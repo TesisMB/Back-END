@@ -1,20 +1,20 @@
-﻿using Back_End.DbContexts;
-using Back_End.Dto;
-using Back_End.Models;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
+using SICREYD.Entities;
+using SICREYD.Models;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Back_End.Helpers
+namespace SICREYD.Entities
 {
-    public class UserSecurity
+    public class UserSecurityDto
     {
         private JwtSettings _settings = null;
-        public UserSecurity(JwtSettings settings)
+        public UserSecurityDto(JwtSettings settings)
         {
             _settings = settings;
         }
@@ -28,8 +28,8 @@ namespace Back_End.Helpers
             using (var db = new CruzRojaContext())
             {
                 authUser = db.Users.Where(
-                    u => u.Dni.ToLower() == user.Dni.ToLower()
-                    && u.Password == user.Password).FirstOrDefault();
+                    u => u.UserDni == user.UserDni
+                    && u.UserPassword == user.UserPassword).FirstOrDefault();
             }
 
             if (authUser != null)
@@ -46,8 +46,8 @@ namespace Back_End.Helpers
             UserAuthDto ret = new UserAuthDto(); // si ingreso aca es porque esta autenticado el usuario
 
 
-            ret.UserName = authUser.Dni; // retorno el nombre del usuario con el cual se esta accediendo al sistema
-            ret.IsAuthenticated = true;
+            ret.Dni = authUser.UserDni; // retorno el nombre del usuario con el cual se esta accediendo al sistema
+            ret.IsAuthenticated = true; 
 
             ret.Permissions = GetUserClaim(authUser); // se retorno la lista de permisos
 
@@ -66,7 +66,7 @@ namespace Back_End.Helpers
                 using (var db = new CruzRojaContext())
                 {
                     list = db.Permissions.Where(
-                        u => u.IdUser == u.IdUser).ToList();
+                        u => u.IdRole == u.IdRole).ToList();
                 }
             }
             catch (Exception ex)
@@ -86,7 +86,7 @@ namespace Back_End.Helpers
 
             List<Claim> jwtClaims = new List<Claim>();
             jwtClaims.Add(new Claim(JwtRegisteredClaimNames.Sub,
-                authUser.UserName));
+                authUser.Dni));
             jwtClaims.Add(new Claim(JwtRegisteredClaimNames.Jti,
                 Guid.NewGuid().ToString()));
 

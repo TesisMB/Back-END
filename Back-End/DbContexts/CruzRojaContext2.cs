@@ -1,7 +1,10 @@
-﻿using Back_End.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Back_End.DbContexts
+namespace SICREYD.Entities
 {
     public class CruzRojaContext2 : DbContext //Creo un Context2 para poder manipular los repositorios,
                                               //interfaces y poder realizar las conexiones a la base de datos de manera correcta
@@ -9,7 +12,7 @@ namespace Back_End.DbContexts
 
         //Este metodo va a ser que devuelva la conexion que se establece en la clase Startup
         public CruzRojaContext2(DbContextOptions<CruzRojaContext2> options)
-              : base(options)
+              : base(options) 
         {
         }
 
@@ -18,7 +21,7 @@ namespace Back_End.DbContexts
         public virtual DbSet<Permissions> Permissions { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
-
+       
 
     }
 }

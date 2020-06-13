@@ -1,9 +1,11 @@
-﻿using Back_End.Models;
+﻿using SICREYD.Entities;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Back_End.Services
+namespace SICREYD.Services
 {
-
     //La interfaz va a ser la que lleve todos los Metodos necesarios para realizar el CRUD en Users
     public interface ICruzRojaRepository
     {

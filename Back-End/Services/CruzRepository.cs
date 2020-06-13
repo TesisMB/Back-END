@@ -1,12 +1,12 @@
-﻿using Back_End.DbContexts;
-using Back_End.Models;
-using Back_End.Services;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using SICREYD.Entities;
+using SICREYD.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
-namespace Back_End.Services
+namespace SICREYD.Services
 {
     public class CruzRepository
     {
@@ -47,7 +47,7 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
         return _context.Users
 
              .Include(i => i.Roles)
-             .FirstOrDefault(a => a.IdUser == userId);
+             .FirstOrDefault(a => a.UserID == userId);
 
     }
 
@@ -73,7 +73,7 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
             throw new ArgumentNullException(nameof(userId));
         }
 
-        return _context.Users.Any(a => a.IdUser == userId);
+        return _context.Users.Any(a => a.UserID == userId);
     }
 
 

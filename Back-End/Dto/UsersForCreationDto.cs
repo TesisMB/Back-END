@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Back_End.Dto
+namespace SICREYD.Models
 {
     public class UsersForCreationDto
     {
@@ -25,7 +28,7 @@ namespace Back_End.Dto
 
         public DateTimeOffset DateOfBirth { get; set; }
 
-        public DateTimeOffset DateOfCreate { get; set; }
+      //  public DateTimeOffset DateOfCreate { get; set; }
 
         public int IdRole { get; set; } /*Una vez que el Usuario Ingresa el Id automaticamente 
                                         se le va colocar el nombre del rol al cual pertence ese nuevo usuario */

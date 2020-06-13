@@ -8,15 +8,16 @@ namespace SICREYD.Models
     //Esta clase que extiende de Users define aquellos valores autorizados que pueden ser actualizados.
     public class UsersForUpdate
     {
-        public string Password { get; set; }
+        public string UserPassword { get; set; }
 
-        public string Phone { get; set; }
+        public string UserPhone { get; set; }
 
-        public string Email { get; set; }
+        public string UserEmail { get; set; }
 
-        public string Address { get; set; }
+        public string UserAddress { get; set; }
 
-        public string Avatar { get; set; }
+        public string UserBirthdate { get; set; }
+        public string UserAvatar { get; set; }
         public int IdRole { get; set; }
     }
 }

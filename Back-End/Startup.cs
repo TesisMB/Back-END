@@ -112,7 +112,7 @@ namespace CourseLibrary.API
                         };
                     }
                 );
-
+                                    /* politicas de autorizacion de permisos*/
             services.AddAuthorization(cfg =>
                 cfg.AddPolicy("ListUsers", p =>
                     p.RequireClaim("ListUsers", "true")));

@@ -37,17 +37,17 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
     }
 
     //listo los usuarios por id
-    public Users GetUser(int userId)
+    public Users GetUser(int UserID)
     {
-        if (userId.ToString() == "")
+        if (UserID.ToString() == "")
         {
-            throw new ArgumentNullException(nameof(userId));
+            throw new ArgumentNullException(nameof(UserID));
         }
 
         return _context.Users
 
              .Include(i => i.Roles)
-             .FirstOrDefault(a => a.UserID == userId);
+             .FirstOrDefault(a => a.UserID == UserID);
 
     }
 
@@ -66,14 +66,14 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
 
 
     //Metodo para verificar si un usuario existe
-    public bool UserExists(int userId)
+    public bool UserExists(int UserID)
     {
-        if (userId.ToString() == "") // si el usuario esta vacio
+        if (UserID.ToString() == "") // si el usuario esta vacio
         {
-            throw new ArgumentNullException(nameof(userId));
+            throw new ArgumentNullException(nameof(UserID));
         }
 
-        return _context.Users.Any(a => a.UserID == userId);
+        return _context.Users.Any(a => a.UserID == UserID);
     }
 
 

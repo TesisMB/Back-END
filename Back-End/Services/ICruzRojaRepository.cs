@@ -15,7 +15,7 @@ namespace SICREYD.Services
 
 
         //lista de usuarios por Id
-        Users GetUser(int userId);
+        Users GetUser(int UserID);
 
         //Añadir un nuevo Usuario
         void AddUser(Users user);
@@ -27,7 +27,7 @@ namespace SICREYD.Services
         void DeleteUser(Users user);
 
         //Metodo para verificar la existenica de un usuario
-        bool UserExists(int userId);
+        bool UserExists(int UserID);
 
 
         //Metodo para poder verificar que los datos a guardar no falte.

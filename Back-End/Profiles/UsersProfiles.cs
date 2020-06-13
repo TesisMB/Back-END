@@ -21,7 +21,7 @@ namespace SICREYD.Profiles
                     //Mapeo entre Name y LastName de Users para devolver FullName (uniendo ambos valores)
                     .ForMember(
                         dest => dest.FullName,
-                        opt => opt.MapFrom(src => $"{src.UserFirstName}"+ "{src.UserLastname}"))
+                        opt => opt.MapFrom(src => $"{src.UserFirstName} {src.UserLastname}"))
 
                        .ForMember(dest => dest.RoleName,
                                     opt => opt.MapFrom(src => src.Roles.RoleName))

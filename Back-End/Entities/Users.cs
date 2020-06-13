@@ -58,7 +58,6 @@ namespace SICREYD.Entities
 
         [ForeignKey("IdRole")]
         public Roles Roles { get; set; }
-
         public int IdRole { get; set; }
 
 

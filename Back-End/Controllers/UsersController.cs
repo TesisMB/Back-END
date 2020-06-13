@@ -49,11 +49,11 @@ namespace SICREYD.Controllers
 
         //Listar Usuarios por Id
         //Name me permite interactuar con el Post para crear un nuevo Id para el usuario solicitado
-        [HttpGet("{userId}", Name = "GetUser")]
+        [HttpGet("{UserID}", Name = "GetUser")]
         [Authorize(Policy = "ListUserId")]
-        public IActionResult GetUser(int userId)
+        public IActionResult GetUser(int UserID)
         {
-            var usersFromRepo = _cruzRojaRepository.GetUser(userId);
+            var usersFromRepo = _cruzRojaRepository.GetUser(UserID);
 
 
             //Si el Id del Usuario no existe se retorna Error.
@@ -91,10 +91,10 @@ namespace SICREYD.Controllers
 
 
         //Este metodo permite actualizar y modificar todos los datos de los Usuarios que estan en el Sistema
-        [HttpPut("{userId}")]
-        public ActionResult UpdateUser(int userId, UsersForUpdate user)
+        [HttpPut("{UserID}")]
+        public ActionResult UpdateUser(int UserID, UsersForUpdate user)
         {
-            var userFromRepo = _cruzRojaRepository.GetUser(userId);
+            var userFromRepo = _cruzRojaRepository.GetUser(UserID);
             if (userFromRepo == null)
             {
                 return NotFound();
@@ -112,12 +112,12 @@ namespace SICREYD.Controllers
         //se debe crear otro Patch en donde solamente se pueda actualizar el Rol del Usuario
 
         //Utilizo este metodo para actualizar los datos que son posibles modificar (Phone-Password-Email)
-        [HttpPatch("{userId}")]
+        [HttpPatch("{UserID}")]
         [Authorize(Policy = "UpdateUser")]
 
-        public ActionResult UpdatePartialUser(int userId, JsonPatchDocument<UsersForUpdate> patchDocument)
+        public ActionResult UpdatePartialUser(int UserID, JsonPatchDocument<UsersForUpdate> patchDocument)
         {
-            var userFromRepo = _cruzRojaRepository.GetUser(userId);
+            var userFromRepo = _cruzRojaRepository.GetUser(UserID);
             if (userFromRepo == null)
             {
                 return NotFound();
@@ -147,13 +147,13 @@ namespace SICREYD.Controllers
 
 
         //Eliminar un Usuario particular en base al Id proporcionado del mismo
-        [HttpDelete("{userId}")]
+        [HttpDelete("{UserID}")]
         [Authorize(Policy = "DeleteUser")]
 
-        public ActionResult DeleteUser(int userId)
+        public ActionResult DeleteUser(int UserID)
         {
 
-            var userFromRepo = _cruzRojaRepository.GetUser(userId);
+            var userFromRepo = _cruzRojaRepository.GetUser(UserID);
 
 
             // si el Id del Usuario no existe de retorna Error.

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace Back_End.Services
 {
-
     //La interfaz va a ser la que lleve todos los Metodos necesarios para realizar el CRUD en Users
     public interface ICruzRojaRepository
     {

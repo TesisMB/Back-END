@@ -1,10 +1,10 @@
-﻿using Back_End.DbContexts;
-using Back_End.Models;
+﻿using Microsoft.EntityFrameworkCore;
 using Back_End.Services;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Back_End.DbContexts;
+using Back_End.Models;
 
 namespace Back_End.Services
 {
@@ -49,6 +49,7 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
              .Include(i => i.Roles)
              .FirstOrDefault(a => a.UserId == userId);
 
+
     }
 
 
@@ -74,6 +75,7 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
         }
 
         return _context.Users.Any(a => a.UserId == userId);
+
     }
 
 
@@ -112,12 +114,6 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
 
     public void UpdateUser(Users user)
     {
-        /*      if (user == null)
-            {
-                throw new ArgumentNullException(nameof(user));
-            }
-
-            _context.Users.Update(user);*/
     }
 }
 

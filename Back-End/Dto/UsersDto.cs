@@ -1,4 +1,6 @@
-﻿namespace Back_End.Dto
+﻿using System;
+
+namespace Back_End.Dto
 {
 
     public class UsersDto : RolesDto /*Me va a permitir heredar las variables tanto el IdRole 
@@ -15,8 +17,14 @@
 
         public string UserAddress { get; set; }
 
-        public int UserAge { get; set; } /*Almaceno en la base de datos las fechas de nacimientos
-                                      de los usarios y devuelvo la edad correspondientes para cada uno de ellos */
+        public string UserDni { get; set; }
+   
+        public DateTimeOffset Birthdate { get; set; }
 
+        public string Phone { get; set; }
+
+        public string UserAvatar { get; set; }
+
+      
     }
 }

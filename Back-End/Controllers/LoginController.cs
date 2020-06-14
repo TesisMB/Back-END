@@ -1,6 +1,5 @@
 ﻿using Back_End.Dto;
 using Back_End.Helpers;
-using Back_End.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Back_End.Controllers
@@ -27,9 +26,11 @@ namespace Back_End.Controllers
             {
                 ret = StatusCode(200, auth); //devuelve el metodo Ok con el Usuario
             }
-            else
+            else 
             {
-                ret = StatusCode(404, "Nombre del Usuario o Contraseña Invalido."); // devuelve Error
+               
+                ret = StatusCode(404, "DNI o Contraseña incorrectas."); // devuelve Error
+            
             }
 
             return ret;

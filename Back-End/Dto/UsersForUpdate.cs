@@ -11,6 +11,8 @@
 
         public string UserAddress { get; set; }
 
+        public string UserAvatar { get; set; }
+
         public int IdRole { get; set; }
     }
 }

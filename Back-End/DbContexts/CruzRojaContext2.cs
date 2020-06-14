@@ -9,7 +9,7 @@ namespace Back_End.DbContexts
 
         //Este metodo va a ser que devuelva la conexion que se establece en la clase Startup
         public CruzRojaContext2(DbContextOptions<CruzRojaContext2> options)
-              : base(options)
+              : base(options) 
         {
         }
 
@@ -18,7 +18,7 @@ namespace Back_End.DbContexts
         public virtual DbSet<Permissions> Permissions { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
-
+       
 
     }
 }

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Back_End.Dto
 {
@@ -30,6 +33,7 @@ namespace Back_End.Dto
         public DateTimeOffset UserBirthdate { get; set; }
 
         public string UserAvatar { get; set; }
+
 
         public int IdRole { get; set; }  /*Una vez que el Usuario Ingresa el Id automaticamente 
                                         se le va colocar el nombre del rol al cual pertence ese nuevo usuario */

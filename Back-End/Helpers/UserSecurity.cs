@@ -1,13 +1,13 @@
-﻿using Back_End.DbContexts;
-using Back_End.Dto;
+﻿using Microsoft.IdentityModel.Tokens;
 using Back_End.Models;
-using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using Back_End.Dto;
+using Back_End.DbContexts;
 
 namespace Back_End.Helpers
 {
@@ -46,8 +46,9 @@ namespace Back_End.Helpers
             UserAuthDto ret = new UserAuthDto(); // si ingreso aca es porque esta autenticado el usuario
 
 
-            ret.UserName = authUser.UserDni; // retorno el nombre del usuario con el cual se esta accediendo al sistema
+            ret.Dni = authUser.UserDni; // retorno el nombre del usuario con el cual se esta accediendo al sistema
             ret.IsAuthenticated = true;
+        
 
             ret.Permissions = GetUserClaim(authUser); // se retorno la lista de permisos
 
@@ -86,7 +87,7 @@ namespace Back_End.Helpers
 
             List<Claim> jwtClaims = new List<Claim>();
             jwtClaims.Add(new Claim(JwtRegisteredClaimNames.Sub,
-                authUser.UserName));
+                authUser.Dni));
             jwtClaims.Add(new Claim(JwtRegisteredClaimNames.Jti,
                 Guid.NewGuid().ToString()));
 

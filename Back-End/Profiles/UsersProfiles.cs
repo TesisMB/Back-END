@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
-using Back_End.Helpers;
+using Back_End.Dto;
+using Back_End.Models;
 
-namespace Back_End.Profiles
+namespace SICREYD.Profiles
 {
     public class UsersProfile : Profile
     {
@@ -9,7 +10,7 @@ namespace Back_End.Profiles
         public UsersProfile()
         {
             //Creo Las clases a ser mapeadas
-            CreateMap<Models.Users, Dto.UsersDto>()
+            CreateMap<Users, UsersDto>()
 
 
                     //Creo dos variables nuevas no existentes en la Base de datos
@@ -19,19 +20,16 @@ namespace Back_End.Profiles
                         dest => dest.UserFullName,
                         opt => opt.MapFrom(src => $"{src.UserFirstName} {src.UserLastName}"))
 
+
                        .ForMember(dest => dest.RoleName,
-                                    opt => opt.MapFrom(src => src.Roles.RoleName))
+                                    opt => opt.MapFrom(src => src.Roles.RoleName));
 
 
-                    //Mapeo la Fecha de Nacimiento para devolver solamente la edad
-                    .ForMember(
-                        dest => dest.UserAge,
-                        opt => opt.MapFrom(src => src.UserBirthdate.GetCurrentAge()));
 
 
-            CreateMap<Dto.UsersForCreationDto, Models.Users>();
-            CreateMap<Dto.UsersForUpdate, Models.Users>();
-            CreateMap<Models.Users, Dto.UsersForUpdate>();
+            CreateMap<UsersForCreationDto, Users>();
+            CreateMap<UsersForUpdate, Users>();
+            CreateMap<Users, UsersForUpdate>();
 
 
         }
@@ -39,4 +37,5 @@ namespace Back_End.Profiles
 
     };
 }
+
 

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
+using System;
 
-namespace SICREYD.Helpers
+namespace Back_End.Helpers
 {
     public static class DateTimeOffsetExtensions
     {

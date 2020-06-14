@@ -12,45 +12,47 @@ namespace Back_End.Models
     {
 
         [Key]
-        public int IdUser { get; set; }
+        public int UserId { get; set; }
 
-        // [Required]
+        [Required]
         [MaxLength(100)]
-        public string Name { get; set; }
+        public string UserFirstName { get; set; }
 
-        //[Required]
+        [Required]
         [MaxLength(100)]
-        public string LastName { get; set; }
+        public string UserLastName { get; set; }
 
         [Required]
         [MaxLength(8)]
-        public string Dni { get; set; }
+        public string UserDni   { get; set; }
 
         [Required]
         [MaxLength(16)]
-        public string Password { get; set; }
+        public string UserPassword { get; set; }
 
-        //[Required]
+        [Required]
         [MaxLength(12)]
-        public string Phone { get; set; }
+        public string UserPhone { get; set; }
 
-        //[Required]
+        [Required]
         [MaxLength(75)]
-        public string Email { get; set; }
+        public string UserEmail { get; set; }
 
-        //[Required]
+        [Required]
         [MaxLength(1)]
-        public string Gender { get; set; }
+        public string UserGender { get; set; }
 
-        //[Required]
+        [Required]
         [MaxLength(8)]
-        public string Address { get; set; }
+        public string UserAddress { get; set; }
 
-        //   [Required]
-        public DateTimeOffset DateOfBirth { get; set; }
+        [Required]
+        public DateTimeOffset UserCreatedate { get; set; }
 
-        // [Required]
-        public DateTimeOffset DateOfCreate { get; set; }
+        [Required]
+        public DateTimeOffset UserBirthdate { get; set; }
+
+        public string UserAvatar { get; set; }
 
         [ForeignKey("IdRole")]
         public Roles Roles { get; set; }

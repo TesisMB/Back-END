@@ -16,7 +16,7 @@ namespace Back_End.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login([FromBody]Users user)
+        public IActionResult Login([FromBody]UserLoginDto user)
         {
             IActionResult ret = null;
             UserAuthDto auth = new UserAuthDto();

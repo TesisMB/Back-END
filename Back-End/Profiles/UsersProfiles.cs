@@ -16,8 +16,8 @@ namespace Back_End.Profiles
 
                     //Mapeo entre Name y LastName de Users para devolver FullName (uniendo ambos valores)
                     .ForMember(
-                        dest => dest.FullName,
-                        opt => opt.MapFrom(src => $"{src.Name} {src.LastName}"))
+                        dest => dest.UserFullName,
+                        opt => opt.MapFrom(src => $"{src.UserFirstName} {src.UserLastName}"))
 
                        .ForMember(dest => dest.RoleName,
                                     opt => opt.MapFrom(src => src.Roles.RoleName))
@@ -25,8 +25,8 @@ namespace Back_End.Profiles
 
                     //Mapeo la Fecha de Nacimiento para devolver solamente la edad
                     .ForMember(
-                        dest => dest.Age,
-                        opt => opt.MapFrom(src => src.DateOfBirth.GetCurrentAge()));
+                        dest => dest.UserAge,
+                        opt => opt.MapFrom(src => src.UserBirthdate.GetCurrentAge()));
 
 
             CreateMap<Dto.UsersForCreationDto, Models.Users>();

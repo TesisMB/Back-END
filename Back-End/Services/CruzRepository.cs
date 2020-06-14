@@ -47,7 +47,7 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
         return _context.Users
 
              .Include(i => i.Roles)
-             .FirstOrDefault(a => a.IdUser == userId);
+             .FirstOrDefault(a => a.UserId == userId);
 
     }
 
@@ -73,7 +73,7 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
             throw new ArgumentNullException(nameof(userId));
         }
 
-        return _context.Users.Any(a => a.IdUser == userId);
+        return _context.Users.Any(a => a.UserId == userId);
     }
 
 

@@ -4,31 +4,37 @@ namespace Back_End.Dto
 {
     public class UsersForCreationDto
     {
-
         //Todas estas variables van a ser necesarias a la hora de crear un nuevo Usuario
 
-        public string Name { get; set; }
 
-        public string LastName { get; set; }
+        public int UserId { get; set; }
 
-        public string Dni { get; set; }
+        public string UserFirstName { get; set; }
 
-        public string Password { get; set; }
+        public string UserLastName { get; set; }
 
-        public string Phone { get; set; }
+        public string UserDni { get; set; }
+        
+        public string UserPassword { get; set; }
 
-        public string Email { get; set; }
+        public string UserPhone { get; set; }
 
-        public string Gender { get; set; }
+        public string UserEmail { get; set; }
+        
+        public string UserGender { get; set; }
 
-        public string Address { get; set; }
+        public string UserAddress { get; set; }
 
-        public DateTimeOffset DateOfBirth { get; set; }
+        public DateTimeOffset UserCreatedate { get; set; }
 
-        public DateTimeOffset DateOfCreate { get; set; }
+        public DateTimeOffset UserBirthdate { get; set; }
 
-        public int IdRole { get; set; } /*Una vez que el Usuario Ingresa el Id automaticamente 
+        public string UserAvatar { get; set; }
+
+        public int IdRole { get; set; }  /*Una vez que el Usuario Ingresa el Id automaticamente 
                                         se le va colocar el nombre del rol al cual pertence ese nuevo usuario */
+
+
 
 
     }

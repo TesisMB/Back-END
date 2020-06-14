@@ -19,7 +19,7 @@ namespace Back_End.Helpers
             _settings = settings;
         }
 
-        public UserAuthDto ValidateUser(Users user)
+        public UserAuthDto ValidateUser(UserLoginDto user)
         {
             UserAuthDto ret = new UserAuthDto();
             Users authUser = null;
@@ -28,8 +28,8 @@ namespace Back_End.Helpers
             using (var db = new CruzRojaContext())
             {
                 authUser = db.Users.Where(
-                    u => u.Dni.ToLower() == user.Dni.ToLower()
-                    && u.Password == user.Password).FirstOrDefault();
+                    u => u.UserDni.ToLower() == user.UserDni.ToLower()
+                    && u.UserPassword == user.UserPassword).FirstOrDefault();
             }
 
             if (authUser != null)
@@ -46,7 +46,7 @@ namespace Back_End.Helpers
             UserAuthDto ret = new UserAuthDto(); // si ingreso aca es porque esta autenticado el usuario
 
 
-            ret.UserName = authUser.Dni; // retorno el nombre del usuario con el cual se esta accediendo al sistema
+            ret.UserName = authUser.UserDni; // retorno el nombre del usuario con el cual se esta accediendo al sistema
             ret.IsAuthenticated = true;
 
             ret.Permissions = GetUserClaim(authUser); // se retorno la lista de permisos
@@ -66,7 +66,7 @@ namespace Back_End.Helpers
                 using (var db = new CruzRojaContext())
                 {
                     list = db.Permissions.Where(
-                        u => u.IdUser == u.IdUser).ToList();
+                        u => u.IdRole == u.IdRole).ToList();
                 }
             }
             catch (Exception ex)

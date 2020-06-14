@@ -24,8 +24,8 @@ namespace Back_End.Models
         [MaxLength(50)]
         public string PermissionValue { get; set; }
 
-        [ForeignKey("IdUser")]
-        public int IdUser { get; set; }
+        [ForeignKey("IdRole")]
+        public int IdRole { get; set; }
 
 
     }

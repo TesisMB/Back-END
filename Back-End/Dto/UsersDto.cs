@@ -10,6 +10,7 @@ namespace Back_End.Dto
 
         public string UserFullName { get; set; } /*Almaceno el Nombre y el Apellido de cada usuario y 
                                              devuelvo el nombre completo  concatenando ambos valores (Name+LastName)*/
+        public string UserDni { get; set; }
 
         public string UserPhone { get; set; }
 
@@ -17,14 +18,10 @@ namespace Back_End.Dto
 
         public string UserAddress { get; set; }
 
-        public string UserDni { get; set; }
-   
-        public DateTimeOffset Birthdate { get; set; }
-
-        public string Phone { get; set; }
-
         public string UserAvatar { get; set; }
 
-      
+        public DateTimeOffset UserBirthdate { get; set; }
+
+
     }
 }

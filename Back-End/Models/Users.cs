@@ -47,7 +47,7 @@ namespace Back_End.Models
         public string UserAddress { get; set; }
 
         [Required]
-        public DateTimeOffset UserCreatedate { get; set; }
+        public DateTimeOffset UserCreatedate { get; set; } = DateTime.Now;
 
         [Required]
         public DateTimeOffset UserBirthdate { get; set; }

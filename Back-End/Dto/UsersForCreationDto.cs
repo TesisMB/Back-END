@@ -28,7 +28,7 @@ namespace Back_End.Dto
 
         public string UserAddress { get; set; }
 
-        public DateTimeOffset UserCreatedate { get; set; }
+        public DateTimeOffset UserCreatedate { get; set; } = DateTime.Now;
 
         public DateTimeOffset UserBirthdate { get; set; }
 

@@ -32,11 +32,13 @@ namespace Back_End.Profiles
             CreateMap<Dto.UsersForCreationDto, Models.Users>();
             CreateMap<Dto.UsersForUpdate, Models.Users>();
             CreateMap<Models.Users, Dto.UsersForUpdate>();
-
+            CreateMap<Models.Users, Dto.IDUpdateRoleDto>();
+            CreateMap<Dto.IDUpdateRoleDto, Models.Users>();
+        }   
 
         }
 
 
     };
-}
+
 

@@ -11,6 +11,5 @@
 
         public string Address { get; set; }
 
-        public int IdRole { get; set; }
     }
 }

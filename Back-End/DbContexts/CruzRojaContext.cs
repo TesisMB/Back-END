@@ -15,7 +15,7 @@ namespace Back_End.DbContexts
 
 
         private const string Connection =
-       @"Server=DESKTOP-IGDSL68;
+       @"Server=DESKTOP-4PRPJUH;
             Database=CruzRojaDB;
             Trusted_Connection=True;
             MultipleActiveResultSets=true";

@@ -25,9 +25,8 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
 
 
     //listo todos los usuarios
-    public IEnumerable<Users> GetUsers()
+   public IEnumerable<Users> GetUsers()
     {
-
         //retorno la lista de usuarios con el nombre del rol especifico al que pertence cada uno
         return _context.Users
                 .Include(i => i.Roles)

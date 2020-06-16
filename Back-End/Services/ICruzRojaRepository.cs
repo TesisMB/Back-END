@@ -11,7 +11,6 @@ namespace Back_End.Services
         //lista completa de usuarios
         IEnumerable<Users> GetUsers();
 
-
         //lista de usuarios por Id
         Users GetUser(int userId);
 
@@ -26,7 +25,6 @@ namespace Back_End.Services
 
         //Metodo para verificar la existenica de un usuario
         bool UserExists(int userId);
-
 
         //Metodo para poder verificar que los datos a guardar no falte.
         bool save();

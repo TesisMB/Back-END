@@ -6,7 +6,7 @@ using Back_End.Entities;
 namespace Back_End.Models
 {
 
-    public class UsersDto : Roles /*Me va a permitir heredar las variables tanto el IdRole 
+    public class UsersDto : RolesDto /*Me va a permitir heredar las variables tanto el RoleID 
                                        como el RoleName al momento de listar los Usuarios*/
     {
         public int UserID { get; set; }

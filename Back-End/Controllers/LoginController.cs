@@ -35,7 +35,7 @@ namespace JWT_Server.Controllers
             else 
             {
                
-                ret = StatusCode(404, "DNI o Contraseña incorrectas."); // devuelve Error
+                ret = StatusCode(404, "Datos incorrectos"); // devuelve Error
             
             }
 

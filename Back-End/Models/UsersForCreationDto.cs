@@ -32,7 +32,7 @@ namespace Back_End.Models
 
         public string UserAvatar { get; set; }
 
-        public int IdRole { get; set; } /*Una vez que el Usuario Ingresa el Id automaticamente 
+        public int RoleID { get; set; } /*Una vez que el Usuario Ingresa el Id automaticamente 
                                         se le va colocar el nombre del rol al cual pertence ese nuevo usuario */
 
 

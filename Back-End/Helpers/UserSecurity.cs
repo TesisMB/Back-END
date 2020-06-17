@@ -67,7 +67,7 @@ namespace Back_End.Entities
                 using (var db = new CruzRojaContext())
                 {
                     list = db.Permissions.Where(
-                        u => u.IdRole == u.IdRole).ToList();
+                        u => u.RoleID == u.RoleID).ToList();
                 }
             }
             catch (Exception ex)

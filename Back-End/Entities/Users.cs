@@ -16,11 +16,11 @@ namespace Back_End.Entities
         [Key]
         public int UserID { get; set; }
 
-       // [Required]
+        [Required]
         [MaxLength(100)]
         public string UserFirstName { get; set; }
 
-        //[Required]
+        [Required]
         [MaxLength(100)]
         public string UserLastname { get; set; }
 
@@ -32,23 +32,23 @@ namespace Back_End.Entities
         [MaxLength(16)]
         public string UserPassword { get; set; }
 
-        //[Required]
+        [Required]
         [MaxLength(12)]
         public string UserPhone { get; set; }
 
-        //[Required]
+        [Required]
         [MaxLength(75)]
         public string UserEmail { get; set; }
 
-        //[Required]
+        [Required]
         [MaxLength(1)]
         public string UserGender { get; set; }
 
-        //[Required]
+        [Required]
    
         public string UserAddress{ get; set; }
 
-     //   [Required]
+        [Required]
         public DateTimeOffset UserBirthdate { get; set; }
 
        // [Required]
@@ -56,9 +56,9 @@ namespace Back_End.Entities
 
         public string UserAvatar { get; set; }
 
-        [ForeignKey("IdRole")]
-        public Roles RoleName { get; set; }
-        public int IdRole { get; set; }
+        [ForeignKey("RoleID")]
+        public RolesDto RoleName { get; set; }
+        public int RoleID { get; set; }
 
 
 

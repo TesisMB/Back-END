@@ -13,7 +13,7 @@ namespace Back_End.Entities
 
     {    
 
-        public virtual DbSet<Roles> Roles { get; set; }
+        public virtual DbSet<RolesDto> Roles { get; set; }
         public virtual DbSet<Permissions> Permissions { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 

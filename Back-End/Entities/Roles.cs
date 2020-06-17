@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace Back_End.Entities
 {
     [Table("Roles", Schema = "dbo")] //tabla y esquema al que pertence la clase en la base de datos de Sql
-    public class Roles
+    public class RolesDto
     {
 
         [Key]
-        public int IdRole { get; set; }
+        public int RoleID { get; set; }
 
         [Required]
         [MaxLength(100)]

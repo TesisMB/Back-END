@@ -14,7 +14,7 @@ namespace Back_End.Entities
 
         [Required()]
         [Key()]
-        public int IdPermission { get; set; }
+        public int PermissionID { get; set; }
 
         [Required()]
         public string PermissionType { get; set; }
@@ -22,9 +22,9 @@ namespace Back_End.Entities
         [Required()]
         public string PermissionValue { get; set; } 
 
-         [ForeignKey("IdRole")]
-        public string RoleName { get; set; }
-        public int IdRole { get; set; }
+         [ForeignKey("RoleID")]
+       // public string RoleName { get; set; }
+        public int RoleID { get; set; }
 
 
     }

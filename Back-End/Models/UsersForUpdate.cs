@@ -18,6 +18,6 @@ namespace Back_End.Models
 
         public string UserBirthdate { get; set; }
         public string UserAvatar { get; set; }
-        public int IdRole { get; set; }
+        public int RoleID { get; set; }
     }
 }

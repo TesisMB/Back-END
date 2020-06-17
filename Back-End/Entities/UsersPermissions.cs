@@ -21,9 +21,9 @@ namespace Back_End.Entities
         public Users users { get; set; }
         public int IdUser { get; set; }
 
-        [ForeignKey("IdPermission")]
+        [ForeignKey("PermissionID")]
         public Permissions Permissions { get; set; }
-        public int IdPermission { get; set; }
+        public int PermissionID { get; set; }
 
     }
     */

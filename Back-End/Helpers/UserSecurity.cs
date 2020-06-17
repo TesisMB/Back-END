@@ -1,6 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using SICREYD.Entities;
-using SICREYD.Models;
+using Back_End.Entities;
+using Back_End.Models;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -9,7 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SICREYD.Entities
+namespace Back_End.Entities
 {
     public class UserSecurityDto
     {
@@ -46,12 +46,13 @@ namespace SICREYD.Entities
             UserAuthDto ret = new UserAuthDto(); // si ingreso aca es porque esta autenticado el usuario
 
 
-            ret.Dni = authUser.UserDni; // retorno el nombre del usuario con el cual se esta accediendo al sistema
-            ret.IsAuthenticated = true; 
-
+            ret.UserDni = authUser.UserDni; // retorno el nombre del usuario con el cual se esta accediendo al sistema
+            ret.IsAuthenticated = true;
+            ret.UserID = authUser.UserID;
+            ret.UserFistname = authUser.UserFirstName;
             ret.Permissions = GetUserClaim(authUser); // se retorno la lista de permisos
-
-            ret.BearerToken = BuildJwtToken(ret);
+            ret.UserLastname = authUser.UserLastname;
+            ret.token = BuildJwtToken(ret);
 
             return ret; // se retorno el objeto del usuario autenticado
         }
@@ -86,7 +87,7 @@ namespace SICREYD.Entities
 
             List<Claim> jwtClaims = new List<Claim>();
             jwtClaims.Add(new Claim(JwtRegisteredClaimNames.Sub,
-                authUser.Dni));
+                authUser.UserDni));
             jwtClaims.Add(new Claim(JwtRegisteredClaimNames.Jti,
                 Guid.NewGuid().ToString()));
 

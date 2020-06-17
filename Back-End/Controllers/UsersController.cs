@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using SICREYD.Models;
-using SICREYD.Services;
+using Back_End.Models;
+using Back_End.Services;
 
-namespace SICREYD.Controllers
+namespace Back_End.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

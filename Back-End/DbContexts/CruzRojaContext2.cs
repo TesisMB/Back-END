@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SICREYD.Entities
+namespace Back_End.Entities
 {
     public class CruzRojaContext2 : DbContext //Creo un Context2 para poder manipular los repositorios,
                                               //interfaces y poder realizar las conexiones a la base de datos de manera correcta

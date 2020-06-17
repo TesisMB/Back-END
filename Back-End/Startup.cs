@@ -18,9 +18,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Serialization;
-using SICREYD.Entities;
-using SICREYD.Models;
-using SICREYD.Services;
+using Back_End.Entities;
+using Back_End.Models;
+using Back_End.Services;
 
 namespace CourseLibrary.API
 {

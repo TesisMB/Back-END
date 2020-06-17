@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SICREYD.Entities;
-using SICREYD.Services;
+using Back_End.Entities;
+using Back_End.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SICREYD.Services
+namespace Back_End.Services
 {
     public class CruzRepository
     {
@@ -30,7 +30,7 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
 
         //retorno la lista de usuarios con el nombre del rol especifico al que pertence cada uno
         return _context.Users
-                .Include(i => i.Roles)
+                .Include(i => i.RoleName)
                 .ToList();
 
         //_context.Users.ToList<Users>();
@@ -46,7 +46,7 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
 
         return _context.Users
 
-             .Include(i => i.Roles)
+             .Include(i => i.RoleName)
              .FirstOrDefault(a => a.UserID == UserID);
 
     }

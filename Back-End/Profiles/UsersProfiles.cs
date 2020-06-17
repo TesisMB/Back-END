@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SICREYD.Profiles
+namespace Back_End.Profiles
 {
     public class UsersProfile : Profile
     {
@@ -24,7 +24,7 @@ namespace SICREYD.Profiles
                         opt => opt.MapFrom(src => $"{src.UserFirstName} {src.UserLastname}"))
 
                        .ForMember(dest => dest.RoleName,
-                                    opt => opt.MapFrom(src => src.Roles.RoleName))
+                                    opt => opt.MapFrom(src => src.RoleName))
 
 
                     //Mapeo la Fecha de Nacimiento para devolver solamente la edad

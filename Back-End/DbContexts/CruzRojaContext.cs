@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SICREYD.Entities;
+using Back_End.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SICREYD.Entities
+namespace Back_End.Entities
 {
     public class CruzRojaContext : DbContext /*Creo un Context para poder obtenener apenas me autentifico el DNI y el password
                                              y devolver los resultados correspondientes */

@@ -1,10 +1,10 @@
-﻿using SICREYD.Entities;
+﻿using Back_End.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SICREYD.Models
+namespace Back_End.Models
 {
     //Esta clase va a devolver determinados datos respecto del Usuario que acaba de iniciar session 
     public class UserAuthDto
@@ -12,14 +12,19 @@ namespace SICREYD.Models
         // Este Metodo tiene dos parametros DNI y BearerToken
         public UserAuthDto() : base()
     {
-        Dni = "No Autorizado"; //Inicializo la variable con un valor por default
-            BearerToken = string.Empty; // El token queda vacio 
+        UserDni = "No Autorizado"; //Inicializo la variable con un valor por default
+            token = string.Empty; // El token queda vacio 
     }
 
-    public string Dni { get; set; } //nombre del Usuario  (Dni)
+    public string UserDni { get; set; } //nombre del Usuario  (Dni)
+    
+    public int UserID { get; set; } // ID del usuario
 
+    public string UserFistname { get; set; }
 
-    public string BearerToken { get; set; } // Token
+    public string UserLastname { get; set; }
+
+    public string token { get; set; } // Token
 
 
     public bool IsAuthenticated { get; set; } //Devuelve True o false 

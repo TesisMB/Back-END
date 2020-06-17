@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SICREYD.Entities
+namespace Back_End.Entities
 {
     [Table("Permissions", Schema = "dbo")] //tabla y esquema al que pertence la clase en la base de datos de Sql
 
@@ -23,7 +23,7 @@ namespace SICREYD.Entities
         public string PermissionValue { get; set; } 
 
          [ForeignKey("IdRole")]
-        public Roles roles { get; set; }
+        public string RoleName { get; set; }
         public int IdRole { get; set; }
 
 

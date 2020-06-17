@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace SICREYD.Controllers
+namespace Back_End.Controllers
 {
     public class BaseApiController : Controller
     {

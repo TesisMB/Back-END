@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SICREYD.Entities;
+using Back_End.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SICREYD.Controllers;
-using SICREYD.Models;
+using Back_End.Controllers;
+using Back_End.Models;
 
 namespace JWT_Server.Controllers
 {

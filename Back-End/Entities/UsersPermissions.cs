@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SICREYD.Entities
+namespace Back_End.Entities
 {
   /*  
     [Table("UsersPermissions", Schema = "dbo")]

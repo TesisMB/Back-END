@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SICREYD.Models
+namespace Back_End.Models
 {
     //Esta clase que extiende de Users define aquellos valores autorizados que pueden ser actualizados.
     public class UsersForUpdate

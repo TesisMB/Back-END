@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SICREYD.Entities
+namespace Back_End.Entities
 {
 
 
@@ -57,7 +57,7 @@ namespace SICREYD.Entities
         public string UserAvatar { get; set; }
 
         [ForeignKey("IdRole")]
-        public Roles Roles { get; set; }
+        public Roles RoleName { get; set; }
         public int IdRole { get; set; }
 
 

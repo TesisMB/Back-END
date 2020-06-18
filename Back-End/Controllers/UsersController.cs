@@ -81,7 +81,7 @@ namespace Back_End.Controllers
             var authorToReturn = _mapper.Map<UsersDto>(userEntity);
 
 
-            return Ok("Usuario Creado Correctamente");
+            return Ok();
 
             //devuelvo una nueva ruta donde se genera un Id nuevo para ese usuario añadido.
             /*   return CreatedAtRoute("GetUser",
@@ -106,7 +106,7 @@ namespace Back_End.Controllers
 
             _cruzRojaRepository.save();
 
-            return Ok("Usuario Actualizado Correctamente");
+            return Ok();
         }
 
         //se debe crear otro Patch en donde solamente se pueda actualizar el Rol del Usuario
@@ -140,7 +140,7 @@ namespace Back_End.Controllers
 
             _cruzRojaRepository.save();
 
-            return Ok("Usuario Actualizado Correctamente");
+            return Ok();
 
         }
 
@@ -167,7 +167,7 @@ namespace Back_End.Controllers
             _cruzRojaRepository.save();
 
             // Se retorna con exito la eliminacion del Usuario especificado
-            return Ok("Usuario eliminado exitosamente");
+            return Ok();
 
         }
 

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Back_End.Entities;
 
 namespace Back_End.Profiles
 {
@@ -24,7 +25,7 @@ namespace Back_End.Profiles
                         opt => opt.MapFrom(src => $"{src.UserFirstName} {src.UserLastname}"))
 
                        .ForMember(dest => dest.RoleName,
-                                    opt => opt.MapFrom(src => src.RoleName))
+                                    opt => opt.MapFrom(src => src.Roles.RoleName))
 
 
                     //Mapeo la Fecha de Nacimiento para devolver solamente la edad

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Back_End.Entities
 {
     [Table("Roles", Schema = "dbo")] //tabla y esquema al que pertence la clase en la base de datos de Sql
-    public class RolesDto
+    public class Roles
     {
 
         [Key]

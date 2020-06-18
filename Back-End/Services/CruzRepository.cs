@@ -30,7 +30,7 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
 
         //retorno la lista de usuarios con el nombre del rol especifico al que pertence cada uno
         return _context.Users
-                .Include(i => i.RoleName)
+                .Include(i => i.Roles)
                 .ToList();
 
         //_context.Users.ToList<Users>();
@@ -46,7 +46,7 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
 
         return _context.Users
 
-             .Include(i => i.RoleName)
+             .Include(i => i.Roles)
              .FirstOrDefault(a => a.UserID == UserID);
 
     }

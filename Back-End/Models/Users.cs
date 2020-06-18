@@ -14,11 +14,11 @@ namespace Back_End.Models
         [Key]
         public int IdUser { get; set; }
 
-        // [Required]
+         [Required]
         [MaxLength(100)]
         public string Name { get; set; }
 
-        //[Required]
+        [Required]
         [MaxLength(100)]
         public string LastName { get; set; }
 
@@ -30,26 +30,26 @@ namespace Back_End.Models
         [MaxLength(16)]
         public string Password { get; set; }
 
-        //[Required]
+        [Required]
         [MaxLength(12)]
         public string Phone { get; set; }
 
-        //[Required]
+        [Required]
         [MaxLength(75)]
         public string Email { get; set; }
 
-        //[Required]
+        [Required]
         [MaxLength(1)]
         public string Gender { get; set; }
 
-        //[Required]
+        [Required]
         [MaxLength(8)]
         public string Address { get; set; }
 
-        //   [Required]
+        [Required]
         public DateTimeOffset DateOfBirth { get; set; }
 
-        // [Required]
+        [Required]
         public DateTimeOffset DateOfCreate { get; set; }
 
         [ForeignKey("IdRole")]

@@ -35,7 +35,7 @@ namespace Back_End.Controllers
 
         // Listar Usuarios de forma completa
         [HttpGet]
-        [Authorize(Policy = "ListUsers")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
+       [Authorize(Policy = "ListUsers")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
         public ActionResult<IEnumerable<UsersDto>> GetUsers()
         {
 

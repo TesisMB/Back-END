@@ -33,7 +33,7 @@ namespace Back_End.Controllers
 
         // Listar Usuarios de forma completa
         [HttpGet]
-       [Authorize(Policy = "ListUsers")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
+        [Authorize(Policy = "ListUsers")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
         public ActionResult<IEnumerable<UsersDto>> GetUsers()
         {
 
@@ -171,37 +171,8 @@ namespace Back_End.Controllers
 
         }
 
-        [HttpPatch("asd/{userId}")]
-        //[Authorize(Policy = "UpdateUser")]
 
-        public ActionResult UpdatePartialUser(int userId, JsonPatchDocument<IDUpdateRoleDto> patchDocument)
-        {
-            var userFromRepo = _cruzRojaRepository.GetUser(userId);
-            if (userFromRepo == null)
-            {
-                return NotFound();
-            }
-
-            var userToPatch = _mapper.Map<IDUpdateRoleDto>(userFromRepo);
-
-            patchDocument.ApplyTo(userToPatch, ModelState);
-
-            if (!TryValidateModel(userToPatch))
-            {
-                return ValidationProblem(ModelState);
-            }
-
-
-            _mapper.Map(userToPatch, userFromRepo);
-
-
-            _cruzRojaRepository.UpdateUser(userFromRepo);
-
-            _cruzRojaRepository.save();
-
-            return Ok("Usuario Actualizado Correctamente");
-
-        }
     }
 
 }
+

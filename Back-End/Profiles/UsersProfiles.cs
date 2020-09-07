@@ -32,7 +32,7 @@ namespace Back_End.Profiles
                     .ForMember(
                         dest => dest.Age,
                         opt => opt.MapFrom(src => src.UserBirthdate.GetCurrentAge()));
-                        
+
 
             CreateMap<Models.UsersForCreationDto, Entities.Users>();
             CreateMap<Models.UsersForUpdate, Entities.Users>();
@@ -42,7 +42,8 @@ namespace Back_End.Profiles
         }
 
 
-    };
+    }
+}
 
 
 

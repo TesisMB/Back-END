@@ -28,7 +28,7 @@ namespace Back_End.Models
 
         public DateTimeOffset UserBirthdate { get; set; }
 
-        public DateTimeOffset UserCreatedate { get; set; }
+        public DateTimeOffset UserCreatedate { get; set; } = DateTime.Now;
 
         public string UserAvatar { get; set; }
 

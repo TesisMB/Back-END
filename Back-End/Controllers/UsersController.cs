@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Back_End.Dto;
-using Back_End.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Back_End.Models;
+using Back_End.Services;
 
 namespace Back_End.Controllers
 {
-
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : BaseApiController
@@ -42,7 +40,7 @@ namespace Back_End.Controllers
             {
                 var usersFromRepo = _cruzRojaRepository.GetUsers();
 
-                //Al momento de mapear utilizo UsersDto para devolver aquellos valores imprecidibles
+                //Al momento de mapear utilizo UsersDto para devolver aquellos valores imprecindibles
                 return Ok(_mapper.Map<IEnumerable<UsersDto>>(usersFromRepo));
 
             }
@@ -51,14 +49,14 @@ namespace Back_End.Controllers
 
         //Listar Usuarios por Id
         //Name me permite interactuar con el Post para crear un nuevo Id para el usuario solicitado
-        [HttpGet("{userId}", Name = "GetUser")]
+        [HttpGet("{UserID}", Name = "GetUser")]
         [Authorize(Policy = "ListUserId")]
-        public IActionResult GetUser(int userId)
+        public IActionResult GetUser(int UserID)
         {
-            var usersFromRepo = _cruzRojaRepository.GetUser(userId);
+            var usersFromRepo = _cruzRojaRepository.GetUser(UserID);
 
 
-            //Si el Ide del Usuario no existe se retorna Error.
+            //Si el Id del Usuario no existe se retorna Error.
             if (usersFromRepo == null)
             {
                 return NotFound();
@@ -76,14 +74,14 @@ namespace Back_End.Controllers
         {
 
             //Realizo un mapeo entre Users - UsersForCreationDto 
-            var userEntity = _mapper.Map<Models.Users>(user);
+            var userEntity = _mapper.Map<Entities.Users>(user);
             _cruzRojaRepository.AddUser(userEntity);
             _cruzRojaRepository.save();
 
             var authorToReturn = _mapper.Map<UsersDto>(userEntity);
 
 
-            return Ok("Usuario Creado Correctamente");
+            return Ok();
 
             //devuelvo una nueva ruta donde se genera un Id nuevo para ese usuario añadido.
             /*   return CreatedAtRoute("GetUser",
@@ -93,10 +91,10 @@ namespace Back_End.Controllers
 
 
         //Este metodo permite actualizar y modificar todos los datos de los Usuarios que estan en el Sistema
-        [HttpPut("{userId}")]
-        public ActionResult UpdateUser(int userId, UsersForUpdate user)
+        [HttpPut("{UserID}")]
+        public ActionResult UpdateUser(int UserID, UsersForUpdate user)
         {
-            var userFromRepo = _cruzRojaRepository.GetUser(userId);
+            var userFromRepo = _cruzRojaRepository.GetUser(UserID);
             if (userFromRepo == null)
             {
                 return NotFound();
@@ -108,18 +106,18 @@ namespace Back_End.Controllers
 
             _cruzRojaRepository.save();
 
-            return Ok("Usuario Actualizado Correctamente");
+            return Ok();
         }
 
         //se debe crear otro Patch en donde solamente se pueda actualizar el Rol del Usuario
 
         //Utilizo este metodo para actualizar los datos que son posibles modificar (Phone-Password-Email)
-        [HttpPatch("{userId}")]
+        [HttpPatch("{UserID}")]
         [Authorize(Policy = "UpdateUser")]
 
-        public ActionResult UpdatePartialUser(int userId, JsonPatchDocument<UsersForUpdate> patchDocument)
+        public ActionResult UpdatePartialUser(int UserID, JsonPatchDocument<UsersForUpdate> patchDocument)
         {
-            var userFromRepo = _cruzRojaRepository.GetUser(userId);
+            var userFromRepo = _cruzRojaRepository.GetUser(UserID);
             if (userFromRepo == null)
             {
                 return NotFound();
@@ -142,20 +140,20 @@ namespace Back_End.Controllers
 
             _cruzRojaRepository.save();
 
-            return Ok("Usuario Actualizado Correctamente");
+            return Ok();
 
         }
 
 
 
         //Eliminar un Usuario particular en base al Id proporcionado del mismo
-        [HttpDelete("{userId}")]
+        [HttpDelete("{UserID}")]
         [Authorize(Policy = "DeleteUser")]
 
-        public ActionResult DeleteUser(int userId)
+        public ActionResult DeleteUser(int UserID)
         {
 
-            var userFromRepo = _cruzRojaRepository.GetUser(userId);
+            var userFromRepo = _cruzRojaRepository.GetUser(UserID);
 
 
             // si el Id del Usuario no existe de retorna Error.
@@ -169,12 +167,12 @@ namespace Back_End.Controllers
             _cruzRojaRepository.save();
 
             // Se retorna con exito la eliminacion del Usuario especificado
-            return Ok("Usuario Eliminado Correctamente");
+            return Ok();
 
         }
-
 
 
     }
 
 }
+

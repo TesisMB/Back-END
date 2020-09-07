@@ -1,5 +1,10 @@
 ﻿using AutoMapper;
 using Back_End.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Back_End.Entities;
 
 namespace Back_End.Profiles
 {
@@ -9,7 +14,7 @@ namespace Back_End.Profiles
         public UsersProfile()
         {
             //Creo Las clases a ser mapeadas
-            CreateMap<Models.Users, Dto.UsersDto>()
+            CreateMap<Entities.Users, Models.UsersDto>()
 
 
                     //Creo dos variables nuevas no existentes en la Base de datos
@@ -17,7 +22,7 @@ namespace Back_End.Profiles
                     //Mapeo entre Name y LastName de Users para devolver FullName (uniendo ambos valores)
                     .ForMember(
                         dest => dest.FullName,
-                        opt => opt.MapFrom(src => $"{src.Name} {src.LastName}"))
+                        opt => opt.MapFrom(src => $"{src.UserFirstName} {src.UserLastname}"))
 
                        .ForMember(dest => dest.RoleName,
                                     opt => opt.MapFrom(src => src.Roles.RoleName))
@@ -26,17 +31,19 @@ namespace Back_End.Profiles
                     //Mapeo la Fecha de Nacimiento para devolver solamente la edad
                     .ForMember(
                         dest => dest.Age,
-                        opt => opt.MapFrom(src => src.DateOfBirth.GetCurrentAge()));
+                        opt => opt.MapFrom(src => src.UserBirthdate.GetCurrentAge()));
 
 
-            CreateMap<Dto.UsersForCreationDto, Models.Users>();
-            CreateMap<Dto.UsersForUpdate, Models.Users>();
-            CreateMap<Models.Users, Dto.UsersForUpdate>();
+            CreateMap<Models.UsersForCreationDto, Entities.Users>();
+            CreateMap<Models.UsersForUpdate, Entities.Users>();
+            CreateMap<Entities.Users, Models.UsersForUpdate>();
 
 
         }
 
 
-    };
+    }
 }
+
+
 

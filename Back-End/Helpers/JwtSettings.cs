@@ -1,4 +1,9 @@
-﻿namespace Back_End.Helpers
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Back_End.Models
 {
     public class JwtSettings
     {
@@ -6,6 +11,6 @@
         public string Key { get; set; }
         public string Issuer { get; set; } //emisor
         public string Audience { get; set; }
-        public int MinutesToExpiration { get; set; }
+        public int MinutesToExpiration { get; set; } 
     }
 }

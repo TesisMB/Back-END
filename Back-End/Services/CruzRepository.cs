@@ -1,10 +1,10 @@
-﻿using Back_End.DbContexts;
-using Back_End.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Back_End.Entities;
 using Back_End.Services;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Back_End.Services
 {
@@ -36,17 +36,17 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
     }
 
     //listo los usuarios por id
-    public Users GetUser(int userId)
+    public Users GetUser(int UserID)
     {
-        if (userId.ToString() == "")
+        if (UserID.ToString() == "")
         {
-            throw new ArgumentNullException(nameof(userId));
+            throw new ArgumentNullException(nameof(UserID));
         }
 
         return _context.Users
 
              .Include(i => i.Roles)
-             .FirstOrDefault(a => a.IdUser == userId);
+             .FirstOrDefault(a => a.UserID == UserID);
 
     }
 
@@ -65,14 +65,14 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
 
 
     //Metodo para verificar si un usuario existe
-    public bool UserExists(int userId)
+    public bool UserExists(int UserID)
     {
-        if (userId.ToString() == "") // si el usuario esta vacio
+        if (UserID.ToString() == "") // si el usuario esta vacio
         {
-            throw new ArgumentNullException(nameof(userId));
+            throw new ArgumentNullException(nameof(UserID));
         }
 
-        return _context.Users.Any(a => a.IdUser == userId);
+        return _context.Users.Any(a => a.UserID == UserID);
     }
 
 

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Back_End.Models
+namespace Back_End.Entities
 {
     [Table("Permissions", Schema = "dbo")] //tabla y esquema al que pertence la clase en la base de datos de Sql
 
@@ -14,18 +14,17 @@ namespace Back_End.Models
 
         [Required()]
         [Key()]
-        public int IdPermission { get; set; }
+        public int PermissionID { get; set; }
 
         [Required()]
-        [MaxLength(50)]
         public string PermissionType { get; set; }
 
         [Required()]
-        [MaxLength(50)]
-        public string PermissionValue { get; set; }
+        public string PermissionValue { get; set; } 
 
-        [ForeignKey("IdUser")]
-        public int IdUser { get; set; }
+         [ForeignKey("RoleID")]
+       // public string RoleName { get; set; }
+        public int RoleID { get; set; }
 
 
     }

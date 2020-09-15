@@ -19,7 +19,7 @@ namespace Back_End.Entities
 
 
         private const string Connection =
-       @"Server=DESKTOP-4PRPJUH;
+       @"Server=DESKTOP-QF24B4L;
             Database=CruzRojaDB;
             Trusted_Connection=True;
             MultipleActiveResultSets=true";

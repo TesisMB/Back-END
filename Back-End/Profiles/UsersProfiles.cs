@@ -5,17 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Back_End.Entities;
+using Back_End.Models;
 
 namespace Back_End.Profiles
 {
     public class UsersProfile : Profile
     {
-
         public UsersProfile()
         {
             //Creo Las clases a ser mapeadas
             CreateMap<Entities.Users, Models.UsersDto>()
-
 
                     //Creo dos variables nuevas no existentes en la Base de datos
 
@@ -27,21 +26,16 @@ namespace Back_End.Profiles
                        .ForMember(dest => dest.RoleName,
                                     opt => opt.MapFrom(src => src.Roles.RoleName))
 
-
                     //Mapeo la Fecha de Nacimiento para devolver solamente la edad
                     .ForMember(
                         dest => dest.Age,
                         opt => opt.MapFrom(src => src.UserBirthdate.GetCurrentAge()));
 
-
             CreateMap<Models.UsersForCreationDto, Entities.Users>();
             CreateMap<Models.UsersForUpdate, Entities.Users>();
             CreateMap<Entities.Users, Models.UsersForUpdate>();
 
-
         }
-
-
     }
 }
 

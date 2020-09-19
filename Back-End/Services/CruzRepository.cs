@@ -15,7 +15,7 @@ namespace Back_End.Services
 //Esta clase se va encaragar de implementar todos los metodos definidos en la interfaz ICruzRojaRepository
 public class CruzRojaRepository : ICruzRojaRepository, IDisposable
 {
-
+    //_context me va a permitir poder conectarme a la Base de datos y poder hacer implementar los metodos  
     public readonly CruzRojaContext2 _context;
 
     public CruzRojaRepository(CruzRojaContext2 context)
@@ -31,40 +31,45 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
         return _context.Users
                 .Include(i => i.Roles)
                 .ToList();
-
-        //_context.Users.ToList<Users>();
     }
 
     //listo los usuarios por id
     public Users GetUser(int UserID)
     {
-        if (UserID.ToString() == "")
+        if (UserID.ToString() == "") // si el usuario esta vacio
         {
             throw new ArgumentNullException(nameof(UserID));
         }
 
+        //retorno un Usuario especifico con el nombre del rol al cual pertence el mismo
         return _context.Users
-
              .Include(i => i.Roles)
              .FirstOrDefault(a => a.UserID == UserID);
-
     }
-
 
     //Añadir un nuevo usuario
     public void AddUser(Users user)
     {
+        //Verifico que el Usuario no sea null
         if (user == null)
         {
             throw new ArgumentNullException(nameof(user));
         }
 
+        //Despues tambien verifico que no existan dos Dni iguales en la Base de datos
+        if (_context.Users.Any(a => a.UserDni == user.UserDni))
+        {
+            throw new ArgumentException();
+        }
+
+        //Se retorna al Controller que no hay errores
         _context.Users.Add(user);
     }
 
 
-
     //Metodo para verificar si un usuario existe
+
+    //NO ES USADO POR AHORA PERO EN EL FUTURO PUEDE LLEGAR A SERVIR
     public bool UserExists(int UserID)
     {
         if (UserID.ToString() == "") // si el usuario esta vacio
@@ -93,7 +98,7 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
     {
         if (disposing)
         {
-            // dispose resources when needed
+            // Disponer de recurso cuando sea necesario
         }
     }
 
@@ -101,22 +106,19 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
     //Metodo para eliminar cada uno de los Usuarios en base a su Id.
     public void DeleteUser(Users user)
     {
-        if (user == null)
+        if (user == null) //Verifico que el Usuario no sea null
         {
             throw new ArgumentNullException(nameof(user));
         }
-
+        //Se retorna al Controller que no hay errores
         _context.Users.Remove(user);
     }
 
+    //Por el momento no es necesario añadirle nada solo llamar a la funcion
     public void UpdateUser(Users user)
     {
-        /*      if (user == null)
-            {
-                throw new ArgumentNullException(nameof(user));
-            }
-
-            _context.Users.Update(user);*/
     }
+
+   
 }
 

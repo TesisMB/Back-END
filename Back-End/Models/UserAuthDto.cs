@@ -26,11 +26,9 @@ namespace Back_End.Models
 
     public string token { get; set; } // Token
 
-
     public bool IsAuthenticated { get; set; } //Devuelve True o false 
 
+    public string RoleName { get; set; }
 
-    public List<Permissions> Permissions { get; set; } //Lista todos los permisos que puede realizar el Usuario.
 }
-
 }

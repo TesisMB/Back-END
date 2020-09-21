@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Back_End.Models;
 using Back_End.Services;
+using Back_End.Entities;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Back_End.Controllers
 {
@@ -19,6 +21,9 @@ namespace Back_End.Controllers
 
         private readonly ICruzRojaRepository _cruzRojaRepository;
         private readonly IMapper _mapper;
+
+        /*Este metodo va a permitir despues poder conectarme tanto para mapear, como para obtener 
+         las funciones que se establecieron repositorios correspondientes*/
 
         public UsersController(ICruzRojaRepository cruzRojaRepository, IMapper mapper)
 
@@ -33,16 +38,14 @@ namespace Back_End.Controllers
 
         // Listar Usuarios de forma completa
         [HttpGet]
-        [Authorize(Policy = "ListUsers")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
+       [Authorize(Roles = "C.General")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
         public ActionResult<IEnumerable<UsersDto>> GetUsers()
         {
-
             {
                 var usersFromRepo = _cruzRojaRepository.GetUsers();
 
                 //Al momento de mapear utilizo UsersDto para devolver aquellos valores imprecindibles
                 return Ok(_mapper.Map<IEnumerable<UsersDto>>(usersFromRepo));
-
             }
         }
 
@@ -50,7 +53,7 @@ namespace Back_End.Controllers
         //Listar Usuarios por Id
         //Name me permite interactuar con el Post para crear un nuevo Id para el usuario solicitado
         [HttpGet("{UserID}", Name = "GetUser")]
-        [Authorize(Policy = "ListUserId")]
+        [Authorize(Roles = "C.General")]
         public IActionResult GetUser(int UserID)
         {
             var usersFromRepo = _cruzRojaRepository.GetUser(UserID);
@@ -69,51 +72,28 @@ namespace Back_End.Controllers
 
         //Agregar un nuevo Usuario y devolve el Id Creado del Usuario
         [HttpPost]
-        [Authorize(Policy = "AddNewUser")]
+        [Authorize(Roles = "C.General")]
         public ActionResult<UsersDto> CreateUser(UsersForCreationDto user)
         {
-
-            //Realizo un mapeo entre Users - UsersForCreationDto 
+            //Se usa User para posteriormente almacenar los valores ingresados a la Base de datos
             var userEntity = _mapper.Map<Entities.Users>(user);
+
+            /*llamo al metodo AddUser para comprobar que los datos que se ingresaron 
+             del nuevo Usuario cumplan con los requisitos*/
             _cruzRojaRepository.AddUser(userEntity);
             _cruzRojaRepository.save();
 
+            /*Una vez comprobado con exito todo se procede a realizar el mapeo 
+            que va a permitir manipular como se devuelven los datos */
             var authorToReturn = _mapper.Map<UsersDto>(userEntity);
 
-
-            return Ok();
-
-            //devuelvo una nueva ruta donde se genera un Id nuevo para ese usuario añadido.
-            /*   return CreatedAtRoute("GetUser",
-                 new { userId = authorToReturn.IdUser },
-                    authorToReturn); */
-        }
-
-
-        //Este metodo permite actualizar y modificar todos los datos de los Usuarios que estan en el Sistema
-        [HttpPut("{UserID}")]
-        public ActionResult UpdateUser(int UserID, UsersForUpdate user)
-        {
-            var userFromRepo = _cruzRojaRepository.GetUser(UserID);
-            if (userFromRepo == null)
-            {
-                return NotFound();
-            }
-
-            _mapper.Map(user, userFromRepo);
-
-            _cruzRojaRepository.UpdateUser(userFromRepo);
-
-            _cruzRojaRepository.save();
-
+            //La Operacion de añadir un Usuario se retorna con exito
             return Ok();
         }
-
-        //se debe crear otro Patch en donde solamente se pueda actualizar el Rol del Usuario
 
         //Utilizo este metodo para actualizar los datos que son posibles modificar (Phone-Password-Email)
         [HttpPatch("{UserID}")]
-        [Authorize(Policy = "UpdateUser")]
+        [Authorize(Roles = "C.General")]
 
         public ActionResult UpdatePartialUser(int UserID, JsonPatchDocument<UsersForUpdate> patchDocument)
         {
@@ -132,24 +112,19 @@ namespace Back_End.Controllers
                 return ValidationProblem(ModelState);
             }
 
-
             _mapper.Map(userToPatch, userFromRepo);
-
 
             _cruzRojaRepository.UpdateUser(userFromRepo);
 
             _cruzRojaRepository.save();
 
+            // Se retorna con exito la actualizacion del Usuario especificado
             return Ok();
-
         }
-
-
 
         //Eliminar un Usuario particular en base al Id proporcionado del mismo
         [HttpDelete("{UserID}")]
-        [Authorize(Policy = "DeleteUser")]
-
+        [Authorize(Roles = "C.General")]
         public ActionResult DeleteUser(int UserID)
         {
 
@@ -168,11 +143,7 @@ namespace Back_End.Controllers
 
             // Se retorna con exito la eliminacion del Usuario especificado
             return Ok();
-
         }
-
-
     }
-
 }
 

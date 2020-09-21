@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Back_End.Controllers;
 using Back_End.Models;
 
-namespace JWT_Server.Controllers
+namespace Back_End.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -21,25 +21,28 @@ namespace JWT_Server.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login([FromBody]Users user)
+        public IActionResult Login([FromBody] UserLoginDto user)
         {
             IActionResult ret = null;
             UserAuthDto auth = new UserAuthDto();
-            UserSecurityDto mgr = new UserSecurityDto(_settings);
+            UserSecurity mgr = new UserSecurity(_settings);
 
+            //Llamo al metodo ValidateUser para verificar los datos del Usuario logueado
             auth = mgr.ValidateUser(user);
+
+            //Compruebo si el usuario esta Authenticado
             if (auth.IsAuthenticated)
             {
-                ret = StatusCode(200, auth); //devuelve el metodo Ok con el Usuario
+                ret = StatusCode(200, auth); //En caso de que se encuentre el Usuario en la base de datos se devolvera un 200 con sus respectivos datos
             }
-            else 
+            else    //En caso de que no se encuentre los datos del Usuario se devolvera un 400
             {
                
-                ret = StatusCode(404, "Datos incorrectos"); // devuelve Error
+                ret = StatusCode(404); 
             
             }
 
-            return ret;
+            return ret; //Retorno el mensaje correspondiente
         }
 
     }

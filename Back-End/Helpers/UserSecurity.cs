@@ -8,22 +8,24 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 
 namespace Back_End.Entities
 {
-    public class UserSecurityDto
+    public class UserSecurity
     {
         private JwtSettings _settings = null;
-        public UserSecurityDto(JwtSettings settings)
+        public UserSecurity(JwtSettings settings)
         {
             _settings = settings;
         }
 
-        public UserAuthDto ValidateUser(Users user)
-        {
-            UserAuthDto ret = new UserAuthDto();
-            Users authUser = null;
+        UserAuthDto ret = new UserAuthDto();
+        Users authUser = null;
 
+        public UserAuthDto ValidateUser(UserLoginDto user)
+        {
+           
             //se conecta a la base de datos para verificar las datos del usuario en cuestion
             using (var db = new CruzRojaContext())
             {
@@ -40,80 +42,86 @@ namespace Back_End.Entities
             return ret; //retornamos el valor de este objeto
         }
 
-        //metodo para crear un objeto del usuario que inicio session
+        //Este metodo va permitir que se devuelva ciertos datos del Usuario logueado
         protected UserAuthDto BuildUserAuthObject(Users authUser)
         {
-            UserAuthDto ret = new UserAuthDto(); // si ingreso aca es porque esta autenticado el usuario
+            //Defino constr como una variable que va a llevar la cadena de conexion de la base de datos para posteriormente poder usarla
+            string constr = @"Server=Localhost; Database=CruzRojaDB; Trusted_Connection=True;";
 
-
-            ret.UserDni = authUser.UserDni; // retorno el nombre del usuario con el cual se esta accediendo al sistema
-            ret.IsAuthenticated = true;
-            ret.UserID = authUser.UserID;
-            ret.UserFistname = authUser.UserFirstName;
-            ret.Permissions = GetUserClaim(authUser); // se retorno la lista de permisos
-            ret.UserLastname = authUser.UserLastname;
-            ret.token = BuildJwtToken(ret);
-
-            return ret; // se retorno el objeto del usuario autenticado
-        }
-
-        //Metodo para obtener los permisos de un usuario especificado
-        protected List<Permissions> GetUserClaim(Users authUser)
-        {
-            List<Permissions> list = new List<Permissions>();
-
-            try
+            //utilizo la coneccion a la base de datos
+            using (SqlConnection con = new SqlConnection(constr))
             {
-                using (var db = new CruzRojaContext())
+
+                /*Traigo los datos que se encuentran en la tabla de Users 
+                mediante  comandos Sql  ademas de agregar el Nombre del Rol al que pertenecen
+               Teniendo en cuenta siempre al Usuario Logueado*/
+
+                string sql = string.Format(@"Select a.*,b.RoleName from Users a 
+                   inner join Roles b on a.RoleID = b.RoleID
+                   Where UserDni= '{0}' and UserPassword= '{1}' ", authUser.UserDni, authUser.UserPassword);
+
+                //cmd va a permitirme poder llevar adelante la consulta a la base de datos
+                SqlCommand cmd = new SqlCommand(sql, con);
+
+                //Interpreta las variable string sql
+                cmd.CommandType = System.Data.CommandType.Text;
+                con.Open();
+                SqlDataReader rd = cmd.ExecuteReader();
+
+                //Devuelvo Ciertos datos del Usuario que se loguea
+                while (rd.Read())
                 {
-                    list = db.Permissions.Where(
-                        u => u.RoleID == authUser.RoleID).ToList();
+                    //Dichos datos se van a encontrar en la Base de datos
+                    ret.IsAuthenticated = true;
+                    ret.UserID = Convert.ToInt32(rd["UserId"]);
+                    ret.UserDni = rd["UserDni"].ToString();
+                    ret.UserFistname = rd["UserFirstname"].ToString();
+                    ret.UserLastname = rd["UserLastname"].ToString();
+                    ret.RoleName = rd["RoleName"].ToString();
+                    ret.token = BuildJwtToken(ret); //Devuelvo el token para su posterior utilizacion
                 }
             }
-            catch (Exception ex)
-            {
-                throw new Exception(
-                    "Exception trying to retrieve user claims.", ex);
-            }
 
-            return list;
+            return ret; // se retorno los valores del Usuario logueado
         }
 
-        //Este Metodo va a ser el que almacena los valores para el token para cada usuario
+
+        //Este Metodo va a ser el que almacena los valores en el token para cada usuario que se loguea
         protected string BuildJwtToken(UserAuthDto authUser)
         {
             SymmetricSecurityKey key = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(_settings.Key));
 
+            //Creo el token con informacion necesaria
+
             List<Claim> jwtClaims = new List<Claim>();
-            jwtClaims.Add(new Claim(JwtRegisteredClaimNames.Sub,
-                authUser.UserDni));
-            jwtClaims.Add(new Claim(JwtRegisteredClaimNames.Jti,
+            {
+
+                //Los valores que el token va a devolver sera el RoleName del Usuario logueado
+                jwtClaims.Add(new Claim(JwtRegisteredClaimNames.Sub, authUser.UserDni));
+                jwtClaims.Add(new Claim(JwtRegisteredClaimNames.Jti,
                 Guid.NewGuid().ToString()));
 
-            jwtClaims.Add(new Claim("isAuthenticated",
-                authUser.IsAuthenticated.ToString().ToLower()));
+                jwtClaims.Add(new Claim("isAuthenticated",
+              authUser.IsAuthenticated.ToString().ToLower()));
 
-            //se obtiene cada uno del permisos con su valor
-            foreach (var claim in authUser.Permissions)
-            {
-                jwtClaims.Add(new Claim(claim.PermissionType, claim.PermissionValue));
+
+                jwtClaims.Add(new Claim(ClaimTypes.Role, authUser.RoleName));
+                //Se crea el token con los valores anteriores
+                var token = new JwtSecurityToken(
+                    issuer: _settings.Issuer,
+                    audience: _settings.Audience,
+                    claims: jwtClaims, //Devuel el token con todos los Claim encontrados
+                    notBefore: DateTime.UtcNow,
+                    expires: DateTime.UtcNow.AddMinutes(
+                        _settings.MinutesToExpiration),
+                    signingCredentials: new SigningCredentials(key,
+                    SecurityAlgorithms.HmacSha256)
+                    );
+
+                //Se devuelve el token creado con sus respectivos datos
+                return new JwtSecurityTokenHandler().WriteToken(token);
             }
-
-            //Se crea el token con los valores anteriores
-            var token = new JwtSecurityToken(
-                issuer: _settings.Issuer,
-                audience: _settings.Audience,
-                claims: jwtClaims,
-                notBefore: DateTime.UtcNow,
-                expires: DateTime.UtcNow.AddMinutes(
-                    _settings.MinutesToExpiration),
-                signingCredentials: new SigningCredentials(key,
-                SecurityAlgorithms.HmacSha256)
-                );
-
-            //Se devuelve el token creado
-            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

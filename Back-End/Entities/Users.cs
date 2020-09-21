@@ -5,14 +5,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Back_End.Models
+namespace Back_End.Entities
 {
-    [Table("Users", Schema = "dbo")] //tabla y esquema al que pertence la clase en la base de datos de Sql
+
+
+        [Table("Users", Schema = "dbo")] //tabla y esquema al que pertence la clase en la base de datos de Sql
     public class Users
     {
 
         [Key]
-        public int UserId { get; set; }
+        public int UserID { get; set; }
 
         [Required]
         [MaxLength(100)]
@@ -20,11 +22,11 @@ namespace Back_End.Models
 
         [Required]
         [MaxLength(100)]
-        public string UserLastName { get; set; }
+        public string UserLastname { get; set; }
 
         [Required]
         [MaxLength(8)]
-        public string UserDni   { get; set; }
+        public string UserDni { get; set; }
 
         [Required]
         [MaxLength(16)]
@@ -33,9 +35,9 @@ namespace Back_End.Models
         [Required]
         [MaxLength(12)]
         public string UserPhone { get; set; }
-
+    
         [Required]
-        [MaxLength(75)]
+        [MaxLength(50)]
         public string UserEmail { get; set; }
 
         [Required]
@@ -43,21 +45,23 @@ namespace Back_End.Models
         public string UserGender { get; set; }
 
         [Required]
-        [MaxLength(8)]
-        public string UserAddress { get; set; }
+        [MaxLength(50)]
+        public string UserAddress{ get; set; }
 
         [Required]
+        [MaxLength(7)]
+        public DateTimeOffset UserBirthdate { get; set; }
+
+        [Required]
+        [MaxLength(7)]
         public DateTimeOffset UserCreatedate { get; set; }
 
         [Required]
-        public DateTimeOffset UserBirthdate { get; set; }
-
         public string UserAvatar { get; set; }
 
-        [ForeignKey("IdRole")]
+        [ForeignKey("RoleID")]
         public Roles Roles { get; set; }
-
-        public int IdRole { get; set; }
+        public int RoleID { get; set; }
 
 
 

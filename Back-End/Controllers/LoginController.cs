@@ -1,6 +1,12 @@
-﻿using Back_End.Dto;
-using Back_End.Helpers;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Back_End.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Back_End.Controllers;
+using Back_End.Models;
 
 namespace Back_End.Controllers
 {
@@ -15,25 +21,28 @@ namespace Back_End.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login([FromBody]UserLoginDto user)
+        public IActionResult Login([FromBody] UserLoginDto user)
         {
             IActionResult ret = null;
             UserAuthDto auth = new UserAuthDto();
             UserSecurity mgr = new UserSecurity(_settings);
 
+            //Llamo al metodo ValidateUser para verificar los datos del Usuario logueado
             auth = mgr.ValidateUser(user);
+
+            //Compruebo si el usuario esta Authenticado
             if (auth.IsAuthenticated)
             {
-                ret = StatusCode(200, auth); //devuelve el metodo Ok con el Usuario
+                ret = StatusCode(200, auth); //En caso de que se encuentre el Usuario en la base de datos se devolvera un 200 con sus respectivos datos
             }
-            else 
+            else    //En caso de que no se encuentre los datos del Usuario se devolvera un 400
             {
                
-                ret = StatusCode(404, "DNI o Contraseña incorrectas."); // devuelve Error
+                ret = StatusCode(404); 
             
             }
 
-            return ret;
+            return ret; //Retorno el mensaje correspondiente
         }
 
     }

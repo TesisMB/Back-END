@@ -1,5 +1,9 @@
-﻿using Back_End.Models;
+﻿using Back_End.Entities;
+using Back_End.Models;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Back_End.Services
 {
@@ -10,9 +14,8 @@ namespace Back_End.Services
         //lista completa de usuarios
         IEnumerable<Users> GetUsers();
 
-
         //lista de usuarios por Id
-        Users GetUser(int userId);
+        Users GetUser(int UserID);
 
         //Añadir un nuevo Usuario
         void AddUser(Users user);
@@ -24,8 +27,7 @@ namespace Back_End.Services
         void DeleteUser(Users user);
 
         //Metodo para verificar la existenica de un usuario
-        bool UserExists(int userId);
-
+        bool UserExists(int UserID);
 
         //Metodo para poder verificar que los datos a guardar no falte.
         bool save();

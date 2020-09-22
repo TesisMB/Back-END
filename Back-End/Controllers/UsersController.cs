@@ -38,7 +38,7 @@ namespace Back_End.Controllers
 
         // Listar Usuarios de forma completa
         [HttpGet]
-       [Authorize(Roles = "C.General")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
+       [Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
         public ActionResult<IEnumerable<UsersDto>> GetUsers()
         {
             {
@@ -53,7 +53,7 @@ namespace Back_End.Controllers
         //Listar Usuarios por Id
         //Name me permite interactuar con el Post para crear un nuevo Id para el usuario solicitado
         [HttpGet("{UserID}", Name = "GetUser")]
-        [Authorize(Roles = "C.General")]
+        [Authorize(Roles = "Coordinador General, Admin")]
         public IActionResult GetUser(int UserID)
         {
             var usersFromRepo = _cruzRojaRepository.GetUser(UserID);
@@ -72,7 +72,7 @@ namespace Back_End.Controllers
 
         //Agregar un nuevo Usuario y devolve el Id Creado del Usuario
         [HttpPost]
-        [Authorize(Roles = "C.General")]
+        [Authorize(Roles = "Coordinador General, Admin")]
         public ActionResult<UsersDto> CreateUser(UsersForCreationDto user)
         {
             //Se usa User para posteriormente almacenar los valores ingresados a la Base de datos
@@ -93,7 +93,7 @@ namespace Back_End.Controllers
 
         //Utilizo este metodo para actualizar los datos que son posibles modificar (Phone-Password-Email)
         [HttpPatch("{UserID}")]
-        [Authorize(Roles = "C.General")]
+        [Authorize(Roles = "Coordinador General, Admin")]
 
         public ActionResult UpdatePartialUser(int UserID, JsonPatchDocument<UsersForUpdate> patchDocument)
         {
@@ -124,7 +124,7 @@ namespace Back_End.Controllers
 
         //Eliminar un Usuario particular en base al Id proporcionado del mismo
         [HttpDelete("{UserID}")]
-        [Authorize(Roles = "C.General")]
+        [Authorize(Roles = "Coordinador General, Admin")]
         public ActionResult DeleteUser(int UserID)
         {
 

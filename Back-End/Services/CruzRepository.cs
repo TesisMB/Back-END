@@ -60,6 +60,8 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
         if (_context.Users.Any(a => a.UserDni == user.UserDni))
         {
             throw new ArgumentException();
+            //**************************************AGREGAR RETORNO DE ERROR **********************************
+            //return "Documento ya registrado.";
         }
 
         //Se retorna al Controller que no hay errores

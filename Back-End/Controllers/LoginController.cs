@@ -35,10 +35,10 @@ namespace Back_End.Controllers
             {
                 ret = StatusCode(200, auth); //En caso de que se encuentre el Usuario en la base de datos se devolvera un 200 con sus respectivos datos
             }
-            else    //En caso de que no se encuentre los datos del Usuario se devolvera un 400
+            else    //En caso de que no se encuentre los datos del Usuario se devolvera un 401
             {
                
-                ret = StatusCode(404); 
+                ret = StatusCode(401); 
             
             }
 

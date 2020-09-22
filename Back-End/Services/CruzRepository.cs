@@ -61,7 +61,7 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
         {
             throw new ArgumentException();
             //**************************************AGREGAR RETORNO DE ERROR **********************************
-            //return "Documento ya registrado.";
+         
         }
 
         //Se retorna al Controller que no hay errores

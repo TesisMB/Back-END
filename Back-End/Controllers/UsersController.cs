@@ -53,7 +53,7 @@ namespace Back_End.Controllers
         //Listar Usuarios por Id
         //Name me permite interactuar con el Post para crear un nuevo Id para el usuario solicitado
         [HttpGet("{UserID}", Name = "GetUser")]
-        [Authorize(Roles = "Coordinador General, Admin")]
+        [Authorize(Roles = "Coordinador General, Admin, Coordinador de Emergencias y Desastres, Encargado de Logistica")]
         public IActionResult GetUser(int UserID)
         {
             var usersFromRepo = _cruzRojaRepository.GetUser(UserID);
@@ -93,7 +93,7 @@ namespace Back_End.Controllers
 
         //Utilizo este metodo para actualizar los datos que son posibles modificar (Phone-Password-Email)
         [HttpPatch("{UserID}")]
-        [Authorize(Roles = "Coordinador General, Admin")]
+        [Authorize(Roles = "Coordinador General, Admin, Coordinador de Emergencias y Desastres, Encargado de Logistica")]
 
         public ActionResult UpdatePartialUser(int UserID, JsonPatchDocument<UsersForUpdate> patchDocument)
         {

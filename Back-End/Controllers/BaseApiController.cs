@@ -13,7 +13,7 @@ namespace Back_End.Controllers
         {
             IActionResult result;
 
-            //Se crea una nuexa exepcion generica con un mensaje
+            //Se crea una nueva excepcion generica con un mensaje
             result = StatusCode(StatusCodes.Status500InternalServerError, new Exception(msg, ex));
 
             return result;

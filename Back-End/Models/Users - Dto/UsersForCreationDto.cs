@@ -9,7 +9,6 @@ namespace Back_End.Models
     {
 
         //Todas estas variables van a ser necesarias a la hora de crear un nuevo Usuario
-
         public string UserFirstName { get; set; }
 
         public string UserLastname { get; set; }
@@ -34,7 +33,6 @@ namespace Back_End.Models
 
         public int RoleID { get; set; } /*Una vez que el Usuario Ingresa el Id automaticamente 
                                         se le va colocar el nombre del rol al cual pertence ese nuevo usuario */
-
 
     }
 }

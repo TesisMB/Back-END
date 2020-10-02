@@ -66,7 +66,7 @@ public class Startup
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         //defino los repositorios a usar
-        services.AddScoped<ICruzRojaRepository, CruzRojaRepository>();
+        services.AddScoped<ICruzRojaRepository <Users>, UsersRepository>();
 
         //defino la conexion con la base de datos
         var connection = Configuration.GetConnectionString("CruzRojaDB");
@@ -132,7 +132,7 @@ public class Startup
                 appBuilder.Run(async context =>
                 {
                     context.Response.StatusCode = 500;
-                    await context.Response.WriteAsync("Ups...! Algo inesperado ha ocurrido, intentelo mas tarde.");
+                    await context.Response.WriteAsync("An unexpected fault happened. Try again later. ");
                 });
             });
         }

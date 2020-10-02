@@ -19,17 +19,17 @@ namespace Back_End.Controllers
     public class UsersController : BaseApiController
     {
 
-        private readonly ICruzRojaRepository _cruzRojaRepository;
+        private readonly ICruzRojaRepository <Users> _cruzRojaRepository;
         private readonly IMapper _mapper;
 
         /*Este metodo va a permitir despues poder conectarme tanto para mapear, como para obtener 
          las funciones que se establecieron repositorios correspondientes*/
 
-        public UsersController(ICruzRojaRepository cruzRojaRepository, IMapper mapper)
+        public UsersController(ICruzRojaRepository <Users> UsersRepository, IMapper mapper)
 
         {
-            _cruzRojaRepository = cruzRojaRepository ??
-                throw new ArgumentNullException(nameof(cruzRojaRepository));
+            _cruzRojaRepository = UsersRepository ??
+                throw new ArgumentNullException(nameof(UsersRepository));
 
             _mapper = mapper ??
                 throw new ArgumentNullException(nameof(mapper));
@@ -42,7 +42,7 @@ namespace Back_End.Controllers
         public ActionResult<IEnumerable<UsersDto>> GetUsers()
         {
             {
-                var usersFromRepo = _cruzRojaRepository.GetUsers();
+                var usersFromRepo = _cruzRojaRepository.GetList();
 
                 //Al momento de mapear utilizo UsersDto para devolver aquellos valores imprecindibles
                 return Ok(_mapper.Map<IEnumerable<UsersDto>>(usersFromRepo));
@@ -56,7 +56,7 @@ namespace Back_End.Controllers
         [Authorize(Roles = "Coordinador General, Admin, Coordinador de Emergencias y Desastres, Encargado de Logistica")]
         public IActionResult GetUser(int UserID)
         {
-            var usersFromRepo = _cruzRojaRepository.GetUser(UserID);
+            var usersFromRepo = _cruzRojaRepository.GetListId(UserID);
 
 
             //Si el Id del Usuario no existe se retorna Error.
@@ -72,7 +72,7 @@ namespace Back_End.Controllers
 
         //Agregar un nuevo Usuario y devolve el Id Creado del Usuario
         [HttpPost]
-        [Authorize(Roles = "Coordinador General, Admin")]
+        //[Authorize(Roles = "Coordinador General, Admin")]
         public ActionResult<UsersDto> CreateUser(UsersForCreationDto user)
         {
             //Se usa User para posteriormente almacenar los valores ingresados a la Base de datos
@@ -80,7 +80,7 @@ namespace Back_End.Controllers
 
             /*llamo al metodo AddUser para comprobar que los datos que se ingresaron 
              del nuevo Usuario cumplan con los requisitos*/
-            _cruzRojaRepository.AddUser(userEntity);
+            _cruzRojaRepository.Add(userEntity);
             _cruzRojaRepository.save();
 
             /*Una vez comprobado con exito todo se procede a realizar el mapeo 
@@ -97,7 +97,7 @@ namespace Back_End.Controllers
 
         public ActionResult UpdatePartialUser(int UserID, JsonPatchDocument<UsersForUpdate> patchDocument)
         {
-            var userFromRepo = _cruzRojaRepository.GetUser(UserID);
+            var userFromRepo = _cruzRojaRepository.GetListId(UserID);
             if (userFromRepo == null)
             {
                 return NotFound();
@@ -114,7 +114,7 @@ namespace Back_End.Controllers
 
             _mapper.Map(userToPatch, userFromRepo);
 
-            _cruzRojaRepository.UpdateUser(userFromRepo);
+            _cruzRojaRepository.Update(userFromRepo);
 
             _cruzRojaRepository.save();
 
@@ -128,7 +128,7 @@ namespace Back_End.Controllers
         public ActionResult DeleteUser(int UserID)
         {
 
-            var userFromRepo = _cruzRojaRepository.GetUser(UserID);
+            var userFromRepo = _cruzRojaRepository.GetListId(UserID);
 
 
             // si el Id del Usuario no existe de retorna Error.
@@ -137,7 +137,7 @@ namespace Back_End.Controllers
                 return NotFound();
             }
 
-            _cruzRojaRepository.DeleteUser(userFromRepo);
+            _cruzRojaRepository.Delete(userFromRepo);
 
             _cruzRojaRepository.save();
 

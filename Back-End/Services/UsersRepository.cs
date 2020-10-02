@@ -8,24 +8,24 @@ using System.Threading.Tasks;
 
 namespace Back_End.Services
 {
-    public class CruzRepository
+    public class UsersRepository
     {
     }
 }
 //Esta clase se va encaragar de implementar todos los metodos definidos en la interfaz ICruzRojaRepository
-public class CruzRojaRepository : ICruzRojaRepository, IDisposable
+public class UsersRepository : ICruzRojaRepository<Users> , IDisposable
 {
     //_context me va a permitir poder conectarme a la Base de datos y poder hacer implementar los metodos  
     public readonly CruzRojaContext2 _context;
 
-    public CruzRojaRepository(CruzRojaContext2 context)
+    public UsersRepository(CruzRojaContext2 context)
     {
         _context = context ?? throw new ArgumentException(nameof(context));
     }
 
 
     //listo todos los usuarios
-   public IEnumerable<Users> GetUsers()
+   public IEnumerable<Users> GetList()
     {
         //retorno la lista de usuarios con el nombre del rol especifico al que pertence cada uno
         return _context.Users
@@ -34,7 +34,7 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
     }
 
     //listo los usuarios por id
-    public Users GetUser(int UserID)
+    public Users GetListId(int UserID)
     {
         if (UserID.ToString() == "") // si el usuario esta vacio
         {
@@ -48,7 +48,7 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
     }
 
     //Añadir un nuevo usuario
-    public void AddUser(Users user)
+    public void Add(Users user)
     {
         //Verifico que el Usuario no sea null
         if (user == null)
@@ -57,30 +57,27 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
         }
 
         //Despues tambien verifico que no existan dos Dni iguales en la Base de datos
-        if (_context.Users.Any(a => a.UserDni == user.UserDni))
+        if (!_context.Users.Any(a => a.UserDni == user.UserDni))
         {
-            throw new ArgumentException();
             //**************************************AGREGAR RETORNO DE ERROR **********************************
-         
+            //Se retorna al Controller que no hay errores
+            _context.Users.Add(user);
         }
-
-        //Se retorna al Controller que no hay errores
-        _context.Users.Add(user);
     }
 
 
     //Metodo para verificar si un usuario existe
 
     //NO ES USADO POR AHORA PERO EN EL FUTURO PUEDE LLEGAR A SERVIR
-    public bool UserExists(int UserID)
-    {
-        if (UserID.ToString() == "") // si el usuario esta vacio
-        {
-            throw new ArgumentNullException(nameof(UserID));
-        }
+    //public bool UserExists(int UserID)
+    //{
+    //    if (UserID.ToString() == "") // si el usuario esta vacio
+    //    {
+    //        throw new Exception(nameof(UserID));
+    //    }
 
-        return _context.Users.Any(a => a.UserID == UserID);
-    }
+    //    return _context.Users.Any(a => a.UserID == UserID);
+    //}
 
 
     //metodo para verificar que todos los datos  a almacenar esten, caso contrario marco un Error.
@@ -106,7 +103,7 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
 
 
     //Metodo para eliminar cada uno de los Usuarios en base a su Id.
-    public void DeleteUser(Users user)
+    public void Delete(Users user)
     {
         if (user == null) //Verifico que el Usuario no sea null
         {
@@ -117,7 +114,7 @@ public class CruzRojaRepository : ICruzRojaRepository, IDisposable
     }
 
     //Por el momento no es necesario añadirle nada solo llamar a la funcion
-    public void UpdateUser(Users user)
+    public void Update(Users user)
     {
     }
 

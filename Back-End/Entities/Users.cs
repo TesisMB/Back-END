@@ -18,7 +18,7 @@ namespace Back_End.Entities
 
         [Required]
         [MaxLength(100)]
-        public string UserFirstName { get; set; }
+        public string UserFirstname { get; set; }
 
         [Required]
         [MaxLength(100)]

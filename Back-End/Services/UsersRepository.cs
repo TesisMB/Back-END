@@ -56,13 +56,19 @@ public class UsersRepository : ICruzRojaRepository<Users> , IDisposable
             throw new ArgumentNullException(nameof(user));
         }
 
+
         //Despues tambien verifico que no existan dos Dni iguales en la Base de datos
-        if (!_context.Users.Any(a => a.UserDni == user.UserDni))
-        {
-            //**************************************AGREGAR RETORNO DE ERROR **********************************
-            //Se retorna al Controller que no hay errores
-            _context.Users.Add(user);
-        }
+        //if (!_context.Users.Any(a => a.UserDni == user.UserDni))
+        //{
+        //    //**************************************AGREGAR RETORNO DE ERROR **********************************
+        //    //Se retorna al Controller que no hay errores
+        //}
+        //else
+        //{
+
+        //}
+
+          _context.Users.Add(user);
     }
 
 

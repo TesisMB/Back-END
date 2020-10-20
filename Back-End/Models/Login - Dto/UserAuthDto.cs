@@ -20,7 +20,7 @@ namespace Back_End.Models
     
     public int UserID { get; set; } // ID del usuario
 
-    public string UserFistname { get; set; }
+    public string UserFirstname { get; set; }
 
     public string UserLastname { get; set; }
 
@@ -29,6 +29,14 @@ namespace Back_End.Models
     public bool IsAuthenticated { get; set; } //Devuelve True o false 
 
     public string RoleName { get; set; }
+
+    public string UserEmail { get; set; }
+
+    public string UserAvatar { get; set; }
+
+    public string UserPhone { get; set; }
+    public string UserAddress { get; set; }
+
 
 }
 }

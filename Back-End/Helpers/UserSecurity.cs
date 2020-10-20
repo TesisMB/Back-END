@@ -75,9 +75,13 @@ namespace Back_End.Entities
                     ret.IsAuthenticated = true;
                     ret.UserID = Convert.ToInt32(rd["UserId"]);
                     ret.UserDni = rd["UserDni"].ToString();
-                    ret.UserFistname = rd["UserFirstname"].ToString();
+                    ret.UserFirstname = rd["UserFirstname"].ToString();
                     ret.UserLastname = rd["UserLastname"].ToString();
                     ret.RoleName = rd["RoleName"].ToString();
+                    ret.UserEmail = rd["UserEmail"].ToString();
+                    ret.UserAvatar = rd["UserAvatar"].ToString();
+                    ret.UserPhone = rd["UserPhone"].ToString();
+                    ret.UserAddress = rd["UserAddress"].ToString();
                     ret.token = BuildJwtToken(ret); //Devuelvo el token para su posterior utilizacion
                 }
             }

@@ -13,6 +13,13 @@ namespace Back_End.Entities
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
+        public virtual DbSet<Estate> Estate { get; set; }
+
+        public virtual DbSet<Rolled> Rolled { get; set; }
+
+        public virtual DbSet<Materials> Materials { get; set; }
+        public virtual DbSet<Medicine> Medicine { get; set; }
+        public virtual DbSet<Volunteer> Volunteer { get; set; }
 
         private const string Connection =
        @"Server=DESKTOP-4PRPJUH;

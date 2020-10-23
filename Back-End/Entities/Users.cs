@@ -63,8 +63,5 @@ namespace Back_End.Entities
         public Roles Roles { get; set; }
         public int RoleID { get; set; }
 
-
-
-
     }
 }

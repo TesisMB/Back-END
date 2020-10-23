@@ -101,10 +101,7 @@ public class UsersRepository : ICruzRojaRepository<Users> , IDisposable
 
     protected virtual void Dispose(bool disposing)
     {
-        if (disposing)
-        {
-            // Disponer de recurso cuando sea necesario
-        }
+
     }
 
 

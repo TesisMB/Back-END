@@ -1,15 +1,16 @@
-﻿using Back_End.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Back_End.Models
 {
-    public class VolunteerDto
+    [Route("api/[controller]")]
+    [ApiController]
+    public class VolunteerForCreation_UpdateDto
     {
-        public int VolunteerID { get; set; }
-
         public string VolunteerFirstName { get; set; }
 
         public string VolunteerLastName { get; set; }
@@ -25,5 +26,5 @@ namespace Back_End.Models
         public string VolunteerSpecialty { get; set; }
 
         public string VolunteerAvatar { get; set; }
-}
+    }
 }

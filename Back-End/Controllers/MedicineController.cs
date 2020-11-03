@@ -2,25 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using Back_End.Entities;
-using Back_End.Models;
 using Back_End.Services;
+using Back_End.Models;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace Back_End.Controllers
 {
     [Route("api/resources/[controller]")]
     [ApiController]
-    public class EstateController : BaseApiController
-    { 
-
-        private readonly ICruzRojaRepository<Estate> _cruzRojaRepository;
+    public class MedicineController : BaseApiController
+    {
+        private readonly ICruzRojaRepository<Medicine> _cruzRojaRepository;
         private readonly IMapper _mapper;
-
-        public EstateController(ICruzRojaRepository<Estate> cruzRojaRepository, IMapper mapper)
+        public MedicineController(ICruzRojaRepository<Medicine> cruzRojaRepository, IMapper mapper)
 
         {
             _cruzRojaRepository = cruzRojaRepository ??
@@ -33,76 +31,76 @@ namespace Back_End.Controllers
 
         [HttpGet]
         //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
-        public ActionResult<IEnumerable<EstateDto>> GetEstate()
+        public ActionResult<IEnumerable<MedicineDto>> GetMedicine()
         {
             {
-                var estateFromRepo = _cruzRojaRepository.GetList();
-                return Ok(estateFromRepo);
+                var medicineFromRepo = _cruzRojaRepository.GetList();
+                return Ok(medicineFromRepo);
             }
 
         }
-        
+
         //Obtener Estate por ID
-        [HttpGet("{EstateID}", Name = "GetEstate")]
+        [HttpGet("{MedicineID}", Name = "GetMedicine")]
         //[Authorize(Roles = "Coordinador General, Admin, Coordinador de Emergencias y Desastres, Encargado de Logistica")]
-        public IActionResult GetEstate(int EstateID)
+        public IActionResult GetMedicine(int MedicineID)
         {
-            var estateFromRepo = _cruzRojaRepository.GetListId(EstateID);
+            var medicineFromRepo = _cruzRojaRepository.GetListId(MedicineID);
 
 
             //Si el Id del Usuario no existe se retorna Error.
-            if (estateFromRepo == null)
+            if (medicineFromRepo == null)
             {
                 return NotFound();
             }
 
             //Al momento de mapear utilizo UsersDto para devolver aquellos valores imprecidibles
-            return Ok(estateFromRepo);
+            return Ok(medicineFromRepo);
         }
 
         [HttpPost]
         //[Authorize(Roles = "Coordinador General, Admin")]
-        public ActionResult<EstateDto> CreateUser(EstateForCreation_UpdateDto estate)
-            
+        public ActionResult<MedicineDto> CreateMedicine(MedicineForCreation_UpdateDto medicine)
+
         {
             //Se usa User para posteriormente almacenar los valores ingresados a la Base de datos
-            
-            var estateEntity = _mapper.Map<Entities.Estate>(estate);
+
+            var medicineEntity = _mapper.Map<Entities.Medicine>(medicine);
 
             /*llamo al metodo AddUser para comprobar que los datos que se ingresaroSn 
              del nuevo Usuario cumplan con los requisitos*/
-            _cruzRojaRepository.Add(estateEntity);
+            _cruzRojaRepository.Add(medicineEntity);
             _cruzRojaRepository.save();
 
-            var authorToReturn = _mapper.Map<EstateDto>(estateEntity);
+            var authorToReturn = _mapper.Map<MedicineDto>(medicineEntity);
 
             //La Operacion de añadir un Usuario se retorna con exito
             return Ok();
         }
 
-        [HttpPatch("{EstateID}")]
+        [HttpPatch("{MedicineID}")]
         //[Authorize(Roles = "Coordinador General, Admin, Coordinador de Emergencias y Desastres, Encargado de Logistica")]
 
-        public ActionResult UpdatePartialEstate(int EstateID, JsonPatchDocument<EstateForCreation_UpdateDto> patchDocument)
+        public ActionResult UpdatePartialMedicine(int MedicineID, JsonPatchDocument<MedicineForCreation_UpdateDto> patchDocument)
         {
-            var estateFromRepo = _cruzRojaRepository.GetListId(EstateID);
-            if (estateFromRepo == null)
+            var medicineFromRepo = _cruzRojaRepository.GetListId(MedicineID);
+            if (medicineFromRepo == null)
             {
                 return NotFound();
             }
 
-            var estateToPatch = _mapper.Map<EstateForCreation_UpdateDto>(estateFromRepo);
+            var medicineToPatch = _mapper.Map<MedicineForCreation_UpdateDto>(medicineFromRepo);
 
-            patchDocument.ApplyTo(estateToPatch, ModelState);
+            patchDocument.ApplyTo(medicineToPatch, ModelState);
 
-            if (!TryValidateModel(estateToPatch))
+            if (!TryValidateModel(medicineToPatch))
             {
                 return ValidationProblem(ModelState);
             }
 
-            _mapper.Map(estateToPatch, estateFromRepo);
+            _mapper.Map(medicineToPatch, medicineFromRepo);
 
-            _cruzRojaRepository.Update(estateFromRepo);
+            _cruzRojaRepository.Update(medicineFromRepo);
 
             _cruzRojaRepository.save();
 
@@ -111,21 +109,21 @@ namespace Back_End.Controllers
         }
 
         //Borrar Estate
-        [HttpDelete("{EstateID}")]
+        [HttpDelete("{MedicineID}")]
         //[Authorize(Roles = "Coordinador General, Admin")]
-        public ActionResult Delete(int EstateID)
+        public ActionResult Delete(int MedicineID)
         {
 
-            var estateFromRepo = _cruzRojaRepository.GetListId(EstateID);
+            var medicineFromRepo = _cruzRojaRepository.GetListId(MedicineID);
 
 
             // si el Id del Usuario no existe de retorna Error.
-            if (estateFromRepo == null)
+            if (medicineFromRepo == null)
             {
                 return NotFound();
             }
 
-            _cruzRojaRepository.Delete(estateFromRepo);
+            _cruzRojaRepository.Delete(medicineFromRepo);
 
             _cruzRojaRepository.save();
 
@@ -133,7 +131,6 @@ namespace Back_End.Controllers
             return Ok();
 
         }
+
     }
-
 }
-

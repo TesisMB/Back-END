@@ -15,8 +15,6 @@ namespace Back_End.Models
         public string UserEmail { get; set; }
 
         public string UserAddress { get; set; }
-
-        public string UserAvatar { get; set; }
         
         public int RoleID { get; set; }
     }

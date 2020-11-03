@@ -2,29 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using Back_End.Entities;
-using Back_End.Models;
 using Back_End.Services;
+using Back_End.Models;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace Back_End.Controllers
 {
     [Route("api/resources/[controller]")]
     [ApiController]
-    public class EstateController : BaseApiController
-    { 
-
-        private readonly ICruzRojaRepository<Estate> _cruzRojaRepository;
+    public class MaterialsController : BaseApiController
+    {
+        private readonly ICruzRojaRepository<Materials> _cruzRojaRepository;
         private readonly IMapper _mapper;
-
-        public EstateController(ICruzRojaRepository<Estate> cruzRojaRepository, IMapper mapper)
+        public MaterialsController(ICruzRojaRepository<Materials> cruzRojaRepository, IMapper mapper)
 
         {
             _cruzRojaRepository = cruzRojaRepository ??
-                throw new ArgumentNullException(nameof(UsersRepository));
+                throw new ArgumentNullException(nameof(MaterialsRepository));
 
             _mapper = mapper ??
                throw new ArgumentNullException(nameof(mapper));
@@ -33,76 +31,76 @@ namespace Back_End.Controllers
 
         [HttpGet]
         //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
-        public ActionResult<IEnumerable<EstateDto>> GetEstate()
+        public ActionResult<IEnumerable<MaterialsDto>> GetMaterials()
         {
             {
-                var estateFromRepo = _cruzRojaRepository.GetList();
-                return Ok(estateFromRepo);
+                var materialsFromRepo = _cruzRojaRepository.GetList();
+                return Ok(materialsFromRepo);
             }
 
         }
-        
+
         //Obtener Estate por ID
-        [HttpGet("{EstateID}", Name = "GetEstate")]
+        [HttpGet("{MaterialsID}", Name = "GetMaterials")]
         //[Authorize(Roles = "Coordinador General, Admin, Coordinador de Emergencias y Desastres, Encargado de Logistica")]
-        public IActionResult GetEstate(int EstateID)
+        public IActionResult GetMaterials(int MaterialsID)
         {
-            var estateFromRepo = _cruzRojaRepository.GetListId(EstateID);
+            var materialsFromRepo = _cruzRojaRepository.GetListId(MaterialsID);
 
 
             //Si el Id del Usuario no existe se retorna Error.
-            if (estateFromRepo == null)
+            if (materialsFromRepo == null)
             {
                 return NotFound();
             }
 
             //Al momento de mapear utilizo UsersDto para devolver aquellos valores imprecidibles
-            return Ok(estateFromRepo);
+            return Ok(materialsFromRepo);
         }
 
         [HttpPost]
         //[Authorize(Roles = "Coordinador General, Admin")]
-        public ActionResult<EstateDto> CreateUser(EstateForCreation_UpdateDto estate)
-            
+        public ActionResult<MaterialsDto> CreateMedicine(MaterialsForCreation_UpdateDto materials)
+
         {
             //Se usa User para posteriormente almacenar los valores ingresados a la Base de datos
-            
-            var estateEntity = _mapper.Map<Entities.Estate>(estate);
+
+            var materialsEntity = _mapper.Map<Entities.Materials>(materials);
 
             /*llamo al metodo AddUser para comprobar que los datos que se ingresaroSn 
              del nuevo Usuario cumplan con los requisitos*/
-            _cruzRojaRepository.Add(estateEntity);
+            _cruzRojaRepository.Add(materialsEntity);
             _cruzRojaRepository.save();
 
-            var authorToReturn = _mapper.Map<EstateDto>(estateEntity);
+            var authorToReturn = _mapper.Map <MaterialsDto>(materialsEntity);
 
             //La Operacion de añadir un Usuario se retorna con exito
             return Ok();
         }
 
-        [HttpPatch("{EstateID}")]
+        [HttpPatch("{MaterialsID}")]
         //[Authorize(Roles = "Coordinador General, Admin, Coordinador de Emergencias y Desastres, Encargado de Logistica")]
 
-        public ActionResult UpdatePartialEstate(int EstateID, JsonPatchDocument<EstateForCreation_UpdateDto> patchDocument)
+        public ActionResult UpdatePartialMaterials(int MaterialsID, JsonPatchDocument<MaterialsForCreation_UpdateDto> patchDocument)
         {
-            var estateFromRepo = _cruzRojaRepository.GetListId(EstateID);
-            if (estateFromRepo == null)
+            var materialsFromRepo = _cruzRojaRepository.GetListId(MaterialsID);
+            if (materialsFromRepo == null)
             {
                 return NotFound();
             }
 
-            var estateToPatch = _mapper.Map<EstateForCreation_UpdateDto>(estateFromRepo);
+            var materialsToPatch = _mapper.Map<MaterialsForCreation_UpdateDto>(materialsFromRepo);
 
-            patchDocument.ApplyTo(estateToPatch, ModelState);
+            patchDocument.ApplyTo(materialsToPatch, ModelState);
 
-            if (!TryValidateModel(estateToPatch))
+            if (!TryValidateModel(materialsToPatch))
             {
                 return ValidationProblem(ModelState);
             }
 
-            _mapper.Map(estateToPatch, estateFromRepo);
+            _mapper.Map(materialsToPatch, materialsFromRepo);
 
-            _cruzRojaRepository.Update(estateFromRepo);
+            _cruzRojaRepository.Update(materialsFromRepo);
 
             _cruzRojaRepository.save();
 
@@ -111,21 +109,21 @@ namespace Back_End.Controllers
         }
 
         //Borrar Estate
-        [HttpDelete("{EstateID}")]
+        [HttpDelete("{MaterialsID}")]
         //[Authorize(Roles = "Coordinador General, Admin")]
-        public ActionResult Delete(int EstateID)
+        public ActionResult Delete(int MaterialsID)
         {
 
-            var estateFromRepo = _cruzRojaRepository.GetListId(EstateID);
+            var materialsFromRepo = _cruzRojaRepository.GetListId(MaterialsID);
 
 
             // si el Id del Usuario no existe de retorna Error.
-            if (estateFromRepo == null)
+            if (materialsFromRepo == null)
             {
                 return NotFound();
             }
 
-            _cruzRojaRepository.Delete(estateFromRepo);
+            _cruzRojaRepository.Delete(materialsFromRepo);
 
             _cruzRojaRepository.save();
 
@@ -133,7 +131,7 @@ namespace Back_End.Controllers
             return Ok();
 
         }
-    }
 
+    }
 }
 

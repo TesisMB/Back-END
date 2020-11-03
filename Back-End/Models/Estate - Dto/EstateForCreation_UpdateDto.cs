@@ -1,15 +1,12 @@
-﻿using Back_End.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Back_End.Models
 {
-    public class EstateDto
+    public class EstateForCreation_UpdateDto
     {
-        public int EstateID { get; set; }
-
         public string EstateAddress { get; set; }
 
         public int EstateNumber { get; set; }
@@ -21,5 +18,6 @@ namespace Back_End.Models
         public string EstateCity { get; set; }
 
         public string EstatePostalCode { get; set; }
+
     }
 }

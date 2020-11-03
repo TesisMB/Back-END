@@ -34,7 +34,6 @@ namespace Back_End.Profiles
             CreateMap<Models.UsersForCreationDto, Entities.Users>();
             CreateMap<Models.UsersForUpdate, Entities.Users>();
             CreateMap<Entities.Users, Models.UsersForUpdate>();
-
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Back_End.Services
 {
-    public class VolunteerRepository : ICruzRojaRepository<Materials>, IDisposable
+    public class VolunteerRepository : ICruzRojaRepository<Volunteer>, IDisposable
     {
         public readonly CruzRojaContext2 _context;
 
@@ -14,39 +14,63 @@ namespace Back_End.Services
         {
             _context = context ?? throw new ArgumentException(nameof(context));
         }
-        public void Add(Materials entity)
+        public IEnumerable<Volunteer> GetList()
         {
-            throw new NotImplementedException();
+            //retorno la lista de usuarios con el nombre del rol especifico al que pertence cada uno
+            return _context.Volunteer
+                    .ToList();
         }
 
-        public void Delete(Materials entity)
+        public void Add(Volunteer volunteer)
         {
-            throw new NotImplementedException();
+            //Verifico que el Usuario no sea null
+            if (volunteer == null)
+            {
+                throw new ArgumentNullException(nameof(volunteer));
+            }
+
+            _context.Volunteer.Add(volunteer);
+        }
+
+        public void Delete(Volunteer volunteer)
+        {
+            if (volunteer == null) //Verifico que el Usuario no sea null
+            {
+                throw new ArgumentNullException(nameof(volunteer));
+            }
+            //Se retorna al Controller que no hay errores
+            _context.Volunteer.Remove(volunteer);
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        protected virtual void Dispose(bool disposing)
+        {
+
         }
 
-        public IEnumerable<Materials> GetList()
+        public Volunteer GetListId(int VolunteerID)
         {
-            throw new NotImplementedException();
-        }
+            if (VolunteerID.ToString() == "") // si el usuario esta vacio
+            {
+                throw new ArgumentNullException(nameof(VolunteerID));
+            }
 
-        public Materials GetListId(int EntityID)
-        {
-            throw new NotImplementedException();
+            //retorno un Usuario especifico con el nombre del rol al cual pertence el mismo
+            return _context.Volunteer
+                 .FirstOrDefault(a => a.VolunteerID == VolunteerID);
         }
 
         public bool save()
         {
-            throw new NotImplementedException();
+            return (_context.SaveChanges() >= 0);
         }
 
-        public void Update(Materials entity)
+        public void Update(Volunteer volunteer)
         {
-            throw new NotImplementedException();
         }
     }
 }

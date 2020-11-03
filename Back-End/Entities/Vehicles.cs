@@ -8,39 +8,39 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Back_End.Entities
 {
     [Table("Rolled", Schema = "dbo")] //tabla y esquema al que pertence la clase en la base de datos de Sql
-    public class Rolled
+    public class Vehicles
     {
         [Key]
-        public int RolledID { get; set; }
+        public int VehicleID { get; set; }
 
         [Required]
-        public int RolledQuantity { get; set; }
+        public int VehicleQuantity { get; set; }
 
         [Required]
         [MaxLength(30)]
-        public string RolledBrand { get; set; }
+        public string VehicleBrand { get; set; }
 
         [Required]
         [MaxLength(20)]
-        public string RolledModel{ get; set; }
+        public string VehicleModel { get; set; }
 
         [Required]
         [MaxLength(30)]
-        public string RolledName { get; set; }
+        public string VehicleName { get; set; }
 
         [Required]
         [MaxLength(50)]
-        public string RolledKms { get; set; }
+        public string VehicleKms { get; set; }
 
         [Required]
-        public bool RolledIsAvailable { get; set; }
+        public bool VehicleIsAvailable { get; set; }
 
         [Required]
         [MaxLength(10)]
-        public string RolledUtility { get; set; }
+        public string VehicleUtility { get; set; }
 
         [Required]
         [MaxLength(100)]
-        public string RolledResponsible { get; set; }
+        public string VehicleResponsible { get; set; }
     }
 }

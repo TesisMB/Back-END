@@ -14,17 +14,17 @@ namespace Back_End.Controllers
 {
     [Route("api/resources/[controller]")]
     [ApiController]
-    public class EstateController : BaseApiController
-    { 
+    public class VehiclesController : BaseApiController
+    {
 
-        private readonly ICruzRojaRepository<Estate> _cruzRojaRepository;
+        private readonly ICruzRojaRepository<Vehicles> _cruzRojaRepository;
         private readonly IMapper _mapper;
 
-        public EstateController(ICruzRojaRepository<Estate> cruzRojaRepository, IMapper mapper)
+        public VehiclesController(ICruzRojaRepository<Vehicles> cruzRojaRepository, IMapper mapper)
 
         {
             _cruzRojaRepository = cruzRojaRepository ??
-                throw new ArgumentNullException(nameof(UsersRepository));
+                throw new ArgumentNullException(nameof(VehiclesRepository));
 
             _mapper = mapper ??
                throw new ArgumentNullException(nameof(mapper));
@@ -33,76 +33,76 @@ namespace Back_End.Controllers
 
         [HttpGet]
         //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
-        public ActionResult<IEnumerable<EstateDto>> GetEstate()
+        public ActionResult<IEnumerable<VehiclesDto>> GetEstate()
         {
             {
-                var estateFromRepo = _cruzRojaRepository.GetList();
-                return Ok(estateFromRepo);
+                var vehiclesFromRepo = _cruzRojaRepository.GetList();
+                return Ok(vehiclesFromRepo);
             }
 
         }
-        
+
         //Obtener Estate por ID
-        [HttpGet("{EstateID}", Name = "GetEstate")]
+        [HttpGet("{VehiclesID}", Name = "GetVehicles")]
         //[Authorize(Roles = "Coordinador General, Admin, Coordinador de Emergencias y Desastres, Encargado de Logistica")]
-        public IActionResult GetEstate(int EstateID)
+        public IActionResult GetVehicle(int EstateID)
         {
-            var estateFromRepo = _cruzRojaRepository.GetListId(EstateID);
+            var vehiclesFromRepo = _cruzRojaRepository.GetListId(EstateID);
 
 
             //Si el Id del Usuario no existe se retorna Error.
-            if (estateFromRepo == null)
+            if (vehiclesFromRepo == null)
             {
                 return NotFound();
             }
 
             //Al momento de mapear utilizo UsersDto para devolver aquellos valores imprecidibles
-            return Ok(estateFromRepo);
+            return Ok(vehiclesFromRepo);
         }
 
         [HttpPost]
         //[Authorize(Roles = "Coordinador General, Admin")]
-        public ActionResult<EstateDto> CreateUser(EstateForCreation_UpdateDto estate)
-            
+        public ActionResult<VehiclesDto> CreateVehicle(VehiclesForCreation_UpdateDto vehicles)
+
         {
             //Se usa User para posteriormente almacenar los valores ingresados a la Base de datos
-            
-            var estateEntity = _mapper.Map<Entities.Estate>(estate);
+
+            var vehiclesEntity = _mapper.Map<Entities.Vehicles>(vehicles);
 
             /*llamo al metodo AddUser para comprobar que los datos que se ingresaroSn 
              del nuevo Usuario cumplan con los requisitos*/
-            _cruzRojaRepository.Add(estateEntity);
+            _cruzRojaRepository.Add(vehiclesEntity);
             _cruzRojaRepository.save();
 
-            var authorToReturn = _mapper.Map<EstateDto>(estateEntity);
+            var authorToReturn = _mapper.Map<VehiclesDto>(vehiclesEntity);
 
             //La Operacion de añadir un Usuario se retorna con exito
             return Ok();
         }
 
-        [HttpPatch("{EstateID}")]
+        [HttpPatch("{VehiclesID}")]
         //[Authorize(Roles = "Coordinador General, Admin, Coordinador de Emergencias y Desastres, Encargado de Logistica")]
 
-        public ActionResult UpdatePartialEstate(int EstateID, JsonPatchDocument<EstateForCreation_UpdateDto> patchDocument)
+        public ActionResult UpdatePartialVehicles(int VehiclesID, JsonPatchDocument<VehiclesForCreation_UpdateDto> patchDocument)
         {
-            var estateFromRepo = _cruzRojaRepository.GetListId(EstateID);
-            if (estateFromRepo == null)
+            var vehiclesFromRepo = _cruzRojaRepository.GetListId(VehiclesID);
+            if (vehiclesFromRepo == null)
             {
                 return NotFound();
             }
 
-            var estateToPatch = _mapper.Map<EstateForCreation_UpdateDto>(estateFromRepo);
+            var vehiclesToPatch = _mapper.Map<VehiclesForCreation_UpdateDto>(vehiclesFromRepo);
 
-            patchDocument.ApplyTo(estateToPatch, ModelState);
+            patchDocument.ApplyTo(vehiclesToPatch, ModelState);
 
-            if (!TryValidateModel(estateToPatch))
+            if (!TryValidateModel(vehiclesToPatch))
             {
                 return ValidationProblem(ModelState);
             }
 
-            _mapper.Map(estateToPatch, estateFromRepo);
+            _mapper.Map(vehiclesToPatch, vehiclesFromRepo);
 
-            _cruzRojaRepository.Update(estateFromRepo);
+            _cruzRojaRepository.Update(vehiclesFromRepo);
 
             _cruzRojaRepository.save();
 
@@ -111,7 +111,7 @@ namespace Back_End.Controllers
         }
 
         //Borrar Estate
-        [HttpDelete("{EstateID}")]
+        [HttpDelete("{VehiclesID}")]
         //[Authorize(Roles = "Coordinador General, Admin")]
         public ActionResult Delete(int EstateID)
         {
@@ -136,4 +136,3 @@ namespace Back_End.Controllers
     }
 
 }
-

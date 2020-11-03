@@ -14,34 +14,60 @@ namespace Back_End.Services
         {
             _context = context ?? throw new ArgumentException(nameof(context));
         }
-        public void Add(Medicine entity)
+
+        public void Add(Medicine estate)
         {
-            throw new NotImplementedException();
+            //Verifico que el Usuario no sea null
+            if (estate == null)
+            {
+                throw new ArgumentNullException(nameof(estate));
+            }
+
+            _context.Medicine.Add(estate);
         }
 
         public void Delete(Medicine entity)
         {
-            throw new NotImplementedException();
+            if (entity == null) //Verifico que el Usuario no sea null
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+            //Se retorna al Controller que no hay errores
+            _context.Medicine.Remove(entity);
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        protected virtual void Dispose(bool disposing)
+        {
+
         }
 
         public IEnumerable<Medicine> GetList()
         {
-            throw new NotImplementedException();
+            //retorno la lista de usuarios con el nombre del rol especifico al que pertence cada uno
+            return _context.Medicine
+                    .ToList();
         }
 
-        public Medicine GetListId(int EntityID)
+        public Medicine GetListId(int MedicineID)
         {
-            throw new NotImplementedException();
+            if (MedicineID.ToString() == "") // si el usuario esta vacio
+            {
+                throw new ArgumentNullException(nameof(MedicineID));
+            }
+
+            //retorno un Usuario especifico con el nombre del rol al cual pertence el mismo
+            return _context.Medicine
+                 .FirstOrDefault(a => a.MedicineID == MedicineID);
         }
 
         public bool save()
         {
-            throw new NotImplementedException();
+            return (_context.SaveChanges() >= 0);
         }
 
         public void Update(Medicine entity)

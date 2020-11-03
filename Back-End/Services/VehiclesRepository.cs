@@ -6,40 +6,40 @@ using System.Threading.Tasks;
 
 namespace Back_End.Services
 {
-    public class EstateRepository : ICruzRojaRepository<Estate>, IDisposable
+    public class VehiclesRepository : ICruzRojaRepository<Vehicles>, IDisposable
     {
         public readonly CruzRojaContext2 _context;
 
-        public EstateRepository(CruzRojaContext2 context)
+        public VehiclesRepository(CruzRojaContext2 context)
         {
             _context = context ?? throw new ArgumentException(nameof(context));
         }
-        public IEnumerable<Estate> GetList()
+        public IEnumerable<Vehicles> GetList()
         {
             //retorno la lista de usuarios con el nombre del rol especifico al que pertence cada uno
-            return _context.Estate
+            return _context.Vehicles
                     .ToList();
         }
 
-        public void Add(Estate estate)
+        public void Add(Vehicles vehicles)
         {
             //Verifico que el Usuario no sea null
-            if (estate == null)
+            if (vehicles == null)
             {
-                throw new ArgumentNullException(nameof(estate));
+                throw new ArgumentNullException(nameof(vehicles));
             }
 
-            _context.Estate.Add(estate);
+            _context.Vehicles.Add(vehicles);
         }
 
-        public void Delete(Estate entity)
+        public void Delete(Vehicles vehicles)
         {
-            if (entity == null) //Verifico que el Usuario no sea null
+            if (vehicles == null) //Verifico que el Usuario no sea null
             {
-                throw new ArgumentNullException(nameof(entity));
+                throw new ArgumentNullException(nameof(vehicles));
             }
             //Se retorna al Controller que no hay errores
-            _context.Estate.Remove(entity);
+            _context.Vehicles.Remove(vehicles);
         }
 
         public void Dispose()
@@ -49,19 +49,19 @@ namespace Back_End.Services
         }
         protected virtual void Dispose(bool disposing)
         {
-          
+
         }
 
-        public Estate GetListId(int EstateID)
+        public Vehicles GetListId(int VehiclesID)
         {
-            if (EstateID.ToString() == "") // si el usuario esta vacio
+            if (VehiclesID.ToString() == "") // si el usuario esta vacio
             {
-                throw new ArgumentNullException(nameof(EstateID));
+                throw new ArgumentNullException(nameof(VehiclesID));
             }
 
             //retorno un Usuario especifico con el nombre del rol al cual pertence el mismo
-            return _context.Estate
-                 .FirstOrDefault(a => a.EstateID == EstateID);
+            return _context.Vehicles
+                 .FirstOrDefault(a => a.VehicleID == VehiclesID);
         }
 
         public bool save()
@@ -69,7 +69,7 @@ namespace Back_End.Services
             return (_context.SaveChanges() >= 0);
         }
 
-        public void Update(Estate entity)
+        public void Update(Vehicles vehicles)
         {
         }
     }

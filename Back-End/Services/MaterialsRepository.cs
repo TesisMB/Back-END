@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Back_End.Services
 {
-
     public class MaterialsRepository : ICruzRojaRepository<Materials>, IDisposable
     {
         public readonly CruzRojaContext2 _context;
@@ -15,34 +14,60 @@ namespace Back_End.Services
         {
             _context = context ?? throw new ArgumentException(nameof(context));
         }
-        public void Add(Materials entity)
+
+        public void Add(Materials materials)
         {
-            throw new NotImplementedException();
+            //Verifico que el Usuario no sea null
+            if (materials == null)
+            {
+                throw new ArgumentNullException(nameof(materials));
+            }
+
+            _context.Materials.Add(materials);
         }
 
-        public void Delete(Materials entity)
+        public void Delete(Materials materials)
         {
-            throw new NotImplementedException();
+            if (materials == null) //Verifico que el Usuario no sea null
+            {
+                throw new ArgumentNullException(nameof(materials));
+            }
+            //Se retorna al Controller que no hay errores
+            _context.Materials.Remove(materials);
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        protected virtual void Dispose(bool disposing)
+        {
+
         }
 
         public IEnumerable<Materials> GetList()
         {
-            throw new NotImplementedException();
+            //retorno la lista de usuarios con el nombre del rol especifico al que pertence cada uno
+            return _context.Materials
+                    .ToList();
         }
 
-        public Materials GetListId(int EntityID)
+        public Materials GetListId(int MaterialsID)
         {
-            throw new NotImplementedException();
+            if (MaterialsID.ToString() == "") // si el usuario esta vacio
+            {
+                throw new ArgumentNullException(nameof(MaterialsID));
+            }
+
+            //retorno un Usuario especifico con el nombre del rol al cual pertence el mismo
+            return _context.Materials
+                 .FirstOrDefault(a => a.MaterialsID == MaterialsID);
         }
 
         public bool save()
         {
-            throw new NotImplementedException();
+            return (_context.SaveChanges() >= 0);
         }
 
         public void Update(Materials entity)

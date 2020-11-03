@@ -15,7 +15,7 @@ namespace Back_End.Entities
 
         public virtual DbSet<Estate> Estate { get; set; }
 
-        public virtual DbSet<Rolled> Rolled { get; set; }
+        public virtual DbSet<Vehicles> Vehicles { get; set; }
 
         public virtual DbSet<Materials> Materials { get; set; }
         public virtual DbSet<Medicine> Medicine { get; set; }

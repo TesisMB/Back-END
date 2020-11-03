@@ -68,6 +68,10 @@ public class Startup
         //defino los repositorios a usar
         services.AddScoped<ICruzRojaRepository <Users>, UsersRepository>();
         services.AddScoped<ICruzRojaRepository<Estate>, EstateRepository>();
+        services.AddScoped<ICruzRojaRepository<Vehicles>, VehiclesRepository>();
+        services.AddScoped<ICruzRojaRepository<Medicine>, MedicineRepository>();
+        services.AddScoped<ICruzRojaRepository<Volunteer>, VolunteerRepository>();
+        services.AddScoped<ICruzRojaRepository<Materials>, MaterialsRepository>();
 
         //defino la conexion con la base de datos
         var connection = Configuration.GetConnectionString("CruzRojaDB");

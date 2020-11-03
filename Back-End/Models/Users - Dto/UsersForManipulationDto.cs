@@ -42,18 +42,13 @@ namespace Back_End.Models.Users___Dto
         public string UserGender { get; set; }
 
         [Required(ErrorMessage = "Debe completar el campo - Direccion")]
-        [MaxLength(12, ErrorMessage = "El campo Direccion puede tener hasta 50 caracteres")]
+        [MaxLength(50, ErrorMessage = "El campo Direccion puede tener hasta 50 caracteres")]
         public string UserAddress { get; set; }
 
         [Required(ErrorMessage = "Debe completar el campo - Fecha de Nacimiento")]
         public DateTimeOffset UserBirthdate { get; set; }
 
         public DateTimeOffset UserCreatedate { get; set; } = DateTime.Now;
-
-        
-        [Required(ErrorMessage = "Debe completar el campo - Avatar")]
-        public string UserAvatar { get; set; }
-
 
         [Required(ErrorMessage = "Debe completar el campo - Role")]
 

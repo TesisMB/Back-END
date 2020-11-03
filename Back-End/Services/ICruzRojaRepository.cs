@@ -26,7 +26,7 @@ namespace Back_End.Services
         //Eliminar un Usuario
         void Delete(TEntity entity);
 
-        //Metodo para verificar la existenica de un usuario
+        //Metodo para verificar la existecia de un usuario
         //bool UserExists(int UserID);
 
         //Metodo para poder verificar que los datos a guardar no falte.

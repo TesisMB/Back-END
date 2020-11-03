@@ -21,6 +21,10 @@ namespace Back_End.Entities
         [MaxLength(7)]
         public DateTime EstateDateExpire{ get; set; }
 
+        [Required]
+        [MaxLength(100)]
+        public string MedicineLabName { get; set; }
+
         [ForeignKey("EstateID")]
         public Estate Estate { get; set; }
         public int EstateID { get; set; }

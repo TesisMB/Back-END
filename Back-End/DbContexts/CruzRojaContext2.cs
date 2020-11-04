@@ -19,5 +19,14 @@ namespace Back_End.Entities
         //Defino cada una de las Models, que se usan durante el proyecto, donde cada una de ellas representa una tabla de la base de datos
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+
+        public virtual DbSet<Estate> Estate { get; set; }
+
+        public virtual DbSet<Vehicles> Vehicles { get; set; }
+
+        public virtual DbSet<Materials> Materials { get; set; }
+        public virtual DbSet<Medicine> Medicine { get; set; }
+        public virtual DbSet<Volunteer> Volunteer { get; set; }
+
     }
 }

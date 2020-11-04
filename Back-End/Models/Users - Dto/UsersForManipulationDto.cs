@@ -50,11 +50,6 @@ namespace Back_End.Models.Users___Dto
 
         public DateTimeOffset UserCreatedate { get; set; } = DateTime.Now;
 
-        
-        [Required(ErrorMessage = "Debe completar el campo - Avatar")]
-        public string UserAvatar { get; set; }
-
-
         [Required(ErrorMessage = "Debe completar el campo - Role")]
 
         public int RoleID { get; set; } /*Una vez que el Usuario Ingresa el Id automaticamente 

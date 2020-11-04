@@ -23,8 +23,6 @@ namespace Back_End.Models
         
         public string UserAddress{ get; set; }
         
-        public string UserAvatar { get; set; }
-        
         public int Age { get; set; } //Almaceno en la base de datos las fechas de nacimientos
     }
 }

@@ -15,18 +15,18 @@ namespace Back_End.Services
         IEnumerable<TEntity> GetList();
 
         //lista de usuarios por Id
-        TEntity GetListId(int UserID);
+        TEntity GetListId(int EntityID);
 
         //Añadir un nuevo Usuario
-        void Add(TEntity user);
+        void Add(TEntity entity);
 
         //Actualizar datos de un Usuario
-        void Update(TEntity user);
+        void Update(TEntity entity);
 
         //Eliminar un Usuario
-        void Delete(TEntity user);
+        void Delete(TEntity entity);
 
-        //Metodo para verificar la existenica de un usuario
+        //Metodo para verificar la existecia de un usuario
         //bool UserExists(int UserID);
 
         //Metodo para poder verificar que los datos a guardar no falte.

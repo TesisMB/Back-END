@@ -56,15 +56,9 @@ namespace Back_End.Entities
         [MaxLength(7)]
         public DateTimeOffset UserCreatedate { get; set; }
 
-        [Required]
-        public string UserAvatar { get; set; }
-
         [ForeignKey("RoleID")]
         public Roles Roles { get; set; }
         public int RoleID { get; set; }
-
-
-
 
     }
 }

@@ -11,24 +11,29 @@ namespace Back_End.Entities
     public class Materials
     {
         [Key]
-        public int MaterialsID { get; set; }
-
-        [Required]
-        public int MaterialsQuantity { get; set; }
+        public int MaterialID { get; set; }
 
         [Required]
         [MaxLength(100)]
-        public string MaterialsName { get; set; }
+        public string MaterialName { get; set; }
 
         [Required]
-        public bool MaterialsIsAvailable { get; set; }
+        public int MaterialQuantity { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string MaterialLocation { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string MaterialUtility { get; set; }
+
+        [Required]
+        public bool MaterialAvailability { get; set; }
 
         [ForeignKey("EstateID")]
         public Estate Estate { get; set; }
         public int EstateID { get; set; }
 
-        [Required]
-        [MaxLength(30)]
-        public string MaterialsUtility { get; set; }
     }
 }

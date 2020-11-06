@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Back_End.Services
 {
-    public class VolunteerRepository : ICruzRojaRepository<Volunteer>, IDisposable
+    public class VolunteersRepository : ICruzRojaRepository<Volunteer>, IDisposable
     {
         public readonly CruzRojaContext2 _context;
 
-        public VolunteerRepository(CruzRojaContext2 context)
+        public VolunteersRepository(CruzRojaContext2 context)
         {
             _context = context ?? throw new ArgumentException(nameof(context));
         }

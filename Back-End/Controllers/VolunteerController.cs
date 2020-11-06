@@ -24,7 +24,7 @@ namespace Back_End.Controllers
 
         {
             _cruzRojaRepository = cruzRojaRepository ??
-                throw new ArgumentNullException(nameof(VolunteerRepository));
+                throw new ArgumentNullException(nameof(VolunteersRepository));
 
             _mapper = mapper ??
                throw new ArgumentNullException(nameof(mapper));
@@ -43,9 +43,9 @@ namespace Back_End.Controllers
         }
 
         //Obtener Estate por ID
-        [HttpGet("{EstateID}", Name = "GetEstate")]
+        [HttpGet("{VolunteerID}", Name = "GetVolunteer")]
         //[Authorize(Roles = "Coordinador General, Admin, Coordinador de Emergencias y Desastres, Encargado de Logistica")]
-        public IActionResult GetEstate(int VolunteerID)
+        public IActionResult GetVolunteer(int VolunteerID)
         {
             var volunteerFromRepo = _cruzRojaRepository.GetListId(VolunteerID);
 

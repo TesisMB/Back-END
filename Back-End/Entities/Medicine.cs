@@ -15,18 +15,29 @@ namespace Back_End.Entities
 
         [Required]
         [MaxLength(100)]
-        public string EstateName { get; set; }
+        public string MedicineName { get; set; }
+
+        [Required]
+        public int MedicineQuantity { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string MedicineWeight { get; set; }
 
         [Required]
         [MaxLength(7)]
-        public DateTime EstateDateExpire{ get; set; }
+        public DateTimeOffset MedicineExpirationDate { get; set; }
 
         [Required]
-        [MaxLength(100)]
-        public string MedicineLabName { get; set; }
+        [MaxLength(50)]
+        public string MedicineLab { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string MedicineDrug { get; set; }
 
         [ForeignKey("EstateID")]
-        public Estate Estate { get; set; }
+        //public Estate Estate { get; set; }
         public int EstateID { get; set; }
     }
 }

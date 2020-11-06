@@ -12,18 +12,18 @@ namespace Back_End.Models
 
         public int VehicleQuantity { get; set; }
 
-        public string VehicleBrand { get; set; }
+        public string VehicleMark { get; set; }
 
         public string VehicleModel { get; set; }
 
-        public string VehicleName { get; set; }
+        public string VehiclePatent { get; set; }
 
         public string VehicleKms { get; set; }
 
-        public bool VehicleIsAvailable { get; set; }
-
         public string VehicleUtility { get; set; }
 
-        public string VehicleResponsible { get; set; }
+        public string VehicleManager { get; set; }
+
+        public bool VehicleAvailability { get; set; }
     }
 }

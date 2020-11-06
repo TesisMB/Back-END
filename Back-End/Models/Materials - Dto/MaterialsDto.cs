@@ -8,13 +8,17 @@ namespace Back_End.Models
 {
     public class MaterialsDto
     {
-        public int MaterialsID { get; set; }
+        public int MaterialD { get; set; }
 
-        public int MaterialsQuantity { get; set; }
-      
-        public string MaterialsName { get; set; }
+        public string MaterialName { get; set; }
 
-        public bool MaterialsIsAvailable { get; set; }
+        public int MaterialQuantity { get; set; }
+
+        public string MaterialLocation { get; set; }
+
+        public string MaterialUtility { get; set; }
+
+        public bool MaterialAvailability { get; set; }
 
         public Estate Estate { get; set; }
 

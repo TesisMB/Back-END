@@ -17,30 +17,31 @@ namespace Back_End.Entities
         public int VehicleQuantity { get; set; }
 
         [Required]
-        [MaxLength(30)]
-        public string VehicleBrand { get; set; }
+        [MaxLength(10)]
+        public string VehicleMark { get; set; }
 
         [Required]
-        [MaxLength(20)]
+        [MaxLength(25)]
         public string VehicleModel { get; set; }
 
         [Required]
         [MaxLength(30)]
-        public string VehicleName { get; set; }
+        public string VehiclePatent { get; set; }
 
         [Required]
         [MaxLength(50)]
         public string VehicleKms { get; set; }
 
         [Required]
-        public bool VehicleIsAvailable { get; set; }
-
-        [Required]
-        [MaxLength(10)]
+        [MaxLength(50)]
         public string VehicleUtility { get; set; }
 
         [Required]
-        [MaxLength(100)]
-        public string VehicleResponsible { get; set; }
+        [MaxLength(50)]
+        public string VehicleManager { get; set; }
+
+        [Required]
+        public bool VehicleAvailability{ get; set; }
+
     }
 }

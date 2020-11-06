@@ -8,7 +8,7 @@ namespace Back_End.Models
 {
     public class MaterialsDto
     {
-        public int MaterialD { get; set; }
+        public int MaterialID { get; set; }
 
         public string MaterialName { get; set; }
 

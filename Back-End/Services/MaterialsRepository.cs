@@ -53,16 +53,16 @@ namespace Back_End.Services
                     .ToList();
         }
 
-        public Materials GetListId(int MaterialsID)
+        public Materials GetListId(int MaterialID)
         {
-            if (MaterialsID.ToString() == "") // si el usuario esta vacio
+            if (MaterialID.ToString() == "") // si el usuario esta vacio
             {
-                throw new ArgumentNullException(nameof(MaterialsID));
+                throw new ArgumentNullException(nameof(MaterialID));
             }
 
             //retorno un Usuario especifico con el nombre del rol al cual pertence el mismo
             return _context.Materials
-                 .FirstOrDefault(a => a.MaterialsID == MaterialsID);
+                 .FirstOrDefault(a => a.MaterialID == MaterialID);
         }
 
         public bool save()

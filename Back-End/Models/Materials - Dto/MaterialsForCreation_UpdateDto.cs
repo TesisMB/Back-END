@@ -7,12 +7,12 @@ namespace Back_End.Models
 {
     public class MaterialsForCreation_UpdateDto
     {
-        public int MaterialsQuantity { get; set; }
+        public int MaterialQuantity { get; set; }
 
-        public string MaterialsName { get; set; }
+        public string MaterialName { get; set; }
 
-        public bool MaterialsIsAvailable { get; set; }
+        public bool MaterialAvailability { get; set; }
 
-        public string MaterialsUtility { get; set; }
+        public string MaterialUtility { get; set; }
     }
 }

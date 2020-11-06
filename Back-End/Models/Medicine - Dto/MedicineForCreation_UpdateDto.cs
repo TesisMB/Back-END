@@ -9,7 +9,10 @@ namespace Back_End.Models
     {
         public string MedicineName { get; set; }
 
-        public DateTime EstateDateExpire { get; set; }
-        public string MedicineLabName { get; set; }
+        public string MedicineWeight { get; set; }
+
+        public string MedicineLab { get; set; }
+
+        public string MedicineDrug { get; set; }
     }
 }

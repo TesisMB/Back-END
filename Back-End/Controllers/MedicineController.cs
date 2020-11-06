@@ -22,7 +22,7 @@ namespace Back_End.Controllers
 
         {
             _cruzRojaRepository = cruzRojaRepository ??
-                throw new ArgumentNullException(nameof(UsersRepository));
+                throw new ArgumentNullException(nameof(MedicineRepository));
 
             _mapper = mapper ??
                throw new ArgumentNullException(nameof(mapper));

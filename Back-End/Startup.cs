@@ -70,7 +70,7 @@ public class Startup
         services.AddScoped<ICruzRojaRepository<Estate>, EstateRepository>();
         services.AddScoped<ICruzRojaRepository<Vehicles>, VehiclesRepository>();
         services.AddScoped<ICruzRojaRepository<Medicine>, MedicineRepository>();
-        services.AddScoped<ICruzRojaRepository<Volunteer>, VolunteerRepository>();
+        services.AddScoped<ICruzRojaRepository<Volunteer>, VolunteersRepository>();
         services.AddScoped<ICruzRojaRepository<Materials>, MaterialsRepository>();
 
         //defino la conexion con la base de datos

@@ -15,15 +15,14 @@ namespace Back_End.Services
             _context = context ?? throw new ArgumentException(nameof(context));
         }
 
-        public void Add(Medicine estate)
+        public void Add(Medicine entity)
         {
-            //Verifico que el Usuario no sea null
-            if (estate == null)
+            if (entity == null)
             {
-                throw new ArgumentNullException(nameof(estate));
+                throw new ArgumentNullException(nameof(entity));
             }
 
-            _context.Medicine.Add(estate);
+            _context.Medicine.Add(entity);
         }
 
         public void Delete(Medicine entity)

@@ -12,8 +12,15 @@ namespace Back_End.Models
 
         public string MedicineName { get; set; }
 
-        public DateTime EstateDateExpire { get; set; }
-        public string MedicineLabName { get; set; }
+        public int MedicineQuantity { get; set; }
+
+        public string MedicineWeight { get; set; }
+
+        public DateTimeOffset MedicineExpirationDate { get; set; }
+
+        public string MedicineLab { get; set; }
+
+        public string MedicineDrug { get; set; }
 
         public Estate Estate { get; set; }
         public int EstateID { get; set; }

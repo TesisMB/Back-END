@@ -12,11 +12,13 @@ namespace Back_End.Entities
     {    
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Persons> Persons { get; set; }
+
 
 
         private const string Connection =
-       @"Server=DESKTOP-IGDSL68;
-            Database=CruzRojaDB;
+       @"Server=DESKTOP-0SC8P3Q;
+            Database=CruzRojaDB - Testing;
             Trusted_Connection=True;
             MultipleActiveResultSets=true";
 

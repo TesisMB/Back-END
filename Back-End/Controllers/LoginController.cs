@@ -21,7 +21,7 @@ namespace Back_End.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login([FromBody] UserLoginDto user)
+        public IActionResult Login([FromBody] Users user)
         {
             IActionResult ret = null;
             UserAuthDto auth = new UserAuthDto();
@@ -41,7 +41,6 @@ namespace Back_End.Controllers
                 ret = StatusCode(401); 
             
             }
-
             return ret; //Retorno el mensaje correspondiente
         }
 

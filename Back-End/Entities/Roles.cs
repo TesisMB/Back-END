@@ -14,7 +14,7 @@ namespace Back_End.Entities
         public int RoleID { get; set; }
 
         [Required]
-        [MaxLength(100)]
+        [MaxLength(50)]
         public string RoleName { get; set; }
 
         public ICollection<Users> Users { get; set; }

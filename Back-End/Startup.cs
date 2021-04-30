@@ -66,12 +66,8 @@ public class Startup
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         //defino los repositorios a usar
-        services.AddScoped<ICruzRojaRepository <Users>, UsersRepository>();
-        services.AddScoped<ICruzRojaRepository<Estate>, EstateRepository>();
-        services.AddScoped<ICruzRojaRepository<Vehicles>, VehiclesRepository>();
-        services.AddScoped<ICruzRojaRepository<Medicine>, MedicineRepository>();
-        services.AddScoped<ICruzRojaRepository<Volunteer>, VolunteersRepository>();
-        services.AddScoped<ICruzRojaRepository<Materials>, MaterialsRepository>();
+        services.AddScoped<ICruzRojaRepository<Users>, UsersRepository>();
+
 
         //defino la conexion con la base de datos
         var connection = Configuration.GetConnectionString("CruzRojaDB");

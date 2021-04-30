@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
+using Back_End.Helpers;
 
 namespace Back_End.Entities
 {
@@ -23,15 +24,21 @@ namespace Back_End.Entities
         UserAuthDto ret = new UserAuthDto();
         Users authUser = null;
 
-        public UserAuthDto ValidateUser(UserLoginDto user)
+        //Esta funcion es para validar la identidad del Usuario que quiere entrar al Sistema
+        public UserAuthDto ValidateUser(Users user)
         {
-           
-            //se conecta a la base de datos para verificar las datos del usuario en cuestion
+
             using (var db = new CruzRojaContext())
             {
+                //Al momento de ingresar la Contraseña se la encripta.
+                string Pass = user.UserPassword;
+                string ePass = Encrypt.GetSHA256(Pass);
+
                 authUser = db.Users.Where(
                     u => u.UserDni == user.UserDni
-                    && u.UserPassword == user.UserPassword).FirstOrDefault();
+                    //Luego de encriptar la contraseña se verificar que coincida
+                    //con la que se encuentra almacenada en la Base de datos.
+                    && u.UserPassword == ePass).FirstOrDefault();
             }
 
             if (authUser != null)
@@ -39,26 +46,27 @@ namespace Back_End.Entities
                 ret = BuildUserAuthObject(authUser); //si los datos son correctos se crea el objeto del usuario autentificado
             }
 
-            return ret; //retornamos el valor de este objeto
+            return ret; 
         }
 
-        //Este metodo va permitir que se devuelva ciertos datos del Usuario logueado
+
+      
+
+        //Este metodo va permitir poder devolver datos del Usuario logueado
         protected UserAuthDto BuildUserAuthObject(Users authUser)
         {
-            //Defino constr como una variable que va a llevar la cadena de conexion de la base de datos para posteriormente poder usarla
-            string constr = @"Server=Localhost; Database=CruzRojaDB; Trusted_Connection=True;";
+            string constr = @"Server=Localhost; Database=CruzRojaDB - Testing; Trusted_Connection=True;";
 
             //utilizo la coneccion a la base de datos
             using (SqlConnection con = new SqlConnection(constr))
             {
 
-                /*Traigo los datos que se encuentran en la tabla de Users 
-                mediante  comandos Sql  ademas de agregar el Nombre del Rol al que pertenecen
-               Teniendo en cuenta siempre al Usuario Logueado*/
+                //Traigo los datos que se encuentran en la tabla de Users en funcion del Usuario logeado
+                string sql = string.Format(@" Select a.*,b.RoleName, c.* from Users  a
+				inner join Roles b on a.FK_RoleID = b.RoleID
+				inner join Persons c on c.ID = a.ID
+                Where UserDni= '{0}' and UserPassword= '{1}' ", authUser.UserDni, authUser.UserPassword);
 
-                string sql = string.Format(@"Select a.*,b.RoleName from Users a 
-                   inner join Roles b on a.RoleID = b.RoleID
-                   Where UserDni= '{0}' and UserPassword= '{1}' ", authUser.UserDni, authUser.UserPassword);
 
                 //cmd va a permitirme poder llevar adelante la consulta a la base de datos
                 SqlCommand cmd = new SqlCommand(sql, con);
@@ -73,15 +81,16 @@ namespace Back_End.Entities
                 {
                     //Dichos datos se van a encontrar en la Base de datos
                     ret.IsAuthenticated = true;
-                    ret.UserID = Convert.ToInt32(rd["UserId"]);
+                    ret.ID = Convert.ToInt32(rd["ID"]);
                     ret.UserDni = rd["UserDni"].ToString();
-                    ret.UserFirstname = rd["UserFirstname"].ToString();
-                    ret.UserLastname = rd["UserLastname"].ToString();
+                    ret.FirstName = rd["FirstName"].ToString();
+                    ret.LastName = rd["LastName"].ToString();
+                    ret.Phone = rd["Phone"].ToString();
+                    ret.Email = rd["Email"].ToString();
+                    ret.Gender = rd["Gender"].ToString();
+                    ret.Birthdate = (DateTimeOffset)rd["Birthdate"];
+                    ret.Available = Convert.ToBoolean(rd["Available"]); 
                     ret.RoleName = rd["RoleName"].ToString();
-                    ret.UserEmail = rd["UserEmail"].ToString();
-                    ret.UserAvatar = rd["UserAvatar"].ToString();
-                    ret.UserPhone = rd["UserPhone"].ToString();
-                    ret.UserAddress = rd["UserAddress"].ToString();
                     ret.token = BuildJwtToken(ret); //Devuelvo el token para su posterior utilizacion
                 }
             }

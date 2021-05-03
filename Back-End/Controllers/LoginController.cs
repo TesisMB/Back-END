@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Back_End.Controllers;
 using Back_End.Models;
+using System.Security.Claims;
 
 namespace Back_End.Controllers
 {
@@ -31,7 +32,7 @@ namespace Back_End.Controllers
             auth = mgr.ValidateUser(user);
 
             //Compruebo si el usuario esta Authenticado
-            if (auth.IsAuthenticated)
+            if (auth.UserAvailable)
             {
                 ret = StatusCode(200, auth); //En caso de que se encuentre el Usuario en la base de datos se devolvera un 200 con sus respectivos datos
             }
@@ -43,6 +44,5 @@ namespace Back_End.Controllers
             }
             return ret; //Retorno el mensaje correspondiente
         }
-
     }
 }

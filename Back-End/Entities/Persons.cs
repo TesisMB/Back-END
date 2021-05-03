@@ -28,15 +28,12 @@ namespace Back_End.Entities
 
         [MaxLength(1)]
         public string Gender { get; set; }
-        
+
         [MaxLength(7)]
         public DateTimeOffset Birthdate { get; set; }
 
         [Required]
         public Boolean Available { get; set; }
-
-        /*[ForeignKey("FK_UserID")]
-        public int FK_UserID { get; set; }*/
         public virtual Users Users { get; set; }
 
     }

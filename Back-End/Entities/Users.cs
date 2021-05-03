@@ -25,8 +25,7 @@ namespace Back_End.Entities
         [ForeignKey("FK_RoleID")]
         public Roles Roles { get; set; }
         public int FK_RoleID { get; set; }
-
-        public virtual Persons Persons { get; set; }
+        public Persons Persons { get; set; }
 
     }
 }

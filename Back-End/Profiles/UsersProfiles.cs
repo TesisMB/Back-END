@@ -13,17 +13,23 @@ namespace Back_End.Profiles
         public UsersProfiles()
         {
             //Creo Las clases a ser mapeadas
-            CreateMap<Entities.Users, Models.UsersDto>()
-
-                 .ForMember(dest => dest.RoleID,
-                                    opt => opt.MapFrom(src => src.FK_RoleID))
+            CreateMap<Users, UsersDto>()
 
                 .ForMember(dest => dest.RoleName,
-                                    opt => opt.MapFrom(src => src.Roles.RoleName));
+                                    opt => opt.MapFrom(src => src.Roles.RoleName))
+
+                .ForMember(dest => dest.UserID,
+                                    opt => opt.MapFrom(src => src.ID))
+
+                .ForMember(dest => dest.UserAvailable,
+                                    opt => opt.MapFrom(src => src.UserAvailability));
 
             CreateMap<UsersForCreationDto, Users>();
 
-            CreateMap<UsersForCreationDto, Persons>();
+            CreateMap<UsersForUpdate, Users>();
+
+
+
         }
     }
 }

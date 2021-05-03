@@ -19,15 +19,11 @@ namespace Back_End.Models
         
     public int ID { get; set; }
     public string UserDni { get; set; } 
-    public string token { get; set; } 
-    public bool IsAuthenticated { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string Phone { get; set; }
-    public string Email { get; set; }
-    public string Gender { get; set; }
-    public DateTimeOffset Birthdate { get; set; }
-    public Boolean Available { get; set; }
     public string RoleName { get; set; }
+    public string token { get; set; } 
+    public Boolean UserAvailable { get; set; } //Esto es necesario ya que se usa en el Login para devolver un 200 o 401
+   
+    public Boolean Status { get; set; }
+
     }
 }

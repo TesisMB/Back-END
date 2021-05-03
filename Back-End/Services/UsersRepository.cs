@@ -10,7 +10,6 @@ namespace Back_End.Services
 {
     public class UsersRepository : ICruzRojaRepository<Users>, IDisposable
     {
-        //_context me va a permitir poder conectarme a la Base de datos y poder hacer implementar los metodos  
         public readonly CruzRojaContext2 _context;
 
         public UsersRepository(CruzRojaContext2 context)
@@ -54,13 +53,17 @@ namespace Back_End.Services
 
         public void Delete(Users user)
         {
-            throw new NotImplementedException();
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+
+            _context.Users.Remove(user);
         }
 
 
         public void Update(Users user)
         {
-            throw new NotImplementedException();
         }
 
 

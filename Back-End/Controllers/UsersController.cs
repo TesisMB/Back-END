@@ -3,6 +3,7 @@ using Back_End.Entities;
 using Back_End.Helpers;
 using Back_End.Models;
 using Back_End.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,7 @@ namespace Back_End.Controllers
         }
 
         [HttpGet]
+       // [Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
         public ActionResult<IEnumerable<UsersDto>> GetPersons()
         {
             {
@@ -42,7 +44,8 @@ namespace Back_End.Controllers
         }
 
          [HttpGet("{userId}", Name = "GetUser")]
-         public IActionResult GetUser(int userId)
+      //   [Authorize(Roles = "Coordinador General, Admin, Coordinador de Emergencias y Desastres, Logistica")]
+        public IActionResult GetUser(int userId)
          {
              var usersFromRepo = _cruzRojaRepository.GetListId(userId);
 
@@ -55,20 +58,6 @@ namespace Back_End.Controllers
              //Al momento de mapear utilizo UsersDto para devolver aquellos valores imprecidibles
              return Ok(_mapper.Map<UsersDto>(usersFromRepo));
          }
-
-        // GET: api/Authors/5
-        /*[HttpGet("{userID}")]
-        public IActionResult Get(int userID)
-        {
-            var usersFromRepo = _cruzRojaRepository.GetDto(userID);
-            if (usersFromRepo == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(_mapper.Map<UsersDto>(usersFromRepo));
-        } */
-
 
 
         //Agregar un nuevo Usuario y devolve el Id Creado del Usuario
@@ -89,8 +78,56 @@ namespace Back_End.Controllers
             var authorToReturn = _mapper.Map<UsersDto>(userEntity);
 
             return Ok();
+        }
+
+        //Este metodo permite actualizar y modificar todos los datos de los Usuarios que estan en el Sistema
+        [HttpPut("{userId}")]
+        public ActionResult UpdateUser(int userId, UsersForUpdate user)
+        {
+            var userFromRepo = _cruzRojaRepository.GetListId(userId);
+            if (userFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            //Nuevamente se debea encriptar la contraseña ingresada
+            user.UserPassword = Encrypt.GetSHA256(user.UserPassword);
+
+            _mapper.Map(user, userFromRepo);
+
+            _cruzRojaRepository.Update(userFromRepo);
+
+            _cruzRojaRepository.save();
+
+            return Ok();
+        }
+
+        //Eliminar un Usuario particular en base al Id proporcionado del mismo
+        [HttpDelete("{userId}")]
+        public ActionResult DeleteUser(int userId)
+        {
+
+            var userFromRepo = _cruzRojaRepository.GetListId(userId);
+
+
+            // si el Id del Usuario no existe de retorna Error.
+            if (userFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _cruzRojaRepository.Delete(userFromRepo);
+
+            _cruzRojaRepository.save();
+
+            // Se retorna con exito la eliminacion del Usuario especificado
+            return Ok();
 
         }
+
+
+      
+
     }
 
 }

@@ -1,52 +1,28 @@
 ﻿using AutoMapper;
-using Back_End.Helpers;
+using Back_End.Entities;
+using Back_End.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Back_End.Entities;
-using Back_End.Models;
 
 namespace Back_End.Profiles
 {
-    public class PersonsProfile : Profile
+    public class PersonsProfiles:Profile
     {
-        public PersonsProfile()
+        public PersonsProfiles()
         {
             //Creo Las clases a ser mapeadas
-            CreateMap<Entities.Persons, Models.PersonsDto>();
+            CreateMap<Persons, PersonsDto>()
 
-                     
-
-            //Mapeo la Fecha de Nacimiento para devolver solamente la edad
-            /*.ForMember(
-                dest => dest.Age,
-                opt => opt.MapFrom(src => src.UserBirthdate.GetCurrentAge())); */
-
-            CreateMap<Models.PersonForCreationDto, Entities.Persons>();
-
-                       //Creo dos variables nuevas no existentes en la Base de datos                         
-                   /*    .ForMember(dest => dest.Users.UserDni,
-                                    opt => opt.MapFrom(src => src.UserDni))
-
-                        .ForMember(dest => dest.Users.UserPassword,
-                                    opt => opt.MapFrom(src => src.UserPassword)); */
-
-                      /*  .ForMember(dest => dest.UserAvailability,
-                                    opt => opt.MapFrom(src => src.Users.UserAvailability))
-
-                         .ForMember(dest => dest.RoleID,
-                                    opt => opt.MapFrom(src => src.Users.FK_RoleID))
+                .ForMember(dest => dest.Status,
+                                    opt => opt.MapFrom(src => src.Available));
+         
+            CreateMap<PersonForCreationDto, Persons>();
 
 
-                         .ForMember(dest => dest.RoleName,
-                                    opt => opt.MapFrom(src => src.Users.Roles.RoleName));*/
-           // CreateMap<Models.UsersForUpdate, Entities.Users>();
-           // CreateMap<Entities.Users, Models.UsersForUpdate>();
+            CreateMap<PersonsForUpdatoDto, Persons>();
 
         }
     }
 }
-
-
-

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Back_End.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Back_End.Entities
@@ -17,7 +19,7 @@ namespace Back_End.Entities
         public string UserDni { get; set; }
 
         [MaxLength(100)]
-        public string UserPassword { get; set; }
+        public string UserPassword  { get; set; }
 
         [Required]
         public Boolean UserAvailability { get; set; }
@@ -26,6 +28,5 @@ namespace Back_End.Entities
         public Roles Roles { get; set; }
         public int FK_RoleID { get; set; }
         public Persons Persons { get; set; }
-
     }
 }

@@ -16,13 +16,11 @@ namespace Back_End.Controllers
     [ApiController]
     public class UsersController : BaseApiController
     {
-
         private readonly ICruzRojaRepository<Users> _cruzRojaRepository;
         private readonly IMapper _mapper;
 
         /*Este metodo va a permitir despues poder conectarme tanto para mapear, como para obtener 
          las funciones que se establecieron repositorios correspondientes*/
-
         public UsersController(ICruzRojaRepository<Users> UsersRepository, IMapper mapper)
 
         {
@@ -33,8 +31,9 @@ namespace Back_End.Controllers
                 throw new ArgumentNullException(nameof(mapper));
         }
 
+
         [HttpGet]
-       // [Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
+        //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
         public ActionResult<IEnumerable<UsersDto>> GetPersons()
         {
             {
@@ -43,8 +42,9 @@ namespace Back_End.Controllers
             }
         }
 
+
          [HttpGet("{userId}", Name = "GetUser")]
-      //   [Authorize(Roles = "Coordinador General, Admin, Coordinador de Emergencias y Desastres, Logistica")]
+         //[Authorize(Roles = "Coordinador General, Admin, Coordinador de Emergencias y Desastres, Encargado de Logistica")]
         public IActionResult GetUser(int userId)
          {
              var usersFromRepo = _cruzRojaRepository.GetListId(userId);
@@ -60,9 +60,8 @@ namespace Back_End.Controllers
          }
 
 
-        //Agregar un nuevo Usuario y devolve el Id Creado del Usuario
         [HttpPost("{Register}")]
-        //[Authorize(Roles = "Coordinador General, Admin")]
+        //[Authorize(Roles = "Coordinador General, Admin")]  
         public ActionResult<UsersDto> CreateUser(UsersForCreationDto user)
         {
             var userEntity = _mapper.Map<Users>(user);
@@ -75,13 +74,15 @@ namespace Back_End.Controllers
 
             /*Una vez comprobado con exito todo se procede a realizar el mapeo 
             que va a permitir manipular como se devuelven los datos */
-            var authorToReturn = _mapper.Map<UsersDto>(userEntity);
+            var userToReturn = _mapper.Map<UsersDto>(userEntity);
 
             return Ok();
         }
 
         //Este metodo permite actualizar y modificar todos los datos de los Usuarios que estan en el Sistema
         [HttpPut("{userId}")]
+        [Authorize(Roles = "Coordinador General, Admin")] 
+
         public ActionResult UpdateUser(int userId, UsersForUpdate user)
         {
             var userFromRepo = _cruzRojaRepository.GetListId(userId);
@@ -104,6 +105,8 @@ namespace Back_End.Controllers
 
         //Eliminar un Usuario particular en base al Id proporcionado del mismo
         [HttpDelete("{userId}")]
+        //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
+
         public ActionResult DeleteUser(int userId)
         {
 
@@ -122,12 +125,7 @@ namespace Back_End.Controllers
 
             // Se retorna con exito la eliminacion del Usuario especificado
             return Ok();
-
         }
-
-
-      
-
     }
 
 }

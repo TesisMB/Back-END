@@ -20,8 +20,9 @@ namespace Back_End.Profiles
          
             CreateMap<PersonForCreationDto, Persons>();
 
-
             CreateMap<PersonsForUpdatoDto, Persons>();
+
+            CreateMap<UserAuthDto, Persons>();
 
         }
     }

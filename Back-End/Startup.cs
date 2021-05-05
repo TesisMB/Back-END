@@ -65,51 +65,14 @@ public class Startup
 
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-        //defino los repositorios a usar
+        //Defino los repositorios a usar
         services.AddScoped<ICruzRojaRepository<Users>, UsersRepository>();
 
 
-        //defino la conexion con la base de datos
+        //Defino la conexion con la base de datos
         var connection = Configuration.GetConnectionString("CruzRojaDB");
         services.AddDbContextPool<CruzRojaContext2>(options => options.UseSqlServer(connection));
         services.AddControllers();
-
-
-
-        JwtSettings settings = GetJwtSettings();
-
-        services.AddSingleton<JwtSettings>(settings);
-
-        //obtener la configuracion del token 
-        services
-            .AddAuthentication
-            (
-                options =>
-                {
-                    options.DefaultAuthenticateScheme = "JwtBearer";
-                    options.DefaultChallengeScheme = "JwtBearer";
-                }
-            )
-            .AddJwtBearer
-            (
-                "JwtBearer", jwtBearerOptions =>
-                {
-                    jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.Key)),
-
-                        ValidateIssuer = true,
-                        ValidIssuer = settings.Issuer,
-
-                        ValidateAudience = true,
-                        ValidAudience = settings.Audience,
-
-                        ValidateLifetime = true,
-                        ClockSkew = TimeSpan.FromMinutes(settings.MinutesToExpiration)
-                    };
-                }
-            );
 
         services.AddControllers().AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
@@ -121,7 +84,6 @@ public class Startup
 
     }
 
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         //Entornoo de desarollo
@@ -149,15 +111,4 @@ public class Startup
         app.UseMvc();
     }
 
-    public JwtSettings GetJwtSettings()
-    {
-        JwtSettings settings = new JwtSettings();
-
-        settings.Key = Configuration["JwtSettings:key"];
-        settings.Audience = Configuration["JwtSettings:audience"];
-        settings.Issuer = Configuration["JwtSettings:issuer"];
-        settings.MinutesToExpiration = Convert.ToInt32(Configuration["JwtSettings:minutesToExpiration"]);
-
-        return settings;
-    }
 }

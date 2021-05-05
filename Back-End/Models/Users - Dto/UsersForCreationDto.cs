@@ -9,8 +9,6 @@ namespace Back_End.Models
 {
     public class UsersForCreationDto // : UsersForManipulationDto
     {
-
-        //Todas estas variables van a ser necesarias a la hora de crear un nuevo Usuario
         [MaxLength(8, ErrorMessage = ("El campo DNI deber tener como maximo 8 caracteres"))]
         public string UserDni { get; set; }
 
@@ -21,7 +19,6 @@ namespace Back_End.Models
 
         public Boolean UserAvailability { get; set; }
         public int FK_RoleID { get; set; }
-        //public int ID { get; set; }
         public virtual PersonForCreationDto Persons { get; set; }
 
     }

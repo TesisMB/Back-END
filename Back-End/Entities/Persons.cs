@@ -10,7 +10,7 @@ namespace Back_End.Entities
     [Table("Persons", Schema = "dbo")] //tabla y esquema al que pertence la clase en la base de datos de Sql
     public class Persons
     {
-        //La clave Primaria 
+        //Defino tanto como clave primaria, como forranea ID, para poder efecturar la relacion 1-1 con Users
         [Key, ForeignKey("Users")]
         public int ID { get; set; }
 
@@ -34,7 +34,6 @@ namespace Back_End.Entities
 
         [Required]
         public Boolean Available { get; set; }
-        public virtual Users Users { get; set; }
-
+        public Users Users { get; set; }
     }
 }

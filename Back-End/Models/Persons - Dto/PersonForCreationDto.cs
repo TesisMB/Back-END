@@ -14,6 +14,5 @@ namespace Back_End.Models
         public string Gender { get; set; }
         public DateTimeOffset Birthdate { get; set; }
         public Boolean Available { get; set; }
-
     }
 }

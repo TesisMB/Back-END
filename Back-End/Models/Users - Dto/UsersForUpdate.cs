@@ -11,7 +11,6 @@ namespace Back_End.Models
         public string UserPassword { get; set; }
         public Boolean UserAvailability { get; set; }
         public int FK_RoleID { get; set; }
-
         public PersonsForUpdatoDto Persons { get; set; }
     }
 }

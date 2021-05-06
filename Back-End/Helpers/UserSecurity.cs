@@ -46,21 +46,20 @@ namespace Back_End.Entities
                 ret = BuildUserAuthObject(authUser); //si los datos son correctos se crea el objeto del usuario autentificado
             }
 
-            return ret;
+            return ret; 
         }
 
 
-
+      
 
         //Este metodo va permitir poder devolver datos del Usuario logueado
-        string constr = @"Server=Localhost; Database=CruzRojaDB - Testing; Trusted_Connection=True;";
-        public UserAuthDto BuildUserAuthObject(Users authUser)
+        protected UserAuthDto BuildUserAuthObject(Users authUser)
         {
+            string constr = @"Server=Localhost; Database=CruzRojaDB - Testing; Trusted_Connection=True;";
 
             //utilizo la coneccion a la base de datos
             using (SqlConnection con = new SqlConnection(constr))
             {
-                var userinfo = new UserAuthDto();
 
                 //Traigo los datos que se encuentran en la tabla de Users en funcion del Usuario logeado
                 string sql = string.Format(@" Select a.*,b.RoleName, c.* from Users  a
@@ -77,58 +76,65 @@ namespace Back_End.Entities
                 con.Open();
                 SqlDataReader rd = cmd.ExecuteReader();
 
-
                 //Devuelvo Ciertos datos del Usuario que se loguea
                 while (rd.Read())
                 {
                     //Dichos datos se van a encontrar en la Base de datos
-                    userinfo.UserAvailable = Convert.ToBoolean(rd["UserAvailability"]);
-                    userinfo.ID = Convert.ToInt32(rd["ID"]);
-                    userinfo.UserDni = rd["UserDni"].ToString();
-                    userinfo.Status = Convert.ToBoolean(rd["Available"]);
-                    userinfo.RoleName = rd["RoleName"].ToString();
-                    userinfo.token = BuildJwtToken(userinfo); //Devuelvo el token para su posterior utilizacion
+                    ret.IsAuthenticated = true;
+                    ret.ID = Convert.ToInt32(rd["ID"]);
+                    ret.UserDni = rd["UserDni"].ToString();
+                    ret.FirstName = rd["FirstName"].ToString();
+                    ret.LastName = rd["LastName"].ToString();
+                    ret.Phone = rd["Phone"].ToString();
+                    ret.Email = rd["Email"].ToString();
+                    ret.Gender = rd["Gender"].ToString();
+                    ret.Birthdate = (DateTimeOffset)rd["Birthdate"];
+                    ret.Available = Convert.ToBoolean(rd["Available"]); 
+                    ret.RoleName = rd["RoleName"].ToString();
+                    ret.token = BuildJwtToken(ret); //Devuelvo el token para su posterior utilizacion
                 }
-                return userinfo;
             }
 
+            return ret; // se retorno los valores del Usuario logueado
         }
 
 
         //Este Metodo va a ser el que almacena los valores en el token para cada usuario que se loguea
         protected string BuildJwtToken(UserAuthDto authUser)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.Key));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            SymmetricSecurityKey key = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(_settings.Key));
 
             //Creo el token con informacion necesaria
 
-            var claims = new[]
-           {
-                new Claim(JwtRegisteredClaimNames.Sub, authUser.UserDni),
-                new Claim("UserID", authUser.ID.ToString()), 
-                new Claim("isAuthenticated", authUser.UserAvailable.ToString().ToLower()),
-                new Claim(ClaimTypes.Role,authUser.RoleName),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
+            List<Claim> jwtClaims = new List<Claim>();
+            {
+
+                //Los valores que el token va a devolver sera el RoleName del Usuario logueado
+                jwtClaims.Add(new Claim(JwtRegisteredClaimNames.Sub, authUser.UserDni));
+                jwtClaims.Add(new Claim(JwtRegisteredClaimNames.Jti,
+                Guid.NewGuid().ToString()));
+
+                jwtClaims.Add(new Claim("isAuthenticated",
+              authUser.IsAuthenticated.ToString().ToLower()));
 
 
+                jwtClaims.Add(new Claim(ClaimTypes.Role, authUser.RoleName));
+                //Se crea el token con los valores anteriores
+                var token = new JwtSecurityToken(
+                    issuer: _settings.Issuer,
+                    audience: _settings.Audience,
+                    claims: jwtClaims, //Devuel el token con todos los Claim encontrados
+                    notBefore: DateTime.UtcNow,
+                    expires: DateTime.UtcNow.AddMinutes(
+                        _settings.MinutesToExpiration),
+                    signingCredentials: new SigningCredentials(key,
+                    SecurityAlgorithms.HmacSha256)
+                    );
 
-            //Se crea el token con los valores anteriores
-            var token = new JwtSecurityToken(
-                issuer: _settings.Issuer,
-                audience: _settings.Audience,
-                claims: claims, //Devuel el token con todos los Claim encontrados
-                notBefore: DateTime.UtcNow,
-                expires: DateTime.UtcNow.AddMinutes(
-                _settings.MinutesToExpiration),
-                signingCredentials: credentials
-                );
-
-            //Se devuelve el token creado con sus respectivos datos
-            return new JwtSecurityTokenHandler().WriteToken(token);
+                //Se devuelve el token creado con sus respectivos datos
+                return new JwtSecurityTokenHandler().WriteToken(token);
+            }
         }
     }
-        
-    
 }

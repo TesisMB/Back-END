@@ -9,9 +9,13 @@ namespace Back_End.Models
     public class UsersForUpdate
     {
         public string UserPassword { get; set; }
-        public Boolean UserAvailability { get; set; }
-        public int FK_RoleID { get; set; }
 
-        public PersonsForUpdatoDto Persons { get; set; }
+        public string UserPhone { get; set; }
+
+        public string UserEmail { get; set; }
+
+        public string UserAddress { get; set; }
+        
+        public int RoleID { get; set; }
     }
 }

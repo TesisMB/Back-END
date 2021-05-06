@@ -74,8 +74,6 @@ public class Startup
         services.AddDbContextPool<CruzRojaContext2>(options => options.UseSqlServer(connection));
         services.AddControllers();
 
-
-
         JwtSettings settings = GetJwtSettings();
 
         services.AddSingleton<JwtSettings>(settings);
@@ -118,7 +116,6 @@ public class Startup
         services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
         services.AddMvc(Options => Options.EnableEndpointRouting = false);
-
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

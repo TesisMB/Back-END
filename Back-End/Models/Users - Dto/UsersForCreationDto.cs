@@ -16,7 +16,6 @@ namespace Back_End.Models
 
         [MinLength(8, ErrorMessage = ("El campo Contraseña deber tener minimo 8 caracteres"))]
         [MaxLength(16, ErrorMessage = "El campo Contraseña puede tener maximo 16 caracteres")]
-        [Required]
         public string UserPassword { get; set; }
 
         public Boolean UserAvailability { get; set; }

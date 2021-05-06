@@ -8,6 +8,7 @@ namespace Back_End.Models
     public class RolesDto
     {
         public int RoleID { get; set; }
+
         public string RoleName { get; set; }
     }
 }

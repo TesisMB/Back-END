@@ -17,6 +17,7 @@ namespace Back_End.Services
             _context = context ?? throw new ArgumentException(nameof(context));
         }
 
+
         public IEnumerable<Users> GetList()
         {
             //retorno la lista de usuarios con el nombre del rol especifico al que pertence cada uno
@@ -50,11 +51,6 @@ namespace Back_End.Services
             _context.Users.Add(user);
         }
 
-        public void Update(Users user)
-        {
-        }
-
-
         public void Delete(Users user)
         {
             if (user == null)
@@ -65,6 +61,10 @@ namespace Back_End.Services
             _context.Users.Remove(user);
         }
 
+
+        public void Update(Users user)
+        {
+        }
 
 
         //metodo para verificar que todos los datos  a almacenar esten, caso contrario marco un Error.

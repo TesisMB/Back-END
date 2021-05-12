@@ -1,39 +1,41 @@
 ﻿using AutoMapper;
-using Back_End.Helpers;
+using Back_End.Entities;
+using Back_End.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Back_End.Entities;
-using Back_End.Models;
 
 namespace Back_End.Profiles
 {
-    public class UsersProfile : Profile
+    public class UsersProfiles : Profile
     {
-        public UsersProfile()
+        public UsersProfiles()
         {
             //Creo Las clases a ser mapeadas
-            CreateMap<Entities.Users, Models.UsersDto>()
+            CreateMap<Users, UsersDto>()
 
-                    //Creo dos variables nuevas no existentes en la Base de datos
-
-                    //Mapeo entre Name y LastName de Users para devolver FullName (uniendo ambos valores)
-                    .ForMember(
-                        dest => dest.FullName,
-                        opt => opt.MapFrom(src => $"{src.UserFirstname} {src.UserLastname}"))
-
-                       .ForMember(dest => dest.RoleName,
+                .ForMember(dest => dest.RoleName,
                                     opt => opt.MapFrom(src => src.Roles.RoleName))
 
-                    //Mapeo la Fecha de Nacimiento para devolver solamente la edad
-                    .ForMember(
-                        dest => dest.Age,
-                        opt => opt.MapFrom(src => src.UserBirthdate.GetCurrentAge()));
+                .ForMember(dest => dest.UserID,
+                                    opt => opt.MapFrom(src => src.ID))
 
-            CreateMap<Models.UsersForCreationDto, Entities.Users>();
-            CreateMap<Models.UsersForUpdate, Entities.Users>();
-            CreateMap<Entities.Users, Models.UsersForUpdate>();
+                .ForMember(dest => dest.UserAvailable,
+                                    opt => opt.MapFrom(src => src.UserAvailability));
+
+            CreateMap<UsersForCreationDto, Users>();
+
+            CreateMap<UsersForUpdate, Users>();
+
+            /*Al momento de mapear, defino que el campo denominado token, sera devuelto con los valores obtenido de la funcion
+              con el ID, y el RoleName de usuario logueado*/
+            CreateMap<Users, UserAuthDto>()
+                 .ForMember(dest => dest.token, 
+                                    opt => opt.MapFrom(src => UserSecurity.GenerateAccessToken(src.ID, src.Roles.RoleName)))
+              
+                 .ForMember(dest => dest.RoleName,
+                                    opt => opt.MapFrom(src => src.Roles.RoleName));
         }
     }
 }

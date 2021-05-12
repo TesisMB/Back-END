@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Back_End.Services
 {
-    //La interfaz va a ser la que lleve todos los Metodos necesarios para realizar el CRUD en Users
+    //La interfaz va a ser la que lleve todos los Metodos necesarios para realizar los CRUD del Sistema.
     public interface ICruzRojaRepository<TEntity>
     {
 
@@ -31,5 +31,7 @@ namespace Back_End.Services
 
         //Metodo para poder verificar que los datos a guardar no falte.
         bool save();
+
+
     }
 }

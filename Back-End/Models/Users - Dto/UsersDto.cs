@@ -5,24 +5,13 @@ using System.Threading.Tasks;
 using Back_End.Entities;
 namespace Back_End.Models
 {
-
-    public class UsersDto : RolesDto /*Me va a permitir heredar las variables tanto el RoleID 
-                                       como el RoleName al momento de listar los Usuarios*/
+    public class UsersDto
     {
         public int UserID { get; set; }
-
         public string UserDni { get; set; }
-      
-        public string FullName { get; set; } /*Almaceno el Nombre y el Apellido de cada usuario y 
-                                             devuelvo el nombre completo  concatenando ambos valores (Name+LastName)*/
-        public DateTimeOffset UserBirthdate { get; set; }
-        
-        public string UserPhone { get; set; }
-
-        public string UserEmail { get; set; }
-        
-        public string UserAddress{ get; set; }
-        
-        public int Age { get; set; } //Almaceno en la base de datos las fechas de nacimientos
+        public Boolean UserAvailable { get; set; }
+        public string RoleName { get; set; }
+        public RolesDto Roles { get; set; }
+        public PersonsDto Persons { get; set; }
     }
 }

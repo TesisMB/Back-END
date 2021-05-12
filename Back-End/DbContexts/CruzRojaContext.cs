@@ -12,6 +12,8 @@ namespace Back_End.Entities
     {    
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Persons> Persons { get; set; }
+
 
         public virtual DbSet<Estate> Estate { get; set; }
 
@@ -22,8 +24,8 @@ namespace Back_End.Entities
         public virtual DbSet<Volunteer> Volunteer { get; set; }
 
         private const string Connection =
-       @"Server=DESKTOP-4PRPJUH;
-            Database=CruzRojaDB;
+       @"Server=PC-MAXI;
+            Database=CruzRojaDB - Testing;
             Trusted_Connection=True;
             MultipleActiveResultSets=true";
 

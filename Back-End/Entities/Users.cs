@@ -1,64 +1,32 @@
-﻿using System;
+﻿using Back_End.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Back_End.Entities
 {
-
-
-        [Table("Users", Schema = "dbo")] //tabla y esquema al que pertence la clase en la base de datos de Sql
+    [Table("Users", Schema = "dbo")] //tabla y esquema al que pertence la clase en la base de datos de Sql
     public class Users
     {
-
         [Key]
-        public int UserID { get; set; }
+        public int ID { get; set; }
 
-        [Required]
-        [MaxLength(100)]
-        public string UserFirstname { get; set; }
-
-        [Required]
-        [MaxLength(100)]
-        public string UserLastname { get; set; }
-
-        [Required]
         [MaxLength(8)]
         public string UserDni { get; set; }
 
-        [Required]
-        [MaxLength(16)]
-        public string UserPassword { get; set; }
+        [MaxLength(100)]
+        public string UserPassword  { get; set; }
 
         [Required]
-        [MaxLength(12)]
-        public string UserPhone { get; set; }
-    
-        [Required]
-        [MaxLength(50)]
-        public string UserEmail { get; set; }
+        public Boolean UserAvailability { get; set; }
 
-        [Required]
-        [MaxLength(1)]
-        public string UserGender { get; set; }
-
-        [Required]
-        [MaxLength(50)]
-        public string UserAddress{ get; set; }
-
-        [Required]
-        [MaxLength(7)]
-        public DateTimeOffset UserBirthdate { get; set; }
-
-        [Required]
-        [MaxLength(7)]
-        public DateTimeOffset UserCreatedate { get; set; }
-
-        [ForeignKey("RoleID")]
+        [ForeignKey("FK_RoleID")]
         public Roles Roles { get; set; }
-        public int RoleID { get; set; }
-
+        public int FK_RoleID { get; set; }
+        public Persons Persons { get; set; }
     }
 }

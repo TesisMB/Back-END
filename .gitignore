@@ -341,6 +341,10 @@ healthchecksdb
 *.json
 Back-End/DbContexts/CruzRojaContext.cs
 Back-End/appsettings.json
+Back-End/appsettings.json
+Back-End/appsettings.json
 Back-End/DbContexts/CruzRojaContext.cs
 Back-End/DbContexts/CruzRojaContext.cs
 Back-End/DbContexts/CruzRojaContext.cs
+Back-End/Helpers/UserSecurity.cs
+Back-End/Helpers/UserSecurity.cs

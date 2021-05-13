@@ -20,6 +20,8 @@ namespace Back_End.Entities
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Persons> Persons { get; set; }
+        public virtual DbSet<Employees> Employees { get; set; }
+        public virtual DbSet<Volunteers> Volunteers { get; set; }
 
     }
 }

@@ -59,7 +59,7 @@ namespace Back_End.Controllers
             return Ok(_mapper.Map<UsersDto>(usersFromRepo));
         }
 
-        [HttpPost("{Register}")]
+        [HttpPost]
         //[Authorize(Roles = "Coordinador General, Admin")] 
         public ActionResult<UsersDto> CreateUser(UsersForCreationDto user)
         {
@@ -78,7 +78,7 @@ namespace Back_End.Controllers
             return Ok();
         }
 
-        [HttpPatch("Update/{userId}")]
+        [HttpPatch("{userId}")]
         //[Authorize(Roles = "Coordinador General, Admin")] 
         public ActionResult UpdatePartialUser(int userId, JsonPatchDocument<UsersForUpdate> patchDocument)
         {
@@ -115,7 +115,7 @@ namespace Back_End.Controllers
         }
         //Eliminar un Usuario particular en base al Id proporcionado del mismo
       
-        [HttpDelete("Delete/{userId}")]
+        [HttpDelete("{userId}")]
         //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
         public ActionResult DeleteUser(int userId)
         {

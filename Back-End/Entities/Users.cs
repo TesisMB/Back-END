@@ -15,18 +15,23 @@ namespace Back_End.Entities
         [Key]
         public int ID { get; set; }
 
+        [Required]
         [MaxLength(8)]
         public string UserDni { get; set; }
 
+        [Required]
         [MaxLength(100)]
         public string UserPassword  { get; set; }
 
-        [Required]
         public Boolean UserAvailability { get; set; }
 
         [ForeignKey("FK_RoleID")]
         public Roles Roles { get; set; }
+
+        [Required]
         public int FK_RoleID { get; set; }
         public Persons Persons { get; set; }
+
+        public Employees Employees { get; set; }
     }
 }

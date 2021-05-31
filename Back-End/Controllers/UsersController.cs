@@ -4,6 +4,7 @@ using Back_End.Helpers;
 using Back_End.Models;
 using Back_End.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace Back_End.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : BaseApiController
+    public class UsersController : ControllerBase
     {
         private readonly ICruzRojaRepository<Users> _cruzRojaRepository;
         private readonly IMapper _mapper;
@@ -31,10 +32,9 @@ namespace Back_End.Controllers
                 throw new ArgumentNullException(nameof(mapper));
         }
 
-
         [HttpGet]
         //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
-        public ActionResult<IEnumerable<UsersDto>> GetPersons()
+        public ActionResult<IEnumerable<UsersDto>> GetList()
         {
             {
                 var usersFromRepo = _cruzRojaRepository.GetList();
@@ -43,27 +43,28 @@ namespace Back_End.Controllers
         }
 
 
-         [HttpGet("{userId}", Name = "GetUser")]
-         //[Authorize(Roles = "Coordinador General, Admin, Coordinador de Emergencias y Desastres, Encargado de Logistica")]
+        [HttpGet("{userId}")]
+        //[Authorize(Roles = "Coordinador General, Admin, Coordinador de Emergencias y Desastres, Encargado de Logistica")]
         public IActionResult GetUser(int userId)
-         {
-             var usersFromRepo = _cruzRojaRepository.GetListId(userId);
+        {
+            var usersFromRepo = _cruzRojaRepository.GetListId(userId);
 
             //Si el userID no existe se retorna NotFound.
             if (usersFromRepo == null)
-             {
-                 return NotFound();
-             }
+            {
+                return NotFound();
+            }
 
-             //Al momento de mapear utilizo UsersDto para devolver aquellos valores imprecidibles
-             return Ok(_mapper.Map<UsersDto>(usersFromRepo));
-         }
+            //Al momento de mapear utilizo UsersDto para devolver aquellos valores imprecidibles
+            return Ok(_mapper.Map<UsersDto>(usersFromRepo));
+        }
 
-
-        [HttpPost("{Register}")]
-        //[Authorize(Roles = "Coordinador General, Admin")]  
+        [HttpPost]
+        //[Authorize(Roles = "Coordinador General, Admin")] 
         public ActionResult<UsersDto> CreateUser(UsersForCreationDto user)
         {
+
+            //Realizo un mapeo entre Users - UsersForCreationDto 
             var userEntity = _mapper.Map<Users>(user);
 
             //Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
@@ -72,41 +73,50 @@ namespace Back_End.Controllers
             _cruzRojaRepository.Add(userEntity);
             _cruzRojaRepository.save();
 
-            /*Una vez comprobado con exito todo se procede a realizar el mapeo 
-            que va a permitir manipular como se devuelven los datos */
-            var userToReturn = _mapper.Map<UsersDto>(userEntity);
+            var usertToReturn = _mapper.Map<UsersDto>(userEntity);
 
             return Ok();
         }
 
-        //Este metodo permite actualizar y modificar todos los datos de los Usuarios que estan en el Sistema
-        [HttpPut("{userId}")]
-        [Authorize(Roles = "Coordinador General, Admin")] 
-
-        public ActionResult UpdateUser(int userId, UsersForUpdate user)
+        [HttpPatch("{userId}")]
+        //[Authorize(Roles = "Coordinador General, Admin")] 
+        public ActionResult UpdatePartialUser(int userId, JsonPatchDocument<UsersForUpdate> patchDocument)
         {
             var userFromRepo = _cruzRojaRepository.GetListId(userId);
-            if (userFromRepo == null)
+            if(userFromRepo == null) 
             {
                 return NotFound();
             }
 
-            //Nuevamente se debea encriptar la contraseña ingresada
-            user.UserPassword = Encrypt.GetSHA256(user.UserPassword);
+            var userToPatch = _mapper.Map<UsersForUpdate>(userFromRepo);
 
-            _mapper.Map(user, userFromRepo);
+            patchDocument.ApplyTo(userToPatch, ModelState);
+
+            if (!TryValidateModel(userToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            string Pass = userToPatch.UserPassword;
+            //string ePass = Encrypt.GetSHA256(Pass);
+
+            if(userFromRepo.UserPassword != Pass) { 
+            //Nuevamente se debea encriptar la contraseña ingresada
+            userToPatch.UserPassword = Encrypt.GetSHA256(userToPatch.UserPassword);
+            }
+
+            _mapper.Map(userToPatch, userFromRepo);
 
             _cruzRojaRepository.Update(userFromRepo);
 
             _cruzRojaRepository.save();
 
-            return Ok();
+            return NoContent();
         }
-
         //Eliminar un Usuario particular en base al Id proporcionado del mismo
+      
         [HttpDelete("{userId}")]
         //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
-
         public ActionResult DeleteUser(int userId)
         {
 
@@ -124,7 +134,7 @@ namespace Back_End.Controllers
             _cruzRojaRepository.save();
 
             // Se retorna con exito la eliminacion del Usuario especificado
-            return Ok();
+            return NoContent();
         }
     }
 

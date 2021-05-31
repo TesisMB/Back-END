@@ -15,13 +15,6 @@ namespace Back_End.Entities
         public virtual DbSet<Persons> Persons { get; set; }
 
 
-        public virtual DbSet<Estate> Estate { get; set; }
-
-        public virtual DbSet<Vehicles> Vehicles { get; set; }
-
-        public virtual DbSet<Materials> Materials { get; set; }
-        public virtual DbSet<Medicine> Medicine { get; set; }
-        public virtual DbSet<Volunteer> Volunteer { get; set; }
 
         private const string Connection =
        @"Server=PC-MAXI;

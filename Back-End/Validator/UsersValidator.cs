@@ -1,7 +1,5 @@
-﻿using Back_End.Entities;
-using Back_End.Models;
+﻿using Back_End.Models;
 using FluentValidation;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Back_End.Validator
@@ -29,7 +27,7 @@ namespace Back_End.Validator
         }
 
 
-            private static bool IsValidNumber(string name)
+        private static bool IsValidNumber(string name)
         {
             return name.All(char.IsNumber);
         }

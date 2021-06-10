@@ -1,11 +1,20 @@
-﻿using AutoMapper;
-using Back_End.Entities;
-using Back_End.Helpers;
-using Back_End.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Back_End.Entities;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Back_End.Controllers;
+using Back_End.Models;
+using System.Security.Claims;
+using Back_End.Helpers;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.EntityFrameworkCore;
+using Back_End.Services;
+using AutoMapper;
 
 namespace Back_End.Controllers
 {
@@ -14,57 +23,37 @@ namespace Back_End.Controllers
     public class LoginController : BaseApiController
     {
         private readonly IMapper _mapper;
-
         public LoginController(IMapper mapper)
         {
             _settings = settings;
         }
-        ActionResult ret = null;
-        UserAuthDto auth = new UserAuthDto();
-        //UserSecurity mgr = new UserSecurity(_settings);
 
         [HttpPost]
-        public ActionResult<UserAuthDto> Login([FromBody] UserLoginDto user)
+        public ActionResult<UserAuthDto> Login([FromBody] Users user)
         {
-            auth = ValidateUser(user);
-            if (auth.UserAvailability)
-            {
-                ret = StatusCode(200, auth);
-            }
-            else
-            {
-                ret = Unauthorized();
-            }
-
-            return ret;
-        }
-
-        public UserAuthDto ValidateUser(UserLoginDto user)
-        {
-            UserAuthDto ret = new UserAuthDto();
-            Users authUser = null;
-
-            //se conecta a la base de datos para verificar las datos del usuario en cuestion
             using (var db = new CruzRojaContext())
             {
                 /*Al momento de ingresar la Contraseña se la encripta para verificar que la contraseña 
-                 ingresada coincida con la contraseña hasheada en la base de datos*/
+                  ingresada coincida con la contraseña hasheada en la base de datos*/
                 string Pass = user.UserPassword;
                 string ePass = Encrypt.GetSHA256(Pass);
 
-
-                authUser = db.Users.Include(u => u.Persons)
+                
+                user = db.Users.Include(u => u.Persons)
                                .Include(u => u.Roles)
                                .Where(u => u.UserDni == user.UserDni
                                       && u.UserPassword == ePass).FirstOrDefault();
-            }
 
-            if (authUser != null)
-            {
-                ret = _mapper.Map<UserAuthDto>(authUser); //si los datos son correctos se crea el objeto del usuario autentificado
+                if (user.UserAvailability)
+                {
+                    return Ok(_mapper.Map<UserAuthDto>(user));
+                }
+                    return Unauthorized();
             }
-
-            return ret; //retornamos el valor de este objeto
         }
     }
 }
+
+
+
+     

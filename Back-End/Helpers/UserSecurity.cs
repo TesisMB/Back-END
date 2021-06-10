@@ -13,15 +13,14 @@ using Back_End.Helpers;
 
 namespace Back_End.Entities
 {
-    public class UserSecurity
+    public  class UserSecurity
     {
-
         //Esta funcion permitira llevar adelante el token para poder acceder al Sistema.
         public static string GenerateAccessToken(int userID, string RoleName)
         {
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
             var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-           
+
             //Los claims me serviran para darle al token informacion adicional para el acceso al Sistema.
             var claims = new[]
            {
@@ -30,13 +29,14 @@ namespace Back_End.Entities
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
-            var token= new JwtSecurityToken(
+            //Se crea el token con todos los valores establecidos previamente.
+            var token = new JwtSecurityToken(
                 issuer: "http://localhost:5000",
                 audience: "http://localhost:5000",
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(5),
+                expires: DateTime.Now.AddHours(5),
                 signingCredentials: signinCredentials
-            );
+                );
 
             //Se devuelve el token creado con sus respectivos datos.
             return new JwtSecurityTokenHandler().WriteToken(token);

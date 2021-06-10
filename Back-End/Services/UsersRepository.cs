@@ -37,7 +37,6 @@ namespace Back_End.Services
 
             //retorno un Usuario especifico con el nombre del rol al cual pertence el mismo
             return _context.Users
-                   .Include(a=>a.Employees)
                   .Include(a => a.Persons)
                  .Include(i => i.Roles)
                  .FirstOrDefault(a => a.ID == UserID);

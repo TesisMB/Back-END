@@ -13,6 +13,7 @@ namespace Back_End.Models
         public int ID { get; set; }
         public string UserDni { get; set; }
         public Boolean UserAvailable { get; set; }
+        public string RoleName { get; set; }
         public RolesDto Roles { get; set; }
         public PersonsDto Persons { get; set; }
     }

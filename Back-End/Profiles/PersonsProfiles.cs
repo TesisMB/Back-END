@@ -30,8 +30,6 @@ namespace Back_End.Profiles
                                     opt => opt.MapFrom(src => src.UserDni))
 
             CreateMap<PersonsForUpdatoDto, Persons>();
-            CreateMap<Persons, PersonsForUpdatoDto>();
-
 
                       /*  .ForMember(dest => dest.UserAvailability,
                                     opt => opt.MapFrom(src => src.Users.UserAvailability))

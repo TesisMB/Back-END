@@ -29,8 +29,9 @@ namespace Back_End.Profiles
                    /*    .ForMember(dest => dest.Users.UserDni,
                                     opt => opt.MapFrom(src => src.UserDni))
 
-                        .ForMember(dest => dest.Users.UserPassword,
-                                    opt => opt.MapFrom(src => src.UserPassword)); */
+            CreateMap<PersonsForUpdatoDto, Persons>();
+            CreateMap<Persons, PersonsForUpdatoDto>();
+
 
                       /*  .ForMember(dest => dest.UserAvailability,
                                     opt => opt.MapFrom(src => src.Users.UserAvailability))

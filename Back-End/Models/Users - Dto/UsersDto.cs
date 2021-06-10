@@ -12,8 +12,8 @@ namespace Back_End.Models
     {
         public int ID { get; set; }
         public string UserDni { get; set; }
-        public string UserPassword { get; set; }
-        public Boolean UserAvailability { get; set; }
+        public Boolean UserAvailable { get; set; }
+        public RolesDto Roles { get; set; }
         public PersonsDto Persons { get; set; }
     }
 }

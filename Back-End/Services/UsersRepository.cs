@@ -1,5 +1,4 @@
 ﻿using Back_End.Entities;
-using Back_End.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,22 +9,17 @@ namespace Back_End.Services
 {
     public class UsersRepository : ICruzRojaRepository<Users>, IDisposable
     {
-        //_context me va a permitir poder conectarme a la Base de datos y poder hacer implementar los metodos  
         public readonly CruzRojaContext2 _context;
 
         public UsersRepository(CruzRojaContext2 context)
         {
             _context = context ?? throw new ArgumentException(nameof(context));
+
         }
 
-
-        public IEnumerable<Users> GetList()
+        public void Add(Users TEntity)
         {
-            //retorno la lista de usuarios con el nombre del rol especifico al que pertence cada uno
-            return _context.Users
-                    .Include(a=>a.Persons)
-                    .ThenInclude(i => i.Users.Roles)
-                    .ToList();
+            throw new NotImplementedException();
         }
 
         public Users GetListId(int UserID)
@@ -37,37 +31,26 @@ namespace Back_End.Services
 
             //retorno un Usuario especifico con el nombre del rol al cual pertence el mismo
             return _context.Users
-                  .Include(a => a.Persons)
-                 .Include(i => i.Roles)
-                 .FirstOrDefault(a => a.ID == UserID);
+                   .Include(i => i.Persons)
+                   .ThenInclude(i => i.Users.Estates)
+                   .ThenInclude(i => i.LocationAddress)
+                   .ThenInclude(i => i.Estates.EstatesTimes)
+                   .ThenInclude(a => a.Times)
+                   .ThenInclude(a => a.Schedules)
+                   .Include(i => i.Roles)
+                   .Include(i=>i.Employees)
+                   .FirstOrDefault(a => a.ID == UserID);
         }
+    
 
-        public void Add(Users user)
+       public void Delete(Users user)
         {
             if (user == null)
             {
                 throw new ArgumentNullException(nameof(user));
             }
 
-            _context.Users.Add(user);
-        }
-
-        public void Delete(Users user)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public void Update(Users user)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        //metodo para verificar que todos los datos  a almacenar esten, caso contrario marco un Error.
-        public bool save()
-        {
-            return (_context.SaveChanges() >= 0);
+            _context.Users.Remove(user);
         }
 
         public void Dispose()
@@ -82,6 +65,39 @@ namespace Back_End.Services
             {
                 // Disponer de recurso cuando sea necesario
             }
+        }
+
+
+        public IEnumerable<Users> GetList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool save()
+        {
+            return (_context.SaveChanges() >= 0);
+        }
+
+
+        public void Update(Users TEntity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Users GetListVolunteerId(int volunteerID)
+        {
+            if (volunteerID.ToString() == "")
+            {
+                throw new ArgumentNullException(nameof(volunteerID));
+            }
+
+            return _context.Users
+                  .Include(a => a.Roles)
+                  .Include(a => a.Persons)
+                  .ThenInclude(a => a.Users.Volunteers)
+                  .ThenInclude(a => a.VolunteersSkills)
+                  .ThenInclude(a => a.Skills)
+                 .FirstOrDefault(a => a.ID == volunteerID);
         }
     }
 }

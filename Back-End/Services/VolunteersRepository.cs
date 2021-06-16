@@ -1,12 +1,12 @@
 ﻿using Back_End.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Back_End.Services
 {
-    public class VolunteersRepository : ICruzRojaRepository<Volunteer>, IDisposable
+    public class VolunteersRepository : ICruzRojaRepository<Volunteers>, IDisposable
     {
         public readonly CruzRojaContext2 _context;
 
@@ -14,63 +14,94 @@ namespace Back_End.Services
         {
             _context = context ?? throw new ArgumentException(nameof(context));
         }
-        public IEnumerable<Volunteer> GetList()
+        public IEnumerable<Volunteers> GetList()
         {
-            //retorno la lista de usuarios con el nombre del rol especifico al que pertence cada uno
-            return _context.Volunteer
-                    .ToList();
+            return _context.Volunteers
+                 .Include(a => a.Users)
+                 .ThenInclude(a => a.Persons)
+                 .Include(a => a.Users.Roles)
+                .Include(a => a.VolunteersSkills)
+                 .ThenInclude(a => a.Skills)
+                 .Include(a=>a.Users.Estates)
+                 .ThenInclude(a=>a.LocationAddress)
+                 .ThenInclude(a=>a.Estates.EstatesTimes)
+                 .ThenInclude(a=>a.Times)
+                 .ThenInclude(a=>a.Schedules)
+                 .ToList();
+        }
+        public Volunteers GetListId(int volunteerId)
+        {
+            if (volunteerId.ToString() == "")
+            {
+                throw new ArgumentNullException(nameof(volunteerId));
+            }
+
+            return _context.Volunteers
+                  .Include(a => a.Users)
+                 .ThenInclude(a => a.Persons)
+                 .Include(a => a.Users.Roles)
+                .Include(a => a.VolunteersSkills)
+                 .ThenInclude(a => a.Skills)
+                 .Include(a => a.Users.Estates)
+                 .ThenInclude(a => a.LocationAddress)
+                 .ThenInclude(a => a.Estates.EstatesTimes)
+                 .ThenInclude(a => a.Times)
+                 .ThenInclude(a => a.Schedules)
+                 .FirstOrDefault(a => a.ID == volunteerId);
         }
 
-        public void Add(Volunteer volunteer)
+        public void Add(Volunteers volunteer)
         {
-            //Verifico que el Usuario no sea null
             if (volunteer == null)
             {
                 throw new ArgumentNullException(nameof(volunteer));
             }
 
-            _context.Volunteer.Add(volunteer);
+            _context.Volunteers.Add(volunteer);
         }
 
-        public void Delete(Volunteer volunteer)
+        public void Update(Volunteers volunteer)
         {
-            if (volunteer == null) //Verifico que el Usuario no sea null
+            /*      if (user == null)
+                {
+                    throw new ArgumentNullException(nameof(user));
+                }
+                _context.Users.Update(user);*/
+        }
+        public bool save()
+        {
+            return (_context.SaveChanges() >= 0);
+        }
+
+        public void Delete(Volunteers volunteer)
+        {
+            if (volunteer == null)
             {
                 throw new ArgumentNullException(nameof(volunteer));
             }
-            //Se retorna al Controller que no hay errores
-            _context.Volunteer.Remove(volunteer);
+
+            _context.Volunteers.Remove(volunteer);
         }
+
+
 
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
         protected virtual void Dispose(bool disposing)
         {
-
-        }
-
-        public Volunteer GetListId(int VolunteerID)
-        {
-            if (VolunteerID.ToString() == "") // si el usuario esta vacio
+            if (disposing)
             {
-                throw new ArgumentNullException(nameof(VolunteerID));
+                // Disponer de recurso cuando sea necesario
             }
-
-            //retorno un Usuario especifico con el nombre del rol al cual pertence el mismo
-            return _context.Volunteer
-                 .FirstOrDefault(a => a.VolunteerID == VolunteerID);
         }
 
-        public bool save()
+        public Volunteers GetListVolunteerId(int TEntity)
         {
-            return (_context.SaveChanges() >= 0);
-        }
-
-        public void Update(Volunteer volunteer)
-        {
+            throw new NotImplementedException();
         }
     }
 }

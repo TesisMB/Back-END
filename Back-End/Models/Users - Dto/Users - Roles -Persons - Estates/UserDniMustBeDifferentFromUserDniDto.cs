@@ -1,4 +1,5 @@
 ﻿using Back_End.Entities;
+using Back_End.Models.Users___Dto;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,7 +12,7 @@ namespace Back_End.Models.Users_Dto
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var User = (UsersForCreationDto)validationContext.ObjectInstance;
+            var User = (UsersEmployeesForCreationDto)validationContext.ObjectInstance;
 
             using (var db = new CruzRojaContext())
 

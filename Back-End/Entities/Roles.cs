@@ -18,6 +18,6 @@ namespace Back_End.Entities
         public string RoleName { get; set; }
 
         public ICollection<Users> Users { get; set; }
-            = new List<Users>();
+
     }
 }

@@ -22,6 +22,7 @@ using Back_End.Services;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Back_End.Validator;
 
 public class Startup
 {
@@ -37,7 +38,6 @@ public class Startup
         {
             setupAction.ReturnHttpNotAcceptable = true;
         })
-
           .AddFluentValidation(fv => {
               fv.RunDefaultMvcValidationAfterFluentValidationExecutes = true;
               fv.RegisterValidatorsFromAssemblyContaining<Startup>();
@@ -54,8 +54,11 @@ public class Startup
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         //Defino los repositorios a usar
-        services.AddScoped<ICruzRojaRepository<Users>, UsersRepository>();
+        services.AddScoped<ICruzRojaRepository<Employees>, EmployeesRepository>();
 
+        services.AddScoped<ICruzRojaRepository<Volunteers>, VolunteersRepository>();
+
+        services.AddScoped<ICruzRojaRepository<Users>, UsersRepository>();
 
 
         //Defino la conexion con la base de datos
@@ -114,6 +117,7 @@ public class Startup
         app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
         app.UseRouting();
+
 
 
         app.UseAuthentication();

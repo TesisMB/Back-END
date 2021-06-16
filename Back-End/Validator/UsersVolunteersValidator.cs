@@ -1,16 +1,14 @@
-﻿using Back_End.Entities;
-using Back_End.Models;
+﻿
+using Back_End.Models.Users___Dto;
 using FluentValidation;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Back_End.Validator
 {
-    public class UsersValidator : AbstractValidator<UsersForCreationDto>
+    public class UsersVolunteersValidator : AbstractValidator<UsersVolunteersForCreationDto>
     {
-        //ctor
-        public UsersValidator()
-        {
+        public  UsersVolunteersValidator()
+            {
             //************USERS - VALIDATIONS************
 
             //Validaciones para el Dni
@@ -19,7 +17,7 @@ namespace Back_End.Validator
             .Length(8).WithMessage("The {PropertyName} must be 8 characters. You entered {TotalLength} characters");
             //Validaciones para la contraseña
             RuleFor(x => x.UserPassword).NotEmpty().WithMessage("{PropertyName} is required.")
-            .Length(8,16).WithMessage("The {PropertyName} must be between 8 and 16 characters. You entered {TotalLength} characters");
+            .Length(8, 16).WithMessage("The {PropertyName} must be between 8 and 16 characters. You entered {TotalLength} characters");
 
             //Validaciones para Rol
             RuleFor(x => x.FK_RoleID).NotEmpty().WithMessage("{PropertyName} is required.");
@@ -28,10 +26,10 @@ namespace Back_End.Validator
             RuleFor(x => x.Persons).NotEmpty().WithMessage("{PropertyName} is required.").SetValidator(new PersonsValidator());
         }
 
-
-            private static bool IsValidNumber(string name)
+        private static bool IsValidNumber(string name)
         {
             return name.All(char.IsNumber);
         }
     }
 }
+

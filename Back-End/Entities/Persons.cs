@@ -28,11 +28,14 @@ namespace Back_End.Entities
         [Required]
         [MaxLength(50)]
         public string Email { get; set; }
-      
+
+        [Required]
+        [MaxLength(50)]
+        public string Address { get; set; }
+
         [Required]
         [MaxLength(1)]
         public string Gender { get; set; }
-
         [Required]
         public DateTimeOffset Birthdate { get; set; }
 

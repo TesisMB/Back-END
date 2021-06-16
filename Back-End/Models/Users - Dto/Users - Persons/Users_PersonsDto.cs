@@ -1,17 +1,19 @@
-﻿using Back_End.Models.Persons___Dto;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Back_End.Models
+namespace Back_End.Models.Users___Dto.Users___Persons
 {
-    public class PersonsDto
+    public class Users_PersonsDto
     {
         public int PersonID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Phone { get; set; }
+        public string Email { get; set; }
         public string Address { get; set; }
+        public string Gender { get; set; }
+        public DateTimeOffset Birthdate { get; set; }
     }
 }

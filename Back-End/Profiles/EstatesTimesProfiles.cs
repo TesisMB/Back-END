@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Back_End.Entities;
-using Back_End.Models;
+using Back_End.Models.Employees___Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +8,12 @@ using System.Threading.Tasks;
 
 namespace Back_End.Profiles
 {
-    public class RolesProfiles: Profile
+    public class EstatesTimesProfiles: Profile
     {
-        public RolesProfiles()
+        public EstatesTimesProfiles()
         {
             //Creo Las clases a ser mapeadas
-            CreateMap<Roles, RolesDto>();
-            CreateMap<RolesForCreationDto, Roles>();
-
+            CreateMap<EstatesTimes, EstatesTimesDto>();
         }
     }
 }

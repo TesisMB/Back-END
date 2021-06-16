@@ -7,17 +7,22 @@ using System.Threading.Tasks;
 
 namespace Back_End.Entities
 {
-    [Table ("Volunteers", Schema = "dbo")]
-    public class Volunteers
+    [Table("Skills", Schema = "dbo")]
+    public class Skills
     {
-        [Key, ForeignKey("Users")]
+        [Key]
         public int ID { get; set; }
-        public string VolunteerAvatar { get; set; }
 
-        public string VolunteerDescription { get; set; }
-        public Users Users { get; set; }
+        [Required]
+        [MaxLength(20)]
+        public string SkillName { get; set; }
 
-        [ForeignKey("FK_VolunteerID")]
+        public string SkillDescription { get; set; }
+
+        public string SkillIcon { get; set; }
+
+        [ForeignKey("FK_SkillID")]
+
         public ICollection<VolunteersSkills> VolunteersSkills { get; set; }
 
     }

@@ -32,6 +32,14 @@ namespace Back_End.Entities
         public int FK_RoleID { get; set; }
         public Persons Persons { get; set; }
 
+        public Volunteers Volunteers { get; set; }
+
         public Employees Employees { get; set; }
+
+        [ForeignKey("FK_EstateID")]
+        public Estates Estates { get; set; }
+
+        [Required]
+        public int FK_EstateID { get; set; }
     }
 }

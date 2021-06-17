@@ -3,6 +3,7 @@ using Back_End.Entities;
 using Back_End.Helpers;
 using Back_End.Models.Employees___Dto;
 using Back_End.Models.Volunteers__Dto;
+using Back_End.ResourceParameters;
 using Back_End.Services;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -32,9 +33,9 @@ namespace Back_End.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<VolunteersDto>> GetList()
+        public ActionResult<IEnumerable<VolunteersDto>> GetList([FromQuery] VolunteersResourceParameters volunteersResourceParameters)
         {
-            var volunterFromRepo = _cruzRojaRepository.GetList();
+            var volunterFromRepo = _cruzRojaRepository.GetList(volunteersResourceParameters);
 
             return Ok(_mapper.Map<IEnumerable<VolunteersDto>>(volunterFromRepo));
         }

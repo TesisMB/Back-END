@@ -9,9 +9,7 @@ namespace Back_End.Profiles
     {
         public SchedulesProfiles()
         {
-            CreateMap<Schedules, SchedulesDto>()
-                                .ForMember(dest => dest.ScheduleID,
-                                    opt => opt.MapFrom(src => src.ID));
+            CreateMap<Schedules, SchedulesDto>();
         }
     }
 }

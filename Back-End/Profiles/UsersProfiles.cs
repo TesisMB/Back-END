@@ -21,19 +21,13 @@ namespace Back_End.Profiles
                 /* .ForMember(dest => dest.Roles.RoleName,
                                      opt => opt.MapFrom(src => src.Roles.RoleName))*/
 
-                .ForMember(dest => dest.UserID,
-                                    opt => opt.MapFrom(src => src.ID))
-
                 .ForMember(dest => dest.UserAvailable,
                                     opt => opt.MapFrom(src => src.UserAvailability));
 
             CreateMap<Users, Users_UsersDto>()
 
-                .ForMember(dest => dest.UserID,
-                                    opt => opt.MapFrom(src => src.ID))
-
                    .ForMember(dest => dest.UserAvailable,
-                                    opt => opt.MapFrom(src => src.UserAvailability)); ;
+                                    opt => opt.MapFrom(src => src.UserAvailability)); 
 
 
             CreateMap<UsersEmployeesForCreationDto, Users>();

@@ -13,10 +13,7 @@ namespace Back_End.Profiles
         public EstatesProfiles()
         {
             //Creo Las clases a ser mapeadas
-            CreateMap<Estates, EstatesDto>()
-
-                .ForMember(dest => dest.EstateID,
-                                    opt => opt.MapFrom(src => src.ID));
+            CreateMap<Estates, EstatesDto>();
 
         }
     }

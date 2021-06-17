@@ -13,9 +13,7 @@ namespace Back_End.Profiles
         public TimesProfiles()
         {
             //Creo Las clases a ser mapeadas
-            CreateMap<Times, TimesDto>()
-                                .ForMember(dest => dest.TimeID,
-                                    opt => opt.MapFrom(src => src.ID));
+            CreateMap<Times, TimesDto>();
         }
     }
 }

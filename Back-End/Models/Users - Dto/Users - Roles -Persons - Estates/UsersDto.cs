@@ -10,7 +10,6 @@ namespace Back_End.Models
 {
     public class UsersDto
     {
-        public int UserID { get; set; }
         public string UserDni { get; set; }
         public Boolean UserAvailable { get; set; }
         public PersonsDto Persons { get; set; }

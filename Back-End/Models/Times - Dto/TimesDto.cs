@@ -8,7 +8,6 @@ namespace Back_End.Models.Employees___Dto
 {
     public class TimesDto
     {
-        public int TimeID { get; set; }
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
         public SchedulesDto Schedules { get; set; }

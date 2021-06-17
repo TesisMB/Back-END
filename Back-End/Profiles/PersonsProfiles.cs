@@ -14,16 +14,11 @@ namespace Back_End.Profiles
         public PersonsProfiles()
         {
             //Creo Las clases a ser mapeadas
-            CreateMap<Persons, PersonsDto>()
-
-                .ForMember(dest => dest.PersonID,
-                                    opt => opt.MapFrom(src => src.ID));
-
+            CreateMap<Persons, PersonsDto>();
             CreateMap<Persons, Users_PersonsDto>()
 
-              .ForMember(dest => dest.PersonID,
-                                    opt => opt.MapFrom(src => src.ID));
-         
+                .ForMember(dest => dest.Status,
+                                    opt => opt.MapFrom(src => src.Available));
 
             CreateMap<PersonForCreationDto, Persons>();
 

@@ -9,7 +9,6 @@ namespace Back_End.Models.Employees___Dto
 {
     public class SkillsDto
     {
-        public int ID { get; set; }
         public string SkillName { get; set; }
         public string SkillIcon { get; set; }
     }

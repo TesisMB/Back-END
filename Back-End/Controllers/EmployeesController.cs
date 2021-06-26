@@ -3,146 +3,248 @@ using Back_End.Entities;
 using Back_End.Helpers;
 using Back_End.Models;
 using Back_End.Models.Employees___Dto;
-using Back_End.Models.Users___Dto.Users___Persons;
-using Back_End.Services;
-using Microsoft.AspNetCore.Authorization;
+using Contracts.Interfaces;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-
+using System.Linq;
 
 namespace Back_End.Controllers
 {
-    [Route("api/[controller]")]
+    //enrutamiento
+    [Route("api/Employees")]
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private readonly ICruzRojaRepository<Employees> _cruzRojaRepository;
-        private readonly ICruzRojaRepository<Users> _cruzRojaRepository_2;
 
-        private readonly IMapper _mapper;
+        private ILoggerManager _logger;
+        private IRepositorWrapper _repository;
+       private readonly IMapper _mapper;
 
         /*Este metodo va a permitir despues poder conectarme tanto para mapear, como para obtener 
          las funciones que se establecieron repositorios correspondientes*/
-        public EmployeesController(ICruzRojaRepository<Employees> EmployeesRepository, ICruzRojaRepository<Users> UsersRepository, IMapper mapper)
-
+        public EmployeesController(ILoggerManager logger,IRepositorWrapper repository,IMapper mapper)
         {
-            _cruzRojaRepository = EmployeesRepository ??
-                throw new ArgumentNullException(nameof(UsersRepository));
 
-            _cruzRojaRepository_2 = UsersRepository ??
-              throw new ArgumentNullException(nameof(UsersRepository));
-
-            _mapper = mapper ??
-                throw new ArgumentNullException(nameof(mapper));
+            _logger = logger;
+            _repository = repository;
+            _mapper = mapper;
         }
+
 
         [HttpGet]
         //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
-        public ActionResult<IEnumerable<EmployeesDto>> GetList()
+        public IActionResult GetAllEmployees()
         {
+            try
             {
-                var usersFromRepo = _cruzRojaRepository.GetList();
-                return Ok(_mapper.Map<IEnumerable<EmployeesDto>>(usersFromRepo));
+                var employees = _repository.Employees.GetAllEmployees();
+                _logger.LogInfo($"Returned all employees from database.");
+
+                var employeesResult = _mapper.Map<IEnumerable<EmployeesDto>>(employees);
+                return Ok(employeesResult);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside GetAllEmployees action: {ex.Message}");
+                return StatusCode(500, "Internal Server error");
             }
         }
-
 
         [HttpGet("{employeeId}")]
         //[Authorize(Roles = "Coordinador General, Admin, Coordinador de Emergencias y Desastres, Encargado de Logistica")]
-        public IActionResult GetEmployee(int employeeId)
+        public IActionResult GetEmployeeById(int employeeId)
         {
-            var usersFromRepo = _cruzRojaRepository.GetListId(employeeId);
-
-            //Si el userID no existe se retorna NotFound.
-            if (usersFromRepo == null)
+            try
             {
-                return NotFound();
-            }
+                var employee = _repository.Employees.GetEmployeeById(employeeId);
 
-            //Al momento de mapear utilizo UsersDto para devolver aquellos valores imprecidibles
-            return Ok(_mapper.Map<EmployeesDto>(usersFromRepo));
+                if (employee == null)
+                {
+                    _logger.LogError($"Employee with id: {employeeId}, hasn't been found in db.");
+
+                    return NotFound();
+                }
+
+                else
+                {
+                    _logger.LogInfo($"Returned employee with id: {employeeId}");
+                    var employeeResult = _mapper.Map<EmployeesDto>(employee);
+                    return Ok(employeeResult);
+                }
+            } catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside GetEmployeeById action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+             }
         }
 
-        
+
+        [HttpGet("{employeeId}/Users")]
+        public IActionResult GetEmployeeWithDetails(int employeeId)
+        {
+            try
+            {
+                var employee = _repository.Employees.GetEmployeeWithDetails(employeeId);
+
+                if (employee == null)
+                {
+                    _logger.LogError($"Employee with id: {employeeId}, hasn't been found in db.");
+                    return NotFound();
+                }
+                else
+                {
+                    _logger.LogInfo($"Returned employe with details for id: {employeeId}");
+
+                    var employeeResult = _mapper.Map<EmployeesDto>(employee);
+                    return Ok(employeeResult);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside GetEmployeeWithDetails action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
         [HttpPost]
         //[Authorize(Roles = "Coordinador General, Admin")] 
-        public ActionResult<EmployeesDto> CreateUser(EmployeesForCreationDto user)
+        public IActionResult CreateEmployee([FromBody]EmployeesForCreationDto employee)
         {
-            //Realizo un mapeo entre Users - UsersForCreationDto 
-            var userEntity = _mapper.Map<Employees>(user);
+            try
+            {
+                if(employee == null)
 
-            //Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
-            userEntity.Users.UserPassword = Encrypt.GetSHA256(userEntity.Users.UserPassword);
+                {
+                    _logger.LogError("Employee object sent from client is null.");
+                    return BadRequest("Employee object is null");
+                }
 
-            _cruzRojaRepository.Add(userEntity);
-            _cruzRojaRepository.save();
+                var employeeEntity = _mapper.Map<Employees>(employee);
 
-            //var usertToReturn = _mapper.Map<UsersDto>(userEntity);
+                // Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
+                employeeEntity.Users.UserPassword = Encrypt.GetSHA256(employeeEntity.Users.UserPassword);
 
-            return Ok();
+
+                _repository.Employees.CreateEmployee(employeeEntity);
+
+                _repository.Save();
+
+                var createdEmployee = _mapper.Map<EmployeesDto>(employeeEntity);
+
+                return Ok();
+            }
+
+            catch(Exception ex)
+
+            {
+                _logger.LogError($"Something went wrong inside CreateEmployee action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
-        
+
         [HttpPatch("{employeeId}")]
         //[Authorize(Roles = "Coordinador General, Admin")] 
-        public ActionResult UpdatePartialUser(int employeeId, JsonPatchDocument<EmployeeForUpdateDto> patchDocument)
+        public IActionResult UpdatePartialUser(int employeeId, JsonPatchDocument<EmployeeForUpdateDto> patchDocument)
         {
-            var userFromRepo = _cruzRojaRepository.GetListId(employeeId);
-            if(userFromRepo == null) 
+            
+            try
             {
-                return NotFound();
+                var employeeEntity = _repository.Employees.GetEmployeeById(employeeId);
+
+
+                if (employeeEntity == null)
+                {
+                    _logger.LogError($"Employee with id: {employeeId}, hasn't been found in db.");
+                    return NotFound();
+                }
+
+                var employeeToPatch = _mapper.Map<EmployeeForUpdateDto>(employeeEntity);
+
+
+                patchDocument.ApplyTo(employeeToPatch, ModelState);
+                
+                var userNewPass = employeeToPatch.Users.UserNewPassword;
+                //employeeToPatch.Users.UserNewPassword = Encrypt.GetSHA256(userNewPass);
+
+
+                if (!TryValidateModel(employeeToPatch))
+                {
+                    return ValidationProblem(ModelState);
+                }
+
+                var userPass = employeeToPatch.Users.UserPassword;
+                employeeToPatch.Users.UserPassword = Encrypt.GetSHA256(userPass);
+
+                Users authUser = new Users();
+
+                using (var db = new CruzRojaContext())
+                    authUser = db.Users.Where(u => u.UserID == employeeEntity.Users.UserID
+                          && u.UserPassword == employeeToPatch.Users.UserPassword).FirstOrDefault();
+
+                if (authUser != null)
+                {
+                var Pass = Encrypt.GetSHA256(userNewPass);
+
+                employeeToPatch.Users.UserNewPassword = Pass;
+                //Encrypt.GetSHA256(employeeEntity.Users.UserPassword);
+
+                var employeeResult = _mapper.Map(employeeToPatch, employeeEntity);
+
+                 employeeResult.Users.UserPassword = employeeToPatch.Users.UserNewPassword;
+
+
+                _repository.Employees.Update(employeeResult);
+                _repository.Save();
+
+                return NoContent();
+                }
+
+                return BadRequest("Contraseña Incorrecta");
             }
 
-            var userToPatch = _mapper.Map<EmployeeForUpdateDto>(userFromRepo);
-
-            patchDocument.ApplyTo(userToPatch, ModelState);
-
-            if (!TryValidateModel(userToPatch))
+            catch (Exception ex)
             {
-                return ValidationProblem(ModelState);
+                _logger.LogError($"Something went wrong inside UpdateEmployee action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+
             }
-
-            string Pass = userToPatch.Users.UserPassword;
-            //string ePass = Encrypt.GetSHA256(Pass);
-
-            if(userFromRepo.Users.UserPassword != Pass) { 
-            //Nuevamente se debea encriptar la contraseña ingresada
-            userToPatch.Users.UserPassword = Encrypt.GetSHA256(userToPatch.Users.UserPassword);
-            }
-          
-
-            _mapper.Map(userToPatch, userFromRepo);
-
-            _cruzRojaRepository.Update(userFromRepo);
-
-            _cruzRojaRepository.save();
-
-            return NoContent();
         }
-        
-        //Eliminar un Usuario particular en base al Id proporcionado del mismo
-        [HttpDelete("{userId}")]
+
+        [HttpDelete("{employeeId}")]
+
         //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
-        public ActionResult DeleteUser(int userId)
+        public IActionResult DeleteEmployee(int employeeId)
         {
 
-            var userFromRepo = _cruzRojaRepository_2.GetListId(userId);
-
-
-            // si el Id del Usuario no existe de retorna Error.
-            if (userFromRepo == null)
+            try
             {
-                return NotFound();
+                var employee = _repository.Users.GetUserEmployeeById(employeeId);
+
+                if(employee == null)
+                {
+                    _logger.LogError($"Employee with id: {employeeId}, hasn't ben found in db.");
+                    return NotFound();
+                }
+
+                /*if (_repository.Vehicles.VehciclesByEmployees(employeeId).Any())
+                {
+                    _logger.LogError($"Cannot delete employee with id: {employeeId}. It has related {_repository.Vehicles}. Delete those accounts first");
+                    return BadRequest();
+                }*/
+
+                _repository.Users.Delete(employee);
+                _repository.Save();
+                return NoContent();
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside DeleteEmployee action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
             }
 
-            _cruzRojaRepository_2.Delete(userFromRepo);
-
-            _cruzRojaRepository_2.save();
-
-            // Se retorna con exito la eliminacion del Usuario especificado
-            return NoContent();
         }
     }
 

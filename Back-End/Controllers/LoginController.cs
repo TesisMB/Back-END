@@ -2,6 +2,7 @@
 using Back_End.Entities;
 using Back_End.Helpers;
 using Back_End.Models;
+using Contracts.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,33 +10,45 @@ using System.Linq;
 
 namespace Back_End.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
-    public class LoginController : BaseApiController
+    public class LoginController: BaseApiController
     {
+        private ILoggerManager _logger;
         private readonly IMapper _mapper;
 
-        public LoginController(IMapper mapper)
+        public LoginController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper)
         {
-            _mapper = mapper ??
-                throw new ArgumentNullException(nameof(mapper));
+            _logger = logger;
+            _mapper = mapper;
         }
+
         ActionResult ret = null;
         UserAuthDto auth = new UserAuthDto();
-        //UserSecurity mgr = new UserSecurity(_settings);
 
 
         [HttpPost]
         public ActionResult<UserAuthDto> Login([FromBody] UserLoginDto user)
         {
-            auth = ValidateUser(user);
-            if (auth.UserAvailability)
+            try
             {
-                ret = StatusCode(200, auth);
-            }
-            else
+                auth = ValidateUser(user);
+                if (auth.UserAvailability)
+                {
+                    ret = StatusCode(200, auth);
+                    _logger.LogInfo($"Returned User.");
+
+                }
+                else
+                {
+                    ret = Unauthorized();
+                }
+
+            }catch (Exception ex)
             {
-                ret = Unauthorized();
+                _logger.LogError($"Something went wrong inside User: {ex.Message}");
+                return StatusCode(500, "Internal server error");
             }
             return ret;
         }
@@ -45,20 +58,20 @@ namespace Back_End.Controllers
             UserAuthDto ret = new UserAuthDto();
             Users authUser = null;
 
+            string Pass = user.UserPassword;
+            string ePass = Encrypt.GetSHA256(Pass);
+
             //se conecta a la base de datos para verificar las datos del usuario en cuestion
             using (var db = new CruzRojaContext())
-            {
-                /*Al momento de ingresar la Contraseña se la encripta para verificar que la contraseña 
-                 ingresada coincida con la contraseña hasheada en la base de datos*/
-                string Pass = user.UserPassword;
-                string ePass = Encrypt.GetSHA256(Pass);
-
-
-                authUser = db.Users.Include(u => u.Persons)
+            authUser = db.Users.Include(u => u.Persons)
                                .Include(u => u.Roles)
+                               .Include( u => u.Estates)
+                               .ThenInclude(u => u.LocationAddress)
+                               .Include(u => u.Estates.EstatesTimes)
+                               .ThenInclude(u => u.Times)
+                               .ThenInclude(u => u.Schedules)
                                .Where(u => u.UserDni == user.UserDni
                                       && u.UserPassword == ePass).FirstOrDefault();
-            }
 
             if (authUser != null)
             {

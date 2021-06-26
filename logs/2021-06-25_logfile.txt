@@ -1,0 +1,43 @@
+2021-06-25 11:30:28.7826 ERROR Something went wrong inside UpdateEmployee action: An error occurred while updating the entries. See the inner exception for details.
+2021-06-25 11:35:43.3017 ERROR Employee with id: 67, hasn't been found in db.
+2021-06-25 11:36:10.6797 ERROR Employee with id: 68, hasn't been found in db.
+2021-06-25 11:36:32.4735 ERROR Something went wrong inside UpdateEmployee action: An error occurred while updating the entries. See the inner exception for details.
+2021-06-25 13:35:24.0963 ERROR Something went wrong inside DeleteEmployee action: An error occurred while updating the entries. See the inner exception for details.
+2021-06-25 16:03:16.6064 INFO Returned all employees from database.
+2021-06-25 16:04:34.3252 ERROR Something went wrong inside GetAllEmployees action: The Include path 'Persons->Users' results in a cycle. Cycles are not allowed in no-tracking queries. Either use a tracking query or remove the cycle.
+2021-06-25 16:04:36.0912 ERROR Something went wrong inside GetAllEmployees action: The Include path 'Persons->Users' results in a cycle. Cycles are not allowed in no-tracking queries. Either use a tracking query or remove the cycle.
+2021-06-25 16:06:51.4664 ERROR Something went wrong inside GetAllEmployees action: The Include path 'Persons->Users' results in a cycle. Cycles are not allowed in no-tracking queries. Either use a tracking query or remove the cycle.
+2021-06-25 16:07:12.5017 ERROR Something went wrong inside GetEmployeeById action: The Include path 'Persons->Users' results in a cycle. Cycles are not allowed in no-tracking queries. Either use a tracking query or remove the cycle.
+2021-06-25 16:09:58.1098 ERROR Something went wrong inside GetEmployeeById action: The Include path 'Persons->Users' results in a cycle. Cycles are not allowed in no-tracking queries. Either use a tracking query or remove the cycle.
+2021-06-25 16:10:06.0392 INFO Returned all employees from database.
+2021-06-25 16:12:53.4040 INFO Returned all employees from database.
+2021-06-25 16:14:27.3577 INFO Returned all employees from database.
+2021-06-25 16:14:58.0901 INFO Returned all employees from database.
+2021-06-25 16:15:02.2488 INFO Returned all employees from database.
+2021-06-25 16:17:29.0287 INFO Returned all employees from database.
+2021-06-25 16:18:16.5469 ERROR Something went wrong inside GetAllEmployees action: The Include path 'LocationAddress->Estates' results in a cycle. Cycles are not allowed in no-tracking queries. Either use a tracking query or remove the cycle.
+2021-06-25 16:18:18.5698 ERROR Something went wrong inside GetAllEmployees action: The Include path 'LocationAddress->Estates' results in a cycle. Cycles are not allowed in no-tracking queries. Either use a tracking query or remove the cycle.
+2021-06-25 16:18:31.5754 ERROR Something went wrong inside GetAllEmployees action: The Include path 'LocationAddress->Estates' results in a cycle. Cycles are not allowed in no-tracking queries. Either use a tracking query or remove the cycle.
+2021-06-25 16:21:36.9506 INFO Returned all employees from database.
+2021-06-25 16:23:36.6706 ERROR Something went wrong inside GetAllEmployees action: The Include path 'LocationAddress->Estates' results in a cycle. Cycles are not allowed in no-tracking queries. Either use a tracking query or remove the cycle.
+2021-06-25 16:25:29.0459 ERROR Something went wrong inside GetAllEmployees action: The Include path 'LocationAddress->Estates' results in a cycle. Cycles are not allowed in no-tracking queries. Either use a tracking query or remove the cycle.
+2021-06-25 16:26:16.4510 INFO Returned all employees from database.
+2021-06-25 16:27:43.2819 INFO Returned all employees from database.
+2021-06-25 16:29:22.2010 INFO Returned all employees from database.
+2021-06-25 16:29:25.4870 INFO Returned all employees from database.
+2021-06-25 16:30:06.7033 INFO Returned all employees from database.
+2021-06-25 16:32:34.6372 INFO Returned all employees from database.
+2021-06-25 16:35:16.0599 INFO Returned all employees from database.
+2021-06-25 16:38:31.0448 INFO Returned all employees from database.
+2021-06-25 17:48:56.9382 INFO Returned all employees from database.
+2021-06-25 17:50:24.4351 INFO Returned all employees from database.
+2021-06-25 17:50:59.2426 INFO Returned employee with id: 83
+2021-06-25 17:57:10.1999 INFO Returned User.
+2021-06-25 17:58:39.5629 INFO Returned User.
+2021-06-25 18:00:16.0625 INFO Returned User.
+2021-06-25 18:01:04.9865 INFO Returned all employees from database.
+2021-06-25 18:02:13.4818 INFO Returned User.
+2021-06-25 18:11:34.3444 INFO Returned employee with id: 83
+2021-06-25 18:41:21.0122 ERROR Employee with id: 69, hasn't been found in db.
+2021-06-25 18:41:35.9076 ERROR Employee with id: 69, hasn't been found in db.
+2021-06-25 18:43:25.6227 ERROR Employee with id: 69, hasn't been found in db.

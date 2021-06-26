@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
-using Back_End.Entities;
 using Back_End.Helpers;
+using Back_End.Models;
 using Back_End.Models.Employees___Dto;
 using Back_End.Models.Volunteers__Dto;
-using Back_End.ResourceParameters;
-using Back_End.Services;
+using Contracts.Interfaces;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,113 +15,194 @@ namespace Back_End.Controllers
     [ApiController]
     public class VolunteersController : ControllerBase
     {
-        private readonly ICruzRojaRepository<Volunteers> _cruzRojaRepository;
-        private readonly ICruzRojaRepository<Users> _cruzRojaRepository_2;
 
-        private readonly IMapper _mapper;
+        private ILoggerManager _logger;
+        private IRepositorWrapper _repository;
+            private readonly IMapper _mapper;
 
-        public VolunteersController(ICruzRojaRepository<Volunteers> volunteersRepository,ICruzRojaRepository<Users> UsersRepository, IMapper mapper)
+        public VolunteersController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper)
         {
-            _cruzRojaRepository = volunteersRepository ?? throw new ArgumentNullException(nameof(volunteersRepository));
-
-
-            _cruzRojaRepository_2 = UsersRepository ??
-              throw new ArgumentNullException(nameof(UsersRepository));
-
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _logger = logger;
+            _repository = repository;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<VolunteersDto>> GetList([FromQuery] VolunteersResourceParameters volunteersResourceParameters)
+        public IActionResult GetAllVolunteers()
         {
-            var volunterFromRepo = _cruzRojaRepository.GetList(volunteersResourceParameters);
+            try
+            {
+                var volunteers = _repository.Volunteers.GetAllVolunteers();
 
-            return Ok(_mapper.Map<IEnumerable<VolunteersDto>>(volunterFromRepo));
+                _logger.LogInfo($"Returned all Volunteers from database.");
+
+                var volunteersResult = _mapper.Map<IEnumerable<VolunteersDto>>(volunteers);
+
+                return Ok(volunteersResult);
+
+            }
+            catch(Exception ex)
+            {
+
+                _logger.LogError($"Something went wrong inside GetAllVolunteers action:  {ex.Message}");
+                return StatusCode(500, "Internal Server error");
+
+            }
+
+            //var volunterFromRepo = _cruzRojaRepository.GetList(volunteersResourceParameters);
+
+            //return Ok(_mapper.Map<IEnumerable<VolunteersDto>>(volunterFromRepo));
         }
+
 
         [HttpGet("{volunteerId}")]
         public IActionResult GetVolunteer(int volunteerId)
         {
-            var volunteerFromRepo = _cruzRojaRepository.GetListId(volunteerId);
-
-            if (volunteerFromRepo == null)
+            try
             {
+
+            var volunteer = _repository.Volunteers.GetVolunteersById(volunteerId);
+
+            if (volunteer == null)
+
+            {
+                 _logger.LogError($"Volunteer with id: {volunteerId}, hasn't been found in db.");
                 return NotFound();
+
+
             }
 
-            return Ok(_mapper.Map<VolunteersDto>(volunteerFromRepo));
+                 else
+
+                 {
+                    _logger.LogInfo($"Returned volunteer with id: {volunteerId}");
+                    var volunteerResult = _mapper.Map<VolunteersDto>(volunteer);
+                    return Ok(volunteerResult);
+
+                 }
+
+            } catch (Exception ex)
+
+            {
+                _logger.LogError($"Something went wrong inside GetEmployeeById action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+
+            }
         }
 
        [HttpPost]
-        public ActionResult<VolunteersDto> CreateVolunteer(VolunteersForCreationDto volunteer)
+        public IActionResult CreateVolunteer([FromBody] VolunteersForCreationDto volunteer)
         {
-            var volunteerEntity = _mapper.Map<Volunteers>(volunteer);
+            try
+            {
+                if(volunteer == null)
 
-            volunteerEntity.Users.UserPassword = Encrypt.GetSHA256(volunteerEntity.Users.UserPassword);
+                {
+                    _logger.LogError("Volunteer object sent from client is null.");
+                    return BadRequest("Volunteer object is null");
 
-            _cruzRojaRepository.Add(volunteerEntity);
-            _cruzRojaRepository.save();
+                }
 
-            return Ok();
+                var volunteerEntity = _mapper.Map<Volunteers>(volunteer);
+
+                // Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
+                volunteerEntity.Users.UserPassword = Encrypt.GetSHA256(volunteerEntity.Users.UserPassword);
+
+                _repository.Volunteers.Create(volunteerEntity);
+
+                _repository.Save();
+
+                var createdVolunteer = _mapper.Map<VolunteersDto>(volunteerEntity);
+
+                return Ok();
+
+            } catch (Exception ex)
+
+            {
+                _logger.LogError($"Something went wrong inside CreateEmployee action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
+        
         [HttpPatch("{volunteerId}")]
         //[Authorize(Roles = "Coordinador General, Admin")] 
         public ActionResult UpdatePartialUser(int volunteerId, JsonPatchDocument<VolunteersForUpdatoDto> patchDocument)
         {
-            var userFromRepo = _cruzRojaRepository.GetListId(volunteerId);
-            if (userFromRepo == null)
+            try
             {
-                return NotFound();
+
+                var volunteerEntity = _repository.Volunteers.GetVolunteersById(volunteerId);
+
+                if (volunteerEntity == null)
+                {
+                    _logger.LogError($"Volunteer with id: {volunteerId}, hasn't been found in db.");
+
+                    return NotFound();
+                }
+
+
+                var volunteerToPatch = _mapper.Map<VolunteersForUpdatoDto>(volunteerEntity);
+
+
+                patchDocument.ApplyTo(volunteerToPatch, ModelState);
+
+                var userNewPass = volunteerToPatch.Users.UserNewPassword;
+
+                if (!TryValidateModel(volunteerToPatch))
+                {
+                    return ValidationProblem(ModelState);
+                }
+
+                volunteerToPatch.Users.UserNewPassword = Encrypt.GetSHA256(userNewPass);
+
+
+                var volunteerResult = _mapper.Map(volunteerToPatch, volunteerEntity);
+
+                volunteerResult.Users.UserPassword = volunteerToPatch.Users.UserNewPassword;
+
+                _repository.Volunteers.Update(volunteerResult);
+                _repository.Save();
+
+                return NoContent();
             }
 
-            var userToPatch = _mapper.Map<VolunteersForUpdatoDto>(userFromRepo);
-
-            patchDocument.ApplyTo(userToPatch, ModelState);
-
-            if (!TryValidateModel(userToPatch))
+            catch (Exception ex)
             {
-                return ValidationProblem(ModelState);
+
+                _logger.LogError($"Something went wrong inside UpdateVolunteer action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
             }
-
-            string Pass = userToPatch.Users.UserPassword;
-            //string ePass = Encrypt.GetSHA256(Pass);
-
-            if (userFromRepo.Users.UserPassword != Pass)
-            {
-                //Nuevamente se debea encriptar la contraseña ingresada
-                userToPatch.Users.UserPassword = Encrypt.GetSHA256(userToPatch.Users.UserPassword);
-            }
-
-
-            _mapper.Map(userToPatch, userFromRepo);
-
-            _cruzRojaRepository.Update(userFromRepo);
-
-            _cruzRojaRepository.save();
-
-            return NoContent();
+            
         }
 
         [HttpDelete("{volunteerId}")]
-        public ActionResult DeleteVolunteer(int volunteerId)
+        public IActionResult DeleteVolunteer(int volunteerId)
         {
-
-            var userFromRepo = _cruzRojaRepository_2.GetListVolunteerId(volunteerId);
-
-
-            // si el Id del Usuario no existe de retorna Error.
-            if (userFromRepo == null)
+            try
             {
-                return NotFound();
+            var volunteer = _repository.Users.GetUserVolunteerById(volunteerId);
+
+
+            if (volunteer == null)
+            {
+                 _logger.LogError($"Volunteer with id: {volunteerId}, hasn't ben found in db.");
+                 return NotFound();
             }
 
-            _cruzRojaRepository_2.Delete(userFromRepo);
+            _repository.Users.Delete(volunteer);
 
-            _cruzRojaRepository.save();
+            _repository.Save();
 
             // Se retorna con exito la eliminacion del Usuario especificado
             return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside DeleteVolunteer action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+
         }
     }
 }

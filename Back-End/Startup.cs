@@ -1,47 +1,52 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Serialization;
-using Back_End.Entities;
-using Back_End.Services;
-using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Back_End.Validator;
+using FluentValidation;
+using Back_End.Models;
+using Back_End;
+using Microsoft.AspNetCore.HttpOverrides;
+using NLog;
+using System.IO;
+using FluentValidation.AspNetCore;
 
 public class Startup
 {
     public Startup(IConfiguration configuration)
     {
+        LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
         Configuration = configuration;
     }
     public IConfiguration Configuration { get; }
 
     public void ConfigureServices(IServiceCollection services)
     {
+
+        services.ConfigureCors();
+        services.ConfigureIISIntegreation();
+        services.ConfigureLoggerService();
+        services.ConfigureSqlContext(Configuration);
+        services.ConfigureRepositoryWrapper();
+        services.Fluent();
+
+
+        services.AddControllers();
+
         services.AddControllers(setupAction =>
         {
             setupAction.ReturnHttpNotAcceptable = true;
         })
 
-          .AddFluentValidation(fv => {
-              fv.RunDefaultMvcValidationAfterFluentValidationExecutes = true;
-              fv.RegisterValidatorsFromAssemblyContaining<Startup>();
-          })
 
         .AddNewtonsoftJson(setupAction =>
         {
@@ -49,24 +54,15 @@ public class Startup
                 new CamelCasePropertyNamesContractResolver();
         })
         .AddXmlDataContractSerializerFormatters();
-      
+
 
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-        //Defino los repositorios a usar
-        services.AddScoped<ICruzRojaRepository<Users>, UsersRepository>();
-
-
-
-        //Defino la conexion con la base de datos
-        var connection = Configuration.GetConnectionString("CruzRojaDB");
-        services.AddDbContextPool<CruzRojaContext2>(options => options.UseSqlServer(connection));
-        services.AddControllers();
 
         services.AddAuthentication(opt => {
             opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         })
+
      .AddJwtBearer(options =>
      {
          options.TokenValidationParameters = new TokenValidationParameters
@@ -81,7 +77,6 @@ public class Startup
          };
      });
 
-
         services.AddControllers().AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
@@ -90,6 +85,7 @@ public class Startup
 
         services.AddMvc(Options => Options.EnableEndpointRouting = false);
 
+     
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -111,22 +107,31 @@ public class Startup
             });
         }
 
-        app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+        app.UseHttpsRedirection();
+
+        //habilita e uso de archivos estaticos para la solicitud.
+        app.UseStaticFiles();
+
+        //Reenvia los encabezados del proxy a la solicitud actual.
+        app.UseForwardedHeaders(new ForwardedHeadersOptions
+        {
+            ForwardedHeaders = ForwardedHeaders.All
+        });
 
         app.UseRouting();
 
+        app.UseCors("CorsPolicy");
+
+        app.UseMvc();
 
         app.UseAuthentication();
 
         app.UseAuthorization();
 
-        app.UseHttpsRedirection();
-        app.UseMvc();
-
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
         });
-           
-    }   
+
+    }
 }

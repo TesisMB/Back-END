@@ -8,10 +8,9 @@ using Back_End.Models.Users___Dto.Users___Persons;
 
 namespace Back_End.Models
 {
-    public class UsersDto
+    public class VolunteersUsersDto
     {
         public string UserDni { get; set; }
-        public Boolean UserAvailable { get; set; }
         public PersonsDto Persons { get; set; }
         public EstatesDto Estates { get; set; }
     }

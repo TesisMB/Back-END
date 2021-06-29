@@ -11,7 +11,7 @@ using System.Linq;
 namespace Back_End.Controllers
 {
     
-    [Route("api/[controller]")]
+    [Route("api/Login")]
     [ApiController]
     public class LoginController: BaseApiController
     {

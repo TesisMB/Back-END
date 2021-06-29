@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+/*
 namespace Back_End.Validator
 {
     public class VolunteersValidator : AbstractValidator<VolunteersForCreationDto>
@@ -15,4 +15,4 @@ namespace Back_End.Validator
             RuleFor(x => x.VolunteerAvatar).NotEmpty().WithMessage("{PropertyName} is required.");
         }
     }
-}
+}*/

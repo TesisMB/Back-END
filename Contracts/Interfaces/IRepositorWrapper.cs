@@ -14,7 +14,6 @@ namespace Contracts.Interfaces
 
         IVehiclesRepository Vehicles { get; }
 
-
         void Save();
     }
 }

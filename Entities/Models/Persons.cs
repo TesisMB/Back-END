@@ -39,7 +39,8 @@ namespace Back_End.Models
         [Required]
         public DateTimeOffset Birthdate { get; set; }
 
-        public Boolean Available { get; set; }
+        [Column("Available")]
+        public Boolean Status { get; set; }
         public Users Users { get; set; }
     }
 }

@@ -1,0 +1,32 @@
+2021-06-29 12:38:27.3744 ERROR Something went wrong inside CreateVehicle action: An error occurred while updating the entries. See the inner exception for details.
+2021-06-29 12:40:09.6337 ERROR Something went wrong inside CreateVehicle action: An error occurred while updating the entries. See the inner exception for details.
+2021-06-29 12:40:42.7393 ERROR Something went wrong inside CreateVehicle action: An error occurred while updating the entries. See the inner exception for details.
+2021-06-29 12:53:57.9063 ERROR Vehicle with id: 11, hasn't been found in db.
+2021-06-29 12:56:13.2960 ERROR Vehicle with id: 11, hasn't been found in db.
+2021-06-29 12:56:18.5214 ERROR Vehicle with id: 0, hasn't been found in db.
+2021-06-29 12:56:19.6545 ERROR Vehicle with id: 0, hasn't been found in db.
+2021-06-29 12:56:20.3126 ERROR Vehicle with id: 0, hasn't been found in db.
+2021-06-29 12:56:22.3457 INFO Returned all vehicles from database.
+2021-06-29 12:56:57.2192 INFO Returned all vehicles from database.
+2021-06-29 16:48:46.0460 ERROR Something went wrong inside UpdateVolunteer action: El nombre de columna 'SkillIcon' no es válido.
+2021-06-29 16:50:03.7659 ERROR Volunteer with id: 89, hasn't been found in db.
+2021-06-29 16:50:49.3660 ERROR Volunteer with id: 90, hasn't been found in db.
+2021-06-29 16:51:27.4500 ERROR Volunteer with id: 90, hasn't been found in db.
+2021-06-29 16:51:34.4703 ERROR Volunteer with id: 90, hasn't been found in db.
+2021-06-29 16:51:36.4749 ERROR Volunteer with id: 90, hasn't been found in db.
+2021-06-29 16:52:36.4872 ERROR Volunteer with id: 90, hasn't been found in db.
+2021-06-29 16:52:37.8553 ERROR Volunteer with id: 90, hasn't been found in db.
+2021-06-29 16:52:41.3196 INFO Returned all Volunteers from database.
+2021-06-29 16:55:22.0794 ERROR Something went wrong inside UpdateVolunteer action: String reference not set to an instance of a String. (Parameter 's')
+2021-06-29 17:25:23.9693 ERROR Something went wrong inside GetEmployeeById action: The Include path 'LocationAddress->Estates' results in a cycle. Cycles are not allowed in no-tracking queries. Either use a tracking query or remove the cycle.
+2021-06-29 17:25:58.3523 ERROR Something went wrong inside GetAllVolunteers action:  The Include path 'LocationAddress->Estates' results in a cycle. Cycles are not allowed in no-tracking queries. Either use a tracking query or remove the cycle.
+2021-06-29 17:26:33.5009 INFO Returned all Volunteers from database.
+2021-06-29 17:27:43.6876 INFO Returned all Volunteers from database.
+2021-06-29 17:28:27.1879 INFO Returned all Volunteers from database.
+2021-06-29 17:29:12.5634 INFO Returned all Volunteers from database.
+2021-06-29 17:29:19.9652 INFO Returned volunteer with id: 69
+2021-06-29 17:29:20.8618 INFO Returned volunteer with id: 69
+2021-06-29 17:29:30.4341 INFO Returned volunteer with id: 69
+2021-06-29 17:36:03.2819 ERROR Something went wrong inside UpdateVolunteer action: String reference not set to an instance of a String. (Parameter 's')
+2021-06-29 17:47:14.1876 ERROR Something went wrong inside GetAllVolunteers action:  The Include path 'LocationAddress->Estates' results in a cycle. Cycles are not allowed in no-tracking queries. Either use a tracking query or remove the cycle.
+2021-06-29 18:20:51.3123 ERROR Something went wrong inside UpdateVolunteer action: El nombre de columna 'SkillIcon' no es válido.

@@ -16,31 +16,49 @@ namespace Repository
         {
 
         }
-        public IEnumerable<Vehicles> GetAllVehciles()
+        public IEnumerable<Vehicles> GetAllVehicles()
         {
             return FindAll()
-                 .Include(a => a.TypeVehicles)
+                   .Include(a => a.Estates)
+                   .Include(a => a.Estates.LocationAddress) 
+                   .Include(a => a.Estates.EstatesTimes)
+                   .ThenInclude( a => a.Times)
+                   .ThenInclude(a => a.Schedules)
+                   .Include(a => a.Employees)
+                   .ThenInclude(a => a.Users)
+                   .ThenInclude(a => a.Persons)
+                   .Include(a => a.TypeVehicles)
                  .ToList();
         }
 
         public Vehicles GetVehicleById(int vehicleId)
         {
-            throw new NotImplementedException();
+            return FindByCondition(vehicle => vehicle.VehicleID == vehicleId)
+                   .Include(a => a.Estates)
+                   .Include(a => a.Estates.LocationAddress)
+                   .Include(a => a.Estates.EstatesTimes)
+                   .ThenInclude(a => a.Times)
+                   .ThenInclude(a => a.Schedules)
+                   .Include(a => a.Employees)
+                   .ThenInclude(a => a.Users)
+                   .ThenInclude(a => a.Persons)
+                   .Include(a => a.TypeVehicles)
+                .FirstOrDefault();
         }
 
         public void CreateVehicle(Vehicles vehicles)
         {
-            throw new NotImplementedException();
+            Create(vehicles);
         }
 
         public void UpdateVehicle(Vehicles vehicles)
         {
-            throw new NotImplementedException();
+            Update(vehicles);
         }
 
         public void DeleteVehicle(Vehicles vehicles)
         {
-            throw new NotImplementedException();
+            Delete(vehicles);
         }
 
     }

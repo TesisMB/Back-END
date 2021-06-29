@@ -25,7 +25,7 @@ namespace Back_End.Models
         [MaxLength(25)]
         public string Model { get; set; }
 
-        //public ICollection<Vehicles> Vehicles { get; set; }
+        public ICollection<Vehicles> Vehicles { get; set; }
 
     }
 }

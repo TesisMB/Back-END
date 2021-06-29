@@ -63,7 +63,6 @@ namespace Repository
             }
         }
 
-
         public void Save()
         {
             _cruzRojaContext2.SaveChanges();

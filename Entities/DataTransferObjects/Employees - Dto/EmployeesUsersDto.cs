@@ -4,15 +4,14 @@ using System;
 
 namespace Back_End.Models.Users___Dto.Users___Persons
 {
-    public class Users_UsersDto
+    public class EmployeesUsersDto
     {
         public int UserID { get; set; }
 
         public string UserDni { get; set; }
-        public Boolean UserAvailability { get; set; }
 
         public string RoleName { get; set; }
-        public Users_PersonsDto Persons { get; set; }
+        public EmployeesPersonsDto Persons { get; set; }
 
         public EstatesDto Estates { get; set; }
     }

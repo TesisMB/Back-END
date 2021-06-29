@@ -22,6 +22,7 @@ namespace Repository
         {
            return CruzRojaContext2.Set<T>().AsNoTracking();
         }
+
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
             return CruzRojaContext2.Set<T>().Where(expression).AsNoTracking();

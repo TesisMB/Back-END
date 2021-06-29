@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Back_End.Models.Users___Dto.Users___Persons
 {
-    public class Users_PersonsDto
+    public class EmployeesPersonsDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

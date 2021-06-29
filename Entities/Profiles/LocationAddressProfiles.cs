@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using Back_End.Entities;
 using Back_End.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Entities.DataTransferObjects.Models.Vehicles___Dto;
 
 namespace Back_End.Profiles
 {
@@ -14,6 +11,8 @@ namespace Back_End.Profiles
         {
             //Creo Las clases a ser mapeadas
             CreateMap<LocationAddress, LocationAddressDto>();
+
+            CreateMap<LocationAddress, LocationAddressVehiclesDto>();
         }
     }
 }

@@ -24,7 +24,6 @@ namespace Back_End.Models
 
         public string SkillDescription { get; set; }
 
-        public string SkillIcon { get; set; }
 
         [ForeignKey("FK_SkillID")]
 

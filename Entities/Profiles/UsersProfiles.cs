@@ -3,7 +3,7 @@ using Back_End.Entities;
 using Back_End.Models;
 using Back_End.Models.Users___Dto;
 using Back_End.Models.Users___Dto.Users___Persons;
-
+using Entities.DataTransferObjects.Models.Vehicles___Dto;
 
 namespace Back_End.Profiles
 {
@@ -12,18 +12,13 @@ namespace Back_End.Profiles
         public UsersProfiles()
         {
             //Creo Las clases a ser mapeadas
-            CreateMap<Users, UsersDto>();
+            CreateMap<Users, VolunteersUsersDto>();
 
-
-            // .ForMember(dest => dest.UserAvailable,
-            //                   opt => opt.MapFrom(src => src.UserAvailability));
-
-            CreateMap<Users, Users_UsersDto>()
+            CreateMap<Users, EmployeesUsersDto>()
                  .ForMember(dest => dest.RoleName,
                                  opt => opt.MapFrom(src => src.Roles.RoleName));
 
-            //.ForMember(dest => dest.UserAvailability,
-            //               opt => opt.MapFrom(src => src.UserAvailability));
+            CreateMap<Users, UsersVehiclesDto>();
 
 
             CreateMap<UsersEmployeesForCreationDto, Users>();

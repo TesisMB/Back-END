@@ -7,7 +7,7 @@ namespace Contracts.Interfaces
 {
     public interface IVehiclesRepository : IRepositoryBase<Vehicles>
     {
-        IEnumerable<Vehicles> GetAllVehciles();
+        IEnumerable<Vehicles> GetAllVehicles();
 
         Vehicles GetVehicleById(int vehicleId);
 

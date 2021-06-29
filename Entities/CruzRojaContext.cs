@@ -22,7 +22,7 @@ namespace Back_End.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<EstatesTimes>()
+             modelBuilder.Entity<EstatesTimes>()
 
             .HasKey(s => new { s.FK_EstateID, s.FK_TimeID });
 

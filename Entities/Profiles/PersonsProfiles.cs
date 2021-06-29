@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Back_End.Models;
 using Back_End.Models.Users___Dto.Users___Persons;
+using Entities.DataTransferObjects.Models.Vehicles___Dto;
 
 namespace Back_End.Profiles
 {
@@ -10,10 +11,11 @@ namespace Back_End.Profiles
         {
             //Creo Las clases a ser mapeadas
             CreateMap<Persons, PersonsDto>();
-            CreateMap<Persons, Users_PersonsDto>()
 
-                .ForMember(dest => dest.Status,
-                                    opt => opt.MapFrom(src => src.Available));
+            CreateMap<Persons, EmployeesPersonsDto>();
+
+            CreateMap<Persons, PersonsVehiclesDto>();
+
 
             CreateMap<PersonForCreationDto, Persons>();
 

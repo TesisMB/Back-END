@@ -12,7 +12,7 @@ namespace Back_End.Models
         public string UserDni { get; set; }
         public Boolean UserAvailability { get; set; }
         public string RoleName { get; set; }
-        public Users_PersonsDto Persons { get; set; }
+        public EmployeesPersonsDto Persons { get; set; }
         public EstatesDto Estates { get; set; }
 
         //El token surgue de realizar el llamada a la funcion GenerateAccessToken usando automapper

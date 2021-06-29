@@ -9,7 +9,6 @@ namespace Back_End.Models
 {
     public class EmployeesDto
     {
-        public int EmployeeID { get; set; }
-        public Users_UsersDto Users { get; set; }
+        public EmployeesUsersDto Users { get; set; }
     }
 }

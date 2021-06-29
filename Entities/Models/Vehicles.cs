@@ -10,8 +10,9 @@ namespace Back_End.Models
     [Table("Vehicles", Schema = "dbo")]
     public class Vehicles
     {
+        [Column("ID")]
         [Key]
-        public int ID { get; set; }
+        public int VehicleID { get; set; }
 
         [Required]
         [MaxLength(9)]
@@ -22,7 +23,11 @@ namespace Back_End.Models
 
         public string VehicleDescription { get; set; }
 
+        [Required]
         public Boolean VehicleAvailability { get; set; }
+
+        [Required]
+        public string VehiclePicture { get; set; }
 
         [ForeignKey("FK_EstateID")]
         public Estates Estates { get; set; }

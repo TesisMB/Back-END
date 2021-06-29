@@ -18,7 +18,7 @@ namespace Back_End.Controllers
 
         private ILoggerManager _logger;
         private IRepositorWrapper _repository;
-            private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
 
         public VolunteersController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper)
         {
@@ -41,7 +41,7 @@ namespace Back_End.Controllers
                 return Ok(volunteersResult);
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
                 _logger.LogError($"Something went wrong inside GetAllVolunteers action:  {ex.Message}");
@@ -61,27 +61,27 @@ namespace Back_End.Controllers
             try
             {
 
-            var volunteer = _repository.Volunteers.GetVolunteersById(volunteerId);
+                var volunteer = _repository.Volunteers.GetVolunteersById(volunteerId);
 
-            if (volunteer == null)
+                if (volunteer == null)
 
-            {
-                 _logger.LogError($"Volunteer with id: {volunteerId}, hasn't been found in db.");
-                return NotFound();
+                {
+                    _logger.LogError($"Volunteer with id: {volunteerId}, hasn't been found in db.");
+                    return NotFound();
 
 
-            }
+                }
+                else
 
-                 else
-
-                 {
+                {
                     _logger.LogInfo($"Returned volunteer with id: {volunteerId}");
                     var volunteerResult = _mapper.Map<VolunteersDto>(volunteer);
                     return Ok(volunteerResult);
 
-                 }
+                }
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
 
             {
                 _logger.LogError($"Something went wrong inside GetEmployeeById action: {ex.Message}");
@@ -90,12 +90,12 @@ namespace Back_End.Controllers
             }
         }
 
-       [HttpPost]
+        [HttpPost]
         public IActionResult CreateVolunteer([FromBody] VolunteersForCreationDto volunteer)
         {
             try
             {
-                if(volunteer == null)
+                if (volunteer == null)
 
                 {
                     _logger.LogError("Volunteer object sent from client is null.");
@@ -116,7 +116,8 @@ namespace Back_End.Controllers
 
                 return Ok();
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
 
             {
                 _logger.LogError($"Something went wrong inside CreateEmployee action: {ex.Message}");
@@ -124,57 +125,46 @@ namespace Back_End.Controllers
             }
         }
 
-        
+
         [HttpPatch("{volunteerId}")]
         //[Authorize(Roles = "Coordinador General, Admin")] 
-        public ActionResult UpdatePartialUser(int volunteerId, JsonPatchDocument<VolunteersForUpdatoDto> patchDocument)
+        public IActionResult UpdatePartialUser(int volunteerId, JsonPatchDocument<VolunteersForUpdatoDto> patchDocument)
         {
-            try
+
+            var userFromRepo = _repository.Volunteers.GetVolunteersById(volunteerId);
+            if (userFromRepo == null)
             {
-
-                var volunteerEntity = _repository.Volunteers.GetVolunteersById(volunteerId);
-
-                if (volunteerEntity == null)
-                {
-                    _logger.LogError($"Volunteer with id: {volunteerId}, hasn't been found in db.");
-
-                    return NotFound();
-                }
-
-
-                var volunteerToPatch = _mapper.Map<VolunteersForUpdatoDto>(volunteerEntity);
-
-
-                patchDocument.ApplyTo(volunteerToPatch, ModelState);
-
-                var userNewPass = volunteerToPatch.Users.UserNewPassword;
-
-                if (!TryValidateModel(volunteerToPatch))
-                {
-                    return ValidationProblem(ModelState);
-                }
-
-                volunteerToPatch.Users.UserNewPassword = Encrypt.GetSHA256(userNewPass);
-
-
-                var volunteerResult = _mapper.Map(volunteerToPatch, volunteerEntity);
-
-                volunteerResult.Users.UserPassword = volunteerToPatch.Users.UserNewPassword;
-
-                _repository.Volunteers.Update(volunteerResult);
-                _repository.Save();
-
-                return NoContent();
+                return NotFound();
             }
 
-            catch (Exception ex)
-            {
+            var userToPatch = _mapper.Map<VolunteersForUpdatoDto>(userFromRepo);
 
-                _logger.LogError($"Something went wrong inside UpdateVolunteer action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
+            patchDocument.ApplyTo(userToPatch, ModelState);
+
+            if (!TryValidateModel(userToPatch))
+            {
+                return ValidationProblem(ModelState);
             }
-            
+
+            string Pass = userToPatch.Users.UserPassword;
+            //string ePass = Encrypt.GetSHA256(Pass);
+
+            if (userFromRepo.Users.UserPassword != Pass)
+            {
+                //Nuevamente se debea encriptar la contraseña ingresada
+                userToPatch.Users.UserPassword = Encrypt.GetSHA256(userToPatch.Users.UserPassword);
+            }
+
+
+            _mapper.Map(userToPatch, userFromRepo);
+
+            _repository.Volunteers.Update(userFromRepo);
+
+            _repository.Save();
+
+            return NoContent();
         }
+
 
         [HttpDelete("{volunteerId}")]
         public IActionResult DeleteVolunteer(int volunteerId)

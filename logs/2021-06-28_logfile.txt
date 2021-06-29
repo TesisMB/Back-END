@@ -1,0 +1,21 @@
+2021-06-28 12:14:03.2679 INFO Returned all vehicles from database.
+2021-06-28 12:15:40.0493 INFO Returned all vehicles from database.
+2021-06-28 12:18:48.3925 INFO Returned all employees from database.
+2021-06-28 12:20:12.4625 INFO Returned all Volunteers from database.
+2021-06-28 12:26:21.4222 INFO Returned all Volunteers from database.
+2021-06-28 12:27:31.0212 INFO Returned all employees from database.
+2021-06-28 12:28:46.1856 INFO Returned all Volunteers from database.
+2021-06-28 12:31:55.9841 INFO Returned all Volunteers from database.
+2021-06-28 12:32:07.1195 INFO Returned all vehicles from database.
+2021-06-28 12:32:24.4473 INFO Returned all employees from database.
+2021-06-28 17:55:58.6282 INFO Returned all employees from database.
+2021-06-28 17:57:31.2279 INFO Returned employee with id: 83
+2021-06-28 17:57:35.5715 INFO Returned all employees from database.
+2021-06-28 17:59:42.6193 INFO Returned all Volunteers from database.
+2021-06-28 18:01:01.0297 INFO Returned all vehicles from database.
+2021-06-28 18:03:49.9012 ERROR Something went wrong inside DeleteEmployee action: An error occurred while updating the entries. See the inner exception for details.
+2021-06-28 18:09:17.0438 INFO Returned all employees from database.
+2021-06-28 18:09:36.3247 INFO Returned all Volunteers from database.
+2021-06-28 18:10:37.4230 INFO Returned User.
+2021-06-28 18:11:07.8246 INFO Returned all employees from database.
+2021-06-28 18:12:00.7894 INFO Returned all employees from database.

@@ -1,9 +1,8 @@
 ﻿using Back_End.Models.Employees___Dto;
 using Back_End.Models.TypeVehicles___Dto;
+using Entities.DataTransferObjects.Models.Vehicles___Dto;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace Back_End.Models.Vehicles___Dto
 {
@@ -19,10 +18,10 @@ namespace Back_End.Models.Vehicles___Dto
 
         public Boolean VehicleAvailability { get; set; }
 
-        public EstatesDto Estates { get; set; }
+        public string VehiclePicture { get; set; }
 
-        public EmployeesDto Employees { get; set; }
-
+        public EstatesVehiclesDto Estates { get; set; }
+        public EmployeesVehiclesDto Employees { get; set; }
         public TypeVehiclesDto TypeVehicles { get; set; }
     }
 }

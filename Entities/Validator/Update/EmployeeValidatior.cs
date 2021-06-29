@@ -3,7 +3,7 @@ using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+/*
 namespace Entities.Validator.Update
 {
     public class EmployeeValidator : AbstractValidator<EmployeeForUpdateDto>
@@ -15,3 +15,4 @@ namespace Entities.Validator.Update
         }
     }
 }
+*/

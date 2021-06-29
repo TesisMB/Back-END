@@ -20,7 +20,7 @@ namespace Back_End.Controllers
 
         private ILoggerManager _logger;
         private IRepositorWrapper _repository;
-       private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
 
         /*Este metodo va a permitir despues poder conectarme tanto para mapear, como para obtener 
          las funciones que se establecieron repositorios correspondientes*/

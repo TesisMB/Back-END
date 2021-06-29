@@ -2,6 +2,7 @@
 using Back_End.Entities;
 using Back_End.Models;
 using Back_End.Models.Employees___Dto;
+using Entities.DataTransferObjects.Models.Vehicles___Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,10 @@ namespace Back_End.Profiles
         {
             //Creo Las clases a ser mapeadas
             CreateMap<Employees, EmployeesDto>();
-       
+
+            CreateMap<Employees, EmployeesVehiclesDto>();
+
+
             CreateMap<EmployeesForCreationDto, Employees>();
 
             CreateMap<EmployeeForUpdateDto, Employees>();

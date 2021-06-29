@@ -22,14 +22,17 @@ namespace Back_End.Models
         public string EstateTypes { get; set; }
 
         public Boolean EstateAvailability { get; set; }
-      
-        public LocationAddress LocationAddress { get; set; }
 
-
-        public ICollection<Users> Users { get; set; }
 
         [ForeignKey("FK_EstateID")]
         public ICollection<EstatesTimes> EstatesTimes { get; set; }
+
+        public LocationAddress LocationAddress { get; set; }
+
+        public ICollection<Users> Users { get; set; }
+
+        public ICollection<Vehicles> Vehicles { get; set; }
+
 
     }
 }

@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+/*
 namespace Entities.Validator.Update
 {
     public class UsersEmployeesValidator : AbstractValidator<UsersForUpdateDto>
@@ -31,7 +31,7 @@ namespace Entities.Validator.Update
         }
 
 
-        /*private bool BeUniqueUrl(string Pass)
+        private bool BeUniqueUrl(string Pass)
         {
             var ePass = Encrypt.GetSHA256(Pass);
 
@@ -42,7 +42,7 @@ namespace Entities.Validator.Update
 
             return true;
         }
-        */
+        
         private static bool IsValidNumber(string name)
         {
             if (String.IsNullOrEmpty(name))
@@ -52,4 +52,4 @@ namespace Entities.Validator.Update
             return name.All(char.IsNumber);
         }
     }
-}
+}*/

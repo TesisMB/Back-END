@@ -1,0 +1,3 @@
+2021-07-02 11:05:26.5704 ERROR Something went wrong inside CreateEmployee action: An error occurred while updating the entries. See the inner exception for details.
+2021-07-02 11:13:45.5976 INFO Returned employe with details for id: 114
+2021-07-02 18:46:22.9651 INFO Returned all employees from database.

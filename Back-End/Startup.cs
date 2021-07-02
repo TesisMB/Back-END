@@ -40,6 +40,10 @@ public class Startup
         services.Fluent();
 
 
+        services.Configure<ApiBehaviorOptions>(options => {
+           options.SuppressModelStateInvalidFilter = true;
+        });
+
         services.AddControllers();
 
         services.AddControllers(setupAction =>

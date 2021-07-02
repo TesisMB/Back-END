@@ -34,15 +34,6 @@ namespace Repository
         public Vehicles GetVehicleById(int vehicleId)
         {
             return FindByCondition(vehicle => vehicle.VehicleID == vehicleId)
-                   .Include(a => a.Estates)
-                   .Include(a => a.Estates.LocationAddress)
-                   .Include(a => a.Estates.EstatesTimes)
-                   .ThenInclude(a => a.Times)
-                   .ThenInclude(a => a.Schedules)
-                   .Include(a => a.Employees)
-                   .ThenInclude(a => a.Users)
-                   .ThenInclude(a => a.Persons)
-                   .Include(a => a.TypeVehicles)
                 .FirstOrDefault();
         }
 
@@ -61,5 +52,19 @@ namespace Repository
             Delete(vehicles);
         }
 
+        public Vehicles GetVehicleWithDetails(int vehicleId)
+        {
+            return FindByCondition(vehicle => vehicle.VehicleID == vehicleId)
+                      .Include(a => a.Estates)
+                      .Include(a => a.Estates.LocationAddress)
+                      .Include(a => a.Estates.EstatesTimes)
+                      .ThenInclude(a => a.Times)
+                      .ThenInclude(a => a.Schedules)
+                      .Include(a => a.Employees)
+                      .ThenInclude(a => a.Users)
+                      .ThenInclude(a => a.Persons)
+                      .Include(a => a.TypeVehicles)
+                   .FirstOrDefault();
+        }
     }
 }

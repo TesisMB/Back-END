@@ -13,8 +13,7 @@ namespace Back_End.Models
         public string Email { get; set; }
         public string Gender { get; set; }
         public string Address { get; set; }
-        public DateTimeOffset Birthdate { get; set; }
-        public Boolean Available { get; set; }
-
+        public DateTime Birthdate { get; set; }
+        public Boolean Status { get; set; } = true;
     }
 }

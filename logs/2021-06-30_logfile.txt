@@ -3,3 +3,5 @@
 2021-06-30 19:36:39.0081 INFO Returned all vehicles from database.
 2021-06-30 19:36:46.6349 INFO Returned all Volunteers from database.
 2021-06-30 19:37:00.7993 INFO Returned all employees from database.
+2021-06-30 19:48:11.3585 INFO Returned all employees from database.
+2021-06-30 19:50:41.6589 INFO Returned all employees from database.

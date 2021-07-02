@@ -36,8 +36,9 @@ namespace Back_End.Models
         [Required]
         [MaxLength(1)]
         public string Gender { get; set; }
+
         [Required]
-        public DateTimeOffset Birthdate { get; set; }
+        public DateTime Birthdate { get; set; }
 
         [Column("Available")]
         public Boolean Status { get; set; }

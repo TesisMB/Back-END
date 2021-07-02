@@ -33,17 +33,9 @@ namespace Repository
         public Volunteers GetVolunteersById(int volunteerId)
         {
             return FindByCondition(volunteer => volunteer.VolunteerID.Equals(volunteerId))
-            .Include(a => a.Users)
-                    .ThenInclude(a => a.Persons)
-                    .Include(a => a.Users.Roles)
-                    .Include(a => a.Users.Estates)
-                    .ThenInclude(a => a.LocationAddress)
-                    .Include(a => a.Users.Estates.EstatesTimes)
-                    .ThenInclude(a => a.Times)
-                    .ThenInclude(a => a.Schedules)
-                    .Include(a => a.VolunteersSkills)
-                   .ThenInclude(a => a.Skills)
-                   .FirstOrDefault();
+                .Include(a => a.Users)
+                .ThenInclude(a => a.Persons)
+                .FirstOrDefault();
         }
 
 
@@ -56,5 +48,20 @@ namespace Repository
             Update(volunteer);
         }
 
+        public Volunteers GetVolunteerWithDetails(int volunteerId)
+        {
+            return FindByCondition(volunteer => volunteer.VolunteerID.Equals(volunteerId))
+                    .Include(a => a.Users)
+                    .ThenInclude(a => a.Persons)
+                    .Include(a => a.Users.Roles)
+                    .Include(a => a.Users.Estates)
+                    .ThenInclude(a => a.LocationAddress)
+                    .Include(a => a.Users.Estates.EstatesTimes)
+                    .ThenInclude(a => a.Times)
+                    .ThenInclude(a => a.Schedules)
+                    .Include(a => a.VolunteersSkills)
+                   .ThenInclude(a => a.Skills)
+                   .FirstOrDefault();
+        }
     }
 }

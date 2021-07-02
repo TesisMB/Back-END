@@ -33,21 +33,20 @@ namespace Repository
         {
             return FindByCondition(empl => empl.EmployeeID.Equals(employeeId))
                     .Include(i => i.Users)
-                    //    .ThenInclude(i => i.Roles)
                     .Include(i => i.Users.Persons)
-                    .Include(i => i.Users.Estates)
-                    .ThenInclude(i => i.LocationAddress)
-                    .Include(a => a.Users.Estates.EstatesTimes)
-                    .ThenInclude(a => a.Times)
-                    .ThenInclude(a => a.Schedules)
                     .FirstOrDefault();
         }
 
         public Employees GetEmployeeWithDetails(int employeeId)
         {
             return FindByCondition(empl => empl.EmployeeID.Equals(employeeId))
-                    .Include(a => a.Users)
-                    //.Include(a => a.Vehicles)
+                     .Include(i => i.Users)
+                    .Include(i => i.Users.Persons)
+                    .Include(i => i.Users.Estates)
+                    .ThenInclude(i => i.LocationAddress)
+                    .Include(a => a.Users.Estates.EstatesTimes)
+                    .ThenInclude(a => a.Times)
+                    .ThenInclude(a => a.Schedules)
                     .FirstOrDefault();
         }
         public void CreateEmployee(Employees employee)

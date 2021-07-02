@@ -1,9 +1,7 @@
 ﻿using Back_End.Models.Employees___Dto;
+using Back_End.Validator;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Text;
-/*
+
 namespace Entities.Validator.Update
 {
     public class EmployeeValidator : AbstractValidator<EmployeeForUpdateDto>
@@ -12,7 +10,10 @@ namespace Entities.Validator.Update
         {
             RuleFor(x => x.Users).SetValidator(new UsersEmployeesValidator());
 
+            RuleFor(stockImage => stockImage.Users.UserAvailability).Must(x => x == false || x == true);
+
+            RuleFor(x => x.Users).SetValidator(new UsersEmployeesValidator());
+
         }
     }
 }
-*/

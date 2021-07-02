@@ -48,12 +48,12 @@ namespace Back_End.Controllers
         }
 
 
-        [HttpGet("{vehiclesId}")]
+        [HttpGet("{vehicleId}")]
         public IActionResult GetVehicle(int vehicleId)
         {
             try
             {
-                var vehicle = _repository.Vehicles.GetVehicleById(vehicleId);
+                var vehicle = _repository.Vehicles.GetVehicleWithDetails(vehicleId);
 
                 if(vehicle == null)
                 {

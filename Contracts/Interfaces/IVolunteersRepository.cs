@@ -10,6 +10,9 @@ namespace Contracts.Interfaces
 
         Volunteers GetVolunteersById(int volunteerId);
 
+        Volunteers GetVolunteerWithDetails(int volunteerId);
+
+
         void CreateVolunteer(Volunteers volunteer);
         void UpdateVolunteer(Volunteers volunteer);
     }

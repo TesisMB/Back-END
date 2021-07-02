@@ -9,13 +9,11 @@ using System.Threading.Tasks;
 
 namespace Back_End.Models
 {
-    public class UsersEmployeesForCreationDto  //: UserDniMustBeDifferentFromUserDniDto
+    public class UsersEmployeesForCreationDto 
     {
-        /*[UserDniMustBeDifferentFromUserDniDto(
-        ErrorMessage = "El Dni que ingreso ya existe")]*/
         public string UserDni { get; set; }
         public string UserPassword { get; set; }
-        public Boolean UserAvailability { get; set; }
+        public Boolean UserAvailability { get; set; } = true;
         public int FK_RoleID { get; set; }
         public int FK_EstateID { get; set; }
         public PersonForCreationDto Persons { get; set; }

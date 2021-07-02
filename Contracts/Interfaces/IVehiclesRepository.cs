@@ -10,6 +10,7 @@ namespace Contracts.Interfaces
         IEnumerable<Vehicles> GetAllVehicles();
 
         Vehicles GetVehicleById(int vehicleId);
+        Vehicles GetVehicleWithDetails(int vehicleId);
 
         void CreateVehicle(Vehicles vehicles);
 

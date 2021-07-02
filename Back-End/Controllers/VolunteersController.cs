@@ -27,6 +27,7 @@ namespace Back_End.Controllers
             _mapper = mapper;
         }
 
+
         [HttpGet]
         public IActionResult GetAllVolunteers()
         {
@@ -61,7 +62,7 @@ namespace Back_End.Controllers
             try
             {
 
-                var volunteer = _repository.Volunteers.GetVolunteersById(volunteerId);
+                var volunteer = _repository.Volunteers.GetVolunteerWithDetails(volunteerId);
 
                 if (volunteer == null)
 
@@ -126,8 +127,8 @@ namespace Back_End.Controllers
         }
 
 
-        [HttpPatch("{volunteerId}")]
         //[Authorize(Roles = "Coordinador General, Admin")] 
+        [HttpPatch("{volunteerId}")]
         public IActionResult UpdatePartialUser(int volunteerId, JsonPatchDocument<VolunteersForUpdatoDto> patchDocument)
         {
 

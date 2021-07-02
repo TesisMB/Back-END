@@ -4,11 +4,13 @@ using Back_End.Helpers;
 using Back_End.Models;
 using Back_End.Models.Employees___Dto;
 using Contracts.Interfaces;
+using Entities.Helpers;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Back_End.Controllers
 {
@@ -24,7 +26,7 @@ namespace Back_End.Controllers
 
         /*Este metodo va a permitir despues poder conectarme tanto para mapear, como para obtener 
          las funciones que se establecieron repositorios correspondientes*/
-        public EmployeesController(ILoggerManager logger,IRepositorWrapper repository,IMapper mapper)
+        public EmployeesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper)
         {
 
             _logger = logger;
@@ -33,8 +35,8 @@ namespace Back_End.Controllers
         }
 
 
-        [HttpGet]
         //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
+        [HttpGet]
         public IActionResult GetAllEmployees()
         {
             try
@@ -45,43 +47,16 @@ namespace Back_End.Controllers
                 var employeesResult = _mapper.Map<IEnumerable<EmployeesDto>>(employees);
                 return Ok(employeesResult);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside GetAllEmployees action: {ex.Message}");
                 return StatusCode(500, "Internal Server error");
             }
         }
 
+
+        //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
         [HttpGet("{employeeId}")]
-        //[Authorize(Roles = "Coordinador General, Admin, Coordinador de Emergencias y Desastres, Encargado de Logistica")]
-        public IActionResult GetEmployeeById(int employeeId)
-        {
-            try
-            {
-                var employee = _repository.Employees.GetEmployeeById(employeeId);
-
-                if (employee == null)
-                {
-                    _logger.LogError($"Employee with id: {employeeId}, hasn't been found in db.");
-
-                    return NotFound();
-                }
-
-                else
-                {
-                    _logger.LogInfo($"Returned employee with id: {employeeId}");
-                    var employeeResult = _mapper.Map<EmployeesDto>(employee);
-                    return Ok(employeeResult);
-                }
-            } catch (Exception ex)
-            {
-                _logger.LogError($"Something went wrong inside GetEmployeeById action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
-             }
-        }
-
-
-        [HttpGet("{employeeId}/Users")]
         public IActionResult GetEmployeeWithDetails(int employeeId)
         {
             try
@@ -108,13 +83,19 @@ namespace Back_End.Controllers
             }
         }
 
-        [HttpPost]
         //[Authorize(Roles = "Coordinador General, Admin")] 
-        public IActionResult CreateEmployee([FromBody]EmployeesForCreationDto employee)
+        [HttpPost]
+        public IActionResult CreateEmployee([FromBody] EmployeesForCreationDto employee)
         {
+            //System.Globalization.TextInfo textInfo = new System.Globalization.CultureInfo("en-US", false).TextInfo;
             try
             {
-                if(employee == null)
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
+                }
+
+                if (employee == null)
 
                 {
                     _logger.LogError("Employee object sent from client is null.");
@@ -123,9 +104,11 @@ namespace Back_End.Controllers
 
                 var employeeEntity = _mapper.Map<Employees>(employee);
 
-                // Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
+                //Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
                 employeeEntity.Users.UserPassword = Encrypt.GetSHA256(employeeEntity.Users.UserPassword);
 
+                //employeeEntity.Users.Persons.FirstName = textInfo.ToTitleCase(employeeEntity.Users.Persons.FirstName);
+                //employeeEntity.Users.Persons.FirstName = employeeEntity.Users.Persons.FirstName.Trim();
 
                 _repository.Employees.CreateEmployee(employeeEntity);
 
@@ -136,7 +119,7 @@ namespace Back_End.Controllers
                 return Ok();
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
 
             {
                 _logger.LogError($"Something went wrong inside CreateEmployee action: {ex.Message}");
@@ -145,15 +128,14 @@ namespace Back_End.Controllers
         }
 
 
-        [HttpPatch("{employeeId}")]
         //[Authorize(Roles = "Coordinador General, Admin")] 
-        public IActionResult UpdatePartialUser(int employeeId, JsonPatchDocument<EmployeeForUpdateDto> patchDocument)
+        [HttpPatch("{employeeId}")]
+         public IActionResult UpdatePartialUser(int employeeId, JsonPatchDocument<EmployeeForUpdateDto> _Employees)
         {
-            
+
             try
             {
                 var employeeEntity = _repository.Employees.GetEmployeeById(employeeId);
-
 
                 if (employeeEntity == null)
                 {
@@ -161,49 +143,56 @@ namespace Back_End.Controllers
                     return NotFound();
                 }
 
-               var employeeToPatch = _mapper.Map<EmployeeForUpdateDto>(employeeEntity);
+                var employeeToPatch = _mapper.Map<EmployeeForUpdateDto>(employeeEntity);
 
-
-                patchDocument.ApplyTo(employeeToPatch, ModelState);
-                
-            //    var userNewPass = employeeToPatch.Users.UserNewPassword;
-                //employeeToPatch.Users.UserNewPassword = Encrypt.GetSHA256(userNewPass);
+                _Employees.ApplyTo(employeeToPatch, ModelState);
 
 
                 if (!TryValidateModel(employeeToPatch))
                 {
-                    return ValidationProblem(ModelState);
+                    return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
                 }
 
-                var userPass = employeeToPatch.Users.UserPassword;
-                employeeToPatch.Users.UserPassword = Encrypt.GetSHA256(userPass);
 
                 Users authUser = new Users();
 
-               /* using (var db = new CruzRojaContext())
-                    authUser = db.Users.Where(u => u.UserID == employeeEntity.Users.UserID
-                          && u.UserPassword == employeeToPatch.Users.UserPassword).FirstOrDefault();*/
+                   if (!string.IsNullOrEmpty(employeeToPatch.Users.UserNewPassword))
+                   {
+                    // AGREGARLOS EN EL REPOSITORIO
+                      var userPass = employeeToPatch.Users.UserPassword;
+                      employeeToPatch.Users.UserPassword = Encrypt.GetSHA256(userPass);
 
-/*                if (authUser != null)
-                {
-                var Pass = Encrypt.GetSHA256(userNewPass);
+                      using (var db = new CruzRojaContext())
+                        authUser = db.Users.Where(u => u.UserID == employeeEntity.Users.UserID
+                              && u.UserPassword == employeeToPatch.Users.UserPassword).FirstOrDefault();
 
-                employeeToPatch.Users.UserNewPassword = Pass;
-                //Encrypt.GetSHA256(employeeEntity.Users.UserPassword);*/
+                      if (authUser == null)
+                      {
+                        return BadRequest(ErrorHelper.Response(400, "La contraseña es erronea."));
+                      }
+
+                    else
+                      {
+                        employeeToPatch.Users.UserNewPassword = employeeToPatch.Users.UserNewPassword.Trim();
+                     
+                        var userNewPass = employeeToPatch.Users.UserNewPassword;
+                        employeeToPatch.Users.UserNewPassword = Encrypt.GetSHA256(userNewPass);
+
+                        employeeToPatch.Users.UserPassword = employeeToPatch.Users.UserNewPassword;
+                    }
+                   }
+
+
 
                 var employeeResult = _mapper.Map(employeeToPatch, employeeEntity);
-
-                // employeeResult.Users.UserPassword = employeeToPatch.Users.UserNewPassword;
-
 
                 _repository.Employees.Update(employeeResult);
                 _repository.Save();
 
                 return NoContent();
-                
 
- //               return BadRequest("Contraseña Incorrecta");
             }
+
 
             catch (Exception ex)
             {
@@ -212,10 +201,8 @@ namespace Back_End.Controllers
 
             }
         }
-
-        [HttpDelete("{employeeId}")]
-
         //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
+        [HttpDelete("{employeeId}")]
         public IActionResult DeleteEmployee(int employeeId)
         {
 

@@ -11,14 +11,17 @@ namespace Entities.Validator.Update
     {
         public PersonsValidator()
         {
-
-            RuleFor(x => x.Phone).NotEmpty().WithMessage("{PropertyName} is required")
+             RuleFor(x => x.Phone)
             .Must(IsValidNumber).WithMessage("{PropertyName} should be all numbers.")
             .MaximumLength(12).WithMessage("The {PropertyName} cannot be more than {MaxLength} characters.");
-
-            RuleFor(x => x.Email).NotEmpty().WithMessage("{PropertyName} is required")
-            .EmailAddress().WithMessage("Valido")
+ 
+             RuleFor(x => x.Email)
+            .EmailAddress().WithMessage("A valid email address is required.")
             .MaximumLength(50).WithMessage("The {PropertyName} cannot be more than {MaxLength} characters.");
+
+            RuleFor(stockImage => stockImage.Status).Must(x => x == false || x == true);
+      
+            RuleFor(x => x.Address).MaximumLength(50).WithMessage("The {PropertyName} cannot be more than {MaxLength} characters.");
         }
 
         private static bool IsValidNumber(string name)
@@ -28,15 +31,6 @@ namespace Entities.Validator.Update
                 return false;
             }
             return name.All(char.IsNumber);
-        }
-
-        private bool IsValidName(string name)
-        {
-            if (String.IsNullOrEmpty(name))
-            {
-                return false;
-            }
-            return name.All(char.IsLetter);
         }
     }
 }

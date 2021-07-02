@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.DataTransferObjects.TypeVehicles___Dto;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -18,5 +19,7 @@ namespace Entities.DataTransferObjects.Vehicles___Dto.Creation
         public int FK_EstateID { get; set; }
         public int FK_EmployeeID { get; set; }
         public int Fk_TypeVehicleID { get; set; }
+
+        public TypeVehiclesForCreationDto TypeVehicles { get; set; }
     }
 }

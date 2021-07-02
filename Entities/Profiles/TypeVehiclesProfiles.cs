@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using Back_End.Models;
 using Back_End.Models.TypeVehicles___Dto;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Entities.DataTransferObjects.TypeVehicles___Dto;
 
 namespace Entities.Profiles
 {
@@ -12,6 +10,8 @@ namespace Entities.Profiles
         public TypeVehiclesProfiles()
         {
             CreateMap<TypeVehicles, TypeVehiclesDto>();
+            CreateMap<TypeVehiclesForCreationDto, TypeVehicles>();
+
         }
     }
 }

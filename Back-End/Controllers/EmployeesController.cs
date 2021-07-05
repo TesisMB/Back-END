@@ -151,40 +151,14 @@ namespace Back_End.Controllers
 
                 _Employees.ApplyTo(employeeToPatch, ModelState);
 
-                Users authUser = new Users();
-
-                   if (!string.IsNullOrEmpty(employeeToPatch.Users.UserNewPassword))
-                   {
-                
-                    // AGREGARLOS EN EL REPOSITORIO
-                      var userPass = employeeToPatch.Users.UserPassword;
-                      employeeToPatch.Users.UserPassword = Encrypt.GetSHA256(userPass);
-
-                      using (var db = new CruzRojaContext())
-                        authUser = db.Users.Where(u => u.UserID == employeeEntity.Users.UserID
-                              && u.UserPassword == employeeToPatch.Users.UserPassword).FirstOrDefault();
 
                 if (!TryValidateModel(employeeToPatch))
                 {
                     return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
                 }
-
-                      if (authUser == null)
-                      {
-                        return BadRequest(ErrorHelper.Response(400, "La Contraseña es erronea."));
-                      }
-
-                    else
-                      {
-                        employeeToPatch.Users.UserNewPassword = employeeToPatch.Users.UserNewPassword.ToString().Trim();
-                     
-                        var userNewPass = employeeToPatch.Users.UserNewPassword;
-                        employeeToPatch.Users.UserNewPassword = Encrypt.GetSHA256(userNewPass);
-
-                        employeeToPatch.Users.UserPassword = employeeToPatch.Users.UserNewPassword;
-                    }
-                   }
-
+                
+                
+                Users authUser = new Users();
                    if (!string.IsNullOrEmpty(employeeToPatch.Users.UserNewPassword))
                    {
                     // AGREGARLOS EN EL REPOSITORIO
@@ -211,15 +185,7 @@ namespace Back_End.Controllers
                     }
                    }
 
-                _Employees.ApplyTo(employeeToPatch, ModelState);
-
-
-
-               if (!TryValidateModel(employeeToPatch))
-                {
-                    return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
-                }
-
+           
 
                 var employeeResult = _mapper.Map(employeeToPatch, employeeEntity);
 

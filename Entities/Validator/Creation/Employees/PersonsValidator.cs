@@ -12,19 +12,11 @@ namespace Back_End.Validator
              RuleFor(x => x.FirstName)
             .Cascade(CascadeMode.StopOnFirstFailure)
             .NotEmpty().WithMessage("{PropertyName} is required")
-<<<<<<< Updated upstream
-=======
-            //.Must(IsValidName).WithMessage("{PropertyName} must not have spaces and should be all letters.")
->>>>>>> Stashed changes
             .MaximumLength(100).WithMessage("The {PropertyName} cannot be more than {MaxLength} characters.");
 
              RuleFor(x => x.LastName)
             .Cascade(CascadeMode.StopOnFirstFailure)
             .NotEmpty().WithMessage("{PropertyName} is required")
-<<<<<<< Updated upstream
-=======
-            .Must(IsValidName).WithMessage("{PropertyName} must not have spaces and should be all letters.")
->>>>>>> Stashed changes
             .MaximumLength(100).WithMessage("The {PropertyName} cannot be more than {MaxLength} characters.");
 
              RuleFor(x => x.Phone)
@@ -51,21 +43,9 @@ namespace Back_End.Validator
         }
 
 
-<<<<<<< Updated upstream
         private bool IsValidNumber(string name)
         {
             return name.All(char.IsNumber);
         }
-=======
-        private static bool IsValidNumber(string name)
-        {
-            return name.All(char.IsNumber);
-        }
-
-        private bool IsValidName(string name)
-        {
-            return name.All(char.IsLetter);
-        }
->>>>>>> Stashed changes
     }
 }

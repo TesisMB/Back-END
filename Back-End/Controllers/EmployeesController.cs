@@ -104,13 +104,10 @@ namespace Back_End.Controllers
 
                 var employeeEntity = _mapper.Map<Employees>(employee);
 
-<<<<<<< Updated upstream
                 //Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
-=======
                 employeeEntity.Users.Persons.FirstName.ToString().Trim();
 
                 // Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
->>>>>>> Stashed changes
                 employeeEntity.Users.UserPassword = Encrypt.GetSHA256(employeeEntity.Users.UserPassword);
 
                 //employeeEntity.Users.Persons.FirstName = textInfo.ToTitleCase(employeeEntity.Users.Persons.FirstName);
@@ -151,12 +148,8 @@ namespace Back_End.Controllers
                 }
 
                 var employeeToPatch = _mapper.Map<EmployeeForUpdateDto>(employeeEntity);
-<<<<<<< Updated upstream
 
                 _Employees.ApplyTo(employeeToPatch, ModelState);
-=======
-
-
 
                 Users authUser = new Users();
 
@@ -166,19 +159,16 @@ namespace Back_End.Controllers
                     // AGREGARLOS EN EL REPOSITORIO
                       var userPass = employeeToPatch.Users.UserPassword;
                       employeeToPatch.Users.UserPassword = Encrypt.GetSHA256(userPass);
->>>>>>> Stashed changes
 
                       using (var db = new CruzRojaContext())
                         authUser = db.Users.Where(u => u.UserID == employeeEntity.Users.UserID
                               && u.UserPassword == employeeToPatch.Users.UserPassword).FirstOrDefault();
 
-<<<<<<< Updated upstream
                 if (!TryValidateModel(employeeToPatch))
                 {
                     return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
                 }
 
-=======
                       if (authUser == null)
                       {
                         return BadRequest(ErrorHelper.Response(400, "La Contraseña es erronea."));
@@ -190,13 +180,11 @@ namespace Back_End.Controllers
                      
                         var userNewPass = employeeToPatch.Users.UserNewPassword;
                         employeeToPatch.Users.UserNewPassword = Encrypt.GetSHA256(userNewPass);
->>>>>>> Stashed changes
 
                         employeeToPatch.Users.UserPassword = employeeToPatch.Users.UserNewPassword;
                     }
                    }
 
-<<<<<<< Updated upstream
                    if (!string.IsNullOrEmpty(employeeToPatch.Users.UserNewPassword))
                    {
                     // AGREGARLOS EN EL REPOSITORIO
@@ -223,21 +211,14 @@ namespace Back_End.Controllers
                     }
                    }
 
-=======
-
                 _Employees.ApplyTo(employeeToPatch, ModelState);
 
-               /* if (!TryValidateModel(employeeToPatch))
-                {
-                    return ValidationProblem(ModelState);
-                }*/
 
 
                if (!TryValidateModel(employeeToPatch))
                 {
                     return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
                 }
->>>>>>> Stashed changes
 
 
                 var employeeResult = _mapper.Map(employeeToPatch, employeeEntity);

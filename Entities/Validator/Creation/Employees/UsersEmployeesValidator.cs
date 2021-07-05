@@ -13,19 +13,11 @@ namespace Back_End.Validator
         {
 
             RuleFor(x => x.UserDni)
-<<<<<<< Updated upstream:Entities/Validator/Creation/Employees/UsersEmployeesValidator.cs
            .Cascade(CascadeMode.StopOnFirstFailure)
            .NotEmpty().WithMessage("{PropertyName} is required.")
            .Must(BeUniqueUrl).WithMessage("Dni already exists")
            .Must(IsValidNumber).WithMessage("{PropertyName} must not have spaces and should be all numbers.")
            .Length(8).WithMessage("The {PropertyName} must be 8 characters. You entered {TotalLength} characters");
-=======
-            .Cascade(CascadeMode.StopOnFirstFailure)
-            .NotEmpty().WithMessage("{PropertyName} is required.")
-            .Must(BeUniqueUrl).WithMessage("Dni already exists")
-            .Length(8).WithMessage("The {PropertyName} must be 8 characters. You entered {TotalLength} characters")
-            .Must(IsValidNumber).WithMessage("{PropertyName} must not have spaces and should be all numbers.");
->>>>>>> Stashed changes:Entities/Validator/Creation/UsersEmployeesValidator.cs
 
 
             RuleFor(x => x.UserPassword).NotEmpty().WithMessage("{PropertyName} is required.")

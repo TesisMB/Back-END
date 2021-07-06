@@ -48,6 +48,8 @@ namespace Back_End.Entities
         public DbSet<Vehicles> Vehicles { get; set; }
         public DbSet<Roles> Roles { get; set; }
 
+
+
         private const string Connection =
       @"Server=DESKTOP-0SC8P3Q;
             Database=CruzRojaDB - Testing;

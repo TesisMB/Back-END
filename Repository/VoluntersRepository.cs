@@ -30,6 +30,20 @@ namespace Repository
                     .ToList();
         }
 
+        public IEnumerable<Volunteers> GetAllVolunteersApp()
+        {
+            return FindAll()
+                            .Include(a => a.Users)
+                            .ThenInclude(a => a.Persons)
+                            .Include(a => a.Users.Estates.EstatesTimes)
+                            .ThenInclude(a => a.Times)
+                            .ThenInclude(a => a.Schedules)
+                            .Include(a => a.VolunteersSkills)
+                            .ThenInclude(a => a.Skills)
+                            .ToList();
+        }
+
+
         public Volunteers GetVolunteersById(int volunteerId)
         {
             return FindByCondition(volunteer => volunteer.VolunteerID.Equals(volunteerId))
@@ -63,5 +77,7 @@ namespace Repository
                    .ThenInclude(a => a.Skills)
                    .FirstOrDefault();
         }
+
+      
     }
 }

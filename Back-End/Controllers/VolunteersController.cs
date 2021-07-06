@@ -4,6 +4,7 @@ using Back_End.Models;
 using Back_End.Models.Employees___Dto;
 using Back_End.Models.Volunteers__Dto;
 using Contracts.Interfaces;
+using Entities.DataTransferObjects.Volunteers__Dto;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,7 +12,7 @@ using System.Collections.Generic;
 
 namespace Back_End.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("")]
     [ApiController]
     public class VolunteersController : ControllerBase
     {
@@ -27,7 +28,7 @@ namespace Back_End.Controllers
             _mapper = mapper;
         }
 
-
+        [Route("api/Volunteers")]
         [HttpGet]
         public IActionResult GetAllVolunteers()
         {
@@ -49,14 +50,33 @@ namespace Back_End.Controllers
                 return StatusCode(500, "Internal Server error");
 
             }
-
-            //var volunterFromRepo = _cruzRojaRepository.GetList(volunteersResourceParameters);
-
-            //return Ok(_mapper.Map<IEnumerable<VolunteersDto>>(volunterFromRepo));
         }
 
+        [Route("api/app/Volunteers")]
+        [HttpGet]
+        public IActionResult GetAllVolunteersApp()
+        {
+            try
+            {
+                var volunteers = _repository.Volunteers.GetAllVolunteersApp();
 
-        [HttpGet("{volunteerId}")]
+                _logger.LogInfo($"Returned all Volunteers from database.");
+
+                var volunteersResult = _mapper.Map<IEnumerable<VolunteersAppDto>>(volunteers);
+
+                return Ok(volunteersResult);
+
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogError($"Something went wrong inside GetAllVolunteersApp action:  {ex.Message}");
+                return StatusCode(500, "Internal Server error");
+            }
+        }
+
+        [Route("api/Volunteers/{volunteerId}")]
+        [HttpGet]
         public IActionResult GetVolunteer(int volunteerId)
         {
             try
@@ -91,6 +111,7 @@ namespace Back_End.Controllers
             }
         }
 
+        [Route("api/Volunteers")]
         [HttpPost]
         public IActionResult CreateVolunteer([FromBody] VolunteersForCreationDto volunteer)
         {
@@ -128,7 +149,8 @@ namespace Back_End.Controllers
 
 
         //[Authorize(Roles = "Coordinador General, Admin")] 
-        [HttpPatch("{volunteerId}")]
+        [Route("api/Volunteers/{volunteerId}")]
+        [HttpPatch]
         public IActionResult UpdatePartialUser(int volunteerId, JsonPatchDocument<VolunteersForUpdatoDto> patchDocument)
         {
 
@@ -167,7 +189,8 @@ namespace Back_End.Controllers
         }
 
 
-        [HttpDelete("{volunteerId}")]
+        [Route("api/Volunteers/{volunteerId}")]
+        [HttpDelete]
         public IActionResult DeleteVolunteer(int volunteerId)
         {
             try

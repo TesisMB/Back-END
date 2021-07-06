@@ -8,6 +8,9 @@ namespace Contracts.Interfaces
     {
         IEnumerable<Volunteers> GetAllVolunteers();
 
+        IEnumerable<Volunteers> GetAllVolunteersApp();
+
+
         Volunteers GetVolunteersById(int volunteerId);
 
         Volunteers GetVolunteerWithDetails(int volunteerId);

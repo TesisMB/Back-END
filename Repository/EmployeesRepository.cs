@@ -41,6 +41,7 @@ namespace Repository
         {
             return FindByCondition(empl => empl.EmployeeID.Equals(employeeId))
                      .Include(i => i.Users)
+                     .ThenInclude(i => i.Roles)
                     .Include(i => i.Users.Persons)
                     .Include(i => i.Users.Estates)
                     .ThenInclude(i => i.LocationAddress)

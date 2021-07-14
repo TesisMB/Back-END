@@ -1,14 +1,17 @@
 ﻿using AutoMapper;
+using Back_End.Entities;
 using Back_End.Helpers;
 using Back_End.Models;
 using Back_End.Models.Employees___Dto;
 using Back_End.Models.Volunteers__Dto;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.Volunteers__Dto;
+using Entities.Helpers;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Back_End.Controllers
 {
@@ -169,13 +172,32 @@ namespace Back_End.Controllers
                 return ValidationProblem(ModelState);
             }
 
-            string Pass = userToPatch.Users.UserPassword;
-            //string ePass = Encrypt.GetSHA256(Pass);
-
-            if (userFromRepo.Users.UserPassword != Pass)
+            Users authUser = new Users();
+            if (!string.IsNullOrEmpty(userToPatch.Users.UserNewPassword))
             {
-                //Nuevamente se debea encriptar la contraseña ingresada
-                userToPatch.Users.UserPassword = Encrypt.GetSHA256(userToPatch.Users.UserPassword);
+                // AGREGARLOS EN EL REPOSITORIO
+                var userPass = userToPatch.Users.UserPassword;
+                userToPatch.Users.UserPassword = Encrypt.GetSHA256(userPass);
+
+                using (var db = new CruzRojaContext())
+                    authUser = db.Users.Where(u => u.UserID == userFromRepo.Users.UserID
+                          && u.UserPassword == userToPatch.Users.UserPassword).FirstOrDefault();
+
+
+                if (authUser == null)
+                {
+                    return BadRequest(ErrorHelper.Response(400, "La contraseña es erronea."));
+                }
+
+                else
+                {
+                    userToPatch.Users.UserNewPassword = userToPatch.Users.UserNewPassword.Trim();
+
+                    var userNewPass = userToPatch.Users.UserNewPassword;
+                    userToPatch.Users.UserNewPassword = Encrypt.GetSHA256(userNewPass);
+
+                    userToPatch.Users.UserPassword = userToPatch.Users.UserNewPassword;
+                }
             }
 
 

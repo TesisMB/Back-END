@@ -46,6 +46,10 @@
 		<ProjectReference Include="..\Repository\Repository.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="StaticFiles\images\" />
+	</ItemGroup>
+
 	<ProjectExtensions>
 		<VisualStudio>
 			<UserProperties appsettings_1json__JsonSchema="" />

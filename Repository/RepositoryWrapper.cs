@@ -10,6 +10,8 @@ namespace Repository
         private IVolunteersRepository _volunteers;
         private IUsersRepository _users;
         private IVehiclesRepository _vehicles;
+        private IMaterialsRepository _materials;
+
         public RepositoryWrapper(CruzRojaContext cruzRojaContext2)
         {
             _cruzRojaContext2 = cruzRojaContext2;
@@ -60,6 +62,18 @@ namespace Repository
                     _vehicles = new VehiclesRepository(_cruzRojaContext2);
                 }
                 return _vehicles;
+            }
+        }
+
+        public IMaterialsRepository Materials
+        {
+            get
+            {
+                if (_materials == null)
+                {
+                    _materials = new MaterialsRepository(_cruzRojaContext2);
+                }
+                return _materials;
             }
         }
 

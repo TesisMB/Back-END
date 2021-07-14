@@ -4,6 +4,7 @@ using Back_End.Models.Vehicles___Dto;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.Vehicles___Dto.Creation;
 using Entities.DataTransferObjects.Vehicles___Dto.Update;
+using Entities.Helpers;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -80,7 +81,13 @@ namespace Back_End.Controllers
         {
             try
             {
-                if(vehicle == null)
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
+                }
+
+                if (vehicle == null)
                 {
                     _logger.LogError("Vehicle object sent from client is null.");
                     return BadRequest("Vehicle object is null");

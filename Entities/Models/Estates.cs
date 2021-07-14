@@ -10,8 +10,9 @@ namespace Back_End.Models
     [Table("Estates", Schema = "dbo")]
     public class Estates
     {
+        [Column("ID")]
         [Key]
-        public int ID { get; set; }
+        public int EstateID { get; set; }
 
         [Required]
         [MaxLength(16)]

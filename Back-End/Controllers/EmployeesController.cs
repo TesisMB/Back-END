@@ -169,6 +169,7 @@ namespace Back_End.Controllers
                         authUser = db.Users.Where(u => u.UserID == employeeEntity.Users.UserID
                               && u.UserPassword == employeeToPatch.Users.UserPassword).FirstOrDefault();
 
+
                       if (authUser == null)
                       {
                         return BadRequest(ErrorHelper.Response(400, "La contraseña es erronea."));

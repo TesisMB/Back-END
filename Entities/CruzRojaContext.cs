@@ -1,4 +1,5 @@
 ﻿using Back_End.Models;
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -30,6 +31,12 @@ namespace Back_End.Entities
 
            .HasKey(s => new { s.FK_VolunteerID, s.FK_SkillID });
 
+
+
+            modelBuilder.Entity<TypeVehiclesModels>()
+
+           .HasKey(s => new { s.FK_TypeVehicleID, s.FK_ModelID });
+
         }
 
         //Defino cada una de las Models, que se usan durante el proyecto, donde cada una de ellas representa una tabla de la base de datos
@@ -47,6 +54,13 @@ namespace Back_End.Entities
         public DbSet<TypeVehicles> TypeVehicles { get; set; }
         public DbSet<Vehicles> Vehicles { get; set; }
         public DbSet<Roles> Roles { get; set; }
+
+        public DbSet<Materials> Materials { get; set; }
+
+        //public DbSet<Marks> Marks { get; set; }
+        //public DbSet<Model> Models { get; set; }
+        //public DbSet<TypeVehiclesModels> TypeVehiclesModels { get; set; }
+
 
 
 

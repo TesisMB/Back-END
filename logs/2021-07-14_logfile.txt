@@ -1,0 +1,6 @@
+2021-07-14 16:01:37.4038 INFO Returned all employees from database.
+2021-07-14 16:10:15.6545 INFO Returned all employees from database.
+2021-07-14 16:13:11.1696 INFO Returned all employees from database.
+2021-07-14 16:32:52.2779 ERROR Something went wrong inside CreateEmployee action: An error occurred while updating the entries. See the inner exception for details.
+2021-07-14 16:33:52.2544 ERROR Something went wrong inside CreateEmployee action: An error occurred while updating the entries. See the inner exception for details.
+2021-07-14 16:35:11.8461 INFO Returned volunteer with id: 1115

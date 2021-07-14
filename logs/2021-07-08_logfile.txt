@@ -1,0 +1,46 @@
+2021-07-08 10:50:40.5457 ERROR Something went wrong inside GetAllVehicles action: El nombre de columna 'MarkID' no es válido.
+2021-07-08 10:52:37.2771 ERROR Something went wrong inside GetAllVehicles action: El nombre de columna 'Fk_MarkID' no es válido.
+El nombre de columna 'MarkID' no es válido.
+2021-07-08 10:54:09.8728 ERROR Something went wrong inside GetAllVehicles action: El nombre de columna 'Fk_MarkID' no es válido.
+El nombre de columna 'MarkID' no es válido.
+2021-07-08 10:55:34.8708 ERROR Something went wrong inside GetAllVehicles action: El nombre de columna 'MarkID' no es válido.
+2021-07-08 10:59:39.7448 ERROR Something went wrong inside GetAllVehicles action: El nombre de columna 'MarkID' no es válido.
+El nombre de columna 'MarkID' no es válido.
+2021-07-08 11:00:59.3421 ERROR Something went wrong inside GetAllVehicles action: El nombre de columna 'MarkID' no es válido.
+El nombre de columna 'MarkID' no es válido.
+2021-07-08 11:01:58.6350 INFO Returned all vehicles from database.
+2021-07-08 11:04:18.9669 INFO Returned all vehicles from database.
+2021-07-08 11:05:12.0739 INFO Returned all vehicles from database.
+2021-07-08 11:05:12.1750 ERROR Something went wrong inside GetAllVehicles action: Error mapping types.
+
+Mapping types:
+List`1 -> IEnumerable`1
+System.Collections.Generic.List`1[[Back_End.Models.Vehicles, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> System.Collections.Generic.IEnumerable`1[[Back_End.Models.Vehicles___Dto.VehiclesDto, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2021-07-08 11:07:55.4340 INFO Returned all vehicles from database.
+2021-07-08 11:08:01.3919 ERROR Something went wrong inside GetAllVehicles action: Error mapping types.
+
+Mapping types:
+List`1 -> IEnumerable`1
+System.Collections.Generic.List`1[[Back_End.Models.Vehicles, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> System.Collections.Generic.IEnumerable`1[[Back_End.Models.Vehicles___Dto.VehiclesDto, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2021-07-08 11:11:24.8535 INFO Returned all vehicles from database.
+2021-07-08 11:15:05.1049 INFO Returned all vehicles from database.
+2021-07-08 11:15:38.5420 INFO Returned all vehicles from database.
+2021-07-08 11:17:31.7609 INFO Returned all vehicles from database.
+2021-07-08 11:17:44.1468 INFO Returned all vehicles from database.
+2021-07-08 11:30:34.7843 ERROR Something went wrong inside GetAllVehicles action: El nombre de columna 'FK_MarkID' no es válido.
+El nombre de columna 'FK_MarkID' no es válido.
+El nombre de columna 'FK_MarkID' no es válido.
+2021-07-08 11:31:55.7515 INFO Returned all vehicles from database.
+2021-07-08 11:32:44.5709 INFO Returned all vehicles from database.
+2021-07-08 17:01:27.5891 ERROR Something went wrong inside GetAllVehicles action: El nombre de columna 'MarksMarkID' no es válido.
+El nombre de columna 'FK_MarkID' no es válido.
+El nombre de columna 'MarksMarkID' no es válido.
+2021-07-08 17:03:03.2292 ERROR Something went wrong inside GetAllVehicles action: El nombre de columna 'FK_MarkID' no es válido.
+2021-07-08 17:04:32.2143 INFO Returned all vehicles from database.
+2021-07-08 17:05:18.3713 INFO Returned all vehicles from database.
+2021-07-08 17:05:39.9013 INFO Returned all vehicles from database.
+2021-07-08 17:07:16.5163 INFO Returned all vehicles from database.
+2021-07-08 17:15:05.5414 INFO Returned all vehicles from database.
+2021-07-08 17:23:27.0585 ERROR Something went wrong inside CreateVehicle action: An error occurred while updating the entries. See the inner exception for details.
+2021-07-08 17:26:12.1976 ERROR Vehicle with id: 6, hasn't been found in db.
+2021-07-08 17:26:15.9405 ERROR Vehicle with id: 5, hasn't been found in db.

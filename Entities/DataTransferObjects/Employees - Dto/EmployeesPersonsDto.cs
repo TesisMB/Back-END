@@ -14,6 +14,6 @@ namespace Back_End.Models.Users___Dto.Users___Persons
         public string Address { get; set; }
         public string Gender { get; set; }
         public Boolean Status { get; set; }
-        public DateTime? Birthdate { get; set; }
+        public DateTime Birthdate { get; set; }
     }
 }

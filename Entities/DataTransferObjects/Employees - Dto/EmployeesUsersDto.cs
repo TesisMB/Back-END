@@ -6,6 +6,7 @@ namespace Back_End.Models.Users___Dto.Users___Persons
 {
     public class EmployeesUsersDto
     {
+        public int UserID { get; set; }
         public string UserDni { get; set; }
         public Boolean UserAvailability { get; set; }
         public string RoleName { get; set; }

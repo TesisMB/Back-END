@@ -3,3 +3,4 @@
 2021-07-15 16:31:54.6277 INFO Returned all employees from database.
 2021-07-15 16:31:56.3630 INFO Returned all employees from database.
 2021-07-15 16:34:17.5442 INFO Returned all employees from database.
+2021-07-15 16:51:20.2334 INFO Returned all employees from database.

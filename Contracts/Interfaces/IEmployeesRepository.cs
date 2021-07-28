@@ -10,9 +10,9 @@ namespace Contracts.Interfaces
 
         Employees GetEmployeeWithDetails(int employeeId);
 
-        void CreateEmployee(Employees employee);
+        void CreateEmployee(EmployeesForCreationDto employee);
 
         void UpdateEmployee(Employees employee);
-
+      //void sendVerificationEmail(Employees employees);//, string origin)
     }
 }

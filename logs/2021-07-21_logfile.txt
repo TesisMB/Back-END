@@ -1,0 +1,6 @@
+2021-07-21 17:22:24.8722 INFO Returned all Materials from database.
+2021-07-21 17:24:11.4362 INFO Returned all Materials from database.
+2021-07-21 17:24:15.0166 INFO Returned all Materials from database.
+2021-07-21 17:24:15.7913 INFO Returned all Materials from database.
+2021-07-21 17:24:16.3160 INFO Returned all Materials from database.
+2021-07-21 17:24:16.7393 INFO Returned all Materials from database.

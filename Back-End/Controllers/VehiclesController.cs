@@ -97,7 +97,7 @@ namespace Back_End.Controllers
 
                 _repository.Vehicles.Create(vehicleEntity);
 
-                _repository.Save();
+                //_repository.Save();
 
                 var createdVehicle = _mapper.Map<VehiclesDto>(vehicleEntity);
 
@@ -138,7 +138,7 @@ namespace Back_End.Controllers
 
                 _repository.Vehicles.Update(vehicleResult);
 
-                _repository.Save();
+               // _repository.Save();
 
                 return NoContent();
             
@@ -165,7 +165,7 @@ namespace Back_End.Controllers
 
                 _repository.Vehicles.Delete(vehicle);
 
-                _repository.Save();
+               // _repository.Save();
 
                 return NoContent();
 

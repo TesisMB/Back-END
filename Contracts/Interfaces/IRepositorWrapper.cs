@@ -16,7 +16,11 @@ namespace Contracts.Interfaces
 
         IMaterialsRepository Materials { get; }
 
+        IMedicinesRepository Medicines { get; }
 
-        void Save();
+        IEstatesRepository Estates { get; }
+
+
+        // void Save();
     }
 }

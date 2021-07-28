@@ -20,8 +20,8 @@ namespace Back_End.Validator
            .Length(8).WithMessage("The {PropertyName} must be 8 characters. You entered {TotalLength} characters");
 
 
-            RuleFor(x => x.UserPassword).NotEmpty().WithMessage("{PropertyName} is required.")
-            .Length(8, 16).WithMessage("The {PropertyName} must be between 8 and 16 characters. You entered {TotalLength} characters");
+            //RuleFor(x => x.UserPassword).NotEmpty().WithMessage("{PropertyName} is required.")
+            //.Length(8, 16).WithMessage("The {PropertyName} must be between 8 and 16 characters. You entered {TotalLength} characters");
 
             RuleFor(x => x.FK_RoleID).NotEmpty().WithMessage("{PropertyName} is required.");
 

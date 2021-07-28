@@ -30,6 +30,8 @@ namespace Back_End.Controllers
             _repository = repository;
             _mapper = mapper;
         }
+
+
         // GET: api/<MaterialsController>
         [HttpGet]
         public IActionResult GetAllVolunteers()
@@ -114,7 +116,7 @@ namespace Back_End.Controllers
 
                 _repository.Materials.Create(materialEntity);
 
-                _repository.Save();
+                //_repository.Save();
 
                 var createdVolunteer = _mapper.Map<MaterialsDto>(materialEntity);
 
@@ -158,7 +160,7 @@ namespace Back_End.Controllers
                 var employeeResult = _mapper.Map(materialToPatch, materialEntity);
 
                 _repository.Materials.Update(employeeResult);
-                _repository.Save();
+                //_repository.Save();
 
                 return NoContent();
 
@@ -194,7 +196,7 @@ namespace Back_End.Controllers
 
                 _repository.Materials.Delete(material);
 
-                _repository.Save();
+                //_repository.Save();
                 return NoContent();
             }
             catch (Exception ex)

@@ -101,24 +101,16 @@ namespace Back_End.Controllers
                     _logger.LogError("Employee object sent from client is null.");
                     return BadRequest("Employee object is null");
                 }
-
-                var employeeEntity = _mapper.Map<Employees>(employee);
-
-                //Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
-                employeeEntity.Users.Persons.FirstName.ToString().Trim();
-
                 // Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
-                employeeEntity.Users.UserPassword = Encrypt.GetSHA256(employeeEntity.Users.UserPassword);
-
+                //employeeEntity.Users.UserPassword = Encrypt.GetSHA256(employeeEntity.Users.UserPassword);
                 //employeeEntity.Users.Persons.FirstName = textInfo.ToTitleCase(employeeEntity.Users.Persons.FirstName);
                 //employeeEntity.Users.Persons.FirstName = employeeEntity.Users.Persons.FirstName.Trim();
 
-                _repository.Employees.CreateEmployee(employeeEntity);
+                _repository.Employees.CreateEmployee(employee);
 
-                _repository.Save();
+                //_repository.Save();
 
-                var createdEmployee = _mapper.Map<EmployeesDto>(employeeEntity);
-
+                //var createdEmployee = _mapper.Map<EmployeesDto>(employeeEntity);
                 return Ok();
             }
 
@@ -176,6 +168,7 @@ namespace Back_End.Controllers
                       }
 
                     else
+
                       {
                         employeeToPatch.Users.UserNewPassword = employeeToPatch.Users.UserNewPassword.Trim();
                      
@@ -186,15 +179,12 @@ namespace Back_End.Controllers
                     }
                    }
 
-           
-
                 var employeeResult = _mapper.Map(employeeToPatch, employeeEntity);
 
                 _repository.Employees.Update(employeeResult);
-                _repository.Save();
+               // _repository.Save();
 
                 return NoContent();
-
             }
 
 
@@ -227,7 +217,7 @@ namespace Back_End.Controllers
                 }*/
 
                 _repository.Users.Delete(employee);
-                _repository.Save();
+                //_repository.Save();
                 return NoContent();
             }
             catch(Exception ex)

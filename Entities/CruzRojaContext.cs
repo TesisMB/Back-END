@@ -54,15 +54,8 @@ namespace Back_End.Entities
         public DbSet<TypeVehicles> TypeVehicles { get; set; }
         public DbSet<Vehicles> Vehicles { get; set; }
         public DbSet<Roles> Roles { get; set; }
-
         public DbSet<Materials> Materials { get; set; }
-
-        //public DbSet<Marks> Marks { get; set; }
-        //public DbSet<Model> Models { get; set; }
-        //public DbSet<TypeVehiclesModels> TypeVehiclesModels { get; set; }
-
-
-
+        public DbSet<Medicines> Medicines { get; set; }
 
         private const string Connection =
       @"Server=DESKTOP-0SC8P3Q;

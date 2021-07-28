@@ -135,7 +135,7 @@ namespace Back_End.Controllers
 
                 _repository.Volunteers.Create(volunteerEntity);
 
-                _repository.Save();
+                //_repository.Save();
 
                 var createdVolunteer = _mapper.Map<VolunteersDto>(volunteerEntity);
 
@@ -205,7 +205,7 @@ namespace Back_End.Controllers
 
             _repository.Volunteers.Update(userFromRepo);
 
-            _repository.Save();
+            //_repository.Save();
 
             return NoContent();
         }
@@ -228,7 +228,7 @@ namespace Back_End.Controllers
 
             _repository.Users.Delete(volunteer);
 
-            _repository.Save();
+            //_repository.Save();
 
             // Se retorna con exito la eliminacion del Usuario especificado
             return NoContent();

@@ -1,0 +1,21 @@
+2021-07-25 18:59:58.7852 INFO Returned all employees from database.
+2021-07-25 19:15:04.0668 ERROR Something went wrong inside CreateEmployee action: Value cannot be null. (Parameter 'text')
+2021-07-25 19:16:36.7540 ERROR Something went wrong inside CreateEmployee action: Value cannot be null. (Parameter 'text')
+2021-07-25 19:20:20.4274 ERROR Something went wrong inside CreateEmployee action: Value cannot be null. (Parameter 'text')
+2021-07-25 19:25:07.3657 ERROR Something went wrong inside CreateEmployee action: Value cannot be null. (Parameter 'userName')
+2021-07-25 19:41:10.6471 ERROR Something went wrong inside User: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Users -> UserAuthDto
+Back_End.Models.Users -> Back_End.Models.UserAuthDto
+2021-07-25 19:41:54.8169 INFO Returned User.
+2021-07-25 21:01:38.7401 INFO Returned all estates from database.
+2021-07-25 21:02:25.5172 INFO Returned all estates from database.
+2021-07-25 21:02:26.7635 INFO Returned all estates from database.
+2021-07-25 21:03:56.4886 INFO Returned all estates from database.
+2021-07-25 21:04:16.8787 INFO Returned all estates from database.
+2021-07-25 21:05:45.2418 INFO Returned all estates from database.
+2021-07-25 21:05:57.1954 ERROR Something went wrong inside GetAllVehicles action: El nombre de columna 'Mark' no es válido.
+El nombre de columna 'Model' no es válido.
+2021-07-25 21:06:06.0810 INFO Returned all employees from database.
+2021-07-25 21:06:48.1316 INFO Returned all employees from database.

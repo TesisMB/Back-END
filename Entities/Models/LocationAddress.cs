@@ -11,7 +11,9 @@ namespace Back_End.Models
     public class LocationAddress
     {
         [Key, ForeignKey("Estates")]
-        public int ID { get; set; }
+
+        [Column("ID")]
+        public int LocationAddressID { get; set; }
 
         [MaxLength(10)]
         public string PostalCode { get; set; }

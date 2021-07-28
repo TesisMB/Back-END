@@ -26,7 +26,7 @@ namespace Back_End.Profiles
             CreateMap<Persons, PersonsForUpdatoDto>();
 
 
-            CreateMap<UserAuthDto, Persons>();
+            CreateMap<UserEmployeeAuthDto, Persons>();
 
         }
     }

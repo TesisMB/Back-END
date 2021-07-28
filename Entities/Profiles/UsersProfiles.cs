@@ -34,7 +34,7 @@ namespace Back_End.Profiles
 
             /*Al momento de mapear, defino que el campo denominado token, sera devuelto con los valores obtenido de la funcion
               con el ID, y el RoleName de usuario logueado*/
-            CreateMap<Users, UserAuthDto>()
+            CreateMap<Users, UserEmployeeAuthDto>()
                  .ForMember(dest => dest.token,
                                     opt => opt.MapFrom(src => UserSecurity.GenerateAccessToken(src.UserID, src.Roles.RoleName)))
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -34,6 +35,7 @@ namespace Back_End.Models
 
         public ICollection<Vehicles> Vehicles { get; set; }
 
+        public ICollection<Medicines> Medicines { get; set; }
 
     }
 }

@@ -1,0 +1,2 @@
+2021-07-24 21:41:20.8944 ERROR Something went wrong inside CreateEmployee action: An error occurred while updating the entries. See the inner exception for details.
+2021-07-24 23:16:39.7576 ERROR Something went wrong inside CreateEmployee action: Object reference not set to an instance of an object.

@@ -1,5 +1,8 @@
-﻿using Back_End.Entities;
+﻿using AutoMapper;
+using Back_End.Entities;
 using Contracts.Interfaces;
+using Entities.DataTransferObjects.Email;
+using Microsoft.Extensions.Options;
 
 namespace Repository
 {
@@ -11,10 +14,17 @@ namespace Repository
         private IUsersRepository _users;
         private IVehiclesRepository _vehicles;
         private IMaterialsRepository _materials;
+        private IMedicinesRepository _medicines;
+        private IEstatesRepository _estates;
 
-        public RepositoryWrapper(CruzRojaContext cruzRojaContext2)
+        private IMapper _mapper;
+        private AppSettings _appSettings;
+
+        public RepositoryWrapper(CruzRojaContext cruzRojaContext2, IMapper mapper,IOptions<AppSettings> appSettings)
         {
             _cruzRojaContext2 = cruzRojaContext2;
+            _mapper = mapper;
+            _appSettings = appSettings.Value;
         }
 
         public IEmployeesRepository Employees
@@ -23,7 +33,7 @@ namespace Repository
             {
                 if (_employees == null)
                 {
-                    _employees = new EmployeesRepository(_cruzRojaContext2);
+                    _employees = new EmployeesRepository(_cruzRojaContext2, _mapper, _appSettings);
                 }
                 return _employees;
             }
@@ -77,9 +87,33 @@ namespace Repository
             }
         }
 
-        public void Save()
+        public IMedicinesRepository Medicines
+        {
+            get
+            {
+                if (_medicines == null)
+                {
+                    _medicines = new MedicinesRepository(_cruzRojaContext2);
+                }
+                return _medicines;
+            }
+        }
+
+        public IEstatesRepository Estates
+        {
+            get
+            {
+                if (_estates == null)
+                {
+                    _estates = new EstatesRepository(_cruzRojaContext2);
+                }
+                return _estates;
+            }
+        }
+
+        /*public void Save()
         {
             _cruzRojaContext2.SaveChanges();
-        }
+        }*/
     }
 }

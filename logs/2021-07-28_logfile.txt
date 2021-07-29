@@ -63,3 +63,4 @@
 2021-07-28 17:06:10.9407 INFO Returned all employees from database.
 2021-07-28 17:06:17.5302 INFO Returned employe with details for id: 1018
 2021-07-28 17:08:02.6339 INFO Returned employe with details for id: 1018
+2021-07-28 17:09:31.8204 INFO Returned all employees from database.

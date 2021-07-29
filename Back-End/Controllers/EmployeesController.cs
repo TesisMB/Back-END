@@ -108,7 +108,7 @@ namespace Back_End.Controllers
 
                 _repository.Employees.CreateEmployee(employee);
 
-                //_repository.Save();
+                _repository.Employees.Save();
 
                 //var createdEmployee = _mapper.Map<EmployeesDto>(employeeEntity);
                 return Ok();
@@ -182,7 +182,8 @@ namespace Back_End.Controllers
                 var employeeResult = _mapper.Map(employeeToPatch, employeeEntity);
 
                 _repository.Employees.Update(employeeResult);
-               // _repository.Save();
+               
+                _repository.Employees.Save();
 
                 return NoContent();
             }
@@ -217,7 +218,9 @@ namespace Back_End.Controllers
                 }*/
 
                 _repository.Users.Delete(employee);
-                //_repository.Save();
+
+                _repository.Employees.Save();
+
                 return NoContent();
             }
             catch(Exception ex)

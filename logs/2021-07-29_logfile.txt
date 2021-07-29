@@ -1,0 +1,20 @@
+2021-07-29 13:29:03.3483 INFO Returned all employees from database.
+2021-07-29 13:30:55.7233 INFO Returned employe with details for id: 1017
+2021-07-29 13:35:33.0977 INFO Returned employe with details for id: 1017
+2021-07-29 13:36:04.2848 INFO Returned employe with details for id: 1017
+2021-07-29 13:38:44.7993 INFO Returned User.
+2021-07-29 13:38:51.6138 INFO Returned all employees from database.
+2021-07-29 13:40:22.5625 INFO Returned employe with details for id: 1018
+2021-07-29 13:40:42.4744 ERROR Employee with id: 0, hasn't been found in db.
+2021-07-29 13:41:01.1994 ERROR Employee with id: 0, hasn't been found in db.
+2021-07-29 13:41:46.5674 INFO Returned User.
+2021-07-29 13:41:51.0545 INFO Returned employe with details for id: 1018
+2021-07-29 13:42:07.5685 INFO Returned all employees from database.
+2021-07-29 13:42:49.2627 INFO Returned all employees from database.
+2021-07-29 13:43:08.2513 INFO Returned all employees from database.
+2021-07-29 13:44:53.4204 INFO Returned employe with details for id: 1018
+2021-07-29 13:45:11.2565 INFO Returned employe with details for id: 1018
+2021-07-29 13:45:36.5038 INFO Returned employe with details for id: 1018
+2021-07-29 13:45:56.3626 INFO Returned all employees from database.
+2021-07-29 13:48:35.2147 INFO Returned all employees from database.
+2021-07-29 13:49:06.4211 INFO Returned employe with details for id: 1018

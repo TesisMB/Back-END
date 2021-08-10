@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-
+using System.Threading.Tasks;
 
 namespace Repository
 {
@@ -41,9 +41,9 @@ namespace Repository
             RepositoryContext.Set<T>().Remove(entity);
         }
 
-        public void Save()
+        public void SaveAsync()
         {
-            RepositoryContext.SaveChanges();
+             RepositoryContext.SaveChanges();
         }
     }
 }

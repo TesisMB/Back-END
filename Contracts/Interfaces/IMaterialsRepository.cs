@@ -1,15 +1,16 @@
 ﻿using Entities.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Contracts.Interfaces
 {
     public interface IMaterialsRepository : IRepositoryBase<Materials>
     {
-        IEnumerable<Materials> GetAllMaterials();
+        Task<IEnumerable<Materials>> GetAllMaterials();
 
-        Materials GetMaterialById(int materialId);
+        Task<Materials> GetMaterialById(int materialId);
 
-        Materials GetMaterialWithDetails(int materialId);
+        Task<Materials> GetMaterialWithDetails(int materialId);
 
         void CreateMaterial(Materials material);
         void UpdateMaterial(Materials material);

@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Contracts.Interfaces
 {
     public interface IVehiclesRepository : IRepositoryBase<Vehicles>
     {
-        IEnumerable<Vehicles> GetAllVehicles();
+        Task<IEnumerable<Vehicles>> GetAllVehicles();
 
-        Vehicles GetVehicleById(int vehicleId);
-        Vehicles GetVehicleWithDetails(int vehicleId);
+        Task<Vehicles> GetVehicleById(int vehicleId);
+        Task<Vehicles> GetVehicleWithDetails(int vehicleId);
 
         void CreateVehicle(Vehicles vehicles);
 

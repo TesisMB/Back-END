@@ -1,22 +1,26 @@
 ﻿using Back_End.Entities;
 using Back_End.Models;
 using Contracts.Interfaces;
+using Entities.DataTransferObjects.Volunteers__Dto;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Repository
 {
     public class VoluntersRepository : RepositoryBase<Volunteers>, IVolunteersRepository
     {
+        private CruzRojaContext cruzRojaContext;
+
         public VoluntersRepository(CruzRojaContext cruzRojaContext2)
         : base(cruzRojaContext2)
         {
-
+            cruzRojaContext = cruzRojaContext2;
         }
-        public IEnumerable<Volunteers> GetAllVolunteers()
+        public async Task<IEnumerable<Volunteers>> GetAllVolunteers()
         {
-            return FindAll()
+            return await FindAll()
                     .Include(a => a.Users)
                     .ThenInclude(a => a.Persons)
                     .Include(a => a.Users.Roles)
@@ -27,12 +31,22 @@ namespace Repository
                     .ThenInclude(a => a.Schedules)
                     .Include(a => a.VolunteersSkills)
                    .ThenInclude(a => a.Skills)
-                    .ToList();
+                    .ToListAsync();
         }
 
-        public IEnumerable<Volunteers> GetAllVolunteersApp()
+        public async Task<IEnumerable<Volunteers>> GetAllVolunteersApp()
         {
-            return FindAll()
+
+            bool volunteer = true;
+           
+            var collection = cruzRojaContext.Volunteers as IQueryable<Volunteers>;
+
+            if (volunteer == true)
+            {
+                collection = collection.Where(a => a.Users.Persons.Status == volunteer);
+            }
+
+            return await collection
                             .Include(a => a.Users)
                             .ThenInclude(a => a.Persons)
                             .Include(a => a.Users.Estates.EstatesTimes)
@@ -40,16 +54,17 @@ namespace Repository
                             .ThenInclude(a => a.Schedules)
                             .Include(a => a.VolunteersSkills)
                             .ThenInclude(a => a.Skills)
-                            .ToList();
+                            .ToListAsync();
+
         }
 
 
-        public Volunteers GetVolunteersById(int volunteerId)
+        public async Task<Volunteers> GetVolunteersById(int volunteerId)
         {
-            return FindByCondition(volunteer => volunteer.VolunteerID.Equals(volunteerId))
+            return await FindByCondition(volunteer => volunteer.VolunteerID.Equals(volunteerId))
                 .Include(a => a.Users)
                 .ThenInclude(a => a.Persons)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
         }
 
 
@@ -62,9 +77,9 @@ namespace Repository
             Update(volunteer);
         }
 
-        public Volunteers GetVolunteerWithDetails(int volunteerId)
+        public async Task<Volunteers> GetVolunteerWithDetails(int volunteerId)
         {
-            return FindByCondition(volunteer => volunteer.VolunteerID.Equals(volunteerId))
+            return await FindByCondition(volunteer => volunteer.VolunteerID.Equals(volunteerId))
                     .Include(a => a.Users)
                     .ThenInclude(a => a.Persons)
                     .Include(a => a.Users.Roles)
@@ -75,7 +90,7 @@ namespace Repository
                     .ThenInclude(a => a.Schedules)
                     .Include(a => a.VolunteersSkills)
                    .ThenInclude(a => a.Skills)
-                   .FirstOrDefault();
+                   .FirstOrDefaultAsync();
         }
 
       

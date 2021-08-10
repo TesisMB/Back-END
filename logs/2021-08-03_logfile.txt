@@ -1,0 +1,8 @@
+2021-08-03 14:00:05.4895 INFO Returned all employees from database.
+2021-08-03 14:00:53.1074 INFO Returned all employees from database.
+2021-08-03 14:01:30.9368 ERROR Something went wrong inside UpdateEmployee action: Value cannot be null. (Parameter 'patchDoc')
+2021-08-03 14:02:58.9241 ERROR Something went wrong inside UpdateEmployee action: Value cannot be null. (Parameter 'patchDoc')
+2021-08-03 14:04:07.8469 ERROR Something went wrong inside UpdateEmployee action: Value cannot be null. (Parameter 'patchDoc')
+2021-08-03 14:07:44.0039 INFO Returned employe with details for id: 1017
+2021-08-03 14:08:01.7079 INFO Returned employe with details for id: 1017
+2021-08-03 14:08:16.5562 INFO Returned employe with details for id: 1017

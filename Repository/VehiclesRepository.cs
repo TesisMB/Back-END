@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
 
 namespace Repository
 {
@@ -16,9 +16,9 @@ namespace Repository
         {
 
         }
-        public IEnumerable<Vehicles> GetAllVehicles()
+        public async Task<IEnumerable<Vehicles>> GetAllVehicles()
         {
-            return FindAll()
+            return await FindAll()
                    .Include(a => a.Estates)
                    .Include(a => a.Estates.LocationAddress)
                    .Include(a => a.Estates.EstatesTimes)
@@ -28,13 +28,27 @@ namespace Repository
                    .ThenInclude(a => a.Users)
                    .ThenInclude(a => a.Persons)
                    .Include(a => a.TypeVehicles)
-                 .ToList();
+                 .ToListAsync();
         }
 
-        public Vehicles GetVehicleById(int vehicleId)
+        public async Task<Vehicles> GetVehicleById(int vehicleId)
         {
-            return FindByCondition(vehicle => vehicle.VehicleID == vehicleId)
-                .FirstOrDefault();
+            return await FindByCondition(vehicle => vehicle.VehicleID == vehicleId)
+                .FirstOrDefaultAsync();
+        }
+        public async Task<Vehicles> GetVehicleWithDetails(int vehicleId)
+        {
+            return await FindByCondition(vehicle => vehicle.VehicleID == vehicleId)
+                      .Include(a => a.Estates)
+                      .Include(a => a.Estates.LocationAddress)
+                      .Include(a => a.Estates.EstatesTimes)
+                      .ThenInclude(a => a.Times)
+                      .ThenInclude(a => a.Schedules)
+                      .Include(a => a.Employees)
+                      .ThenInclude(a => a.Users)
+                      .ThenInclude(a => a.Persons)
+                      .Include(a => a.TypeVehicles)
+                   .FirstOrDefaultAsync();
         }
 
         public void CreateVehicle(Vehicles vehicles)
@@ -52,19 +66,5 @@ namespace Repository
             Delete(vehicles);
         }
 
-        public Vehicles GetVehicleWithDetails(int vehicleId)
-        {
-            return FindByCondition(vehicle => vehicle.VehicleID == vehicleId)
-                      .Include(a => a.Estates)
-                      .Include(a => a.Estates.LocationAddress)
-                      .Include(a => a.Estates.EstatesTimes)
-                      .ThenInclude(a => a.Times)
-                      .ThenInclude(a => a.Schedules)
-                      .Include(a => a.Employees)
-                      .ThenInclude(a => a.Users)
-                      .ThenInclude(a => a.Persons)
-                      .Include(a => a.TypeVehicles)
-                   .FirstOrDefault();
-        }
     }
 }

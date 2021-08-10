@@ -8,5 +8,6 @@ namespace Entities.DataTransferObjects.Volunteers__Dto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public Boolean Status { get; set; } = true;
     }
 }

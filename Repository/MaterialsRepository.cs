@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Repository
 {
@@ -16,33 +17,33 @@ namespace Repository
         {
 
         }
-        public IEnumerable<Materials> GetAllMaterials()
+        public async Task<IEnumerable<Materials>> GetAllMaterials()
         {
-            return FindAll()
+            return await FindAll()
                        .Include(a => a.Estates)
                        .Include(a => a.Estates.LocationAddress)
                        .Include(a => a.Estates.EstatesTimes)
                        .ThenInclude(a => a.Times)
                        .ThenInclude(a => a.Schedules)
-                       .ToList();
+                       .ToListAsync();
 
         }
 
-        public Materials GetMaterialById(int materialId)
+        public async Task<Materials> GetMaterialById(int materialId)
         {
-            return FindByCondition(material => material.MaterialID == materialId)
-                           .FirstOrDefault();
+            return await FindByCondition(material => material.MaterialID == materialId)
+                           .FirstOrDefaultAsync();
         }
 
-        public Materials GetMaterialWithDetails(int materialId)
+        public async Task<Materials> GetMaterialWithDetails(int materialId)
         {
-            return FindByCondition(material => material.MaterialID == materialId)
+            return await FindByCondition(material => material.MaterialID == materialId)
                        .Include(a => a.Estates)
                        .Include(a => a.Estates.LocationAddress)
                        .Include(a => a.Estates.EstatesTimes)
                        .ThenInclude(a => a.Times)
                        .ThenInclude(a => a.Schedules)
-                       .FirstOrDefault();
+                       .FirstOrDefaultAsync();
         }
 
         public void CreateMaterial(Materials material)

@@ -29,13 +29,13 @@ namespace Back_End.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllMedicines()
+        public async Task<ActionResult<Medicines>> GetAllMedicines()
         {
         
 
             try
             {
-                var volunteers = _repository.Medicines.GetAllMedicines();
+                var volunteers = await _repository.Medicines.GetAllMedicines();
 
                 _logger.LogInfo($"Returned all Materials from database.");
 
@@ -55,11 +55,11 @@ namespace Back_End.Controllers
 
         // GET api/<MedicinesControllers>/5
         [HttpGet("{medicineId}")]
-        public IActionResult GetMedicineWithDetails(int medicineId)
+        public async Task<ActionResult<Medicines>> GetMedicineWithDetails(int medicineId)
         {
             try
             {
-                var employee = _repository.Medicines.GetMedicinelWithDetails(medicineId);
+                var employee = await _repository.Medicines.GetMedicinelWithDetails(medicineId);
 
                 if (employee == null)
                 {
@@ -82,7 +82,7 @@ namespace Back_End.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateVehicle([FromBody] MedicineForCreationDto medicine)
+        public async Task<ActionResult<Medicines>> CreateMedicine([FromBody] MedicineForCreationDto medicine)
         {
             try
             {
@@ -102,7 +102,7 @@ namespace Back_End.Controllers
 
                 _repository.Medicines.Create(medicineEntity);
 
-                //_repository.Save();
+                _repository.Medicines.SaveAsync();
 
                 var createdVehicle = _mapper.Map<MedicinesDto>(medicineEntity);
 
@@ -119,11 +119,11 @@ namespace Back_End.Controllers
 
 
         [HttpPatch("{medicineId}")]
-        public IActionResult UpdateVehicle(int medicineId, JsonPatchDocument<MedicineForUpdateDto> patchDocument)
+        public async Task<ActionResult> UpdateMedicine(int medicineId, JsonPatchDocument<MedicineForUpdateDto> patchDocument)
         {
             try
             {
-                var medicineEntity = _repository.Medicines.GetMedicineById(medicineId);
+                var medicineEntity = await _repository.Medicines.GetMedicineById(medicineId);
 
                 if (medicineEntity == null)
                 {
@@ -145,7 +145,7 @@ namespace Back_End.Controllers
 
                 _repository.Medicines.Update(medicineResult);
 
-               // _repository.Save();
+                _repository.Medicines.SaveAsync();
 
                 return NoContent();
 
@@ -159,11 +159,11 @@ namespace Back_End.Controllers
 
         // DELETE api/<MedicinesControllers>/5
         [HttpDelete("{medicineId}")]
-            public IActionResult DeleteMedicine(int medicineId)
+            public async Task<ActionResult> DeleteMedicine(int medicineId)
             {
                 try
                 {
-                    var medicine = _repository.Medicines.GetMedicineById(medicineId);
+                    var medicine = await _repository.Medicines.GetMedicineById(medicineId);
 
                     if (medicine == null)
                     {
@@ -173,7 +173,7 @@ namespace Back_End.Controllers
 
                     _repository.Medicines.Delete(medicine);
 
-                   // _repository.Save();
+                     _repository.Medicines.SaveAsync();
 
                     return NoContent();
 

@@ -2,16 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Contracts.Interfaces
 {
     public interface IMedicinesRepository : IRepositoryBase<Medicines>
     {
-        IEnumerable<Medicines> GetAllMedicines();
+        Task<IEnumerable<Medicines>> GetAllMedicines();
 
-        Medicines GetMedicineById(int medicineId);
+        Task<Medicines> GetMedicineById(int medicineId);
 
-        Medicines GetMedicinelWithDetails(int medicineId);
+        Task<Medicines> GetMedicinelWithDetails(int medicineId);
 
         void CreateMedicine(Medicines medicine);
         void UpdateMedicine(Medicines medicine);

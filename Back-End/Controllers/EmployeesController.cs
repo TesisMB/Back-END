@@ -5,6 +5,7 @@ using Back_End.Models;
 using Back_End.Models.Employees___Dto;
 using Contracts.Interfaces;
 using Entities.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,34 +20,33 @@ namespace Back_End.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-
         private ILoggerManager _logger;
         private IRepositorWrapper _repository;
         private readonly IMapper _mapper;
 
         /*Este metodo va a permitir despues poder conectarme tanto para mapear, como para obtener 
-         las funciones que se establecieron repositorios correspondientes*/
+          las funciones que se establecieron repositorios correspondientes*/
+       
         public EmployeesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper)
         {
-
             _logger = logger;
             _repository = repository;
             _mapper = mapper;
         }
 
-
-        //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
+        //[Authorize(Roles = "Coordinador General")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
         [HttpGet]
-        public IActionResult GetAllEmployees()
+        public async Task<ActionResult<Employees>> GetAllEmployees()
         {
             try
             {
-                var employees = _repository.Employees.GetAllEmployees();
+                var employees = await _repository.Employees.GetAllEmployees();
                 _logger.LogInfo($"Returned all employees from database.");
 
                 var employeesResult = _mapper.Map<IEnumerable<EmployeesDto>>(employees);
                 return Ok(employeesResult);
             }
+
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside GetAllEmployees action: {ex.Message}");
@@ -57,11 +57,11 @@ namespace Back_End.Controllers
 
         //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
         [HttpGet("{employeeId}")]
-        public IActionResult GetEmployeeWithDetails(int employeeId)
+        public async Task<ActionResult<Employees>> GetEmployeeWithDetails(int employeeId)
         {
             try
             {
-                var employee = _repository.Employees.GetEmployeeWithDetails(employeeId);
+                var employee = await _repository.Employees.GetEmployeeWithDetails(employeeId);
 
                 if (employee == null)
                 {
@@ -85,8 +85,9 @@ namespace Back_End.Controllers
 
         //[Authorize(Roles = "Coordinador General, Admin")] 
         [HttpPost]
-        public IActionResult CreateEmployee([FromBody] EmployeesForCreationDto employee)
+        public ActionResult<Employees> CreateEmployee([FromBody] EmployeesForCreationDto employee)
         {
+
             //System.Globalization.TextInfo textInfo = new System.Globalization.CultureInfo("en-US", false).TextInfo;
             try
             {
@@ -108,7 +109,7 @@ namespace Back_End.Controllers
 
                 _repository.Employees.CreateEmployee(employee);
 
-                _repository.Employees.Save();
+                //_repository.Employees.SaveAsync();
 
                 //var createdEmployee = _mapper.Map<EmployeesDto>(employeeEntity);
                 return Ok();
@@ -125,13 +126,11 @@ namespace Back_End.Controllers
 
         //[Authorize(Roles = "Coordinador General, Admin")] 
         [HttpPatch("{employeeId}")]
-         public IActionResult UpdatePartialUser(int employeeId, JsonPatchDocument<EmployeeForUpdateDto> _Employees)
+         public async Task<ActionResult> UpdatePartialUser(int employeeId, JsonPatchDocument<EmployeeForUpdateDto> _Employees)
         {
-
             try
             {
-                
-                var employeeEntity = _repository.Employees.GetEmployeeById(employeeId);
+                var employeeEntity = await _repository.Employees.GetEmployeeById(employeeId);
 
                 if (employeeEntity == null)
                 {
@@ -157,9 +156,9 @@ namespace Back_End.Controllers
                       var userPass = employeeToPatch.Users.UserPassword;
                       employeeToPatch.Users.UserPassword = Encrypt.GetSHA256(userPass);
 
-                      using (var db = new CruzRojaContext())
-                        authUser = db.Users.Where(u => u.UserID == employeeEntity.Users.UserID
-                              && u.UserPassword == employeeToPatch.Users.UserPassword).FirstOrDefault();
+                     // using (var db = new CruzRojaContext())
+                        //authUser = db.Users.Where(u => u.UserID == employeeEntity.Users.UserID
+                       //       && u.UserPassword == employeeToPatch.Users.UserPassword).FirstOrDefault();
 
 
                       if (authUser == null)
@@ -168,7 +167,6 @@ namespace Back_End.Controllers
                       }
 
                     else
-
                       {
                         employeeToPatch.Users.UserNewPassword = employeeToPatch.Users.UserNewPassword.Trim();
                      
@@ -177,13 +175,14 @@ namespace Back_End.Controllers
 
                         employeeToPatch.Users.UserPassword = employeeToPatch.Users.UserNewPassword;
                     }
+
                    }
 
                 var employeeResult = _mapper.Map(employeeToPatch, employeeEntity);
 
                 _repository.Employees.Update(employeeResult);
                
-                _repository.Employees.Save();
+                _repository.Employees.SaveAsync();
 
                 return NoContent();
             }
@@ -198,12 +197,11 @@ namespace Back_End.Controllers
         }
         //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
         [HttpDelete("{employeeId}")]
-        public IActionResult DeleteEmployee(int employeeId)
+        public async Task<ActionResult> DeleteEmployee(int employeeId)
         {
-
             try
             {
-                var employee = _repository.Users.GetUserEmployeeById(employeeId);
+                var employee = await _repository.Users.GetUserEmployeeById(employeeId);
 
                 if(employee == null)
                 {
@@ -219,7 +217,7 @@ namespace Back_End.Controllers
 
                 _repository.Users.Delete(employee);
 
-                _repository.Employees.Save();
+                 _repository.Employees.SaveAsync();
 
                 return NoContent();
             }
@@ -228,7 +226,6 @@ namespace Back_End.Controllers
                 _logger.LogError($"Something went wrong inside DeleteEmployee action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
-
         }
     }
 

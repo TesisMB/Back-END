@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Repository
 {
@@ -16,16 +17,15 @@ namespace Repository
 
         }
 
-
-
-        IEnumerable<Estates> IEstatesRepository.GetAllEstates()
+        public async Task<IEnumerable<Estates>> GetAllEstates()
         {
-            return FindAll()
+            return await FindAll()
+                .Include(i => i.Locations)
                 .Include(i => i.LocationAddress)
                 .Include(i => i.EstatesTimes)
                 .ThenInclude(i => i.Times)
                 .ThenInclude(i => i.Schedules)
-                .ToList();
+                .ToListAsync();
         }
     }
 }

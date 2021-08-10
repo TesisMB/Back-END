@@ -18,13 +18,10 @@ namespace Repository
         private IEstatesRepository _estates;
 
         private IMapper _mapper;
-        private AppSettings _appSettings;
-
-        public RepositoryWrapper(CruzRojaContext cruzRojaContext2, IMapper mapper,IOptions<AppSettings> appSettings)
+        public RepositoryWrapper(CruzRojaContext cruzRojaContext2, IMapper mapper)
         {
             _cruzRojaContext2 = cruzRojaContext2;
             _mapper = mapper;
-            _appSettings = appSettings.Value;
         }
 
         public IEmployeesRepository Employees
@@ -33,7 +30,7 @@ namespace Repository
             {
                 if (_employees == null)
                 {
-                    _employees = new EmployeesRepository(_cruzRojaContext2, _mapper, _appSettings);
+                    _employees = new EmployeesRepository(_cruzRojaContext2, _mapper);
                 }
                 return _employees;
             }
@@ -57,7 +54,7 @@ namespace Repository
             {
                 if (_users == null)
                 {
-                    _users = new UsersRepository(_cruzRojaContext2);
+                    _users = new UsersRepository(_cruzRojaContext2, _mapper);
                 }
                 return _users;
             }

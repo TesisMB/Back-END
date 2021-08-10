@@ -34,11 +34,11 @@ namespace Back_End.Controllers
 
         // GET: api/<MaterialsController>
         [HttpGet]
-        public IActionResult GetAllVolunteers()
+        public async Task<ActionResult<Materials>> GetAllVolunteers()
         {
             try
             {
-                var volunteers = _repository.Materials.GetAllMaterials();
+                var volunteers = await _repository.Materials.GetAllMaterials();
 
                 _logger.LogInfo($"Returned all Materials from database.");
 
@@ -58,12 +58,12 @@ namespace Back_End.Controllers
 
         // GET api/<MaterialsController>/5
         [HttpGet("{materialId}")]
-        public IActionResult GetMaterial(int materialId)
+        public async Task<ActionResult<Materials>> GetMaterial(int materialId)
         {
             try
             {
 
-                var volunteer = _repository.Materials.GetMaterialWithDetails(materialId);
+                var volunteer = await _repository.Materials.GetMaterialWithDetails(materialId);
 
                 if (volunteer == null)
 
@@ -77,6 +77,7 @@ namespace Back_End.Controllers
 
                 {
                     _logger.LogInfo($"Returned Material with id: {materialId}");
+                   
                     var volunteerResult = _mapper.Map<MaterialsDto>(volunteer);
                     return Ok(volunteerResult);
 
@@ -94,7 +95,7 @@ namespace Back_End.Controllers
 
         // POST api/<MaterialsController>
         [HttpPost]
-        public IActionResult CreateMaterial([FromBody] MaterialsForCreationDto material)
+        public async Task<ActionResult<Materials>> CreateMaterial([FromBody] MaterialsForCreationDto material)
         {
             try
             {
@@ -114,9 +115,9 @@ namespace Back_End.Controllers
                 var materialEntity = _mapper.Map<Materials>(material);
 
 
-                _repository.Materials.Create(materialEntity);
+                _repository.Materials.CreateMaterial(materialEntity);
 
-                //_repository.Save();
+                 _repository.Materials.SaveAsync();
 
                 var createdVolunteer = _mapper.Map<MaterialsDto>(materialEntity);
 
@@ -133,13 +134,13 @@ namespace Back_End.Controllers
 
         //[Authorize(Roles = "Coordinador General, Admin")] 
         [HttpPatch("{materialId}")]
-        public IActionResult UpdatePartialUser(int materialId, JsonPatchDocument<MaterialsForUpdateDto> _materials)
+        public async Task<ActionResult> UpdatePartialUser(int materialId, JsonPatchDocument<MaterialsForUpdateDto> _materials)
         {
 
             try
             {
 
-                var materialEntity = _repository.Materials.GetMaterialById(materialId);
+                var materialEntity = await _repository.Materials.GetMaterialById(materialId);
 
                 if (materialEntity == null)
                 {
@@ -160,7 +161,8 @@ namespace Back_End.Controllers
                 var employeeResult = _mapper.Map(materialToPatch, materialEntity);
 
                 _repository.Materials.Update(employeeResult);
-                //_repository.Save();
+              
+                 _repository.Materials.SaveAsync();
 
                 return NoContent();
 
@@ -174,13 +176,14 @@ namespace Back_End.Controllers
 
             }
         }
+
         [HttpDelete("{materialId}")]
-        public IActionResult DeleteEmployee(int materialId)
+        public async Task<ActionResult> DeleteEmployee(int materialId)
         {
 
             try
             {
-                var material = _repository.Materials.GetMaterialById(materialId);
+                var material = await _repository.Materials.GetMaterialById(materialId);
 
                 if (material == null)
                 {
@@ -196,7 +199,8 @@ namespace Back_End.Controllers
 
                 _repository.Materials.Delete(material);
 
-                //_repository.Save();
+                 _repository.Materials.SaveAsync();
+
                 return NoContent();
             }
             catch (Exception ex)

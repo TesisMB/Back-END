@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Back_End.Controllers
 {
@@ -33,11 +34,11 @@ namespace Back_End.Controllers
 
         [Route("api/Volunteers")]
         [HttpGet]
-        public IActionResult GetAllVolunteers()
+        public async Task<ActionResult> GetAllVolunteers()
         {
             try
             {
-                var volunteers = _repository.Volunteers.GetAllVolunteers();
+                var volunteers = await _repository.Volunteers.GetAllVolunteers();
 
                 _logger.LogInfo($"Returned all Volunteers from database.");
 
@@ -57,22 +58,21 @@ namespace Back_End.Controllers
 
         [Route("api/app/Volunteers")]
         [HttpGet]
-        public IActionResult GetAllVolunteersApp()
+        public async Task<ActionResult<Volunteers>> GetAllVolunteersApp()
         {
             try
             {
-                var volunteers = _repository.Volunteers.GetAllVolunteersApp();
+                var volunteers1 = await _repository.Volunteers.GetAllVolunteersApp();
 
                 _logger.LogInfo($"Returned all Volunteers from database.");
 
-                var volunteersResult = _mapper.Map<IEnumerable<VolunteersAppDto>>(volunteers);
+                var volunteersResult = _mapper.Map<IEnumerable<VolunteersAppDto>>(volunteers1);
 
                 return Ok(volunteersResult);
-
             }
+
             catch (Exception ex)
             {
-
                 _logger.LogError($"Something went wrong inside GetAllVolunteersApp action:  {ex.Message}");
                 return StatusCode(500, "Internal Server error");
             }
@@ -80,12 +80,11 @@ namespace Back_End.Controllers
 
         [Route("api/Volunteers/{volunteerId}")]
         [HttpGet]
-        public IActionResult GetVolunteer(int volunteerId)
+        public async Task<ActionResult<Volunteers>> GetVolunteer(int volunteerId)
         {
             try
             {
-
-                var volunteer = _repository.Volunteers.GetVolunteerWithDetails(volunteerId);
+                var volunteer = await _repository.Volunteers.GetVolunteerWithDetails(volunteerId);
 
                 if (volunteer == null)
 
@@ -116,7 +115,7 @@ namespace Back_End.Controllers
 
         [Route("api/Volunteers")]
         [HttpPost]
-        public IActionResult CreateVolunteer([FromBody] VolunteersForCreationDto volunteer)
+        public async Task<ActionResult<Volunteers>> CreateVolunteer([FromBody] VolunteersForCreationDto volunteer)
         {
             try
             {
@@ -135,7 +134,7 @@ namespace Back_End.Controllers
 
                 _repository.Volunteers.Create(volunteerEntity);
 
-                //_repository.Save();
+                 _repository.Volunteers.SaveAsync();
 
                 var createdVolunteer = _mapper.Map<VolunteersDto>(volunteerEntity);
 
@@ -154,10 +153,11 @@ namespace Back_End.Controllers
         //[Authorize(Roles = "Coordinador General, Admin")] 
         [Route("api/Volunteers/{volunteerId}")]
         [HttpPatch]
-        public IActionResult UpdatePartialUser(int volunteerId, JsonPatchDocument<VolunteersForUpdatoDto> patchDocument)
+        public async Task<ActionResult> UpdatePartialUser(int volunteerId, JsonPatchDocument<VolunteersForUpdatoDto> patchDocument)
         {
 
-            var userFromRepo = _repository.Volunteers.GetVolunteersById(volunteerId);
+            var userFromRepo = await _repository.Volunteers.GetVolunteersById(volunteerId);
+           
             if (userFromRepo == null)
             {
                 return NotFound();
@@ -213,11 +213,11 @@ namespace Back_End.Controllers
 
         [Route("api/Volunteers/{volunteerId}")]
         [HttpDelete]
-        public IActionResult DeleteVolunteer(int volunteerId)
+        public async Task<ActionResult> DeleteVolunteer(int volunteerId)
         {
             try
             {
-            var volunteer = _repository.Users.GetUserVolunteerById(volunteerId);
+            var volunteer = await _repository.Users.GetUserVolunteerById(volunteerId);
 
 
             if (volunteer == null)
@@ -228,7 +228,7 @@ namespace Back_End.Controllers
 
             _repository.Users.Delete(volunteer);
 
-            //_repository.Save();
+             _repository.Volunteers.SaveAsync();
 
             // Se retorna con exito la eliminacion del Usuario especificado
             return NoContent();

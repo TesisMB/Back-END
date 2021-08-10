@@ -14,7 +14,7 @@ namespace Back_End.Controllers
     public class UploadController : ControllerBase
     {
         [HttpPost, DisableRequestSizeLimit]
-        public IActionResult Upload()
+        public ActionResult Upload()
         {
             try
             {
@@ -30,7 +30,7 @@ namespace Back_End.Controllers
 
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
-                        file.CopyTo(stream);
+                         file.CopyTo(stream);
                     }
                     return Ok(new { dbPath });
                 }

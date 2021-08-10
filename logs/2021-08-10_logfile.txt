@@ -1,0 +1,14 @@
+2021-08-10 19:44:48.4746 INFO Returned all employees from database.
+2021-08-10 19:45:25.5391 INFO Returned all employees from database.
+2021-08-10 19:45:40.2115 INFO Returned all employees from database.
+2021-08-10 19:46:37.0464 INFO Returned User.
+2021-08-10 19:57:41.5222 INFO Returned User.
+2021-08-10 19:59:42.8758 INFO Returned all Volunteers from database.
+2021-08-10 20:01:09.4399 INFO Returned all Volunteers from database.
+2021-08-10 20:01:36.4017 INFO Returned all Volunteers from database.
+2021-08-10 20:20:03.2229 INFO Returned User.
+2021-08-10 20:21:38.9266 INFO Returned User.
+2021-08-10 20:22:19.2704 INFO Returned User.
+2021-08-10 20:23:56.5552 INFO Returned User.
+2021-08-10 20:24:16.9311 INFO Returned employe with details for id: 1017
+2021-08-10 20:24:25.9697 INFO Returned User.

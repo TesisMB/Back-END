@@ -13,25 +13,23 @@ using MimeKit.Text;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Repository
 {
     public class EmployeesRepository : RepositoryBase<Employees>, IEmployeesRepository
     {
         private IMapper _mapper;
-        private AppSettings _appSettings;
-
-
         //ctor
-        public EmployeesRepository(CruzRojaContext repositoryContext, IMapper mapper, AppSettings appSettings) : base(repositoryContext)
+       
+        public EmployeesRepository(CruzRojaContext repositoryContext, IMapper mapper) : base(repositoryContext)
         {
             _mapper = mapper;
-            _appSettings = appSettings;
         }
 
-        public IEnumerable<Employees> GetAllEmployees()
+        public async Task<IEnumerable<Employees>> GetAllEmployees()
         {
-            return FindAll()
+            return await FindAll()
                     .Include(i => i.Users)
                     .ThenInclude(i => i.Roles)
                     .Include(i => i.Users.Persons)
@@ -40,20 +38,20 @@ namespace Repository
                     .Include(a => a.Users.Estates.EstatesTimes)
                     .ThenInclude(a => a.Times)
                     .ThenInclude(a => a.Schedules)
-                    .ToList();
+                    .ToListAsync();
         }
 
-        public Employees GetEmployeeById(int employeeId)
+        public async Task<Employees> GetEmployeeById(int employeeId)
         {
-            return FindByCondition(empl => empl.EmployeeID.Equals(employeeId))
+            return await FindByCondition(empl => empl.EmployeeID.Equals(employeeId))
                     .Include(i => i.Users)
                     .Include(i => i.Users.Persons)
-                    .FirstOrDefault();
+                    .FirstOrDefaultAsync();
         }
 
-        public Employees GetEmployeeWithDetails(int employeeId)
+        public async Task<Employees> GetEmployeeWithDetails(int employeeId)
         {
-            return FindByCondition(empl => empl.EmployeeID.Equals(employeeId))
+            return await FindByCondition(empl => empl.EmployeeID.Equals(employeeId))
                      .Include(i => i.Users)
                      .ThenInclude(i => i.Roles)
                     .Include(i => i.Users.Persons)
@@ -62,7 +60,7 @@ namespace Repository
                     .Include(a => a.Users.Estates.EstatesTimes)
                     .ThenInclude(a => a.Times)
                     .ThenInclude(a => a.Schedules)
-                    .FirstOrDefault();
+                    .FirstOrDefaultAsync();
         }
 
         public void CreateEmployee(EmployeesForCreationDto employee)
@@ -81,18 +79,15 @@ namespace Repository
             //del carácter especificado para una cantidad especificada de caracteres.
             string codigo = token.Substring(0, longitud);
 
-
             employee.Users.UserPassword = codigo;
 
-           
             var employeeEntity = _mapper.Map<Employees>(employee);
 
             employeeEntity.Users.UserPassword = Encrypt.GetSHA256(employee.Users.UserPassword);
-           
-            
+
             Create(employeeEntity);
 
-            Save();
+            SaveAsync();
 
             sendVerificationEmail(employee);
 
@@ -107,8 +102,7 @@ namespace Repository
              <p>Su usuario es: {employees.Users.UserDni}<p>
              <p>Su contraseña es: {employees.Users.UserPassword}</p>";
 
-
-            Send(
+            EmailRepository.Send(
                 to: employees.Users.Persons.Email,
                 subject: "Sign-up Verification API",
                 html: $@"<p>Bienvenido a SICREYD!</p>
@@ -116,7 +110,7 @@ namespace Repository
             );
         }
 
-        public void Send(string to, string subject, string html, string from = null)
+        /*public void Send(string to, string subject, string html, string from = null)
         {
             // create message
             var email = new MimeMessage();
@@ -133,8 +127,7 @@ namespace Repository
 
             smtp.Send(email);
             smtp.Disconnect(true);
-        }
-
+        }*/
 
         public void UpdateEmployee(Employees employee)
         {

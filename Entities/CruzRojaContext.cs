@@ -56,9 +56,11 @@ namespace Back_End.Entities
         public DbSet<Roles> Roles { get; set; }
         public DbSet<Materials> Materials { get; set; }
         public DbSet<Medicines> Medicines { get; set; }
+        public DbSet<Locations> Locations { get; set; }
+
 
         private const string Connection =
-      @"Server=DESKTOP-0SC8P3Q;
+      @"Server=localhost;
             Database=CruzRojaDB - Testing;
             Trusted_Connection=True;
             MultipleActiveResultSets=true";

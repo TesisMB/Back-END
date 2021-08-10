@@ -25,6 +25,10 @@ namespace Back_End.Models
 
         public Boolean EstateAvailability { get; set; }
 
+        public int FK_LocationID { get; set; }
+
+        [ForeignKey("FK_LocationID")]
+        public Locations Locations { get; set; }
 
         [ForeignKey("FK_EstateID")]
         public ICollection<EstatesTimes> EstatesTimes { get; set; }

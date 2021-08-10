@@ -31,6 +31,13 @@ namespace Back_End.Models
 
         [Required]
         public int FK_RoleID { get; set; }
+
+        public string ResetToken { get; set; }
+
+        public DateTime? ResetTokenExpires { get; set; }
+
+        public DateTime? PasswordReset { get; set; }
+
         public Persons Persons { get; set; }
 
         public Volunteers Volunteers { get; set; }

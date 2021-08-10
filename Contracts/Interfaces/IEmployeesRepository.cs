@@ -1,14 +1,16 @@
 ﻿using Back_End.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Contracts.Interfaces
 {
     public interface IEmployeesRepository : IRepositoryBase<Employees>
     {
-        IEnumerable<Employees> GetAllEmployees();
-        Employees GetEmployeeById(int employeeId);
+        Task<IEnumerable<Employees>> GetAllEmployees();
 
-        Employees GetEmployeeWithDetails(int employeeId);
+        Task<Employees> GetEmployeeById(int employeeId);
+
+        Task<Employees> GetEmployeeWithDetails(int employeeId);
 
         void CreateEmployee(EmployeesForCreationDto employee);
 

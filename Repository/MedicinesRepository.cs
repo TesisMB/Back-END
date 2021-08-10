@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Repository
 {
@@ -17,52 +18,51 @@ namespace Repository
 
         }
 
-        public void CreateMedicine(Medicines medicine)
+        public async Task<IEnumerable<Medicines>> GetAllMedicines()
         {
-            Create(medicine);
-        }
-
-        public void DeleteMedicine(Medicines medicine)
-        {
-            Delete(medicine);
-        }
-
-        public IEnumerable<Medicines> GetAllMedicines()
-        {
-            return FindAll()
+            return await FindAll()
                 .Include(a => a.Estates)
                 .ThenInclude(a => a.LocationAddress)
                 .Include(a => a.Estates.EstatesTimes)
                 .ThenInclude(a => a.Times)
                 .ThenInclude(a => a.Schedules)
-                .ToList();
+                .ToListAsync();
         }
 
-        public Medicines GetMedicineById(int medicineId)
+        public async Task<Medicines> GetMedicineById(int medicineId)
         {
-            return FindByCondition(med => med.MedicineID.Equals(medicineId))
+            return await FindByCondition(med => med.MedicineID.Equals(medicineId))
                               //.Include(a => a.Estates)
                               //.ThenInclude(a => a.LocationAddress)
                               //.Include(a => a.Estates.EstatesTimes)
                               //.ThenInclude(a => a.Times)
                               //.ThenInclude(a => a.Schedules)
-                              .FirstOrDefault();
+                              .FirstOrDefaultAsync();
         }
 
-        public Medicines GetMedicinelWithDetails(int medicineId)
+        public async Task<Medicines> GetMedicinelWithDetails(int medicineId)
         {
-            return FindByCondition(med => med.MedicineID.Equals(medicineId))
+            return await FindByCondition(med => med.MedicineID.Equals(medicineId))
                      .Include(a => a.Estates)
                      .ThenInclude(a => a.LocationAddress)
                      .Include(a => a.Estates.EstatesTimes)
                      .ThenInclude(a => a.Times)
                      .ThenInclude(a => a.Schedules)
-                     .FirstOrDefault();
+                     .FirstOrDefaultAsync();
         }
 
+        public void CreateMedicine(Medicines medicine)
+        {
+            Create(medicine);
+        }
         public void UpdateMedicine(Medicines medicine)
         {
             Update(medicine);
+        }
+
+        public void DeleteMedicine(Medicines medicine)
+        {
+            Delete(medicine);
         }
     }
 }

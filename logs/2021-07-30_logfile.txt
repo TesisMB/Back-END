@@ -1,0 +1,119 @@
+2021-07-30 12:42:29.3487 INFO Returned all Volunteers from database.
+2021-07-30 12:43:14.9524 INFO Returned all Volunteers from database.
+2021-07-30 12:43:28.4264 INFO Returned all Volunteers from database.
+2021-07-30 12:43:39.8707 INFO Returned all Volunteers from database.
+2021-07-30 12:43:53.0952 INFO Returned all Volunteers from database.
+2021-07-30 12:46:13.0069 INFO Returned all Volunteers from database.
+2021-07-30 12:47:44.1275 INFO Returned all Volunteers from database.
+2021-07-30 12:48:44.9877 INFO Returned all Volunteers from database.
+2021-07-30 12:49:50.6744 INFO Returned all Volunteers from database.
+2021-07-30 12:50:16.1754 INFO Returned all Volunteers from database.
+2021-07-30 12:53:19.7684 INFO Returned all Volunteers from database.
+2021-07-30 12:53:32.2568 INFO Returned all Volunteers from database.
+2021-07-30 16:42:36.6279 INFO Returned all employees from database.
+2021-07-30 16:42:57.3482 INFO Returned employe with details for id: 1017
+2021-07-30 16:45:38.3313 INFO Returned all employees from database.
+2021-07-30 16:45:41.9771 INFO Returned all employees from database.
+2021-07-30 16:45:43.3398 INFO Returned all employees from database.
+2021-07-30 16:45:44.1684 INFO Returned all employees from database.
+2021-07-30 16:45:44.8377 INFO Returned all employees from database.
+2021-07-30 16:45:45.6532 INFO Returned all employees from database.
+2021-07-30 16:46:05.0653 INFO Returned all employees from database.
+2021-07-30 16:46:06.8806 INFO Returned all employees from database.
+2021-07-30 16:46:07.6535 INFO Returned all employees from database.
+2021-07-30 16:46:08.2734 INFO Returned all employees from database.
+2021-07-30 16:46:08.8793 INFO Returned all employees from database.
+2021-07-30 16:46:09.2855 INFO Returned all employees from database.
+2021-07-30 16:46:09.7474 INFO Returned all employees from database.
+2021-07-30 16:46:10.1910 INFO Returned all employees from database.
+2021-07-30 16:46:10.5426 INFO Returned all employees from database.
+2021-07-30 16:46:10.9708 INFO Returned all employees from database.
+2021-07-30 16:46:11.5644 INFO Returned all employees from database.
+2021-07-30 16:46:12.1838 INFO Returned all employees from database.
+2021-07-30 16:46:13.4142 INFO Returned all employees from database.
+2021-07-30 16:47:40.2631 INFO Returned User.
+2021-07-30 16:48:07.1783 INFO Returned User.
+2021-07-30 16:48:14.0552 INFO Returned User.
+2021-07-30 16:48:14.9518 INFO Returned User.
+2021-07-30 16:48:15.5866 INFO Returned User.
+2021-07-30 16:48:16.2431 INFO Returned User.
+2021-07-30 16:48:16.8367 INFO Returned User.
+2021-07-30 16:48:25.8368 INFO Returned User.
+2021-07-30 16:48:27.8283 INFO Returned User.
+2021-07-30 16:48:43.5537 INFO Returned User.
+2021-07-30 16:48:44.6343 INFO Returned User.
+2021-07-30 16:48:45.2624 INFO Returned User.
+2021-07-30 16:48:45.8804 INFO Returned User.
+2021-07-30 16:48:46.2320 INFO Returned User.
+2021-07-30 17:01:32.1760 INFO Returned User.
+2021-07-30 17:02:23.2359 INFO Returned User.
+2021-07-30 17:03:08.4475 INFO Returned User.
+2021-07-30 17:03:45.9840 INFO Returned User.
+2021-07-30 17:04:14.2062 INFO Returned User.
+2021-07-30 17:04:19.4409 INFO Returned employe with details for id: 1021
+2021-07-30 17:04:24.0851 INFO Returned all employees from database.
+2021-07-30 17:04:54.9191 INFO Returned all employees from database.
+2021-07-30 17:05:00.0979 INFO Returned employe with details for id: 1021
+2021-07-30 17:05:22.0333 INFO Returned all employees from database.
+2021-07-30 17:05:44.5785 INFO Returned User.
+2021-07-30 17:07:57.3093 INFO Returned all employees from database.
+2021-07-30 17:09:29.8036 INFO Returned User.
+2021-07-30 17:11:01.4470 INFO Returned User.
+2021-07-30 17:11:13.5590 INFO Returned all employees from database.
+2021-07-30 17:11:40.0543 INFO Returned employe with details for id: 1021
+2021-07-30 17:12:13.1311 INFO Returned employe with details for id: 1021
+2021-07-30 17:14:37.7862 INFO Returned all employees from database.
+2021-07-30 17:14:46.2723 INFO Returned all employees from database.
+2021-07-30 17:16:28.4425 INFO Returned all employees from database.
+2021-07-30 17:16:56.2328 INFO Returned all employees from database.
+2021-07-30 17:17:22.2168 INFO Returned all employees from database.
+2021-07-30 17:17:28.8503 INFO Returned all employees from database.
+2021-07-30 17:18:07.1365 INFO Returned all employees from database.
+2021-07-30 17:18:55.6505 INFO Returned all employees from database.
+2021-07-30 17:19:16.8953 INFO Returned employe with details for id: 1021
+2021-07-30 17:23:15.5781 INFO Returned all employees from database.
+2021-07-30 17:24:11.3802 INFO Returned all employees from database.
+2021-07-30 17:24:22.6521 INFO Returned all employees from database.
+2021-07-30 17:24:33.7709 INFO Returned all employees from database.
+2021-07-30 17:24:48.6988 INFO Returned all employees from database.
+2021-07-30 17:26:01.0994 INFO Returned all employees from database.
+2021-07-30 17:26:05.6057 INFO Returned all employees from database.
+2021-07-30 17:26:11.7488 INFO Returned all employees from database.
+2021-07-30 17:26:20.1424 INFO Returned all employees from database.
+2021-07-30 17:26:58.8200 INFO Returned all employees from database.
+2021-07-30 17:28:16.0915 INFO Returned all employees from database.
+2021-07-30 17:29:23.0063 INFO Returned all employees from database.
+2021-07-30 17:29:46.4583 INFO Returned User.
+2021-07-30 17:31:25.6293 INFO Returned all employees from database.
+2021-07-30 17:32:24.5917 INFO Returned all employees from database.
+2021-07-30 17:32:30.9773 INFO Returned all employees from database.
+2021-07-30 17:33:32.5481 INFO Returned all employees from database.
+2021-07-30 17:33:37.8557 INFO Returned all employees from database.
+2021-07-30 17:34:18.3240 INFO Returned all employees from database.
+2021-07-30 17:34:25.9091 INFO Returned all employees from database.
+2021-07-30 17:34:28.1179 INFO Returned employe with details for id: 1021
+2021-07-30 17:34:41.8287 INFO Returned all employees from database.
+2021-07-30 17:35:55.4388 INFO Returned all employees from database.
+2021-07-30 17:36:02.0558 INFO Returned all employees from database.
+2021-07-30 17:36:12.6314 INFO Returned employe with details for id: 1021
+2021-07-30 19:22:07.2686 ERROR Something went wrong inside GetAllEstates action: Data is Null. This method or property cannot be called on Null values.
+2021-07-30 19:24:29.1747 ERROR Something went wrong inside GetAllEstates action: Data is Null. This method or property cannot be called on Null values.
+2021-07-30 19:25:56.9868 INFO Returned all estates from database.
+2021-07-30 19:25:57.1019 ERROR Something went wrong inside GetAllEstates action: Error mapping types.
+
+Mapping types:
+List`1 -> IEnumerable`1
+System.Collections.Generic.List`1[[Back_End.Models.Estates, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> System.Collections.Generic.IEnumerable`1[[Back_End.Models.Employees___Dto.EstatesDto, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2021-07-30 19:26:55.0043 INFO Returned all estates from database.
+2021-07-30 19:26:55.0374 ERROR Something went wrong inside GetAllEstates action: Error mapping types.
+
+Mapping types:
+List`1 -> IEnumerable`1
+System.Collections.Generic.List`1[[Back_End.Models.Estates, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> System.Collections.Generic.IEnumerable`1[[Back_End.Models.Employees___Dto.EstatesDto, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2021-07-30 19:28:21.7841 INFO Returned all estates from database.
+2021-07-30 19:28:21.8973 ERROR Something went wrong inside GetAllEstates action: Error mapping types.
+
+Mapping types:
+List`1 -> IEnumerable`1
+System.Collections.Generic.List`1[[Back_End.Models.Estates, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> System.Collections.Generic.IEnumerable`1[[Back_End.Models.Employees___Dto.EstatesDto, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2021-07-30 19:29:05.4410 INFO Returned all estates from database.

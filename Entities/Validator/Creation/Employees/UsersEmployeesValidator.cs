@@ -32,8 +32,6 @@ namespace Back_End.Validator
             RuleFor(x => x.Persons).SetValidator(new PersonsValidator());
         }
 
-
-
         //Esta funcion me permite verificar que se ingresar en el campo UserDni valores unicos.
         private bool BeUniqueUrl(string Dni)
         {

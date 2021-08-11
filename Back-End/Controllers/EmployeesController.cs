@@ -34,8 +34,8 @@ namespace Back_End.Controllers
             _mapper = mapper;
         }
 
-        //[Authorize(Roles = "Coordinador General")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
         [HttpGet]
+        //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
         public async Task<ActionResult<Employees>> GetAllEmployees()
         {
             try

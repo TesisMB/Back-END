@@ -8,7 +8,7 @@ namespace Repository
 {
     public class RepositoryWrapper : IRepositorWrapper
     {
-        private CruzRojaContext _cruzRojaContext2;
+        private CruzRojaContext _cruzRojaContext;
         private IEmployeesRepository _employees;
         private IVolunteersRepository _volunteers;
         private IUsersRepository _users;
@@ -17,10 +17,11 @@ namespace Repository
         private IMedicinesRepository _medicines;
         private IEstatesRepository _estates;
 
+
         private IMapper _mapper;
-        public RepositoryWrapper(CruzRojaContext cruzRojaContext2, IMapper mapper)
+        public RepositoryWrapper(CruzRojaContext cruzRojaContext, IMapper mapper)
         {
-            _cruzRojaContext2 = cruzRojaContext2;
+            _cruzRojaContext = cruzRojaContext;
             _mapper = mapper;
         }
 
@@ -30,7 +31,7 @@ namespace Repository
             {
                 if (_employees == null)
                 {
-                    _employees = new EmployeesRepository(_cruzRojaContext2, _mapper);
+                    _employees = new EmployeesRepository(_cruzRojaContext, _mapper);
                 }
                 return _employees;
             }
@@ -42,7 +43,7 @@ namespace Repository
             {
                 if (_volunteers == null)
                 {
-                    _volunteers = new VoluntersRepository(_cruzRojaContext2);
+                    _volunteers = new VoluntersRepository(_cruzRojaContext);
                 }
                 return _volunteers;
             }
@@ -54,7 +55,7 @@ namespace Repository
             {
                 if (_users == null)
                 {
-                    _users = new UsersRepository(_cruzRojaContext2, _mapper);
+                    _users = new UsersRepository(_cruzRojaContext, _mapper);
                 }
                 return _users;
             }
@@ -66,7 +67,7 @@ namespace Repository
             {
                 if (_vehicles == null)
                 {
-                    _vehicles = new VehiclesRepository(_cruzRojaContext2);
+                    _vehicles = new VehiclesRepository(_cruzRojaContext);
                 }
                 return _vehicles;
             }
@@ -78,7 +79,7 @@ namespace Repository
             {
                 if (_materials == null)
                 {
-                    _materials = new MaterialsRepository(_cruzRojaContext2);
+                    _materials = new MaterialsRepository(_cruzRojaContext);
                 }
                 return _materials;
             }
@@ -90,7 +91,7 @@ namespace Repository
             {
                 if (_medicines == null)
                 {
-                    _medicines = new MedicinesRepository(_cruzRojaContext2);
+                    _medicines = new MedicinesRepository(_cruzRojaContext);
                 }
                 return _medicines;
             }
@@ -102,7 +103,7 @@ namespace Repository
             {
                 if (_estates == null)
                 {
-                    _estates = new EstatesRepository(_cruzRojaContext2);
+                    _estates = new EstatesRepository(_cruzRojaContext);
                 }
                 return _estates;
             }

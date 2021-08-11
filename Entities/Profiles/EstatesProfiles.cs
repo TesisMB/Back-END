@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Back_End.Models;
 using Back_End.Models.Employees___Dto;
+using Entities.DataTransferObjects.Estates___Dto;
 using Entities.DataTransferObjects.Models.Vehicles___Dto;
 
 namespace Back_End.Profiles
@@ -12,6 +13,8 @@ namespace Back_End.Profiles
             //Creo Las clases a ser mapeadas
             CreateMap<Estates, EstatesDto>();
             CreateMap<Estates, EstatesVehiclesDto>();
+
+            CreateMap<Estates, EstatesTypeDto>();
 
         }
     }

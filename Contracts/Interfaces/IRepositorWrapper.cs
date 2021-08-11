@@ -20,7 +20,6 @@ namespace Contracts.Interfaces
 
         IEstatesRepository Estates { get; }
 
-
         // void Save();
     }
 }

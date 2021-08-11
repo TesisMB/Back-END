@@ -9,5 +9,7 @@ namespace Contracts.Interfaces
     public interface IEstatesRepository : IRepositoryBase<Estates>
     {
        Task<IEnumerable<Estates>> GetAllEstates();
+        Task<IEnumerable<Estates>> GetAllEstatesType();
+
     }
 }

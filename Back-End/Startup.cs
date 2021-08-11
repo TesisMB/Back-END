@@ -66,20 +66,21 @@ public class Startup
             opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         })
+.AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = true;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters
+  {
+      ValidateIssuerSigningKey = true,
+      IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("superSecretKey@345")),
+      ValidateIssuer = false,
+      ValidateAudience = false,
+      ClockSkew = TimeSpan.Zero
+      //ValidateLifetime = true,
 
-     .AddJwtBearer(options =>
-     {
-         options.TokenValidationParameters = new TokenValidationParameters
-         {
-             ValidateIssuer = true,
-             ValidateAudience = true,
-             ValidateLifetime = true,
-             ValidateIssuerSigningKey = true,
-             ValidIssuer = "http://localhost:5000",
-             ValidAudience = "http://localhost:5000",
-             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
-         };
-     });
+  };
+});
 
         services.AddControllers().AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
@@ -111,7 +112,6 @@ public class Startup
             });
         }
 
-        app.UseHttpsRedirection();
 
         //habilita e uso de archivos estaticos para la solicitud.
         app.UseStaticFiles();
@@ -122,15 +122,17 @@ public class Startup
             ForwardedHeaders = ForwardedHeaders.All
         });
 
-        app.UseRouting();
-
         app.UseCors("CorsPolicy");
 
-        app.UseMvc();
+        app.UseRouting();
 
         app.UseAuthentication();
 
         app.UseAuthorization();
+
+        app.UseHttpsRedirection();
+
+        app.UseMvc();
 
         app.UseEndpoints(endpoints =>
         {

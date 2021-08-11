@@ -12,8 +12,8 @@ namespace Repository
 {
    public class MedicinesRepository : RepositoryBase<Medicines>, IMedicinesRepository
     {
-        public MedicinesRepository(CruzRojaContext cruzRojaContext2)
-            : base(cruzRojaContext2)
+        public MedicinesRepository(CruzRojaContext cruzRojaContext)
+            : base(cruzRojaContext)
         {
 
         }

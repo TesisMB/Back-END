@@ -12,8 +12,8 @@ namespace Repository
 {
    public class MaterialsRepository : RepositoryBase<Materials>, IMaterialsRepository
     {
-        public MaterialsRepository(CruzRojaContext cruzRojaContext2)
-        : base(cruzRojaContext2)
+        public MaterialsRepository(CruzRojaContext cruzRojaContext)
+        : base(cruzRojaContext)
         {
 
         }

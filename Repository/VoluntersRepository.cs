@@ -11,12 +11,12 @@ namespace Repository
 {
     public class VoluntersRepository : RepositoryBase<Volunteers>, IVolunteersRepository
     {
-        private CruzRojaContext cruzRojaContext;
+        private CruzRojaContext _cruzRojaContext;
 
-        public VoluntersRepository(CruzRojaContext cruzRojaContext2)
-        : base(cruzRojaContext2)
+        public VoluntersRepository(CruzRojaContext cruzRojaContext)
+        : base(cruzRojaContext)
         {
-            cruzRojaContext = cruzRojaContext2;
+            _cruzRojaContext = cruzRojaContext;
         }
         public async Task<IEnumerable<Volunteers>> GetAllVolunteers()
         {
@@ -39,7 +39,7 @@ namespace Repository
 
             bool volunteer = true;
            
-            var collection = cruzRojaContext.Volunteers as IQueryable<Volunteers>;
+            var collection = _cruzRojaContext.Volunteers as IQueryable<Volunteers>;
 
             if (volunteer == true)
             {

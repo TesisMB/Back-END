@@ -11,8 +11,8 @@ namespace Repository
 {
     public class VehiclesRepository : RepositoryBase<Vehicles>, IVehiclesRepository
     {
-        public VehiclesRepository(CruzRojaContext cruzRojaContext2)
-             : base(cruzRojaContext2)
+        public VehiclesRepository(CruzRojaContext cruzRojaContext)
+             : base(cruzRojaContext)
         {
 
         }

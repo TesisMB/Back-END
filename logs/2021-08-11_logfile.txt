@@ -1,0 +1,96 @@
+2021-08-11 12:36:08.7883 INFO Returned User.
+2021-08-11 12:36:14.5800 INFO Returned User.
+2021-08-11 13:09:26.8173 INFO Returned User.
+2021-08-11 13:11:30.4896 INFO Returned User.
+2021-08-11 13:16:10.2708 INFO Returned User.
+2021-08-11 13:24:22.4752 INFO Returned User.
+2021-08-11 13:25:11.2288 INFO Returned all employees from database.
+2021-08-11 13:25:30.2106 INFO Returned all employees from database.
+2021-08-11 13:25:31.0985 INFO Returned all employees from database.
+2021-08-11 13:25:31.7701 INFO Returned all employees from database.
+2021-08-11 13:25:32.4446 INFO Returned all employees from database.
+2021-08-11 13:25:33.1512 INFO Returned all employees from database.
+2021-08-11 13:25:33.7879 INFO Returned all employees from database.
+2021-08-11 13:25:34.3863 INFO Returned all employees from database.
+2021-08-11 13:25:35.0349 INFO Returned all employees from database.
+2021-08-11 13:25:35.7834 INFO Returned all employees from database.
+2021-08-11 13:25:36.4750 INFO Returned all employees from database.
+2021-08-11 13:25:37.3509 INFO Returned all employees from database.
+2021-08-11 13:25:52.3042 INFO Returned all employees from database.
+2021-08-11 13:26:45.4074 INFO Returned all employees from database.
+2021-08-11 13:26:46.8228 INFO Returned all employees from database.
+2021-08-11 13:26:47.5346 INFO Returned all employees from database.
+2021-08-11 13:26:48.0796 INFO Returned all employees from database.
+2021-08-11 13:26:49.9648 INFO Returned all employees from database.
+2021-08-11 13:26:50.5610 INFO Returned all employees from database.
+2021-08-11 13:26:55.2613 INFO Returned User.
+2021-08-11 13:28:27.7382 INFO Returned all employees from database.
+2021-08-11 13:31:21.0202 INFO Returned User.
+2021-08-11 13:32:26.4376 INFO Returned User.
+2021-08-11 13:33:12.8018 ERROR Something went wrong inside CreateEmployee action: Object reference not set to an instance of an object.
+2021-08-11 13:33:19.0999 INFO Returned all employees from database.
+2021-08-11 13:33:21.9564 INFO Returned all employees from database.
+2021-08-11 13:33:22.4117 INFO Returned all employees from database.
+2021-08-11 13:33:22.9023 INFO Returned all employees from database.
+2021-08-11 13:33:23.3528 INFO Returned all employees from database.
+2021-08-11 13:33:23.7880 INFO Returned all employees from database.
+2021-08-11 13:33:24.2634 INFO Returned all employees from database.
+2021-08-11 13:33:24.6146 INFO Returned all employees from database.
+2021-08-11 13:33:24.9798 INFO Returned all employees from database.
+2021-08-11 13:33:25.2970 INFO Returned all employees from database.
+2021-08-11 13:33:25.6290 INFO Returned all employees from database.
+2021-08-11 13:33:32.5981 INFO Returned all employees from database.
+2021-08-11 13:33:33.1999 INFO Returned all employees from database.
+2021-08-11 13:33:33.7554 INFO Returned all employees from database.
+2021-08-11 13:33:34.1850 INFO Returned all employees from database.
+2021-08-11 13:33:34.7535 INFO Returned all employees from database.
+2021-08-11 13:33:35.1194 INFO Returned all employees from database.
+2021-08-11 13:33:35.5731 INFO Returned all employees from database.
+2021-08-11 13:33:36.0100 INFO Returned all employees from database.
+2021-08-11 13:34:04.6698 INFO Returned all employees from database.
+2021-08-11 13:34:05.3268 INFO Returned all employees from database.
+2021-08-11 13:34:05.9293 INFO Returned all employees from database.
+2021-08-11 13:38:38.3167 INFO Returned User.
+2021-08-11 13:39:49.6161 INFO Returned User.
+2021-08-11 13:43:00.4425 INFO Returned User.
+2021-08-11 13:47:05.2707 INFO Returned User.
+2021-08-11 13:47:30.2719 INFO Returned all employees from database.
+2021-08-11 13:47:59.5284 INFO Returned all employees from database.
+2021-08-11 13:48:00.3100 INFO Returned all employees from database.
+2021-08-11 13:48:04.7912 INFO Returned all employees from database.
+2021-08-11 13:48:05.4228 INFO Returned all employees from database.
+2021-08-11 13:48:05.9982 INFO Returned all employees from database.
+2021-08-11 13:48:06.5526 INFO Returned all employees from database.
+2021-08-11 13:48:07.1119 INFO Returned all employees from database.
+2021-08-11 13:48:07.5836 INFO Returned all employees from database.
+2021-08-11 13:48:08.0087 INFO Returned all employees from database.
+2021-08-11 13:48:09.3376 INFO Returned all employees from database.
+2021-08-11 13:48:09.8029 INFO Returned all employees from database.
+2021-08-11 13:48:10.2562 INFO Returned all employees from database.
+2021-08-11 13:48:10.8267 INFO Returned all employees from database.
+2021-08-11 13:48:11.1519 INFO Returned all employees from database.
+2021-08-11 13:48:15.7031 INFO Returned all employees from database.
+2021-08-11 13:48:16.2970 INFO Returned all employees from database.
+2021-08-11 13:48:16.8641 INFO Returned all employees from database.
+2021-08-11 13:48:17.3800 INFO Returned all employees from database.
+2021-08-11 13:55:09.9427 INFO Returned User.
+2021-08-11 13:55:29.7472 INFO Returned all employees from database.
+2021-08-11 13:56:04.1575 INFO Returned all employees from database.
+2021-08-11 13:56:07.8645 INFO Returned all employees from database.
+2021-08-11 14:04:04.0990 INFO Returned User.
+2021-08-11 16:37:51.0676 ERROR Employee with id: 1015, hasn't been found in db.
+2021-08-11 16:37:53.3742 ERROR Employee with id: 1014, hasn't been found in db.
+2021-08-11 16:37:54.5639 ERROR Employee with id: 1013, hasn't been found in db.
+2021-08-11 16:37:55.4865 ERROR Employee with id: 1012, hasn't been found in db.
+2021-08-11 16:39:06.3784 INFO Returned employe with details for id: 1029
+2021-08-11 18:31:40.9108 INFO Returned all estates from database.
+2021-08-11 18:32:06.0675 INFO Returned all estates from database.
+2021-08-11 18:35:37.1291 INFO Returned all estates from database.
+2021-08-11 18:48:34.6020 INFO Returned all estates from database.
+2021-08-11 18:49:07.0510 INFO Returned all estates from database.
+2021-08-11 18:55:12.9583 INFO Returned all estates from database.
+2021-08-11 18:55:44.5670 INFO Returned all estates from database.
+2021-08-11 19:03:26.9264 INFO Returned all estates from database.
+2021-08-11 19:03:28.2662 INFO Returned all estates from database.
+2021-08-11 19:03:29.9048 INFO Returned all estates from database.
+2021-08-11 19:03:49.2869 INFO Returned all estates from database.

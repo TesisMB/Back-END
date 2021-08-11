@@ -25,11 +25,11 @@ namespace Repository
         private IMapper _mapper;
         private CruzRojaContext _cruzRojaContext;
 
-        public UsersRepository(CruzRojaContext cruzRojaContext2, IMapper mapper)
-            : base(cruzRojaContext2)
+        public UsersRepository(CruzRojaContext cruzRojaContext, IMapper mapper)
+            : base(cruzRojaContext)
         {
             _mapper = mapper;
-            _cruzRojaContext = cruzRojaContext2;
+            _cruzRojaContext = cruzRojaContext;
         }
 
         public async Task<Users> GetUserEmployeeById(int userId)

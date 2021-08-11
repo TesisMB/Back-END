@@ -12,7 +12,7 @@ namespace Repository
 {
    public class EstatesRepository : RepositoryBase<Estates>, IEstatesRepository                                                                                                                            
     {
-        public EstatesRepository(CruzRojaContext repositoryContext): base(repositoryContext)
+        public EstatesRepository(CruzRojaContext cruzRojaContext) : base(cruzRojaContext)
         {
 
         }
@@ -20,12 +20,17 @@ namespace Repository
         public async Task<IEnumerable<Estates>> GetAllEstates()
         {
             return await FindAll()
-                .Include(i => i.Locations)
                 .Include(i => i.LocationAddress)
                 .Include(i => i.EstatesTimes)
                 .ThenInclude(i => i.Times)
                 .ThenInclude(i => i.Schedules)
                 .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Estates>> GetAllEstatesType()
+        {
+            return await FindAll()
+                          .ToListAsync();
         }
     }
 }

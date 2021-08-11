@@ -15,6 +15,6 @@ namespace Contracts.Interfaces
         void CreateEmployee(EmployeesForCreationDto employee);
 
         void UpdateEmployee(Employees employee);
-      //void sendVerificationEmail(Employees employees);//, string origin)
+
     }
 }

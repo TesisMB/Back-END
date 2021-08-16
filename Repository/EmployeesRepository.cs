@@ -38,6 +38,7 @@ namespace Repository
                     .Include(a => a.Users.Estates.EstatesTimes)
                     .ThenInclude(a => a.Times)
                     .ThenInclude(a => a.Schedules)
+                    .Include(a => a.Users.Estates.Locations)
                     .ToListAsync();
         }
 
@@ -60,6 +61,7 @@ namespace Repository
                     .Include(a => a.Users.Estates.EstatesTimes)
                     .ThenInclude(a => a.Times)
                     .ThenInclude(a => a.Schedules)
+                    .Include(a=>a.Users.Estates.Locations)
                     .FirstOrDefaultAsync();
         }
 

@@ -7,7 +7,7 @@ namespace Back_End.Models
 {
     public class EmployeesForCreationDto
     {
-        public DateTimeOffset EmployeeCreatedate { get; set; } = DateTime.Now;
+        public DateTime EmployeeCreatedate { get; set; } = DateTime.Now;
         public UsersEmployeesForCreationDto Users { get; set; }
     }
 }

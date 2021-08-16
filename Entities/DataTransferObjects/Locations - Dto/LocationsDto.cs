@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Entities.DataTransferObjects.Locations___Dto
@@ -15,8 +16,9 @@ namespace Entities.DataTransferObjects.Locations___Dto
 
         public string LocationCityName { get; set; }
 
-        public int LocationLongitude { get; set; }
-        public int LocationLatitude { get; set; }
+        public string LocationLongitude { get; set; }
+
+        public string LocationLatitude { get; set; }
 
     }
 }

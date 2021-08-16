@@ -26,8 +26,9 @@ namespace Entities.Models
         [MaxLength(25)]
         public string LocationCityName { get; set; }
 
-        public int LocationLongitude { get; set; }
-        public int LocationLatitude { get; set; }
+        public string LocationLongitude { get; set; }
+
+        public string LocationLatitude { get; set; }
 
         public ICollection<Estates> Estates { get; set; }
 

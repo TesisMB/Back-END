@@ -15,7 +15,7 @@ namespace Back_End.Models
         public int EmployeeID { get; set; }
 
         [Required]
-        public DateTimeOffset EmployeeCreatedate { get; set; }
+        public DateTime EmployeeCreatedate { get; set; }
 
         public Users Users { get; set; }
 

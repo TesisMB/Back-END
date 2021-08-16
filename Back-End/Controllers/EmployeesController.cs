@@ -8,10 +8,13 @@ using Entities.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using NLog.Layouts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
+using Wkhtmltopdf.NetCore;
 
 namespace Back_End.Controllers
 {
@@ -23,15 +26,52 @@ namespace Back_End.Controllers
         private ILoggerManager _logger;
         private IRepositorWrapper _repository;
         private readonly IMapper _mapper;
-
-        /*Este metodo va a permitir despues poder conectarme tanto para mapear, como para obtener 
-          las funciones que se establecieron repositorios correspondientes*/
-       
-        public EmployeesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper)
+        readonly IGeneratePdf _generatePdf;
+        public EmployeesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper, IGeneratePdf generatePdf)
         {
             _logger = logger;
             _repository = repository;
             _mapper = mapper;
+            _generatePdf = generatePdf;
+
+        }
+
+        [HttpGet("Get/{employeeId}")]
+        public async Task <IActionResult> GetEmployee1(int employeeId)
+        {
+
+            var employee = await _repository.Employees.GetEmployeeWithDetails(employeeId);
+
+            if (employee == null)
+            {
+               return NotFound();
+            }
+
+            var options = new ConvertOptions
+            {
+                PageMargins = new Wkhtmltopdf.NetCore.Options.Margins()
+                {
+                    Top = 5
+                }
+            };
+
+            _generatePdf.SetConvertOptions(options);
+
+
+            var pdf = await _generatePdf.GetByteArray("Views/Employee/EmployeeInfo.cshtml", employee);
+
+            var pdfStream = new System.IO.MemoryStream();
+            pdfStream.Write(pdf, 0, pdf.Length);
+            pdfStream.Position = 0;
+
+
+            //var pdf = await _generatePdf.GetByteArray("Views/Employee/EmployeeInfo.cshtml", employee);
+
+            return new FileStreamResult(pdfStream, "application/pdf");
+
+            //return await _generatePdf.GetPdf("Views/Employee/EmployeeInfo.cshtml", pdfStream);
+
+            //return File(pdf, "application/pdf", $"{employee.Users.Persons.FirstName} {employee.Users.Persons.LastName}.pdf");
         }
 
         [HttpGet]

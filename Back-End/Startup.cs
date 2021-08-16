@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using NLog;
 using System.IO;
 using FluentValidation.AspNetCore;
+using Wkhtmltopdf.NetCore;
 
 public class Startup
 {
@@ -38,6 +39,8 @@ public class Startup
         services.ConfigureSqlContext(Configuration);
         services.ConfigureRepositoryWrapper();
         services.Fluent();
+
+        services.AddWkhtmltopdf("WkhtmltoPdf");
 
 
         services.Configure<ApiBehaviorOptions>(options => {

@@ -13,6 +13,8 @@ namespace Back_End.Models.Employees___Dto
         public string EstateTypes { get; set; }
 
         public LocationAddressDto LocationAddress { get; set; }
+
+        public LocationsDto Locations { get; set; }
         public ICollection<EstatesTimesDto> EstatesTimes { get; set; }
     }
 }

@@ -36,7 +36,7 @@ namespace Back_End.Controllers
 
         }
 
-        [HttpGet("Get/{employeeId}")]
+        [HttpGet("PDF/{employeeId}")]
         public async Task <IActionResult> GetEmployee1(int employeeId)
         {
 

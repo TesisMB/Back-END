@@ -5,12 +5,11 @@ using FluentValidation;
 
 namespace Entities.Validator
 {
-    public class EmployeeValidator : AbstractValidator<EmployeesForCreationDto>
+    public class EmployeesValidator : AbstractValidator<EmployeesForCreationDto>
     {
-        public EmployeeValidator()
+        public EmployeesValidator()
         {
             RuleFor(x => x.Users).SetValidator(new UsersEmployeesValidator());
-
         }
     }
 }

@@ -8,7 +8,6 @@ namespace Entities.DataTransferObjects.Locations___Dto
     public class LocationsDto
     {
         public int LocationID { get; set; }
-
    
         public string LocationDepartmentName { get; set; }
 

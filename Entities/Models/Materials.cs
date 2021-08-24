@@ -24,7 +24,7 @@ namespace Entities.Models
 
         [Required]
         [MaxLength(50)]
-        public string MaterialQuantity { get; set; }
+        public int MaterialQuantity { get; set; }
 
         public string MaterialUtility { get; set; }
 

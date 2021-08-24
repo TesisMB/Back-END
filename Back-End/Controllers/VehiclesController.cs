@@ -164,7 +164,7 @@ namespace Back_End.Controllers
                     return NotFound();
                 }
 
-                _repository.Vehicles.Delete(vehicle);
+                _repository.Vehicles.DeleteVehicle(vehicle);
 
                  _repository.Vehicles.SaveAsync();
 

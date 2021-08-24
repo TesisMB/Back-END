@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Back_End.Entities;
 using Contracts.Interfaces;
-using Entities.DataTransferObjects.Email;
 using Microsoft.Extensions.Options;
 
 namespace Repository
@@ -16,9 +15,12 @@ namespace Repository
         private IMaterialsRepository _materials;
         private IMedicinesRepository _medicines;
         private IEstatesRepository _estates;
+        private IEmergenciesDisastersRepository _emergenciesDisasters;
+        private ITypesEmergenciesDisastersRepository _typesEmergenciesDisasters;
 
 
         private IMapper _mapper;
+
         public RepositoryWrapper(CruzRojaContext cruzRojaContext, IMapper mapper)
         {
             _cruzRojaContext = cruzRojaContext;
@@ -106,6 +108,30 @@ namespace Repository
                     _estates = new EstatesRepository(_cruzRojaContext);
                 }
                 return _estates;
+            }
+        }
+
+        public IEmergenciesDisastersRepository EmergenciesDisasters
+        {
+            get
+            {
+                if (_emergenciesDisasters == null)
+                {
+                    _emergenciesDisasters = new EmergenciesDisastersRepository(_cruzRojaContext);
+                }
+                return _emergenciesDisasters;
+            }
+        }
+
+        public ITypesEmergenciesDisastersRepository TypesEmergenciesDisasters
+        {
+            get
+            {
+                if (_typesEmergenciesDisasters == null)
+                {
+                    _typesEmergenciesDisasters = new TypesEmergenciesDisastersRepository(_cruzRojaContext);
+                }
+                return _typesEmergenciesDisasters;
             }
         }
 

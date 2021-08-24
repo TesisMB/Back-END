@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -20,5 +21,8 @@ namespace Back_End.Models
         public Users Users { get; set; }
 
         public ICollection<Vehicles> Vehicles { get; set; }
+
+        public ICollection<EmergenciesDisasters> EmergenciesDisasters { get; set; }
+
     }
 }

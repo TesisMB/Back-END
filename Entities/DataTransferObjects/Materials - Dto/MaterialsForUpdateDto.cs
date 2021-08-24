@@ -6,7 +6,7 @@ namespace Entities.DataTransferObjects.Materials___Dto
 {
     public class MaterialsForUpdateDto
     {
-        public string MaterialQuantity { get; set; }
+        public int MaterialQuantity { get; set; }
 
         public Boolean MaterialAvailability { get; set; }
         public string MaterialPicture { get; set; }

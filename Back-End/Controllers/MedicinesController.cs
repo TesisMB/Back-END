@@ -86,11 +86,10 @@ namespace Back_End.Controllers
         {
             try
             {
-
-              /*  if (!ModelState.IsValid)
+                if (!ModelState.IsValid)
                 {
                     return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
-                }*/
+                }
 
                 if (medicine == null)
                 {

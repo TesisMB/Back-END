@@ -3,13 +3,7 @@ using Back_End.Entities;
 using Back_End.Helpers;
 using Back_End.Models;
 using Contracts.Interfaces;
-using Entities.DataTransferObjects.Email;
-using MailKit.Net.Smtp;
-using MailKit.Security;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using MimeKit;
-using MimeKit.Text;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,19 +13,37 @@ namespace Repository
 {
     public class EmployeesRepository : RepositoryBase<Employees>, IEmployeesRepository
     {
+        private CruzRojaContext _cruzRojaContext;
+
         private IMapper _mapper;
         //ctor
        
-        public EmployeesRepository(CruzRojaContext repositoryContext, IMapper mapper) : base(repositoryContext)
+        public EmployeesRepository(CruzRojaContext cruzRojaContext, IMapper mapper) : base(cruzRojaContext)
         {
             _mapper = mapper;
+            _cruzRojaContext = cruzRojaContext;
         }
 
         public async Task<IEnumerable<Employees>> GetAllEmployees()
         {
-            return await FindAll()
+            var user = UsersRepository.authUser;
+
+            var Collection = _cruzRojaContext.Employees as IQueryable<Employees>;
+
+            if(!string.IsNullOrEmpty(user.Estates.Locations.LocationDepartmentName) || !string.IsNullOrEmpty(user.Estates.Locations.LocationCityName) || !string.IsNullOrEmpty(user.Estates.Locations.LocationMunicipalityName))
+            {
+                Collection = Collection.Where(
+                    a => a.Users.Estates.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName
+                    && a.Users.Estates.Locations.LocationCityName == user.Estates.Locations.LocationCityName
+                    && a.Users.Estates.Locations.LocationMunicipalityName == user.Estates.Locations.LocationMunicipalityName
+                    );
+            }
+
+
+            return await Collection
                     .Include(i => i.Users)
-                    .ThenInclude(i => i.Roles)
+                    .Include(i => i.Users.Locations)
+                    .Include(i => i.Users.Roles)
                     .Include(i => i.Users.Persons)
                     .Include(i => i.Users.Estates)
                     .ThenInclude(i => i.LocationAddress)
@@ -54,8 +66,8 @@ namespace Repository
         {
             return await FindByCondition(empl => empl.EmployeeID.Equals(employeeId))
                      .Include(i => i.Users)
-                     .ThenInclude(i => i.Roles)
-                    .Include(i => i.Users.Persons)
+                     .Include(i => i.Users.Locations)
+                    .Include(i => i.Users.Roles).Include(i => i.Users.Persons)
                     .Include(i => i.Users.Estates)
                     .ThenInclude(i => i.LocationAddress)
                     .Include(a => a.Users.Estates.EstatesTimes)

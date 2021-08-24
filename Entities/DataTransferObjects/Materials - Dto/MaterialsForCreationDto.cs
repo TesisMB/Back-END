@@ -10,7 +10,7 @@ namespace Entities.DataTransferObjects.Materials___Dto
         
         public string MaterialMark { get; set; }
 
-        public string MaterialQuantity { get; set; }
+        public int MaterialQuantity { get; set; }
 
         public string MaterialUtility { get; set; }
 

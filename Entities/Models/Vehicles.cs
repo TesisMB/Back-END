@@ -31,11 +31,11 @@ namespace Back_End.Models
 
         [ForeignKey("FK_EstateID")]
         public Estates Estates { get; set; }
-        public int FK_EstateID { get; set; }
+        public int? FK_EstateID { get; set; }
 
         [ForeignKey("FK_EmployeeID")]
         public Employees Employees { get; set; }
-        public int FK_EmployeeID { get; set; }
+        public int? FK_EmployeeID { get; set; }
 
         [ForeignKey("Fk_TypeVehicleID")]
         public TypeVehicles TypeVehicles { get; set; }

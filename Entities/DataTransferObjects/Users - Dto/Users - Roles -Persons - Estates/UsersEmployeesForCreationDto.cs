@@ -26,5 +26,9 @@ namespace Back_End.Models
 
         public PersonForCreationDto Persons { get; set; }
         public int FK_EstateID { get; set; }
+
+        public int FK_LocationID { get; set; }
+
+
     }
 }

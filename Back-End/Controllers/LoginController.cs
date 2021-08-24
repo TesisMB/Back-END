@@ -1,21 +1,12 @@
 ﻿using AutoMapper;
-using Back_End.Entities;
-using Back_End.Helpers;
 using Back_End.Models;
 using Contracts.Interfaces;
-using Entities.DataTransferObjects;
-using Entities.DataTransferObjects.Email;
-using Entities.DataTransferObjects.Login___Dto;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Linq;
-using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace Back_End.Controllers
 {
-
     [Route("api/")]
     [ApiController]
     public class LoginController : BaseApiController
@@ -60,47 +51,18 @@ namespace Back_End.Controllers
             return ret;
         }
 
-       /* public async Task<UserEmployeeAuthDto> ValidateUser(UserLoginDto user)
-        {
-            UserEmployeeAuthDto ret = new UserEmployeeAuthDto();
-
-            Users authUser = null;
-
-            string Pass = user.UserPassword;
-            string ePass = Encrypt.GetSHA256(Pass);
-
-            //se conecta a la base de datos para verificar las datos del usuario en cuestion
-            await using (var db = new CruzRojaContext())
-                authUser = db.Users.Include(u => u.Persons)
-                               .Include(u => u.Roles)
-                               .Include(u => u.Estates)
-                               .ThenInclude(u => u.LocationAddress)
-                               .Include(u => u.Estates.EstatesTimes)
-                               .ThenInclude(u => u.Times)
-                               .ThenInclude(u => u.Schedules)
-                                .Where(u => u.UserDni == user.UserDni
-                                   && u.UserPassword == ePass).FirstOrDefault();
-
-            if (authUser != null)
-            {
-                ret = _mapper.Map<UserEmployeeAuthDto>(authUser); //si los datos son correctos se crea el objeto del usuario autentificado
-            }
-
-            return ret; //retornamos el valor de este objeto
-        }
-*/
         [HttpPost("forgot-password")]
-        public ActionResult ForgotPassword(ForgotPasswordRequest model)
+        public ActionResult ForgotPassword(string email )
         {
-            _repository.Users.ForgotPassword(model);
+            _repository.Users.ForgotPassword(email);
 
             return Ok();
         }
 
         [HttpPost("reset-password/{token?}")]
-        public ActionResult ResetPassword([FromQuery] string token, [FromBody] ResetPasswordRequest model)
+        public ActionResult ResetPassword([FromQuery] string token, [FromBody] string password)
         {
-            _repository.Users.ResetPassword(token, model);
+            _repository.Users.ResetPassword(token, password);
             return Ok();
         }
 

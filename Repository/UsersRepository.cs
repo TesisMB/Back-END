@@ -4,7 +4,6 @@ using Back_End.Helpers;
 using Back_End.Models;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects;
-using Entities.DataTransferObjects.Email;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.EntityFrameworkCore;
@@ -23,13 +22,12 @@ namespace Repository
     {
 
         private IMapper _mapper;
-        private CruzRojaContext _cruzRojaContext;
+        public static Users authUser;
 
         public UsersRepository(CruzRojaContext cruzRojaContext, IMapper mapper)
             : base(cruzRojaContext)
         {
             _mapper = mapper;
-            _cruzRojaContext = cruzRojaContext;
         }
 
         public async Task<Users> GetUserEmployeeById(int userId)
@@ -57,14 +55,14 @@ namespace Repository
 
 
         //Funcion que sirve para poder recuperar la contraseña olvidada
-        public void ForgotPassword(ForgotPasswordRequest model)
+        public void ForgotPassword(string email)
         {
             Users authUser = null;
 
             using (var db = new CruzRojaContext())
                 authUser = db.Users
                                .Include(u => u.Persons)
-                               .Where(u => u.Persons.Email == model.Email).FirstOrDefault();
+                               .Where(u => u.Persons.Email == email).FirstOrDefault();
 
             //var account = _cruzRojaContext.Users.FirstOrDefault(i => i.Persons.Email == model.Email);
 
@@ -103,12 +101,6 @@ namespace Repository
                                  <a style=""color: white; text-align: center; display: block; background:red; text-decoration: none;  border-radius: 0.4rem; margin: 4rem auto; width: 15%; padding: 10px;
                                     "" href=""{resetUrl}"">Reset your Password</a>";
 
-
-
-                // color: white; text - align: center; display: block; background: red; width: 20 %; margin: 10rem auto; padding: 10px; border - radius: 0.4rem;
-                // < p ><a href=""{resetUrl}"">{resetUrl}</a></p>";
-                //message = $@"<p>Please use the below token to reset your password with the <code>/accounts/reset-password</code> api route:</p>
-                //           <p><code>{account.ResetToken}</code></p>";
             }
 
             EmailRepository.Send
@@ -121,7 +113,7 @@ namespace Repository
         }
 
         //Funcion para validar los campos: Token, contraseña nueva 
-        public void  ResetPassword(string token, ResetPasswordRequest model)
+        public void  ResetPassword(string token, string password)
         {
            Users account = null;
 
@@ -130,26 +122,19 @@ namespace Repository
                                .Where(u => u.ResetToken == token
                                && u.ResetTokenExpires > DateTime.Now).FirstOrDefault();
 
-            /*var account = _cruzRojaContext.Users.SingleOrDefault
-                (i => i.ResetToken == token
-                && i.ResetTokenExpires > DateTime.Now);*/
-
-            /*if (account == null)
-                throw new ArgumentException("Invalid token");*/
-
-            account.UserPassword = Encrypt.GetSHA256(model.Password);
+            account.UserPassword = Encrypt.GetSHA256(password);
             account.PasswordReset = DateTime.Now;
             account.ResetToken = null;
             account.ResetTokenExpires = null;
 
             Update(account);
+
             SaveAsync();
         }
 
         public async Task<UserEmployeeAuthDto> ValidateUser(UserLoginDto user)
         {
             UserEmployeeAuthDto ret = new UserEmployeeAuthDto();
-            Users authUser = null;
 
             string Pass = user.UserPassword;
             string ePass = Encrypt.GetSHA256(Pass);
@@ -163,6 +148,7 @@ namespace Repository
                                .Include(u => u.Estates.EstatesTimes)
                                .ThenInclude(u => u.Times)
                                .ThenInclude(u => u.Schedules)
+                               .Include(u => u.Estates.Locations)
                                 .Where(u => u.UserDni == user.UserDni
                                    && u.UserPassword == ePass).FirstOrDefault();
 
@@ -173,24 +159,5 @@ namespace Repository
 
             return ret; //retornamos el valor de este objeto          
         }
-
-        /*public void Send(string to, string subject, string html, string from = null)
-            {
-                // create message
-                var email = new MimeMessage();
-                email.From.Add(MailboxAddress.Parse(from ?? "info@aspnet-core-signup-verification-api.com"));
-                email.To.Add(MailboxAddress.Parse(to));
-                email.Subject = subject;
-                email.Body = new TextPart(TextFormat.Html) { Text = html };
-
-
-                // send email
-                using var smtp = new SmtpClient();
-                smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-                smtp.Authenticate("tesis.unc.mb@gmail.com", "larioja1450 ");
-
-                smtp.Send(email);
-                smtp.Disconnect(true);
-            }*/
     }
  }

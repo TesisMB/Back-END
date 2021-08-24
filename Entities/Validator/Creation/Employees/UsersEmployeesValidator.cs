@@ -15,13 +15,9 @@ namespace Back_End.Validator
             RuleFor(x => x.UserDni)
            .Cascade(CascadeMode.StopOnFirstFailure)
            .NotEmpty().WithMessage("{PropertyName} is required.")
-           .Must(BeUniqueUrl).WithMessage("Dni already exists")
+           .Must(BeUniqueDni).WithMessage("Dni already exists")
            .Must(IsValidNumber).WithMessage("{PropertyName} must not have spaces and should be all numbers.")
            .Length(8).WithMessage("The {PropertyName} must be 8 characters. You entered {TotalLength} characters");
-
-
-            //RuleFor(x => x.UserPassword).NotEmpty().WithMessage("{PropertyName} is required.")
-            //.Length(8, 16).WithMessage("The {PropertyName} must be between 8 and 16 characters. You entered {TotalLength} characters");
 
             RuleFor(x => x.FK_RoleID).NotEmpty().WithMessage("{PropertyName} is required.");
 
@@ -33,7 +29,7 @@ namespace Back_End.Validator
         }
 
         //Esta funcion me permite verificar que se ingresar en el campo UserDni valores unicos.
-        private bool BeUniqueUrl(string Dni)
+        private bool BeUniqueDni(string Dni)
         {
             return new CruzRojaContext().Users.FirstOrDefault(x => x.UserDni == Dni) == null;
         }

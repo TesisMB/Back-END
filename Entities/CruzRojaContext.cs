@@ -57,6 +57,9 @@ namespace Back_End.Entities
         public DbSet<Materials> Materials { get; set; }
         public DbSet<Medicines> Medicines { get; set; }
         public DbSet<Locations> Locations { get; set; }
+        public DbSet<EmergenciesDisasters> EmergenciesDisasters { get; set; }
+        public DbSet<TypesEmergenciesDisasters> TypesEmergenciesDisasters { get; set; }
+        public DbSet<Alerts> Alerts { get; set; }
 
 
         private const string Connection =

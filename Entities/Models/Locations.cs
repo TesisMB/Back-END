@@ -32,5 +32,9 @@ namespace Entities.Models
 
         public ICollection<Estates> Estates { get; set; }
 
+        public ICollection<EmergenciesDisasters> EmergenciesDisasters { get; set; }
+
+        public ICollection<Users> Users { get; set; }
+
     }
 }

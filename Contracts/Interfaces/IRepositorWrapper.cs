@@ -19,6 +19,9 @@ namespace Contracts.Interfaces
         IMedicinesRepository Medicines { get; }
 
         IEstatesRepository Estates { get; }
+        IEmergenciesDisastersRepository EmergenciesDisasters { get; }
+
+        ITypesEmergenciesDisastersRepository TypesEmergenciesDisasters { get; }
 
         // void Save();
     }

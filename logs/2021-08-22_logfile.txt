@@ -1,0 +1,5 @@
+2021-08-22 18:27:00.7878 INFO Returned all alerts from database.
+2021-08-22 18:27:58.3479 INFO Returned all alerts from database.
+2021-08-22 18:37:10.3827 ERROR Something went wrong inside GetAllTypesEmergenciesDisasters action: The method or operation is not implemented.
+2021-08-22 18:38:15.5829 INFO Returned all TypesEmergenciesDisasters from database.
+2021-08-22 19:15:16.4245 INFO Returned all Materials from database.

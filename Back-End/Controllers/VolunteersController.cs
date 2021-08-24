@@ -119,6 +119,12 @@ namespace Back_End.Controllers
         {
             try
             {
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
+                }
+
                 if (volunteer == null)
 
                 {
@@ -132,7 +138,7 @@ namespace Back_End.Controllers
                 // Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
                 volunteerEntity.Users.UserPassword = Encrypt.GetSHA256(volunteerEntity.Users.UserPassword);
 
-                _repository.Volunteers.Create(volunteerEntity);
+                _repository.Volunteers.CreateVolunteer(volunteerEntity);
 
                  _repository.Volunteers.SaveAsync();
 

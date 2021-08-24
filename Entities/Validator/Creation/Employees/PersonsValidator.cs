@@ -1,4 +1,5 @@
-﻿using Back_End.Models;
+﻿using Back_End.Entities;
+using Back_End.Models;
 using FluentValidation;
 using System;
 using System.Linq;
@@ -27,7 +28,8 @@ namespace Back_End.Validator
 
              RuleFor(x => x.Email).NotEmpty().WithMessage("{PropertyName} is required")
             .EmailAddress().WithMessage("A valid email address is required.")
-            .MaximumLength(50).WithMessage("The {PropertyName} cannot be more than {MaxLength} characters.");
+            .MaximumLength(50).WithMessage("The {PropertyName} cannot be more than {MaxLength} characters.")
+            .Must(BeUniqueEmail).WithMessage("Email already exists");
 
              RuleFor(x => x.Gender).NotEmpty().WithMessage("{PropertyName} is required")
             .Must(x => new[] { "M", "F", "O" }.Contains(x))
@@ -39,11 +41,24 @@ namespace Back_End.Validator
             .MaximumLength(50).WithMessage("The {PropertyName} cannot be more than {MaxLength} characters.");
             
             RuleFor(x => x.Birthdate).NotEmpty().WithMessage("{PropertyName} is required.")
-           .LessThan(p => DateTime.Now).WithMessage("the PropertyName} has not passed yet");
+            .Must(BeAValidAge).WithMessage("Must be a valid age")
+            .LessThan(p => DateTime.Now).WithMessage("the PropertyName} has not passed yet");
         }
 
+        private bool BeUniqueEmail(string Email)
+        {
+            return new CruzRojaContext().Persons.FirstOrDefault(x => x.Email == Email) == null;
+        }
 
-        private bool IsValidNumber(string name)
+        private bool BeAValidAge(DateTime? date)
+        {
+            if (date.HasValue)
+                return (DateTime.Now.Year - date.Value.Year) >= 18;
+
+            return false;
+        }
+
+        private  bool IsValidNumber(string name)
         {
             return name.All(char.IsNumber);
         }

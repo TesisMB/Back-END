@@ -1,24 +1,19 @@
 ﻿using AutoMapper;
-using Back_End.Entities;
 using Back_End.Helpers;
 using Back_End.Models;
 using Back_End.Models.Employees___Dto;
 using Contracts.Interfaces;
 using Entities.Helpers;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using NLog.Layouts;
+using Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using Wkhtmltopdf.NetCore;
 
 namespace Back_End.Controllers
 {
-    //enrutamiento
     [Route("api/Employees")]
     [ApiController]
     public class EmployeesController : ControllerBase
@@ -27,19 +22,18 @@ namespace Back_End.Controllers
         private IRepositorWrapper _repository;
         private readonly IMapper _mapper;
         readonly IGeneratePdf _generatePdf;
+
         public EmployeesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper, IGeneratePdf generatePdf)
         {
             _logger = logger;
             _repository = repository;
             _mapper = mapper;
             _generatePdf = generatePdf;
-
         }
 
         [HttpGet("PDF/{employeeId}")]
         public async Task <IActionResult> GetEmployee1(int employeeId)
         {
-
             var employee = await _repository.Employees.GetEmployeeWithDetails(employeeId);
 
             if (employee == null)
@@ -80,6 +74,8 @@ namespace Back_End.Controllers
         {
             try
             {
+                //Console.WriteLine(UsersRepository.authUser.Estates.LocationAddress.);
+
                 var employees = await _repository.Employees.GetAllEmployees();
                 _logger.LogInfo($"Returned all employees from database.");
 
@@ -255,7 +251,7 @@ namespace Back_End.Controllers
                     return BadRequest();
                 }*/
 
-                _repository.Users.Delete(employee);
+                _repository.Users.DeletUser(employee);
 
                  _repository.Employees.SaveAsync();
 

@@ -20,11 +20,11 @@ namespace Entities.Models
 
         [Required]
         [MaxLength(50)]
-        public String MedicineQuantity { get; set; }
+        public int MedicineQuantity { get; set; }
 
 
         [Required]
-        public DateTimeOffset MedicineExpirationDate { get; set; }
+        public DateTime MedicineExpirationDate { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -35,8 +35,10 @@ namespace Entities.Models
         public String MedicineDrug { get; set; }
 
         [Required]
-        [MaxLength(10)]
-        public String MedicineWeight { get; set; }
+        public double MedicineWeight { get; set; }
+
+        [Required]
+        public string MedicineUnits { get; set; }
 
         public String MedicineUtility { get; set; }
 

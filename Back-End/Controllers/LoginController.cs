@@ -23,7 +23,7 @@ namespace Back_End.Controllers
         }
 
         ActionResult ret = null;
-        UserEmployeeAuthDto auth = new UserEmployeeAuthDto();
+        Users auth = new Users();
 
 
         [HttpPost("login")]
@@ -31,13 +31,21 @@ namespace Back_End.Controllers
         {
             try
             {
-                auth = await  _repository.Users.ValidateUser(user);
-                if (auth.UserAvailability)
+                var auth = await _repository.Users.ValidateUser(user);
+
+                if (auth.UserAvailability && auth.Roles.RoleName == "Voluntario")
                 {
-                    ret = StatusCode(200, auth);
+                    var auth1 = _repository.Users.ValidateUserV(auth);
+                    ret = StatusCode(200, auth1);
                     _logger.LogInfo($"Returned User.");
                 }
 
+                else if (auth.UserAvailability && auth.Roles.RoleName != "Voluntario")
+                {
+                    var auth2 = _repository.Users.ValidateUserE(auth);
+                    ret = StatusCode(200, auth2);
+                    _logger.LogInfo($"Returned User.");
+                }
                 else
                 {
                     ret = Unauthorized();
@@ -52,17 +60,17 @@ namespace Back_End.Controllers
         }
 
         [HttpPost("forgot-password")]
-        public ActionResult ForgotPassword(string email )
+        public ActionResult ForgotPassword([FromBody] Persons email)
         {
-            _repository.Users.ForgotPassword(email);
+            _repository.Users.ForgotPassword(email.Email);
 
             return Ok();
         }
 
         [HttpPost("reset-password/{token?}")]
-        public ActionResult ResetPassword([FromQuery] string token, [FromBody] string password)
+        public ActionResult ResetPassword([FromQuery] string token, [FromBody] Users pass)
         {
-            _repository.Users.ResetPassword(token, password);
+            _repository.Users.ResetPassword(token, pass.UserPassword);
             return Ok();
         }
 

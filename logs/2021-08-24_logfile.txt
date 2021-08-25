@@ -68,3 +68,53 @@
 2021-08-24 19:29:49.5273 ERROR Something went wrong inside CreateMaterial action: An error occurred while updating the entries. See the inner exception for details.
 2021-08-24 19:29:52.7027 ERROR Something went wrong inside CreateMaterial action: An error occurred while updating the entries. See the inner exception for details.
 2021-08-24 19:30:10.5438 INFO Returned all emergenciesDisasters from database.
+2021-08-24 20:15:29.9745 INFO Returned User.
+2021-08-24 20:16:10.3126 INFO Returned User.
+2021-08-24 20:16:34.2176 INFO Returned all Volunteers from database.
+2021-08-24 20:16:52.7569 ERROR Something went wrong inside User: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Users -> UserVolunteerAuthDto
+Back_End.Models.Users -> Entities.DataTransferObjects.Login___Dto.UserVolunteerAuthDto
+2021-08-24 20:18:16.2090 ERROR Something went wrong inside User: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Users -> UserVolunteerAuthDto
+Back_End.Models.Users -> Entities.DataTransferObjects.Login___Dto.UserVolunteerAuthDto
+2021-08-24 20:25:07.3813 ERROR Something went wrong inside User: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Users -> UserVolunteerAuthDto
+Back_End.Models.Users -> Entities.DataTransferObjects.Login___Dto.UserVolunteerAuthDto
+2021-08-24 20:28:46.0364 ERROR Something went wrong inside User: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Users -> UserVolunteerAuthDto
+Back_End.Models.Users -> Entities.DataTransferObjects.Login___Dto.UserVolunteerAuthDto
+2021-08-24 20:30:34.3493 INFO Returned User.
+2021-08-24 20:30:34.4817 INFO Returned User.
+2021-08-24 20:32:06.5216 INFO Returned User.
+2021-08-24 20:32:06.6118 INFO Returned User.
+2021-08-24 20:33:43.0259 INFO Returned User.
+2021-08-24 20:33:43.0912 INFO Returned User.
+2021-08-24 20:37:58.7245 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserVolunteerAuthDto
+Back_End.Models.Users -> Entities.DataTransferObjects.Login___Dto.UserVolunteerAuthDto
+
+Type Map configuration:
+Users -> UserVolunteerAuthDto
+Back_End.Models.Users -> Entities.DataTransferObjects.Login___Dto.UserVolunteerAuthDto
+
+Destination Member:
+Volunteers
+
+2021-08-24 21:01:15.4582 INFO Returned User.
+2021-08-24 21:01:15.5857 INFO Returned User.
+2021-08-24 21:02:59.7404 INFO Returned User.
+2021-08-24 21:03:52.4736 INFO Returned User.
+2021-08-24 21:11:29.7741 INFO Returned User.
+2021-08-24 21:11:41.1731 INFO Returned User.
+2021-08-24 21:13:28.3604 INFO Returned User.
+2021-08-24 21:14:04.8966 INFO Returned User.

@@ -1,4 +1,5 @@
 ﻿using Back_End.Models;
+using Entities.DataTransferObjects.Login___Dto;
 using System.Threading.Tasks;
 
 namespace Contracts.Interfaces
@@ -14,6 +15,11 @@ namespace Contracts.Interfaces
         void ForgotPassword(string email);
         void ResetPassword(string token, string password);
 
-        Task<UserEmployeeAuthDto> ValidateUser(UserLoginDto user);
+        UserEmployeeAuthDto ValidateUserE(Users user);
+
+        Task<Users> ValidateUser(UserLoginDto user);
+
+        UserVolunteerAuthDto ValidateUserV(Users user);
+
     }
 }

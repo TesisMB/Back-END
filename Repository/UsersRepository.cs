@@ -4,6 +4,7 @@ using Back_End.Helpers;
 using Back_End.Models;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects;
+using Entities.DataTransferObjects.Login___Dto;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +21,6 @@ namespace Repository
 {
     public class UsersRepository : RepositoryBase<Users>, IUsersRepository
     {
-
         private IMapper _mapper;
         public static Users authUser;
 
@@ -132,15 +132,15 @@ namespace Repository
             SaveAsync();
         }
 
-        public async Task<UserEmployeeAuthDto> ValidateUser(UserLoginDto user)
+        public async Task<Users> ValidateUser(UserLoginDto user)
         {
-            UserEmployeeAuthDto ret = new UserEmployeeAuthDto();
+            Users ret = new Users();
 
             string Pass = user.UserPassword;
             string ePass = Encrypt.GetSHA256(Pass);
 
             //se conecta a la base de datos para verificar las datos del usuario en cuestion
-             await using (var db = new CruzRojaContext())
+            await using (var db = new CruzRojaContext())
                 authUser = db.Users.Include(u => u.Persons)
                                .Include(u => u.Roles)
                                .Include(u => u.Estates)
@@ -149,13 +149,28 @@ namespace Repository
                                .ThenInclude(u => u.Times)
                                .ThenInclude(u => u.Schedules)
                                .Include(u => u.Estates.Locations)
+                               .Include(u => u.Volunteers)
                                 .Where(u => u.UserDni == user.UserDni
                                    && u.UserPassword == ePass).FirstOrDefault();
 
-            if (authUser != null)
-            {
+            return authUser; //retornamos el valor de este objeto       
+        }
+
+
+        public UserEmployeeAuthDto ValidateUserE(Users user)
+        {
+            UserEmployeeAuthDto ret = new UserEmployeeAuthDto();
+
                 ret = _mapper.Map<UserEmployeeAuthDto>(authUser); //si los datos son correctos se crea el objeto del usuario autentificado
-            }
+
+            return ret; //retornamos el valor de este objeto          
+        }
+
+        public UserVolunteerAuthDto ValidateUserV(Users user)
+        {
+            UserVolunteerAuthDto ret = new UserVolunteerAuthDto();
+
+                ret =  _mapper.Map<UserVolunteerAuthDto>(user); //si los datos son correctos se crea el objeto del usuario autentificado
 
             return ret; //retornamos el valor de este objeto          
         }

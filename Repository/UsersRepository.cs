@@ -3,18 +3,10 @@ using Back_End.Entities;
 using Back_End.Helpers;
 using Back_End.Models;
 using Contracts.Interfaces;
-using Entities.DataTransferObjects;
-using Entities.DataTransferObjects.Login___Dto;
-using MailKit.Net.Smtp;
-using MailKit.Security;
 using Microsoft.EntityFrameworkCore;
-using MimeKit;
-using MimeKit.Text;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Repository
@@ -132,9 +124,9 @@ namespace Repository
             SaveAsync();
         }
 
-        public async Task<Users> ValidateUser(UserLoginDto user)
+        public async Task<UserEmployeeAuthDto> ValidateUser(UserLoginDto user)
         {
-            Users ret = new Users();
+            UserEmployeeAuthDto ret = new UserEmployeeAuthDto();
 
             string Pass = user.UserPassword;
             string ePass = Encrypt.GetSHA256(Pass);
@@ -153,26 +145,13 @@ namespace Repository
                                 .Where(u => u.UserDni == user.UserDni
                                    && u.UserPassword == ePass).FirstOrDefault();
 
-            return authUser; //retornamos el valor de este objeto       
-        }
 
-
-        public UserEmployeeAuthDto ValidateUserE(Users user)
-        {
-            UserEmployeeAuthDto ret = new UserEmployeeAuthDto();
-
+            if(authUser != null)
+            {
                 ret = _mapper.Map<UserEmployeeAuthDto>(authUser); //si los datos son correctos se crea el objeto del usuario autentificado
+            }
 
-            return ret; //retornamos el valor de este objeto          
-        }
-
-        public UserVolunteerAuthDto ValidateUserV(Users user)
-        {
-            UserVolunteerAuthDto ret = new UserVolunteerAuthDto();
-
-                ret =  _mapper.Map<UserVolunteerAuthDto>(user); //si los datos son correctos se crea el objeto del usuario autentificado
-
-            return ret; //retornamos el valor de este objeto          
+            return ret; //retornamos el valor de este objeto       
         }
     }
  }

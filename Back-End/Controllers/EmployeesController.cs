@@ -4,6 +4,7 @@ using Back_End.Models;
 using Back_End.Models.Employees___Dto;
 using Contracts.Interfaces;
 using Entities.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
@@ -32,7 +33,7 @@ namespace Back_End.Controllers
         }
 
         [HttpGet("PDF/{employeeId}")]
-        public async Task <IActionResult> GetEmployee1(int employeeId)
+        public async Task <IActionResult> GetEmployeeIDPDF(int employeeId)
         {
             var employee = await _repository.Employees.GetEmployeeWithDetails(employeeId);
 
@@ -68,6 +69,7 @@ namespace Back_End.Controllers
             //return File(pdf, "application/pdf", $"{employee.Users.Persons.FirstName} {employee.Users.Persons.LastName}.pdf");
         }
 
+
         [HttpGet]
         //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
         public async Task<ActionResult<Employees>> GetAllEmployees()
@@ -91,8 +93,8 @@ namespace Back_End.Controllers
         }
 
 
-        //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
         [HttpGet("{employeeId}")]
+        //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
         public async Task<ActionResult<Employees>> GetEmployeeWithDetails(int employeeId)
         {
             try

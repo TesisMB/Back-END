@@ -18,6 +18,5 @@ namespace Entities.DataTransferObjects.Locations___Dto
         public string LocationLongitude { get; set; }
 
         public string LocationLatitude { get; set; }
-
     }
 }

@@ -20,17 +20,19 @@ namespace Repository
         public async Task<IEnumerable<Volunteers>> GetAllVolunteers()
         {
             return await FindAll()
-                    .Include(a => a.Users)
-                    .ThenInclude(a => a.Persons)
-                    .Include(a => a.Users.Roles)
-                    .Include(a => a.Users.Estates)
-                    .ThenInclude(a => a.LocationAddress)
-                    .Include(a => a.Users.Estates.EstatesTimes)
-                    .ThenInclude(a => a.Times)
-                    .ThenInclude(a => a.Schedules)
-                    .Include(a => a.VolunteersSkills)
-                   .ThenInclude(a => a.Skills)
-                    .ToListAsync();
+                         .Include(a => a.Users)
+                         .ThenInclude(a => a.Persons)
+                         .Include(a => a.Users.Locations)
+                         .Include(a => a.Users.Roles)
+                         .Include(a => a.Users.Estates)
+                         .ThenInclude(a => a.LocationAddress)
+                         .Include(a => a.Users.Estates.EstatesTimes)
+                         .ThenInclude(a => a.Times)
+                         .ThenInclude(a => a.Schedules)
+                         .Include(a => a.VolunteersSkills)
+                         .ThenInclude(a => a.Skills)
+                         .Include(a => a.Users.Estates.Locations)
+                         .ToListAsync();
         }
 
         public async Task<IEnumerable<Volunteers>> GetAllVolunteersApp()
@@ -71,6 +73,7 @@ namespace Repository
             return await FindByCondition(volunteer => volunteer.VolunteerID.Equals(volunteerId))
                     .Include(a => a.Users)
                     .ThenInclude(a => a.Persons)
+                    .Include(a => a.Users.Locations)
                     .Include(a => a.Users.Roles)
                     .Include(a => a.Users.Estates)
                     .ThenInclude(a => a.LocationAddress)
@@ -78,8 +81,9 @@ namespace Repository
                     .ThenInclude(a => a.Times)
                     .ThenInclude(a => a.Schedules)
                     .Include(a => a.VolunteersSkills)
-                   .ThenInclude(a => a.Skills)
-                   .FirstOrDefaultAsync();
+                    .ThenInclude(a => a.Skills)
+                    .Include(a => a.Users.Estates.Locations)
+                    .FirstOrDefaultAsync();
         }
 
       

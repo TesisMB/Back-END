@@ -1,6 +1,0 @@
-2021-07-15 16:30:49.0301 INFO Returned User.
-2021-07-15 16:31:54.5454 ERROR Something went wrong inside CreateEmployee action: Object reference not set to an instance of an object.
-2021-07-15 16:31:54.6277 INFO Returned all employees from database.
-2021-07-15 16:31:56.3630 INFO Returned all employees from database.
-2021-07-15 16:34:17.5442 INFO Returned all employees from database.
-2021-07-15 16:51:20.2334 INFO Returned all employees from database.

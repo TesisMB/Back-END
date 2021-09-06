@@ -14,12 +14,6 @@ namespace Contracts.Interfaces
         void DeletUser(Users user);
         void ForgotPassword(string email);
         void ResetPassword(string token, string password);
-
-        UserEmployeeAuthDto ValidateUserE(Users user);
-
-        Task<Users> ValidateUser(UserLoginDto user);
-
-        UserVolunteerAuthDto ValidateUserV(Users user);
-
+        Task<UserEmployeeAuthDto> ValidateUser(UserLoginDto user);
     }
 }

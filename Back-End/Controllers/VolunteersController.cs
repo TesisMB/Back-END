@@ -34,7 +34,7 @@ namespace Back_End.Controllers
 
         [Route("api/Volunteers")]
         [HttpGet]
-        public async Task<ActionResult> GetAllVolunteers()
+        public async Task<ActionResult<Volunteers>> GetAllVolunteers()
         {
             try
             {

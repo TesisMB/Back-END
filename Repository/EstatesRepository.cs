@@ -21,6 +21,7 @@ namespace Repository
         {
             return await FindAll()
                 .Include(i => i.LocationAddress)
+                .Include(i => i.Locations)
                 .Include(i => i.EstatesTimes)
                 .ThenInclude(i => i.Times)
                 .ThenInclude(i => i.Schedules)

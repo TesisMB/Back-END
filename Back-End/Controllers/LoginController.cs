@@ -23,27 +23,47 @@ namespace Back_End.Controllers
         }
 
         ActionResult ret = null;
-        Users auth = new Users();
+
+        [HttpPost("app/login")]
+        public async Task<ActionResult<Users>> LoginApp([FromBody] UserLoginDto user)
+        {
+            try
+            {
+
+                var auth = await _repository.Users.ValidateUser(user);
+
+                if (auth.UserAvailability)
+                {
+                    ret = StatusCode(200, auth);
+                    _logger.LogInfo($"Returned User.");
+                }
+                else
+                {
+                    ret = Unauthorized();
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside User: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+
+            return ret;
+        }
+
+
 
 
         [HttpPost("login")]
-        public async Task<ActionResult<UserEmployeeAuthDto>> Login([FromBody] UserLoginDto user)
+        public async Task<ActionResult<UserEmployeeAuthDto>> LoginWeb([FromBody] UserLoginDto user)
         {
             try
             {
                 var auth = await _repository.Users.ValidateUser(user);
-
-                if (auth.UserAvailability && auth.Roles.RoleName == "Voluntario")
+                
+                if (auth.UserAvailability && auth.RoleName != "Voluntario")
                 {
-                    var auth1 = _repository.Users.ValidateUserV(auth);
-                    ret = StatusCode(200, auth1);
-                    _logger.LogInfo($"Returned User.");
-                }
-
-                else if (auth.UserAvailability && auth.Roles.RoleName != "Voluntario")
-                {
-                    var auth2 = _repository.Users.ValidateUserE(auth);
-                    ret = StatusCode(200, auth2);
+                    ret = StatusCode(200, auth);
                     _logger.LogInfo($"Returned User.");
                 }
                 else

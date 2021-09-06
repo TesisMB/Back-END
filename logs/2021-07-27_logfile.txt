@@ -1,7 +1,0 @@
-2021-07-27 16:23:43.6596 INFO Returned User.
-2021-07-27 16:31:52.1611 INFO Returned all Materials from database.
-2021-07-27 16:34:59.3018 INFO Returned all estates from database.
-2021-07-27 16:53:16.8471 INFO Returned all estates from database.
-2021-07-27 16:54:39.6291 INFO Returned all estates from database.
-2021-07-27 17:13:35.7079 INFO Returned all Volunteers from database.
-2021-07-27 17:17:12.1212 INFO Returned all employees from database.

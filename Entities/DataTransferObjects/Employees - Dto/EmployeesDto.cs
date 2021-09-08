@@ -10,6 +10,7 @@ namespace Back_End.Models
     public class EmployeesDto
     {
         public int EmployeeID { get; set; }
+        public DateTime EmployeeCreatedate { get; set; }
         public EmployeesUsersDto Users { get; set; }
     }
 }

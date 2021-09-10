@@ -27,18 +27,19 @@ namespace Repository
                    .Include(a => a.Employees)
                    .ThenInclude(a => a.Users)
                    .ThenInclude(a => a.Persons)
-                   .Include(a => a.TypeVehicles)
+                   .Include(a => a.Type)
+                   .Include(a => a.Estates.Locations)
                  .ToListAsync();
         }
 
         public async Task<Vehicles> GetVehicleById(int vehicleId)
         {
-            return await FindByCondition(vehicle => vehicle.VehicleID == vehicleId)
+            return await FindByCondition(vehicle => vehicle.ID == vehicleId)
                 .FirstOrDefaultAsync();
         }
         public async Task<Vehicles> GetVehicleWithDetails(int vehicleId)
         {
-            return await FindByCondition(vehicle => vehicle.VehicleID == vehicleId)
+            return await FindByCondition(vehicle => vehicle.ID == vehicleId)
                       .Include(a => a.Estates)
                       .Include(a => a.Estates.LocationAddress)
                       .Include(a => a.Estates.EstatesTimes)
@@ -47,7 +48,8 @@ namespace Repository
                       .Include(a => a.Employees)
                       .ThenInclude(a => a.Users)
                       .ThenInclude(a => a.Persons)
-                      .Include(a => a.TypeVehicles)
+                      .Include(a => a.Type)
+                      .Include(a => a.Estates.Locations)
                    .FirstOrDefaultAsync();
         }
 

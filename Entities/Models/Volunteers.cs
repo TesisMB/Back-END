@@ -12,8 +12,7 @@ namespace Back_End.Models
     {
 
         [Key, ForeignKey("Users")]
-        [Column("ID")]
-        public int VolunteerID { get; set; }
+        public int ID { get; set; }
         public string VolunteerAvatar { get; set; }
 
         public string VolunteerDescription { get; set; }

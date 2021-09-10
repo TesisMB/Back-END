@@ -52,7 +52,7 @@ namespace Repository
 
         public async Task<Volunteers> GetVolunteersById(int volunteerId)
         {
-            return await FindByCondition(volunteer => volunteer.VolunteerID.Equals(volunteerId))
+            return await FindByCondition(volunteer => volunteer.ID.Equals(volunteerId))
                 .Include(a => a.Users)
                 .ThenInclude(a => a.Persons)
                 .FirstOrDefaultAsync();
@@ -70,7 +70,7 @@ namespace Repository
 
         public async Task<Volunteers> GetVolunteerWithDetails(int volunteerId)
         {
-            return await FindByCondition(volunteer => volunteer.VolunteerID.Equals(volunteerId))
+            return await FindByCondition(volunteer => volunteer.ID.Equals(volunteerId))
                     .Include(a => a.Users)
                     .ThenInclude(a => a.Persons)
                     .Include(a => a.Users.Locations)

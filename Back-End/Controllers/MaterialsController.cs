@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.Materials___Dto;
+using Entities.DataTransferObjects.ResourcesDto;
 using Entities.Helpers;
 using Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
@@ -41,7 +42,7 @@ namespace Back_End.Controllers
 
                 _logger.LogInfo($"Returned all Materials from database.");
 
-                var volunteersResult = _mapper.Map<IEnumerable<MaterialsDto>>(volunteers);
+                var volunteersResult = _mapper.Map<IEnumerable<ResourcesDto>>(volunteers);
 
                 return Ok(volunteersResult);
 
@@ -77,7 +78,7 @@ namespace Back_End.Controllers
                 {
                     _logger.LogInfo($"Returned Material with id: {materialId}");
                    
-                    var volunteerResult = _mapper.Map<MaterialsDto>(volunteer);
+                    var volunteerResult = _mapper.Map<ResourcesDto>(volunteer);
                     return Ok(volunteerResult);
 
                 }

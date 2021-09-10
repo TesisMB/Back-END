@@ -2,6 +2,7 @@
 using Back_End.Models;
 using Back_End.Models.Vehicles___Dto;
 using Contracts.Interfaces;
+using Entities.DataTransferObjects.ResourcesDto;
 using Entities.DataTransferObjects.Vehicles___Dto.Creation;
 using Entities.DataTransferObjects.Vehicles___Dto.Update;
 using Entities.Helpers;
@@ -38,7 +39,7 @@ namespace Back_End.Controllers
                 var vehicles = await _repository.Vehicles.GetAllVehicles();
                 _logger.LogInfo($"Returned all vehicles from database.");
 
-                var employeesResult = _mapper.Map<IEnumerable<VehiclesDto>>(vehicles);
+                var employeesResult = _mapper.Map<IEnumerable<ResourcesDto>>(vehicles);
                 return Ok(employeesResult);
 
             }
@@ -66,7 +67,7 @@ namespace Back_End.Controllers
                 else
                 {
                     _logger.LogInfo($"Returned vehicle with id: {vehicleId}");
-                    var vehicleResult = _mapper.Map<VehiclesDto>(vehicle);
+                    var vehicleResult = _mapper.Map<ResourcesDto>(vehicle);
                     return Ok(vehicleResult);
                 }
 

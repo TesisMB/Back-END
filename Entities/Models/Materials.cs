@@ -11,8 +11,7 @@ namespace Entities.Models
    public class Materials
     {
         [Key]
-        [Column("ID")]
-        public int MaterialID { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [MaxLength(50)]

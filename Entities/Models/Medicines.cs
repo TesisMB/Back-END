@@ -11,8 +11,7 @@ namespace Entities.Models
     public class Medicines
     {
         [Key]
-        [Column("ID")]
-        public int MedicineID { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -44,6 +43,9 @@ namespace Entities.Models
 
         [Required]
         public Boolean MedicineAvailability { get; set; }
+
+        [Required]
+        public string MedicinePicture { get; set; }
 
         [Required]
         public int FK_EstateID { get; set; }

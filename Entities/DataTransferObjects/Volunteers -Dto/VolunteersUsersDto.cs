@@ -14,7 +14,6 @@ namespace Back_End.Models
         public string UserDni { get; set; }
         public string RoleName { get; set; }
         public PersonsDto Persons { get; set; }
-        public EstatesDto Estates { get; set; }
         public LocationsDto Locations { get; set; }
     }
 }

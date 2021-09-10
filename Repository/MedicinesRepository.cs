@@ -23,12 +23,13 @@ namespace Repository
                 .Include(a => a.Estates.EstatesTimes)
                 .ThenInclude(a => a.Times)
                 .ThenInclude(a => a.Schedules)
+                .Include(a => a.Estates.Locations)
                 .ToListAsync();
         }
 
         public async Task<Medicines> GetMedicineById(int medicineId)
         {
-            return await FindByCondition(med => med.MedicineID.Equals(medicineId))
+            return await FindByCondition(med => med.ID.Equals(medicineId))
                               //.Include(a => a.Estates)
                               //.ThenInclude(a => a.LocationAddress)
                               //.Include(a => a.Estates.EstatesTimes)
@@ -39,12 +40,13 @@ namespace Repository
 
         public async Task<Medicines> GetMedicinelWithDetails(int medicineId)
         {
-            return await FindByCondition(med => med.MedicineID.Equals(medicineId))
+            return await FindByCondition(med => med.ID.Equals(medicineId))
                      .Include(a => a.Estates)
                      .ThenInclude(a => a.LocationAddress)
                      .Include(a => a.Estates.EstatesTimes)
                      .ThenInclude(a => a.Times)
                      .ThenInclude(a => a.Schedules)
+                     .Include(a => a.Estates.Locations)
                      .FirstOrDefaultAsync();
         }
 

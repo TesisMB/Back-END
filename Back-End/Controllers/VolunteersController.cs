@@ -5,6 +5,7 @@ using Back_End.Models;
 using Back_End.Models.Employees___Dto;
 using Back_End.Models.Volunteers__Dto;
 using Contracts.Interfaces;
+using Entities.DataTransferObjects.ResourcesDto;
 using Entities.DataTransferObjects.Volunteers__Dto;
 using Entities.Helpers;
 using Microsoft.AspNetCore.JsonPatch;
@@ -42,7 +43,7 @@ namespace Back_End.Controllers
 
                 _logger.LogInfo($"Returned all Volunteers from database.");
 
-                var volunteersResult = _mapper.Map<IEnumerable<VolunteersDto>>(volunteers);
+                var volunteersResult = _mapper.Map<IEnumerable<ResourcesDto>>(volunteers);
 
                 return Ok(volunteersResult);
 
@@ -98,7 +99,7 @@ namespace Back_End.Controllers
 
                 {
                     _logger.LogInfo($"Returned volunteer with id: {volunteerId}");
-                    var volunteerResult = _mapper.Map<VolunteersDto>(volunteer);
+                    var volunteerResult = _mapper.Map<ResourcesDto>(volunteer);
                     return Ok(volunteerResult);
 
                 }

@@ -11,6 +11,7 @@ namespace Entities.DataTransferObjects.Models.Vehicles___Dto
         public string EstatePhone { get; set; }
         public string EstateTypes { get; set; }
         public LocationAddressVehiclesDto LocationAddress { get; set; }
+
         public ICollection<EstatesTimesDto> EstatesTimes { get; set; }
     }
 }

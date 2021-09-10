@@ -10,9 +10,9 @@ namespace Back_End.Models
     [Table("Vehicles", Schema = "dbo")]
     public class Vehicles
     {
-        [Column("ID")]
+       
         [Key]
-        public int VehicleID { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [MaxLength(9)]
@@ -38,7 +38,7 @@ namespace Back_End.Models
         public int? FK_EmployeeID { get; set; }
 
         [ForeignKey("Fk_TypeVehicleID")]
-        public TypeVehicles TypeVehicles { get; set; }
+        public TypeVehicles Type{ get; set; }
         public int Fk_TypeVehicleID { get; set; }
     }
 }

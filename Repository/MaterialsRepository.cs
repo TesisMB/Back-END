@@ -25,24 +25,26 @@ namespace Repository
                        .Include(a => a.Estates.EstatesTimes)
                        .ThenInclude(a => a.Times)
                        .ThenInclude(a => a.Schedules)
+                       .Include(a => a.Estates.Locations)
                        .ToListAsync();
 
         }
 
         public async Task<Materials> GetMaterialById(int materialId)
         {
-            return await FindByCondition(material => material.MaterialID == materialId)
+            return await FindByCondition(material => material.ID == materialId)
                            .FirstOrDefaultAsync();
         }
 
         public async Task<Materials> GetMaterialWithDetails(int materialId)
         {
-            return await FindByCondition(material => material.MaterialID == materialId)
+            return await FindByCondition(material => material.ID == materialId)
                        .Include(a => a.Estates)
                        .Include(a => a.Estates.LocationAddress)
                        .Include(a => a.Estates.EstatesTimes)
                        .ThenInclude(a => a.Times)
                        .ThenInclude(a => a.Schedules)
+                       .Include(a => a.Estates.Locations)
                        .FirstOrDefaultAsync();
         }
 

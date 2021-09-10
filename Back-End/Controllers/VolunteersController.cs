@@ -33,7 +33,7 @@ namespace Back_End.Controllers
             _mapper = mapper;
         }
 
-        [Route("api/Volunteers")]
+        [Route("api/Voluntarios")]
         [HttpGet]
         public async Task<ActionResult<Volunteers>> GetAllVolunteers()
         {
@@ -79,7 +79,7 @@ namespace Back_End.Controllers
             }
         }
 
-        [Route("api/Volunteers/{volunteerId}")]
+        [Route("api/Voluntarios/{volunteerId}")]
         [HttpGet]
         public async Task<ActionResult<Volunteers>> GetVolunteer(int volunteerId)
         {
@@ -114,7 +114,7 @@ namespace Back_End.Controllers
             }
         }
 
-        [Route("api/Volunteers")]
+        [Route("api/Voluntarios")]
         [HttpPost]
         public async Task<ActionResult<Volunteers>> CreateVolunteer([FromBody] VolunteersForCreationDto volunteer)
         {
@@ -158,7 +158,7 @@ namespace Back_End.Controllers
 
 
         //[Authorize(Roles = "Coordinador General, Admin")] 
-        [Route("api/Volunteers/{volunteerId}")]
+        [Route("api/Voluntarios/{volunteerId}")]
         [HttpPatch]
         public async Task<ActionResult> UpdatePartialUser(int volunteerId, JsonPatchDocument<VolunteersForUpdatoDto> patchDocument)
         {
@@ -218,7 +218,7 @@ namespace Back_End.Controllers
         }
 
 
-        [Route("api/Volunteers/{volunteerId}")]
+        [Route("api/Voluntarios/{volunteerId}")]
         [HttpDelete]
         public async Task<ActionResult> DeleteVolunteer(int volunteerId)
         {

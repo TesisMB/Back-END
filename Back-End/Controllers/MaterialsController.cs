@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Back_End.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Materiales")]
     [ApiController]
     public class MaterialsController : ControllerBase
     {

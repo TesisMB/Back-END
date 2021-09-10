@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Back_End.Controllers
 {
-    [Route("api/Vehicles")]
+    [Route("api/Vehiculos")]
     [ApiController]
     public class VehiclesController : ControllerBase
     {

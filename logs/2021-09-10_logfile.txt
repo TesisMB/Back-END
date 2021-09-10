@@ -181,3 +181,15 @@ System.Collections.Generic.List`1[[Back_End.Models.Volunteers, Entities, Version
 2021-09-10 19:27:26.4476 INFO Returned vehicle with id: 3
 2021-09-10 19:27:43.5181 ERROR Volunteer with id: 3, hasn't been found in db.
 2021-09-10 19:27:46.1486 INFO Returned all Volunteers from database.
+2021-09-10 19:56:45.5525 INFO Returned all Volunteers from database.
+2021-09-10 19:56:48.7987 INFO Returned volunteer with id: 15
+2021-09-10 19:56:50.2512 INFO Returned volunteer with id: 19
+2021-09-10 19:56:55.3656 INFO Returned all Materials from database.
+2021-09-10 19:56:58.8302 ERROR Medicine with id: 1, hasn't been found in db.
+2021-09-10 19:56:59.7283 INFO Returned medicine with details for id: 2
+2021-09-10 19:57:03.5646 INFO Returned all Materials from database.
+2021-09-10 19:57:05.2940 INFO Returned Material with id: 2
+2021-09-10 19:57:06.1086 INFO Returned Material with id: 3
+2021-09-10 19:58:01.1455 INFO Returned all vehicles from database.
+2021-09-10 19:58:02.7519 INFO Returned vehicle with id: 2
+2021-09-10 19:58:03.8847 INFO Returned vehicle with id: 3

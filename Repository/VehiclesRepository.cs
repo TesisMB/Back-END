@@ -10,15 +10,25 @@ using System.Threading.Tasks;
 namespace Repository
 {
     public class VehiclesRepository : RepositoryBase<Vehicles>, IVehiclesRepository
-    {
+    { 
+
+        private CruzRojaContext _cruzRojaContext;
         public VehiclesRepository(CruzRojaContext cruzRojaContext)
              : base(cruzRojaContext)
         {
-
+            _cruzRojaContext = cruzRojaContext;
         }
         public async Task<IEnumerable<Vehicles>> GetAllVehicles()
         {
-            return await FindAll()
+            var vehicles = UsersRepository.authUser;
+
+            var collection = _cruzRojaContext.Vehicles as IQueryable<Vehicles>;
+
+
+            collection = collection.Where(
+                                        a => a.Estates.Locations.LocationDepartmentName == vehicles.Estates.Locations.LocationDepartmentName);
+
+            return await collection
                    .Include(a => a.Estates)
                    .Include(a => a.Estates.LocationAddress)
                    .Include(a => a.Estates.EstatesTimes)

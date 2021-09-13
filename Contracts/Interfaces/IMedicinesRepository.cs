@@ -8,6 +8,7 @@ namespace Contracts.Interfaces
 {
     public interface IMedicinesRepository : IRepositoryBase<Medicines>
     {
+
         Task<IEnumerable<Medicines>> GetAllMedicines();
 
         Task<Medicines> GetMedicineById(int medicineId);

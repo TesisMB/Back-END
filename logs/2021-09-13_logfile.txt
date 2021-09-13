@@ -1,0 +1,4 @@
+2021-09-13 12:21:24.3793 INFO Returned User.
+2021-09-13 12:21:33.2691 INFO Returned all employees from database.
+2021-09-13 12:21:39.2141 INFO Returned all employees from database.
+2021-09-13 12:21:42.6836 INFO Returned employe with details for id: 2

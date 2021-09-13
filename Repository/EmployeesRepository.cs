@@ -30,14 +30,11 @@ namespace Repository
 
             var Collection = _cruzRojaContext.Employees as IQueryable<Employees>;
 
-            if(!string.IsNullOrEmpty(user.Estates.Locations.LocationDepartmentName) || !string.IsNullOrEmpty(user.Estates.Locations.LocationCityName) || !string.IsNullOrEmpty(user.Estates.Locations.LocationMunicipalityName))
-            {
+           
                 Collection = Collection.Where(
                     a => a.Users.Estates.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName
                     && a.Users.Estates.Locations.LocationCityName == user.Estates.Locations.LocationCityName
-                    && a.Users.Estates.Locations.LocationMunicipalityName == user.Estates.Locations.LocationMunicipalityName
-                    );
-            }
+                    && a.Users.Estates.Locations.LocationMunicipalityName == user.Estates.Locations.LocationMunicipalityName);
 
 
             return await Collection

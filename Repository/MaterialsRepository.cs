@@ -12,14 +12,27 @@ namespace Repository
 {
    public class MaterialsRepository : RepositoryBase<Materials>, IMaterialsRepository
     {
+        private CruzRojaContext _cruzRojaContext;
+
         public MaterialsRepository(CruzRojaContext cruzRojaContext)
         : base(cruzRojaContext)
         {
-
+            _cruzRojaContext = cruzRojaContext;
         }
         public async Task<IEnumerable<Materials>> GetAllMaterials()
         {
-            return await FindAll()
+            var material = UsersRepository.authUser;
+
+
+            var collection = _cruzRojaContext.Materials as IQueryable<Materials>;
+           
+
+                collection = collection.Where(
+                    a => a.Estates.Locations.LocationDepartmentName == material.Estates.Locations.LocationDepartmentName);
+            
+
+
+            return await collection
                        .Include(a => a.Estates)
                        .Include(a => a.Estates.LocationAddress)
                        .Include(a => a.Estates.EstatesTimes)

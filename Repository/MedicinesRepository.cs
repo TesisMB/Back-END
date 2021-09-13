@@ -3,21 +3,30 @@ using Contracts.Interfaces;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Repository
 {
     public class MedicinesRepository : RepositoryBase<Medicines>, IMedicinesRepository
     {
+        private CruzRojaContext _cruzRojaContext;
         public MedicinesRepository(CruzRojaContext cruzRojaContext)
             : base(cruzRojaContext)
         {
-
+            _cruzRojaContext = cruzRojaContext;
         }
 
         public async Task<IEnumerable<Medicines>> GetAllMedicines()
         {
-            return await FindAll()
+            var medicines = UsersRepository.authUser;
+
+            var collection = _cruzRojaContext.Medicines as IQueryable<Medicines>;
+
+            collection = collection.Where(
+                                            a => a.Estates.Locations.LocationDepartmentName == medicines.Estates.Locations.LocationDepartmentName);
+
+            return await collection
                 .Include(a => a.Estates)
                 .ThenInclude(a => a.LocationAddress)
                 .Include(a => a.Estates.EstatesTimes)

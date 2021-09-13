@@ -11,15 +11,25 @@ namespace Repository
 {
     public class VoluntersRepository : RepositoryBase<Volunteers>, IVolunteersRepository
     {
+        private CruzRojaContext _cruzRojaContext;
 
         public VoluntersRepository(CruzRojaContext cruzRojaContext)
         : base(cruzRojaContext)
         {
+            _cruzRojaContext = cruzRojaContext;
         }
 
         public async Task<IEnumerable<Volunteers>> GetAllVolunteers()
         {
-            return await FindAll()
+
+            var volunteers = UsersRepository.authUser;
+
+            var collection = _cruzRojaContext.Volunteers as IQueryable<Volunteers>;
+
+            collection = collection.Where(
+                                        a => a.Users.Estates.Locations.LocationDepartmentName == volunteers.Estates.Locations.LocationDepartmentName);
+
+            return await collection
                          .Include(a => a.Users)
                          .ThenInclude(a => a.Persons)
                          .Include(a => a.Users.Locations)

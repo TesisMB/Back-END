@@ -19,24 +19,19 @@ namespace Back_End.Entities
               : base(options)
         {
         }
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<EstatesTimes>()
 
            .HasKey(s => new { s.FK_EstateID, s.FK_TimeID });
 
-            modelBuilder.Entity<VolunteersSkills>()
-
-           .HasKey(s => new { s.FK_VolunteerID, s.FK_SkillID });
-
-
-
             modelBuilder.Entity<TypeVehiclesModels>()
 
            .HasKey(s => new { s.FK_TypeVehicleID, s.FK_ModelID });
 
+            modelBuilder.Entity<VolunteersSkillsFormationEstates>()
+
+          .HasKey(s => new { s.FK_VolunteerSkillID, s.FK_FormationEstateID});
         }
 
         //Defino cada una de las Models, que se usan durante el proyecto, donde cada una de ellas representa una tabla de la base de datos
@@ -60,7 +55,9 @@ namespace Back_End.Entities
         public DbSet<EmergenciesDisasters> EmergenciesDisasters { get; set; }
         public DbSet<TypesEmergenciesDisasters> TypesEmergenciesDisasters { get; set; }
         public DbSet<Alerts> Alerts { get; set; }
+        public DbSet<VolunteersSkillsFormationEstates> VolunteersSkillsFormationEstates { get; set; }
 
+        public DbSet<FormationsEstates> FormationsEstates { get; set; }
 
         private const string Connection =
       @"Server=localhost;

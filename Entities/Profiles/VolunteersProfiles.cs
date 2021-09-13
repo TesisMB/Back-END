@@ -14,20 +14,15 @@ namespace Back_End.Profiles
         public VolunteersProfiles()
         {
             CreateMap<Volunteers, ResourcesDto>()
-                .ForMember(dest => dest.Description,
+              .ForMember(dest => dest.Description,
                             opt => opt.MapFrom(src => src.VolunteerDescription))
 
-                 .ForMember(dest => dest.Picture,
+              .ForMember(dest => dest.Picture,
                             opt => opt.MapFrom(src => src.VolunteerAvatar))
 
-            .ForPath(dest => dest.Volunteers.Users, opts => opts.MapFrom(src => src.Users))
+              .ForPath(dest => dest.Volunteers.Users, opts => opts.MapFrom(src => src.Users))
 
-           //            .ForPath(dest => dest.Volunteers.VolunteersSkills, opts => opts.MapFrom(src => src.VolunteersSkills))
-
-           //.ForPath(dest => dest.Volunteers.VolunteersSkills, opts => opts.MapFrom(o => o.VolunteersSkills.Select(t => t.Volunteers).ToList()))
-
-           //.ForPath(dest => dest.Volunteers.VolunteersSkills, opts => opts.MapFrom(o => o.VolunteersSkills.ToList()))
-          .ForPath(d => d.Volunteers.VolunteersSkills, o => o.MapFrom(s => s.VolunteersSkills))
+              .ForPath(d => d.Volunteers.VolunteersSkills, o => o.MapFrom(s => s.VolunteersSkills))
 
               .ForPath(dest => dest.Estates, opts => opts.MapFrom(src => src.Users.Estates));
 

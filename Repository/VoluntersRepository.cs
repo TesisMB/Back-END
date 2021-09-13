@@ -22,14 +22,14 @@ namespace Repository
         public async Task<IEnumerable<Volunteers>> GetAllVolunteers()
         {
 
-            var volunteers = UsersRepository.authUser;
+            /*var volunteers = UsersRepository.authUser;
 
             var collection = _cruzRojaContext.Volunteers as IQueryable<Volunteers>;
 
             collection = collection.Where(
-                                        a => a.Users.Estates.Locations.LocationDepartmentName == volunteers.Estates.Locations.LocationDepartmentName);
+                                        a => a.Users.Estates.Locations.LocationDepartmentName == volunteers.Estates.Locations.LocationDepartmentName);*/
 
-            return await collection
+            return await FindAll()
                          .Include(a => a.Users)
                          .ThenInclude(a => a.Persons)
                          .Include(a => a.Users.Locations)
@@ -39,9 +39,13 @@ namespace Repository
                          .Include(a => a.Users.Estates.EstatesTimes)
                          .ThenInclude(a => a.Times)
                          .ThenInclude(a => a.Schedules)
+                         .Include(a => a.Users.Estates.Locations)
                          .Include(a => a.VolunteersSkills)
                          .ThenInclude(a => a.Skills)
-                         .Include(a => a.Users.Estates.Locations)
+                         .Include(a => a.VolunteersSkills)
+                         .ThenInclude(a => a.VolunteersSkillsFormationEstates)
+                         .ThenInclude(a => a.FormationsEstates)
+                         .ThenInclude(a => a.FormationsDates)
                          .ToListAsync();
         }
 
@@ -90,9 +94,13 @@ namespace Repository
                     .Include(a => a.Users.Estates.EstatesTimes)
                     .ThenInclude(a => a.Times)
                     .ThenInclude(a => a.Schedules)
+                    .Include(a => a.Users.Estates.Locations)
                     .Include(a => a.VolunteersSkills)
                     .ThenInclude(a => a.Skills)
-                    .Include(a => a.Users.Estates.Locations)
+                    .Include(a => a.VolunteersSkills)
+                    .ThenInclude(a => a.VolunteersSkillsFormationEstates)
+                    .ThenInclude(a => a.FormationsEstates)
+                    .ThenInclude(a => a.FormationsDates)
                     .FirstOrDefaultAsync();
         }
 

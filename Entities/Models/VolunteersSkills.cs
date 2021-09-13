@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Entities.Models;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,12 +12,18 @@ namespace Back_End.Models
 
     public class VolunteersSkills
     {
+        [Key]
+        public int ID { get; set; }
+
+        [ForeignKey("FK_VolunteerID")]
+        public Volunteers Volunteers { get; set; }
         public int FK_VolunteerID { get; set; }
 
-        public Volunteers Volunteers { get; set; }
-
+        [ForeignKey("FK_SkillID")]
+        public Skills Skills { get; set; }
         public int FK_SkillID { get; set; }
 
-        public Skills Skills { get; set; }
+        [ForeignKey("FK_VolunteerSkillID")]
+        public ICollection<VolunteersSkillsFormationEstates> VolunteersSkillsFormationEstates { get; set; }
     }
 }

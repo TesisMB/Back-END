@@ -11,6 +11,5 @@ namespace Back_End.Models.Employees___Dto
         public VolunteersUsersDto Users { get; set; }
 
         public ICollection<VolunteersSkillsDto> VolunteersSkills { get; set; }
-
     }
 }

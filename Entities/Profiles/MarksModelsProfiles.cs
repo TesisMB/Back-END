@@ -11,7 +11,7 @@ namespace Entities.Profiles
     {
         public MarksModelsProfiles()
         {
-            CreateMap<TypeVehiclesModels, TypeVehiclesModelsDto>();
+            CreateMap<MarksModels, MarksModelsDto>();
         }
     }
 }

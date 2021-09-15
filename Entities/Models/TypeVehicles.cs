@@ -18,17 +18,6 @@ namespace Back_End.Models
         [MaxLength(25)]
         public string Type { get; set; }
 
-        [Required]
-        [MaxLength(50)]
-        public string Mark { get; set; }
-
-
-        [Required]
-        [MaxLength(50)]
-        public string Model { get; set; }
-
-        //[ForeignKey("FK_TypeVehicleID")]
-        //public ICollection<TypeVehiclesModels> TypeVehiclesModels { get; set; }
         public ICollection<Vehicles> Vehicles { get; set; }
 
     }

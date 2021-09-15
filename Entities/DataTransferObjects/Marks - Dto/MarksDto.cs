@@ -7,6 +7,7 @@ namespace Entities.DataTransferObjects.Marks___Dto
 {
    public class MarksDto
    {
+        public int ID { get; set; }
         public string MarkName { get; set; }
     }
 }

@@ -9,12 +9,15 @@ namespace Entities.Models
     [Table("Marks", Schema = "dbo")]
     public class Marks
     {
-        [Column("ID")]
         [Key]
-        public int MarkID { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [MaxLength(50)]
         public string MarkName { get; set; }
+
+        [ForeignKey("FK_MarkID")]
+        public ICollection<MarksModels> MarksModels { get; set; }
+
     }
 }

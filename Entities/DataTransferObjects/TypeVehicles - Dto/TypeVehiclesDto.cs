@@ -11,8 +11,5 @@ namespace Back_End.Models.TypeVehicles___Dto
     {
         public string Type { get; set; }
 
-        public string Mark { get; set; }
-        public string Model { get; set; }
-        //public ICollection<TypeVehiclesModelsDto> TypeVehiclesModels { get; set; }
     }
 }

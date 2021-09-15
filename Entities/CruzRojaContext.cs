@@ -32,6 +32,10 @@ namespace Back_End.Entities
             modelBuilder.Entity<VolunteersSkillsFormationEstates>()
 
           .HasKey(s => new { s.FK_VolunteerSkillID, s.FK_FormationEstateID});
+
+            modelBuilder.Entity<MarksModels>()
+
+          .HasKey(s => new { s.FK_MarkID, s.FK_ModelID });
         }
 
         //Defino cada una de las Models, que se usan durante el proyecto, donde cada una de ellas representa una tabla de la base de datos
@@ -56,6 +60,10 @@ namespace Back_End.Entities
         public DbSet<TypesEmergenciesDisasters> TypesEmergenciesDisasters { get; set; }
         public DbSet<Alerts> Alerts { get; set; }
         public DbSet<VolunteersSkillsFormationEstates> VolunteersSkillsFormationEstates { get; set; }
+        public DbSet<MarksModels> MarksModels { get; set; }
+        public DbSet<Marks> Marks { get; set; }
+        public DbSet<Model> Models { get; set; }
+
 
         public DbSet<FormationsEstates> FormationsEstates { get; set; }
 

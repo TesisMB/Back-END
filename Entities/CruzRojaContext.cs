@@ -12,8 +12,6 @@ namespace Back_End.Entities
         {
         }
 
-
-
         //Este metodo va a ser que devuelva la conexion que se establece en la clase Startup
         public CruzRojaContext(DbContextOptions<CruzRojaContext> options)
               : base(options)
@@ -63,9 +61,14 @@ namespace Back_End.Entities
         public DbSet<MarksModels> MarksModels { get; set; }
         public DbSet<Marks> Marks { get; set; }
         public DbSet<Model> Models { get; set; }
-
-
         public DbSet<FormationsEstates> FormationsEstates { get; set; }
+        public DbSet<Resources_Request> Resources_Requests { get; set; }
+        public DbSet<Resources> Resources { get; set; }
+        public DbSet<Resources_Materials> Resources_Materials { get; set; }
+        public DbSet<Resources_Medicines> Resources_Medicines { get; set; }
+        public DbSet<Resources_Vehicles> Resources_Vehicles { get; set; }
+
+
 
         private const string Connection =
       @"Server=localhost;

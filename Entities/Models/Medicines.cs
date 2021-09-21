@@ -52,6 +52,7 @@ namespace Entities.Models
 
         [ForeignKey("FK_EstateID")]
         public Estates Estates { get; set; }
+        public ICollection<Resources_Medicines> Resources_Medicines { get; set; }
 
     }
 }

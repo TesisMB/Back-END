@@ -1,0 +1,37 @@
+2021-09-21 09:50:39.8634 INFO Returned all Resources_Request from database.
+2021-09-21 09:52:30.1438 INFO Returned all Resources_Request from database.
+2021-09-21 09:52:58.6451 INFO Returned all Resources_Request from database.
+2021-09-21 09:54:21.5199 INFO Returned all Resources_Request from database.
+2021-09-21 09:55:05.2853 INFO Returned all Resources_Request from database.
+2021-09-21 10:18:49.5995 INFO Returned User.
+2021-09-21 10:19:12.2958 INFO Returned all Resources_Request from database.
+2021-09-21 10:19:39.7165 INFO Returned all employees from database.
+2021-09-21 10:21:26.8402 INFO Returned all employees from database.
+2021-09-21 10:21:51.9400 INFO Returned all Resources_Request from database.
+2021-09-21 10:22:02.0244 INFO Returned employe with details for id: 7
+2021-09-21 10:22:12.7347 INFO Returned all employees from database.
+2021-09-21 10:22:58.9159 INFO Returned all Resources_Request from database.
+2021-09-21 10:23:56.7544 INFO Returned User.
+2021-09-21 10:24:44.6441 INFO Returned User.
+2021-09-21 10:26:21.2703 INFO Returned User.
+2021-09-21 10:27:51.0352 INFO Returned User.
+2021-09-21 10:28:28.4929 INFO Returned all Resources_Request from database.
+2021-09-21 10:32:24.7237 INFO Returned User.
+2021-09-21 10:32:42.3313 INFO Returned all Resources_Request from database.
+2021-09-21 10:33:54.2837 INFO Returned User.
+2021-09-21 10:33:59.0576 INFO Returned all Resources_Request from database.
+2021-09-21 11:00:39.2378 INFO Returned User.
+2021-09-21 11:01:45.7855 ERROR Something went wrong inside CreateMedicine action: Object reference not set to an instance of an object.
+2021-09-21 11:02:03.7185 INFO Returned User.
+2021-09-21 11:02:26.0299 ERROR Something went wrong inside CreateMedicine action: The method or operation is not implemented.
+2021-09-21 11:09:31.0823 INFO Returned User.
+2021-09-21 11:09:51.7730 ERROR Something went wrong inside CreateMedicine action: The method or operation is not implemented.
+2021-09-21 11:13:39.8638 ERROR Something went wrong inside User: String reference not set to an instance of a String. (Parameter 's')
+2021-09-21 11:16:30.4664 ERROR Something went wrong inside User: String reference not set to an instance of a String. (Parameter 's')
+2021-09-21 11:16:43.8776 INFO Returned User.
+2021-09-21 11:17:04.5506 ERROR Something went wrong inside CreateMedicine action: An error occurred while updating the entries. See the inner exception for details.
+2021-09-21 11:19:45.4665 ERROR Something went wrong inside CreateMedicine action: An error occurred while updating the entries. See the inner exception for details.
+2021-09-21 11:20:39.3147 INFO Returned User.
+2021-09-21 11:23:57.3944 ERROR Something went wrong inside User: String reference not set to an instance of a String. (Parameter 's')
+2021-09-21 11:24:01.1893 INFO Returned User.
+2021-09-21 11:24:08.6825 INFO Returned all Resources_Request from database.

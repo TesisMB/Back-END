@@ -56,5 +56,7 @@ namespace Back_End.Models
 
         [Required]
         public int FK_LocationID { get; set; }
+
+        public ICollection<Resources_Request> Resources_Requests { get; set; }
     }
 }

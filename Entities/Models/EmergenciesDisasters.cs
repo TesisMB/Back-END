@@ -34,7 +34,6 @@ namespace Entities.Models
         [ForeignKey("FK_AlertID")]
         public Alerts Alerts { get; set; }
 
-
         public int? Fk_EmplooyeeID { get; set; }
 
         [Required]
@@ -45,6 +44,7 @@ namespace Entities.Models
 
         [Required]
         public int FK_AlertID { get; set; }
+        public ICollection<Resources_Request> Resources_Requests { get; set; }
 
     }
 

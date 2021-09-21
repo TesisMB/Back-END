@@ -23,6 +23,9 @@ namespace Contracts.Interfaces
 
         ITypesEmergenciesDisastersRepository TypesEmergenciesDisasters { get; }
 
+        IResources_RequestRepository Resources_RequestRepository { get; }
+
+
         // void Save();
     }
 }

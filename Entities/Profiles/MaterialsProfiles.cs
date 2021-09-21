@@ -12,6 +12,8 @@ namespace Entities.Profiles
     {
         public MaterialsProfiles()
         {
+            CreateMap<Materials, MaterialsDto>();
+
             CreateMap<Materials, ResourcesDto>()
 
                 .ForMember(dest => dest.Name,

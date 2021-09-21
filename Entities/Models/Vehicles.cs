@@ -43,5 +43,7 @@ namespace Back_End.Models
         public int Fk_TypeVehicleID { get; set; }
 
         public MarksModels MarksModels { get; set; }
+        public ICollection<Resources_Vehicles> Resources_Vehicles { get; set; }
+
     }
 }

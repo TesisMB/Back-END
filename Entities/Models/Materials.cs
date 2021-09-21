@@ -37,5 +37,7 @@ namespace Entities.Models
 
         public Estates Estates { get; set; }
 
+        public ICollection<Resources_Materials> Resources_Materials { get; set; }
+
     }
 }

@@ -17,6 +17,7 @@ namespace Repository
         private IEstatesRepository _estates;
         private IEmergenciesDisastersRepository _emergenciesDisasters;
         private ITypesEmergenciesDisastersRepository _typesEmergenciesDisasters;
+        private IResources_RequestRepository _request_Repository;
 
 
         private IMapper _mapper;
@@ -132,6 +133,18 @@ namespace Repository
                     _typesEmergenciesDisasters = new TypesEmergenciesDisastersRepository(_cruzRojaContext);
                 }
                 return _typesEmergenciesDisasters;
+            }
+        }
+
+        public IResources_RequestRepository Resources_RequestRepository
+        {
+            get
+            {
+                if (_request_Repository == null)
+                {
+                    _request_Repository = new Resources_RequestRepository(_cruzRojaContext);
+                }
+                return _request_Repository;
             }
         }
 

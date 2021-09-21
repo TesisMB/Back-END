@@ -12,6 +12,8 @@ namespace Entities.Profiles
     {
         public VehiclesProfiles()
         {
+            CreateMap<Vehicles, VehiclesDto>();
+
             CreateMap<Vehicles, ResourcesDto>()
                 // .ForMember(dest => dest.Vehicles.Utility,
                 //           opt => opt.MapFrom(src => src.VehicleUtility))

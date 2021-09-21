@@ -13,6 +13,8 @@ namespace Entities.Profiles
 
         public MedicinesProfiles()
         {
+            CreateMap<Medicines, MedicinesDto>();
+
             CreateMap<Medicines, ResourcesDto>()
 
                 .ForMember(dest => dest.Name,

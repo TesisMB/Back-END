@@ -58,5 +58,11 @@ namespace Back_End.Models
         public int FK_LocationID { get; set; }
 
         public ICollection<Resources_Request> Resources_Requests { get; set; }
+
+        [ForeignKey("FK_UserID")]
+        public ICollection<UsersNotifications> UsersNotifications { get; set; }
+
+        [ForeignKey("FK_UserID")]
+        public ICollection<UsersChatRooms> UsersChatRooms { get; set; }
     }
 }

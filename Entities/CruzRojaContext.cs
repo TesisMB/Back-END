@@ -31,9 +31,19 @@ namespace Back_End.Entities
 
           .HasKey(s => new { s.FK_VolunteerSkillID, s.FK_FormationEstateID});
 
-            modelBuilder.Entity<MarksModels>()
+            modelBuilder.Entity<BrandsModels>()
 
-          .HasKey(s => new { s.FK_MarkID, s.FK_ModelID });
+          .HasKey(s => new { s.FK_BrandID, s.FK_ModelID });
+
+            modelBuilder.Entity<UsersNotifications>()
+
+           .HasKey(s => new { s.FK_UserID, s.FK_NotificationID });
+
+            modelBuilder.Entity<UsersChatRooms>()
+
+            .HasKey(s => new { s.Fk_UserID, s.FK_ChatRoomID });
+
+
         }
 
         //Defino cada una de las Models, que se usan durante el proyecto, donde cada una de ellas representa una tabla de la base de datos
@@ -58,8 +68,8 @@ namespace Back_End.Entities
         public DbSet<TypesEmergenciesDisasters> TypesEmergenciesDisasters { get; set; }
         public DbSet<Alerts> Alerts { get; set; }
         public DbSet<VolunteersSkillsFormationEstates> VolunteersSkillsFormationEstates { get; set; }
-        public DbSet<MarksModels> MarksModels { get; set; }
-        public DbSet<Marks> Marks { get; set; }
+        public DbSet<BrandsModels> MarksModels { get; set; }
+        public DbSet<Brands> Marks { get; set; }
         public DbSet<Model> Models { get; set; }
         public DbSet<FormationsEstates> FormationsEstates { get; set; }
         public DbSet<Resources_Request> Resources_Requests { get; set; }
@@ -67,8 +77,8 @@ namespace Back_End.Entities
         public DbSet<Resources_Materials> Resources_Materials { get; set; }
         public DbSet<Resources_Medicines> Resources_Medicines { get; set; }
         public DbSet<Resources_Vehicles> Resources_Vehicles { get; set; }
-
-
+        public DbSet<Notifications> Notifications { get; set; }
+        public DbSet<UsersNotifications> UsersNotifications { get; set; }
 
         private const string Connection =
       @"Server=localhost;

@@ -16,7 +16,7 @@ namespace Back_End.Models.Vehicles___Dto
         public EmployeesVehiclesDto Employees { get; set; }
         public TypeVehiclesDto Type { get; set; }
 
-        public MarksModelsDto MarksModels { get; set; }
+        public BrandsModelsDto BrandsModels { get; set; }
 
     }
 }

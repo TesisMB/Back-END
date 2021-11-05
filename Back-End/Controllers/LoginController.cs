@@ -15,11 +15,11 @@ namespace Back_End.Controllers
         private readonly IMapper _mapper;
         private IRepositorWrapper _repository;
 
-        public LoginController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper, IRepositorWrapper repositorio)
+        public LoginController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper)
         {
             _logger = logger;
             _mapper = mapper;
-            _repository = repositorio;
+            _repository = repository;
         }
 
         ActionResult ret = null;
@@ -29,9 +29,7 @@ namespace Back_End.Controllers
         {
             try
             {
-
                 var auth = await _repository.Users.ValidateUser(user);
-
                 if (auth.UserAvailability)
                 {
                     ret = StatusCode(200, auth);

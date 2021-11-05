@@ -3,7 +3,7 @@ using Entities.Validator.Creation.Medicines;
 using FluentValidation;
 
 
-namespace Entities.Validator.Creation.Materials
+namespace Entities.Validator.Creation
 {
     public class MaterialsValidator : AbstractValidator<MaterialsForCreationDto>
     {

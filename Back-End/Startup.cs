@@ -11,15 +11,12 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Back_End.Validator;
-using FluentValidation;
-using Back_End.Models;
 using Back_End;
 using Microsoft.AspNetCore.HttpOverrides;
 using NLog;
 using System.IO;
-using FluentValidation.AspNetCore;
 using Wkhtmltopdf.NetCore;
+using Back_End.Hubs;
 
 public class Startup
 {
@@ -39,9 +36,21 @@ public class Startup
         services.ConfigureSqlContext(Configuration);
         services.ConfigureRepositoryWrapper();
         services.Fluent();
-
         services.AddWkhtmltopdf("WkhtmltoPdf");
 
+        services.AddCors(options =>
+        {
+            options.AddPolicy("todos",
+                builder => {
+                    builder.AllowAnyHeader()
+                    .AllowAnyMethod()
+                    //dominios
+                    .SetIsOriginAllowed((Host) => true)
+                    .AllowCredentials();
+                });
+        });
+
+        services.AddSignalR();
 
         services.Configure<ApiBehaviorOptions>(options => {
            options.SuppressModelStateInvalidFilter = true;
@@ -125,7 +134,7 @@ public class Startup
             ForwardedHeaders = ForwardedHeaders.All
         });
 
-        app.UseCors("CorsPolicy");
+        app.UseCors("todos");
 
         app.UseRouting();
 
@@ -140,6 +149,7 @@ public class Startup
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
+            endpoints.MapHub<Mensaje>("Notifications");
         });
 
     }

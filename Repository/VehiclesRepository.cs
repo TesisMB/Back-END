@@ -20,15 +20,14 @@ namespace Repository
         }
         public async Task<IEnumerable<Vehicles>> GetAllVehicles()
         {
-            /*var vehicles = UsersRepository.authUser;
+            var vehicles = UsersRepository.authUser;
 
             var collection = _cruzRojaContext.Vehicles as IQueryable<Vehicles>;
 
-
             collection = collection.Where(
-                                        a => a.Estates.Locations.LocationDepartmentName == vehicles.Estates.Locations.LocationDepartmentName);*/
+                                        a => a.Estates.Locations.LocationDepartmentName == vehicles.Estates.Locations.LocationDepartmentName);
 
-            return await FindAll()
+            return await collection
                    .Include(a => a.Estates)
                    .Include(a => a.Estates.LocationAddress)
                    .Include(a => a.Estates.EstatesTimes)
@@ -39,9 +38,9 @@ namespace Repository
                    .ThenInclude(a => a.Persons)
                    .Include(a => a.Type)
                    .Include(a => a.Estates.Locations)
-                   .Include(a => a.MarksModels)
-                   .Include(a => a.MarksModels.Marks)
-                   .Include(a => a.MarksModels.Model)
+                   .Include(a => a.BrandsModels)
+                   .Include(a => a.BrandsModels.Brands)
+                   .Include(a => a.BrandsModels.Model)
                  .ToListAsync();
         }
 

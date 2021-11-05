@@ -71,8 +71,7 @@ namespace Back_End.Controllers
                 {
                     _logger.LogInfo($"Returned medicine with details for id: {medicineId}");
 
-                    var employeeResult = _mapper.Map<ResourcesDto
-                        >(employee);
+                    var employeeResult = _mapper.Map<ResourcesDto>(employee);
                     return Ok(employeeResult);
                 }
             }

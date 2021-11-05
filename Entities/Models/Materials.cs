@@ -19,7 +19,7 @@ namespace Entities.Models
 
         [Required]
         [MaxLength(50)]
-        public string MaterialMark { get; set; }
+        public string MaterialBrand { get; set; }
 
         [Required]
         [MaxLength(50)]

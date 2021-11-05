@@ -8,7 +8,7 @@ namespace Entities.DataTransferObjects.Materials___Dto
 {
     public class MaterialsDto
     {
-        public string Mark { get; set; }
+        public string Brand { get; set; }
 
     }
 }

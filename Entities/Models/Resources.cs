@@ -18,11 +18,11 @@ namespace Entities.Models
         [ForeignKey("FK_Resource_VehiclelID")]
         public Resources_Vehicles Resources_Vehicles { get; set; }
 
-        public int FK_Resource_MaterialID { get; set; }
+        public int? FK_Resource_MaterialID { get; set; }
 
-        public int FK_Resource_MedicinelID { get; set; }
+        public int? FK_Resource_MedicinelID { get; set; }
 
-        public int FK_Resource_VehiclelID { get; set; }
+        public int? FK_Resource_VehiclelID { get; set; }
 
         public Resources_Request Resources_Request { get; set; }
     }

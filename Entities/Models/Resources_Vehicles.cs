@@ -11,9 +11,6 @@ namespace Entities.Models
         [Key]
         public int ID { get; set; }
 
-        [Required]
-        public int Quantity { get; set; }
-
         [ForeignKey("FK_VehicleID")]
         public Vehicles Vehicles { get; set; }
 

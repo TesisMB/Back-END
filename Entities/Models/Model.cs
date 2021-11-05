@@ -17,7 +17,7 @@ namespace Entities.Models
         public string ModelName { get; set; }
 
         [ForeignKey("FK_ModelID")]
-        public ICollection<MarksModels> MarksModels { get; set; }
+        public ICollection<BrandsModels> MarksModels { get; set; }
 
     }
 }

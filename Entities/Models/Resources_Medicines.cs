@@ -9,6 +9,7 @@ namespace Entities.Models
     public class Resources_Medicines
     {
         [Key]
+
         public int ID { get; set; }
 
         [Required]

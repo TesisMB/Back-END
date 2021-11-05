@@ -14,7 +14,7 @@ namespace Entities.DataTransferObjects.Resources_Request___Dto
 
         public string Reason { get; set; }
 
-        public bool Status { get; set; }
+        public Boolean Status { get; set; } 
 
         public EmployeesUsersDto Users { get; set; }
 

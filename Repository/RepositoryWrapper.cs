@@ -17,7 +17,7 @@ namespace Repository
         private IEstatesRepository _estates;
         private IEmergenciesDisastersRepository _emergenciesDisasters;
         private ITypesEmergenciesDisastersRepository _typesEmergenciesDisasters;
-        private IResources_RequestRepository _request_Repository;
+        private IResources_RequestRepository _resources_Request;
 
 
         private IMapper _mapper;
@@ -136,17 +136,18 @@ namespace Repository
             }
         }
 
-        public IResources_RequestRepository Resources_RequestRepository
+        public IResources_RequestRepository Resources_Requests
         {
             get
             {
-                if (_request_Repository == null)
+                if (_resources_Request == null)
                 {
-                    _request_Repository = new Resources_RequestRepository(_cruzRojaContext);
+                    _resources_Request = new Resources_RequestRepository(_cruzRojaContext);
                 }
-                return _request_Repository;
+                return _resources_Request;
             }
         }
+
 
         /*public void Save()
         {

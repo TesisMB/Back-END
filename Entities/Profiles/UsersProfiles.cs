@@ -30,7 +30,10 @@ namespace Back_End.Profiles
                               opt => opt.MapFrom(src => UserSecurity.GenerateAccessToken(src.UserID, src.Roles.RoleName)))
 
            .ForMember(dest => dest.RoleName,
-                              opt => opt.MapFrom(src => src.Roles.RoleName));
+                              opt => opt.MapFrom(src => src.Roles.RoleName))
+           
+            .ForMember(dest => dest.VolunteerAvatar,
+                              opt => opt.MapFrom(src => src.Volunteers.VolunteerAvatar));
 
             CreateMap<Users, UsersVehiclesDto>();
 

@@ -1,0 +1,13 @@
+2021-09-23 11:37:04.0693 INFO Returned User.
+2021-09-23 11:37:06.6122 ERROR Something went wrong inside CreateMedicine action: The property 'ID' on entity type 'Resources_Request' has a temporary value while attempting to change the entity's state to 'Modified'. Either set a permanent value explicitly or ensure that the database is configured to generate values for this property.
+2021-09-23 11:38:52.8191 INFO Returned User.
+2021-09-23 11:38:55.4392 ERROR Something went wrong inside CreateMedicine action: The instance of entity type 'Resources_Materials' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2021-09-23 11:44:18.0856 INFO Returned User.
+2021-09-23 11:45:57.1574 ERROR Something went wrong inside CreateMedicine action: The instance of entity type 'Resources_Materials' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2021-09-23 11:48:56.8038 INFO Returned User.
+2021-09-23 11:49:46.0164 ERROR Something went wrong inside CreateMedicine action: The instance of entity type 'Resources_Materials' cannot be tracked because another instance with the same key value for {'Resource_MaterialID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2021-09-23 12:03:54.0685 INFO Returned User.
+2021-09-23 12:04:28.5496 ERROR Something went wrong inside CreateMedicine action: Sequence contains no elements
+2021-09-23 12:05:17.6168 INFO Returned User.
+2021-09-23 12:05:48.6005 ERROR Something went wrong inside CreateMedicine action: The property 'ID' on entity type 'Medicines' is part of a key and so cannot be modified or marked as modified. To change the principal of an existing entity with an identifying foreign key first delete the dependent and invoke 'SaveChanges' then associate the dependent with the new principal.
+2021-09-23 12:06:42.3826 INFO Returned User.

@@ -18,7 +18,7 @@ namespace Entities.Models
         public string Reason { get; set; }
 
         [Required]
-        public bool Status { get; set; }
+        public Boolean Status { get; set; }
 
         [ForeignKey("FK_UserID")]
         public Users Users { get; set; }

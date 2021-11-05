@@ -1,0 +1,6 @@
+2021-11-02 15:33:38.6772 ERROR Something went wrong inside CreateMedicine action: Object reference not set to an instance of an object.
+2021-11-02 15:33:49.1207 INFO Returned User.
+2021-11-02 15:33:55.9432 ERROR Something went wrong inside CreateMedicine action: Value cannot be null. (Parameter 'entity')
+2021-11-02 15:36:40.4468 ERROR Something went wrong inside CreateMedicine action: Value cannot be null. (Parameter 'entity')
+2021-11-02 15:46:40.1446 ERROR Something went wrong inside CreateMedicine action: Object reference not set to an instance of an object.
+2021-11-02 15:46:44.7563 INFO Returned User.

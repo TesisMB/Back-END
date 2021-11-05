@@ -22,14 +22,14 @@ namespace Repository
         public async Task<IEnumerable<Volunteers>> GetAllVolunteers()
         {
 
-            /*var volunteers = UsersRepository.authUser;
+            var volunteers = UsersRepository.authUser;
 
             var collection = _cruzRojaContext.Volunteers as IQueryable<Volunteers>;
 
             collection = collection.Where(
-                                        a => a.Users.Estates.Locations.LocationDepartmentName == volunteers.Estates.Locations.LocationDepartmentName);*/
+                                        a => a.Users.Estates.Locations.LocationDepartmentName == volunteers.Estates.Locations.LocationDepartmentName);
 
-            return await FindAll()
+            return await collection
                          .Include(a => a.Users)
                          .ThenInclude(a => a.Persons)
                          .Include(a => a.Users.Locations)

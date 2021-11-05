@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-   public class MaterialsRepository : RepositoryBase<Materials>, IMaterialsRepository
+    public class MaterialsRepository : RepositoryBase<Materials>, IMaterialsRepository
     {
         private CruzRojaContext _cruzRojaContext;
 
@@ -25,11 +25,11 @@ namespace Repository
 
 
             var collection = _cruzRojaContext.Materials as IQueryable<Materials>;
-           
 
-                collection = collection.Where(
-                    a => a.Estates.Locations.LocationDepartmentName == material.Estates.Locations.LocationDepartmentName);
-            
+
+            collection = collection.Where(
+                a => a.Estates.Locations.LocationDepartmentName == material.Estates.Locations.LocationDepartmentName);
+
 
 
             return await collection
@@ -76,6 +76,7 @@ namespace Repository
         {
             Delete(material);
         }
+
 
     }
 }

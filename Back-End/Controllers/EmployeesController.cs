@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Wkhtmltopdf.NetCore;
 
@@ -33,42 +34,44 @@ namespace Back_End.Controllers
         }
 
         [HttpGet("PDF/{employeeId}")]
-        public async Task <IActionResult> GetEmployeeIDPDF(int employeeId)
+        public async Task <FileResult> GetEmployeeIDPDF(int employeeId)
         {
             var employee = await _repository.Employees.GetEmployeeWithDetails(employeeId);
+            /*
+                        var options = new ConvertOptions
+                        {
+                            PageMargins = new Wkhtmltopdf.NetCore.Options.Margins()
+                            {
+                                Top = 5
+                            }
+                        };*/
 
-            if (employee == null)
-            {
-               return NotFound();
-            }
+            // _generatePdf.SetConvertOptions(options);
 
-            var options = new ConvertOptions
-            {
-                PageMargins = new Wkhtmltopdf.NetCore.Options.Margins()
-                {
-                    Top = 5
-                }
-            };
+           // var filePath = $"{employee.Users.Persons.FirstName} {employee.Users.Persons.LastName}.pdf"; // Here, you should validate the request and the existance of the file.
 
-            _generatePdf.SetConvertOptions(options);
+           // var bytes = await System.IO.File.ReadAllBytesAsync(filePath);
+            //return File(bytes, "Views/Employee/EmployeeInfo.cshtml", Path.GetFileName(filePath));
 
 
-            var pdf = await _generatePdf.GetByteArray("Views/Employee/EmployeeInfo.cshtml", employee);
+           var pdf = await _generatePdf.GetByteArray("Views/Employee/EmployeeInfo.cshtml", employee);
 
-            var pdfStream = new System.IO.MemoryStream();
+           /* var pdfStream = new System.IO.MemoryStream();
             pdfStream.Write(pdf, 0, pdf.Length);
-            pdfStream.Position = 0;
+            pdfStream.Position = 0;*/
 
 
             //var pdf = await _generatePdf.GetByteArray("Views/Employee/EmployeeInfo.cshtml", employee);
 
-            return new FileStreamResult(pdfStream, "application/pdf");
+            //return new FileStreamResult(pdfStream, "application/pdf");
 
             //return await _generatePdf.GetPdf("Views/Employee/EmployeeInfo.cshtml", pdfStream);
 
-            //return File(pdf, "application/pdf", $"{employee.Users.Persons.FirstName} {employee.Users.Persons.LastName}.pdf");
+           return File(pdf, "application/pdf", $"{employee.Users.Persons.FirstName} {employee.Users.Persons.LastName}.pdf");
         }
 
+
+       
 
         [HttpGet]
         //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
@@ -160,7 +163,6 @@ namespace Back_End.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
-
 
         //[Authorize(Roles = "Coordinador General, Admin")] 
         [HttpPatch("{employeeId}")]

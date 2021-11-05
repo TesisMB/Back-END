@@ -15,6 +15,8 @@ namespace Back_End.Models
         public EmployeesPersonsDto Persons { get; set; }
         public EstatesDto Estates { get; set; }
 
+        public string VolunteerAvatar { get; set; }
+
         //El token surgue de realizar el llamada a la funcion GenerateAccessToken usando automapper
         public string token { get; set; } 
     }

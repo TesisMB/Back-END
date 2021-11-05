@@ -14,6 +14,10 @@ namespace Entities.Profiles
             CreateMap<Resources_Request, Resources_RequestDto>();
             CreateMap<Resources_RequestForCreationDto, Resources_Request>();
 
+
+            CreateMap<Resources_Request, Resource_RequestForUpdateDto>();
+            CreateMap<Resource_RequestForUpdateDto, Resources_Request>();
+
         }
     }
 }

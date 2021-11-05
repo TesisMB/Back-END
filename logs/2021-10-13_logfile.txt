@@ -1,0 +1,22 @@
+2021-10-13 19:32:40.8050 INFO Returned User.
+2021-10-13 19:32:57.8439 INFO Returned all employees from database.
+2021-10-13 19:37:43.7107 INFO Returned User.
+2021-10-13 19:38:32.3305 INFO Returned User.
+2021-10-13 19:38:42.8886 INFO Returned employe with details for id: 9
+2021-10-13 19:38:48.2282 INFO Returned all Materials from database.
+2021-10-13 19:38:50.0769 INFO Returned Material with id: 3
+2021-10-13 19:39:19.0640 INFO Returned Material with id: 3
+2021-10-13 19:39:25.6339 INFO Returned all Materials from database.
+2021-10-13 19:41:06.8962 INFO Returned User.
+2021-10-13 19:41:19.4437 INFO Returned all Materials from database.
+2021-10-13 19:48:26.1422 INFO Returned all employees from database.
+2021-10-13 19:48:27.2216 INFO Returned all employees from database.
+2021-10-13 19:48:27.8739 INFO Returned all employees from database.
+2021-10-13 19:48:28.3620 INFO Returned all employees from database.
+2021-10-13 19:48:28.9044 INFO Returned all employees from database.
+2021-10-13 19:48:33.6401 INFO Returned all employees from database.
+2021-10-13 19:48:34.4228 INFO Returned all employees from database.
+2021-10-13 19:51:58.1093 INFO Returned User.
+2021-10-13 20:04:42.8505 INFO Returned User.
+2021-10-13 20:04:43.0874 INFO Returned all employees from database.
+2021-10-13 20:04:45.8234 INFO Returned all employees from database.

@@ -11,7 +11,7 @@ namespace Back_End.Models
     [Table("Vehicles", Schema = "dbo")]
     public class Vehicles
     {
-       
+
         [Key]
         public int ID { get; set; }
 
@@ -42,7 +42,7 @@ namespace Back_End.Models
         public TypeVehicles Type{ get; set; }
         public int Fk_TypeVehicleID { get; set; }
 
-        public MarksModels MarksModels { get; set; }
+        public BrandsModels BrandsModels { get; set; }
         public ICollection<Resources_Vehicles> Resources_Vehicles { get; set; }
 
     }

@@ -23,7 +23,7 @@ namespace Contracts.Interfaces
 
         ITypesEmergenciesDisastersRepository TypesEmergenciesDisasters { get; }
 
-        IResources_RequestRepository Resources_RequestRepository { get; }
+        IResources_RequestRepository Resources_Requests { get; }
 
 
         // void Save();

@@ -1,0 +1,31 @@
+2021-11-04 15:50:37.5626 INFO Returned User.
+2021-11-04 15:51:54.9335 INFO Returned all employees from database.
+2021-11-04 15:51:58.5509 INFO Returned all employees from database.
+2021-11-04 15:53:42.5695 INFO Returned all vehicles from database.
+2021-11-04 15:55:04.0439 INFO Returned employe with details for id: 2
+2021-11-04 15:56:16.0323 INFO Returned User.
+2021-11-04 15:56:19.8393 INFO Returned all employees from database.
+2021-11-04 15:56:46.9549 INFO Returned all employees from database.
+2021-11-04 15:57:05.6140 INFO Returned all Materials from database.
+2021-11-04 15:57:12.1043 INFO Returned all Volunteers from database.
+2021-11-04 15:57:32.9404 INFO Returned all Materials from database.
+2021-11-04 15:57:43.1134 INFO Returned all Materials from database.
+2021-11-04 15:57:45.9304 INFO Returned Material with id: 3
+2021-11-04 15:57:50.8958 INFO Returned all Materials from database.
+2021-11-04 15:57:53.8671 INFO Returned Material with id: 15
+2021-11-04 15:57:54.9512 INFO Returned all Materials from database.
+2021-11-04 15:58:02.8117 INFO Returned Material with id: 3
+2021-11-04 15:58:04.6965 INFO Returned all Materials from database.
+2021-11-04 15:58:09.1495 INFO Returned all Materials from database.
+2021-11-04 15:59:24.4250 INFO Returned all vehicles from database.
+2021-11-04 15:59:24.4250 INFO Returned all Materials from database.
+2021-11-04 15:59:35.1746 INFO Returned all Materials from database.
+2021-11-04 15:59:41.8184 INFO Returned all vehicles from database.
+2021-11-04 15:59:46.5582 INFO Returned all Materials from database.
+2021-11-04 15:59:51.3751 INFO Returned Material with id: 3
+2021-11-04 15:59:53.2938 INFO Returned all Materials from database.
+2021-11-04 16:00:10.2671 INFO Returned Material with id: 15
+2021-11-04 16:00:11.9225 INFO Returned all Materials from database.
+2021-11-04 16:00:50.8606 INFO Returned all Materials from database.
+2021-11-04 16:07:12.6574 INFO Returned all employees from database.
+2021-11-04 16:40:37.2184 INFO Returned User.

@@ -24,7 +24,11 @@ namespace Back_End.Profiles
 
               .ForPath(d => d.Volunteers.VolunteersSkills, o => o.MapFrom(s => s.VolunteersSkills))
 
-              .ForPath(dest => dest.Estates, opts => opts.MapFrom(src => src.Users.Estates));
+              .ForPath(dest => dest.Estates, opts => opts.MapFrom(src => src.Users.Estates))
+
+
+              .ForMember(dest => dest.Availability,
+                            opt => opt.MapFrom(src => src.Users.Persons.Status));
 
 
             CreateMap<Volunteers, VolunteersAppDto>();

@@ -34,7 +34,7 @@ namespace Entities.Profiles
 
                .ForPath(dest => dest.Vehicles.Employees, opts => opts.MapFrom(src => src.Employees))
 
-               .ForPath(dest => dest.Vehicles.MarksModels, opts => opts.MapFrom(src => src.MarksModels));
+               .ForPath(dest => dest.Vehicles.BrandsModels, opts => opts.MapFrom(src => src.BrandsModels));
 
                  //.ForPath(dest => dest.Vehicles.VehiclePatent,
                    //opt => opt.MapFrom(src => src.VehiclePatent));

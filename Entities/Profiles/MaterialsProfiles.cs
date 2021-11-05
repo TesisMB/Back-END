@@ -22,7 +22,7 @@ namespace Entities.Profiles
                 /*.ForMember(dest => dest.Materials.Mark,
                           opt => opt.MapFrom(src => src.MaterialMark))*/
 
-                .ForPath(dest => dest.Materials.Mark, opts => opts.MapFrom(src => src.MaterialMark))
+                .ForPath(dest => dest.Materials.Brand, opts => opts.MapFrom(src => src.Resources_Materials))
 
                     .ForMember(dest => dest.Quantity,
                             opt => opt.MapFrom(src => src.MaterialQuantity))
@@ -38,11 +38,11 @@ namespace Entities.Profiles
 
 
 
-            CreateMap<MaterialsForCreationDto, Materials>();
+            CreateMap<MaterialsForCreationDto, Brands>();
 
-            CreateMap<MaterialsForUpdateDto, Materials>();
+            CreateMap<MaterialsForUpdateDto, Brands>();
 
-            CreateMap<Materials, MaterialsForUpdateDto>();
+            CreateMap<Brands, MaterialsForUpdateDto>();
 
 
         }

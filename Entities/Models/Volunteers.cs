@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Back_End.Models
 {
-    [Table ("Volunteers", Schema = "dbo")]
+    [Table("Volunteers", Schema = "dbo")]
     public class Volunteers
     {
 
@@ -19,7 +19,6 @@ namespace Back_End.Models
         public string VolunteerDescription { get; set; }
         public Users Users { get; set; }
 
-        [ForeignKey("FK_VolunteerID")]
         public ICollection<VolunteersSkills> VolunteersSkills { get; set; }
 
     }

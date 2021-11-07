@@ -1,18 +1,31 @@
-﻿using Back_End.Entities;
+﻿using AutoMapper;
+using Back_End.Entities;
 using Contracts.Interfaces;
+using Microsoft.Extensions.Options;
 
 namespace Repository
 {
-   public class RepositoryWrapper : IRepositorWrapper
+    public class RepositoryWrapper : IRepositorWrapper
     {
-        private CruzRojaContext _cruzRojaContext2;
+        private CruzRojaContext _cruzRojaContext;
         private IEmployeesRepository _employees;
         private IVolunteersRepository _volunteers;
         private IUsersRepository _users;
         private IVehiclesRepository _vehicles;
-        public RepositoryWrapper(CruzRojaContext cruzRojaContext2)
+        private IMaterialsRepository _materials;
+        private IMedicinesRepository _medicines;
+        private IEstatesRepository _estates;
+        private IEmergenciesDisastersRepository _emergenciesDisasters;
+        private ITypesEmergenciesDisastersRepository _typesEmergenciesDisasters;
+        private IResources_RequestRepository _resources_Request;
+
+
+        private IMapper _mapper;
+
+        public RepositoryWrapper(CruzRojaContext cruzRojaContext, IMapper mapper)
         {
-            _cruzRojaContext2 = cruzRojaContext2;
+            _cruzRojaContext = cruzRojaContext;
+            _mapper = mapper;
         }
 
         public IEmployeesRepository Employees
@@ -21,7 +34,7 @@ namespace Repository
             {
                 if (_employees == null)
                 {
-                    _employees = new EmployeesRepository(_cruzRojaContext2);
+                    _employees = new EmployeesRepository(_cruzRojaContext, _mapper);
                 }
                 return _employees;
             }
@@ -33,7 +46,7 @@ namespace Repository
             {
                 if (_volunteers == null)
                 {
-                    _volunteers = new VoluntersRepository(_cruzRojaContext2);
+                    _volunteers = new VoluntersRepository(_cruzRojaContext);
                 }
                 return _volunteers;
             }
@@ -45,7 +58,7 @@ namespace Repository
             {
                 if (_users == null)
                 {
-                    _users = new UsersRepository(_cruzRojaContext2);
+                    _users = new UsersRepository(_cruzRojaContext, _mapper);
                 }
                 return _users;
             }
@@ -57,15 +70,88 @@ namespace Repository
             {
                 if (_vehicles == null)
                 {
-                    _vehicles = new VehiclesRepository(_cruzRojaContext2);
+                    _vehicles = new VehiclesRepository(_cruzRojaContext);
                 }
                 return _vehicles;
             }
         }
 
-        public void Save()
+        public IMaterialsRepository Materials
+        {
+            get
+            {
+                if (_materials == null)
+                {
+                    _materials = new MaterialsRepository(_cruzRojaContext);
+                }
+                return _materials;
+            }
+        }
+
+        public IMedicinesRepository Medicines
+        {
+            get
+            {
+                if (_medicines == null)
+                {
+                    _medicines = new MedicinesRepository(_cruzRojaContext);
+                }
+                return _medicines;
+            }
+        }
+
+        public IEstatesRepository Estates
+        {
+            get
+            {
+                if (_estates == null)
+                {
+                    _estates = new EstatesRepository(_cruzRojaContext);
+                }
+                return _estates;
+            }
+        }
+
+        public IEmergenciesDisastersRepository EmergenciesDisasters
+        {
+            get
+            {
+                if (_emergenciesDisasters == null)
+                {
+                    _emergenciesDisasters = new EmergenciesDisastersRepository(_cruzRojaContext);
+                }
+                return _emergenciesDisasters;
+            }
+        }
+
+        public ITypesEmergenciesDisastersRepository TypesEmergenciesDisasters
+        {
+            get
+            {
+                if (_typesEmergenciesDisasters == null)
+                {
+                    _typesEmergenciesDisasters = new TypesEmergenciesDisastersRepository(_cruzRojaContext);
+                }
+                return _typesEmergenciesDisasters;
+            }
+        }
+
+        public IResources_RequestRepository Resources_Requests
+        {
+            get
+            {
+                if (_resources_Request == null)
+                {
+                    _resources_Request = new Resources_RequestRepository(_cruzRojaContext);
+                }
+                return _resources_Request;
+            }
+        }
+
+
+        /*public void Save()
         {
             _cruzRojaContext2.SaveChanges();
-        }
+        }*/
     }
 }

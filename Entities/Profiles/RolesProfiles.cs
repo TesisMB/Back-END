@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Back_End.Profiles
 {
-    public class RolesProfiles: Profile
+    public class RolesProfiles : Profile
     {
         public RolesProfiles()
         {

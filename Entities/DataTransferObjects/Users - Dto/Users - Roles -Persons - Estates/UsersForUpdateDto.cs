@@ -1,13 +1,8 @@
-﻿using Back_End.Helpers;
-using Back_End.Models.Employees___Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
+
 
 namespace Back_End.Models
 {
-    //Esta clase que extiende de Users define aquellos valores autorizados que pueden ser actualizados.
     public class UsersForUpdateDto
     {
         public string UserPassword { get; set; }
@@ -15,6 +10,8 @@ namespace Back_End.Models
         public Boolean UserAvailability { get; set; }
         public int FK_RoleID { get; set; }
         public int FK_EstateID { get; set; }
+        public int FK_LocationID { get; set; }
+
         public PersonsForUpdatoDto Persons { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Back_End.Models.Employees___Dto;
+using Entities.DataTransferObjects.VolunteersSkillsFormationEstates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,10 @@ namespace Back_End.Models.VolunteersSkills___Dto
 {
     public class VolunteersSkillsDto
     {
+        public int ID { get; set; }
         public SkillsDto Skills { get; set; }
+
+        public ICollection<VolunteersSkillsFormationEstatesDto> VolunteersSkillsFormationEstates { get; set; }
+
     }
 }

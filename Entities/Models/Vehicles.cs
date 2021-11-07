@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,9 +11,9 @@ namespace Back_End.Models
     [Table("Vehicles", Schema = "dbo")]
     public class Vehicles
     {
-        [Column("ID")]
+
         [Key]
-        public int VehicleID { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [MaxLength(9)]
@@ -31,14 +32,18 @@ namespace Back_End.Models
 
         [ForeignKey("FK_EstateID")]
         public Estates Estates { get; set; }
-        public int FK_EstateID { get; set; }
+        public int? FK_EstateID { get; set; }
 
         [ForeignKey("FK_EmployeeID")]
         public Employees Employees { get; set; }
-        public int FK_EmployeeID { get; set; }
+        public int? FK_EmployeeID { get; set; }
 
         [ForeignKey("Fk_TypeVehicleID")]
-        public TypeVehicles TypeVehicles { get; set; }
+        public TypeVehicles Type{ get; set; }
         public int Fk_TypeVehicleID { get; set; }
+
+        public BrandsModels BrandsModels { get; set; }
+        public ICollection<Resources_Vehicles> Resources_Vehicles { get; set; }
+
     }
 }

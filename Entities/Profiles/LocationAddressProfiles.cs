@@ -5,7 +5,7 @@ using Entities.DataTransferObjects.Models.Vehicles___Dto;
 
 namespace Back_End.Profiles
 {
-    public class LocationAddressProfiles :Profile
+    public class LocationAddressProfiles : Profile
     {
         public LocationAddressProfiles()
         {

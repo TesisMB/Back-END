@@ -14,6 +14,18 @@ namespace Contracts.Interfaces
 
         IVehiclesRepository Vehicles { get; }
 
-        void Save();
+        IMaterialsRepository Materials { get; }
+
+        IMedicinesRepository Medicines { get; }
+
+        IEstatesRepository Estates { get; }
+        IEmergenciesDisastersRepository EmergenciesDisasters { get; }
+
+        ITypesEmergenciesDisastersRepository TypesEmergenciesDisasters { get; }
+
+        IResources_RequestRepository Resources_Requests { get; }
+
+
+        // void Save();
     }
 }

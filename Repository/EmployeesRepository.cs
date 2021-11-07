@@ -1,58 +1,124 @@
-﻿using Back_End.Entities;
+﻿using AutoMapper;
+using Back_End.Entities;
+using Back_End.Helpers;
 using Back_End.Models;
 using Contracts.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Repository
 {
     public class EmployeesRepository : RepositoryBase<Employees>, IEmployeesRepository
     {
+        private CruzRojaContext _cruzRojaContext;
+
+        private IMapper _mapper;
         //ctor
-        public EmployeesRepository(CruzRojaContext cruzRojaContext2)
-            : base(cruzRojaContext2)
+       
+        public EmployeesRepository(CruzRojaContext cruzRojaContext, IMapper mapper) : base(cruzRojaContext)
         {
-                
+            _mapper = mapper;
+            _cruzRojaContext = cruzRojaContext;
         }
-        public IEnumerable<Employees> GetAllEmployees()
+
+        public async Task<IEnumerable<Employees>> GetAllEmployees()
         {
-            return FindAll()
+            var user = UsersRepository.authUser;
+
+            var Collection = _cruzRojaContext.Employees as IQueryable<Employees>;
+
+           
+                Collection = Collection.Where(
+                    a => a.Users.Estates.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName
+                    && a.Users.Estates.Locations.LocationCityName == user.Estates.Locations.LocationCityName
+                    && a.Users.Estates.Locations.LocationMunicipalityName == user.Estates.Locations.LocationMunicipalityName);
+
+
+            return await Collection
                     .Include(i => i.Users)
-                    .ThenInclude(i => i.Roles)
+                    .Include(i => i.Users.Locations)
+                    .Include(i => i.Users.Roles)
                     .Include(i => i.Users.Persons)
                     .Include(i => i.Users.Estates)
                     .ThenInclude(i => i.LocationAddress)
                     .Include(a => a.Users.Estates.EstatesTimes)
                     .ThenInclude(a => a.Times)
                     .ThenInclude(a => a.Schedules)
-                    .ToList();
+                    .Include(a => a.Users.Estates.Locations)
+                    .ToListAsync();
         }
 
-        public Employees GetEmployeeById(int employeeId)
+        public async Task<Employees> GetEmployeeById(int employeeId)
         {
-            return FindByCondition(empl => empl.EmployeeID.Equals(employeeId))
+            return await FindByCondition(empl => empl.EmployeeID.Equals(employeeId))
                     .Include(i => i.Users)
-                    .ThenInclude(i => i.Roles)
                     .Include(i => i.Users.Persons)
+                    .FirstOrDefaultAsync();
+        }
+
+        public async Task<Employees> GetEmployeeWithDetails(int employeeId)
+        {
+            return await FindByCondition(empl => empl.EmployeeID.Equals(employeeId))
+                     .Include(i => i.Users)
+                     .Include(i => i.Users.Locations)
+                    .Include(i => i.Users.Roles).Include(i => i.Users.Persons)
                     .Include(i => i.Users.Estates)
                     .ThenInclude(i => i.LocationAddress)
                     .Include(a => a.Users.Estates.EstatesTimes)
                     .ThenInclude(a => a.Times)
                     .ThenInclude(a => a.Schedules)
-                    .FirstOrDefault();
+                    .Include(a=>a.Users.Estates.Locations)
+                    .FirstOrDefaultAsync();
         }
 
-        public Employees GetEmployeeWithDetails(int employeeId)
+        public void CreateEmployee(EmployeesForCreationDto employee)
         {
-            return FindByCondition(empl => empl.EmployeeID.Equals(employeeId))
-                    .Include(a => a.Users)
-                    //.Include(a => a.Vehicles)
-                    .FirstOrDefault();
+            int longitud = 7;
+            Guid miGuid = Guid.NewGuid();
+
+            //convierto de Guid a byte
+            //miGuid.ToByteArray() => Representa ese tipo guid como una matriz de bytes
+            string token = Convert.ToBase64String(miGuid.ToByteArray());
+
+            //Replazo los = y el signo +
+            token = token.Replace("=", "").Replace("+", "");
+
+            //Devuelve los caracteres extraídos de una cadena según la posición 
+            //del carácter especificado para una cantidad especificada de caracteres.
+            string codigo = token.Substring(0, longitud);
+
+            employee.Users.UserPassword = codigo;
+
+            var employeeEntity = _mapper.Map<Employees>(employee);
+
+            employeeEntity.Users.UserPassword = Encrypt.GetSHA256(employee.Users.UserPassword);
+
+            Create(employeeEntity);
+
+            SaveAsync();
+
+            sendVerificationEmail(employee);
+
+            //Create(employee);
         }
-        public void CreateEmployee(Employees employee)
+
+        private void sendVerificationEmail(EmployeesForCreationDto employees)
         {
-            Create(employee);
+            string message;
+
+             message = $@"<p>Se creo con exito su cuenta</p>
+             <p>Su usuario es: {employees.Users.UserDni}<p>
+             <p>Su contraseña es: {employees.Users.UserPassword}</p>";
+
+            EmailRepository.Send(
+                to: employees.Users.Persons.Email,
+                subject: "Sign-up Verification API",
+                html: $@"<p>Bienvenido a SICREYD!</p>
+                         {message}"
+            );
         }
 
         public void UpdateEmployee(Employees employee)

@@ -1,17 +1,23 @@
 ﻿using AutoMapper;
+using Back_End.Entities;
 using Back_End.Helpers;
 using Back_End.Models;
 using Back_End.Models.Employees___Dto;
 using Back_End.Models.Volunteers__Dto;
 using Contracts.Interfaces;
+using Entities.DataTransferObjects.ResourcesDto;
+using Entities.DataTransferObjects.Volunteers__Dto;
+using Entities.Helpers;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Back_End.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("")]
     [ApiController]
     public class VolunteersController : ControllerBase
     {
@@ -27,16 +33,17 @@ namespace Back_End.Controllers
             _mapper = mapper;
         }
 
+        [Route("api/Voluntarios")]
         [HttpGet]
-        public IActionResult GetAllVolunteers()
+        public async Task<ActionResult<Volunteers>> GetAllVolunteers()
         {
             try
             {
-                var volunteers = _repository.Volunteers.GetAllVolunteers();
+                var volunteers = await _repository.Volunteers.GetAllVolunteers();
 
                 _logger.LogInfo($"Returned all Volunteers from database.");
 
-                var volunteersResult = _mapper.Map<IEnumerable<VolunteersDto>>(volunteers);
+                var volunteersResult = _mapper.Map<IEnumerable<ResourcesDto>>(volunteers);
 
                 return Ok(volunteersResult);
 
@@ -48,20 +55,37 @@ namespace Back_End.Controllers
                 return StatusCode(500, "Internal Server error");
 
             }
-
-            //var volunterFromRepo = _cruzRojaRepository.GetList(volunteersResourceParameters);
-
-            //return Ok(_mapper.Map<IEnumerable<VolunteersDto>>(volunterFromRepo));
         }
 
-
-        [HttpGet("{volunteerId}")]
-        public IActionResult GetVolunteer(int volunteerId)
+        [Route("api/app/Volunteers")]
+        [HttpGet]
+        public async Task<ActionResult<Volunteers>> GetAllVolunteersApp()
         {
             try
             {
+                var volunteers1 = await _repository.Volunteers.GetAllVolunteersApp();
 
-                var volunteer = _repository.Volunteers.GetVolunteersById(volunteerId);
+                _logger.LogInfo($"Returned all Volunteers from database.");
+
+                var volunteersResult = _mapper.Map<IEnumerable<VolunteersAppDto>>(volunteers1);
+
+                return Ok(volunteersResult);
+            }
+
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside GetAllVolunteersApp action:  {ex.Message}");
+                return StatusCode(500, "Internal Server error");
+            }
+        }
+
+        [Route("api/Voluntarios/{volunteerId}")]
+        [HttpGet]
+        public async Task<ActionResult<Volunteers>> GetVolunteer(int volunteerId)
+        {
+            try
+            {
+                var volunteer = await _repository.Volunteers.GetVolunteerWithDetails(volunteerId);
 
                 if (volunteer == null)
 
@@ -75,7 +99,7 @@ namespace Back_End.Controllers
 
                 {
                     _logger.LogInfo($"Returned volunteer with id: {volunteerId}");
-                    var volunteerResult = _mapper.Map<VolunteersDto>(volunteer);
+                    var volunteerResult = _mapper.Map<ResourcesDto>(volunteer);
                     return Ok(volunteerResult);
 
                 }
@@ -90,11 +114,18 @@ namespace Back_End.Controllers
             }
         }
 
+        [Route("api/Voluntarios")]
         [HttpPost]
-        public IActionResult CreateVolunteer([FromBody] VolunteersForCreationDto volunteer)
+        public async Task<ActionResult<Volunteers>> CreateVolunteer([FromBody] VolunteersForCreationDto volunteer)
         {
             try
             {
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
+                }
+
                 if (volunteer == null)
 
                 {
@@ -108,9 +139,9 @@ namespace Back_End.Controllers
                 // Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
                 volunteerEntity.Users.UserPassword = Encrypt.GetSHA256(volunteerEntity.Users.UserPassword);
 
-                _repository.Volunteers.Create(volunteerEntity);
+                _repository.Volunteers.CreateVolunteer(volunteerEntity);
 
-                _repository.Save();
+                 _repository.Volunteers.SaveAsync();
 
                 var createdVolunteer = _mapper.Map<VolunteersDto>(volunteerEntity);
 
@@ -126,12 +157,14 @@ namespace Back_End.Controllers
         }
 
 
-        [HttpPatch("{volunteerId}")]
         //[Authorize(Roles = "Coordinador General, Admin")] 
-        public IActionResult UpdatePartialUser(int volunteerId, JsonPatchDocument<VolunteersForUpdatoDto> patchDocument)
+        [Route("api/Voluntarios/{volunteerId}")]
+        [HttpPatch]
+        public async Task<ActionResult> UpdatePartialUser(int volunteerId, JsonPatchDocument<VolunteersForUpdatoDto> patchDocument)
         {
 
-            var userFromRepo = _repository.Volunteers.GetVolunteersById(volunteerId);
+            var userFromRepo = await _repository.Volunteers.GetVolunteersById(volunteerId);
+           
             if (userFromRepo == null)
             {
                 return NotFound();
@@ -146,13 +179,32 @@ namespace Back_End.Controllers
                 return ValidationProblem(ModelState);
             }
 
-            string Pass = userToPatch.Users.UserPassword;
-            //string ePass = Encrypt.GetSHA256(Pass);
-
-            if (userFromRepo.Users.UserPassword != Pass)
+            Users authUser = new Users();
+            if (!string.IsNullOrEmpty(userToPatch.Users.UserNewPassword))
             {
-                //Nuevamente se debea encriptar la contraseña ingresada
-                userToPatch.Users.UserPassword = Encrypt.GetSHA256(userToPatch.Users.UserPassword);
+                // AGREGARLOS EN EL REPOSITORIO
+                var userPass = userToPatch.Users.UserPassword;
+                userToPatch.Users.UserPassword = Encrypt.GetSHA256(userPass);
+
+                using (var db = new CruzRojaContext())
+                    authUser = db.Users.Where(u => u.UserID == userFromRepo.Users.UserID
+                          && u.UserPassword == userToPatch.Users.UserPassword).FirstOrDefault();
+
+
+                if (authUser == null)
+                {
+                    return BadRequest(ErrorHelper.Response(400, "La contraseña es erronea."));
+                }
+
+                else
+                {
+                    userToPatch.Users.UserNewPassword = userToPatch.Users.UserNewPassword.Trim();
+
+                    var userNewPass = userToPatch.Users.UserNewPassword;
+                    userToPatch.Users.UserNewPassword = Encrypt.GetSHA256(userNewPass);
+
+                    userToPatch.Users.UserPassword = userToPatch.Users.UserNewPassword;
+                }
             }
 
 
@@ -160,18 +212,19 @@ namespace Back_End.Controllers
 
             _repository.Volunteers.Update(userFromRepo);
 
-            _repository.Save();
+            //_repository.Save();
 
             return NoContent();
         }
 
 
-        [HttpDelete("{volunteerId}")]
-        public IActionResult DeleteVolunteer(int volunteerId)
+        [Route("api/Voluntarios/{volunteerId}")]
+        [HttpDelete]
+        public async Task<ActionResult> DeleteVolunteer(int volunteerId)
         {
             try
             {
-            var volunteer = _repository.Users.GetUserVolunteerById(volunteerId);
+            var volunteer = await _repository.Users.GetUserVolunteerById(volunteerId);
 
 
             if (volunteer == null)
@@ -182,7 +235,7 @@ namespace Back_End.Controllers
 
             _repository.Users.Delete(volunteer);
 
-            _repository.Save();
+             _repository.Volunteers.SaveAsync();
 
             // Se retorna con exito la eliminacion del Usuario especificado
             return NoContent();

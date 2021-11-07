@@ -2,16 +2,19 @@
 using Back_End.Models;
 using Back_End.Models.Vehicles___Dto;
 using Contracts.Interfaces;
+using Entities.DataTransferObjects.ResourcesDto;
 using Entities.DataTransferObjects.Vehicles___Dto.Creation;
 using Entities.DataTransferObjects.Vehicles___Dto.Update;
+using Entities.Helpers;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Back_End.Controllers
 {
-    [Route("api/Vehicles")]
+    [Route("api/Vehiculos")]
     [ApiController]
     public class VehiclesController : ControllerBase
     {
@@ -29,14 +32,14 @@ namespace Back_End.Controllers
 
 
         [HttpGet]
-        public IActionResult GetAllVehicles()
+        public async Task<ActionResult<Vehicles>> GetAllVehicles()
         {
             try
             {
-                var vehicles = _repository.Vehicles.GetAllVehicles();
+                var vehicles = await _repository.Vehicles.GetAllVehicles();
                 _logger.LogInfo($"Returned all vehicles from database.");
 
-                var employeesResult = _mapper.Map<IEnumerable<VehiclesDto>>(vehicles);
+                var employeesResult = _mapper.Map<IEnumerable<ResourcesDto>>(vehicles);
                 return Ok(employeesResult);
 
             }
@@ -48,12 +51,12 @@ namespace Back_End.Controllers
         }
 
 
-        [HttpGet("{vehiclesId}")]
-        public IActionResult GetVehicle(int vehicleId)
+        [HttpGet("{vehicleId}")]
+        public async Task<ActionResult<Vehicles>> GetVehicle(int vehicleId)
         {
             try
             {
-                var vehicle = _repository.Vehicles.GetVehicleById(vehicleId);
+                var vehicle = await _repository.Vehicles.GetVehicleWithDetails(vehicleId);
 
                 if(vehicle == null)
                 {
@@ -64,7 +67,7 @@ namespace Back_End.Controllers
                 else
                 {
                     _logger.LogInfo($"Returned vehicle with id: {vehicleId}");
-                    var vehicleResult = _mapper.Map<VehiclesDto>(vehicle);
+                    var vehicleResult = _mapper.Map<ResourcesDto>(vehicle);
                     return Ok(vehicleResult);
                 }
 
@@ -76,11 +79,17 @@ namespace Back_End.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateVehicle([FromBody] VehiclesForCreationDto vehicle)
+        public async Task<ActionResult<Vehicles>> CreateVehicle([FromBody] VehiclesForCreationDto vehicle)
         {
             try
             {
-                if(vehicle == null)
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
+                }
+
+                if (vehicle == null)
                 {
                     _logger.LogError("Vehicle object sent from client is null.");
                     return BadRequest("Vehicle object is null");
@@ -90,7 +99,7 @@ namespace Back_End.Controllers
 
                 _repository.Vehicles.Create(vehicleEntity);
 
-                _repository.Save();
+                 _repository.Vehicles.SaveAsync();
 
                 var createdVehicle = _mapper.Map<VehiclesDto>(vehicleEntity);
 
@@ -105,11 +114,11 @@ namespace Back_End.Controllers
         }
 
         [HttpPatch("{vehicleId}")]
-        public IActionResult UpdateVehicle(int vehicleId, JsonPatchDocument<VehiclesForUpdateDto> patchDocument)
+        public async Task<ActionResult> UpdateVehicle(int vehicleId, JsonPatchDocument<VehiclesForUpdateDto> patchDocument)
         {
             try
             {
-                var vehicleEntity = _repository.Vehicles.GetVehicleById(vehicleId);
+                var vehicleEntity = await _repository.Vehicles.GetVehicleById(vehicleId);
 
                 if(vehicleEntity == null)
                 {
@@ -131,7 +140,7 @@ namespace Back_End.Controllers
 
                 _repository.Vehicles.Update(vehicleResult);
 
-                _repository.Save();
+                 _repository.Vehicles.SaveAsync();
 
                 return NoContent();
             
@@ -144,11 +153,11 @@ namespace Back_End.Controllers
 
 
         [HttpDelete("{vehicleId}")]
-        public IActionResult DeleteVehicle (int vehicleId)
+        public async Task<ActionResult> DeleteVehicle (int vehicleId)
         {
             try
             {
-                var vehicle = _repository.Vehicles.GetVehicleById(vehicleId);
+                var vehicle = await _repository.Vehicles.GetVehicleById(vehicleId);
 
                 if(vehicle == null)
                 {
@@ -156,9 +165,9 @@ namespace Back_End.Controllers
                     return NotFound();
                 }
 
-                _repository.Vehicles.Delete(vehicle);
+                _repository.Vehicles.DeleteVehicle(vehicle);
 
-                _repository.Save();
+                 _repository.Vehicles.SaveAsync();
 
                 return NoContent();
 

@@ -11,14 +11,12 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Back_End.Validator;
-using FluentValidation;
-using Back_End.Models;
 using Back_End;
 using Microsoft.AspNetCore.HttpOverrides;
 using NLog;
 using System.IO;
-using FluentValidation.AspNetCore;
+using Wkhtmltopdf.NetCore;
+using Back_End.Hubs;
 
 public class Startup
 {
@@ -38,7 +36,25 @@ public class Startup
         services.ConfigureSqlContext(Configuration);
         services.ConfigureRepositoryWrapper();
         services.Fluent();
+        services.AddWkhtmltopdf("WkhtmltoPdf");
 
+        services.AddCors(options =>
+        {
+            options.AddPolicy("todos",
+                builder => {
+                    builder.AllowAnyHeader()
+                    .AllowAnyMethod()
+                    //dominios
+                    .SetIsOriginAllowed((Host) => true)
+                    .AllowCredentials();
+                });
+        });
+
+        services.AddSignalR();
+
+        services.Configure<ApiBehaviorOptions>(options => {
+           options.SuppressModelStateInvalidFilter = true;
+        });
 
         services.AddControllers();
 
@@ -62,20 +78,21 @@ public class Startup
             opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         })
+.AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = true;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters
+  {
+      ValidateIssuerSigningKey = true,
+      IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("superSecretKey@345")),
+      ValidateIssuer = false,
+      ValidateAudience = false,
+      ClockSkew = TimeSpan.Zero
+      //ValidateLifetime = true,
 
-     .AddJwtBearer(options =>
-     {
-         options.TokenValidationParameters = new TokenValidationParameters
-         {
-             ValidateIssuer = true,
-             ValidateAudience = true,
-             ValidateLifetime = true,
-             ValidateIssuerSigningKey = true,
-             ValidIssuer = "http://localhost:5000",
-             ValidAudience = "http://localhost:5000",
-             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
-         };
-     });
+  };
+});
 
         services.AddControllers().AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
@@ -107,7 +124,6 @@ public class Startup
             });
         }
 
-        app.UseHttpsRedirection();
 
         //habilita e uso de archivos estaticos para la solicitud.
         app.UseStaticFiles();
@@ -118,19 +134,22 @@ public class Startup
             ForwardedHeaders = ForwardedHeaders.All
         });
 
+        app.UseCors("todos");
+
         app.UseRouting();
-
-        app.UseCors("CorsPolicy");
-
-        app.UseMvc();
 
         app.UseAuthentication();
 
         app.UseAuthorization();
 
+        app.UseHttpsRedirection();
+
+        app.UseMvc();
+
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
+            endpoints.MapHub<Mensaje>("Notifications");
         });
 
     }

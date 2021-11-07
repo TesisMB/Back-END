@@ -5,7 +5,7 @@ using Back_End.Models.Persons___Dto;
 
 namespace Back_End.Profiles
 {
-    public class SchedulesProfiles: Profile
+    public class SchedulesProfiles : Profile
     {
         public SchedulesProfiles()
         {

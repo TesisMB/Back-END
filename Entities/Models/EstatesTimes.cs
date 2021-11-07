@@ -11,12 +11,13 @@ namespace Back_End.Models
 
     public class EstatesTimes
 
-    {   [Required]
+    {
+        [Required]
         public int FK_EstateID { get; set; }
 
         public Estates Estates { get; set; }
 
-       [Required]
+        [Required]
         public int FK_TimeID { get; set; }
 
         public Times Times { get; set; }

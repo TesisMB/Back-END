@@ -1,17 +1,19 @@
 ﻿using Back_End.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Entities.DataTransferObjects.Login___Dto;
+using System.Threading.Tasks;
 
 namespace Contracts.Interfaces
 {
     public interface IUsersRepository : IRepositoryBase<Users>
     {
 
-        Users GetUserEmployeeById(int userId);
+        Task<Users> GetUserEmployeeById(int userId);
 
-        Users GetUserVolunteerById(int userId);
+        Task<Users> GetUserVolunteerById(int userId);
 
         void DeletUser(Users user);
+        void ForgotPassword(string email);
+        void ResetPassword(string token, string password);
+        Task<UserEmployeeAuthDto> ValidateUser(UserLoginDto user);
     }
 }

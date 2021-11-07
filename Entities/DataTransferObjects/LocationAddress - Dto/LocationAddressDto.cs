@@ -8,6 +8,10 @@ namespace Back_End.Models
 {
     public class LocationAddressDto
     {
+        public int LocationAddressID { get; set; }
+
+        public string PostalCode { get; set; }
+
         public string Address { get; set; }
 
         public string NumberAddress { get; set; }

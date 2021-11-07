@@ -4,7 +4,7 @@ using Back_End.Models.Employees___Dto;
 
 namespace Back_End.Profiles
 {
-    public class TimesProfiles: Profile
+    public class TimesProfiles : Profile
     {
         public TimesProfiles()
         {

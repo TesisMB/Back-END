@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace Back_End.Models
 {
-    [Table("LocationAddress", Schema="dbo")]
+    [Table("LocationAddress", Schema = "dbo")]
     public class LocationAddress
     {
         [Key, ForeignKey("Estates")]
-        public int ID { get; set; }
+
+        [Column("ID")]
+        public int LocationAddressID { get; set; }
 
         [MaxLength(10)]
         public string PostalCode { get; set; }

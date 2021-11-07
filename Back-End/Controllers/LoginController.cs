@@ -1,51 +1,75 @@
 ﻿using AutoMapper;
-using Back_End.Entities;
-using Back_End.Helpers;
 using Back_End.Models;
 using Contracts.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace Back_End.Controllers
 {
-    
-    [Route("api/Login")]
+    [Route("api/")]
     [ApiController]
-    public class LoginController: BaseApiController
+    public class LoginController : BaseApiController
     {
         private ILoggerManager _logger;
         private readonly IMapper _mapper;
+        private IRepositorWrapper _repository;
 
         public LoginController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper)
         {
             _logger = logger;
             _mapper = mapper;
+            _repository = repository;
         }
 
         ActionResult ret = null;
-        UserAuthDto auth = new UserAuthDto();
 
-
-        [HttpPost]
-        public ActionResult<UserAuthDto> Login([FromBody] UserLoginDto user)
+        [HttpPost("app/login")]
+        public async Task<ActionResult<Users>> LoginApp([FromBody] UserLoginDto user)
         {
             try
             {
-                auth = ValidateUser(user);
+                var auth = await _repository.Users.ValidateUser(user);
                 if (auth.UserAvailability)
                 {
                     ret = StatusCode(200, auth);
                     _logger.LogInfo($"Returned User.");
+                }
+                else
+                {
+                    ret = Unauthorized();
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside User: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
 
+            return ret;
+        }
+
+
+
+
+        [HttpPost("login")]
+        public async Task<ActionResult<UserEmployeeAuthDto>> LoginWeb([FromBody] UserLoginDto user)
+        {
+            try
+            {
+                var auth = await _repository.Users.ValidateUser(user);
+                
+                if (auth.UserAvailability && auth.RoleName != "Voluntario")
+                {
+                    ret = StatusCode(200, auth);
+                    _logger.LogInfo($"Returned User.");
                 }
                 else
                 {
                     ret = Unauthorized();
                 }
 
-            }catch (Exception ex)
+            } catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside User: {ex.Message}");
                 return StatusCode(500, "Internal server error");
@@ -53,32 +77,20 @@ namespace Back_End.Controllers
             return ret;
         }
 
-        public UserAuthDto ValidateUser(UserLoginDto user)
+        [HttpPost("forgot-password")]
+        public ActionResult ForgotPassword([FromBody] Persons email)
         {
-            UserAuthDto ret = new UserAuthDto();
-            Users authUser = null;
+            _repository.Users.ForgotPassword(email.Email);
 
-            string Pass = user.UserPassword;
-            string ePass = Encrypt.GetSHA256(Pass);
-
-            //se conecta a la base de datos para verificar las datos del usuario en cuestion
-            using (var db = new CruzRojaContext())
-            authUser = db.Users.Include(u => u.Persons)
-                               .Include(u => u.Roles)
-                               .Include( u => u.Estates)
-                               .ThenInclude(u => u.LocationAddress)
-                               .Include(u => u.Estates.EstatesTimes)
-                               .ThenInclude(u => u.Times)
-                               .ThenInclude(u => u.Schedules)
-                               .Where(u => u.UserDni == user.UserDni
-                                      && u.UserPassword == ePass).FirstOrDefault();
-
-            if (authUser != null)
-            {
-                ret = _mapper.Map<UserAuthDto>(authUser); //si los datos son correctos se crea el objeto del usuario autentificado
-            }
-
-            return ret; //retornamos el valor de este objeto
+            return Ok();
         }
+
+        [HttpPost("reset-password/{token?}")]
+        public ActionResult ResetPassword([FromQuery] string token, [FromBody] Users pass)
+        {
+            _repository.Users.ResetPassword(token, pass.UserPassword);
+            return Ok();
+        }
+
     }
 }

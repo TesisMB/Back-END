@@ -1,17 +1,18 @@
-﻿using System;
+﻿using Entities.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace Back_End.Models
 {
-    [Table("Estates", Schema ="dbo")]
+    [Table("Estates", Schema = "dbo")]
     public class Estates
     {
+        [Column("ID")]
         [Key]
-        public int ID { get; set; }
+        public int EstateID { get; set; }
 
         [Required]
         [MaxLength(16)]
@@ -23,6 +24,10 @@ namespace Back_End.Models
 
         public Boolean EstateAvailability { get; set; }
 
+        public int FK_LocationID { get; set; }
+
+        [ForeignKey("FK_LocationID")]
+        public Locations Locations { get; set; }
 
         [ForeignKey("FK_EstateID")]
         public ICollection<EstatesTimes> EstatesTimes { get; set; }
@@ -33,6 +38,7 @@ namespace Back_End.Models
 
         public ICollection<Vehicles> Vehicles { get; set; }
 
+        public ICollection<Medicines> Medicines { get; set; }
 
     }
 }

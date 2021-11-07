@@ -1,0 +1,75 @@
+2021-11-05 11:51:28.0005 INFO Returned User.
+2021-11-05 11:51:47.0390 INFO Returned all Volunteers from database.
+2021-11-05 11:56:01.7062 INFO Returned User.
+2021-11-05 11:56:07.7235 INFO Returned all Volunteers from database.
+2021-11-05 11:57:22.4807 INFO Returned all Volunteers from database.
+2021-11-05 11:57:59.0533 INFO Returned all Volunteers from database.
+2021-11-05 12:18:10.7355 ERROR Something went wrong inside CreateMedicine action: Object reference not set to an instance of an object.
+2021-11-05 12:18:18.8677 INFO Returned User.
+2021-11-05 12:26:35.8751 INFO Returned User.
+2021-11-05 12:29:09.6885 INFO Returned User.
+2021-11-05 12:32:07.4865 INFO Returned User.
+2021-11-05 12:57:17.2190 INFO Returned User.
+2021-11-05 12:58:22.8912 INFO Returned User.
+2021-11-05 13:00:29.1585 INFO Returned User.
+2021-11-05 13:01:22.2657 INFO Returned User.
+2021-11-05 13:04:41.2807 INFO Returned User.
+2021-11-05 13:12:08.7498 INFO Returned User.
+2021-11-05 13:15:56.3122 INFO Returned User.
+2021-11-05 13:17:04.7500 ERROR Something went wrong inside CreateMedicine action: Object reference not set to an instance of an object.
+2021-11-05 13:17:08.8751 INFO Returned User.
+2021-11-05 13:22:54.0481 INFO Returned User.
+2021-11-05 13:27:35.1249 INFO Returned User.
+2021-11-05 14:08:49.6882 INFO Returned User.
+2021-11-05 14:14:19.9848 INFO Returned User.
+2021-11-05 14:17:11.7504 INFO Returned User.
+2021-11-05 14:18:57.2813 INFO Returned User.
+2021-11-05 14:20:23.5321 INFO Returned User.
+2021-11-05 14:21:37.5623 INFO Returned User.
+2021-11-05 14:52:35.5004 INFO Returned User.
+2021-11-05 14:58:12.2815 INFO Returned User.
+2021-11-05 15:03:36.8139 INFO Returned User.
+2021-11-05 15:06:21.6875 INFO Returned User.
+2021-11-05 15:09:12.7349 INFO Returned User.
+2021-11-05 15:13:42.0341 INFO Returned User.
+2021-11-05 15:15:12.5158 INFO Returned User.
+2021-11-05 15:21:22.0035 INFO Returned User.
+2021-11-05 15:22:52.1881 INFO Returned User.
+2021-11-05 16:00:00.8438 INFO Returned all vehicles from database.
+2021-11-05 16:01:53.2280 INFO Returned vehicle with id: 2
+2021-11-05 16:04:17.1654 INFO Returned all vehicles from database.
+2021-11-05 16:29:21.9374 ERROR Something went wrong inside GetAllVehicles action: El nombre de columna 'FK_MarkID' no es válido.
+El nombre de columna 'FK_MarkID' no es válido.
+El nombre de columna 'BrandsName' no es válido.
+2021-11-05 16:29:25.0893 ERROR Something went wrong inside GetAllVehicles action: El nombre de columna 'FK_MarkID' no es válido.
+El nombre de columna 'FK_MarkID' no es válido.
+El nombre de columna 'BrandsName' no es válido.
+2021-11-05 16:31:26.4056 INFO Returned all vehicles from database.
+2021-11-05 16:32:11.2698 ERROR Something went wrong inside GetAllMaterials action:  An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2021-11-05 16:32:59.8415 ERROR Something went wrong inside GetAllMaterials action:  An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2021-11-05 16:33:12.3445 INFO Returned all Volunteers from database.
+2021-11-05 16:34:54.3128 ERROR Something went wrong inside GetAllMaterials action:  An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2021-11-05 16:35:37.1357 ERROR Something went wrong inside GetAllMaterials action:  An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2021-11-05 16:35:43.2840 INFO Returned User.
+2021-11-05 16:35:46.6423 INFO Returned all Materials from database.
+2021-11-05 16:35:54.9025 INFO Returned all Materials from database.
+2021-11-05 16:38:25.3284 INFO Returned User.
+2021-11-05 16:38:32.1766 INFO Returned all Materials from database.
+2021-11-05 16:38:39.0669 INFO Returned all Volunteers from database.
+2021-11-05 16:40:16.6884 INFO Returned User.
+2021-11-05 16:40:23.5340 INFO Returned all Volunteers from database.
+2021-11-05 16:41:19.2669 INFO Returned all vehicles from database.
+2021-11-05 16:41:30.1165 INFO Returned all Materials from database.
+2021-11-05 16:42:52.1264 INFO Returned User.
+2021-11-05 16:42:55.1923 INFO Returned all Materials from database.
+2021-11-05 16:43:05.7809 INFO Returned all Materials from database.
+2021-11-05 16:43:14.2333 INFO Returned all vehicles from database.
+2021-11-05 16:43:24.8658 INFO Returned all Materials from database.
+2021-11-05 16:43:31.1991 INFO Returned all employees from database.
+2021-11-05 16:44:23.4257 INFO Returned all emergenciesDisasters from database.
+2021-11-05 16:45:01.2266 INFO Returned all TypesEmergenciesDisasters from database.
+2021-11-05 16:45:16.2396 INFO Returned all Resources_Request from database.
+2021-11-05 16:46:20.5319 INFO Returned User.
+2021-11-05 16:46:23.9772 INFO Returned all Resources_Request from database.
+2021-11-05 16:47:06.8916 INFO Returned User.
+2021-11-05 16:47:11.1292 INFO Returned all vehicles from database.

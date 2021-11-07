@@ -10,11 +10,6 @@ namespace Back_End.Models
     [Table("Skills", Schema = "dbo")]
     public class Skills
     {
-        public Skills()
-        {
-            VolunteersSkills = new HashSet<VolunteersSkills>();
-        }
-
         [Key]
         public int ID { get; set; }
 
@@ -24,10 +19,6 @@ namespace Back_End.Models
 
         public string SkillDescription { get; set; }
 
-
-        [ForeignKey("FK_SkillID")]
-
         public ICollection<VolunteersSkills> VolunteersSkills { get; set; }
-
     }
 }

@@ -7,7 +7,7 @@ namespace Entities.DataTransferObjects.Volunteers__Dto
 {
     public class VolunteersAppDto
     {
-        public int VolunteerID { get; set; }
+        public int ID { get; set; }
 
         public string VolunteerAvatar { get; set; }
         public VolunteersUsersAppDto Users { get; set; }

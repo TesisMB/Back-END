@@ -15,6 +15,8 @@ namespace Contracts.Interfaces
 
         Task<Volunteers> GetVolunteerWithDetails(int volunteerId);
 
+        Task<Volunteers> GetVolunteerAppWithDetails(int volunteerId);
+
         void CreateVolunteer(Volunteers volunteer);
         void UpdateVolunteer(Volunteers volunteer);
     }

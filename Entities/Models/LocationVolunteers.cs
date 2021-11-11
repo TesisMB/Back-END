@@ -10,8 +10,10 @@ namespace Entities.Models
     {
         public int ID { get; set; }
 
-        public string LocationVolunteerLatitude { get; set; }
+        [Column(TypeName = "decimal(8, 6)")]
+        public decimal LocationVolunteerLatitude { get; set; }
 
-        public string LocationVolunteerLongitude { get; set; }
+        [Column(TypeName = "decimal(9, 6)")]
+        public decimal LocationVolunteerLongitude { get; set; }
     }
 }

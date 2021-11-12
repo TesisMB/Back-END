@@ -28,7 +28,7 @@ namespace Repository
 
             collection = collection.Where(
                                         a => a.Users.Estates.Locations.LocationDepartmentName == volunteers.Estates.Locations.LocationDepartmentName);
-
+            
             return await collection
                          .Include(a => a.Users)
                          .ThenInclude(a => a.Persons)
@@ -59,6 +59,10 @@ namespace Repository
                             .ThenInclude(a => a.Schedules)
                             .Include(a => a.VolunteersSkills)
                             .ThenInclude(a => a.Skills)
+                            .Include(a => a.VolunteersSkills)
+                            .ThenInclude(a => a.VolunteersSkillsFormationEstates)
+                            .ThenInclude(a => a.FormationsEstates)
+                            .ThenInclude(a => a.FormationsDates)
                             .ToListAsync();
 
         }
@@ -114,6 +118,10 @@ namespace Repository
                      .ThenInclude(a => a.Schedules)
                      .Include(a => a.VolunteersSkills)
                      .ThenInclude(a => a.Skills)
+                    .Include(a => a.VolunteersSkills)
+                    .ThenInclude(a => a.VolunteersSkillsFormationEstates)
+                    .ThenInclude(a => a.FormationsEstates)
+                    .ThenInclude(a => a.FormationsDates)
                      .FirstOrDefaultAsync();
         }
     }

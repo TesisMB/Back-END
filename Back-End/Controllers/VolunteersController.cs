@@ -78,7 +78,6 @@ namespace Back_End.Controllers
             }
         }
 
-
         [Route("api/app/Volunteers/{volunteerId}")]
         [HttpGet]
         public async Task<ActionResult<Volunteers>> GetAllVolunteerApp(int volunteerId)

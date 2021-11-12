@@ -1,0 +1,8 @@
+2021-11-12 17:09:55.4106 INFO Returned all Volunteers from database.
+2021-11-12 17:11:09.8519 INFO Returned all Volunteers from database.
+2021-11-12 17:28:34.3636 INFO Returned volunteer with id: 14
+2021-11-12 17:29:41.0833 INFO Returned all Volunteers from database.
+2021-11-12 17:29:50.8182 INFO Returned volunteer with id: 31
+2021-11-12 17:29:53.3469 INFO Returned volunteer with id: 15
+2021-11-12 17:33:38.4890 INFO Returned volunteer with id: 15
+2021-11-12 17:33:40.9967 INFO Returned all Volunteers from database.

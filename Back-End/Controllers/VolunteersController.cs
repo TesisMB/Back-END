@@ -46,7 +46,6 @@ namespace Back_End.Controllers
                 var volunteersResult = _mapper.Map<IEnumerable<ResourcesDto>>(volunteers);
 
                 return Ok(volunteersResult);
-
             }
             catch (Exception ex)
             {
@@ -76,6 +75,41 @@ namespace Back_End.Controllers
             {
                 _logger.LogError($"Something went wrong inside GetAllVolunteersApp action:  {ex.Message}");
                 return StatusCode(500, "Internal Server error");
+            }
+        }
+
+        [Route("api/app/Volunteers/{volunteerId}")]
+        [HttpGet]
+        public async Task<ActionResult<Volunteers>> GetAllVolunteerApp(int volunteerId)
+        {
+            try
+            {
+                var volunteer = await _repository.Volunteers.GetVolunteerAppWithDetails(volunteerId);
+
+                if (volunteer == null)
+
+                {
+                    _logger.LogError($"Volunteer with id: {volunteerId}, hasn't been found in db.");
+                    return NotFound();
+
+
+                }
+                else
+
+                {
+                    _logger.LogInfo($"Returned volunteer with id: {volunteerId}");
+                    var volunteerResult = _mapper.Map<VolunteersAppDto>(volunteer);
+                    return Ok(volunteerResult);
+
+                }
+
+            }
+            catch (Exception ex)
+
+            {
+                _logger.LogError($"Something went wrong inside GetEmployeeById action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+
             }
         }
 

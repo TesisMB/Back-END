@@ -1,0 +1,15 @@
+2021-11-10 11:24:19.5275 INFO Returned User.
+2021-11-10 11:45:38.3243 INFO Returned all emergenciesDisasters from database.
+2021-11-10 11:46:12.1321 INFO Returned all emergenciesDisasters from database.
+2021-11-10 11:50:41.9190 INFO Returned all emergenciesDisasters from database.
+2021-11-10 11:53:18.9828 INFO Returned all emergenciesDisasters from database.
+2021-11-10 11:53:51.4642 INFO Returned all emergenciesDisasters from database.
+2021-11-10 11:55:23.9486 ERROR Something went wrong inside GetAllEmegenciesDisasters action: Unable to cast object of type 'System.Double' to type 'System.Decimal'.
+2021-11-10 12:04:07.9980 INFO Returned all emergenciesDisasters from database.
+2021-11-10 12:05:14.1204 INFO Returned all emergenciesDisasters from database.
+2021-11-10 12:05:59.5900 INFO Returned all emergenciesDisasters from database.
+2021-11-10 12:06:29.3068 INFO Returned all emergenciesDisasters from database.
+2021-11-10 12:07:04.7154 INFO Returned all emergenciesDisasters from database.
+2021-11-10 12:09:25.7640 INFO Returned all emergenciesDisasters from database.
+2021-11-10 12:10:21.0655 INFO Returned all emergenciesDisasters from database.
+2021-11-10 12:27:21.8616 INFO Returned all emergenciesDisasters from database.

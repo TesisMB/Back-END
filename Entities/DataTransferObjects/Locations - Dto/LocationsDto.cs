@@ -15,8 +15,8 @@ namespace Entities.DataTransferObjects.Locations___Dto
 
         public string LocationCityName { get; set; }
 
-        public string LocationLongitude { get; set; }
+        public decimal LocationLongitude { get; set; }
 
-        public string LocationLatitude { get; set; }
+        public decimal LocationLatitude { get; set; }
     }
 }

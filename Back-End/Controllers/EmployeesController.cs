@@ -74,12 +74,11 @@ namespace Back_End.Controllers
        
 
         [HttpGet]
-        //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
+        [Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
         public async Task<ActionResult<Employees>> GetAllEmployees()
         {
             try
             {
-                //Console.WriteLine(UsersRepository.authUser.Estates.LocationAddress.);
 
                 var employees = await _repository.Employees.GetAllEmployees();
                 _logger.LogInfo($"Returned all employees from database.");

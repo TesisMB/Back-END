@@ -14,10 +14,11 @@ namespace Entities.Profiles
         {
             CreateMap<Vehicles, VehiclesDto>();
 
-            CreateMap<Vehicles, ResourcesDto>()
-                // .ForMember(dest => dest.Vehicles.Utility,
-                //           opt => opt.MapFrom(src => src.VehicleUtility))
-                .ForPath(dest => dest.Vehicles.Utility, opts => opts.MapFrom(src => src.VehicleUtility))
+            CreateMap<Vehicles, Resources_Dto>()
+
+               .ForMember(dest => dest.Name, opts => opts.MapFrom(src => $"{src.BrandsModels.Brands.BrandName } {src.BrandsModels.Model.ModelName}"))
+
+                //.ForPath(dest => dest.Vehicles.Utility, opts => opts.MapFrom(src => src.VehicleUtility))
 
                 .ForMember(dest => dest.Description,
                             opt => opt.MapFrom(src => src.VehicleDescription))
@@ -28,16 +29,18 @@ namespace Entities.Profiles
                     .ForMember(dest => dest.Picture,
                             opt => opt.MapFrom(src => src.VehiclePicture))
 
+                .ForPath(dest => dest.Vehicles.Type, opts => opts.MapFrom(src => src.Type.Type))
+
                  .ForPath(dest => dest.Vehicles.VehiclePatent, opts => opts.MapFrom(src => src.VehiclePatent))
 
-                .ForPath(dest => dest.Vehicles.Type, opts => opts.MapFrom(src => src.Type))
+                 .ForPath(dest => dest.Vehicles.VehicleYear, opts => opts.MapFrom(src => src.VehicleYear))
 
-               .ForPath(dest => dest.Vehicles.Employees, opts => opts.MapFrom(src => src.Employees))
+                 .ForPath(dest => dest.LocationCityName, opts => opts.MapFrom(src => src.Estates.Locations.LocationCityName));
 
-               .ForPath(dest => dest.Vehicles.BrandsModels, opts => opts.MapFrom(src => src.BrandsModels));
+            //.ForPath(dest => dest.Vehicles.Employees, opts => opts.MapFrom(src => src.Employees));
 
-                 //.ForPath(dest => dest.Vehicles.VehiclePatent,
-                   //opt => opt.MapFrom(src => src.VehiclePatent));
+            //.ForPath(dest => dest.Vehicles.BrandsModels, opts => opts.MapFrom(src => src.BrandsModels));
+            ;
 
 
 

@@ -12,8 +12,10 @@ namespace Back_End.Models
     public class VolunteersUsersDto
     {
         public string UserDni { get; set; }
-        public string RoleName { get; set; }
-        public PersonsDto Persons { get; set; }
-        public LocationsDto Locations { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        //public string RoleName { get; set; }
+        //public PersonsDto Persons { get; set; }
+        //public LocationsDto Locations { get; set; }
     }
 }

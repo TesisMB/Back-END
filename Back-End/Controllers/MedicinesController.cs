@@ -40,7 +40,7 @@ namespace Back_End.Controllers
 
                 _logger.LogInfo($"Returned all Materials from database.");
 
-                var volunteersResult = _mapper.Map<IEnumerable<ResourcesDto>>(volunteers);
+                var volunteersResult = _mapper.Map<IEnumerable<Resources_Dto>>(volunteers);
 
                 return Ok(volunteersResult);
 
@@ -71,7 +71,7 @@ namespace Back_End.Controllers
                 {
                     _logger.LogInfo($"Returned medicine with details for id: {medicineId}");
 
-                    var employeeResult = _mapper.Map<ResourcesDto>(employee);
+                    var employeeResult = _mapper.Map<Resources_Dto>(employee);
                     return Ok(employeeResult);
                 }
             }

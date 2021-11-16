@@ -15,7 +15,7 @@ namespace Entities.Profiles
         {
             CreateMap<Medicines, MedicinesDto>();
 
-            CreateMap<Medicines, ResourcesDto>()
+            CreateMap<Medicines, Resources_Dto>()
 
                 .ForMember(dest => dest.Name,
                             opt => opt.MapFrom(src => src.MedicineName))
@@ -52,10 +52,11 @@ namespace Entities.Profiles
                                    .ForMember(dest => dest.Medicines.MedicineUnits,
                        opt => opt.MapFrom(src => src.MedicineUnits));*/
 
-                              .ForMember(dest => dest.Picture,
-                            opt => opt.MapFrom(src => src.MedicinePicture))
+                     .ForMember(dest => dest.Picture, opt => opt.MapFrom(src => src.MedicinePicture))
 
-                                                      .ForPath(dest => dest.Medicines.MedicineUnits, opts => opts.MapFrom(src => src.MedicineUnits));
+                  .ForPath(dest => dest.Medicines.MedicineUnits, opts => opts.MapFrom(src => src.MedicineUnits))
+
+                    .ForPath(dest => dest.LocationCityName, opts => opts.MapFrom(src => src.Estates.Locations.LocationCityName));
 
 
             CreateMap<MedicineForCreationDto, Medicines>();

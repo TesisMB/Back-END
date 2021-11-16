@@ -30,6 +30,9 @@ namespace Back_End.Models
         [Required]
         public string VehiclePicture { get; set; }
 
+        [Required]
+        public int VehicleYear { get; set; }
+
         [ForeignKey("FK_EstateID")]
         public Estates Estates { get; set; }
         public int? FK_EstateID { get; set; }

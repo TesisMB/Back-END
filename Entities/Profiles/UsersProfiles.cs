@@ -19,9 +19,9 @@ namespace Back_End.Profiles
                  .ForMember(dest => dest.RoleName,
                                  opt => opt.MapFrom(src => src.Roles.RoleName));
 
-            CreateMap<Users, VolunteersUsersDto>()
+            /*CreateMap<Users, VolunteersUsersDto>()
                     .ForMember(dest => dest.RoleName,
-                                 opt => opt.MapFrom(src => src.Roles.RoleName));
+                                 opt => opt.MapFrom(src => src.Roles.RoleName));*/
 
             CreateMap<Users, VolunteersUsersAppDto>();
 

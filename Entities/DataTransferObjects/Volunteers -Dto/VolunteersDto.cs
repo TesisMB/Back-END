@@ -8,8 +8,11 @@ namespace Back_End.Models.Employees___Dto
 {
     public class VolunteersDto
     {
-        public VolunteersUsersDto Users { get; set; }
+        public string UserDni { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        //public VolunteersUsersDto Users { get; set; }
 
-        public ICollection<VolunteersSkillsDto> VolunteersSkills { get; set; }
+        // public ICollection<VolunteersSkillsDto> VolunteersSkills { get; set; }
     }
 }

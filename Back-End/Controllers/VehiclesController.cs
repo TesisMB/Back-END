@@ -32,14 +32,14 @@ namespace Back_End.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<Vehicles>> GetAllVehicles()
+        public async Task<ActionResult<Vehicles>> GetAllVehicles([FromQuery] VehiclesDto vehiclesFilters)
         {
             try
             {
-                var vehicles = await _repository.Vehicles.GetAllVehicles();
+                var vehicles = await _repository.Vehicles.GetAllVehiclesFilters(vehiclesFilters);
                 _logger.LogInfo($"Returned all vehicles from database.");
 
-                var employeesResult = _mapper.Map<IEnumerable<ResourcesDto>>(vehicles);
+                var employeesResult = _mapper.Map<IEnumerable<Resources_Dto>>(vehicles);
                 return Ok(employeesResult);
 
             }
@@ -67,7 +67,7 @@ namespace Back_End.Controllers
                 else
                 {
                     _logger.LogInfo($"Returned vehicle with id: {vehicleId}");
-                    var vehicleResult = _mapper.Map<ResourcesDto>(vehicle);
+                    var vehicleResult = _mapper.Map<Resources_Dto>(vehicle);
                     return Ok(vehicleResult);
                 }
 

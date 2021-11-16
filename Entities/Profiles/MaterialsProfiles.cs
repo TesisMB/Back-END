@@ -14,7 +14,7 @@ namespace Entities.Profiles
         {
             CreateMap<Materials, MaterialsDto>();
 
-            CreateMap<Materials, ResourcesDto>()
+            CreateMap<Materials, Resources_Dto>()
 
                 .ForMember(dest => dest.Name,
                             opt => opt.MapFrom(src => src.MaterialName))
@@ -22,7 +22,7 @@ namespace Entities.Profiles
                 /*.ForMember(dest => dest.Materials.Mark,
                           opt => opt.MapFrom(src => src.MaterialMark))*/
 
-                .ForPath(dest => dest.Materials.Brand, opts => opts.MapFrom(src => src.Resources_Materials))
+                .ForPath(dest => dest.Materials.Brand, opts => opts.MapFrom(src => src.MaterialBrand))
 
                     .ForMember(dest => dest.Quantity,
                             opt => opt.MapFrom(src => src.MaterialQuantity))
@@ -34,9 +34,13 @@ namespace Entities.Profiles
                             opt => opt.MapFrom(src => src.MaterialPicture))
 
                         .ForMember(dest => dest.Description,
-                                       opt => opt.MapFrom(src => src.MaterialUtility));
+                                       opt => opt.MapFrom(src => src.MaterialUtility))
 
+                           .ForMember(dest => dest.Description,
+                                       opt => opt.MapFrom(src => src.MaterialUtility))
 
+                           .ForPath(dest => dest.LocationCityName,
+                                       opt => opt.MapFrom(src => src.Estates.Locations.LocationCityName));
 
             CreateMap<MaterialsForCreationDto, Brands>();
 

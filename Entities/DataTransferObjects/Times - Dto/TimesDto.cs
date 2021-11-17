@@ -10,6 +10,9 @@ namespace Back_End.Models.Employees___Dto
     {
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
-        public SchedulesDto Schedules { get; set; }
+
+        public String ScheduleDate { get; set; }
+
+        //public SchedulesDto Schedules { get; set; }
     }
 }

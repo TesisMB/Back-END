@@ -105,3 +105,40 @@
 2021-11-16 17:29:01.8609 INFO Returned all Materials from database.
 2021-11-16 17:29:38.6610 INFO Returned User.
 2021-11-16 17:30:07.9347 INFO Returned all vehicles from database.
+2021-11-16 17:55:07.4732 INFO Returned User.
+2021-11-16 17:55:12.9241 INFO Returned all Volunteers from database.
+2021-11-16 17:56:05.5201 INFO Returned User.
+2021-11-16 17:56:06.7081 INFO Returned all Volunteers from database.
+2021-11-16 17:56:15.9082 INFO Returned all vehicles from database.
+2021-11-16 17:56:32.5299 INFO Returned all vehicles from database.
+2021-11-16 17:56:38.9298 INFO Returned all vehicles from database.
+2021-11-16 17:56:45.9945 INFO Returned all vehicles from database.
+2021-11-16 17:58:44.4111 INFO Returned User.
+2021-11-16 17:58:47.0400 INFO Returned all vehicles from database.
+2021-11-16 17:59:13.8298 INFO Returned all vehicles from database.
+2021-11-16 17:59:25.4864 INFO Returned all vehicles from database.
+2021-11-16 18:43:42.0040 INFO Returned User.
+2021-11-16 18:44:09.5161 INFO Returned all vehicles from database.
+2021-11-16 18:45:07.5673 INFO Returned User.
+2021-11-16 18:45:34.9152 INFO Returned all vehicles from database.
+2021-11-16 18:48:07.9885 INFO Returned User.
+2021-11-16 18:53:17.0674 INFO Returned User.
+2021-11-16 18:53:36.3228 INFO Returned all vehicles from database.
+2021-11-16 18:53:36.3667 ERROR Something went wrong inside GetAllVehicles action: Error mapping types.
+
+Mapping types:
+List`1 -> IEnumerable`1
+System.Collections.Generic.List`1[[Back_End.Models.Vehicles, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> System.Collections.Generic.IEnumerable`1[[Entities.DataTransferObjects.ResourcesDto.Resources_Dto, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2021-11-16 18:58:22.0198 ERROR Something went wrong inside GetAllVehicles action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2021-11-16 18:58:30.7991 INFO Returned User.
+2021-11-16 18:58:52.2048 INFO Returned all vehicles from database.
+2021-11-16 18:59:03.6401 INFO Returned all vehicles from database.
+2021-11-16 19:01:03.6299 INFO Returned User.
+2021-11-16 19:01:06.7637 INFO Returned all vehicles from database.
+2021-11-16 19:01:29.6676 INFO Returned all vehicles from database.
+2021-11-16 19:01:41.2649 INFO Returned all vehicles from database.
+2021-11-16 19:01:45.4451 INFO Returned all vehicles from database.
+2021-11-16 19:01:46.0266 INFO Returned all vehicles from database.
+2021-11-16 19:02:15.9116 INFO Returned User.
+2021-11-16 19:02:53.2843 INFO Returned all vehicles from database.
+2021-11-16 19:03:10.4436 INFO Returned all vehicles from database.

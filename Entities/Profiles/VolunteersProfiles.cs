@@ -38,7 +38,21 @@ namespace Back_End.Profiles
 
                .ForPath(dest => dest.Volunteers.Phone, opts => opts.MapFrom(src => src.Users.Persons.Phone))
 
-               .ForPath(dest => dest.Volunteers.UserDni, opts => opts.MapFrom(src => src.Users.UserDni))
+               .ForPath(dest => dest.Volunteers.Dni, opts => opts.MapFrom(src => src.Users.UserDni));
+
+            CreateMap<Volunteers, Resource_Dto>()
+
+               .ForPath(dest => dest.Volunteers.Email, opts => opts.MapFrom(src => src.Users.Persons.Email))
+
+               .ForPath(dest => dest.Volunteers.Phone, opts => opts.MapFrom(src => src.Users.Persons.Phone))
+
+               .ForPath(dest => dest.Volunteers.Dni, opts => opts.MapFrom(src => src.Users.UserDni))
+
+                .ForPath(dest => dest.Volunteers.Birthdate, opts => opts.MapFrom(src => src.Users.Persons.Birthdate))
+
+               .ForPath(dest => dest.Volunteers.Address, opts => opts.MapFrom(src => src.Users.Persons.Address))
+
+               .ForPath(dest => dest.Volunteers.Status, opts => opts.MapFrom(src => src.Users.Persons.Status))
 
 
               .ForPath(dest => dest.LocationCityName, opts => opts.MapFrom(src => src.Users.Estates.Locations.LocationCityName));

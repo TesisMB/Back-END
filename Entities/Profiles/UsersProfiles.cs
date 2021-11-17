@@ -3,6 +3,7 @@ using Back_End.Entities;
 using Back_End.Models;
 using Back_End.Models.Users___Dto;
 using Back_End.Models.Users___Dto.Users___Persons;
+using Entities.DataTransferObjects.Employees___Dto;
 using Entities.DataTransferObjects.Login___Dto;
 using Entities.DataTransferObjects.Models.Vehicles___Dto;
 using Entities.DataTransferObjects.Volunteers__Dto;
@@ -36,6 +37,10 @@ namespace Back_End.Profiles
                               opt => opt.MapFrom(src => src.Volunteers.VolunteerAvatar));
 
             CreateMap<Users, UsersVehiclesDto>();
+
+            CreateMap<Users, EmployeeUserDto>()
+                 .ForMember(dest => dest.RoleName,
+                              opt => opt.MapFrom(src => src.Roles.RoleName));
 
 
             CreateMap<UsersEmployeesForCreationDto, Users>();

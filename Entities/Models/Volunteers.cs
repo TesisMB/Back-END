@@ -12,7 +12,11 @@ namespace Back_End.Models
     {
 
         [Key, ForeignKey("Users")]
+<<<<<<< Updated upstream
         public int ID { get; set; }
+=======
+        public int ID{ get; set; }
+>>>>>>> Stashed changes
         public string VolunteerAvatar { get; set; }
 
         public string VolunteerDescription { get; set; }

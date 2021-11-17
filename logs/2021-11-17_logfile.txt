@@ -1,0 +1,114 @@
+2021-11-17 17:13:03.4726 INFO Returned User.
+2021-11-17 17:13:08.7203 INFO Returned all vehicles from database.
+2021-11-17 17:14:53.9421 INFO Returned User.
+2021-11-17 17:14:56.8205 INFO Returned all vehicles from database.
+2021-11-17 17:17:00.3645 INFO Returned User.
+2021-11-17 17:17:07.5453 INFO Returned all vehicles from database.
+2021-11-17 17:18:33.4416 INFO Returned User.
+2021-11-17 17:18:48.5356 INFO Returned all vehicles from database.
+2021-11-17 17:21:35.5618 INFO Returned all vehicles from database.
+2021-11-17 17:21:50.0093 INFO Returned all vehicles from database.
+2021-11-17 17:22:03.3599 INFO Returned all vehicles from database.
+2021-11-17 17:22:12.8099 INFO Returned all vehicles from database.
+2021-11-17 17:22:31.1594 INFO Returned all vehicles from database.
+2021-11-17 17:22:42.8548 INFO Returned all vehicles from database.
+2021-11-17 17:23:06.8434 INFO Returned vehicle with id: 3
+2021-11-17 17:30:30.7226 INFO Returned User.
+2021-11-17 17:30:34.8265 INFO Returned all vehicles from database.
+2021-11-17 17:30:40.5431 INFO Returned vehicle with id: 3
+2021-11-17 17:34:59.2698 INFO Returned User.
+2021-11-17 17:35:07.5069 INFO Returned all vehicles from database.
+2021-11-17 17:37:13.8485 INFO Returned User.
+2021-11-17 17:37:18.5360 INFO Returned vehicle with id: 3
+2021-11-17 17:43:41.0040 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2021-11-17 17:43:45.2994 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2021-11-17 17:46:56.3800 INFO Returned User.
+2021-11-17 17:47:05.2207 INFO Returned vehicle with id: 3
+2021-11-17 17:52:14.3005 INFO Returned User.
+2021-11-17 17:52:18.7837 INFO Returned vehicle with id: 3
+2021-11-17 17:55:40.0064 INFO Returned all vehicles from database.
+2021-11-17 17:55:51.1964 INFO Returned vehicle with id: 2
+2021-11-17 17:58:40.0834 INFO Returned User.
+2021-11-17 17:58:52.4396 INFO Returned all vehicles from database.
+2021-11-17 17:58:54.2358 INFO Returned vehicle with id: 3
+2021-11-17 17:59:12.8350 INFO Returned all Materials from database.
+2021-11-17 18:01:21.7552 INFO Returned User.
+2021-11-17 18:01:23.8353 INFO Returned all Materials from database.
+2021-11-17 18:02:03.0207 INFO Returned User.
+2021-11-17 18:02:05.0440 INFO Returned all Materials from database.
+2021-11-17 18:02:24.0046 INFO Returned Material with id: 2
+2021-11-17 18:03:05.2829 INFO Returned all Materials from database.
+2021-11-17 18:03:14.8204 INFO Returned medicine with details for id: 4
+2021-11-17 18:04:01.5710 INFO Returned all Volunteers from database.
+2021-11-17 18:07:37.5205 INFO Returned User.
+2021-11-17 18:07:39.3570 INFO Returned all Volunteers from database.
+2021-11-17 18:08:06.1231 INFO Returned all Materials from database.
+2021-11-17 18:08:13.2654 INFO Returned medicine with details for id: 3
+2021-11-17 18:08:35.6063 INFO Returned all Materials from database.
+2021-11-17 18:08:37.3988 INFO Returned Material with id: 3
+2021-11-17 18:09:04.0907 INFO Returned all vehicles from database.
+2021-11-17 18:09:06.7672 INFO Returned vehicle with id: 3
+2021-11-17 18:12:12.4112 INFO Returned User.
+2021-11-17 18:12:14.4949 INFO Returned vehicle with id: 3
+2021-11-17 18:12:18.3812 INFO Returned all Volunteers from database.
+2021-11-17 18:22:07.6460 INFO Returned User.
+2021-11-17 18:22:21.4725 INFO Returned all Volunteers from database.
+2021-11-17 18:22:30.2664 INFO Returned volunteer with id: 15
+2021-11-17 18:28:58.0193 INFO Returned User.
+2021-11-17 18:29:00.2679 INFO Returned volunteer with id: 15
+2021-11-17 18:30:11.5830 INFO Returned User.
+2021-11-17 18:30:13.3494 INFO Returned all employees from database.
+2021-11-17 18:32:48.1927 INFO Returned User.
+2021-11-17 18:32:49.2834 INFO Returned all employees from database.
+2021-11-17 18:33:33.5195 INFO Returned User.
+2021-11-17 18:33:37.8739 INFO Returned all employees from database.
+2021-11-17 18:35:42.9069 INFO Returned employe with details for id: 2
+2021-11-17 19:14:42.1296 INFO Returned User.
+2021-11-17 19:14:48.3296 INFO Returned all employees from database.
+2021-11-17 19:14:56.9908 INFO Returned all employees from database.
+2021-11-17 19:15:49.8121 INFO Returned User.
+2021-11-17 19:15:58.5074 INFO Returned all employees from database.
+2021-11-17 19:23:10.5845 INFO Returned User.
+2021-11-17 19:23:11.5859 INFO Returned all employees from database.
+2021-11-17 19:24:35.7227 INFO Returned User.
+2021-11-17 19:24:37.8363 INFO Returned all employees from database.
+2021-11-17 19:25:57.2710 INFO Returned User.
+2021-11-17 19:26:04.3617 INFO Returned all employees from database.
+2021-11-17 19:26:17.2458 INFO Returned employe with details for id: 2
+2021-11-17 19:33:23.6951 INFO Returned User.
+2021-11-17 19:33:29.4900 INFO Returned all employees from database.
+2021-11-17 19:34:12.6604 INFO Returned User.
+2021-11-17 19:34:24.5582 INFO Returned all employees from database.
+2021-11-17 19:34:29.5817 INFO Returned employe with details for id: 2
+2021-11-17 19:36:44.4585 INFO Returned User.
+2021-11-17 19:36:48.5513 INFO Returned all employees from database.
+2021-11-17 19:37:01.9110 INFO Returned employe with details for id: 2
+2021-11-17 19:37:12.9926 INFO Returned all employees from database.
+2021-11-17 19:37:16.4272 INFO Returned employe with details for id: 2
+2021-11-17 19:37:57.6768 INFO Returned User.
+2021-11-17 19:38:04.4715 INFO Returned all employees from database.
+2021-11-17 19:38:07.5414 INFO Returned employe with details for id: 2

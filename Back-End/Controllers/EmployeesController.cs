@@ -3,6 +3,7 @@ using Back_End.Helpers;
 using Back_End.Models;
 using Back_End.Models.Employees___Dto;
 using Contracts.Interfaces;
+using Entities.DataTransferObjects.Employees___Dto;
 using Entities.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
@@ -74,7 +75,7 @@ namespace Back_End.Controllers
        
 
         [HttpGet]
-        [Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
+       // [Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
         public async Task<ActionResult<Employees>> GetAllEmployees()
         {
             try
@@ -112,7 +113,7 @@ namespace Back_End.Controllers
                 {
                     _logger.LogInfo($"Returned employe with details for id: {employeeId}");
 
-                    var employeeResult = _mapper.Map<EmployeesDto>(employee);
+                    var employeeResult = _mapper.Map<EmployeeDto>(employee);
                     return Ok(employeeResult);
                 }
             }

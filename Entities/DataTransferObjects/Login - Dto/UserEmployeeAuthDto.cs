@@ -1,5 +1,6 @@
 ﻿using Back_End.Models.Employees___Dto;
 using Back_End.Models.Users___Dto.Users___Persons;
+using Entities.DataTransferObjects.Employees___Dto;
 using System;
 
 
@@ -12,12 +13,15 @@ namespace Back_End.Models
         public string UserDni { get; set; }
         public Boolean UserAvailability { get; set; }
         public string RoleName { get; set; }
-        public EmployeesPersonsDto Persons { get; set; }
+
+        public string LocationCityName { get; set; }
+
+        public EmployeePersonDto Persons { get; set; }
         public EstatesDto Estates { get; set; }
 
         public string VolunteerAvatar { get; set; }
+        public string token { get; set; } 
 
         //El token surgue de realizar el llamada a la funcion GenerateAccessToken usando automapper
-        public string token { get; set; } 
     }
 }

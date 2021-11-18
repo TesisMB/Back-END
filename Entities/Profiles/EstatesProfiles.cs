@@ -18,13 +18,18 @@ namespace Back_End.Profiles
                  
                  .ForPath(resp => resp.LocationsID, opt => opt.MapFrom(src => src.Locations.LocationID))
 
-                .ForPath(resp => resp.Address, opt => opt.MapFrom(src => $"{src.LocationAddress.Address} {src.LocationAddress.NumberAddress}"))
+                   .ForPath(resp => resp.Address, opt => opt.MapFrom(src => src.LocationAddress.Address))
+                 .ForPath(resp => resp.NumberAddress, opt => opt.MapFrom(src => src.LocationAddress.NumberAddress))
+
+               //.ForPath(resp => resp.Address, opt => opt.MapFrom(src => $"{src.LocationAddress.Address} {src.LocationAddress.NumberAddress}"))
 
                .ForPath(resp => resp.PostalCode, opt => opt.MapFrom(src => src.LocationAddress.PostalCode));
 
 
             CreateMap<Estates, EstateDto>()
-                                .ForPath(resp => resp.Address, opt => opt.MapFrom(src => $"{src.LocationAddress.Address} {src.LocationAddress.NumberAddress}"));
+                 .ForPath(resp => resp.Address, opt => opt.MapFrom(src => src.LocationAddress.Address))
+                 .ForPath(resp => resp.NumberAddress, opt => opt.MapFrom(src => src.LocationAddress.NumberAddress));
+            // .ForPath(resp => resp.Address, opt => opt.MapFrom(src => $"{src.LocationAddress.Address} {src.LocationAddress.NumberAddress}"));
 
 
             CreateMap<Estates, EstatesVehiclesDto>();

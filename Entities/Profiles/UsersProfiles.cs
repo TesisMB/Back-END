@@ -32,7 +32,11 @@ namespace Back_End.Profiles
 
            .ForMember(dest => dest.RoleName,
                               opt => opt.MapFrom(src => src.Roles.RoleName))
-           
+
+
+           .ForMember(dest => dest.LocationCityName,
+                              opt => opt.MapFrom(src => src.Estates.Locations.LocationCityName))
+
             .ForMember(dest => dest.VolunteerAvatar,
                               opt => opt.MapFrom(src => src.Volunteers.VolunteerAvatar));
 

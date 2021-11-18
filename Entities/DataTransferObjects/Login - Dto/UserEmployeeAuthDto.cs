@@ -14,7 +14,6 @@ namespace Back_End.Models
         public Boolean UserAvailability { get; set; }
         public string RoleName { get; set; }
 
-        public string LocationCityName { get; set; }
 
         public EmployeePersonDto Persons { get; set; }
         public EstatesDto Estates { get; set; }

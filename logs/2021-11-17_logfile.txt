@@ -135,3 +135,8 @@ Estates
 2021-11-17 21:44:17.1311 INFO Returned User.
 2021-11-17 21:44:28.8284 INFO Returned all employees from database.
 2021-11-17 21:44:33.3463 INFO Returned employe with details for id: 2
+2021-11-17 22:06:13.4302 INFO Returned User.
+2021-11-17 22:06:48.1074 INFO Returned all employees from database.
+2021-11-17 22:07:48.8416 INFO Returned employe with details for id: 2
+2021-11-17 22:08:06.6775 INFO Returned all employees from database.
+2021-11-17 22:08:16.7271 INFO Returned User.

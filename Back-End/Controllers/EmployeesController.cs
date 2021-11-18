@@ -84,7 +84,7 @@ namespace Back_End.Controllers
                 var employees = await _repository.Employees.GetAllEmployees();
                 _logger.LogInfo($"Returned all employees from database.");
 
-                var employeesResult = _mapper.Map<IEnumerable<EmployeesDto>>(employees);
+                var employeesResult = _mapper.Map<IEnumerable<EmployeeDto>>(employees);
                 return Ok(employeesResult);
             }
 

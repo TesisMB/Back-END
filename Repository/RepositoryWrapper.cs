@@ -18,7 +18,7 @@ namespace Repository
         private IEmergenciesDisastersRepository _emergenciesDisasters;
         private ITypesEmergenciesDisastersRepository _typesEmergenciesDisasters;
         private IResources_RequestRepository _resources_Request;
-
+        private IChatRoomsRepository _chatRooms;
 
         private IMapper _mapper;
 
@@ -145,6 +145,18 @@ namespace Repository
                     _resources_Request = new Resources_RequestRepository(_cruzRojaContext);
                 }
                 return _resources_Request;
+            }
+        }
+
+        public IChatRoomsRepository ChatRooms
+        {
+            get
+            {
+                if (_chatRooms == null)
+                {
+                    _chatRooms = new ChatRoomsRepository(_cruzRojaContext);
+                }
+                return _chatRooms;
             }
         }
 

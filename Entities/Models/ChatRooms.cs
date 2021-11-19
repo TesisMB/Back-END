@@ -9,19 +9,21 @@ namespace Entities.Models
     [Table("ChatRooms", Schema="dbo")]
     public class ChatRooms
     {
-        [Key]
+        [Key, ForeignKey("EmergenciesDisasters")]
         public int ID { get; set; }
 
         [Required]
-        public DateTime CreateDate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         [Required]
-        [ForeignKey("TypeChatRoomID")]
+        [ForeignKey("FK_TypeChatRoomID")]
         public TypesChatRooms TypesChatRooms { get; set; }
-        public int TypeChatRoomID { get; set; }
+        public int FK_TypeChatRoomID { get; set; }
 
         [ForeignKey("FK_ChatRoomID")]
         public ICollection<UsersChatRooms> UsersChatRooms { get; set; }
+
+        public EmergenciesDisasters EmergenciesDisasters { get; set; }
 
     }
 }

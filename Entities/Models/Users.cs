@@ -62,6 +62,10 @@ namespace Back_End.Models
         [ForeignKey("FK_UserID")]
         public ICollection<UsersNotifications> UsersNotifications { get; set; }
 
+
+        [ForeignKey("FK_UserID")]
+        public ICollection<UsersChat> UsersChat { get; set; }
+
         [ForeignKey("FK_UserID")]
         public ICollection<UsersChatRooms> UsersChatRooms { get; set; }
     }

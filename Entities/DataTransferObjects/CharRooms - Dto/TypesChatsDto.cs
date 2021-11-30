@@ -12,9 +12,9 @@ namespace Entities.DataTransferObjects.CharRooms___Dto
 
         public Boolean IsGroupChat { get; set; }
 
-        public ICollection<ChatsDto> Chat { get; set; }
+        //public ICollection<ChatsDto> Chat { get; set; }
 
-        //CHATROOM - 1 - 1
+        //CHATROOMs
         public ICollection<ChatRoomsDto> ChatRooms { get; set; }
 
 

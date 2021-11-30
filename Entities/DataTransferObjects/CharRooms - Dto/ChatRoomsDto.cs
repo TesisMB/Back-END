@@ -6,7 +6,7 @@ namespace Entities.DataTransferObjects.CharRooms___Dto
 {
    public class ChatRoomsDto
     {
-        public int ID { get; set; }
+        public int ChatRoomID { get; set; }
 
         public DateTime CreatedDate { get; set; }
 

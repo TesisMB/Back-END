@@ -13,9 +13,9 @@ namespace Entities.Models
         public int ID { get; set; }
 
         [Required]
-        [MaxLength(50)]
-        public String Name { get; set; }
+        public Boolean IsGroupChat { get; set; }
 
+        public ICollection<Chat> Chat { get; set; }
         public ICollection<ChatRooms> ChatRooms { get; set; }
     }
 }

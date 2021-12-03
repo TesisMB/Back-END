@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.DataTransferObjects.CharRooms___Dto;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -19,5 +20,7 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
         public int FK_TypeEmergencyID { get; set; }
 
         public int FK_AlertID { get; set; }
+
+        public ChatRoomsForCreationDto ChatRooms { get; set; }
     }
 }

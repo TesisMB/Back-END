@@ -41,9 +41,11 @@ namespace Back_End.Entities
 
             modelBuilder.Entity<UsersChatRooms>()
 
-            .HasKey(s => new { s.Fk_UserID, s.FK_ChatRoomID });
+            .HasKey(s => new { s.FK_UserID, s.FK_ChatRoomID });
+            
+            modelBuilder.Entity<UsersChat>()
 
-
+        .HasKey(s => new { s.FK_UserID, s.FK_ChatID });
         }
 
         //Defino cada una de las Models, que se usan durante el proyecto, donde cada una de ellas representa una tabla de la base de datos
@@ -79,6 +81,11 @@ namespace Back_End.Entities
         public DbSet<Resources_Vehicles> Resources_Vehicles { get; set; }
         public DbSet<Notifications> Notifications { get; set; }
         public DbSet<UsersNotifications> UsersNotifications { get; set; }
+        public DbSet<Chat> Chat { get; set; }
+        public DbSet<ChatRooms> ChatRooms { get; set; }
+        public DbSet<TypesChatRooms> TypesChatRooms { get; set; }
+        public DbSet<UsersChatRooms> UsersChatRooms { get; set; }
+        public DbSet<UsersChat> UsersChat { get; set; }
 
         private const string Connection =
       @"Server=localhost;

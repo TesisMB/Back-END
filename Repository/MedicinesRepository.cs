@@ -27,12 +27,12 @@ namespace Repository
                                             a => a.Estates.Locations.LocationDepartmentName == medicines.Estates.Locations.LocationDepartmentName);
 
             return await collection
-                .Include(a => a.Estates)
-                .ThenInclude(a => a.LocationAddress)
-                .Include(a => a.Estates.EstatesTimes)
-                .ThenInclude(a => a.Times)
-                .ThenInclude(a => a.Schedules)
-                .Include(a => a.Estates.Locations)
+                //.Include(a => a.Estates)
+                //.ThenInclude(a => a.LocationAddress)
+               // .Include(a => a.Estates.EstatesTimes)
+               // .ThenInclude(a => a.Times)
+                //.ThenInclude(a => a.Schedules)
+                //.Include(a => a.Estates.Locations)
                 .ToListAsync();
         }
 

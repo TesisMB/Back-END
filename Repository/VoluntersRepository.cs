@@ -32,9 +32,9 @@ namespace Repository
             return await collection
                          .Include(a => a.Users)
                          .ThenInclude(a => a.Persons)
-                         .Include(a => a.Users.Locations)
-                         .Include(a => a.Users.Roles)
-                         .Include(a => a.Users.Estates)
+                         //.Include(a => a.Users.Locations)
+                         //.Include(a => a.Users.Roles)
+                         /*.Include(a => a.Users.Estates)
                          .ThenInclude(a => a.LocationAddress)
                          .Include(a => a.Users.Estates.EstatesTimes)
                          .ThenInclude(a => a.Times)
@@ -45,7 +45,7 @@ namespace Repository
                          .Include(a => a.VolunteersSkills)
                          .ThenInclude(a => a.VolunteersSkillsFormationEstates)
                          .ThenInclude(a => a.FormationsEstates)
-                         .ThenInclude(a => a.FormationsDates)
+                         .ThenInclude(a => a.FormationsDates)*/
                          .ToListAsync();
         }
 

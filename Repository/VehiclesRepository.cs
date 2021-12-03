@@ -42,16 +42,16 @@ namespace Repository
 
 
             return await collection
-                   .Include(a => a.Estates)
-                   .Include(a => a.Estates.LocationAddress)
-                   .Include(a => a.Estates.EstatesTimes)
-                   .ThenInclude(a => a.Times)
-                   .ThenInclude(a => a.Schedules)
-                   .Include(a => a.Employees)
-                   .ThenInclude(a => a.Users)
-                   .ThenInclude(a => a.Persons)
+                   //.Include(a => a.Estates)
+                   //.Include(a => a.Estates.LocationAddress)
+                   //.Include(a => a.Estates.EstatesTimes)
+                   //.ThenInclude(a => a.Times)
+                   //.ThenInclude(a => a.Schedules)
+                   //.Include(a => a.Employees)
+                   //.ThenInclude(a => a.Users)
+                   //.ThenInclude(a => a.Persons)
                    .Include(a => a.Type)
-                   .Include(a => a.Estates.Locations)
+                   //.Include(a => a.Estates.Locations)
                    .Include(a => a.BrandsModels)
                    .Include(a => a.BrandsModels.Brands)
                    .Include(a => a.BrandsModels.Model)
@@ -77,6 +77,9 @@ namespace Repository
                       .ThenInclude(a => a.Persons)
                       .Include(a => a.Type)
                       .Include(a => a.Estates.Locations)
+                      .Include(a => a.BrandsModels)
+                      .Include(a => a.BrandsModels.Brands)
+                      .Include(a => a.BrandsModels.Model)
                    .FirstOrDefaultAsync();
         }
 
@@ -106,16 +109,16 @@ namespace Repository
                                         a => a.Estates.Locations.LocationDepartmentName == vehicles.Estates.Locations.LocationDepartmentName);
           
             return collection
-                 .Include(a => a.Estates)
-                   .Include(a => a.Estates.LocationAddress)
-                   .Include(a => a.Estates.EstatesTimes)
-                   .ThenInclude(a => a.Times)
-                   .ThenInclude(a => a.Schedules)
-                   .Include(a => a.Employees)
-                   .ThenInclude(a => a.Users)
-                   .ThenInclude(a => a.Persons)
+                   //.Include(a => a.Estates)
+                   //.Include(a => a.Estates.LocationAddress)
+                   //.Include(a => a.Estates.EstatesTimes)
+                   //.ThenInclude(a => a.Times)
+                   //.ThenInclude(a => a.Schedules)
+                   //.Include(a => a.Employees)
+                   //.ThenInclude(a => a.Users)
+                   //.ThenInclude(a => a.Persons)
                    .Include(a => a.Type)
-                   .Include(a => a.Estates.Locations)
+                   //.Include(a => a.Estates.Locations)
                    .Include(a => a.BrandsModels)
                    .Include(a => a.BrandsModels.Brands)
                    .Include(a => a.BrandsModels.Model)

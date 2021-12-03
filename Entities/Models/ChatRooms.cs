@@ -13,7 +13,7 @@ namespace Entities.Models
         public int ID { get; set; }
 
         [Required]
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreationDate { get; set; }
 
         [Required]
         [ForeignKey("FK_TypeChatRoomID")]

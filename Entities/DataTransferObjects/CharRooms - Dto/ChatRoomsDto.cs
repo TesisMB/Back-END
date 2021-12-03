@@ -8,7 +8,7 @@ namespace Entities.DataTransferObjects.CharRooms___Dto
     {
         public int ChatRoomID { get; set; }
 
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreationDate { get; set; }
 
         public ICollection<UsersChatRoomsDto> UsersChatRooms { get; set; }
 

@@ -100,7 +100,7 @@ namespace Back_End.Controllers
             }
             catch(Exception ex)
             {
-                _logger.LogError($"Something went wrong inside CreateMaterial action: {ex.Message}");
+                _logger.LogError($"Something went wrong inside CreateEmergenciesDisaster action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
         }

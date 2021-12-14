@@ -77,3 +77,72 @@
 2021-12-13 13:26:27.4939 INFO Returned all ChatRooms from database. 
 2021-12-13 13:39:25.7659 INFO Returned all ChatRooms from database. 
 2021-12-13 13:39:26.0968 INFO Returned all emergenciesDisasters from database.
+2021-12-13 17:09:55.6014 INFO Returned User.
+2021-12-13 17:10:13.3514 INFO Returned all employees from database.
+2021-12-13 17:10:17.5446 INFO Returned all employees from database.
+2021-12-13 17:10:37.3031 INFO Returned employe with details for id: 2
+2021-12-13 17:10:56.5566 INFO Returned employe with details for id: 2
+2021-12-13 17:11:41.4908 INFO Returned User.
+2021-12-13 17:11:43.9262 INFO Returned all employees from database.
+2021-12-13 18:13:00.1960 INFO Returned all ChatRooms from database. 
+2021-12-13 18:13:21.6916 INFO Returned all ChatRooms from database. 
+2021-12-13 18:14:34.5688 INFO Returned all ChatRooms from database. 
+2021-12-13 18:14:38.8900 INFO Returned all ChatRooms from database. 
+2021-12-13 18:14:55.7256 INFO Returned all ChatRooms from database. 
+2021-12-13 18:14:59.4854 INFO Returned all ChatRooms from database. 
+2021-12-13 18:15:00.7665 INFO Returned all ChatRooms from database. 
+2021-12-13 18:15:01.6871 INFO Returned all ChatRooms from database. 
+2021-12-13 18:15:02.4950 INFO Returned all ChatRooms from database. 
+2021-12-13 18:15:04.2069 INFO Returned all ChatRooms from database. 
+2021-12-13 18:15:05.9617 INFO Returned all ChatRooms from database. 
+2021-12-13 18:34:01.1921 INFO Returned all ChatRooms from database. 
+2021-12-13 18:34:06.1088 INFO Returned all ChatRooms from database. 
+2021-12-13 18:34:07.7297 INFO Returned all ChatRooms from database. 
+2021-12-13 18:34:08.6968 INFO Returned all ChatRooms from database. 
+2021-12-13 18:34:08.7809 ERROR Something went wrong inside GetAllChatRooms aciton: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Chat -> TypesChatsDto
+Entities.Models.Chat -> Entities.DataTransferObjects.CharRooms___Dto.TypesChatsDto
+2021-12-13 18:34:10.2155 INFO Returned all ChatRooms from database. 
+2021-12-13 18:36:25.9427 INFO Returned all ChatRooms from database. 
+2021-12-13 18:36:27.2624 ERROR Something went wrong inside GetAllChatRooms aciton: The Include path 'TypesChatRooms->ChatRooms' results in a cycle. Cycles are not allowed in no-tracking queries. Either use a tracking query or remove the cycle.
+2021-12-13 18:36:28.6268 ERROR Something went wrong inside GetAllChatRooms aciton: The Include path 'TypesChatRooms->ChatRooms' results in a cycle. Cycles are not allowed in no-tracking queries. Either use a tracking query or remove the cycle.
+2021-12-13 18:37:25.6142 INFO Returned all ChatRooms from database. 
+2021-12-13 18:37:27.8919 INFO Returned all ChatRooms from database. 
+2021-12-13 18:37:38.8516 INFO Returned all ChatRooms from database. 
+2021-12-13 18:37:40.1450 INFO Returned all ChatRooms from database. 
+2021-12-13 18:37:47.3219 INFO Returned all ChatRooms from database. 
+2021-12-13 18:37:48.5856 INFO Returned all ChatRooms from database. 
+2021-12-13 18:37:49.9599 INFO Returned all ChatRooms from database. 
+2021-12-13 18:38:07.5265 INFO Returned all ChatRooms from database. 
+2021-12-13 18:38:11.9607 INFO Returned all ChatRooms from database. 
+2021-12-13 18:39:45.4423 INFO Returned all ChatRooms from database. 
+2021-12-13 18:41:24.6762 INFO Returned all ChatRooms from database. 
+2021-12-13 18:47:23.4424 INFO Returned User.
+2021-12-13 18:47:27.0026 INFO Returned employe with details for id: 2
+2021-12-13 19:53:15.4576 INFO Returned User.
+2021-12-13 19:53:15.4576 INFO Returned User.
+2021-12-13 19:53:17.3711 INFO Returned all emergenciesDisasters from database.
+2021-12-13 19:53:25.5632 INFO Returned all ChatRooms from database. 
+2021-12-13 19:53:40.5931 INFO Returned all emergenciesDisasters from database.
+2021-12-13 19:53:50.4497 INFO Returned all emergenciesDisasters from database.
+2021-12-13 19:53:51.1499 INFO Returned all ChatRooms from database. 
+2021-12-13 19:54:07.8586 INFO Returned all emergenciesDisasters from database.
+2021-12-13 19:54:08.7421 INFO Returned all ChatRooms from database. 
+2021-12-13 20:04:28.4383 INFO Returned all ChatRooms from database. 
+2021-12-13 20:04:44.4462 INFO Returned all ChatRooms from database. 
+2021-12-13 20:06:21.3828 INFO Returned all ChatRooms from database. 
+2021-12-13 20:10:32.1230 INFO Returned all ChatRooms from database. 
+2021-12-13 20:32:50.5680 INFO Returned User.
+2021-12-13 20:34:11.7080 INFO Returned User.
+2021-12-13 20:34:21.3664 ERROR Something went wrong inside User: String reference not set to an instance of a String. (Parameter 's')
+2021-12-13 20:38:42.7392 INFO Returned User.
+2021-12-13 20:39:18.4972 INFO Returned all ChatRooms from database. 
+2021-12-13 20:44:27.3011 INFO Returned User.
+2021-12-13 20:44:36.6038 INFO Returned all ChatRooms from database. 
+2021-12-13 20:45:32.1145 INFO Returned User.
+2021-12-13 20:50:45.0687 INFO Returned all ChatRooms from database. 
+2021-12-13 20:50:46.9403 INFO Returned all ChatRooms from database. 
+2021-12-13 20:52:45.9261 INFO Returned all ChatRooms from database. 
+2021-12-13 20:52:45.9261 INFO Returned all emergenciesDisasters from database.

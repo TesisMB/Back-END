@@ -6,7 +6,7 @@ namespace Back_End.Hubs
 {
     public class Mensaje : Hub
     {
-        /*public override Task OnConnectedAsync()
+        public override Task OnConnectedAsync()
         {
             return base.OnConnectedAsync();
         }
@@ -14,7 +14,7 @@ namespace Back_End.Hubs
         public Task NotificaTodos(string mensaje)
         {
             return Clients.All.SendAsync("prepararventa", mensaje);
-        }*/
+        }
 
         public async Task SendMessage(string room, string user, string message)
         {

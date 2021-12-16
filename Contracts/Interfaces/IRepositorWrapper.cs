@@ -26,6 +26,7 @@ namespace Contracts.Interfaces
         IResources_RequestRepository Resources_Requests { get; }
 
         IChatRoomsRepository ChatRooms { get; }
+        IChatRepository Chat { get; }
 
 
         // void Save();

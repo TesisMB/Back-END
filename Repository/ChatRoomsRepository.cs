@@ -13,7 +13,7 @@ namespace Repository
         {
 
         }
-
+       
         public async Task<IEnumerable<TypesChatRooms>> GetChatRooms()
         {
             return await FindAll()

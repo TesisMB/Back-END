@@ -19,6 +19,7 @@ namespace Repository
         private ITypesEmergenciesDisastersRepository _typesEmergenciesDisasters;
         private IResources_RequestRepository _resources_Request;
         private IChatRoomsRepository _chatRooms;
+        private IChatRepository _chats;
 
         private IMapper _mapper;
 
@@ -159,6 +160,20 @@ namespace Repository
                 return _chatRooms;
             }
         }
+
+
+        public IChatRepository Chat
+        {
+            get
+            {
+                if (_chats == null)
+                {
+                    _chats = new ChatRepository(_cruzRojaContext);
+                }
+                return _chats;
+            }
+        }
+
 
 
         /*public void Save()

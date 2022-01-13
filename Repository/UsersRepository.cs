@@ -86,7 +86,10 @@ namespace Repository
         {
             string message;
             {
-               var resetUrl = $"/account/reset-password?token={account.ResetToken}";
+
+               var resetUrl = $"http://localhost:4200/cliente/resetear-contrase%C3%B1a?token= {account.ResetToken}";
+
+                resetUrl.Trim();
                message = $@"
                                 <p>Sentimos que hayas tenido problemas para iniciar sesión en SYNAGIR. Podemos ayudar a recuperar tu cuenta.</p>
                                 <p>Please click the below link to reset your password, the link will be valid for 1 day:</p>
@@ -111,7 +114,7 @@ namespace Repository
 
            using (var db = new CruzRojaContext())
                 account = db.Users
-                               .Where(u => u.ResetToken == token
+                               .Where(u => u.ResetToken == token.Trim()
                                && u.ResetTokenExpires > DateTime.Now).FirstOrDefault();
 
             account.UserPassword = Encrypt.GetSHA256(password);

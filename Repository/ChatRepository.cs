@@ -27,6 +27,7 @@ namespace Repository
                    .Include(i=> i.EmergenciesDisasters.TypesEmergenciesDisasters)
                    .Include(i => i.EmergenciesDisasters)
                    .ThenInclude(i=> i.Locations)
+                   .Include(i => i.Messages)
                    .FirstOrDefaultAsync();
         }
     }

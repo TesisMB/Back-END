@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Entities.Models
 {
-    [Table("Messages", Schema="dbo")]
+    [Table("Messages", Schema = "dbo")]
     public class Messages
     {
         [Key]
@@ -19,7 +17,7 @@ namespace Entities.Models
         public Boolean MessageState { get; set; }
 
         [Required]
-        public DateTime CreateDate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         [Required]
         [ForeignKey("FK_ChatRoomID")]
@@ -29,6 +27,6 @@ namespace Entities.Models
 
         [ForeignKey("FK_LocationVolunteerID")]
         public LocationVolunteers LocationVolunteers { get; set; }
-        public int FK_LocationVolunteerID { get; set; }
+        public int? FK_LocationVolunteerID { get; set; }
     }
 }

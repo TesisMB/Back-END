@@ -3,6 +3,7 @@ using Back_End.Models;
 using Back_End.Models.Vehicles___Dto;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.ResourcesDto;
+using Entities.DataTransferObjects.Vehicles___Dto;
 using Entities.DataTransferObjects.Vehicles___Dto.Creation;
 using Entities.DataTransferObjects.Vehicles___Dto.Update;
 using Entities.Helpers;
@@ -32,7 +33,7 @@ namespace Back_End.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<Vehicles>> GetAllVehicles([FromQuery] VehiclesDto vehiclesFilters)
+        public async Task<ActionResult<Vehicles>> GetAllVehicles([FromQuery] vehiclesFiltersDto vehiclesFilters)
         {
             try
             {

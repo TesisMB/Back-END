@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Entities.DataTransferObjects.Messages___Dto;
+using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Entities.DataTransferObjects.CharRooms___Dto
 {
-   public class ChatRoomsDto
+    public class ChatRoomsDto
     {
         public int ChatRoomID { get; set; }
 
@@ -13,5 +13,9 @@ namespace Entities.DataTransferObjects.CharRooms___Dto
         public ICollection<UsersChatRoomsDto> UsersChatRooms { get; set; }
 
         public ChatRoomsEmergenciesDisastersDto EmergenciesDisasters { get; set; }
+
+        public ICollection<MessagesDto> Messages { get; set; }
+
+
     }
 }

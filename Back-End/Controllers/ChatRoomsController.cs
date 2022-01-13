@@ -1,18 +1,13 @@
 ﻿using AutoMapper;
-using Back_End.Entities;
 using Back_End.Hubs;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.CharRooms___Dto;
 using Entities.DataTransferObjects.Messages___Dto;
 using Entities.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.EntityFrameworkCore;
-using Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Back_End.Controllers
@@ -62,7 +57,7 @@ namespace Back_End.Controllers
                 var chatRooms = await _repository.Chat.GetChat(chatRoomID);
                 _logger.LogInfo($"Returned all ChatRooms from database. ");
 
-                if(chatRooms == null)
+                if (chatRooms == null)
                 {
                     return NotFound();
                 }
@@ -79,8 +74,21 @@ namespace Back_End.Controllers
         }
 
         [HttpPost]
-        public  IActionResult SendMessage([FromBody] MessagesForCreationDto message)
+        public IActionResult SendMessage([FromBody] MessagesForCreationDto message)
         {
+            if(message == null)
+            {
+                
+                    _logger.LogError("Message object sent from client is null.");
+                    return BadRequest("Message object is null");
+                
+            }
+
+            var messages = _mapper.Map<Messages>(message);
+
+            _repository.Messages.Create(messages);
+
+            _repository.Messages.SaveAsync();
 
             string not = Newtonsoft.Json.JsonConvert.SerializeObject(message);
 

@@ -20,6 +20,7 @@ namespace Repository
         private IResources_RequestRepository _resources_Request;
         private IChatRoomsRepository _chatRooms;
         private IChatRepository _chats;
+        private IMessageRepository _messages;
 
         private IMapper _mapper;
 
@@ -174,6 +175,17 @@ namespace Repository
             }
         }
 
+        public IMessageRepository Messages
+        {
+            get
+            {
+                if (_messages == null)
+                {
+                    _messages = new MessageRepository(_cruzRojaContext);
+                }
+                return _messages;
+            }
+        }
 
 
         /*public void Save()

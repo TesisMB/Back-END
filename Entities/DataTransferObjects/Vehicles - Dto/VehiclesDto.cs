@@ -1,7 +1,4 @@
-﻿
-using Entities.DataTransferObjects.Models.Vehicles___Dto;
-
-namespace Back_End.Models.Vehicles___Dto
+﻿namespace Back_End.Models.Vehicles___Dto
 {
     public class VehiclesDto
     {

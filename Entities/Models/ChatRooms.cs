@@ -24,6 +24,7 @@ namespace Entities.Models
         public ICollection<UsersChatRooms> UsersChatRooms { get; set; }
 
         public EmergenciesDisasters EmergenciesDisasters { get; set; }
+        public ICollection<Messages> Messages { get; set; }
 
     }
 }

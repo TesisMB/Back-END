@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Entities.Models
 {
-    [Table("LocationVolunteers", Schema="dbo")]
+    [Table("LocationVolunteers", Schema = "dbo")]
     public class LocationVolunteers
     {
         public int ID { get; set; }
@@ -15,5 +13,7 @@ namespace Entities.Models
 
         [Column(TypeName = "decimal(9, 6)")]
         public decimal LocationVolunteerLongitude { get; set; }
+
+        public Messages Messages { get; set; }
     }
 }

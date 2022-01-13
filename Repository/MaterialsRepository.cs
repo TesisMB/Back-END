@@ -33,12 +33,12 @@ namespace Repository
 
 
             return await collection
-                      // .Include(a => a.Estates)
-                      /* .Include(a => a.Estates.LocationAddress)
+                       .Include(a => a.Estates)
+                       .Include(a => a.Estates.LocationAddress)
                        .Include(a => a.Estates.EstatesTimes)
                        .ThenInclude(a => a.Times)
                        .ThenInclude(a => a.Schedules)
-                       .Include(a => a.Estates.Locations)*/
+                       .Include(a => a.Estates.Locations)
                        .ToListAsync();
 
         }

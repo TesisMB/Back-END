@@ -36,7 +36,6 @@ namespace Repository
                     && a.Users.Estates.Locations.LocationCityName == user.Estates.Locations.LocationCityName
                     && a.Users.Estates.Locations.LocationMunicipalityName == user.Estates.Locations.LocationMunicipalityName);
 
-
             return await Collection
                     .Include(i => i.Users)
                     .Include(i => i.Users.Locations)

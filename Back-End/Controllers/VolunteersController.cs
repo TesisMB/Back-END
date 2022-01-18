@@ -171,13 +171,13 @@ namespace Back_End.Controllers
                 var volunteerEntity = _mapper.Map<Volunteers>(volunteer);
 
                 // Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
+                _repository.Volunteers.CreateVolunteer(volunteerEntity);
                 volunteerEntity.Users.UserPassword = Encrypt.GetSHA256(volunteerEntity.Users.UserPassword);
 
-                _repository.Volunteers.CreateVolunteer(volunteerEntity);
 
-                 _repository.Volunteers.SaveAsync();
+                _repository.Volunteers.SaveAsync();
 
-                var createdVolunteer = _mapper.Map<VolunteersDto>(volunteerEntity);
+                //var createdVolunteer = _mapper.Map<VolunteersDto>(volunteerEntity);
 
                 return Ok();
 
@@ -198,7 +198,7 @@ namespace Back_End.Controllers
         {
 
             var userFromRepo = await _repository.Volunteers.GetVolunteersById(volunteerId);
-           
+
             if (userFromRepo == null)
             {
                 return NotFound();
@@ -258,21 +258,21 @@ namespace Back_End.Controllers
         {
             try
             {
-            var volunteer = await _repository.Users.GetUserVolunteerById(volunteerId);
+                var volunteer = await _repository.Users.GetUserVolunteerById(volunteerId);
 
 
-            if (volunteer == null)
-            {
-                 _logger.LogError($"Volunteer with id: {volunteerId}, hasn't ben found in db.");
-                 return NotFound();
-            }
+                if (volunteer == null)
+                {
+                    _logger.LogError($"Volunteer with id: {volunteerId}, hasn't ben found in db.");
+                    return NotFound();
+                }
 
-            _repository.Users.Delete(volunteer);
+                _repository.Users.Delete(volunteer);
 
-             _repository.Volunteers.SaveAsync();
+                _repository.Volunteers.SaveAsync();
 
-            // Se retorna con exito la eliminacion del Usuario especificado
-            return NoContent();
+                // Se retorna con exito la eliminacion del Usuario especificado
+                return NoContent();
             }
             catch (Exception ex)
             {

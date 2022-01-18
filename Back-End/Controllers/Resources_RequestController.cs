@@ -5,7 +5,6 @@ using Entities.Helpers;
 using Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Repository;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -62,15 +61,14 @@ namespace Back_End.Controllers
 
                 var resourceRequest = _mapper.Map<Resources_Request>(resources_Request);
 
+
                 //Rebisar si hay en stock Materials o Medicines
-
                 var resource = _repository.Resources_Requests.Stock(resourceRequest);
-
 
                 foreach (var resources in resource.Resources_RequestResources_Materials_Medicines_Vehicles)
                 {
 
-                if(resources.Resources_Materials.Materials == null || resources.Resources_Medicines.Medicines == null)
+                    if (resources.Resources_Materials.Materials == null || resources.Resources_Medicines.Medicines == null)
                     {
                         return BadRequest(ErrorHelper.Response(400, "No hay Stock!!!"));
                     }

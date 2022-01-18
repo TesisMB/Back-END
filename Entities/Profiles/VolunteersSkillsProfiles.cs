@@ -9,7 +9,9 @@ namespace Back_End.Profiles
     {
         public VolunteersSkillsProfiles()
         {
-            CreateMap<VolunteersSkills, VolunteersSkillsDto>();
+            CreateMap<VolunteersSkills, VolunteersSkillsDto>()
+                .ForPath(a => a.SkillName, i => i.MapFrom(src => src.Skills.SkillName));
+
             CreateMap<VolunteersSkillsForCreationDto, VolunteersSkills>();
 
         }

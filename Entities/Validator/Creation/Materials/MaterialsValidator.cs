@@ -13,7 +13,7 @@ namespace Entities.Validator.Creation
            .NotEmpty().WithMessage("{PropertyName} is required.")
            .MaximumLength(50).WithMessage("The {PropertyName} must be 50 characters. You entered {TotalLength} characters");
 
-            RuleFor(x => x.MaterialMark)
+            RuleFor(x => x.MaterialBrand)
            .NotEmpty().WithMessage("{PropertyName} is required.")
            .MaximumLength(50).WithMessage("The {PropertyName} must be 50 characters. You entered {TotalLength} characters");
 

@@ -42,9 +42,9 @@ namespace Entities.Profiles
                            .ForPath(dest => dest.LocationCityName,
                                        opt => opt.MapFrom(src => src.Estates.Locations.LocationCityName));
 
-            CreateMap<MaterialsForCreationDto, Brands>();
+            CreateMap<MaterialsForCreationDto, Materials>();
 
-            CreateMap<MaterialsForUpdateDto, Brands>();
+            CreateMap<MaterialsForUpdateDto, Materials>();
 
             CreateMap<Brands, MaterialsForUpdateDto>();
 

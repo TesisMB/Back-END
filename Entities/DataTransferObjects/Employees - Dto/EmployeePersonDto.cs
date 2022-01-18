@@ -12,6 +12,6 @@ namespace Entities.DataTransferObjects.Employees___Dto
         public string Address { get; set; }
         public string Gender { get; set; }
         public Boolean Status { get; set; }
-        public int date { get; set; }
+        public string Birthdate { get; set; }
     }
 }

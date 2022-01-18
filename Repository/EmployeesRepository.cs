@@ -3,6 +3,7 @@ using Back_End.Entities;
 using Back_End.Helpers;
 using Back_End.Models;
 using Contracts.Interfaces;
+using Entities.Helpers;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -95,13 +96,29 @@ namespace Repository
 
             employeeEntity.Users.UserPassword = Encrypt.GetSHA256(employee.Users.UserPassword);
 
+            spaceCamelCase(employeeEntity);
             Create(employeeEntity);
 
             SaveAsync();
 
             sendVerificationEmail(employee);
 
+
             //Create(employee);
+        }
+
+
+        public static Employees spaceCamelCase(Employees employee)
+        {
+           employee.Users.UserDni = WithoutSpace_CamelCase.GetCamelCase(employee.Users.UserDni);
+           employee.Users.UserPassword = WithoutSpace_CamelCase.GetWithoutSpace(employee.Users.UserPassword);
+           employee.Users.Persons.FirstName = WithoutSpace_CamelCase.GetCamelCase(employee.Users.Persons.FirstName);
+           employee.Users.Persons.LastName = WithoutSpace_CamelCase.GetCamelCase(employee.Users.Persons.LastName);
+           employee.Users.Persons.Phone = WithoutSpace_CamelCase.GetCamelCase(employee.Users.Persons.Phone);
+           employee.Users.Persons.Address = WithoutSpace_CamelCase.GetCamelCase(employee.Users.Persons.Address);
+           employee.Users.Persons.Email = WithoutSpace_CamelCase.GetWithoutSpace(employee.Users.Persons.Email);
+
+            return employee;
         }
 
         private void sendVerificationEmail(EmployeesForCreationDto employees)

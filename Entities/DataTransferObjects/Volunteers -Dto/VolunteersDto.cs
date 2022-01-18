@@ -1,5 +1,4 @@
 ﻿using Back_End.Models.VolunteersSkills___Dto;
-using Entities.DataTransferObjects.Login___Dto;
 using System.Collections.Generic;
 
 namespace Back_End.Models.Employees___Dto
@@ -12,6 +11,6 @@ namespace Back_End.Models.Employees___Dto
 
         //public VolunteersUserDto Users { get; set; }
 
-        public ICollection<VolunteersSkillsDto> VolunteersSkills { get; set; }
+        public IEnumerable<VolunteersSkillsDto> VolunteersSkills { get; set; }
     }
 }

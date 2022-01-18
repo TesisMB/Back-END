@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Back_End.Models;
 using Back_End.Models.Employees___Dto;
+using Entities.Helpers;
 
 namespace Back_End.Profiles
 {
@@ -10,10 +11,8 @@ namespace Back_End.Profiles
         {
             //Creo Las clases a ser mapeadas
             CreateMap<EstatesTimes, EstatesTimesDto>()
-                .ForPath(src => src.Times, opt => opt.MapFrom(a => $"{a.Times.StartTime} - {a.Times.EndTime}"))
-               // .ForPath(src => src.StartTime, opt => opt.MapFrom(a => a.Times.StartTime))
+                .ForPath(src => src.Times, opt => opt.MapFrom(a => $"{DateTimeOffsetExtensions.GetTime(a.Times.StartTime)} - {DateTimeOffsetExtensions.GetTime(a.Times.EndTime)}"))
 
-                //.ForPath(src => src.EndTime, opt => opt.MapFrom(a => a.Times.EndTime))
 
                 .ForPath(src => src.ScheduleDate, opt => opt.MapFrom(a => a.Times.Schedules.ScheduleDate));
         }

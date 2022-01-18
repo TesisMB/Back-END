@@ -3,6 +3,7 @@ using Back_End.Models;
 using Back_End.Models.Employees___Dto;
 using Entities.DataTransferObjects.Employees___Dto;
 using Entities.DataTransferObjects.Models.Vehicles___Dto;
+using Entities.Helpers;
 
 namespace Back_End.Profiles
 {
@@ -12,11 +13,13 @@ namespace Back_End.Profiles
         {
             //Creo Las clases a ser mapeadas
             CreateMap<Employees, EmployeesDto>();
-            CreateMap<Employees, EmployeeDto>();
+            CreateMap<Employees, EmployeeDto>()
+
+                .ForPath(i => i.Users.Persons.Birthdate, opt => opt.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.Users.Persons.Birthdate)));
 
             CreateMap<Employees, EmployeesVehiclesDto>();
 
-            
+
             CreateMap<EmployeesForCreationDto, Employees>();
 
             CreateMap<EmployeeForUpdateDto, Employees>();

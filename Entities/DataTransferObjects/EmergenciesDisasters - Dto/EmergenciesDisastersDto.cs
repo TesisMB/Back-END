@@ -14,7 +14,7 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
 
         public DateTime EmergencyDisasterStartDate { get; set; }
 
-        public DateTime? EmergencyDisasterEndDate { get; set; }
+        public DateTime EmergencyDisasterEndDate { get; set; }
 
         public string EmergencyDisasterInstruction { get; set; }
 

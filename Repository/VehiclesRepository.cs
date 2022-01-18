@@ -2,7 +2,9 @@
 using Back_End.Models;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.Vehicles___Dto;
+using Entities.Helpers;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,7 +35,7 @@ namespace Repository
              if (!string.IsNullOrEmpty(vehicles.Type) && (vehicles.VehicleYear != null))
             {
                 collection = collection.Where(
-                                      a => a.Type.Type == vehicles.Type
+                                      a => a.TypeVehicles.Type == vehicles.Type
                                       &&
                                        a.Estates.Locations.LocationDepartmentName == vehicles1.Estates.Locations.LocationDepartmentName);
             }
@@ -56,7 +58,7 @@ namespace Repository
                       .Include(a => a.Employees)
                       .ThenInclude(a => a.Users)
                       .ThenInclude(a => a.Persons)
-                      .Include(a => a.Type)
+                      .Include(a => a.TypeVehicles)
                       .Include(a => a.Estates.Locations)
                       .Include(a => a.BrandsModels)
                       .Include(a => a.BrandsModels.Brands)
@@ -81,7 +83,7 @@ namespace Repository
                       .Include(a => a.Employees)
                       .ThenInclude(a => a.Users)
                       .ThenInclude(a => a.Persons)
-                      .Include(a => a.Type)
+                      .Include(a => a.TypeVehicles)
                       .Include(a => a.Estates.Locations)
                       .Include(a => a.BrandsModels)
                       .Include(a => a.BrandsModels.Brands)
@@ -91,7 +93,27 @@ namespace Repository
 
         public void CreateVehicle(Vehicles vehicles)
         {
+
+            spaceCamelCase(vehicles);
             Create(vehicles);
+        }
+
+        private void spaceCamelCase(Vehicles vehicles)
+        {
+            vehicles.VehiclePatent = WithoutSpace_CamelCase.GetCamelCase(vehicles.VehiclePatent);
+            vehicles.VehicleUtility = WithoutSpace_CamelCase.GetCamelCase(vehicles.VehiclePatent);
+            vehicles.VehicleDescription = WithoutSpace_CamelCase.GetCamelCase(vehicles.VehiclePatent);
+
+            if(vehicles.TypeVehicles != null)
+            {
+            vehicles.TypeVehicles.Type = WithoutSpace_CamelCase.GetCamelCase(vehicles.TypeVehicles.Type);
+            }
+
+            if(vehicles.BrandsModels != null)
+            {
+            vehicles.BrandsModels.Brands.BrandName = WithoutSpace_CamelCase.GetCamelCase(vehicles.BrandsModels.Brands.BrandName);
+            vehicles.BrandsModels.Model.ModelName = WithoutSpace_CamelCase.GetCamelCase(vehicles.BrandsModels.Model.ModelName);
+            }
         }
 
         public void UpdateVehicle(Vehicles vehicles)
@@ -123,7 +145,7 @@ namespace Repository
                    .Include(a => a.Employees)
                    .ThenInclude(a => a.Users)
                    .ThenInclude(a => a.Persons)
-                   .Include(a => a.Type)
+                   .Include(a => a.TypeVehicles)
                    .Include(a => a.Estates.Locations)
                    .Include(a => a.BrandsModels)
                    .Include(a => a.BrandsModels.Brands)

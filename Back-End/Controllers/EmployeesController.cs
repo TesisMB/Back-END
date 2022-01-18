@@ -126,8 +126,6 @@ namespace Back_End.Controllers
         [HttpPost]
         public ActionResult<Employees> CreateEmployee([FromBody] EmployeesForCreationDto employee)
         {
-
-            //System.Globalization.TextInfo textInfo = new System.Globalization.CultureInfo("en-US", false).TextInfo;
             try
             {
                 if (!ModelState.IsValid)
@@ -141,16 +139,12 @@ namespace Back_End.Controllers
                     _logger.LogError("Employee object sent from client is null.");
                     return BadRequest("Employee object is null");
                 }
-                // Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
-                //employeeEntity.Users.UserPassword = Encrypt.GetSHA256(employeeEntity.Users.UserPassword);
-                //employeeEntity.Users.Persons.FirstName = textInfo.ToTitleCase(employeeEntity.Users.Persons.FirstName);
-                //employeeEntity.Users.Persons.FirstName = employeeEntity.Users.Persons.FirstName.Trim();
+
 
                 _repository.Employees.CreateEmployee(employee);
 
                 //_repository.Employees.SaveAsync();
 
-                //var createdEmployee = _mapper.Map<EmployeesDto>(employeeEntity);
                 return Ok();
             }
 

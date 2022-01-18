@@ -29,7 +29,7 @@ namespace Entities.Profiles
                     .ForMember(dest => dest.Picture,
                             opt => opt.MapFrom(src => src.VehiclePicture))
 
-                .ForPath(dest => dest.Vehicles.Type, opts => opts.MapFrom(src => src.Type.Type))
+                .ForPath(dest => dest.Vehicles.Type, opts => opts.MapFrom(src => src.TypeVehicles.Type))
 
                  .ForPath(dest => dest.Vehicles.VehiclePatent, opts => opts.MapFrom(src => src.VehiclePatent))
 

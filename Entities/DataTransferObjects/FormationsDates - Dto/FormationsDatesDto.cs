@@ -8,6 +8,6 @@ namespace Entities.DataTransferObjects.FormationsDates___Dto
     {
         public int ID { get; set; }
 
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
     }
 }

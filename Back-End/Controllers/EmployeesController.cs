@@ -5,13 +5,10 @@ using Back_End.Models.Employees___Dto;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.Employees___Dto;
 using Entities.Helpers;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Repository;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using Wkhtmltopdf.NetCore;
 
@@ -35,7 +32,7 @@ namespace Back_End.Controllers
         }
 
         [HttpGet("PDF/{employeeId}")]
-        public async Task <FileResult> GetEmployeeIDPDF(int employeeId)
+        public async Task<FileResult> GetEmployeeIDPDF(int employeeId)
         {
             var employee = await _repository.Employees.GetEmployeeWithDetails(employeeId);
             /*
@@ -49,17 +46,17 @@ namespace Back_End.Controllers
 
             // _generatePdf.SetConvertOptions(options);
 
-           // var filePath = $"{employee.Users.Persons.FirstName} {employee.Users.Persons.LastName}.pdf"; // Here, you should validate the request and the existance of the file.
+            // var filePath = $"{employee.Users.Persons.FirstName} {employee.Users.Persons.LastName}.pdf"; // Here, you should validate the request and the existance of the file.
 
-           // var bytes = await System.IO.File.ReadAllBytesAsync(filePath);
+            // var bytes = await System.IO.File.ReadAllBytesAsync(filePath);
             //return File(bytes, "Views/Employee/EmployeeInfo.cshtml", Path.GetFileName(filePath));
 
 
-           var pdf = await _generatePdf.GetByteArray("Views/Employee/EmployeeInfo.cshtml", employee);
+            var pdf = await _generatePdf.GetByteArray("Views/Employee/EmployeeInfo.cshtml", employee);
 
-           /* var pdfStream = new System.IO.MemoryStream();
-            pdfStream.Write(pdf, 0, pdf.Length);
-            pdfStream.Position = 0;*/
+            /* var pdfStream = new System.IO.MemoryStream();
+             pdfStream.Write(pdf, 0, pdf.Length);
+             pdfStream.Position = 0;*/
 
 
             //var pdf = await _generatePdf.GetByteArray("Views/Employee/EmployeeInfo.cshtml", employee);
@@ -68,14 +65,14 @@ namespace Back_End.Controllers
 
             //return await _generatePdf.GetPdf("Views/Employee/EmployeeInfo.cshtml", pdfStream);
 
-           return File(pdf, "application/pdf", $"{employee.Users.Persons.FirstName} {employee.Users.Persons.LastName}.pdf");
+            return File(pdf, "application/pdf", $"{employee.Users.Persons.FirstName} {employee.Users.Persons.LastName}.pdf");
         }
 
 
-       
+
 
         [HttpGet]
-       // [Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
+        // [Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
         public async Task<ActionResult<Employees>> GetAllEmployees()
         {
             try
@@ -167,7 +164,7 @@ namespace Back_End.Controllers
 
         //[Authorize(Roles = "Coordinador General, Admin")] 
         [HttpPatch("{employeeId}")]
-         public async Task<ActionResult> UpdatePartialUser(int employeeId, JsonPatchDocument<EmployeeForUpdateDto> _Employees)
+        public async Task<ActionResult> UpdatePartialUser(int employeeId, JsonPatchDocument<EmployeeForUpdateDto> _Employees)
         {
             try
             {
@@ -188,41 +185,41 @@ namespace Back_End.Controllers
                 {
                     return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
                 }
-                
-                
+
+
                 Users authUser = new Users();
-                   if (!string.IsNullOrEmpty(employeeToPatch.Users.UserNewPassword))
-                   {
+                if (!string.IsNullOrEmpty(employeeToPatch.Users.UserNewPassword))
+                {
                     // AGREGARLOS EN EL REPOSITORIO
-                      var userPass = employeeToPatch.Users.UserPassword;
-                      employeeToPatch.Users.UserPassword = Encrypt.GetSHA256(userPass);
+                    var userPass = employeeToPatch.Users.UserPassword;
+                    employeeToPatch.Users.UserPassword = Encrypt.GetSHA256(userPass);
 
-                     // using (var db = new CruzRojaContext())
-                        //authUser = db.Users.Where(u => u.UserID == employeeEntity.Users.UserID
-                       //       && u.UserPassword == employeeToPatch.Users.UserPassword).FirstOrDefault();
+                    // using (var db = new CruzRojaContext())
+                    //authUser = db.Users.Where(u => u.UserID == employeeEntity.Users.UserID
+                    //       && u.UserPassword == employeeToPatch.Users.UserPassword).FirstOrDefault();
 
 
-                      if (authUser == null)
-                      {
+                    if (authUser == null)
+                    {
                         return BadRequest(ErrorHelper.Response(400, "La contraseña es erronea."));
-                      }
+                    }
 
                     else
-                      {
+                    {
                         employeeToPatch.Users.UserNewPassword = employeeToPatch.Users.UserNewPassword.Trim();
-                     
+
                         var userNewPass = employeeToPatch.Users.UserNewPassword;
                         employeeToPatch.Users.UserNewPassword = Encrypt.GetSHA256(userNewPass);
 
                         employeeToPatch.Users.UserPassword = employeeToPatch.Users.UserNewPassword;
                     }
 
-                   }
+                }
 
                 var employeeResult = _mapper.Map(employeeToPatch, employeeEntity);
 
                 _repository.Employees.Update(employeeResult);
-               
+
                 _repository.Employees.SaveAsync();
 
                 return NoContent();
@@ -244,7 +241,7 @@ namespace Back_End.Controllers
             {
                 var employee = await _repository.Users.GetUserEmployeeById(employeeId);
 
-                if(employee == null)
+                if (employee == null)
                 {
                     _logger.LogError($"Employee with id: {employeeId}, hasn't ben found in db.");
                     return NotFound();
@@ -258,11 +255,11 @@ namespace Back_End.Controllers
 
                 _repository.Users.DeletUser(employee);
 
-                 _repository.Employees.SaveAsync();
+                _repository.Employees.SaveAsync();
 
                 return NoContent();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside DeleteEmployee action: {ex.Message}");
                 return StatusCode(500, "Internal server error");

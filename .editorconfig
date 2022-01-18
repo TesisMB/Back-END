@@ -2,3 +2,6 @@
 
 # CS0108: El miembro oculta el miembro heredado. Falta una contraseña nueva
 dotnet_diagnostic.CS0108.severity = none
+
+# CS8632: La anotación para tipos de referencia que aceptan valores NULL solo debe usarse en el código dentro de un contexto de anotaciones "#nullable".
+dotnet_diagnostic.CS8632.severity = none

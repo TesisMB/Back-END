@@ -1,17 +1,13 @@
-﻿
-using AutoMapper;
-using Back_End.Entities;
+﻿using AutoMapper;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.Resources_Request___Dto;
 using Entities.Helpers;
 using Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Back_End.Controllers
@@ -66,42 +62,24 @@ namespace Back_End.Controllers
 
                 var resourceRequest = _mapper.Map<Resources_Request>(resources_Request);
 
-                resourceRequest.FK_UserID = UsersRepository.authUser.UserID;
+                //Rebisar si hay en stock Materials o Medicines
+
+                var resource = _repository.Resources_Requests.Stock(resourceRequest);
 
 
-                Materials materials = null;
-                Medicines medicines = null;
-
-                var db = new CruzRojaContext();
-
-                materials = db.Materials
-                 .Where(i => i.ID == resourceRequest.Resources.Resources_Materials.FK_MaterialID
-                 &&
-                 (i.MaterialQuantity - resourceRequest.Resources.Resources_Materials.Quantity) >= 0
-                 )
-                 .FirstOrDefault();
-
-                medicines = db.Medicines
-              .Where(i => i.ID == resourceRequest.Resources.Resources_Medicines.FK_MedicineID
-                 &&
-                 (i.MedicineQuantity - resourceRequest.Resources.Resources_Medicines.Quantity) >= 0
-                 )
-              .FirstOrDefault();
-
-                 /*  .Where(
-                      i => i.Resources_Materials.Quantity - materials.MaterialQuantity < 0
-                      &&
-                       i.Resources_Medicines.Quantity - medicines.MedicineQuantity < 0
-                      )*/
-
-                _repository.Resources_Requests.CreateResource_Resquest(resourceRequest);
-
-                if (materials == null || medicines == null)
+                foreach (var resources in resource.Resources_RequestResources_Materials_Medicines_Vehicles)
                 {
-                     return BadRequest(ErrorHelper.Response(400, "No hay Stock!!!"));
+
+                if(resources.Resources_Materials.Materials == null || resources.Resources_Medicines.Medicines == null)
+                    {
+                        return BadRequest(ErrorHelper.Response(400, "No hay Stock!!!"));
+                    }
+
+                    resources.Resources_Materials.Materials = null;
+                    resources.Resources_Medicines.Medicines = null;
                 }
 
-                _repository.Resources_Requests.SaveAsync();
+                _repository.Resources_Requests.CreateResource_Resquest(resourceRequest);
 
                 return Ok();
             }
@@ -117,7 +95,7 @@ namespace Back_End.Controllers
         {
             try
             {
-                var reourceRequest =  await _repository.Resources_Requests.GetResourcesRequestByID(reourceRequestID);
+                var reourceRequest = await _repository.Resources_Requests.GetResourcesRequestByID(reourceRequestID);
 
                 if (reourceRequest == null)
                 {
@@ -129,10 +107,11 @@ namespace Back_End.Controllers
 
                 _resourceRequest.ApplyTo(resourceRequestToPatch, ModelState);
 
-                if(!TryValidateModel(resourceRequestToPatch)){
+                if (!TryValidateModel(resourceRequestToPatch))
+                {
                     return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
                 }
-            
+
 
                 var resourceRequestResult = _mapper.Map(resourceRequestToPatch, reourceRequest);
 
@@ -142,7 +121,7 @@ namespace Back_End.Controllers
 
                 return NoContent();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside UpdatePartialEmegencyDisaster action: {ex.Message}");
                 return StatusCode(500, "Internal server error");

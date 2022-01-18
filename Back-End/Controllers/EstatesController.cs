@@ -6,7 +6,6 @@ using Entities.DataTransferObjects.Estates___Dto;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Back_End.Controllers
@@ -39,7 +38,7 @@ namespace Back_End.Controllers
 
                 var employeesResult = _mapper.Map<IEnumerable<EstatesDto>>(employees);
                 return Ok(employeesResult);
-        
+
             }
             catch (Exception ex)
             {

@@ -1,5 +1,6 @@
 ﻿using Back_End.Models;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -32,6 +33,9 @@ namespace Entities.Models
         [Required]
         public int FK_EmergencyDisasterID { get; set; }
 
-        public Resources  Resources { get; set; }
+        [ForeignKey("FK_Resources_RequestID")]
+        public ICollection<Resources_RequestResources_Materials_Medicines_Vehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
+       
+        //public Resources  Resources { get; set; }
     }
 }

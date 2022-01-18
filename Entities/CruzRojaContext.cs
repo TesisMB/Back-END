@@ -75,7 +75,7 @@ namespace Back_End.Entities
         public DbSet<Model> Models { get; set; }
         public DbSet<FormationsEstates> FormationsEstates { get; set; }
         public DbSet<Resources_Request> Resources_Requests { get; set; }
-        public DbSet<Resources> Resources { get; set; }
+        //public DbSet<Resources> Resources { get; set; }
         public DbSet<Resources_Materials> Resources_Materials { get; set; }
         public DbSet<Resources_Medicines> Resources_Medicines { get; set; }
         public DbSet<Resources_Vehicles> Resources_Vehicles { get; set; }
@@ -86,6 +86,7 @@ namespace Back_End.Entities
         public DbSet<TypesChatRooms> TypesChatRooms { get; set; }
         public DbSet<UsersChatRooms> UsersChatRooms { get; set; }
         public DbSet<UsersChat> UsersChat { get; set; }
+        public DbSet<Resources_RequestResources_Materials_Medicines_Vehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
 
         private const string Connection =
       @"Server=localhost;

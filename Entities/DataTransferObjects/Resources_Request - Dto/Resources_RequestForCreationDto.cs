@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Entities.DataTransferObjects.Resources_RequestResources_Materials_Medicines_Vehicles___Dto;
+using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Entities.DataTransferObjects.Resources_Request___Dto
 {
@@ -16,6 +16,8 @@ namespace Entities.DataTransferObjects.Resources_Request___Dto
 
         public int FK_EmergencyDisasterID { get; set; }
 
-        public ResourcesForCreationDto Resources { get; set; }
+        public ICollection<Resources_RequestResources_Materials_Medicines_VehiclesForCreationDto> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
+
+        //public ResourcesForCreationDto Resources { get; set; }
     }
 }

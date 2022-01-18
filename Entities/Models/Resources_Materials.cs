@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
@@ -18,6 +19,9 @@ namespace Entities.Models
 
          [Required]
          public int FK_MaterialID { get; set; }
+
+        [ForeignKey("FK_Resources_MaterialsID")]
+        public ICollection<Resources_RequestResources_Materials_Medicines_Vehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
     }
 
 }

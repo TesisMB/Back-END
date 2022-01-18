@@ -10,13 +10,13 @@ namespace Entities.Models
         public int ID { get; set; }
 
         [ForeignKey("FK_Resource_MaterialID")]
-        public Resources_Materials Resources_Materials { get; set; }
+        public Resources_Materials? Resources_Materials { get; set; }
 
         [ForeignKey("FK_Resource_MedicinelID")]
-        public Resources_Medicines Resources_Medicines { get; set; }
+        public Resources_Medicines? Resources_Medicines { get; set; }
 
         [ForeignKey("FK_Resource_VehiclelID")]
-        public Resources_Vehicles Resources_Vehicles { get; set; }
+        public Resources_Vehicles? Resources_Vehicles { get; set; }
 
         public int? FK_Resource_MaterialID { get; set; }
 

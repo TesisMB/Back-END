@@ -1,0 +1,50 @@
+2022-01-14 18:40:56.2537 INFO Returned User.
+2022-01-14 18:42:14.0434 INFO Returned all Volunteers from database.
+2022-01-14 18:45:25.0478 INFO Returned all Volunteers from database.
+2022-01-14 18:52:28.1049 INFO Returned all Volunteers from database.
+2022-01-14 19:00:43.4332 INFO Returned all Volunteers from database.
+2022-01-14 19:00:58.6749 INFO Returned all Volunteers from database.
+2022-01-14 19:01:08.1021 INFO Returned volunteer with id: 14
+2022-01-14 19:01:32.4570 INFO Returned all Materials from database.
+2022-01-14 19:01:34.5093 INFO Returned Material with id: 2
+2022-01-14 19:01:59.7406 INFO Returned Material with id: 2
+2022-01-14 19:03:05.7600 INFO Returned Material with id: 2
+2022-01-14 19:04:02.9420 INFO Returned Material with id: 2
+2022-01-14 19:05:31.2348 INFO Returned Material with id: 2
+2022-01-14 19:05:46.7658 INFO Returned Material with id: 2
+2022-01-14 19:06:09.1225 INFO Returned Material with id: 2
+2022-01-14 19:07:13.4544 INFO Returned Material with id: 2
+2022-01-14 19:14:09.0317 INFO Returned User.
+2022-01-14 19:14:18.0027 INFO Returned all Materials from database.
+2022-01-14 19:14:20.1874 INFO Returned Material with id: 6
+2022-01-14 19:15:38.0270 INFO Returned Material with id: 6
+2022-01-14 19:30:52.2940 INFO Returned Material with id: 6
+2022-01-14 19:33:26.3390 INFO Returned Material with id: 6
+2022-01-14 19:37:17.7074 INFO Returned all Materials from database.
+2022-01-14 19:37:56.9517 ERROR Volunteer with id: 4, hasn't been found in db.
+2022-01-14 19:38:01.6529 INFO Returned all Volunteers from database.
+2022-01-14 19:38:08.2536 ERROR Vehicle with id: 14, hasn't been found in db.
+2022-01-14 19:38:10.6278 INFO Returned all Volunteers from database.
+2022-01-14 19:38:59.8022 INFO Returned all Materials from database.
+2022-01-14 19:39:00.7992 INFO Returned Material with id: 6
+2022-01-14 19:41:11.5743 INFO Returned Material with id: 6
+2022-01-14 19:43:32.3442 INFO Returned Material with id: 6
+2022-01-14 19:44:02.5948 INFO Returned Material with id: 6
+2022-01-14 19:45:03.9489 INFO Returned Material with id: 6
+2022-01-14 19:45:42.4309 INFO Returned Material with id: 6
+2022-01-14 19:47:33.7522 INFO Returned Material with id: 6
+2022-01-14 19:48:56.6610 INFO Returned Material with id: 6
+2022-01-14 19:52:25.6108 INFO Returned Material with id: 6
+2022-01-14 19:54:07.9830 INFO Returned Material with id: 6
+2022-01-14 19:54:13.7137 INFO Returned Material with id: 6
+2022-01-14 19:54:19.2428 INFO Returned Material with id: 10
+2022-01-14 19:55:41.4614 INFO Returned Material with id: 10
+2022-01-14 19:56:36.1906 INFO Returned Material with id: 10
+2022-01-14 19:56:48.5350 INFO Returned Material with id: 10
+2022-01-14 19:58:10.5484 INFO Returned Material with id: 10
+2022-01-14 20:03:45.5754 INFO Returned all Materials from database.
+2022-01-14 20:03:47.6082 INFO Returned Material with id: 10
+2022-01-14 20:05:52.3239 INFO Returned Material with id: 10
+2022-01-14 20:06:30.9272 INFO Returned Material with id: 10
+2022-01-14 20:07:49.4731 INFO Returned Material with id: 10
+2022-01-14 20:09:25.7729 INFO Returned Material with id: 10

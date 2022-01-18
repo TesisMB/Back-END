@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Entities.DataTransferObjects.FormationsDates___Dto;
+using Entities.DataTransferObjects.FormationsEstates___Dto;
+using Entities.Helpers;
 using Entities.Models;
 
 namespace Entities.Profiles
@@ -8,7 +10,15 @@ namespace Entities.Profiles
     {
         public FormationsDatesProfiles()
         {
-            CreateMap<FormationsDates, FormationsDatesDto>();
+            CreateMap<FormationsDates, FormationsDatesDto>()
+                .ForMember(i => i.Date, opt => opt.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.Date)));
+
+            CreateMap<FormationsEstatesForCreationDto, FormationsDates>();
+
+
+
         }
+
+
     }
 }

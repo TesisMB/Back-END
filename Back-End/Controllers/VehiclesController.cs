@@ -98,7 +98,7 @@ namespace Back_End.Controllers
 
                 var vehicleEntity = _mapper.Map<Vehicles>(vehicle);
 
-                _repository.Vehicles.Create(vehicleEntity);
+                _repository.Vehicles.CreateVehicle(vehicleEntity);
 
                  _repository.Vehicles.SaveAsync();
 

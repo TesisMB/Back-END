@@ -1,8 +1,6 @@
 ﻿using Back_End.Models.Employees___Dto;
-using System;
+using Entities.DataTransferObjects.VolunteersSkillsFormationEstates;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Back_End.Models.VolunteersSkillsDto___Dto
 {
@@ -11,5 +9,8 @@ namespace Back_End.Models.VolunteersSkillsDto___Dto
         public int FK_SkillID { get; set; }
 
         public SkillsForCreationDto Skills { get; set; }
+
+        public ICollection<VolunteersSkillsFormationEstatesForCreationDto> VolunteersSkillsFormationEstates { get; set; }
+
     }
 }

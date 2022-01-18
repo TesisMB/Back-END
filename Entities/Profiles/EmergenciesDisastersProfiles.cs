@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Entities.DataTransferObjects.CharRooms___Dto;
 using Entities.DataTransferObjects.EmergenciesDisasters___Dto;
+using Entities.Helpers;
 using Entities.Models;
 
 namespace Entities.Profiles
@@ -10,6 +11,7 @@ namespace Entities.Profiles
         public EmergenciesDisastersProfiles()
         {
             CreateMap<EmergenciesDisasters, EmergenciesDisastersDto>();
+
 
             CreateMap<EmergenciesDisastersForCreationDto, EmergenciesDisasters>();
 

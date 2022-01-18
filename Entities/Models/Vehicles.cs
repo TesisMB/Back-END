@@ -42,7 +42,7 @@ namespace Back_End.Models
         public int? FK_EmployeeID { get; set; }
 
         [ForeignKey("Fk_TypeVehicleID")]
-        public TypeVehicles Type{ get; set; }
+        public TypeVehicles TypeVehicles { get; set; }
         public int Fk_TypeVehicleID { get; set; }
 
         public BrandsModels BrandsModels { get; set; }

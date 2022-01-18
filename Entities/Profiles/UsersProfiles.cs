@@ -3,11 +3,10 @@ using Back_End.Entities;
 using Back_End.Models;
 using Back_End.Models.Users___Dto;
 using Back_End.Models.Users___Dto.Users___Persons;
-using Entities.DataTransferObjects.CharRooms___Dto;
 using Entities.DataTransferObjects.Employees___Dto;
-using Entities.DataTransferObjects.Login___Dto;
 using Entities.DataTransferObjects.Models.Vehicles___Dto;
 using Entities.DataTransferObjects.Volunteers__Dto;
+using Entities.Helpers;
 
 namespace Back_End.Profiles
 {
@@ -21,13 +20,12 @@ namespace Back_End.Profiles
                  .ForMember(dest => dest.RoleName,
                                  opt => opt.MapFrom(src => src.Roles.RoleName));
 
-            /*CreateMap<Users, VolunteersUsersDto>()
-                    .ForMember(dest => dest.RoleName,
-                                 opt => opt.MapFrom(src => src.Roles.RoleName));*/
-
             CreateMap<Users, VolunteersUsersAppDto>();
 
+
             CreateMap<Users, UserEmployeeAuthDto>()
+           .ForPath(i => i.Persons.Birthdate, opt => opt.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.Persons.Birthdate)))
+
            .ForMember(dest => dest.token,
                               opt => opt.MapFrom(src => UserSecurity.GenerateAccessToken(src.UserID, src.Roles.RoleName)))
 
@@ -47,7 +45,7 @@ namespace Back_End.Profiles
                               opt => opt.MapFrom(src => src.Roles.RoleName));
 
 
-           
+
 
             CreateMap<UsersEmployeesForCreationDto, Users>();
 

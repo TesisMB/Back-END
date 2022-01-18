@@ -1,21 +1,22 @@
 ﻿using System;
 
 namespace Entities.Helpers
-
 {
-    public static class DateTimeOffsetExtensions
+    public class DateTimeOffsetExtensions
     {
-        public static int GetCurrentAge(this DateTimeOffset dateTimeOffset)
+        public static string GetDate(DateTime date)
         {
-            var currentDate = DateTime.UtcNow;
-            int age = currentDate.Year - dateTimeOffset.Year;
+            var fecha = date.ToString("dd/MM/yyyy");
 
-            if (currentDate < dateTimeOffset.AddYears(age))
-            {
-                age--;
-            }
-
-            return age;
+            return fecha;
         }
+
+        public static string GetTime(TimeSpan time)
+        {
+            var hora = time.ToString(@"hh\:mm");
+
+            return hora;
+        }
+    
     }
 }

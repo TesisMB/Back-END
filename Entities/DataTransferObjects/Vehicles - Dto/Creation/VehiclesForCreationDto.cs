@@ -1,4 +1,5 @@
-﻿using Entities.DataTransferObjects.TypeVehicles___Dto;
+﻿using Entities.DataTransferObjects.Brands___Dto;
+using Entities.DataTransferObjects.TypeVehicles___Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +12,9 @@ namespace Entities.DataTransferObjects.Vehicles___Dto.Creation
 
         public string VehicleUtility { get; set; }
 
+        public int VehicleYear { get; set; }
+
+
         public string VehicleDescription { get; set; }
 
         public Boolean VehicleAvailability { get; set; } = true;
@@ -21,5 +25,7 @@ namespace Entities.DataTransferObjects.Vehicles___Dto.Creation
         public int Fk_TypeVehicleID { get; set; }
 
         public TypeVehiclesForCreationDto TypeVehicles { get; set; }
+        public BrandsModelsForCreationDto BrandsModels { get; set; }
+
     }
 }

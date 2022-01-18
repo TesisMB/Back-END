@@ -11,7 +11,6 @@ namespace Back_End.Models
         public int FK_RoleID { get; set; }
         public int FK_EstateID { get; set; }
         public int FK_LocationID { get; set; }
-
         public PersonsForUpdatoDto Persons { get; set; }
     }
 }

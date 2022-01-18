@@ -10,14 +10,14 @@ namespace Entities.Validator.Creation.Vehicles
     {
         public TypeVehiclesValidator()
         {
-            RuleFor(x => x.Mark)
+            /*RuleFor(x => x.Brand)
             .NotEmpty().WithMessage("{PropertyName} is required.")
             .MaximumLength(50).WithMessage("The {PropertyName} must be 9 characters. You entered {TotalLength} characters");
 
 
             RuleFor(x => x.Model)
            .NotEmpty().WithMessage("{PropertyName} is required.")
-           .MaximumLength(50).WithMessage("The {PropertyName} must be 50 characters. You entered {TotalLength} characters");
+           .MaximumLength(50).WithMessage("The {PropertyName} must be 50 characters. You entered {TotalLength} characters");*/
         }
     }
 }

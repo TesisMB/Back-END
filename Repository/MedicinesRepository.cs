@@ -1,7 +1,9 @@
 ﻿using Back_End.Entities;
 using Contracts.Interfaces;
+using Entities.Helpers;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -61,8 +63,20 @@ namespace Repository
 
         public void CreateMedicine(Medicines medicine)
         {
+            spaceCamelCase(medicine);
+
             Create(medicine);
         }
+
+        private void spaceCamelCase(Medicines medicine)
+        {
+            medicine.MedicineName = WithoutSpace_CamelCase.GetCamelCase(medicine.MedicineName);
+            medicine.MedicineLab = WithoutSpace_CamelCase.GetCamelCase(medicine.MedicineLab);
+            medicine.MedicineDrug = WithoutSpace_CamelCase.GetCamelCase(medicine.MedicineDrug);
+            medicine.MedicineUnits = WithoutSpace_CamelCase.GetCamelCase(medicine.MedicineUnits);
+            medicine.MedicineUtility = WithoutSpace_CamelCase.GetCamelCase(medicine.MedicineUtility);
+        }
+
         public void UpdateMedicine(Medicines medicine)
         {
             Update(medicine);

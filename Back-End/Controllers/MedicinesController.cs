@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Back_End.Controllers
@@ -32,8 +31,6 @@ namespace Back_End.Controllers
         [HttpGet]
         public async Task<ActionResult<Medicines>> GetAllMedicines()
         {
-        
-
             try
             {
                 var volunteers = await _repository.Medicines.GetAllMedicines();
@@ -54,7 +51,6 @@ namespace Back_End.Controllers
             }
         }
 
-        // GET api/<MedicinesControllers>/5
         [HttpGet("{medicineId}")]
         public async Task<ActionResult<Medicines>> GetMedicineWithDetails(int medicineId)
         {
@@ -100,7 +96,7 @@ namespace Back_End.Controllers
 
                 var medicineEntity = _mapper.Map<Medicines>(medicine);
 
-                _repository.Medicines.Create(medicineEntity);
+                _repository.Medicines.CreateMedicine(medicineEntity);
 
                 _repository.Medicines.SaveAsync();
 
@@ -116,7 +112,6 @@ namespace Back_End.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
-
 
         [HttpPatch("{medicineId}")]
         public async Task<ActionResult> UpdateMedicine(int medicineId, JsonPatchDocument<MedicineForUpdateDto> patchDocument)
@@ -148,7 +143,6 @@ namespace Back_End.Controllers
                 _repository.Medicines.SaveAsync();
 
                 return NoContent();
-
             }
             catch (Exception ex)
             {
@@ -157,33 +151,32 @@ namespace Back_End.Controllers
             }
         }
 
-        // DELETE api/<MedicinesControllers>/5
         [HttpDelete("{medicineId}")]
-            public async Task<ActionResult> DeleteMedicine(int medicineId)
+        public async Task<ActionResult> DeleteMedicine(int medicineId)
+        {
+            try
             {
-                try
+                var medicine = await _repository.Medicines.GetMedicineById(medicineId);
+
+                if (medicine == null)
                 {
-                    var medicine = await _repository.Medicines.GetMedicineById(medicineId);
-
-                    if (medicine == null)
-                    {
-                        _logger.LogError($"MedicineId with id: {medicineId}, hasn't ben found in db.");
-                        return NotFound();
-                    }
-
-                    _repository.Medicines.Delete(medicine);
-
-                     _repository.Medicines.SaveAsync();
-
-                    return NoContent();
-
+                    _logger.LogError($"MedicineId with id: {medicineId}, hasn't ben found in db.");
+                    return NotFound();
                 }
-                catch (Exception ex)
-                {
-                    _logger.LogError($"Something went wrong inside DeleteVehicle action: {ex.Message}");
-                    return StatusCode(500, "Internal server error");
-                }
+
+                _repository.Medicines.Delete(medicine);
+
+                _repository.Medicines.SaveAsync();
+
+                return NoContent();
 
             }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside DeleteVehicle action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+
         }
     }
+}

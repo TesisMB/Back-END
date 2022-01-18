@@ -1,8 +1,10 @@
 ﻿using Back_End.Entities;
 using Back_End.Models;
 using Contracts.Interfaces;
+using Entities.Helpers;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -58,11 +60,21 @@ namespace Repository
         }
         public void CreateResource_Resquest(Resources_Request resources_Request)
         {
+            spaceCamelCase(resources_Request);
+
 
             Create(resources_Request);
             UpdateResources(resources_Request);
         }
 
+        private void spaceCamelCase(Resources_Request resources_Request)
+        {
+            //Falta implementarlos en el PATCH
+            if(resources_Request.Reason != null)
+            {
+            resources_Request.Reason = WithoutSpace_CamelCase.GetCamelCase(resources_Request.Reason);
+            }
+        }
 
         public void UpdateResources(Resources_Request resources_Request)
         {

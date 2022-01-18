@@ -1,8 +1,4 @@
-﻿using Entities.DataTransferObjects.Locations___Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Back_End.Models.Employees___Dto
 {
@@ -21,6 +17,6 @@ namespace Back_End.Models.Employees___Dto
         public ICollection<EstatesTimesDto> EstatesTimes { get; set; }
 
         //public LocationAddressDto LocationAddress { get; set; }
-       // public LocationsDto Locations { get; set; }
-}
+        // public LocationsDto Locations { get; set; }
     }
+}

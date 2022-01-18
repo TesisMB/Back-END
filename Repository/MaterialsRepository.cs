@@ -1,5 +1,6 @@
 ﻿using Back_End.Entities;
 using Contracts.Interfaces;
+using Entities.Helpers;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -63,9 +64,17 @@ namespace Repository
 
         public void CreateMaterial(Materials material)
         {
+            spaceCamelCase(material);
+
             Create(material);
         }
 
+        private void spaceCamelCase(Materials material)
+        {
+            material.MaterialName = WithoutSpace_CamelCase.GetCamelCase(material.MaterialName);
+            material.MaterialBrand = WithoutSpace_CamelCase.GetCamelCase(material.MaterialBrand);
+            material.MaterialUtility = WithoutSpace_CamelCase.GetCamelCase(material.MaterialUtility);
+        }
 
         public void UpdateMaterial(Materials material)
         {

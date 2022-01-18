@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Entities.DataTransferObjects.Medicines___Dto;
 using Entities.DataTransferObjects.ResourcesDto;
+using Entities.Helpers;
 using Entities.Models;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace Entities.Profiles
                       .ForMember(dest => dest.Availability,
                             opt => opt.MapFrom(src => src.MedicineAvailability))
 
-                     .ForPath(dest => dest.Medicines.MedicineExpirationDate, opts => opts.MapFrom(src => src.MedicineExpirationDate))
+                     .ForPath(dest => dest.Medicines.MedicineExpirationDate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.MedicineExpirationDate)))
 
                      /* .ForMember(dest => dest.Medicines.MedicineExpirationDate,
                             opt => opt.MapFrom(src => src.MedicineExpirationDate))*/

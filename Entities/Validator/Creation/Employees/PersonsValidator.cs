@@ -1,5 +1,6 @@
 ﻿using Back_End.Entities;
 using Back_End.Models;
+using Entities.Helpers;
 using FluentValidation;
 using System;
 using System.Linq;

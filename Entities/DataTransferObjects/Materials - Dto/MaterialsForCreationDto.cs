@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Entities.DataTransferObjects.Materials___Dto
 {
-   public class MaterialsForCreationDto
+    public class MaterialsForCreationDto
     {
         public string MaterialName { get; set; }
-        
-        public string MaterialMark { get; set; }
+
+        public string MaterialBrand { get; set; }
 
         public int MaterialQuantity { get; set; }
 

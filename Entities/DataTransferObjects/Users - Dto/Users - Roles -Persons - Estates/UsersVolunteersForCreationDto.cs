@@ -3,10 +3,8 @@
 
 namespace Back_End.Models.Users___Dto
 {
-    public class UsersVolunteersForCreationDto //: UserDniMustBeDifferentFromUserDniDto
+    public class UsersVolunteersForCreationDto 
     {
-        //[UserDniMustBeDifferentFromUserDniDto(
-        //ErrorMessage = "El Dni que ingreso ya existe")]
         public string UserDni { get; set; }
         public string UserPassword { get; set; }
         public Boolean UserAvailability { get; set; }

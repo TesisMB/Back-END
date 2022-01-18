@@ -6,7 +6,7 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
 {
    public class EmergenciesDisastersForUpdateDto
     {
-        public DateTime EmergencyDisasterEndDate { get; set; }
+        public DateTime? EmergencyDisasterEndDate { get; set; }
 
         public string EmergencyDisasterInstruction { get; set; }
 

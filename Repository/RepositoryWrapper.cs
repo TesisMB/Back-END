@@ -17,10 +17,10 @@ namespace Repository
         private IEstatesRepository _estates;
         private IEmergenciesDisastersRepository _emergenciesDisasters;
         private ITypesEmergenciesDisastersRepository _typesEmergenciesDisasters;
-        private IResources_RequestRepository _resources_Request;
         private IChatRoomsRepository _chatRooms;
         private IChatRepository _chats;
         private IMessageRepository _messages;
+        private IResources_RequestRepository _resources_Request;
 
         private IMapper _mapper;
 

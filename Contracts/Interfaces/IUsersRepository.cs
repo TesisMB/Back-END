@@ -1,5 +1,4 @@
 ﻿using Back_End.Models;
-using Entities.DataTransferObjects.Login___Dto;
 using System.Threading.Tasks;
 
 namespace Contracts.Interfaces

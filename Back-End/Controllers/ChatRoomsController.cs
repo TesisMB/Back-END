@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Back_End.Entities;
 using Back_End.Hubs;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.CharRooms___Dto;
@@ -6,8 +7,11 @@ using Entities.DataTransferObjects.Messages___Dto;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
+using Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Back_End.Controllers
@@ -76,13 +80,29 @@ namespace Back_End.Controllers
         [HttpPost]
         public IActionResult SendMessage([FromBody] MessagesForCreationDto message)
         {
-            if(message == null)
+            var username = UsersRepository.authUser;
+
+            var user = username.Persons.FirstName + "" + username.Persons.LastName;
+
+            if (message == null)
             {
                 
                     _logger.LogError("Message object sent from client is null.");
                     return BadRequest("Message object is null");
                 
             }
+
+            var db = new CruzRojaContext();
+
+            EmergenciesDisasters room = null;
+
+            room = db.EmergenciesDisasters
+                .Include(i => i.TypesEmergenciesDisasters)
+                .Where(i => i.EmergencyDisasterID == message.FK_ChatRoomID)
+                .FirstOrDefault();
+
+
+            message.Room = room.TypesEmergenciesDisasters.TypeEmergencyDisasterName;
 
             var messages = _mapper.Map<Messages>(message);
 
@@ -92,9 +112,11 @@ namespace Back_End.Controllers
 
             string not = Newtonsoft.Json.JsonConvert.SerializeObject(message);
 
-            _hubContext.Clients.All.SendAsync("notificar", not);
+            // _hubContext.Clients.Group(sala).SendAsync("ReceiveMessage", user, not);
 
-            return Ok(new { resp = "Enivado de forma satisfactoria" });
+            _hubContext.Clients.All.SendAsync("ReceiveMessage", not);
+
+            return Ok(message);
         }
     }
 }

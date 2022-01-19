@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.DataTransferObjects.CharRooms___Dto;
+using System;
 
 namespace Entities.DataTransferObjects.Messages___Dto
 {
@@ -8,14 +9,13 @@ namespace Entities.DataTransferObjects.Messages___Dto
 
         public Boolean MessageState { get; set; }
 
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
 
         public int FK_ChatRoomID { get; set; } 
 
         public int? FK_LocationVolunteerID { get; set; }
 
-
-        //public ChatRoomsForCreationDto ChatRooms { get; set; }
+        public string Room { get; set; }
 
     }
 }

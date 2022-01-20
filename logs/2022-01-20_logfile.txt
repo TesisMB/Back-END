@@ -43,3 +43,36 @@
 2022-01-20 11:38:52.2565 INFO Returned volunteer with id: 14
 2022-01-20 11:39:58.9301 INFO Returned User.
 2022-01-20 11:40:05.3598 INFO Returned User.
+2022-01-20 17:04:53.0211 INFO Returned User.
+2022-01-20 17:05:19.5558 INFO Returned all employees from database.
+2022-01-20 17:07:23.6679 INFO Returned User.
+2022-01-20 17:07:26.3035 INFO Returned employe with details for id: 2
+2022-01-20 17:07:53.2707 INFO Returned all Volunteers from database.
+2022-01-20 17:08:29.4968 INFO Returned all employees from database.
+2022-01-20 17:08:47.7610 INFO Returned all employees from database.
+2022-01-20 17:09:26.0955 INFO Returned all Volunteers from database.
+2022-01-20 17:09:29.6038 INFO Returned all employees from database.
+2022-01-20 17:09:56.9381 INFO Returned all Volunteers from database.
+2022-01-20 17:10:09.2607 INFO Returned all Materials from database.
+2022-01-20 17:10:36.7517 INFO Returned all vehicles from database.
+2022-01-20 17:10:39.4196 INFO Returned vehicle with id: 5
+2022-01-20 17:10:48.6159 INFO Returned all vehicles from database.
+2022-01-20 17:10:56.5880 INFO Returned all Materials from database.
+2022-01-20 17:11:09.7902 INFO Returned all Volunteers from database.
+2022-01-20 17:11:12.2732 INFO Returned volunteer with id: 15
+2022-01-20 17:11:29.3902 INFO Returned all Volunteers from database.
+2022-01-20 17:11:33.2047 INFO Returned employe with details for id: 2
+2022-01-20 18:00:08.3332 ERROR Employee with id: 62, hasn't been found in db.
+2022-01-20 18:12:12.4430 ERROR Employee with id: 65, hasn't ben found in db.
+2022-01-20 18:16:05.3489 INFO Returned User.
+2022-01-20 18:19:07.3381 ERROR Something went wrong inside DeleteVolunteer action: An error occurred while updating the entries. See the inner exception for details.
+2022-01-20 18:19:16.2900 ERROR Something went wrong inside DeleteVolunteer action: An error occurred while updating the entries. See the inner exception for details.
+2022-01-20 18:35:06.4453 ERROR Something went wrong inside CreateEmployee action: Object reference not set to an instance of an object.
+2022-01-20 18:38:20.4140 INFO Returned User.
+2022-01-20 18:41:26.8170 INFO Returned User.
+2022-01-20 18:41:55.3002 INFO Returned all Volunteers from database.
+2022-01-20 18:42:22.5939 INFO Returned User.
+2022-01-20 18:42:25.7272 INFO Returned User.
+2022-01-20 18:44:45.2078 INFO Returned User.
+2022-01-20 18:44:56.4782 INFO Returned User.
+2022-01-20 18:45:00.2795 INFO Returned User.

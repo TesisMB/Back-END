@@ -12,7 +12,7 @@ namespace Contracts.Interfaces
 
         Task<Employees> GetEmployeeWithDetails(int employeeId);
 
-        void CreateEmployee(EmployeesForCreationDto employee);
+        void CreateEmployee(Employees employee);
 
         void UpdateEmployee(Employees employee);
 

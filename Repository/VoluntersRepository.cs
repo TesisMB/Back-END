@@ -1,4 +1,5 @@
 ﻿using Back_End.Entities;
+using Back_End.Helpers;
 using Back_End.Models;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.Volunteers__Dto;
@@ -81,7 +82,14 @@ namespace Repository
 
         public void CreateVolunteer(Volunteers volunteer)
         {
+
+            Email.generatePassword(volunteer.Users);
+            
+            Email.sendVerificationEmail(volunteer.Users);
             SpaceCamelCase(volunteer);
+
+            volunteer.Users.UserPassword = Encrypt.GetSHA256(volunteer.Users.UserPassword);
+
             Create(volunteer);
         }
 

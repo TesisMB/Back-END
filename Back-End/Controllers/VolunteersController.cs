@@ -172,8 +172,7 @@ namespace Back_End.Controllers
 
                 // Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
                 _repository.Volunteers.CreateVolunteer(volunteerEntity);
-                volunteerEntity.Users.UserPassword = Encrypt.GetSHA256(volunteerEntity.Users.UserPassword);
-
+                //volunteerEntity.Users.UserPassword = Encrypt.GetSHA256(volunteerEntity.Users.UserPassword);
 
                 _repository.Volunteers.SaveAsync();
 

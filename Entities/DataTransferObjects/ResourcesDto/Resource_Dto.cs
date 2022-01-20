@@ -25,6 +25,6 @@ namespace Entities.DataTransferObjects.ResourcesDto
 
         public VolunteerDto Volunteers { get; set; }
 
-        //public EstatesDto Estates { get; set; }
+        public EstatesDto Estates { get; set; }
     }
 }

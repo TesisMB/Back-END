@@ -1,0 +1,45 @@
+2022-01-20 11:10:13.8015 INFO Returned User.
+2022-01-20 11:13:35.2077 INFO Returned User.
+2022-01-20 11:13:51.2700 INFO Returned all employees from database.
+2022-01-20 11:14:32.9752 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-20 11:14:34.0965 INFO Returned User.
+2022-01-20 11:14:37.8358 INFO Returned all employees from database.
+2022-01-20 11:15:37.0061 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-20 11:15:38.5973 INFO Returned User.
+2022-01-20 11:15:46.2895 INFO Returned all employees from database.
+2022-01-20 11:15:59.8250 INFO Returned all employees from database.
+2022-01-20 11:16:10.3268 INFO Returned all Volunteers from database.
+2022-01-20 11:16:25.3850 INFO Returned volunteer with id: 14
+2022-01-20 11:30:20.4500 ERROR Material with id: 14, hasn't been found in db.
+2022-01-20 11:30:22.0546 INFO Returned all Materials from database.
+2022-01-20 11:30:31.6268 INFO Returned Material with id: 2
+2022-01-20 11:30:36.2832 INFO Returned all Materials from database.
+2022-01-20 11:30:42.4080 INFO Returned Material with id: 2
+2022-01-20 11:30:57.0388 INFO Returned all vehicles from database.
+2022-01-20 11:31:22.4597 INFO Returned vehicle with id: 3
+2022-01-20 11:34:05.8483 INFO Returned User.
+2022-01-20 11:34:09.7121 INFO Returned vehicle with id: 3
+2022-01-20 11:34:26.4557 INFO Returned all vehicles from database.
+2022-01-20 11:34:40.5026 INFO Returned all Materials from database.
+2022-01-20 11:34:47.7441 INFO Returned medicine with details for id: 4
+2022-01-20 11:34:56.5064 INFO Returned medicine with details for id: 3
+2022-01-20 11:34:58.7069 INFO Returned medicine with details for id: 2
+2022-01-20 11:35:01.6715 ERROR Medicine with id: 1, hasn't been found in db.
+2022-01-20 11:35:02.8259 INFO Returned medicine with details for id: 2
+2022-01-20 11:35:03.9703 INFO Returned medicine with details for id: 3
+2022-01-20 11:35:04.8693 INFO Returned medicine with details for id: 4
+2022-01-20 11:35:05.7224 INFO Returned medicine with details for id: 5
+2022-01-20 11:35:06.9188 INFO Returned medicine with details for id: 5
+2022-01-20 11:35:07.9603 ERROR Medicine with id: 7, hasn't been found in db.
+2022-01-20 11:35:09.9539 INFO Returned medicine with details for id: 6
+2022-01-20 11:36:55.2403 INFO Returned User.
+2022-01-20 11:36:58.9270 INFO Returned all employees from database.
+2022-01-20 11:37:05.2004 INFO Returned all Volunteers from database.
+2022-01-20 11:37:46.5969 INFO Returned volunteer with id: 14
+2022-01-20 11:37:58.9589 INFO Returned all Materials from database.
+2022-01-20 11:38:13.6924 INFO Returned all Volunteers from database.
+2022-01-20 11:38:34.2160 INFO Returned all employees from database.
+2022-01-20 11:38:46.4771 INFO Returned User.
+2022-01-20 11:38:52.2565 INFO Returned volunteer with id: 14
+2022-01-20 11:39:58.9301 INFO Returned User.
+2022-01-20 11:40:05.3598 INFO Returned User.

@@ -133,7 +133,7 @@ namespace Back_End.Controllers
 
                 {
                     _logger.LogInfo($"Returned volunteer with id: {volunteerId}");
-                    var volunteerResult = _mapper.Map<Resource_Dto>(volunteer);
+                    var volunteerResult = _mapper.Map<Resources_Dto>(volunteer);
                     return Ok(volunteerResult);
 
                 }

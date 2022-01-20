@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Entities.Models;
+using Microsoft.AspNetCore.SignalR;
 using Repository;
 using System.Threading.Tasks;
 
@@ -6,14 +7,19 @@ namespace Back_End.Hubs
 {
     public class Mensaje : Hub
     {
-        public override Task OnConnectedAsync()
+        public async Task NewMessage(Messages msg)
+        {
+            await Clients.All.SendAsync("ReceiveMessage", msg);
+        }
+
+        /*public override Task OnConnectedAsync()
         {
             return base.OnConnectedAsync();
         }
 
-        public Task NotificaTodos(string mensaje)
+        public Task NewMessage(string mensaje)
         {
-            return Clients.All.SendAsync("prepararventa", mensaje);
+            return Clients.All.SendAsync("ReceiveMessage", mensaje);
         }
 
         public async Task SendMessage(string room, string user, string message)
@@ -31,6 +37,6 @@ namespace Back_End.Hubs
 
             await Clients.Group(room).SendAsync("ShowWho", $"Alguien se conecto {Context.ConnectionId}");
         }
-
+        */
     }
 }

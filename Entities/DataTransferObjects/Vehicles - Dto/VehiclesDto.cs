@@ -2,7 +2,6 @@
 {
     public class VehiclesDto
     {
-        public int ID { get; set; }
         public string VehiclePatent { get; set; }
 
         //public string Utility { get; set; }

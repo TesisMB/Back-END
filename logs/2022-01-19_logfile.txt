@@ -436,3 +436,284 @@
 2022-01-19 15:35:33.4558 INFO Returned all employees from database.
 2022-01-19 15:38:06.4116 INFO Returned User.
 2022-01-19 15:38:10.0454 INFO Returned all employees from database.
+2022-01-19 16:32:04.5686 INFO Returned User.
+2022-01-19 16:32:10.3420 INFO Returned all ChatRooms from database. 
+2022-01-19 16:32:13.5494 INFO Returned all ChatRooms from database. 
+2022-01-19 16:33:09.5964 INFO Returned all ChatRooms from database. 
+2022-01-19 16:33:16.6636 INFO Returned all ChatRooms from database. 
+2022-01-19 16:33:22.5620 INFO Returned all ChatRooms from database. 
+2022-01-19 16:33:23.6105 INFO Returned all ChatRooms from database. 
+2022-01-19 16:33:27.2717 INFO Returned all ChatRooms from database. 
+2022-01-19 16:33:28.7992 INFO Returned all ChatRooms from database. 
+2022-01-19 16:33:37.7293 INFO Returned all ChatRooms from database. 
+2022-01-19 16:33:40.3057 INFO Returned all ChatRooms from database. 
+2022-01-19 16:37:03.3104 INFO Returned all ChatRooms from database. 
+2022-01-19 16:37:04.2524 INFO Returned all ChatRooms from database. 
+2022-01-19 16:39:56.8635 INFO Returned User.
+2022-01-19 16:39:59.7329 INFO Returned all ChatRooms from database. 
+2022-01-19 16:40:02.3928 INFO Returned all ChatRooms from database. 
+2022-01-19 16:42:24.0219 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 16:42:34.5734 INFO Returned User.
+2022-01-19 16:42:37.7523 INFO Returned all ChatRooms from database. 
+2022-01-19 16:42:40.5370 INFO Returned all ChatRooms from database. 
+2022-01-19 16:44:34.5054 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 16:44:44.9064 INFO Returned User.
+2022-01-19 16:44:46.5425 INFO Returned all ChatRooms from database. 
+2022-01-19 16:44:48.8806 INFO Returned all ChatRooms from database. 
+2022-01-19 16:45:36.6714 INFO Returned User.
+2022-01-19 16:45:38.7448 INFO Returned all ChatRooms from database. 
+2022-01-19 16:45:45.4330 INFO Returned all ChatRooms from database. 
+2022-01-19 16:46:16.3825 INFO Returned all ChatRooms from database. 
+2022-01-19 16:46:19.0310 INFO Returned all ChatRooms from database. 
+2022-01-19 16:50:07.4641 INFO Returned all ChatRooms from database. 
+2022-01-19 16:50:10.7012 INFO Returned all ChatRooms from database. 
+2022-01-19 16:51:20.3521 INFO Returned all ChatRooms from database. 
+2022-01-19 16:51:20.4029 INFO Returned all ChatRooms from database. 
+2022-01-19 16:51:34.6111 INFO Returned all ChatRooms from database. 
+2022-01-19 16:51:34.6413 INFO Returned all ChatRooms from database. 
+2022-01-19 16:54:11.8787 INFO Returned all ChatRooms from database. 
+2022-01-19 16:54:11.9931 INFO Returned all ChatRooms from database. 
+2022-01-19 16:54:23.3137 INFO Returned all ChatRooms from database. 
+2022-01-19 16:54:24.9895 INFO Returned all ChatRooms from database. 
+2022-01-19 16:54:40.2049 INFO Returned User.
+2022-01-19 16:54:49.2135 INFO Returned User.
+2022-01-19 16:54:50.4212 INFO Returned all ChatRooms from database. 
+2022-01-19 16:54:51.5141 INFO Returned all ChatRooms from database. 
+2022-01-19 16:54:53.0712 INFO Returned all ChatRooms from database. 
+2022-01-19 16:54:56.5031 INFO Returned all ChatRooms from database. 
+2022-01-19 16:55:23.4506 INFO Returned User.
+2022-01-19 16:55:24.4787 INFO Returned all ChatRooms from database. 
+2022-01-19 16:55:26.1286 INFO Returned all ChatRooms from database. 
+2022-01-19 16:56:56.5709 INFO Returned User.
+2022-01-19 16:56:57.9958 INFO Returned all ChatRooms from database. 
+2022-01-19 16:56:59.2980 INFO Returned all ChatRooms from database. 
+2022-01-19 16:58:13.6931 INFO Returned all ChatRooms from database. 
+2022-01-19 16:58:15.1639 INFO Returned all ChatRooms from database. 
+2022-01-19 16:59:00.5440 INFO Returned all ChatRooms from database. 
+2022-01-19 16:59:00.7391 INFO Returned all ChatRooms from database. 
+2022-01-19 17:02:19.0515 INFO Returned User.
+2022-01-19 17:02:20.2013 INFO Returned all ChatRooms from database. 
+2022-01-19 17:02:29.3232 INFO Returned all ChatRooms from database. 
+2022-01-19 17:04:43.9278 INFO Returned User.
+2022-01-19 17:04:46.0632 INFO Returned all ChatRooms from database. 
+2022-01-19 17:04:48.1774 INFO Returned all ChatRooms from database. 
+2022-01-19 17:05:11.7487 INFO Returned User.
+2022-01-19 17:05:12.9007 INFO Returned all ChatRooms from database. 
+2022-01-19 17:05:14.4554 INFO Returned all ChatRooms from database. 
+2022-01-19 17:07:48.1772 INFO Returned User.
+2022-01-19 17:07:50.0669 INFO Returned all ChatRooms from database. 
+2022-01-19 17:07:53.7248 INFO Returned all ChatRooms from database. 
+2022-01-19 17:09:27.2809 INFO Returned all ChatRooms from database. 
+2022-01-19 17:09:27.8133 INFO Returned all ChatRooms from database. 
+2022-01-19 17:09:29.1462 INFO Returned all ChatRooms from database. 
+2022-01-19 17:09:29.8668 INFO Returned all ChatRooms from database. 
+2022-01-19 17:10:10.2269 INFO Returned all ChatRooms from database. 
+2022-01-19 17:10:10.5613 INFO Returned all ChatRooms from database. 
+2022-01-19 17:10:31.7175 INFO Returned all ChatRooms from database. 
+2022-01-19 17:10:32.2072 INFO Returned all ChatRooms from database. 
+2022-01-19 17:10:49.5771 INFO Returned all ChatRooms from database. 
+2022-01-19 17:10:50.4478 INFO Returned all ChatRooms from database. 
+2022-01-19 17:10:54.7297 INFO Returned all ChatRooms from database. 
+2022-01-19 17:10:56.9928 INFO Returned all ChatRooms from database. 
+2022-01-19 17:12:01.8342 INFO Returned all ChatRooms from database. 
+2022-01-19 17:12:02.1732 INFO Returned all ChatRooms from database. 
+2022-01-19 17:12:56.1784 INFO Returned all ChatRooms from database. 
+2022-01-19 17:12:57.4217 INFO Returned all ChatRooms from database. 
+2022-01-19 17:13:01.5872 INFO Returned all ChatRooms from database. 
+2022-01-19 17:13:03.2744 INFO Returned all ChatRooms from database. 
+2022-01-19 17:14:14.0108 INFO Returned all ChatRooms from database. 
+2022-01-19 17:14:16.5710 INFO Returned all ChatRooms from database. 
+2022-01-19 17:15:01.8444 INFO Returned all ChatRooms from database. 
+2022-01-19 17:15:09.1058 INFO Returned all ChatRooms from database. 
+2022-01-19 17:16:30.2285 INFO Returned all ChatRooms from database. 
+2022-01-19 17:16:30.7984 INFO Returned all ChatRooms from database. 
+2022-01-19 17:16:31.3182 INFO Returned all ChatRooms from database. 
+2022-01-19 17:17:41.9765 INFO Returned all ChatRooms from database. 
+2022-01-19 17:17:43.1844 INFO Returned all ChatRooms from database. 
+2022-01-19 17:17:55.9440 INFO Returned User.
+2022-01-19 17:17:59.1226 INFO Returned all ChatRooms from database. 
+2022-01-19 17:18:01.3671 INFO Returned all ChatRooms from database. 
+2022-01-19 17:18:30.0260 INFO Returned all ChatRooms from database. 
+2022-01-19 17:18:35.9675 INFO Returned all ChatRooms from database. 
+2022-01-19 17:18:52.8025 INFO Returned all ChatRooms from database. 
+2022-01-19 17:18:55.3217 INFO Returned all ChatRooms from database. 
+2022-01-19 17:18:56.2668 INFO Returned all ChatRooms from database. 
+2022-01-19 17:18:58.5776 INFO Returned all ChatRooms from database. 
+2022-01-19 17:19:26.2037 INFO Returned all ChatRooms from database. 
+2022-01-19 17:21:36.3643 INFO Returned all ChatRooms from database. 
+2022-01-19 17:21:42.4332 INFO Returned all ChatRooms from database. 
+2022-01-19 17:21:43.3594 INFO Returned all ChatRooms from database. 
+2022-01-19 17:21:53.7147 INFO Returned all ChatRooms from database. 
+2022-01-19 17:21:59.8725 INFO Returned all ChatRooms from database. 
+2022-01-19 17:22:01.3686 INFO Returned all ChatRooms from database. 
+2022-01-19 17:22:47.5259 INFO Returned all ChatRooms from database. 
+2022-01-19 17:22:49.2275 INFO Returned all ChatRooms from database. 
+2022-01-19 17:23:53.8794 INFO Returned all ChatRooms from database. 
+2022-01-19 17:23:55.5375 INFO Returned all ChatRooms from database. 
+2022-01-19 17:24:42.1159 INFO Returned all ChatRooms from database. 
+2022-01-19 17:24:46.3403 INFO Returned all ChatRooms from database. 
+2022-01-19 17:25:05.6807 INFO Returned all ChatRooms from database. 
+2022-01-19 17:28:01.5617 INFO Returned all ChatRooms from database. 
+2022-01-19 17:28:03.8935 INFO Returned all ChatRooms from database. 
+2022-01-19 17:28:05.4830 INFO Returned all ChatRooms from database. 
+2022-01-19 17:28:09.0578 INFO Returned all ChatRooms from database. 
+2022-01-19 17:28:13.6150 INFO Returned all ChatRooms from database. 
+2022-01-19 17:28:14.6681 INFO Returned all ChatRooms from database. 
+2022-01-19 17:28:19.0189 INFO Returned all ChatRooms from database. 
+2022-01-19 17:28:20.4457 INFO Returned all ChatRooms from database. 
+2022-01-19 17:28:22.4618 INFO Returned all ChatRooms from database. 
+2022-01-19 17:28:24.1687 INFO Returned all ChatRooms from database. 
+2022-01-19 17:28:27.5454 INFO Returned all ChatRooms from database. 
+2022-01-19 17:28:29.8363 INFO Returned all ChatRooms from database. 
+2022-01-19 17:28:43.5478 INFO Returned all ChatRooms from database. 
+2022-01-19 17:29:15.6139 INFO Returned all ChatRooms from database. 
+2022-01-19 17:29:17.0332 INFO Returned all ChatRooms from database. 
+2022-01-19 17:29:17.6466 INFO Returned all emergenciesDisasters from database.
+2022-01-19 17:30:43.4142 INFO Returned all ChatRooms from database. 
+2022-01-19 17:31:06.1476 INFO Returned all ChatRooms from database. 
+2022-01-19 17:31:11.7378 INFO Returned all ChatRooms from database. 
+2022-01-19 17:31:17.3215 INFO Returned all ChatRooms from database. 
+2022-01-19 17:31:26.6634 INFO Returned all ChatRooms from database. 
+2022-01-19 17:31:31.7490 INFO Returned all ChatRooms from database. 
+2022-01-19 17:31:44.8437 INFO Returned all ChatRooms from database. 
+2022-01-19 17:31:56.0300 INFO Returned all ChatRooms from database. 
+2022-01-19 17:32:04.4135 INFO Returned all ChatRooms from database. 
+2022-01-19 17:47:30.1225 INFO Returned all ChatRooms from database. 
+2022-01-19 17:47:33.8182 INFO Returned all ChatRooms from database. 
+2022-01-19 17:47:43.0175 INFO Returned all ChatRooms from database. 
+2022-01-19 17:47:58.1384 INFO Returned all ChatRooms from database. 
+2022-01-19 17:48:03.8283 INFO Returned all ChatRooms from database. 
+2022-01-19 17:48:22.4996 INFO Returned all ChatRooms from database. 
+2022-01-19 17:48:26.7269 INFO Returned all ChatRooms from database. 
+2022-01-19 17:50:40.2554 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 17:50:56.7622 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 17:51:08.9814 INFO Returned User.
+2022-01-19 17:51:10.1064 INFO Returned all ChatRooms from database. 
+2022-01-19 17:51:55.5511 INFO Returned all emergenciesDisasters from database.
+2022-01-19 17:52:35.0983 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 17:52:58.3087 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 17:53:00.9990 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 17:53:05.2973 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 17:53:06.6394 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 17:53:09.5525 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 17:53:15.5420 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 17:55:24.8264 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 17:55:27.0178 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 17:55:28.1709 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 17:55:31.2889 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 17:55:35.2063 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 17:55:38.5238 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 17:55:41.4723 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 17:55:43.1660 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 17:55:52.9214 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 17:55:55.0293 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 17:56:31.6376 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 17:56:36.0104 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 17:56:48.0313 INFO Returned User.
+2022-01-19 17:56:49.1386 INFO Returned all ChatRooms from database. 
+2022-01-19 17:57:13.6234 INFO Returned User.
+2022-01-19 17:57:14.7376 INFO Returned all ChatRooms from database. 
+2022-01-19 17:59:57.9461 INFO Returned all ChatRooms from database. 
+2022-01-19 18:00:32.3422 INFO Returned all ChatRooms from database. 
+2022-01-19 18:00:32.4378 INFO Returned all ChatRooms from database. 
+2022-01-19 18:02:50.1906 INFO Returned all ChatRooms from database. 
+2022-01-19 18:02:50.2990 INFO Returned all ChatRooms from database. 
+2022-01-19 18:02:53.3548 INFO Returned all ChatRooms from database. 
+2022-01-19 18:02:53.7468 INFO Returned all ChatRooms from database. 
+2022-01-19 18:02:56.3030 INFO Returned all ChatRooms from database. 
+2022-01-19 18:02:56.6661 INFO Returned all ChatRooms from database. 
+2022-01-19 18:03:00.3321 INFO Returned all ChatRooms from database. 
+2022-01-19 18:03:00.4818 INFO Returned all ChatRooms from database. 
+2022-01-19 18:03:17.3649 INFO Returned all ChatRooms from database. 
+2022-01-19 18:03:53.6676 INFO Returned all ChatRooms from database. 
+2022-01-19 18:03:54.9621 INFO Returned all ChatRooms from database. 
+2022-01-19 18:03:59.3472 INFO Returned all ChatRooms from database. 
+2022-01-19 18:04:04.8820 INFO Returned all ChatRooms from database. 
+2022-01-19 18:04:09.9054 INFO Returned all ChatRooms from database. 
+2022-01-19 18:05:07.6275 INFO Returned all ChatRooms from database. 
+2022-01-19 18:05:07.6373 INFO Returned all ChatRooms from database. 
+2022-01-19 18:05:10.3888 INFO Returned all ChatRooms from database. 
+2022-01-19 18:05:10.4015 INFO Returned all ChatRooms from database. 
+2022-01-19 18:05:23.6609 INFO Returned all ChatRooms from database. 
+2022-01-19 18:05:24.9342 INFO Returned all ChatRooms from database. 
+2022-01-19 18:07:07.1786 INFO Returned all ChatRooms from database. 
+2022-01-19 18:07:07.4334 INFO Returned all ChatRooms from database. 
+2022-01-19 18:07:10.3403 INFO Returned all ChatRooms from database. 
+2022-01-19 18:07:10.7312 INFO Returned all ChatRooms from database. 
+2022-01-19 18:07:26.7665 INFO Returned all ChatRooms from database. 
+2022-01-19 18:08:47.1167 INFO Returned all ChatRooms from database. 
+2022-01-19 18:08:56.0316 INFO Returned all ChatRooms from database. 
+2022-01-19 18:09:04.0593 INFO Returned all ChatRooms from database. 
+2022-01-19 18:09:06.1214 INFO Returned all ChatRooms from database. 
+2022-01-19 18:09:08.4999 INFO Returned all ChatRooms from database. 
+2022-01-19 18:09:11.2618 INFO Returned all ChatRooms from database. 
+2022-01-19 18:09:18.1483 INFO Returned all ChatRooms from database. 
+2022-01-19 18:47:30.1803 INFO Returned all ChatRooms from database. 
+2022-01-19 18:47:30.3235 INFO Returned all ChatRooms from database. 
+2022-01-19 18:47:52.8269 INFO Returned all ChatRooms from database. 
+2022-01-19 18:47:52.8733 INFO Returned all ChatRooms from database. 
+2022-01-19 18:48:49.6273 INFO Returned all ChatRooms from database. 
+2022-01-19 18:48:51.4600 INFO Returned all ChatRooms from database. 
+2022-01-19 18:49:39.0631 INFO Returned all ChatRooms from database. 
+2022-01-19 18:49:49.2532 INFO Returned all ChatRooms from database. 
+2022-01-19 18:49:52.9204 INFO Returned all ChatRooms from database. 
+2022-01-19 18:49:54.0827 INFO Returned all ChatRooms from database. 
+2022-01-19 18:50:01.8398 INFO Returned all ChatRooms from database. 
+2022-01-19 18:50:08.1949 INFO Returned all ChatRooms from database. 
+2022-01-19 18:50:38.4576 INFO Returned all ChatRooms from database. 
+2022-01-19 18:51:44.8174 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 18:51:52.7106 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-01-19 18:52:08.1790 INFO Returned User.
+2022-01-19 18:52:09.2694 INFO Returned all ChatRooms from database. 
+2022-01-19 18:52:11.5660 INFO Returned all ChatRooms from database. 
+2022-01-19 18:53:00.0959 INFO Returned all ChatRooms from database. 
+2022-01-19 18:53:08.9870 INFO Returned all ChatRooms from database. 
+2022-01-19 18:53:15.6804 INFO Returned all ChatRooms from database. 
+2022-01-19 18:54:08.0700 INFO Returned all ChatRooms from database. 
+2022-01-19 18:54:10.0634 INFO Returned all ChatRooms from database. 
+2022-01-19 18:55:01.5521 INFO Returned all ChatRooms from database. 
+2022-01-19 18:55:04.4006 INFO Returned all ChatRooms from database. 
+2022-01-19 18:55:31.2887 INFO Returned all ChatRooms from database. 
+2022-01-19 18:57:14.5042 INFO Returned User.
+2022-01-19 18:57:15.8170 INFO Returned all ChatRooms from database. 
+2022-01-19 18:57:16.8088 INFO Returned all ChatRooms from database. 
+2022-01-19 18:59:20.3939 INFO Returned all ChatRooms from database. 
+2022-01-19 19:01:38.7603 INFO Returned User.
+2022-01-19 19:01:59.3787 INFO Returned all ChatRooms from database. 
+2022-01-19 19:02:00.6351 INFO Returned all ChatRooms from database. 
+2022-01-19 19:03:56.6389 INFO Returned all ChatRooms from database. 
+2022-01-19 19:04:09.6567 INFO Returned all ChatRooms from database. 
+2022-01-19 19:05:19.1232 INFO Returned all emergenciesDisasters from database.
+2022-01-19 19:05:31.3331 INFO Returned User.
+2022-01-19 19:05:55.7088 INFO Returned all ChatRooms from database. 
+2022-01-19 19:16:44.2183 INFO Returned User.
+2022-01-19 19:16:46.9216 INFO Returned all ChatRooms from database. 
+2022-01-19 19:17:29.9745 INFO Returned all ChatRooms from database. 
+2022-01-19 19:18:05.9365 INFO Returned all ChatRooms from database. 
+2022-01-19 19:18:08.4141 INFO Returned all ChatRooms from database. 
+2022-01-19 19:18:26.5626 INFO Returned all ChatRooms from database. 
+2022-01-19 19:18:28.0402 INFO Returned all ChatRooms from database. 
+2022-01-19 19:18:41.8010 INFO Returned all ChatRooms from database. 
+2022-01-19 19:19:26.5482 INFO Returned all ChatRooms from database. 
+2022-01-19 19:19:36.5858 INFO Returned all ChatRooms from database. 
+2022-01-19 19:21:20.8858 INFO Returned all ChatRooms from database. 
+2022-01-19 19:21:35.5864 INFO Returned all ChatRooms from database. 
+2022-01-19 19:21:41.8581 INFO Returned all ChatRooms from database. 
+2022-01-19 19:21:44.8579 INFO Returned all ChatRooms from database. 
+2022-01-19 19:21:48.0833 INFO Returned all ChatRooms from database. 
+2022-01-19 19:21:52.9328 INFO Returned all ChatRooms from database. 
+2022-01-19 19:22:01.0102 INFO Returned all ChatRooms from database. 
+2022-01-19 19:22:06.4484 INFO Returned all ChatRooms from database. 
+2022-01-19 19:22:11.2991 INFO Returned all ChatRooms from database. 
+2022-01-19 19:22:16.4672 INFO Returned all ChatRooms from database. 
+2022-01-19 19:23:07.7276 INFO Returned User.
+2022-01-19 19:23:09.1534 INFO Returned all ChatRooms from database. 
+2022-01-19 19:23:10.9969 INFO Returned all ChatRooms from database. 
+2022-01-19 19:23:19.4135 INFO Returned all ChatRooms from database. 
+2022-01-19 19:23:53.8926 INFO Returned User.
+2022-01-19 19:23:55.0403 INFO Returned all ChatRooms from database. 
+2022-01-19 19:23:57.4806 INFO Returned all ChatRooms from database. 
+2022-01-19 19:24:45.7241 INFO Returned all ChatRooms from database. 
+2022-01-19 19:24:46.4219 INFO Returned all ChatRooms from database. 
+2022-01-19 19:25:41.9216 INFO Returned all ChatRooms from database. 
+2022-01-19 19:25:42.0656 INFO Returned all ChatRooms from database. 

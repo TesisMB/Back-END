@@ -89,7 +89,6 @@ namespace Back_End.Controllers
                 
                     _logger.LogError("Message object sent from client is null.");
                     return BadRequest("Message object is null");
-                
             }
 
             var db = new CruzRojaContext();
@@ -101,7 +100,6 @@ namespace Back_End.Controllers
                 .Where(i => i.EmergencyDisasterID == message.FK_ChatRoomID)
                 .FirstOrDefault();
 
-
             message.Room = room.TypesEmergenciesDisasters.TypeEmergencyDisasterName;
 
             var messages = _mapper.Map<Messages>(message);
@@ -110,11 +108,11 @@ namespace Back_End.Controllers
 
             _repository.Messages.SaveAsync();
 
-            string not = Newtonsoft.Json.JsonConvert.SerializeObject(message);
+            //string not = Newtonsoft.Json.JsonConvert.SerializeObject(message);
 
             // _hubContext.Clients.Group(sala).SendAsync("ReceiveMessage", user, not);
 
-            _hubContext.Clients.All.SendAsync("ReceiveMessage", not);
+            //_hubContext.Clients.All.SendAsync("ReceiveMessage", not);
 
             return Ok(message);
         }

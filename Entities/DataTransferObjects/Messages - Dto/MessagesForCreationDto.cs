@@ -5,17 +5,18 @@ namespace Entities.DataTransferObjects.Messages___Dto
 {
     public class MessagesForCreationDto
     {
-        public String Message { get; set; }
+        public String message { get; set; }
 
         public Boolean MessageState { get; set; }
 
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime createdDate { get; set; } = DateTime.Now;
 
         public int FK_ChatRoomID { get; set; } 
 
         public int? FK_LocationVolunteerID { get; set; }
 
-        public string Room { get; set; }
+        public int userID { get; set; }
 
+        public string Room { get; set; }
     }
 }

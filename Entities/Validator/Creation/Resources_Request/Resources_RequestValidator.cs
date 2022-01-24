@@ -7,10 +7,7 @@ namespace Entities.Validator.Creation.Resources_Request
     {
         public Resources_RequestValidator()
         {
-            RuleFor(x => x.Resources_Materials.Quantity)
-            .Must(DifferentZero).WithMessage("Error");
-
-            RuleFor(x => x.Resources_Medicines.Quantity)
+            RuleFor(x => x.Quantity)
             .Must(DifferentZero).WithMessage("Error");
         }
 

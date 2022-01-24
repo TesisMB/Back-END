@@ -76,3 +76,6 @@
 2022-01-20 18:44:45.2078 INFO Returned User.
 2022-01-20 18:44:56.4782 INFO Returned User.
 2022-01-20 18:45:00.2795 INFO Returned User.
+2022-01-20 19:56:58.8639 INFO Returned User.
+2022-01-20 19:57:02.1865 INFO Returned all Volunteers from database.
+2022-01-20 19:57:15.5009 INFO Returned volunteer with id: 14

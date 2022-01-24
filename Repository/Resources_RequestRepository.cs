@@ -26,7 +26,7 @@ namespace Repository
 
             var collection = _cruzRojaContext.Resources_Requests as IQueryable<Resources_Request>;
 
-            if (user.Roles.RoleName == "Encargado de Logistica")
+          /*  if (user.Roles.RoleName == "Encargado de Logistica")
             {
                 collection = collection.Where(
                     a => a.Users.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
@@ -34,7 +34,7 @@ namespace Repository
             else
             {
                 return null;
-            }
+            }*/
 
             return await FindAll()
                 .Include(i => i.Users)

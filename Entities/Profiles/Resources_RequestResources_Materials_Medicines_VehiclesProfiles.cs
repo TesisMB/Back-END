@@ -10,6 +10,7 @@ namespace Entities.Profiles
         {
             CreateMap<Resources_RequestResources_Materials_Medicines_Vehicles, Resources_RequestResources_Materials_Medicines_VehiclesDto>();
             CreateMap<Resources_RequestResources_Materials_Medicines_VehiclesForCreationDto, Resources_RequestResources_Materials_Medicines_Vehicles>();
+ 
         }
     }
 }

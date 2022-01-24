@@ -80,9 +80,11 @@ namespace Back_End.Controllers
         [HttpPost]
         public IActionResult SendMessage([FromBody] MessagesForCreationDto message)
         {
-            var username = UsersRepository.authUser;
 
-            var user = username.Persons.FirstName + "" + username.Persons.LastName;
+            var users = UsersRepository.authUser;
+
+            message.userID = users.UserID;
+
 
             if (message == null)
             {
@@ -91,16 +93,8 @@ namespace Back_End.Controllers
                     return BadRequest("Message object is null");
             }
 
-            var db = new CruzRojaContext();
+            message.Room = Convert.ToString(message.FK_ChatRoomID);
 
-            EmergenciesDisasters room = null;
-
-            room = db.EmergenciesDisasters
-                .Include(i => i.TypesEmergenciesDisasters)
-                .Where(i => i.EmergencyDisasterID == message.FK_ChatRoomID)
-                .FirstOrDefault();
-
-            message.Room = room.TypesEmergenciesDisasters.TypeEmergencyDisasterName;
 
             var messages = _mapper.Map<Messages>(message);
 
@@ -108,13 +102,13 @@ namespace Back_End.Controllers
 
             _repository.Messages.SaveAsync();
 
-            //string not = Newtonsoft.Json.JsonConvert.SerializeObject(message);
+            string not = Newtonsoft.Json.JsonConvert.SerializeObject(message);
 
-            // _hubContext.Clients.Group(sala).SendAsync("ReceiveMessage", user, not);
+             //_hubContext.Clients.Group(message.Room).SendAsync("ReceiveMessage", not);
 
-            //_hubContext.Clients.All.SendAsync("ReceiveMessage", not);
+            _hubContext.Clients.All.SendAsync("ReceiveMessage", not);
 
-            return Ok(message);
+            return Ok();
         }
     }
 }

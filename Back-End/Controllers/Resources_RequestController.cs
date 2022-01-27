@@ -5,6 +5,7 @@ using Entities.Helpers;
 using Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Repository;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -61,24 +62,45 @@ namespace Back_End.Controllers
 
                 var resourceRequest = _mapper.Map<Resources_Request>(resources_Request);
 
-
-                //Rebisar si hay en stock Materials o Medicines
-                var resource = _repository.Resources_Requests.Stock(resourceRequest);
-
-                foreach (var resources in resource.Resources_RequestResources_Materials_Medicines_Vehicles)
+/*               foreach (var item2 in resourceRequest.Resources_RequestResources_Materials_Medicines_Vehicles)
                 {
+                        if (item2.Resources_Materials.FK_MaterialID == null)
+                        {
+                            item2.Resources_Materials = null;
+                        }
 
-                    if (resources.Resources_Materials.Materials == null || resources.Resources_Medicines.Medicines == null)
+                        if (item2.Resources_Medicines.FK_MedicineID == null)
+                        {
+                            item2.Resources_Medicines = null;
+                        }
+
+                        if (item2.FK_VehiclesID != null)
+                        {
+                            item2.Resources_Materials = null;
+                            item2.Resources_Medicines = null;
+                        }
+               }*/
+
+                resourceRequest.FK_UserID = UsersRepository.authUser.UserID;
+
+
+                //Revisar si hay en stock Materials o Medicines
+                //var resource = _repository.Resources_Requests.Stock(resourceRequest);
+
+                /*foreach (var item3 in resource.Resources_RequestResources_Materials_Medicines_Vehicles)
+                {
+                    if (item3.Resources_Materials == null || item3.Resources_Medicines == null)
                     {
                         return BadRequest(ErrorHelper.Response(400, "No hay Stock!!!"));
                     }
+                }*/
 
-                    resources.Resources_Materials.Materials = null;
-                    resources.Resources_Medicines.Medicines = null;
-                }
+
+
 
                 _repository.Resources_Requests.CreateResource_Resquest(resourceRequest);
 
+                _repository.Resources_Requests.SaveAsync();
                 return Ok();
             }
             catch (Exception ex)

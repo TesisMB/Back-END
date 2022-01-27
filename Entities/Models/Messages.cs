@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Back_End.Models;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -28,5 +29,9 @@ namespace Entities.Models
         [ForeignKey("FK_LocationVolunteerID")]
         public LocationVolunteers LocationVolunteers { get; set; }
         public int? FK_LocationVolunteerID { get; set; }
+
+        [ForeignKey("FK_UserID")]
+        public Users Users { get; set; }
+        public int FK_UserID { get; set; }
     }
 }

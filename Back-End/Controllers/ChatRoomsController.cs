@@ -1,17 +1,11 @@
 ﻿using AutoMapper;
-using Back_End.Entities;
-using Back_End.Hubs;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.CharRooms___Dto;
 using Entities.DataTransferObjects.Messages___Dto;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.EntityFrameworkCore;
-using Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Back_End.Controllers
@@ -23,15 +17,15 @@ namespace Back_End.Controllers
         private ILoggerManager _logger;
         private IMapper _mapper;
         private IRepositorWrapper _repository;
-        private IHubContext<Mensaje> _hubContext;
+        //private IHubContext<Mensaje> _hubContext;
 
 
-        public ChatRoomsController(ILoggerManager logger, IMapper mapper, IRepositorWrapper repository, IHubContext<Mensaje> hubContext)
+        public ChatRoomsController(ILoggerManager logger, IMapper mapper, IRepositorWrapper repository) //IHubContext<Mensaje> hubContext)
         {
             _logger = logger;
             _mapper = mapper;
             _repository = repository;
-            _hubContext = hubContext;
+            //_hubContext = hubContext;
         }
 
         [HttpGet]
@@ -45,6 +39,7 @@ namespace Back_End.Controllers
                 var chatRoomsToResult = _mapper.Map<IEnumerable<TypesChatsDto>>(chatRooms);
 
                 return Ok(chatRoomsToResult);
+
             }
             catch (Exception ex)
             {
@@ -81,20 +76,12 @@ namespace Back_End.Controllers
         public IActionResult SendMessage([FromBody] MessagesForCreationDto message)
         {
 
-            var users = UsersRepository.authUser;
-
-            message.userID = users.UserID;
-
-
             if (message == null)
             {
-                
-                    _logger.LogError("Message object sent from client is null.");
-                    return BadRequest("Message object is null");
+
+                _logger.LogError("Message object sent from client is null.");
+                return BadRequest("Message object is null");
             }
-
-            message.Room = Convert.ToString(message.FK_ChatRoomID);
-
 
             var messages = _mapper.Map<Messages>(message);
 
@@ -102,13 +89,7 @@ namespace Back_End.Controllers
 
             _repository.Messages.SaveAsync();
 
-            string not = Newtonsoft.Json.JsonConvert.SerializeObject(message);
-
-             //_hubContext.Clients.Group(message.Room).SendAsync("ReceiveMessage", not);
-
-            _hubContext.Clients.All.SendAsync("ReceiveMessage", not);
-
-            return Ok();
+            return StatusCode(200, message);
         }
     }
 }

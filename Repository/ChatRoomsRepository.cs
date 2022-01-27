@@ -21,7 +21,7 @@ namespace Repository
         public async Task<IEnumerable<TypesChatRooms>> GetChatRooms()
         {
 
-            var users = UsersRepository.authUser;
+            /*var users = UsersRepository.authUser;
 
             var collection = _cruzRojaContext.TypesChatRooms as IQueryable<TypesChatRooms>;
 
@@ -35,8 +35,8 @@ namespace Repository
 
             collection = collection.Where(a => chat.FK_UserID == users.UserID
                                             && a.IsGroupChat == true);
-
-            return await collection
+            */
+            return await FindAll()
                 .Include(a => a.Chat)
                 .ThenInclude(a => a.UsersChat)
                  .ThenInclude(a => a.Users)

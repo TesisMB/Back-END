@@ -18,7 +18,7 @@ namespace Entities.Models
          public Materials Materials { get; set; }
 
          [Required]
-         public int FK_MaterialID { get; set; }
+         public int? FK_MaterialID { get; set; }
 
         [ForeignKey("FK_Resources_MaterialsID")]
         public ICollection<Resources_RequestResources_Materials_Medicines_Vehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }

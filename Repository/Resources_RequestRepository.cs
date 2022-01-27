@@ -64,7 +64,7 @@ namespace Repository
 
 
             Create(resources_Request);
-            UpdateResources(resources_Request);
+            //UpdateResources(resources_Request);
         }
 
         private void spaceCamelCase(Resources_Request resources_Request)
@@ -240,6 +240,8 @@ namespace Repository
                            (i.MaterialQuantity - resource.Resources_Materials.Quantity) >= 0
                            )
                            .FirstOrDefault();
+
+                resource.Resources_Materials.Materials = null;
                 }
 
                 if (resource.Resources_Medicines != null)
@@ -250,10 +252,10 @@ namespace Repository
                            (i.MedicineQuantity - resource.Resources_Medicines.Quantity) >= 0
                            )
                         .FirstOrDefault();
+
+                    resource.Resources_Medicines.Medicines = null;
                 }
                 
-                resource.Resources_Materials.Materials = materials;
-                resource.Resources_Medicines.Medicines = medicines;
             }
 
             return resources_Request;

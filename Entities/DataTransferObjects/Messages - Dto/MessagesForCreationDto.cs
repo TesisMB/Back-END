@@ -15,8 +15,7 @@ namespace Entities.DataTransferObjects.Messages___Dto
 
         public int? FK_LocationVolunteerID { get; set; }
 
-        public int userID { get; set; }
+        public int FK_UserID { get; set; }
 
-        public string Room { get; set; }
     }
 }

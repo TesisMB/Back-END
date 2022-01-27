@@ -11,8 +11,7 @@ namespace Entities.Validator.Creation.Resources_Request
             .Must(DifferentZero).WithMessage("Error");
         }
 
-
-        public bool DifferentZero(int quantity)
+        public bool DifferentZero(int? quantity)
         {
             if (quantity > 0)
             {

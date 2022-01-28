@@ -62,43 +62,54 @@ namespace Back_End.Controllers
 
                 var resourceRequest = _mapper.Map<Resources_Request>(resources_Request);
 
-/*               foreach (var item2 in resourceRequest.Resources_RequestResources_Materials_Medicines_Vehicles)
+                foreach (var item2 in resourceRequest.Resources_RequestResources_Materials_Medicines_Vehicles)
                 {
-                        if (item2.Resources_Materials.FK_MaterialID == null)
-                        {
-                            item2.Resources_Materials = null;
-                        }
+                    //MEDICINES
+                    if (item2.Resources_Medicines.FK_MedicineID == 0 && item2.FK_VehiclesID != 0 && item2.Resources_Materials.FK_MaterialID != 0)
+                    {
+                        item2.Resources_Medicines = null;
+                    }
+                    else if (item2.Resources_Medicines.FK_MedicineID != 0 && item2.FK_VehiclesID != 0 && item2.Resources_Materials.FK_MaterialID == 0)
+                    {
+                        item2.Resources_Materials = null;
 
-                        if (item2.Resources_Medicines.FK_MedicineID == null)
-                        {
-                            item2.Resources_Medicines = null;
-                        }
+                    }
+                    else if (item2.Resources_Medicines.FK_MedicineID != 0 && item2.FK_VehiclesID == 0 && item2.Resources_Materials.FK_MaterialID == 0)
+                    {
+                        item2.Resources_Materials = null;
+                        item2.FK_VehiclesID = null;
 
-                        if (item2.FK_VehiclesID != null)
-                        {
-                            item2.Resources_Materials = null;
-                            item2.Resources_Medicines = null;
-                        }
-               }*/
+                    }
+                    else if (item2.Resources_Medicines.FK_MedicineID == 0 && item2.FK_VehiclesID == 0 && item2.Resources_Materials.FK_MaterialID != 0)
+                    {
+                        item2.Resources_Medicines = null;
+                        item2.FK_VehiclesID = null;
+                    }
+                    else if (item2.Resources_Medicines.FK_MedicineID == 0 && item2.FK_VehiclesID != 0 && item2.Resources_Materials.FK_MaterialID == 0)
+                    {
+                        item2.Resources_Materials = null;
+                        item2.Resources_Medicines = null;
+                    }
+                }
 
-                resourceRequest.FK_UserID = UsersRepository.authUser.UserID;
+                //resourceRequest.FK_UserID = UsersRepository.authUser.UserID;
 
 
                 //Revisar si hay en stock Materials o Medicines
-                //var resource = _repository.Resources_Requests.Stock(resourceRequest);
+                var resource = _repository.Resources_Requests.Stock(resourceRequest);
 
-                /*foreach (var item3 in resource.Resources_RequestResources_Materials_Medicines_Vehicles)
+                foreach (var resources in resource.Resources_RequestResources_Materials_Medicines_Vehicles)
                 {
-                    if (item3.Resources_Materials == null || item3.Resources_Medicines == null)
+                    if (resources.Resources_Materials == null && resources.Resources_Medicines == null && resources.FK_VehiclesID == null)
                     {
                         return BadRequest(ErrorHelper.Response(400, "No hay Stock!!!"));
                     }
-                }*/
+                }
 
+                var recurso = _repository.Resources_Requests.DeleteResource(resource);
+                
 
-
-
-                _repository.Resources_Requests.CreateResource_Resquest(resourceRequest);
+                _repository.Resources_Requests.CreateResource_Resquest(resource);
 
                 _repository.Resources_Requests.SaveAsync();
                 return Ok();

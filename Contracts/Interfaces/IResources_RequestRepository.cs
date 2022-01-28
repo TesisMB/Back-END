@@ -16,5 +16,7 @@ namespace Contracts.Interfaces
         void UpdateResource_Resquest2(Resources_Request resources_Request);
 
         Resources_Request Stock(Resources_Request resources_Request);
+
+        Resources_Request DeleteResource(Resources_Request resources_Request);
     }
 }

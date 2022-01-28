@@ -74,37 +74,37 @@ namespace Repository
                     .FirstOrDefaultAsync();
         }
 
-        public void CreateEmployee(EmployeesForCreationDto employee)
+        public void CreateEmployee(Employees employee)
         {
-            int longitud = 7;
-            Guid miGuid = Guid.NewGuid();
+            //int longitud = 7;
+            //Guid miGuid = Guid.NewGuid();
 
             //convierto de Guid a byte
             //miGuid.ToByteArray() => Representa ese tipo guid como una matriz de bytes
-            string token = Convert.ToBase64String(miGuid.ToByteArray());
+            // string token = Convert.ToBase64String(miGuid.ToByteArray());
 
             //Replazo los = y el signo +
-            token = token.Replace("=", "").Replace("+", "");
+            //token = token.Replace("=", "").Replace("+", "");
 
             //Devuelve los caracteres extraídos de una cadena según la posición 
             //del carácter especificado para una cantidad especificada de caracteres.
-            string codigo = token.Substring(0, longitud);
+            //string codigo = token.Substring(0, longitud);
 
-            employee.Users.UserPassword = codigo;
-
-            var employeeEntity = _mapper.Map<Employees>(employee);
-
-            employeeEntity.Users.UserPassword = Encrypt.GetSHA256(employee.Users.UserPassword);
-
-            spaceCamelCase(employeeEntity);
-            Create(employeeEntity);
-
-            SaveAsync();
-
-            sendVerificationEmail(employee);
+            //employee.Users.UserPassword = codigo;
 
 
-            //Create(employee);
+            Email.generatePassword(employee.Users);
+
+            Email.sendVerificationEmail(employee.Users);
+            spaceCamelCase(employee);
+            
+            employee.Users.UserPassword = Encrypt.GetSHA256(employee.Users.UserPassword);
+
+            Create(employee);
+
+//            SaveAsync();
+
+
         }
 
 
@@ -129,7 +129,7 @@ namespace Repository
              <p>Su usuario es: {employees.Users.UserDni}<p>
              <p>Su contraseña es: {employees.Users.UserPassword}</p>";
 
-            EmailRepository.Send(
+            Email.Send(
                 to: employees.Users.Persons.Email,
                 subject: "Sign-up Verification API",
                 html: $@"<p>Bienvenido a SICREYD!</p>

@@ -4,7 +4,6 @@ using Contracts.Interfaces;
 using Entities.Helpers;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,7 +25,7 @@ namespace Repository
 
             var collection = _cruzRojaContext.Resources_Requests as IQueryable<Resources_Request>;
 
-            if (user.Roles.RoleName == "Encargado de Logistica")
+          /*  if (user.Roles.RoleName == "Encargado de Logistica")
             {
                 collection = collection.Where(
                     a => a.Users.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
@@ -34,7 +33,7 @@ namespace Repository
             else
             {
                 return null;
-            }
+            }*/
 
             return await FindAll()
                 .Include(i => i.Users)
@@ -61,8 +60,6 @@ namespace Repository
         public void CreateResource_Resquest(Resources_Request resources_Request)
         {
             spaceCamelCase(resources_Request);
-
-
             Create(resources_Request);
             UpdateResources(resources_Request);
         }
@@ -145,8 +142,8 @@ namespace Repository
             {
                 resources.Vehicles.VehicleAvailability = false;
             }
-            
-                SaveAsync();
+                //Update(resources);
+                //SaveAsync();
             }
          }
 
@@ -226,34 +223,68 @@ namespace Repository
             Materials materials = null;
             Medicines medicines = null;
 
-            resources_Request.FK_UserID = UsersRepository.authUser.UserID;
+            resources_Request.FK_UserID = 2;
 
             var db = new CruzRojaContext();
 
             foreach (var resource in resources_Request.Resources_RequestResources_Materials_Medicines_Vehicles)
             {
-                if(resource.Resources_Materials != null)
+                if (resource.Resources_Materials != null)
                 {
-                          materials = db.Materials
-                           .Where(i => i.ID == resource.Resources_Materials.FK_MaterialID
-                           &&
-                           (i.MaterialQuantity - resource.Resources_Materials.Quantity) >= 0
-                           )
-                           .FirstOrDefault();
+                    materials = db.Materials
+                     .Where(i => i.ID == resource.Resources_Materials.FK_MaterialID
+                     &&
+                     (i.MaterialQuantity - resource.Resources_Materials.Quantity) >= 0
+                     )
+                     .FirstOrDefault();
+
+                    resource.Resources_Materials.Materials = materials;
+
+                    if (materials == null)
+                    {
+                        resource.Resources_Materials = null;
+                    }
+
                 }
 
-                if (resource.Resources_Medicines != null)
+                    if (resource.Resources_Medicines != null)
+                    {
+                        medicines = db.Medicines
+                            .Where(i => i.ID == resource.Resources_Medicines.FK_MedicineID
+                               &&
+                               (i.MedicineQuantity - resource.Resources_Medicines.Quantity) >= 0
+                               )
+                            .FirstOrDefault();
+
+                        resource.Resources_Medicines.Medicines = medicines;
+
+                        if (medicines == null)
+                        {
+                            resource.Resources_Medicines = null;
+                        }
+                    }
+            }
+
+
+            return resources_Request;
+
+
+        }
+
+        public Resources_Request DeleteResource(Resources_Request resources_Request)
+        {
+
+            foreach (var item in resources_Request.Resources_RequestResources_Materials_Medicines_Vehicles)
+            {
+                if(item.Resources_Materials != null)
                 {
-                    medicines = db.Medicines
-                        .Where(i => i.ID == resource.Resources_Medicines.FK_MedicineID
-                           &&
-                           (i.MedicineQuantity - resource.Resources_Medicines.Quantity) >= 0
-                           )
-                        .FirstOrDefault();
+                    item.Resources_Materials.Materials = null;
                 }
-                
-                resource.Resources_Materials.Materials = materials;
-                resource.Resources_Medicines.Medicines = medicines;
+
+                if (item.Resources_Medicines != null)
+                {
+                    item.Resources_Medicines.Medicines = null;
+                }
             }
 
             return resources_Request;

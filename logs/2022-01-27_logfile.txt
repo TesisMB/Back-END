@@ -1,0 +1,197 @@
+2022-01-27 15:34:32.2997 INFO Returned User.
+2022-01-27 15:35:30.8935 INFO Returned User.
+2022-01-27 15:36:30.1894 INFO Returned User.
+2022-01-27 15:36:32.6254 ERROR Something went wrong inside CreateMedicine action: An error occurred while updating the entries. See the inner exception for details.
+2022-01-27 15:37:59.2367 INFO Returned User.
+2022-01-27 15:38:10.7240 ERROR Something went wrong inside CreateMedicine action: An error occurred while updating the entries. See the inner exception for details.
+2022-01-27 15:39:49.7205 INFO Returned User.
+2022-01-27 15:39:57.9503 ERROR Something went wrong inside CreateMedicine action: An error occurred while updating the entries. See the inner exception for details.
+2022-01-27 15:40:30.5653 INFO Returned User.
+2022-01-27 15:41:45.1460 INFO Returned User.
+2022-01-27 15:42:46.8004 INFO Returned User.
+2022-01-27 15:43:54.4885 INFO Returned User.
+2022-01-27 15:47:00.6436 INFO Returned User.
+2022-01-27 15:47:27.3306 INFO Returned User.
+2022-01-27 16:27:57.6575 INFO Returned User.
+2022-01-27 16:27:59.6364 INFO Returned all ChatRooms from database. 
+2022-01-27 16:28:01.0736 ERROR Something went wrong inside GetAllChatRooms aciton: El nombre de columna 'FK_UserID' no es válido.
+2022-01-27 16:28:05.3551 INFO Returned all emergenciesDisasters from database.
+2022-01-27 16:31:43.5710 INFO Returned all emergenciesDisasters from database.
+2022-01-27 16:33:14.6629 INFO Returned all emergenciesDisasters from database.
+2022-01-27 16:33:19.1544 INFO Returned all emergenciesDisasters from database.
+2022-01-27 16:34:19.8563 INFO Returned all emergenciesDisasters from database.
+2022-01-27 16:34:27.5644 INFO Returned all emergenciesDisasters from database.
+2022-01-27 16:35:31.3890 INFO Returned all emergenciesDisasters from database.
+2022-01-27 16:35:45.8002 INFO Returned all emergenciesDisasters from database.
+2022-01-27 16:35:53.4083 INFO Returned all emergenciesDisasters from database.
+2022-01-27 16:36:02.0160 INFO Returned all emergenciesDisasters from database.
+2022-01-27 16:36:38.4755 INFO Returned all emergenciesDisasters from database.
+2022-01-27 16:36:58.6127 INFO Returned all emergenciesDisasters from database.
+2022-01-27 16:37:11.7793 INFO Returned all emergenciesDisasters from database.
+2022-01-27 16:37:23.9437 INFO Returned all emergenciesDisasters from database.
+2022-01-27 16:37:28.8299 INFO Returned all emergenciesDisasters from database.
+2022-01-27 16:37:31.6513 INFO Returned all emergenciesDisasters from database.
+2022-01-27 16:37:39.3350 INFO Returned all ChatRooms from database. 
+2022-01-27 16:37:40.1376 ERROR Something went wrong inside GetAllChatRooms aciton: El nombre de columna 'FK_UserID' no es válido.
+2022-01-27 16:37:54.4926 INFO Returned User.
+2022-01-27 16:37:55.7619 INFO Returned all ChatRooms from database. 
+2022-01-27 16:37:56.6665 ERROR Something went wrong inside GetAllChatRooms aciton: El nombre de columna 'FK_UserID' no es válido.
+2022-01-27 16:38:10.5878 INFO Returned all emergenciesDisasters from database.
+2022-01-27 16:38:11.8261 ERROR Something went wrong inside GetAllChatRooms aciton: El nombre de columna 'FK_UserID' no es válido.
+2022-01-27 16:38:58.9834 ERROR Something went wrong inside GetAllChatRooms aciton: El nombre de columna 'FK_UserID' no es válido.
+2022-01-27 16:39:15.0859 INFO Returned all ChatRooms from database. 
+2022-01-27 16:39:16.1775 ERROR Something went wrong inside GetAllChatRooms aciton: El nombre de columna 'FK_UserID' no es válido.
+2022-01-27 16:39:34.5318 INFO Returned all emergenciesDisasters from database.
+2022-01-27 16:39:35.9524 ERROR Something went wrong inside GetAllChatRooms aciton: El nombre de columna 'FK_UserID' no es válido.
+2022-01-27 16:46:47.2679 INFO Returned all ChatRooms from database. 
+2022-01-27 16:46:52.0250 INFO Returned all ChatRooms from database. 
+2022-01-27 16:47:34.3768 INFO Returned all ChatRooms from database. 
+2022-01-27 16:48:00.3776 INFO Returned all ChatRooms from database. 
+2022-01-27 16:48:37.4443 ERROR Something went wrong inside GetAllChatRooms aciton: El nombre de columna 'FK_UserID' no es válido.
+2022-01-27 16:50:08.4393 INFO Returned all ChatRooms from database. 
+2022-01-27 16:50:20.3575 INFO Returned all ChatRooms from database. 
+2022-01-27 16:50:21.1698 INFO Returned all ChatRooms from database. 
+2022-01-27 16:50:59.0530 INFO Returned all ChatRooms from database. 
+2022-01-27 16:50:59.7343 INFO Returned all ChatRooms from database. 
+2022-01-27 16:51:33.3643 INFO Returned all ChatRooms from database. 
+2022-01-27 16:51:56.1991 INFO Returned all ChatRooms from database. 
+2022-01-27 16:52:32.4238 INFO Returned all ChatRooms from database. 
+2022-01-27 16:52:32.6030 INFO Returned all ChatRooms from database. 
+2022-01-27 16:52:35.2216 INFO Returned all ChatRooms from database. 
+2022-01-27 16:52:36.5177 INFO Returned all ChatRooms from database. 
+2022-01-27 16:52:39.0927 INFO Returned all ChatRooms from database. 
+2022-01-27 16:52:40.5556 INFO Returned all ChatRooms from database. 
+2022-01-27 16:53:26.7437 INFO Returned all ChatRooms from database. 
+2022-01-27 16:53:36.8667 INFO Returned all ChatRooms from database. 
+2022-01-27 16:53:39.2317 INFO Returned all ChatRooms from database. 
+2022-01-27 16:53:47.1938 INFO Returned all ChatRooms from database. 
+2022-01-27 16:54:13.3080 INFO Returned all ChatRooms from database. 
+2022-01-27 16:54:13.9045 INFO Returned all ChatRooms from database. 
+2022-01-27 16:54:45.7563 INFO Returned all ChatRooms from database. 
+2022-01-27 16:54:45.9580 INFO Returned all ChatRooms from database. 
+2022-01-27 16:55:29.6567 INFO Returned all ChatRooms from database. 
+2022-01-27 16:55:30.2832 INFO Returned all ChatRooms from database. 
+2022-01-27 16:56:17.9958 INFO Returned all ChatRooms from database. 
+2022-01-27 16:56:31.1946 INFO Returned all ChatRooms from database. 
+2022-01-27 16:56:39.7581 INFO Returned all ChatRooms from database. 
+2022-01-27 16:57:00.1627 INFO Returned all ChatRooms from database. 
+2022-01-27 16:57:15.1558 INFO Returned all ChatRooms from database. 
+2022-01-27 16:57:23.9425 INFO Returned all ChatRooms from database. 
+2022-01-27 16:58:45.6042 INFO Returned all ChatRooms from database. 
+2022-01-27 16:58:46.3215 INFO Returned all ChatRooms from database. 
+2022-01-27 16:58:51.5236 INFO Returned all ChatRooms from database. 
+2022-01-27 16:59:03.9342 INFO Returned all ChatRooms from database. 
+2022-01-27 16:59:04.1411 INFO Returned all ChatRooms from database. 
+2022-01-27 16:59:08.5322 INFO Returned all ChatRooms from database. 
+2022-01-27 16:59:08.6747 INFO Returned all ChatRooms from database. 
+2022-01-27 16:59:13.3656 INFO Returned all ChatRooms from database. 
+2022-01-27 17:07:01.6441 INFO Returned all ChatRooms from database. 
+2022-01-27 17:07:01.6441 INFO Returned all ChatRooms from database. 
+2022-01-27 17:07:12.3622 INFO Returned all ChatRooms from database. 
+2022-01-27 17:07:16.3656 INFO Returned all ChatRooms from database. 
+2022-01-27 17:07:18.8899 INFO Returned all emergenciesDisasters from database.
+2022-01-27 17:07:19.0986 INFO Returned all ChatRooms from database. 
+2022-01-27 17:07:19.9287 INFO Returned all ChatRooms from database. 
+2022-01-27 17:08:44.0027 INFO Returned all ChatRooms from database. 
+2022-01-27 17:08:44.3166 INFO Returned all ChatRooms from database. 
+2022-01-27 17:08:47.0888 INFO Returned all ChatRooms from database. 
+2022-01-27 17:08:48.4283 INFO Returned all ChatRooms from database. 
+2022-01-27 17:08:48.9812 INFO Returned all ChatRooms from database. 
+2022-01-27 17:08:54.1617 INFO Returned all ChatRooms from database. 
+2022-01-27 17:08:59.9447 INFO Returned all ChatRooms from database. 
+2022-01-27 17:12:21.4293 INFO Returned all ChatRooms from database. 
+2022-01-27 17:12:23.7871 INFO Returned all ChatRooms from database. 
+2022-01-27 17:12:39.0552 INFO Returned all ChatRooms from database. 
+2022-01-27 17:12:45.6154 INFO Returned all ChatRooms from database. 
+2022-01-27 17:12:48.2085 INFO Returned all ChatRooms from database. 
+2022-01-27 17:13:24.4824 INFO Returned all ChatRooms from database. 
+2022-01-27 17:13:37.4260 INFO Returned all ChatRooms from database. 
+2022-01-27 17:15:00.1373 INFO Returned all ChatRooms from database. 
+2022-01-27 17:17:20.1387 INFO Returned User.
+2022-01-27 17:17:33.2207 ERROR Something went wrong inside CreateMedicine action: An error occurred while updating the entries. See the inner exception for details.
+2022-01-27 17:18:21.4863 INFO Returned User.
+2022-01-27 17:20:35.0959 INFO Returned User.
+2022-01-27 17:22:22.9090 INFO Returned User.
+2022-01-27 17:23:12.7679 INFO Returned User.
+2022-01-27 17:27:35.2645 ERROR Something went wrong inside CreateMedicine action: An error occurred while updating the entries. See the inner exception for details.
+2022-01-27 17:28:03.0786 ERROR Something went wrong inside CreateMedicine action: An error occurred while updating the entries. See the inner exception for details.
+2022-01-27 17:28:22.0743 ERROR Something went wrong inside CreateMedicine action: An error occurred while updating the entries. See the inner exception for details.
+2022-01-27 17:28:50.2433 ERROR Something went wrong inside CreateMedicine action: An error occurred while updating the entries. See the inner exception for details.
+2022-01-27 17:30:25.7362 INFO Returned User.
+2022-01-27 17:31:13.9408 INFO Returned User.
+2022-01-27 17:31:20.6249 ERROR Something went wrong inside CreateMedicine action: An error occurred while updating the entries. See the inner exception for details.
+2022-01-27 17:33:14.7997 ERROR Something went wrong inside CreateMedicine action: Object reference not set to an instance of an object.
+2022-01-27 17:33:18.7894 INFO Returned User.
+2022-01-27 17:33:32.6129 ERROR Something went wrong inside CreateMedicine action: An error occurred while updating the entries. See the inner exception for details.
+2022-01-27 17:34:18.6898 INFO Returned User.
+2022-01-27 17:34:20.3583 ERROR Something went wrong inside CreateMedicine action: An error occurred while updating the entries. See the inner exception for details.
+2022-01-27 17:34:52.8569 ERROR Something went wrong inside CreateMedicine action: An error occurred while updating the entries. See the inner exception for details.
+2022-01-27 17:35:06.7991 INFO Returned User.
+2022-01-27 17:36:42.2830 INFO Returned User.
+2022-01-27 17:36:55.1474 ERROR Something went wrong inside CreateMedicine action: An error occurred while updating the entries. See the inner exception for details.
+2022-01-27 17:37:20.7567 ERROR Something went wrong inside CreateMedicine action: An error occurred while updating the entries. See the inner exception for details.
+2022-01-27 17:38:01.2375 INFO Returned User.
+2022-01-27 17:38:33.1951 ERROR Something went wrong inside CreateMedicine action: An error occurred while updating the entries. See the inner exception for details.
+2022-01-27 17:41:28.6100 ERROR Something went wrong inside CreateMedicine action: An error occurred while updating the entries. See the inner exception for details.
+2022-01-27 17:43:54.3775 INFO Returned User.
+2022-01-27 17:44:30.6898 INFO Returned User.
+2022-01-27 17:46:07.7529 INFO Returned User.
+2022-01-27 17:47:21.2676 INFO Returned User.
+2022-01-27 17:49:50.1427 INFO Returned User.
+2022-01-27 17:53:22.1113 INFO Returned User.
+2022-01-27 17:53:57.7826 INFO Returned User.
+2022-01-27 17:55:28.0665 INFO Returned User.
+2022-01-27 17:56:04.1745 INFO Returned User.
+2022-01-27 17:56:53.6912 INFO Returned User.
+2022-01-27 17:57:28.2211 INFO Returned User.
+2022-01-27 18:09:25.2828 INFO Returned User.
+2022-01-27 18:10:14.8464 INFO Returned User.
+2022-01-27 18:17:43.0807 INFO Returned User.
+2022-01-27 18:18:33.5152 ERROR Something went wrong inside CreateMedicine action: An error occurred while updating the entries. See the inner exception for details.
+2022-01-27 18:19:14.5950 INFO Returned User.
+2022-01-27 18:23:44.1273 INFO Returned User.
+2022-01-27 18:24:02.0922 ERROR Something went wrong inside CreateMedicine action: An error occurred while updating the entries. See the inner exception for details.
+2022-01-27 18:28:54.4868 INFO Returned User.
+2022-01-27 18:29:33.1585 INFO Returned User.
+2022-01-27 18:32:32.0520 INFO Returned User.
+2022-01-27 18:34:53.2511 ERROR Something went wrong inside CreateMedicine action: The instance of entity type 'Resources_Medicines' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-01-27 18:40:00.4670 ERROR Something went wrong inside CreateMedicine action: The instance of entity type 'Resources_Medicines' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-01-27 18:40:03.5316 ERROR Something went wrong inside CreateMedicine action: The instance of entity type 'Resources_Medicines' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-01-27 18:40:40.0625 ERROR Something went wrong inside CreateMedicine action: The instance of entity type 'Resources_Medicines' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-01-27 18:42:27.2345 ERROR Something went wrong inside CreateMedicine action: The instance of entity type 'Resources_Medicines' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-01-27 18:43:15.9559 INFO Returned User.
+2022-01-27 18:43:18.0035 ERROR Something went wrong inside CreateMedicine action: The instance of entity type 'Resources_Medicines' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-01-27 18:44:36.4960 ERROR Something went wrong inside CreateMedicine action: The instance of entity type 'Resources_Medicines' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-01-27 18:45:02.8919 INFO Returned User.
+2022-01-27 18:46:14.6788 ERROR Something went wrong inside CreateMedicine action: The instance of entity type 'Resources_Medicines' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-01-27 18:49:22.4137 ERROR Something went wrong inside CreateMedicine action: The instance of entity type 'Resources_Medicines' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-01-27 18:50:37.8397 ERROR Something went wrong inside CreateMedicine action: The instance of entity type 'Resources_Medicines' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-01-27 18:51:12.9493 INFO Returned User.
+2022-01-27 18:51:15.1733 ERROR Something went wrong inside CreateMedicine action: The instance of entity type 'Resources_Medicines' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-01-27 18:53:10.5796 ERROR Something went wrong inside CreateMedicine action: The instance of entity type 'Resources_Medicines' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-01-27 18:57:16.9874 INFO Returned User.
+2022-01-27 19:05:37.7060 ERROR Something went wrong inside CreateMedicine action: Object reference not set to an instance of an object.
+2022-01-27 19:05:41.6765 INFO Returned User.
+2022-01-27 19:12:18.9734 INFO Returned User.
+2022-01-27 19:13:17.5176 INFO Returned User.
+2022-01-27 19:14:36.7682 INFO Returned User.
+2022-01-27 19:14:43.8591 INFO Returned User.
+2022-01-27 19:15:40.9401 INFO Returned User.
+2022-01-27 19:15:40.9401 INFO Returned User.
+2022-01-27 19:17:47.2216 INFO Returned User.
+2022-01-27 19:19:06.7061 ERROR Something went wrong inside CreateMedicine action: Object reference not set to an instance of an object.
+2022-01-27 19:24:46.7995 INFO Returned User.
+2022-01-27 19:25:45.9704 INFO Returned User.
+2022-01-27 19:26:31.1600 INFO Returned User.
+2022-01-27 19:32:35.0182 INFO Returned User.
+2022-01-27 19:34:57.5540 INFO Returned User.
+2022-01-27 19:35:39.4582 INFO Returned User.
+2022-01-27 19:36:05.5663 ERROR Something went wrong inside CreateMedicine action: Object reference not set to an instance of an object.
+2022-01-27 19:37:08.1469 INFO Returned User.
+2022-01-27 19:39:24.0020 INFO Returned User.
+2022-01-27 19:42:46.8621 INFO Returned User.
+2022-01-27 19:46:20.1287 INFO Returned User.
+2022-01-27 19:50:06.8308 INFO Returned User.
+2022-01-27 19:52:27.6285 ERROR Something went wrong inside CreateMedicine action: Object reference not set to an instance of an object.
+2022-01-27 19:52:39.2847 ERROR Something went wrong inside CreateMedicine action: Object reference not set to an instance of an object.
+2022-01-27 20:16:56.5202 ERROR Something went wrong inside CreateMedicine action: The instance of entity type 'Materials' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.

@@ -4,7 +4,7 @@ namespace Contracts.Interfaces
 {
     public interface IMessageRepository: IRepositoryBase<Messages>
     {
-        void CreateMaterial(Messages messages);
+        void CreateMessage(Messages messages);
 
     }
 }

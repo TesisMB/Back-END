@@ -20,7 +20,7 @@ namespace Entities.Models
         public Medicines Medicines { get; set; }
 
         [Required]
-        public int FK_MedicineID { get; set; }
+        public int? FK_MedicineID { get; set; }
 
         [ForeignKey("FK_Resources_MedicinesID")]
         public ICollection<Resources_RequestResources_Materials_Medicines_Vehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }

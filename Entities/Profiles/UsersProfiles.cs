@@ -24,10 +24,11 @@ namespace Back_End.Profiles
 
 
             CreateMap<Users, UserEmployeeAuthDto>()
-           .ForPath(i => i.Persons.Birthdate, opt => opt.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.Persons.Birthdate)))
+           //.ForPath(i => i.Persons.Birthdate, opt => opt.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.Persons.Birthdate)))
 
            .ForMember(dest => dest.token,
                               opt => opt.MapFrom(src => UserSecurity.GenerateAccessToken(src.UserID, src.Roles.RoleName)))
+
 
            .ForMember(dest => dest.RoleName,
                               opt => opt.MapFrom(src => src.Roles.RoleName))

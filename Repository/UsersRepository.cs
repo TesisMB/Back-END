@@ -37,6 +37,8 @@ namespace Repository
                               .Include(a => a.Persons)
                               .Include(a => a.Volunteers.VolunteersSkills)
                               .ThenInclude(a => a.Skills)
+                              .Include(a => a.Volunteers.VolunteersSkills)
+                              .ThenInclude(a => a.VolunteersSkillsFormationEstates)
                               .FirstOrDefaultAsync();
         }
 
@@ -98,7 +100,7 @@ namespace Repository
 
             }
 
-            EmailRepository.Send
+            Email.Send
                 (
                 to: account.Persons.Email,
                 subject: "Sign-up Verification API - Reset Password",

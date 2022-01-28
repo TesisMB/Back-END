@@ -11,7 +11,7 @@ namespace Repository
 
         }
 
-        public void CreateMaterial(Messages messages)
+        public void CreateMessage(Messages messages)
         {
             Create(messages);
         }

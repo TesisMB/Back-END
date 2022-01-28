@@ -11,7 +11,7 @@ namespace Entities.Models
     public class Medicines
     {
         [Key]
-        public int ID { get; set; }
+        public int? ID { get; set; }
 
         [Required]
         [MaxLength(50)]

@@ -64,5 +64,7 @@ namespace Back_End.Models
 
         [ForeignKey("FK_UserID")]
         public ICollection<UsersChatRooms> UsersChatRooms { get; set; }
+        public Messages Messages { get; set; }
+
     }
 }

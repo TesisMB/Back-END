@@ -13,7 +13,6 @@ namespace Entities.Models
         public Resources_Request Resources_Request { get; set; }
         public int FK_Resources_RequestID { get; set; }
 
-
         public Resources_Materials Resources_Materials { get; set; }
         public int? FK_Resources_MaterialsID { get; set; }
 

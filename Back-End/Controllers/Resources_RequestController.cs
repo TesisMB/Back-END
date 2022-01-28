@@ -5,6 +5,7 @@ using Entities.Helpers;
 using Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Repository;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -61,24 +62,56 @@ namespace Back_End.Controllers
 
                 var resourceRequest = _mapper.Map<Resources_Request>(resources_Request);
 
+                foreach (var item2 in resourceRequest.Resources_RequestResources_Materials_Medicines_Vehicles)
+                {
+                    //MEDICINES
+                    if (item2.Resources_Medicines.FK_MedicineID == 0 && item2.FK_VehiclesID != 0 && item2.Resources_Materials.FK_MaterialID != 0)
+                    {
+                        item2.Resources_Medicines = null;
+                    }
+                    else if (item2.Resources_Medicines.FK_MedicineID != 0 && item2.FK_VehiclesID != 0 && item2.Resources_Materials.FK_MaterialID == 0)
+                    {
+                        item2.Resources_Materials = null;
 
-                //Rebisar si hay en stock Materials o Medicines
+                    }
+                    else if (item2.Resources_Medicines.FK_MedicineID != 0 && item2.FK_VehiclesID == 0 && item2.Resources_Materials.FK_MaterialID == 0)
+                    {
+                        item2.Resources_Materials = null;
+                        item2.FK_VehiclesID = null;
+
+                    }
+                    else if (item2.Resources_Medicines.FK_MedicineID == 0 && item2.FK_VehiclesID == 0 && item2.Resources_Materials.FK_MaterialID != 0)
+                    {
+                        item2.Resources_Medicines = null;
+                        item2.FK_VehiclesID = null;
+                    }
+                    else if (item2.Resources_Medicines.FK_MedicineID == 0 && item2.FK_VehiclesID != 0 && item2.Resources_Materials.FK_MaterialID == 0)
+                    {
+                        item2.Resources_Materials = null;
+                        item2.Resources_Medicines = null;
+                    }
+                }
+
+                //resourceRequest.FK_UserID = UsersRepository.authUser.UserID;
+
+
+                //Revisar si hay en stock Materials o Medicines
                 var resource = _repository.Resources_Requests.Stock(resourceRequest);
 
                 foreach (var resources in resource.Resources_RequestResources_Materials_Medicines_Vehicles)
                 {
-
-                    if (resources.Resources_Materials.Materials == null || resources.Resources_Medicines.Medicines == null)
+                    if (resources.Resources_Materials == null && resources.Resources_Medicines == null && resources.FK_VehiclesID == null)
                     {
                         return BadRequest(ErrorHelper.Response(400, "No hay Stock!!!"));
                     }
-
-                    resources.Resources_Materials.Materials = null;
-                    resources.Resources_Medicines.Medicines = null;
                 }
 
-                _repository.Resources_Requests.CreateResource_Resquest(resourceRequest);
+                var recurso = _repository.Resources_Requests.DeleteResource(resource);
+                
 
+                _repository.Resources_Requests.CreateResource_Resquest(resource);
+
+                _repository.Resources_Requests.SaveAsync();
                 return Ok();
             }
             catch (Exception ex)

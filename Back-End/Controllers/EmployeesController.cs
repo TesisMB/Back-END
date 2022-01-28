@@ -141,9 +141,11 @@ namespace Back_End.Controllers
                 }
 
 
-                _repository.Employees.CreateEmployee(employee);
+                var employeeEntity = _mapper.Map<Employees>(employee);
 
-                //_repository.Employees.SaveAsync();
+                _repository.Employees.CreateEmployee(employeeEntity);
+
+                _repository.Employees.SaveAsync();
 
                 return Ok();
             }

@@ -133,7 +133,7 @@ namespace Back_End.Controllers
 
                 {
                     _logger.LogInfo($"Returned volunteer with id: {volunteerId}");
-                    var volunteerResult = _mapper.Map<Resource_Dto>(volunteer);
+                    var volunteerResult = _mapper.Map<Resources_Dto>(volunteer);
                     return Ok(volunteerResult);
 
                 }
@@ -172,8 +172,7 @@ namespace Back_End.Controllers
 
                 // Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
                 _repository.Volunteers.CreateVolunteer(volunteerEntity);
-                volunteerEntity.Users.UserPassword = Encrypt.GetSHA256(volunteerEntity.Users.UserPassword);
-
+                //volunteerEntity.Users.UserPassword = Encrypt.GetSHA256(volunteerEntity.Users.UserPassword);
 
                 _repository.Volunteers.SaveAsync();
 

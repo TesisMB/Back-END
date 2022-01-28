@@ -29,6 +29,8 @@ namespace Contracts.Interfaces
         IChatRepository Chat { get; }
         IMessageRepository Messages { get; }
 
+        IUsersChatRoomsRepository UsersChatRooms { get; }
+
 
         // void Save();
     }

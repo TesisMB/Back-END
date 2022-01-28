@@ -17,15 +17,13 @@ namespace Back_End.Controllers
         private ILoggerManager _logger;
         private IMapper _mapper;
         private IRepositorWrapper _repository;
-        //private IHubContext<Mensaje> _hubContext;
 
 
-        public ChatRoomsController(ILoggerManager logger, IMapper mapper, IRepositorWrapper repository) //IHubContext<Mensaje> hubContext)
+        public ChatRoomsController(ILoggerManager logger, IMapper mapper, IRepositorWrapper repository)
         {
             _logger = logger;
             _mapper = mapper;
             _repository = repository;
-            //_hubContext = hubContext;
         }
 
         [HttpGet]
@@ -75,21 +73,84 @@ namespace Back_End.Controllers
         [HttpPost]
         public IActionResult SendMessage([FromBody] MessagesForCreationDto message)
         {
-
-            if (message == null)
+            try
             {
+                if (message == null)
+                {
 
-                _logger.LogError("Message object sent from client is null.");
-                return BadRequest("Message object is null");
+                    _logger.LogError("Message object sent from client is null.");
+                    return BadRequest("Message object is null");
+                }
+
+                var messages = _mapper.Map<Messages>(message);
+
+                _repository.Messages.Create(messages);
+
+                _repository.Messages.SaveAsync();
+
+                return StatusCode(200, message);
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside SendMessage aciton: {ex.Message}");
+                return StatusCode(500, "interval Server Error");
+            }
+        }
+
+
+        [HttpPost("JoinGroup")]
+        public IActionResult JoinGroup([FromBody] UsersChatRoomsJoin_LeaveGroupDto usersChat)
+        {
+            try
+            {
+                if (usersChat == null)
+                {
+                    _logger.LogError("UsersChat object sent from client is null.");
+                    return BadRequest("UsersChat object is null");
+                }
+
+                var userChatRoom = _mapper.Map<UsersChatRooms>(usersChat);
+
+                _repository.UsersChatRooms.Create(userChatRoom);
+
+                _repository.Messages.SaveAsync();
+
+                return Ok();
+
+            }
+            catch (Exception ex) {
+                _logger.LogError($"Something went wrong inside JoinGroup aciton: {ex.Message}");
+                return StatusCode(500, "interval Server Error");
+            }
+        }
+
+        [HttpDelete("LeaveGroup/{UserID}/{chatRoomID}")]
+        public async Task<ActionResult> LeaveGroup(int UserID, int chatRoomID) 
+        {
+            try
+            {
+                var usersChatRooms = await _repository.UsersChatRooms.GetUsersChatRooms(UserID, chatRoomID);
+                
+                if(usersChatRooms == null)
+                {
+                    _logger.LogError($"User with id: {UserID} and ChatRoom with id: {chatRoomID}, hasn't ben found in db.");
+                    return NotFound();
+                }
+
+                _repository.UsersChatRooms.LeaveGroup(usersChatRooms);
+                _repository.UsersChatRooms.SaveAsync();
+
+                return NoContent();
             }
 
-            var messages = _mapper.Map<Messages>(message);
-
-            _repository.Messages.Create(messages);
-
-            _repository.Messages.SaveAsync();
-
-            return StatusCode(200, message);
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside LeaveGroup action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
         }
+
+
     }
 }

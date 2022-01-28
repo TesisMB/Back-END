@@ -21,6 +21,7 @@ namespace Repository
         private IChatRepository _chats;
         private IMessageRepository _messages;
         private IResources_RequestRepository _resources_Request;
+        private IUsersChatRoomsRepository _userChatRooms;
 
         private IMapper _mapper;
 
@@ -184,6 +185,18 @@ namespace Repository
                     _messages = new MessageRepository(_cruzRojaContext);
                 }
                 return _messages;
+            }
+        }
+
+        public IUsersChatRoomsRepository UsersChatRooms
+        {
+            get
+            {
+                if (_userChatRooms == null)
+                {
+                    _userChatRooms = new UsersChatRoomsRepository(_cruzRojaContext);
+                }
+                return _userChatRooms;
             }
         }
 

@@ -10,3 +10,12 @@
 2022-01-28 14:48:58.9300 INFO Returned employe with details for id: 2
 2022-01-28 14:53:30.9276 INFO Returned employe with details for id: 2
 2022-01-28 14:59:00.6440 INFO Returned employe with details for id: 2
+2022-01-28 17:32:17.9740 ERROR Something went wrong inside JoinGroup aciton: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+UsersChatRoomsJoin_LeaveGroupDto -> UsersChatRooms
+Entities.DataTransferObjects.CharRooms___Dto.UsersChatRoomsJoin_LeaveGroupDto -> Entities.Models.UsersChatRooms
+2022-01-28 17:34:17.5983 INFO Returned all ChatRooms from database. 
+2022-01-28 18:00:41.8972 ERROR User with id: 2 and ChatRoom with id: 28, hasn't ben found in db.
+2022-01-28 18:00:53.2341 ERROR User with id: 2 and ChatRoom with id: 30, hasn't ben found in db.
+2022-01-28 18:01:01.6705 INFO Returned all ChatRooms from database. 

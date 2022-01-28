@@ -55,7 +55,7 @@ namespace Back_End.Models
 
         public ICollection<Resources_Request> Resources_Requests { get; set; }
 
-        [ForeignKey("FK_UserID")]
+        [ForeignKey("FK_UserID")] 
         public ICollection<UsersNotifications> UsersNotifications { get; set; }
 
 

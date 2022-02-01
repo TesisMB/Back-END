@@ -31,9 +31,11 @@ namespace Back_End.Controllers
             try
             {
                 var emergenciesDisasters = await _repository.EmergenciesDisasters.GetAllEmergenciesDisasters();
+
                 _logger.LogInfo($"Returned all emergenciesDisasters from database.");
 
                 var emergenciesDisastersResult = _mapper.Map<IEnumerable<EmergenciesDisastersDto>>(emergenciesDisasters);
+
 
                 return Ok(emergenciesDisastersResult);
 

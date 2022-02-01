@@ -10,7 +10,8 @@ namespace Entities.Profiles
     {
         public EmergenciesDisastersProfiles()
         {
-            CreateMap<EmergenciesDisasters, EmergenciesDisastersDto>();
+            CreateMap<EmergenciesDisasters, EmergenciesDisastersDto>()
+                                   .ForPath(dest => dest.EmergencyDisasterStartDate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDateTime(src.EmergencyDisasterStartDate)));
 
 
             CreateMap<EmergenciesDisastersForCreationDto, EmergenciesDisasters>();

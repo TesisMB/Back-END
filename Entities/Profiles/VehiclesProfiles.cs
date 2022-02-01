@@ -12,13 +12,13 @@ namespace Entities.Profiles
     {
         public VehiclesProfiles()
         {
-            CreateMap<Vehicles, VehiclesDto>();
+            CreateMap<Vehicles, VehiclesDto>()
+
+               .ForPath(dest => dest.Type, opts => opts.MapFrom(src => src.TypeVehicles.Type));
 
             CreateMap<Vehicles, Resources_Dto>()
 
                .ForMember(dest => dest.Name, opts => opts.MapFrom(src => $"{src.BrandsModels.Brands.BrandName } {src.BrandsModels.Model.ModelName}"))
-
-                //.ForPath(dest => dest.Vehicles.Utility, opts => opts.MapFrom(src => src.VehicleUtility))
 
                 .ForMember(dest => dest.Description,
                             opt => opt.MapFrom(src => src.VehicleDescription))
@@ -38,10 +38,6 @@ namespace Entities.Profiles
                  .ForPath(dest => dest.LocationCityName, opts => opts.MapFrom(src => src.Estates.Locations.LocationCityName))
 
                  .ForPath(dest => dest.Vehicles.EmployeeName, opts => opts.MapFrom(src => $"{src.Employees.Users.Persons.FirstName} {src.Employees.Users.Persons.LastName}"));
-
-            //.ForPath(dest => dest.Vehicles.Employees, opts => opts.MapFrom(src => src.Employees));
-
-            //.ForPath(dest => dest.Vehicles.BrandsModels, opts => opts.MapFrom(src => src.BrandsModels));
             ;
 
 

@@ -14,7 +14,8 @@ namespace Entities.Profiles
 
         public MedicinesProfiles()
         {
-            CreateMap<Medicines, MedicinesDto>();
+            CreateMap<Medicines, MedicinesDto>()
+                                     .ForPath(dest => dest.MedicineExpirationDate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.MedicineExpirationDate)));
 
             CreateMap<Medicines, Resources_Dto>()
 

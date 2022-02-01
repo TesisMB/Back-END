@@ -13,11 +13,10 @@ namespace Back_End.Profiles
         {
             //Creo Las clases a ser mapeadas
             CreateMap<Employees, EmployeesDto>();
-            CreateMap<Employees, EmployeeDto>();
-                //.ForMember(i => i.Users.Persons.Birthdate, opt => opt.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.Users.Persons.Birthdate)));
+            CreateMap<Employees, EmployeeDto>()
+                .ForMember(i => i.EmployeeCreatedate, opt => opt.MapFrom(src => DateTimeOffsetExtensions.GetDateTime(src.EmployeeCreatedate)));
 
             CreateMap<Employees, EmployeesVehiclesDto>();
-
 
             CreateMap<EmployeesForCreationDto, Employees>();
 

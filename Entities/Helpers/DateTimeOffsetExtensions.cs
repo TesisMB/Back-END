@@ -10,6 +10,12 @@ namespace Entities.Helpers
 
             return fecha;
         }
+        public static string GetDateTime(DateTime date)
+        {
+            var fecha = date.ToString(@"dd/MM/yyyy hh\:mm\:ss");
+
+            return fecha;
+        }
 
         public static string GetTime(TimeSpan time)
         {

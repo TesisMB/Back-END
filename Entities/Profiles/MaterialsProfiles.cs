@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using Entities.DataTransferObjects.Materials___Dto;
+using Entities.DataTransferObjects.Resources_RequestResources_Materials_Medicines_Vehicles___Dto;
 using Entities.DataTransferObjects.ResourcesDto;
 using Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Entities.Profiles
 {
@@ -13,6 +11,8 @@ namespace Entities.Profiles
         public MaterialsProfiles()
         {
             CreateMap<Materials, MaterialsDto>();
+
+
 
             CreateMap<Materials, Resources_Dto>()
                 .ForMember(dest => dest.Name,

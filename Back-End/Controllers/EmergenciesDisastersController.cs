@@ -38,7 +38,7 @@ namespace Back_End.Controllers
                 return Ok(emergenciesDisastersResult);
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside GetAllEmegenciesDisasters action: {ex.Message}");
                 return StatusCode(500, "Internal Server error");
@@ -50,9 +50,9 @@ namespace Back_End.Controllers
         {
             try
             {
-                var emegencyDisaster =  await _repository.EmergenciesDisasters.GetEmergencyDisasterWithDetails(emegencyDisasterID);
-           
-                if(emegencyDisaster == null)
+                var emegencyDisaster = await _repository.EmergenciesDisasters.GetEmergencyDisasterWithDetails(emegencyDisasterID);
+
+                if (emegencyDisaster == null)
                 {
                     _logger.LogError($"EmergenciesDisasters with id: {emegencyDisasterID}, hasn't been found in db.");
 
@@ -64,9 +64,9 @@ namespace Back_End.Controllers
                 var emergencyDisasterResult = _mapper.Map<EmergenciesDisastersDto>(emegencyDisaster);
 
                 return Ok(emergencyDisasterResult);
-            
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside GetEmegencyDisasterIDWithDetails action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
@@ -88,17 +88,17 @@ namespace Back_End.Controllers
                     _logger.LogError("EmergencyDisaster object sent from client is null.");
                     return BadRequest("EmergencyDisaster object is null");
                 }
-            
 
-            var emergencyDisaster = _mapper.Map<EmergenciesDisasters>(emergenciesDisasters);
 
-            _repository.EmergenciesDisasters.CreateEmergencyDisaster(emergencyDisaster);
+                var emergencyDisaster = _mapper.Map<EmergenciesDisasters>(emergenciesDisasters);
 
-             _repository.EmergenciesDisasters.SaveAsync();
+                _repository.EmergenciesDisasters.CreateEmergencyDisaster(emergencyDisaster);
 
-            return Ok();
+                _repository.EmergenciesDisasters.SaveAsync();
+
+                return Ok();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside CreateEmergenciesDisaster action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
@@ -111,7 +111,7 @@ namespace Back_End.Controllers
             try
             {
                 var emergencyDisaster = await _repository.EmergenciesDisasters.GetEmergencyDisasterById(emegencyDisasterID);
-             
+
                 if (emergencyDisaster == null)
                 {
                     return NotFound();
@@ -135,7 +135,7 @@ namespace Back_End.Controllers
                 return NoContent();
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside UpdatePartialEmegencyDisaster action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
@@ -148,14 +148,14 @@ namespace Back_End.Controllers
             try
             {
 
-            var emegencyDisaster = await _repository.EmergenciesDisasters.GetEmergencyDisasterById(emegencyDisasterID);
+                var emegencyDisaster = await _repository.EmergenciesDisasters.GetEmergencyDisasterById(emegencyDisasterID);
 
-            if(emegencyDisaster == null)
-            {
+                if (emegencyDisaster == null)
+                {
                     _logger.LogError($"EmergencyDisaster with id: {emegencyDisasterID}, hasn't ben found in db.");
 
                     return NotFound();
-            }
+                }
 
 
                 _repository.EmergenciesDisasters.DeleteEmergencyDisaster(emegencyDisaster);
@@ -166,7 +166,7 @@ namespace Back_End.Controllers
 
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside DeletemegencyDisaster action: {ex.Message}");
                 return StatusCode(500, "Internal server error");

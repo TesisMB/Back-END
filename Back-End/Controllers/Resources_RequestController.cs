@@ -92,7 +92,7 @@ namespace Back_End.Controllers
                     }
                 }
 
-                //resourceRequest.FK_UserID = UsersRepository.authUser.UserID;
+                resourceRequest.FK_UserID = UsersRepository.authUser.UserID;
 
 
                 //Revisar si hay en stock Materials o Medicines
@@ -100,14 +100,27 @@ namespace Back_End.Controllers
 
                 foreach (var resources in resource.Resources_RequestResources_Materials_Medicines_Vehicles)
                 {
-                    if (resources.Resources_Materials == null && resources.Resources_Medicines == null && resources.FK_VehiclesID == null)
+                    if (resources.Resources_Materials == null && resources.Resources_Medicines == null && !resources.Vehicles.VehicleAvailability)
                     {
-                        return BadRequest(ErrorHelper.Response(400, "No hay Stock!!!"));
+
+                        return BadRequest(ErrorHelper.Response(400, @$"Vehicle no disponible {resources.FK_VehiclesID}"));
+                    }
+
+                    if (resources.Resources_Medicines == null && resources.FK_VehiclesID == null && resources.Resources_Materials.Quantity - resources.Resources_Materials.Materials.MaterialQuantity > 0)
+                 
+                    {
+                        return BadRequest(ErrorHelper.Response(400, @$"Material sin stock {resources.Resources_Materials.FK_MaterialID}"));
+                    }
+
+                    if (resources.Resources_Materials == null && resources.FK_VehiclesID == null && resources.Resources_Medicines.Quantity - resources.Resources_Medicines.Medicines.MedicineQuantity > 0)
+                    {
+                        return BadRequest(ErrorHelper.Response(400, @$"Medicine sin stock {resources.Resources_Medicines.FK_MedicineID}"));
+
                     }
                 }
-
-                var recurso = _repository.Resources_Requests.DeleteResource(resource);
                 
+                //Pongo Null los valores Materials - Medicines - Vehicles para que no hay auna inconsistencia en los datos y algun error con la base de datos.
+                var recurso = _repository.Resources_Requests.DeleteResource(resource);
 
                 _repository.Resources_Requests.CreateResource_Resquest(resource);
 
@@ -116,7 +129,7 @@ namespace Back_End.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Something went wrong inside CreateMedicine action: {ex.Message}");
+                _logger.LogError($"Something went wrong inside CreateResource_Request action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
         }
@@ -154,7 +167,7 @@ namespace Back_End.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Something went wrong inside UpdatePartialEmegencyDisaster action: {ex.Message}");
+                _logger.LogError($"Something went wrong inside UpdatePartialResource_Request action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
         }

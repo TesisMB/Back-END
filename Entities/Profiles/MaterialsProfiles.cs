@@ -15,12 +15,8 @@ namespace Entities.Profiles
             CreateMap<Materials, MaterialsDto>();
 
             CreateMap<Materials, Resources_Dto>()
-
                 .ForMember(dest => dest.Name,
                             opt => opt.MapFrom(src => src.MaterialName))
-
-                /*.ForMember(dest => dest.Materials.Mark,
-                          opt => opt.MapFrom(src => src.MaterialMark))*/
 
                 .ForPath(dest => dest.Materials.Brand, opts => opts.MapFrom(src => src.MaterialBrand))
 

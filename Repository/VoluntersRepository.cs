@@ -90,6 +90,8 @@ namespace Repository
 
             volunteer.Users.UserPassword = Encrypt.GetSHA256(volunteer.Users.UserPassword);
 
+
+
             Create(volunteer);
         }
 

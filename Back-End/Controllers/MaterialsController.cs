@@ -32,7 +32,6 @@ namespace Back_End.Controllers
         }
 
 
-        // GET: api/<MaterialsController>
         [HttpGet]
         public async Task<ActionResult<Materials>> GetAllVolunteers()
         {
@@ -56,7 +55,6 @@ namespace Back_End.Controllers
             }
         }
 
-        // GET api/<MaterialsController>/5
         [HttpGet("{materialId}")]
         public async Task<ActionResult<Materials>> GetMaterial(int materialId)
         {
@@ -93,7 +91,6 @@ namespace Back_End.Controllers
             }
         }
 
-        // POST api/<MaterialsController>
         [HttpPost]
         public async Task<ActionResult<Materials>> CreateMaterial([FromBody] MaterialsForCreationDto material)
         {
@@ -113,7 +110,6 @@ namespace Back_End.Controllers
                 }
 
                 var materialEntity = _mapper.Map<Materials>(material);
-
 
                 _repository.Materials.CreateMaterial(materialEntity);
 

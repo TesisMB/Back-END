@@ -59,7 +59,7 @@ namespace Back_End.Controllers
             {
                 var vehicle = await _repository.Vehicles.GetVehicleWithDetails(vehicleId);
 
-                if(vehicle == null)
+                if (vehicle == null)
                 {
                     _logger.LogError($"Vehicle with id: {vehicleId}, hasn't been found in db.");
                     return NotFound();
@@ -72,7 +72,8 @@ namespace Back_End.Controllers
                     return Ok(vehicleResult);
                 }
 
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside GetVehicleById action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
@@ -100,13 +101,14 @@ namespace Back_End.Controllers
 
                 _repository.Vehicles.CreateVehicle(vehicleEntity);
 
-                 _repository.Vehicles.SaveAsync();
+                _repository.Vehicles.SaveAsync();
 
                 var createdVehicle = _mapper.Map<VehiclesDto>(vehicleEntity);
 
                 return Ok();
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
 
             {
                 _logger.LogError($"Something went wrong inside CreateVehicle action: {ex.Message}");
@@ -121,7 +123,7 @@ namespace Back_End.Controllers
             {
                 var vehicleEntity = await _repository.Vehicles.GetVehicleById(vehicleId);
 
-                if(vehicleEntity == null)
+                if (vehicleEntity == null)
                 {
                     _logger.LogError($"Vehicle with id: {vehicleId}, hasn't been found in db.");
                     return NotFound();
@@ -141,11 +143,12 @@ namespace Back_End.Controllers
 
                 _repository.Vehicles.Update(vehicleResult);
 
-                 _repository.Vehicles.SaveAsync();
+                _repository.Vehicles.SaveAsync();
 
                 return NoContent();
-            
-            }catch (Exception ex)
+
+            }
+            catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside UpdateVehicle action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
@@ -154,13 +157,13 @@ namespace Back_End.Controllers
 
 
         [HttpDelete("{vehicleId}")]
-        public async Task<ActionResult> DeleteVehicle (int vehicleId)
+        public async Task<ActionResult> DeleteVehicle(int vehicleId)
         {
             try
             {
                 var vehicle = await _repository.Vehicles.GetVehicleById(vehicleId);
 
-                if(vehicle == null)
+                if (vehicle == null)
                 {
                     _logger.LogError($"Vehicle with id: {vehicleId}, hasn't ben found in db.");
                     return NotFound();
@@ -168,11 +171,12 @@ namespace Back_End.Controllers
 
                 _repository.Vehicles.DeleteVehicle(vehicle);
 
-                 _repository.Vehicles.SaveAsync();
+                _repository.Vehicles.SaveAsync();
 
                 return NoContent();
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside DeleteVehicle action: {ex.Message}");
                 return StatusCode(500, "Internal server error");

@@ -25,35 +25,46 @@ namespace Repository
 
             var collection = _cruzRojaContext.Resources_Requests as IQueryable<Resources_Request>;
 
-          /*  if (user.Roles.RoleName == "Encargado de Logistica")
-            {
-                collection = collection.Where(
-                    a => a.Users.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
-            }
-            else
-            {
-                return null;
-            }*/
+                  collection = collection.Where(
+                      a => a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
 
-            return await FindAll()
-                .Include(i => i.Users)
+             /*if (user.Roles.RoleName == "Encargado de Logistica")
+              {
+              }
+              else
+              {
+                  return null;
+              }*/
+
+            return await collection
+                //.Include(i => i.Users)
                 .Include(i => i.EmergenciesDisasters)
+                //.ThenInclude(i => i.TypesEmergenciesDisasters)
+                //.Include(i => i.EmergenciesDisasters.Alerts)
+
                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Vehicles)
+                .ThenInclude(i => i.TypeVehicles)
+                .ThenInclude(i => i.Vehicles)
+                .ThenInclude(i => i.BrandsModels)
+                .ThenInclude(i => i.Brands)
+                .ThenInclude(i => i.BrandsModels)
+                .ThenInclude(i => i.Model)
+
                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Resources_Materials)
                 .ThenInclude(i => i.Materials)
+
                  .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Resources_Medicines)
                 .ThenInclude(i => i.Medicines)
-                .Include(i => i.EmergenciesDisasters)
-                .ThenInclude(i => i.TypesEmergenciesDisasters)
-                .Include(i => i.EmergenciesDisasters.Alerts)
+
                 .Include(i => i.Users)
                 .Include(i => i.Users.Persons)
                 .Include(i => i.Users.Roles)
                 .Include(i => i.Users.Estates)
-                .ThenInclude(i => i.Locations)
+                .Include(i => i.Users.Estates.LocationAddress)
+                .Include(i => i.Users.Estates.Locations)
                 .Include(i => i.Users.Locations)
                 .ToListAsync();
         }
@@ -67,9 +78,9 @@ namespace Repository
         private void spaceCamelCase(Resources_Request resources_Request)
         {
             //Falta implementarlos en el PATCH
-            if(resources_Request.Reason != null)
+            if (resources_Request.Reason != null)
             {
-            resources_Request.Reason = WithoutSpace_CamelCase.GetCamelCase(resources_Request.Reason);
+                resources_Request.Reason = WithoutSpace_CamelCase.GetCamelCase(resources_Request.Reason);
             }
         }
 
@@ -83,13 +94,13 @@ namespace Repository
             {
                 var db = new CruzRojaContext();
 
-                if(resources.Resources_Materials != null)
+                if (resources.Resources_Materials != null)
                 {
-                materials = db.Materials
-                    .Include(i => i.Resources_Materials)
-                    .Where(
-                     a => a.ID == resources.Resources_Materials.FK_MaterialID)
-                    .FirstOrDefault();
+                    materials = db.Materials
+                        .Include(i => i.Resources_Materials)
+                        .Where(
+                         a => a.ID == resources.Resources_Materials.FK_MaterialID)
+                        .FirstOrDefault();
 
                     resources.Resources_Materials.Materials = materials;
 
@@ -103,49 +114,49 @@ namespace Repository
                      a => a.ID == resources.Resources_Medicines.FK_MedicineID)
                     .FirstOrDefault();
 
-                resources.Resources_Medicines.Medicines = medicines;
+                    resources.Resources_Medicines.Medicines = medicines;
                 }
 
-                if(resources.FK_VehiclesID != null)
+                if (resources.FK_VehiclesID != null)
                 {
                     vehicles = db.Vehicles
                    .Where(
                     a => a.ID == resources.FK_VehiclesID)
                    .FirstOrDefault();
 
-                resources.Vehicles = vehicles;
+                    resources.Vehicles = vehicles;
                 }
 
 
-            if (resources.Resources_Materials != null)
-            {
-                resources.Resources_Materials.Materials.MaterialQuantity = materials.MaterialQuantity - resources.Resources_Materials.Quantity;
-
-                if (resources.Resources_Materials.Materials.MaterialQuantity == 0)
+                if (resources.Resources_Materials != null)
                 {
-                    resources.Resources_Materials.Materials.MaterialAvailability = false;
+                    resources.Resources_Materials.Materials.MaterialQuantity = materials.MaterialQuantity - resources.Resources_Materials.Quantity;
+
+                    if (resources.Resources_Materials.Materials.MaterialQuantity == 0)
+                    {
+                        resources.Resources_Materials.Materials.MaterialAvailability = false;
+                    }
                 }
-            }
 
-            if (resources.Resources_Medicines != null)
-            {
-                resources.Resources_Medicines.Medicines.MedicineQuantity = medicines.MedicineQuantity - resources.Resources_Medicines.Quantity;
-
-                if (resources.Resources_Medicines.Medicines.MedicineQuantity == 0)
+                if (resources.Resources_Medicines != null)
                 {
-                    resources.Resources_Medicines.Medicines.MedicineAvailability = false;
+                    resources.Resources_Medicines.Medicines.MedicineQuantity = medicines.MedicineQuantity - resources.Resources_Medicines.Quantity;
+
+                    if (resources.Resources_Medicines.Medicines.MedicineQuantity == 0)
+                    {
+                        resources.Resources_Medicines.Medicines.MedicineAvailability = false;
+                    }
                 }
-            }
 
 
-            if (resources.Vehicles != null)
-            {
-                resources.Vehicles.VehicleAvailability = false;
-            }
+                if (resources.Vehicles != null)
+                {
+                    resources.Vehicles.VehicleAvailability = false;
+                }
                 //Update(resources);
                 //SaveAsync();
             }
-         }
+        }
 
         public async Task<Resources_Request> GetResourcesRequestByID(int resource)
         {
@@ -183,45 +194,42 @@ namespace Repository
 
             foreach (var resources in resources_Request.Resources_RequestResources_Materials_Medicines_Vehicles)
             {
-            if (resources.Resources_Request.Status == false)
-
-            {
-                if (resources.Resources_Materials.Materials != null)
+                if (resources_Request.Status == false)
                 {
+
+                    if (resources.Vehicles == null && resources.Resources_Medicines == null && resources.Resources_Materials != null)
+                    {
                         resources.Resources_Materials.Materials.MaterialQuantity = resources.Resources_Materials.Materials.MaterialQuantity + resources.Resources_Materials.Quantity;
-                }
+                        resources.Resources_Materials.Materials.MaterialAvailability = true;
+                        _cruzRojaContext.Entry(resources.Resources_Materials.Materials).CurrentValues.SetValues(resources.Resources_Materials.Materials);
+                    }
 
-                if (resources.Resources_Medicines.Medicines != null)
-                {
+
+                    if (resources.Vehicles == null && resources.Resources_Materials == null && resources.Resources_Medicines != null)
+                    {
                         resources.Resources_Medicines.Medicines.MedicineQuantity = resources.Resources_Medicines.Medicines.MedicineQuantity + resources.Resources_Medicines.Quantity;
-                }
+                        resources.Resources_Medicines.Medicines.MedicineAvailability = true;
+                        _cruzRojaContext.Entry(resources.Resources_Medicines.Medicines).CurrentValues.SetValues(resources.Resources_Medicines.Medicines);
+                    }
 
-                if (resources.Vehicles != null)
-                {
+                    if (resources.Resources_Materials == null && resources.Resources_Medicines == null && resources.Vehicles != null)
+                    {
                         resources.Vehicles.VehicleAvailability = true;
+                        //Entry le dice al DbContext que cambie el estado de la entidad en modificado
+                        //setvalues realiza una copia del objeto pasado con los cambios
+                        _cruzRojaContext.Entry(resources.Vehicles).CurrentValues.SetValues(resources.Vehicles);
+                    }
                 }
 
-                //var group = _cruzRojaContext.Materials.First(g => g.ID == materials.ID);
-                _cruzRojaContext.Entry(resources.Resources_Materials.Materials).CurrentValues.SetValues(resources.Resources_Materials.Materials);
-                // await _cruzRojaContext.SaveChangesAsync();
-
-                //var group1 = _cruzRojaContext.Medicines.First(g => g.ID == medicines.ID);
-                _cruzRojaContext.Entry(resources.Resources_Medicines.Medicines).CurrentValues.SetValues(resources.Resources_Medicines.Medicines);
-                //Entry le dice al DbContext que cambie el estado de la entidad en modificado
-                //setvalues realiza una copia del objeto pasado con los cambios
-                //Update(resources_Request);
-                _cruzRojaContext.Entry(resources.Vehicles).CurrentValues.SetValues(resources.Vehicles);
             }
-
             Update(resources_Request);
-
-            }
         }
 
         public Resources_Request Stock(Resources_Request resources_Request)
         {
             Materials materials = null;
             Medicines medicines = null;
+            Vehicles vehicles = null;
 
             resources_Request.FK_UserID = 2;
 
@@ -233,8 +241,8 @@ namespace Repository
                 {
                     materials = db.Materials
                      .Where(i => i.ID == resource.Resources_Materials.FK_MaterialID
-                     &&
-                     (i.MaterialQuantity - resource.Resources_Materials.Quantity) >= 0
+                     // &&
+                     //   (i.MaterialQuantity - resource.Resources_Materials.Quantity) >= 0
                      )
                      .FirstOrDefault();
 
@@ -247,28 +255,41 @@ namespace Repository
 
                 }
 
-                    if (resource.Resources_Medicines != null)
+                if (resource.Resources_Medicines != null)
+                {
+                    medicines = db.Medicines
+                        .Where(i => i.ID == resource.Resources_Medicines.FK_MedicineID
+                           //  &&
+                           //(i.MedicineQuantity - resource.Resources_Medicines.Quantity) >= 0
+                           )
+                        .FirstOrDefault();
+
+                    resource.Resources_Medicines.Medicines = medicines;
+
+                    if (medicines == null)
                     {
-                        medicines = db.Medicines
-                            .Where(i => i.ID == resource.Resources_Medicines.FK_MedicineID
-                               &&
-                               (i.MedicineQuantity - resource.Resources_Medicines.Quantity) >= 0
-                               )
-                            .FirstOrDefault();
-
-                        resource.Resources_Medicines.Medicines = medicines;
-
-                        if (medicines == null)
-                        {
-                            resource.Resources_Medicines = null;
-                        }
+                        resource.Resources_Medicines = null;
                     }
+                }
+
+                if (resource.FK_VehiclesID != null)
+                {
+                    vehicles = db.Vehicles
+                        .Where(i => i.ID == resource.FK_VehiclesID
+                           //  &&
+                           //(i.MedicineQuantity - resource.Resources_Medicines.Quantity) >= 0
+                           )
+                        .FirstOrDefault();
+
+                    resource.Vehicles = vehicles;
+
+                    if (vehicles == null)
+                    {
+                        resource.Vehicles = null;
+                    }
+                }
             }
-
-
             return resources_Request;
-
-
         }
 
         public Resources_Request DeleteResource(Resources_Request resources_Request)
@@ -276,7 +297,7 @@ namespace Repository
 
             foreach (var item in resources_Request.Resources_RequestResources_Materials_Medicines_Vehicles)
             {
-                if(item.Resources_Materials != null)
+                if (item.Resources_Materials != null)
                 {
                     item.Resources_Materials.Materials = null;
                 }
@@ -284,6 +305,11 @@ namespace Repository
                 if (item.Resources_Medicines != null)
                 {
                     item.Resources_Medicines.Medicines = null;
+                }
+
+                if (item.Vehicles != null)
+                {
+                    item.Vehicles = null;
                 }
             }
 

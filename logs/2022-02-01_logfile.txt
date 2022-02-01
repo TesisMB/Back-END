@@ -1,0 +1,25 @@
+2022-02-01 10:06:35.0550 INFO Returned User.
+2022-02-01 10:09:02.0191 ERROR Something went wrong inside CreateMedicine action: Object reference not set to an instance of an object.
+2022-02-01 10:09:33.9903 INFO Returned User.
+2022-02-01 10:11:33.6997 INFO Returned User.
+2022-02-01 10:12:31.6378 INFO Returned User.
+2022-02-01 10:13:09.6003 ERROR Something went wrong inside CreateMedicine action: Object reference not set to an instance of an object.
+2022-02-01 10:13:16.3317 INFO Returned User.
+2022-02-01 10:15:13.4996 ERROR Something went wrong inside CreateMedicine action: Object reference not set to an instance of an object.
+2022-02-01 10:18:59.6134 INFO Returned User.
+2022-02-01 10:21:34.0366 INFO Returned User.
+2022-02-01 10:23:46.4898 INFO Returned User.
+2022-02-01 10:26:05.2601 INFO Returned User.
+2022-02-01 10:26:30.0887 ERROR Something went wrong inside CreateMedicine action: The instance of entity type 'Vehicles' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-02-01 10:29:13.7411 INFO Returned User.
+2022-02-01 11:00:50.2497 INFO Returned User.
+2022-02-01 11:00:55.3549 INFO Returned all Resources_Request from database.
+2022-02-01 11:01:50.8600 INFO Returned all Resources_Request from database.
+2022-02-01 11:03:38.1250 INFO Returned User.
+2022-02-01 11:03:39.9585 INFO Returned all Resources_Request from database.
+2022-02-01 11:05:36.5140 INFO Returned all Resources_Request from database.
+2022-02-01 11:05:38.3475 INFO Returned all Resources_Request from database.
+2022-02-01 11:10:51.4108 INFO Returned User.
+2022-02-01 11:10:53.1697 INFO Returned all Resources_Request from database.
+2022-02-01 11:51:07.9583 INFO Returned User.
+2022-02-01 11:51:10.5872 INFO Returned all Resources_Request from database.

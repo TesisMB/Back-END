@@ -35,22 +35,24 @@ namespace Back_End.Controllers
         public async Task<FileResult> GetEmployeeIDPDF(int employeeId)
         {
             var employee = await _repository.Employees.GetEmployeeWithDetails(employeeId);
-            /*
+            
                         var options = new ConvertOptions
                         {
                             PageMargins = new Wkhtmltopdf.NetCore.Options.Margins()
                             {
                                 Top = 5
                             }
-                        };*/
+                        };
 
-            // _generatePdf.SetConvertOptions(options);
+             _generatePdf.SetConvertOptions(options);
+
+
+               
 
             // var filePath = $"{employee.Users.Persons.FirstName} {employee.Users.Persons.LastName}.pdf"; // Here, you should validate the request and the existance of the file.
 
             // var bytes = await System.IO.File.ReadAllBytesAsync(filePath);
             //return File(bytes, "Views/Employee/EmployeeInfo.cshtml", Path.GetFileName(filePath));
-
 
             var pdf = await _generatePdf.GetByteArray("Views/Employee/EmployeeInfo.cshtml", employee);
 
@@ -58,6 +60,11 @@ namespace Back_End.Controllers
              pdfStream.Write(pdf, 0, pdf.Length);
              pdfStream.Position = 0;*/
 
+
+            //HttpContext.Response.ContentType = "application/pdf";
+
+            //string filename = @"report.pdf";
+            //HttpContext.Response.Headers.Add("x-filename", filename);
 
             //var pdf = await _generatePdf.GetByteArray("Views/Employee/EmployeeInfo.cshtml", employee);
 

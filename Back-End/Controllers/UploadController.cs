@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
 
 namespace Back_End.Controllers
 {
@@ -16,7 +12,6 @@ namespace Back_End.Controllers
         [HttpPost, DisableRequestSizeLimit]
         public ActionResult Upload()
         {
-            try
             {
                 var file = Request.Form.Files[0];
                 var folderName = Path.Combine("StaticFiles", "Images");
@@ -30,7 +25,7 @@ namespace Back_End.Controllers
 
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
-                         file.CopyTo(stream);
+                        file.CopyTo(stream);
                     }
                     return Ok(new { dbPath });
                 }
@@ -39,10 +34,7 @@ namespace Back_End.Controllers
                     return BadRequest();
                 }
             }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex}");
-            }
+       
         }
     }
 }

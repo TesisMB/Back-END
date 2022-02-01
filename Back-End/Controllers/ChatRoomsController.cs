@@ -119,20 +119,22 @@ namespace Back_End.Controllers
                 return Ok();
 
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 _logger.LogError($"Something went wrong inside JoinGroup aciton: {ex.Message}");
                 return StatusCode(500, "interval Server Error");
             }
         }
 
+
         [HttpDelete("LeaveGroup/{UserID}/{chatRoomID}")]
-        public async Task<ActionResult> LeaveGroup(int UserID, int chatRoomID) 
+        public async Task<ActionResult> LeaveGroup(int UserID, int chatRoomID)
         {
             try
             {
                 var usersChatRooms = await _repository.UsersChatRooms.GetUsersChatRooms(UserID, chatRoomID);
-                
-                if(usersChatRooms == null)
+
+                if (usersChatRooms == null)
                 {
                     _logger.LogError($"User with id: {UserID} and ChatRoom with id: {chatRoomID}, hasn't ben found in db.");
                     return NotFound();
@@ -150,7 +152,5 @@ namespace Back_End.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
-
-
     }
 }

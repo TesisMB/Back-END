@@ -11,7 +11,9 @@ namespace Entities.Profiles
     {
         public Resources_MaterialsProfiles()
         {
-            CreateMap<Resources_Materials, Resources_MaterialsDto>();
+            CreateMap<Resources_Materials, Resources_MaterialsDto>()
+                                .ForPath(dest => dest.Materials.Brand, opts => opts.MapFrom(src => src.Materials.MaterialBrand));
+            
             CreateMap<Resources_MaterialsForCreationDto, Resources_Materials>();
         }
     }

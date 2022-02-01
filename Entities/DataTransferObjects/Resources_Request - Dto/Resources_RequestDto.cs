@@ -10,7 +10,7 @@ namespace Entities.DataTransferObjects.Resources_Request___Dto
     {
         public int ID { get; set; }
 
-        public DateTime RequestDate { get; set; }
+        public string RequestDate { get; set; }
 
         public string Reason { get; set; }
 

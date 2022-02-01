@@ -18,6 +18,7 @@ namespace Repository
 
         public async Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisasters()
         {
+
             return await FindAll()
                 .Include(i => i.TypesEmergenciesDisasters)
                 .Include(i => i.Alerts)

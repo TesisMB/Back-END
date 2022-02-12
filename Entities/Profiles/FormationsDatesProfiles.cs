@@ -6,7 +6,7 @@ using Entities.Models;
 
 namespace Entities.Profiles
 {
-    public class FormationsDatesProfiles: Profile
+    public class FormationsDatesProfiles : Profile
     {
         public FormationsDatesProfiles()
         {

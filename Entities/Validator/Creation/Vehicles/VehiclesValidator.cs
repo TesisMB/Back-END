@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Entities.Validator.Creation.Vehicles
 {
-    public class VehiclesValidator :AbstractValidator<VehiclesForCreationDto>
+    public class VehiclesValidator : AbstractValidator<VehiclesForCreationDto>
     {
         public VehiclesValidator()
         {

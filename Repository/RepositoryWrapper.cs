@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Back_End.Entities;
 using Contracts.Interfaces;
-using Microsoft.Extensions.Options;
 
 namespace Repository
 {

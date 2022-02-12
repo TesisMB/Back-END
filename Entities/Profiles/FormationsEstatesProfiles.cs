@@ -4,7 +4,7 @@ using Entities.Models;
 
 namespace Entities.Profiles
 {
-    public class FormationsEstatesProfiles: Profile
+    public class FormationsEstatesProfiles : Profile
     {
         public FormationsEstatesProfiles()
         {

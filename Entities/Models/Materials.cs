@@ -3,15 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Entities.Models
 {
-    [Table ("Materials", Schema = "dbo")]
-   public class Materials
+    [Table("Materials", Schema = "dbo")]
+    public class Materials
     {
         [Key]
-        public int? ID { get; set; }
+        public string ID { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -37,7 +36,9 @@ namespace Entities.Models
 
         public Estates Estates { get; set; }
 
-        public ICollection<Resources_Materials> Resources_Materials { get; set; }
+        [ForeignKey("FK_MaterialID")]
+        public ICollection<Resources_RequestResources_Materials_Medicines_Vehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
+
 
     }
 }

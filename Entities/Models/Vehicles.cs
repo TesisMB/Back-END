@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Back_End.Models
 {
@@ -13,7 +11,7 @@ namespace Back_End.Models
     {
 
         [Key]
-        public int ID { get; set; }
+        public string ID { get; set; }
 
         [Required]
         [MaxLength(9)]
@@ -46,9 +44,8 @@ namespace Back_End.Models
         public int Fk_TypeVehicleID { get; set; }
 
         public BrandsModels BrandsModels { get; set; }
-        //public ICollection<Resources_Vehicles> Resources_Vehicles { get; set; }
 
-        [ForeignKey("FK_VehiclesID")]
+        [ForeignKey("FK_VehicleID")]
         public ICollection<Resources_RequestResources_Materials_Medicines_Vehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
 
     }

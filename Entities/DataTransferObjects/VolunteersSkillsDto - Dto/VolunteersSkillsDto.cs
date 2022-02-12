@@ -1,9 +1,5 @@
-﻿using Back_End.Models.Employees___Dto;
-using Entities.DataTransferObjects.VolunteersSkillsFormationEstates;
-using System;
+﻿using Entities.DataTransferObjects.VolunteersSkillsFormationEstates;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Back_End.Models.VolunteersSkills___Dto
 {

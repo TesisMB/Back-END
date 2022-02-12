@@ -5,9 +5,10 @@ namespace Entities.DataTransferObjects.Resources_RequestResources_Materials_Medi
 {
     public class Resources_RequestResources_Materials_Medicines_VehiclesDto
     {
-        public int ID { get; set; }
-        public Resources_MaterialsDto? Resources_Materials { get; set; }
-        public Resources_MedicinesDto? Resources_Medicines { get; set; }
-        public VehiclesDto? Vehicles { get; set; }
+        public string ID { get; set; }
+        public int FK_MaterialID { get; set; }
+        public int FK_MedicineID { get; set; }
+        public int FK_VehicleID { get; set; }
+        public int Quantity { get; set; }
     }
 }

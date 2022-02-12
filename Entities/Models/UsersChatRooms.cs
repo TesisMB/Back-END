@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Models
 {
-    [Table("UsersChatRooms", Schema="dbo")]
+    [Table("UsersChatRooms", Schema = "dbo")]
     public class UsersChatRooms
     {
         public int FK_UserID { get; set; }

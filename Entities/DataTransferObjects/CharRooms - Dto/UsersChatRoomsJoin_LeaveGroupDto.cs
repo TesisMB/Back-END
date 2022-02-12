@@ -1,6 +1,4 @@
-﻿
-
-namespace Entities.DataTransferObjects.CharRooms___Dto
+﻿namespace Entities.DataTransferObjects.CharRooms___Dto
 {
     public class UsersChatRoomsJoin_LeaveGroupDto
     {

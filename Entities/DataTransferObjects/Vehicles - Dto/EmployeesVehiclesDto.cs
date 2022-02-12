@@ -1,7 +1,4 @@
-﻿
-
-
-namespace Entities.DataTransferObjects.Models.Vehicles___Dto
+﻿namespace Entities.DataTransferObjects.Models.Vehicles___Dto
 {
     public class EmployeesVehiclesDto
     {

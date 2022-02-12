@@ -23,6 +23,6 @@ namespace Entities.Helpers
 
             return hora;
         }
-    
+
     }
 }

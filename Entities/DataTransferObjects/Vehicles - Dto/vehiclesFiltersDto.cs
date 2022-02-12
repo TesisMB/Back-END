@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Entities.DataTransferObjects.Vehicles___Dto
+﻿namespace Entities.DataTransferObjects.Vehicles___Dto
 {
     public class vehiclesFiltersDto
     {

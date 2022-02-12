@@ -3,10 +3,8 @@ using Contracts.Interfaces;
 using Entities.Helpers;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Repository
@@ -44,13 +42,24 @@ namespace Repository
 
         }
 
-        public async Task<Materials> GetMaterialById(int materialId)
+
+        public static void status(Materials materials)
+        {
+
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            cruzRojaContext.Update(materials);
+
+            cruzRojaContext.SaveChanges();
+        }
+
+        public async Task<Materials> GetMaterialById(string materialId)
         {
             return await FindByCondition(material => material.ID == materialId)
                            .FirstOrDefaultAsync();
         }
 
-        public async Task<Materials> GetMaterialWithDetails(int materialId)
+        public async Task<Materials> GetMaterialWithDetails(string materialId)
         {
             return await FindByCondition(material => material.ID == materialId)
                        .Include(a => a.Estates)

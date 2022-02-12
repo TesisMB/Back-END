@@ -29,7 +29,7 @@ namespace Back_End.Entities
 
             modelBuilder.Entity<VolunteersSkillsFormationEstates>()
 
-          .HasKey(s => new { s.FK_VolunteerSkillID, s.FK_FormationEstateID});
+          .HasKey(s => new { s.FK_VolunteerSkillID, s.FK_FormationEstateID });
 
             modelBuilder.Entity<BrandsModels>()
 
@@ -42,7 +42,7 @@ namespace Back_End.Entities
             modelBuilder.Entity<UsersChatRooms>()
 
             .HasKey(s => new { s.FK_UserID, s.FK_ChatRoomID });
-            
+
             modelBuilder.Entity<UsersChat>()
 
         .HasKey(s => new { s.FK_UserID, s.FK_ChatID });
@@ -75,10 +75,6 @@ namespace Back_End.Entities
         public DbSet<Model> Models { get; set; }
         public DbSet<FormationsEstates> FormationsEstates { get; set; }
         public DbSet<Resources_Request> Resources_Requests { get; set; }
-        //public DbSet<Resources> Resources { get; set; }
-        public DbSet<Resources_Materials> Resources_Materials { get; set; }
-        public DbSet<Resources_Medicines> Resources_Medicines { get; set; }
-        public DbSet<Resources_Vehicles> Resources_Vehicles { get; set; }
         public DbSet<Notifications> Notifications { get; set; }
         public DbSet<UsersNotifications> UsersNotifications { get; set; }
         public DbSet<Chat> Chat { get; set; }

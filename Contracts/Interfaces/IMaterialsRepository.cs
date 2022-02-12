@@ -8,9 +8,9 @@ namespace Contracts.Interfaces
     {
         Task<IEnumerable<Materials>> GetAllMaterials();
 
-        Task<Materials> GetMaterialById(int materialId);
+        Task<Materials> GetMaterialById(string materialId);
 
-        Task<Materials> GetMaterialWithDetails(int materialId);
+        Task<Materials> GetMaterialWithDetails(string materialId);
 
         void CreateMaterial(Materials material);
         void UpdateMaterial(Materials material);

@@ -60,9 +60,9 @@ namespace Repository
 
         private void spaceCamelCase(EmergenciesDisasters emergencyDisaster)
         {
-            if(emergencyDisaster.EmergencyDisasterInstruction != null)
+            if (emergencyDisaster.EmergencyDisasterInstruction != null)
             {
-            emergencyDisaster.EmergencyDisasterInstruction = WithoutSpace_CamelCase.GetCamelCase(emergencyDisaster.EmergencyDisasterInstruction);
+                emergencyDisaster.EmergencyDisasterInstruction = WithoutSpace_CamelCase.GetCamelCase(emergencyDisaster.EmergencyDisasterInstruction);
             }
         }
 

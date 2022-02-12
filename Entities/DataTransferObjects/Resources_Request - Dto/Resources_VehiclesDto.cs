@@ -1,7 +1,4 @@
 ﻿using Back_End.Models.Vehicles___Dto;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Entities.DataTransferObjects.Resources_Request___Dto
 {

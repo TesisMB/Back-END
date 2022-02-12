@@ -1,6 +1,5 @@
 ﻿using Back_End.Entities;
 using Contracts.Interfaces;
-using Entities.DataTransferObjects.CharRooms___Dto;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -8,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class UsersChatRoomsRepository: RepositoryBase<UsersChatRooms>, IUsersChatRoomsRepository
+    public class UsersChatRoomsRepository : RepositoryBase<UsersChatRooms>, IUsersChatRoomsRepository
     {
         private CruzRojaContext _cruzRojaContext;
-        public UsersChatRoomsRepository(CruzRojaContext cruzRojaContext): base(cruzRojaContext)
+        public UsersChatRoomsRepository(CruzRojaContext cruzRojaContext) : base(cruzRojaContext)
         {
             _cruzRojaContext = cruzRojaContext;
         }

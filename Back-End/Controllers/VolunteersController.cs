@@ -8,7 +8,6 @@ using Contracts.Interfaces;
 using Entities.DataTransferObjects.ResourcesDto;
 using Entities.DataTransferObjects.Volunteers__Dto;
 using Entities.Helpers;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -154,7 +153,7 @@ namespace Back_End.Controllers
 
         [Route("api/Voluntarios")]
         [HttpPost]
-        public async Task<ActionResult<Volunteers>> CreateVolunteer([FromForm] [FromBody] VolunteersForCreationDto volunteer)
+        public async Task<ActionResult<Volunteers>> CreateVolunteer([FromForm][FromBody] VolunteersForCreationDto volunteer)
         {
             try
             {
@@ -174,7 +173,7 @@ namespace Back_End.Controllers
 
                 var volunteerEntity = _mapper.Map<Volunteers>(volunteer);
 
-                volunteerEntity.VolunteerAvatar = await SaveImage(volunteer.ImageFile);
+                volunteerEntity.VolunteerAvatar = await UploadController.SaveImage(volunteer.ImageFile);
 
                 // Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
                 _repository.Volunteers.CreateVolunteer(volunteerEntity);
@@ -283,65 +282,6 @@ namespace Back_End.Controllers
             {
                 _logger.LogError($"Something went wrong inside DeleteVolunteer action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
-            }
-
-        }
-
-        [NonAction]
-        public static async Task<string> SaveImage(IFormFile Image)
-        {
-            {
-
-                var folderName = Path.Combine("StaticFiles", "Images");
-                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-
-                    var fileName = ContentDispositionHeaderValue.Parse(Image.ContentDisposition).FileName.Trim('"');
-                    var fullPath = Path.Combine(pathToSave, fileName);
-                    var dbPath = Path.Combine(folderName, fileName);
-
-                    using (var stream = new FileStream(fullPath, FileMode.Create))
-                    {
-                       await Image.CopyToAsync(stream);
-
-                    }
-                return fileName; 
-
-
-
-                //                    string imageName = new string(Path.GetFileNameWithoutExtension(Image.FileName).Take(10).ToArray()).Replace(' ', '-');
-                //              imageName = imageName + DateTime.Now.ToString("yy/mm/ss/fff") + Path.GetExtension(Image.FileName);
-                //            var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, "StaticFiles", "Images", imageName);
-
-
-                //          using (var fileStream = new FileStream(imagePath, FileMode.Create))
-                //        {
-                //          await Image.CopyToAsync(fileStream);
-                //    }
-
-
-                /* var file = Request.Form.Files[0];
-
-                  file = Image;
-
-                 var folderName = Path.Combine("StaticFiles", "Images");
-                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-
-                 if (file.Length > 0)
-                 {
-                     var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                     var fullPath = Path.Combine(pathToSave, fileName);
-                     var dbPath = Path.Combine(folderName, fileName);
-
-                     using (var stream = new FileStream(fullPath, FileMode.Create))
-                     {
-                         file.CopyTo(stream);
-                     }
-                     return Ok(new { dbPath });
-                 }
-                 else
-                 {
-                     return BadRequest();
-                 }*/
             }
 
         }

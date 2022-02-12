@@ -53,7 +53,7 @@ namespace Back_End.Controllers
 
 
         [HttpGet("{vehicleId}")]
-        public async Task<ActionResult<Vehicles>> GetVehicle(int vehicleId)
+        public async Task<ActionResult<Vehicles>> GetVehicle(string vehicleId)
         {
             try
             {
@@ -99,6 +99,8 @@ namespace Back_End.Controllers
 
                 var vehicleEntity = _mapper.Map<Vehicles>(vehicle);
 
+                vehicleEntity.VehiclePicture = await UploadController.SaveImage(vehicle.ImageFile);
+
                 _repository.Vehicles.CreateVehicle(vehicleEntity);
 
                 _repository.Vehicles.SaveAsync();
@@ -117,7 +119,7 @@ namespace Back_End.Controllers
         }
 
         [HttpPatch("{vehicleId}")]
-        public async Task<ActionResult> UpdateVehicle(int vehicleId, JsonPatchDocument<VehiclesForUpdateDto> patchDocument)
+        public async Task<ActionResult> UpdateVehicle(string vehicleId, JsonPatchDocument<VehiclesForUpdateDto> patchDocument)
         {
             try
             {
@@ -157,7 +159,7 @@ namespace Back_End.Controllers
 
 
         [HttpDelete("{vehicleId}")]
-        public async Task<ActionResult> DeleteVehicle(int vehicleId)
+        public async Task<ActionResult> DeleteVehicle(string vehicleId)
         {
             try
             {

@@ -6,11 +6,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Models
 {
-    [Table("Resources_Medicines", Schema="dbo")]
+    [Table("Resources_Medicines", Schema = "dbo")]
     public class Resources_Medicines
     {
         [Key]
-
         public int ID { get; set; }
 
         [Required]

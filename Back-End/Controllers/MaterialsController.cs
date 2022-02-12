@@ -56,7 +56,7 @@ namespace Back_End.Controllers
         }
 
         [HttpGet("{materialId}")]
-        public async Task<ActionResult<Materials>> GetMaterial(int materialId)
+        public async Task<ActionResult<Materials>> GetMaterial(string materialId)
         {
             try
             {
@@ -111,6 +111,9 @@ namespace Back_End.Controllers
 
                 var materialEntity = _mapper.Map<Materials>(material);
 
+                materialEntity.MaterialPicture = await UploadController.SaveImage(material.ImageFile);
+
+
                 _repository.Materials.CreateMaterial(materialEntity);
 
                  _repository.Materials.SaveAsync();
@@ -130,7 +133,7 @@ namespace Back_End.Controllers
 
         //[Authorize(Roles = "Coordinador General, Admin")] 
         [HttpPatch("{materialId}")]
-        public async Task<ActionResult> UpdatePartialUser(int materialId, JsonPatchDocument<MaterialsForUpdateDto> _materials)
+        public async Task<ActionResult> UpdatePartialUser(string materialId, JsonPatchDocument<MaterialsForUpdateDto> _materials)
         {
 
             try
@@ -156,7 +159,7 @@ namespace Back_End.Controllers
 
                 var employeeResult = _mapper.Map(materialToPatch, materialEntity);
 
-                _repository.Materials.Update(employeeResult);
+                _repository.Materials.UpdateMaterial(employeeResult);
               
                  _repository.Materials.SaveAsync();
 
@@ -174,7 +177,7 @@ namespace Back_End.Controllers
         }
 
         [HttpDelete("{materialId}")]
-        public async Task<ActionResult> DeleteEmployee(int materialId)
+        public async Task<ActionResult> DeleteEmployee(string materialId)
         {
 
             try

@@ -1,11 +1,4 @@
-﻿using Back_End.Entities;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Back_End.Models.Employees___Dto
+﻿namespace Back_End.Models.Employees___Dto
 {
     public class SkillsDto
     {

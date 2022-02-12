@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Entities.Models
 {
@@ -17,7 +15,7 @@ namespace Entities.Models
         public string FormationEstateName { get; set; }
 
         [ForeignKey("FK_FormationDateID")]
-         public FormationsDates FormationsDates { get; set; }
+        public FormationsDates FormationsDates { get; set; }
 
         [Required]
         public int FK_FormationDateID { get; set; }

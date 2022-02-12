@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class ChatRoomsRepository: RepositoryBase<TypesChatRooms>, IChatRoomsRepository
+    public class ChatRoomsRepository : RepositoryBase<TypesChatRooms>, IChatRoomsRepository
     {
         private CruzRojaContext _cruzRojaContext;
 
-        public ChatRoomsRepository(CruzRojaContext cruzRojaContext): base(cruzRojaContext)
+        public ChatRoomsRepository(CruzRojaContext cruzRojaContext) : base(cruzRojaContext)
         {
             _cruzRojaContext = cruzRojaContext;
 

@@ -1,5 +1,4 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using Back_End.Models;
 using Back_End.Models.Vehicles___Dto;
 using Entities.DataTransferObjects.ResourcesDto;

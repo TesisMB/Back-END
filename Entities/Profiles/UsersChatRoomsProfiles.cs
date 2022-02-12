@@ -1,13 +1,10 @@
 ﻿using AutoMapper;
 using Entities.DataTransferObjects.CharRooms___Dto;
 using Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Entities.Profiles
 {
-    public class UsersChatRoomsProfiles: Profile
+    public class UsersChatRoomsProfiles : Profile
     {
         public UsersChatRoomsProfiles()
         {
@@ -17,7 +14,7 @@ namespace Entities.Profiles
                    .ForPath(resp => resp.Name, opt => opt.MapFrom(a => $"{a.Users.Persons.FirstName} {a.Users.Persons.LastName}"));
 
             CreateMap<UsersChatRoomsJoin_LeaveGroupDto, UsersChatRooms>();
-        
+
         }
     }
 }

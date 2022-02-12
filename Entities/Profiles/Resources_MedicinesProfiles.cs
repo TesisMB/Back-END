@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using Entities.DataTransferObjects.Resources_Request___Dto;
 using Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Entities.Profiles
 {
@@ -13,6 +10,7 @@ namespace Entities.Profiles
         {
             CreateMap<Resources_Medicines, Resources_MedicinesDto>();
             CreateMap<Resources_MedicinesForCreationDto, Resources_Medicines>();
+            CreateMap<Resources_Medicines, Resources_MedicinesForCreationDto>();
         }
     }
 }

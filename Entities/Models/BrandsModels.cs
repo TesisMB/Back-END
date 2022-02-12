@@ -1,9 +1,6 @@
 ﻿using Back_End.Models;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Entities.Models
 {
@@ -12,7 +9,7 @@ namespace Entities.Models
     public class BrandsModels
     {
         [Key, ForeignKey("Vehicles")]
-        public int ID { get; set; }
+        public string ID { get; set; }
 
         [Required]
         public int FK_BrandID { get; set; }

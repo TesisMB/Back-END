@@ -44,5 +44,26 @@ namespace Back_End.Controllers
                 return StatusCode(500, "Internal Server error");
             }
         }
+
+        [HttpGet("{typeEmergencyDisasterId}")]
+        public async Task<ActionResult<TypesEmergenciesDisasters>> GetTypesEmergencyDisaster(int typeEmergencyDisasterId)
+        {
+            try
+            {
+                var alerts = await _repository.TypesEmergenciesDisasters.GetTypeEmergencyDisaster(typeEmergencyDisasterId);
+                _logger.LogInfo($"Returned all TypesEmergenciesDisasters from database.");
+
+                var alertResult = _mapper.Map<TypesEmergenciesDisastersDto>(alerts);
+
+                return Ok(alertResult);
+            }
+
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside GetAllTypesEmergenciesDisasters action: {ex.Message}");
+                return StatusCode(500, "Internal Server error");
+            }
+        }
+
     }
 }

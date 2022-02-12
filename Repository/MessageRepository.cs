@@ -4,9 +4,9 @@ using Entities.Models;
 
 namespace Repository
 {
-    public class MessageRepository: RepositoryBase<Messages>, IMessageRepository
+    public class MessageRepository : RepositoryBase<Messages>, IMessageRepository
     {
-        public MessageRepository(CruzRojaContext context): base(context)
+        public MessageRepository(CruzRojaContext context) : base(context)
         {
 
         }

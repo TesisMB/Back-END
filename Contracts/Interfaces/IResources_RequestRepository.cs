@@ -12,10 +12,9 @@ namespace Contracts.Interfaces
 
         void CreateResource_Resquest(Resources_Request resources_Request);
 
-        void UpdateResource_Resquest(Resources_Request resources_Request);
         void UpdateResource_Resquest2(Resources_Request resources_Request);
 
-        Resources_Request Stock(Resources_Request resources_Request);
+        public void ActualizarEstado(Resources_Request resources_Request);
 
         Resources_Request DeleteResource(Resources_Request resources_Request);
     }

@@ -84,7 +84,7 @@ namespace Back_End.Controllers
 
                 var messages = _mapper.Map<Messages>(message);
 
-                _repository.Messages.Create(messages);
+                _repository.Messages.CreateMessage(messages);
 
                 _repository.Messages.SaveAsync();
 

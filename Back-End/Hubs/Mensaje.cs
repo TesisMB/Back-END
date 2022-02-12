@@ -11,7 +11,7 @@ namespace Back_End.Hubs
     {
         public async Task NewMessage(MessagesForCreationDto msg)
         {
-            var sala = Convert.ToString(msg.FK_ChatRoomID);
+            var sala = Convert.ToString(msg.fK_ChatRoomID);
 
             await Clients.Group(sala).SendAsync("ReceiveMessage",  msg);
         }

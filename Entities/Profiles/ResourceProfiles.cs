@@ -4,7 +4,7 @@ using Entities.Models;
 
 namespace Entities.Profiles
 {
-    public class ResourceProfiles: Profile
+    public class ResourceProfiles : Profile
     {
         public ResourceProfiles()
         {

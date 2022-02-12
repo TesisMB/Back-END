@@ -52,7 +52,7 @@ namespace Back_End.Controllers
         }
 
         [HttpGet("{medicineId}")]
-        public async Task<ActionResult<Medicines>> GetMedicineWithDetails(int medicineId)
+        public async Task<ActionResult<Medicines>> GetMedicineWithDetails(string medicineId)
         {
             try
             {
@@ -96,6 +96,9 @@ namespace Back_End.Controllers
 
                 var medicineEntity = _mapper.Map<Medicines>(medicine);
 
+                medicineEntity.MedicinePicture = await UploadController.SaveImage(medicine.ImageFile);
+
+
                 _repository.Medicines.CreateMedicine(medicineEntity);
 
                 _repository.Medicines.SaveAsync();
@@ -114,7 +117,7 @@ namespace Back_End.Controllers
         }
 
         [HttpPatch("{medicineId}")]
-        public async Task<ActionResult> UpdateMedicine(int medicineId, JsonPatchDocument<MedicineForUpdateDto> patchDocument)
+        public async Task<ActionResult> UpdateMedicine(string medicineId, JsonPatchDocument<MedicineForUpdateDto> patchDocument)
         {
             try
             {
@@ -152,7 +155,7 @@ namespace Back_End.Controllers
         }
 
         [HttpDelete("{medicineId}")]
-        public async Task<ActionResult> DeleteMedicine(int medicineId)
+        public async Task<ActionResult> DeleteMedicine(string medicineId)
         {
             try
             {

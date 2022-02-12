@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Models
 {
-    [Table("Resources", Schema="dbo")]
+    [Table("Resources", Schema = "dbo")]
     public class Resources
     {
         [Key, ForeignKey("Resources_Request")]

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 
 namespace Entities.DataTransferObjects.Materials___Dto
 {
@@ -8,13 +9,16 @@ namespace Entities.DataTransferObjects.Materials___Dto
 
         public string MaterialBrand { get; set; }
 
+       
+
         public int MaterialQuantity { get; set; }
 
         public string MaterialUtility { get; set; }
 
         public Boolean MaterialAvailability { get; set; } = true;
+        
+        public IFormFile ImageFile { get; set; }
 
-        public string MaterialPicture { get; set; }
         public int FK_EstateID { get; set; }
     }
 }

@@ -17,6 +17,7 @@ using NLog;
 using System.IO;
 using Wkhtmltopdf.NetCore;
 using Back_End.Hubs;
+using Back_End.Entities;
 
 public class Startup
 {
@@ -53,7 +54,7 @@ public class Startup
         services.AddSignalR();
 
         services.Configure<ApiBehaviorOptions>(options => {
-           options.SuppressModelStateInvalidFilter = true;
+            options.SuppressModelStateInvalidFilter = true;
         });
 
         services.AddControllers();
@@ -73,6 +74,12 @@ public class Startup
 
 
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
+        var configuration = new MapperConfiguration(cfg => {
+            cfg.AllowNullCollections = true;
+        });
+
 
         services.AddAuthentication(opt => {
             opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

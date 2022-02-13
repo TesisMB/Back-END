@@ -26,10 +26,10 @@ namespace Repository
         {
             var user = UsersRepository.authUser;
 
-            //var collection = _cruzRojaContext.Resources_Requests as IQueryable<Resources_Request>;
+            var collection = _cruzRojaContext.Resources_Requests as IQueryable<Resources_Request>;
 
-            //collection = collection.Where(
-            //  a => a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
+            collection = collection.Where(
+                         a => a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
 
             /*if (user.Roles.RoleName == "Encargado de Logistica")
              {
@@ -39,7 +39,7 @@ namespace Repository
                  return null;
              }*/
 
-            return await FindAll()
+            return await collection
                 //.Include(i => i.Users)
                 .Include(i => i.EmergenciesDisasters)
                 //.ThenInclude(i => i.TypesEmergenciesDisasters)
@@ -400,9 +400,6 @@ namespace Repository
             foreach (var resources in resources_Request.Resources_RequestResources_Materials_Medicines_Vehicles)
             {
 
-
-                //var rec = recurso(resources.FK_Resource_RequestID, resources);
-
                 //Revisar Material si existe en la base de datos
                 if (resources.FK_MaterialID != null)
                 {
@@ -489,11 +486,10 @@ namespace Repository
                         }
 
                 }
-
-
-
             }
         }
+
+
 
         public Resources_RequestResources_Materials_Medicines_Vehicles Stock(Resources_Request resources, Resources_RequestResources_Materials_Medicines_Vehicles resources_Request)
         {
@@ -570,7 +566,6 @@ namespace Repository
 
 
 
-
                 if (resource.FK_VehicleID != null)
                 {
                     rec = db.Resources_RequestResources_Materials_Medicines_Vehicles
@@ -594,17 +589,12 @@ namespace Repository
 
                             VehiclesRepository.status(resources_Request.Vehicles);
                         }
-
-                
                     }
                 }
-
             }
 
             return resources_Request;
         }
-
-
 
 
         public Resources_Request DeleteResource(Resources_Request resources_Request)
@@ -631,7 +621,6 @@ namespace Repository
             }
 
             return resources_Request;
-
         }
     }
 

@@ -53,7 +53,7 @@ namespace Back_End.Models
         [Required]
         public int FK_LocationID { get; set; }
 
-        public ICollection<Resources_Request> Resources_Requests { get; set; }
+        public ICollection<ResourcesRequest> Resources_Requests { get; set; }
 
         [ForeignKey("FK_UserID")]
         public ICollection<UsersNotifications> UsersNotifications { get; set; }

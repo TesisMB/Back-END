@@ -1,5 +1,4 @@
-﻿using Entities.Models;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Collections.Generic;
 using System.Linq;
 using static Entities.Resources_RequestValidator;
@@ -11,6 +10,7 @@ namespace Entities.Helpers
         public static int contador = 0;
 
         public static int contadorRecursos = 0;
+
         public static ResponseObject Response(int StatusCode, string Message)
         {
             return new ResponseObject()
@@ -31,9 +31,9 @@ namespace Entities.Helpers
         }
 
 
-        public static Resources_RequestValidator.Resource RetornarRecursos()
+        public static Resource RetornarRecursos()
         {
-            var recursos = Resources_RequestValidator.Resources;
+            var recursos = Resources;
 
             var valor = recursos.ElementAt(contadorRecursos);
 
@@ -44,7 +44,7 @@ namespace Entities.Helpers
 
         public static string Retornar()
         {
-            var llave = Resources_RequestValidator.Key;
+            var llave = Key;
 
             var valor = llave.ElementAt(contador);
 
@@ -60,7 +60,7 @@ namespace Entities.Helpers
             return Model.Select(x => new ModalErrorResourcesStock() {
                         Type = "M", 
                         Key = Retornar(),
-                        Recurso = RetornarRecursos(),
+                        Resource = RetornarRecursos(),
                         Messages = x.Value.Errors.Select(y => y.ErrorMessage).FirstOrDefault()})
                         .ToList();
 
@@ -77,7 +77,7 @@ namespace Entities.Helpers
         {
             public string Type { get; set; }
             public  string Key { get; set; } // Define al nombre del Campo
-            public Resource Recurso { get; set; }
+            public Resource Resource { get; set; }
             public string Messages { get; set; }
         }
 

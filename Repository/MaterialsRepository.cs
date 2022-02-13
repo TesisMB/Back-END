@@ -53,13 +53,13 @@ namespace Repository
             cruzRojaContext.SaveChanges();
         }
 
-        public async Task<Materials> GetMaterialById(string materialId)
+        public async Task<Materials> GetMaterialById(int materialId)
         {
             return await FindByCondition(material => material.ID == materialId)
                            .FirstOrDefaultAsync();
         }
 
-        public async Task<Materials> GetMaterialWithDetails(string materialId)
+        public async Task<Materials> GetMaterialWithDetails(int materialId)
         {
             return await FindByCondition(material => material.ID == materialId)
                        .Include(a => a.Estates)

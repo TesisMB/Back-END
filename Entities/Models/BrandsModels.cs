@@ -9,7 +9,7 @@ namespace Entities.Models
     public class BrandsModels
     {
         [Key, ForeignKey("Vehicles")]
-        public string ID { get; set; }
+        public int ID { get; set; }
 
         [Required]
         public int FK_BrandID { get; set; }

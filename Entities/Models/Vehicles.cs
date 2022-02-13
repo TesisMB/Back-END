@@ -11,7 +11,7 @@ namespace Back_End.Models
     {
 
         [Key]
-        public string ID { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [MaxLength(9)]
@@ -46,7 +46,7 @@ namespace Back_End.Models
         public BrandsModels BrandsModels { get; set; }
 
         [ForeignKey("FK_VehicleID")]
-        public ICollection<Resources_RequestResources_Materials_Medicines_Vehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
+        public ICollection<ResourcesRequestMaterialsMedicinesVehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
 
     }
 }

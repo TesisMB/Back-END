@@ -14,8 +14,8 @@ namespace Contracts.Interfaces
 
         IEnumerable<Vehicles> GetAllVehicles();
 
-        Task<Vehicles> GetVehicleById(string vehicleId);
-        Task<Vehicles> GetVehicleWithDetails(string vehicleId);
+        Task<Vehicles> GetVehicleById(int vehicleId);
+        Task<Vehicles> GetVehicleWithDetails(int vehicleId);
 
         void CreateVehicle(Vehicles vehicles);
 

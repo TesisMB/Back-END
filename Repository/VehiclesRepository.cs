@@ -65,13 +65,13 @@ namespace Repository
                  .ToListAsync();
         }
 
-        public async Task<Vehicles> GetVehicleById(string vehicleId)
+        public async Task<Vehicles> GetVehicleById(int vehicleId)
         {
             return await FindByCondition(vehicle => vehicle.ID == vehicleId)
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<Vehicles> GetVehicleWithDetails(string vehicleId)
+        public async Task<Vehicles> GetVehicleWithDetails(int vehicleId)
         {
             return await FindByCondition(vehicle => vehicle.ID == vehicleId)
                       .Include(a => a.Estates)

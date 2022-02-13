@@ -47,7 +47,7 @@ namespace Entities.Models
         public int FK_AlertID { get; set; }
 
         [Required]
-        public ICollection<Resources_Request> Resources_Requests { get; set; }
+        public ICollection<ResourcesRequest> Resources_Requests { get; set; }
 
     }
 

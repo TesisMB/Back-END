@@ -7,7 +7,7 @@ namespace Entities.DataTransferObjects.ResourcesDto
 {
     public class Resources_Dto
     {
-        public string ID { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
         public int? Quantity { get; set; }
         public bool Availability { get; set; }

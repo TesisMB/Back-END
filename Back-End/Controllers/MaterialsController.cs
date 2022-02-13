@@ -44,7 +44,6 @@ namespace Back_End.Controllers
                 var volunteersResult = _mapper.Map<IEnumerable<Resources_Dto>>(volunteers);
 
                 return Ok(volunteersResult);
-
             }
             catch (Exception ex)
             {
@@ -56,7 +55,7 @@ namespace Back_End.Controllers
         }
 
         [HttpGet("{materialId}")]
-        public async Task<ActionResult<Materials>> GetMaterial(string materialId)
+        public async Task<ActionResult<Materials>> GetMaterial(int materialId)
         {
             try
             {
@@ -133,7 +132,7 @@ namespace Back_End.Controllers
 
         //[Authorize(Roles = "Coordinador General, Admin")] 
         [HttpPatch("{materialId}")]
-        public async Task<ActionResult> UpdatePartialUser(string materialId, JsonPatchDocument<MaterialsForUpdateDto> _materials)
+        public async Task<ActionResult> UpdatePartialUser(int materialId, JsonPatchDocument<MaterialsForUpdateDto> _materials)
         {
 
             try
@@ -177,7 +176,7 @@ namespace Back_End.Controllers
         }
 
         [HttpDelete("{materialId}")]
-        public async Task<ActionResult> DeleteEmployee(string materialId)
+        public async Task<ActionResult> DeleteEmployee(int materialId)
         {
 
             try

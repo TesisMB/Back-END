@@ -149,3 +149,29 @@ System.Object -> Entities.DataTransferObjects.Materials___Dto.MaterialsForUpdate
 2022-02-12 19:35:30.1635 INFO Returned User.
 2022-02-12 19:37:38.7109 INFO Returned User.
 2022-02-12 19:52:53.8340 INFO Returned User.
+2022-02-12 21:18:20.3348 ERROR Something went wrong inside GetAllVehicles action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-02-12 21:20:21.0883 INFO Returned User.
+2022-02-12 21:20:24.2926 INFO Returned all vehicles from database.
+2022-02-12 21:20:35.0195 INFO Returned all Materials from database.
+2022-02-12 21:20:55.1930 INFO Returned User.
+2022-02-12 21:20:57.5966 INFO Returned all Materials from database.
+2022-02-12 21:21:12.3363 INFO Returned all employees from database.
+2022-02-12 21:21:18.9346 INFO Returned all vehicles from database.
+2022-02-12 21:21:39.5724 INFO Returned all estates from database.
+2022-02-12 21:22:24.3528 INFO Returned all emergenciesDisasters from database.
+2022-02-12 21:22:40.6870 INFO Returned all Resources_Request from database.
+2022-02-12 21:24:11.4098 INFO Returned all Resources_Request from database.
+2022-02-12 21:24:12.7049 INFO Returned all Resources_Request from database.
+2022-02-12 21:24:15.8437 INFO Returned User.
+2022-02-12 21:24:36.0238 INFO Returned User.
+2022-02-12 21:24:38.3341 INFO Returned all Resources_Request from database.
+2022-02-12 21:26:54.5553 INFO Returned User.
+2022-02-12 21:27:07.9505 INFO Returned all Resources_Request from database.
+2022-02-12 21:28:43.8673 INFO Returned User.
+2022-02-12 21:28:49.0678 INFO Returned all Resources_Request from database.
+2022-02-12 21:34:30.7569 INFO Returned User.
+2022-02-12 21:34:32.8598 INFO Returned all Resources_Request from database.
+2022-02-12 21:34:34.1195 INFO Returned all Resources_Request from database.
+2022-02-12 21:34:35.0491 INFO Returned all Resources_Request from database.
+2022-02-12 21:36:23.4912 INFO Returned User.
+2022-02-12 21:36:25.0046 INFO Returned all Resources_Request from database.

@@ -10,7 +10,7 @@ namespace Entities.Models
     public class Materials
     {
         [Key]
-        public string ID { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -37,7 +37,7 @@ namespace Entities.Models
         public Estates Estates { get; set; }
 
         [ForeignKey("FK_MaterialID")]
-        public ICollection<Resources_RequestResources_Materials_Medicines_Vehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
+        public ICollection<ResourcesRequestMaterialsMedicinesVehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
 
 
     }

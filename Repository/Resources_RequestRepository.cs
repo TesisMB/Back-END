@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class Resources_RequestRepository : RepositoryBase<Resources_Request>, IResources_RequestRepository
+    public class Resources_RequestRepository : RepositoryBase<ResourcesRequest>, IResources_RequestRepository
     {
         private CruzRojaContext _cruzRojaContext = new CruzRojaContext();
         public static CruzRojaContext db = new CruzRojaContext();
-        public static Resources_RequestResources_Materials_Medicines_Vehicles recursos = null;
+        public static ResourcesRequestMaterialsMedicinesVehicles recursos = null;
 
         public Resources_RequestRepository(CruzRojaContext cruzRojaContext) : base(cruzRojaContext)
         {
@@ -22,11 +22,11 @@ namespace Repository
         }
 
 
-        public async Task<IEnumerable<Resources_Request>> GetAllResourcesRequest()
+        public async Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequest()
         {
             var user = UsersRepository.authUser;
 
-            var collection = _cruzRojaContext.Resources_Requests as IQueryable<Resources_Request>;
+            var collection = _cruzRojaContext.Resources_Requests as IQueryable<ResourcesRequest>;
 
             collection = collection.Where(
                          a => a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
@@ -40,7 +40,7 @@ namespace Repository
              }*/
 
             return await collection
-                //.Include(i => i.Users)
+                .Include(i => i.Users)
                 .Include(i => i.EmergenciesDisasters)
                 //.ThenInclude(i => i.TypesEmergenciesDisasters)
                 //.Include(i => i.EmergenciesDisasters.Alerts)
@@ -53,7 +53,7 @@ namespace Repository
                 /*.ThenInclude(i => i.BrandsModels)
                 .ThenInclude(i => i.Brands)
                 .ThenInclude(i => i.BrandsModels)
-                .ThenInclude(i => i.Model)
+                .ThenInclude(i => i.Model)*/
 
                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Materials)
@@ -67,14 +67,14 @@ namespace Repository
                 .Include(i => i.Users.Estates)
                 .Include(i => i.Users.Estates.LocationAddress)
                 .Include(i => i.Users.Estates.Locations)
-                .Include(i => i.Users.Locations)*/
+                .Include(i => i.Users.Locations)
                 .ToListAsync();
         }
 
 
-        public void CreateResource_Resquest(Resources_Request resources_Request)
+        public void CreateResource_Resquest(ResourcesRequest resources_Request)
         {
-            Resources_Request rec = null;
+            ResourcesRequest rec = null;
 
 
             rec = db.Resources_Requests
@@ -158,7 +158,7 @@ namespace Repository
         }
 
 
-        private void spaceCamelCase(Resources_Request resources_Request)
+        private void spaceCamelCase(ResourcesRequest resources_Request)
         {
             //Falta implementarlos en el PATCH
             if (resources_Request.Reason != null)
@@ -170,7 +170,7 @@ namespace Repository
 
 
         //Actualiza los recursos en la solicitud existente y mantengo actualizo el Stock
-        public void UpdateResources(Resources_Request resources_Request)
+        public void UpdateResources(ResourcesRequest resources_Request)
         {
             Materials materials = null;
             Medicines medicines = null;
@@ -263,7 +263,7 @@ namespace Repository
 
         }
 
-        public async Task<Resources_Request> GetResourcesRequestByID(int resource)
+        public async Task<ResourcesRequest> GetResourcesRequestByID(int resource)
         {
             return await FindByCondition(res => res.ID.Equals(resource))
                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
@@ -278,10 +278,10 @@ namespace Repository
         }
 
 
-        public static ICollection<Resources_RequestResources_Materials_Medicines_Vehicles> valorId()
+        public static ICollection<ResourcesRequestMaterialsMedicinesVehicles> valorId()
         {
 
-            ICollection<Resources_RequestResources_Materials_Medicines_Vehicles> recs =
+            ICollection<ResourcesRequestMaterialsMedicinesVehicles> recs =
 
               db.Resources_RequestResources_Materials_Medicines_Vehicles
                     .ToList();
@@ -295,7 +295,7 @@ namespace Repository
 
 
         //Reviso la exitencia de los recursos de la slicitud existente 
-        public static Resources_RequestResources_Materials_Medicines_Vehicles recurso(Resources_Request resources_Request, Resources_RequestResources_Materials_Medicines_Vehicles _Resources_RequestResources_Materials_Medicines_Vehicles)
+        public static ResourcesRequestMaterialsMedicinesVehicles recurso(ResourcesRequest resources_Request, ResourcesRequestMaterialsMedicinesVehicles _Resources_RequestResources_Materials_Medicines_Vehicles)
         {
 
             if (_Resources_RequestResources_Materials_Medicines_Vehicles.FK_MaterialID != null)
@@ -349,7 +349,7 @@ namespace Repository
 
 
 
-        public void ActualizarEstado(Resources_Request resources_Request)
+        public void ActualizarEstado(ResourcesRequest resources_Request)
         {
 
             foreach (var resources in resources_Request.Resources_RequestResources_Materials_Medicines_Vehicles)
@@ -389,12 +389,12 @@ namespace Repository
 
 
         //Crea la solicitud y actualizo Stock
-        public void UpdateResource_Resquest2(Resources_Request resources_Request)
+        public void UpdateResource_Resquest2(ResourcesRequest resources_Request)
         {
             Materials materials = null;
             Medicines medicines = null;
             Vehicles vehicles = null;
-            Resources_RequestResources_Materials_Medicines_Vehicles rec = null;
+            ResourcesRequestMaterialsMedicinesVehicles rec = null;
 
 
             foreach (var resources in resources_Request.Resources_RequestResources_Materials_Medicines_Vehicles)
@@ -491,13 +491,13 @@ namespace Repository
 
 
 
-        public Resources_RequestResources_Materials_Medicines_Vehicles Stock(Resources_Request resources, Resources_RequestResources_Materials_Medicines_Vehicles resources_Request)
+        public ResourcesRequestMaterialsMedicinesVehicles Stock(ResourcesRequest resources, ResourcesRequestMaterialsMedicinesVehicles resources_Request)
         {
             Materials materials = null;
             Medicines medicines = null;
             Vehicles vehicles = null;
             var db = new CruzRojaContext();
-            Resources_RequestResources_Materials_Medicines_Vehicles rec = null;
+            ResourcesRequestMaterialsMedicinesVehicles rec = null;
 
 
             foreach (var resource in resources.Resources_RequestResources_Materials_Medicines_Vehicles)
@@ -597,7 +597,7 @@ namespace Repository
         }
 
 
-        public Resources_Request DeleteResource(Resources_Request resources_Request)
+        public ResourcesRequest DeleteResource(ResourcesRequest resources_Request)
         {
 
             foreach (var item in resources_Request.Resources_RequestResources_Materials_Medicines_Vehicles)

@@ -2,7 +2,6 @@
 using Back_End.Models;
 using Entities.DataTransferObjects.Resources_RequestResources_Materials_Medicines_Vehicles___Dto;
 using Entities.Models;
-using Entities.Validator.Creation.Resources_Request;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -10,16 +9,15 @@ using System.Linq;
 
 namespace Entities
 {
-    public class Resources_RequestValidator : AbstractValidator<Resources_RequestResources_Materials_Medicines_VehiclesForCreationDto>
+    public class Resources_RequestValidator : AbstractValidator<ResourcesRequestMaterialsMedicinesVehiclesForCreationDto>
     {
         public static Materials materials = null;
         public static Medicines medicines = null;
         public static Vehicles vehicles = null;
         public static CruzRojaContext db = new CruzRojaContext();
-        public static Resources_RequestResources_Materials_Medicines_Vehicles rec = null;
+        public static ResourcesRequestMaterialsMedicinesVehicles rec = null;
+
         public static List<string> Key = new List<string>();
-
-
         public static List<Resource> Resources = new List<Resource>();
 
         public Resources_RequestValidator()
@@ -43,7 +41,7 @@ namespace Entities
 
                         Resources.Add(new Resource() { ID = id.FK_MaterialID, Name = materials.MaterialName });
 
-                        context.AddFailure("No hay Stock");
+                        context.AddFailure("No hay stock");
                     }
 
                 }
@@ -66,7 +64,7 @@ namespace Entities
                         Key.Add("Medicine");
                         Resources.Add(new Resource() { ID = id.FK_MedicineID, Name = medicines.MedicineName });
 
-                        context.AddFailure("No hay Stock");
+                        context.AddFailure("No hay stock");
 
                     }
                 }
@@ -94,7 +92,7 @@ namespace Entities
                         Key.Add("Vehicle");
                         Resources.Add(new Resource() { ID = id.FK_VehicleID, Name = vehiculo });
 
-                        context.AddFailure("No hay Stock");
+                        context.AddFailure("No se en cuentra disponible");
                     }
                 }
             });
@@ -104,7 +102,7 @@ namespace Entities
 
         public  class Resource
         {
-            public  string ID { get; set; }
+            public  int? ID { get; set; }
 
             public  string Name { get; set; } // Define al nombre del Campo
         }
@@ -113,9 +111,9 @@ namespace Entities
 
 
 
-        public bool DifferentZero(string? id)
+        public bool DifferentZero(int? id)
         {
-            if (id == "")
+            if (id == null)
             {
                 return true;
             }
@@ -124,9 +122,9 @@ namespace Entities
         }
 
 
-        private bool DifferentZero2(string? id)
+        private bool DifferentZero2(int? id)
         {
-            if (id == "")
+            if (id == null)
             {
                 return true;
             }
@@ -136,9 +134,9 @@ namespace Entities
         }
 
 
-        private bool DifferentZero3(string? id)
+        private bool DifferentZero3(int? id)
         {
-            if (id == "")
+            if (id == null)
             {
                 return true;
             }

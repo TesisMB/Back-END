@@ -26,9 +26,6 @@ namespace Entities.Models
 
         public int FK_ChatRoomID { get; set; }
 
-        [ForeignKey("FK_LocationVolunteerID")]
-        public LocationVolunteers LocationVolunteers { get; set; }
-        public int? FK_LocationVolunteerID { get; set; }
 
         [ForeignKey("FK_UserID")]
         public Users Users { get; set; }

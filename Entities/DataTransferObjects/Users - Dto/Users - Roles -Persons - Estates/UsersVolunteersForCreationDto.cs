@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace Back_End.Models.Users___Dto
 {
     public class UsersVolunteersForCreationDto 

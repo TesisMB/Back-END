@@ -2,10 +2,7 @@
 using Back_End.Models.Users___Dto;
 using Back_End.Validator;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Entities.Validator
 {
@@ -13,23 +10,23 @@ namespace Entities.Validator
     {
         public UsersVolunteersValidator()
         {
-           RuleFor(x => x.UserDni)
-          .Cascade(CascadeMode.StopOnFirstFailure)
-          .NotEmpty().WithMessage("{PropertyName} is required.")
-          .Must(BeUniqueUrl).WithMessage("Dni already exists")
-          .Must(IsValidNumber).WithMessage("{PropertyName} must not have spaces and should be all numbers.")
-          .Length(8).WithMessage("The {PropertyName} must be 8 characters. You entered {TotalLength} characters");
-    
-           RuleFor(x => x.UserPassword).NotEmpty().WithMessage("{PropertyName} is required.")
-           .Length(8, 16).WithMessage("The {PropertyName} must be between 8 and 16 characters. You entered {TotalLength} characters");
+            RuleFor(x => x.UserDni)
+           .Cascade(CascadeMode.StopOnFirstFailure)
+           .NotEmpty().WithMessage("{PropertyName} is required.")
+           .Must(BeUniqueUrl).WithMessage("Dni already exists")
+           .Must(IsValidNumber).WithMessage("{PropertyName} must not have spaces and should be all numbers.")
+           .Length(8).WithMessage("The {PropertyName} must be 8 characters. You entered {TotalLength} characters");
 
-           RuleFor(x => x.FK_RoleID).NotEmpty().WithMessage("{PropertyName} is required.");
+            RuleFor(x => x.UserPassword).NotEmpty().WithMessage("{PropertyName} is required.")
+            .Length(8, 16).WithMessage("The {PropertyName} must be between 8 and 16 characters. You entered {TotalLength} characters");
 
-           RuleFor(x => x.FK_EstateID).NotEmpty().WithMessage("{PropertyName} is required.");
+            RuleFor(x => x.FK_RoleID).NotEmpty().WithMessage("{PropertyName} is required.");
+
+            RuleFor(x => x.FK_EstateID).NotEmpty().WithMessage("{PropertyName} is required.");
 
 
             //Heredo las validaciones de Persons
-           RuleFor(x => x.Persons).SetValidator(new PersonsValidator());
+            RuleFor(x => x.Persons).SetValidator(new PersonsValidator());
         }
 
         //Esta funcion me permite verificar que se ingresar en el campo UserDni valores unicos.

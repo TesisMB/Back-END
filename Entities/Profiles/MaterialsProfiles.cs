@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Entities.DataTransferObjects.Materials___Dto;
-using Entities.DataTransferObjects.Resources_RequestResources_Materials_Medicines_Vehicles___Dto;
 using Entities.DataTransferObjects.ResourcesDto;
 using Entities.Models;
 
@@ -40,9 +39,12 @@ namespace Entities.Profiles
 
             CreateMap<MaterialsForCreationDto, Materials>();
 
-            CreateMap<MaterialsForUpdateDto, Materials>();
+            CreateMap<MaterialsForUpdateDto, Materials>()
+                .ForMember(a => a.MaterialQuantity, b => b.MapFrom(a => a.MaterialQuantity));
 
-            CreateMap<Brands, MaterialsForUpdateDto>();
+     
+
+            CreateMap<Materials, MaterialsForUpdateDto>();
 
 
         }

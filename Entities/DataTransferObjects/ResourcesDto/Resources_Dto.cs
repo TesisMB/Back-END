@@ -14,6 +14,8 @@ namespace Entities.DataTransferObjects.ResourcesDto
         public string Picture { get; set; }
         public string Description { get; set; }
 
+        public string ImageSrc { get; set; }
+
         public string LocationCityName { get; set; }
 
         public MedicinesDto Medicines { get; set; }

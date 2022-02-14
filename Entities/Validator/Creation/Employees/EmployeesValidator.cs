@@ -2,7 +2,6 @@
 using Back_End.Validator;
 using FluentValidation;
 
-
 namespace Entities.Validator
 {
     public class EmployeesValidator : AbstractValidator<EmployeesForCreationDto>

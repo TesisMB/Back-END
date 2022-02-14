@@ -2,10 +2,9 @@
 using Back_End.Helpers;
 using Back_End.Models;
 using Contracts.Interfaces;
-using Entities.DataTransferObjects.Volunteers__Dto;
 using Entities.Helpers;
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,7 +30,7 @@ namespace Repository
 
             collection = collection.Where(
                                         a => a.Users.Estates.Locations.LocationDepartmentName == volunteers.Estates.Locations.LocationDepartmentName);
-            
+
             return await collection
                          .Include(a => a.Users)
                          .ThenInclude(a => a.Persons)
@@ -84,7 +83,7 @@ namespace Repository
         {
 
             Email.generatePassword(volunteer.Users);
-            
+
             Email.sendVerificationEmail(volunteer.Users);
             SpaceCamelCase(volunteer);
 
@@ -105,14 +104,15 @@ namespace Repository
 
                 foreach (var v in vol.VolunteersSkillsFormationEstates)
                 {
-                    if(vol.Skills != null) { 
-                    vol.Skills.SkillName = WithoutSpace_CamelCase.GetCamelCase(vol.Skills.SkillName);
-                    vol.Skills.SkillDescription = WithoutSpace_CamelCase.GetCamelCase(vol.Skills.SkillDescription);
+                    if (vol.Skills != null)
+                    {
+                        vol.Skills.SkillName = WithoutSpace_CamelCase.GetCamelCase(vol.Skills.SkillName);
+                        vol.Skills.SkillDescription = WithoutSpace_CamelCase.GetCamelCase(vol.Skills.SkillDescription);
                     }
 
-                    if(v.FormationsEstates != null)
+                    if (v.FormationsEstates != null)
                     {
-                    v.FormationsEstates.FormationEstateName = WithoutSpace_CamelCase.GetCamelCase(v.FormationsEstates.FormationEstateName);
+                        v.FormationsEstates.FormationEstateName = WithoutSpace_CamelCase.GetCamelCase(v.FormationsEstates.FormationEstateName);
                     }
 
                 }
@@ -158,19 +158,20 @@ namespace Repository
 
         public async Task<Volunteers> GetVolunteerAppWithDetails(int volunteerId)
         {
-               return await FindByCondition(volunteer => volunteer.ID.Equals(volunteerId))
-                     .Include(a => a.Users)
-                     .ThenInclude(a => a.Persons)
-                     .Include(a => a.Users.Estates.EstatesTimes)
-                     .ThenInclude(a => a.Times)
-                     .ThenInclude(a => a.Schedules)
-                     .Include(a => a.VolunteersSkills)
-                     .ThenInclude(a => a.Skills)
-                    .Include(a => a.VolunteersSkills)
-                    .ThenInclude(a => a.VolunteersSkillsFormationEstates)
-                    .ThenInclude(a => a.FormationsEstates)
-                    .ThenInclude(a => a.FormationsDates)
-                     .FirstOrDefaultAsync();
+            return await FindByCondition(volunteer => volunteer.ID.Equals(volunteerId))
+                  .Include(a => a.Users)
+                  .ThenInclude(a => a.Persons)
+                  .Include(a => a.Users.Estates.EstatesTimes)
+                  .ThenInclude(a => a.Times)
+                  .ThenInclude(a => a.Schedules)
+                  .Include(a => a.VolunteersSkills)
+                  .ThenInclude(a => a.Skills)
+                 .Include(a => a.VolunteersSkills)
+                 .ThenInclude(a => a.VolunteersSkillsFormationEstates)
+                 .ThenInclude(a => a.FormationsEstates)
+                 .ThenInclude(a => a.FormationsDates)
+                  .FirstOrDefaultAsync();
         }
+
     }
 }

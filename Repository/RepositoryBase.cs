@@ -1,10 +1,9 @@
 ﻿using Back_End.Entities;
 using Contracts.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 
 namespace Repository
 {
@@ -31,7 +30,7 @@ namespace Repository
             RepositoryContext.Set<T>().Add(entity);
         }
 
-        public  void Update(T entity)
+        public void Update(T entity)
         {
             RepositoryContext.Set<T>().Update(entity);
         }
@@ -43,7 +42,7 @@ namespace Repository
 
         public void SaveAsync()
         {
-             RepositoryContext.SaveChanges();
+            RepositoryContext.SaveChanges();
         }
     }
 }

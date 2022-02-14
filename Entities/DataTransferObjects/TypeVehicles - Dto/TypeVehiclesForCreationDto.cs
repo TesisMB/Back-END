@@ -1,6 +1,4 @@
-﻿
-
-namespace Entities.DataTransferObjects.TypeVehicles___Dto
+﻿namespace Entities.DataTransferObjects.TypeVehicles___Dto
 {
     public class TypeVehiclesForCreationDto
     {

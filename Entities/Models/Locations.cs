@@ -1,13 +1,11 @@
 ﻿using Back_End.Models;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Entities.Models
 {
-    [Table("Locations" , Schema = "dbo")]
+    [Table("Locations", Schema = "dbo")]
     public class Locations
     {
         [Key]

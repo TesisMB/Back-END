@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 
 namespace Entities.DataTransferObjects.Medicines___Dto
 {
@@ -14,7 +15,7 @@ namespace Entities.DataTransferObjects.Medicines___Dto
 
         public String MedicineUtility { get; set; }
         public Boolean MedicineAvailability { get; set; } = true;
-        public string MedicinePicture { get; set; }
+        public IFormFile ImageFile { get; set; }
         public int FK_EstateID { get; set; }
     }
 }

@@ -4,19 +4,12 @@ using System.Threading.Tasks;
 
 namespace Contracts.Interfaces
 {
-    public interface IResources_RequestRepository : IRepositoryBase<Resources_Request>
+    public interface IResources_RequestRepository : IRepositoryBase<ResourcesRequest>
     {
-        Task<IEnumerable<Resources_Request>> GetAllResourcesRequest();
+        Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequest();
 
-        Task<Resources_Request> GetResourcesRequestByID(int resource);
+        Task<ResourcesRequest> GetResourcesRequestByID(int resource);
 
-        void CreateResource_Resquest(Resources_Request resources_Request);
-
-        void UpdateResource_Resquest(Resources_Request resources_Request);
-        void UpdateResource_Resquest2(Resources_Request resources_Request);
-
-        Resources_Request Stock(Resources_Request resources_Request);
-
-        Resources_Request DeleteResource(Resources_Request resources_Request);
+        void CreateResource_Resquest(ResourcesRequest resources_Request, int userRequest);
     }
 }

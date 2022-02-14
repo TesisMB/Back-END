@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Entities.Models
 {
@@ -48,7 +47,10 @@ namespace Entities.Models
         public int FK_AlertID { get; set; }
 
         [Required]
-        public ICollection<Resources_Request> Resources_Requests { get; set; }
+        public ICollection<ResourcesRequest> Resources_Requests { get; set; }
+
+        [ForeignKey("FK_EmergencyDisasterID")]
+        public ICollection<VolunteersLocationVolunteersEmergenciesDisasters> VolunteersLocationVolunteersEmergenciesDisasters { get; set; }
 
     }
 

@@ -9,7 +9,7 @@ namespace Entities.Profiles
         public TypesChatRoomsProfiles()
         {
             CreateMap<TypesChatRooms, TypesChatsDto>();
-              
+
 
             CreateMap<TypesChatRoomsForCreationDto, TypesChatRooms>();
         }

@@ -1,6 +1,4 @@
-﻿using Back_End.Models.Employees___Dto;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace Back_End.Models.Persons___Dto
 {

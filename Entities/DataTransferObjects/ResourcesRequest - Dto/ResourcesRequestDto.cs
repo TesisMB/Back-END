@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Entities.DataTransferObjects.Resources_Request___Dto
 {
-    public class Resources_RequestDto
+    public class ResourcesRequestDto
     {
         public int ID { get; set; }
 
@@ -16,10 +16,12 @@ namespace Entities.DataTransferObjects.Resources_Request___Dto
 
         public Boolean Status { get; set; }
 
+        public string Condition { get; set; }
+
         public EmployeesUsersDto Users { get; set; }
 
         public EmergenciesDisastersDto EmergenciesDisasters { get; set; }
 
-        public ICollection<Resources_RequestResources_Materials_Medicines_VehiclesDto> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
+        public ICollection<ResourcesRequestMaterialsMedicinesVehiclesDto> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
     }
 }

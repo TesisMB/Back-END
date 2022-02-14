@@ -1,6 +1,6 @@
 ﻿using Back_End.Entities;
+using Back_End.Models;
 using Contracts.Interfaces;
-using Entities.DataTransferObjects.CharRooms___Dto;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class UsersChatRoomsRepository: RepositoryBase<UsersChatRooms>, IUsersChatRoomsRepository
+    public class UsersChatRoomsRepository : RepositoryBase<UsersChatRooms>, IUsersChatRoomsRepository
     {
         private CruzRojaContext _cruzRojaContext;
-        public UsersChatRoomsRepository(CruzRojaContext cruzRojaContext): base(cruzRojaContext)
+        public UsersChatRoomsRepository(CruzRojaContext cruzRojaContext) : base(cruzRojaContext)
         {
             _cruzRojaContext = cruzRojaContext;
         }
@@ -31,14 +31,51 @@ namespace Repository
                    .FirstOrDefaultAsync();
         }
 
-        public void JoinGroup(UsersChatRooms usersChat)
+        public void JoinGroup(UsersChatRooms usersChat, decimal longitude, decimal latitude)
         {
+            usersChat.FK_UserID = UsersRepository.authUser.UserID;
+            var rol = UsersRepository.authUser.Roles.RoleName;
+            usersChat.Users = null;
+
+            if (rol == "Voluntario")
+            {
+                LocationVolunteers locations = new LocationVolunteers()
+                {
+                    LocationVolunteerLatitude = latitude,
+                    LocationVolunteerLongitude = longitude
+                    };
+
+                _cruzRojaContext.Add(locations);
+                SaveAsync();
+
+
+               VolunteersLocationVolunteersEmergenciesDisasters volunteersLocationVolunteersEmergenciesDisasters = new VolunteersLocationVolunteersEmergenciesDisasters();
+
+                volunteersLocationVolunteersEmergenciesDisasters.FK_VolunteerID = usersChat.FK_UserID;
+                volunteersLocationVolunteersEmergenciesDisasters.FK_LocationVolunteerID = locations.ID;
+                volunteersLocationVolunteersEmergenciesDisasters.FK_EmergencyDisasterID = usersChat.FK_ChatRoomID;
+
+
+                _cruzRojaContext.Add(volunteersLocationVolunteersEmergenciesDisasters);
+                SaveAsync();
+            }
+
+
             Create(usersChat);
         }
 
         public void LeaveGroup(UsersChatRooms usersChat)
         {
             Delete(usersChat);
+        }
+
+
+        public void Coords(LocationVolunteers Locations)
+        {
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            cruzRojaContext.Add(Locations);
+            SaveAsync();
         }
     }
 }

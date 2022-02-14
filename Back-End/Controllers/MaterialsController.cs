@@ -41,10 +41,15 @@ namespace Back_End.Controllers
 
                 _logger.LogInfo($"Returned all Materials from database.");
 
-                var volunteersResult = _mapper.Map<IEnumerable<Resources_Dto>>(volunteers);
+                var materialsResult = _mapper.Map<IEnumerable<Resources_Dto>>(volunteers);
 
-                return Ok(volunteersResult);
+                foreach (var item in materialsResult)
+                {
+                    item.ImageSrc = String.Format("{0}://{1}{2}/StaticFiles/Images/{3}",
+                                                  Request.Scheme, Request.Host, Request.PathBase, item.Picture);
+                }
 
+                return Ok(materialsResult);
             }
             catch (Exception ex)
             {
@@ -111,6 +116,9 @@ namespace Back_End.Controllers
 
                 var materialEntity = _mapper.Map<Materials>(material);
 
+                materialEntity.MaterialPicture = await UploadController.SaveImage(material.ImageFile);
+
+
                 _repository.Materials.CreateMaterial(materialEntity);
 
                  _repository.Materials.SaveAsync();
@@ -156,7 +164,7 @@ namespace Back_End.Controllers
 
                 var employeeResult = _mapper.Map(materialToPatch, materialEntity);
 
-                _repository.Materials.Update(employeeResult);
+                _repository.Materials.UpdateMaterial(employeeResult);
               
                  _repository.Materials.SaveAsync();
 

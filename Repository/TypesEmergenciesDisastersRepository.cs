@@ -2,17 +2,14 @@
 using Contracts.Interfaces;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Repository
 {
     public class TypesEmergenciesDisastersRepository : RepositoryBase<TypesEmergenciesDisasters>, ITypesEmergenciesDisastersRepository
     {
-        public TypesEmergenciesDisastersRepository(CruzRojaContext cruzRojaContext):base(cruzRojaContext)
+        public TypesEmergenciesDisastersRepository(CruzRojaContext cruzRojaContext) : base(cruzRojaContext)
         {
 
         }
@@ -20,6 +17,18 @@ namespace Repository
         {
             return await FindAll()
                 .ToListAsync();
+        }
+
+        public async Task<TypesEmergenciesDisasters> GetTypeEmergencyDisaster(int TypeEmergencyDisasterId)
+        {
+            return await FindByCondition(a => a.TypeEmergencyDisasterID.Equals(TypeEmergencyDisasterId))
+                .Include(i => i.EmergenciesDisasters)
+                .ThenInclude(i => i.Alerts)
+                .Include(i => i.EmergenciesDisasters)
+                .ThenInclude(i => i.Employees)
+                .Include(i => i.EmergenciesDisasters)
+                .ThenInclude(i => i.Locations)
+                .FirstOrDefaultAsync();
         }
     }
 }

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Models
 {
-    [Table("ChatRooms", Schema="dbo")]
+    [Table("ChatRooms", Schema = "dbo")]
     public class ChatRooms
     {
         [Key, ForeignKey("EmergenciesDisasters")]

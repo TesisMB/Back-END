@@ -53,7 +53,7 @@ public class Startup
         services.AddSignalR();
 
         services.Configure<ApiBehaviorOptions>(options => {
-           options.SuppressModelStateInvalidFilter = true;
+            options.SuppressModelStateInvalidFilter = true;
         });
 
         services.AddControllers();
@@ -73,6 +73,12 @@ public class Startup
 
 
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
+        var configuration = new MapperConfiguration(cfg => {
+            cfg.AllowNullCollections = true;
+        });
+
 
         services.AddAuthentication(opt => {
             opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -126,7 +132,11 @@ public class Startup
 
 
         //habilita e uso de archivos estaticos para la solicitud.
-        app.UseStaticFiles();
+        app.UseStaticFiles(/*new StaticFileOptions
+        {
+            FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "StaticFiles", "Images")),
+            RequestPath = "/StaticFiles/Images"
+        }*/);
 
         //Reenvia los encabezados del proxy a la solicitud actual.
         app.UseForwardedHeaders(new ForwardedHeadersOptions

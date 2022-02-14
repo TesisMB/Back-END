@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Entities.DataTransferObjects.Login___Dto
+﻿namespace Entities.DataTransferObjects.Login___Dto
 {
     public class VolunteersUserDto
     {

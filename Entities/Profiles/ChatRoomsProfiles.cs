@@ -5,7 +5,7 @@ using Entities.Models;
 
 namespace Entities.Profiles
 {
-   public class ChatRoomsProfiles: Profile
+    public class ChatRoomsProfiles : Profile
     {
         public ChatRoomsProfiles()
         {

@@ -3,9 +3,6 @@ using Entities.DataTransferObjects.Medicines___Dto;
 using Entities.DataTransferObjects.ResourcesDto;
 using Entities.Helpers;
 using Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Entities.Profiles
 {
@@ -48,11 +45,11 @@ namespace Entities.Profiles
                            .ForPath(dest => dest.Medicines.MedicineWeight, opts => opts.MapFrom(src => src.MedicineWeight))
 
 
-                              /* .ForMember(dest => dest.Medicines.MedicineWeight,
-                       opt => opt.MapFrom(src => src.MedicineWeight))
+                     /* .ForMember(dest => dest.Medicines.MedicineWeight,
+              opt => opt.MapFrom(src => src.MedicineWeight))
 
-                                   .ForMember(dest => dest.Medicines.MedicineUnits,
-                       opt => opt.MapFrom(src => src.MedicineUnits));*/
+                          .ForMember(dest => dest.Medicines.MedicineUnits,
+              opt => opt.MapFrom(src => src.MedicineUnits));*/
 
                      .ForMember(dest => dest.Picture, opt => opt.MapFrom(src => src.MedicinePicture))
 
@@ -64,7 +61,9 @@ namespace Entities.Profiles
             CreateMap<MedicineForCreationDto, Medicines>();
 
 
-            CreateMap<MedicineForUpdateDto, Medicines>();
+            CreateMap<MedicineForUpdateDto, Medicines>()
+                               .ForMember(a => a.MedicineQuantity, b => b.MapFrom(a => a.MedicineQuantity));
+            
             CreateMap<Medicines, MedicineForUpdateDto>();
         }
     }

@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using Entities.DataTransferObjects.Marks___Dto;
 using Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Entities.Profiles
 {

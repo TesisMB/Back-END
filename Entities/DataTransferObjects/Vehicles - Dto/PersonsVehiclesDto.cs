@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Entities.DataTransferObjects.Models.Vehicles___Dto
+﻿namespace Entities.DataTransferObjects.Models.Vehicles___Dto
 {
     public class PersonsVehiclesDto
     {

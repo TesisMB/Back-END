@@ -56,7 +56,9 @@ namespace Repository
             using (var db = new CruzRojaContext())
                 authUser = db.Users
                                .Include(u => u.Persons)
-                               .Where(u => u.Persons.Email == email).FirstOrDefault();
+                               .Where(u => u.Persons.Email == email)
+                               .AsNoTracking()
+                               .FirstOrDefault();
 
             //var account = _cruzRojaContext.Users.FirstOrDefault(i => i.Persons.Email == model.Email);
 
@@ -89,10 +91,10 @@ namespace Repository
             string message;
             {
 
-               var resetUrl = $"http://localhost:4200/cliente/resetear-contrase%C3%B1a?token= {account.ResetToken}";
+                var resetUrl = $"http://localhost:4200/cliente/resetear-contrase%C3%B1a?token= {account.ResetToken}";
 
                 resetUrl.Trim();
-               message = $@"
+                message = $@"
                                 <p>Sentimos que hayas tenido problemas para iniciar sesión en SYNAGIR. Podemos ayudar a recuperar tu cuenta.</p>
                                 <p>Please click the below link to reset your password, the link will be valid for 1 day:</p>
                                  <a style=""color: white; text-align: center; display: block; background:red; text-decoration: none;  border-radius: 0.4rem; margin: 4rem auto; width: 15%; padding: 10px;
@@ -110,14 +112,16 @@ namespace Repository
         }
 
         //Funcion para validar los campos: Token, contraseña nueva 
-        public void  ResetPassword(string token, string password)
+        public void ResetPassword(string token, string password)
         {
-           Users account = null;
+            Users account = null;
 
-           using (var db = new CruzRojaContext())
+            using (var db = new CruzRojaContext())
                 account = db.Users
                                .Where(u => u.ResetToken == token.Trim()
-                               && u.ResetTokenExpires > DateTime.Now).FirstOrDefault();
+                               && u.ResetTokenExpires > DateTime.Now)
+                               .AsNoTracking()
+                               .FirstOrDefault();
 
             account.UserPassword = Encrypt.GetSHA256(password);
             account.PasswordReset = DateTime.Now;
@@ -148,10 +152,12 @@ namespace Repository
                                .Include(u => u.Estates.Locations)
                                .Include(u => u.Volunteers)
                                 .Where(u => u.UserDni == user.UserDni
-                                   && u.UserPassword == ePass).FirstOrDefault();
+                                   && u.UserPassword == ePass)
+                                .AsNoTracking()
+                                .FirstOrDefault();
 
 
-            if(authUser != null)
+            if (authUser != null)
             {
                 ret = _mapper.Map<UserEmployeeAuthDto>(authUser); //si los datos son correctos se crea el objeto del usuario autentificado
             }
@@ -159,4 +165,4 @@ namespace Repository
             return ret; //retornamos el valor de este objeto       
         }
     }
- }
+}

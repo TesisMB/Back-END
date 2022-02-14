@@ -4,7 +4,6 @@ using Contracts.Interfaces;
 using Entities.DataTransferObjects.Vehicles___Dto;
 using Entities.Helpers;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -32,7 +31,7 @@ namespace Repository
             }
 
 
-             if (!string.IsNullOrEmpty(vehicles.Type) && (vehicles.VehicleYear != null))
+            if (!string.IsNullOrEmpty(vehicles.Type) && (vehicles.VehicleYear != null))
             {
                 collection = collection.Where(
                                       a => a.TypeVehicles.Type == vehicles.Type
@@ -41,7 +40,7 @@ namespace Repository
             }
 
 
-             if ((vehicles.VehicleYear != null))
+            if ((vehicles.VehicleYear != null))
             {
                 collection = collection.Where(
                                       a => a.VehicleYear == vehicles.VehicleYear
@@ -91,6 +90,19 @@ namespace Repository
                    .FirstOrDefaultAsync();
         }
 
+
+        public static void status(Vehicles Vehicles)
+        {
+
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            cruzRojaContext.Update(Vehicles);
+
+            cruzRojaContext.SaveChanges();
+        
+        }
+
+
         public void CreateVehicle(Vehicles vehicles)
         {
 
@@ -104,15 +116,15 @@ namespace Repository
             vehicles.VehicleUtility = WithoutSpace_CamelCase.GetCamelCase(vehicles.VehiclePatent);
             vehicles.VehicleDescription = WithoutSpace_CamelCase.GetCamelCase(vehicles.VehiclePatent);
 
-            if(vehicles.TypeVehicles != null)
+            if (vehicles.TypeVehicles != null)
             {
-            vehicles.TypeVehicles.Type = WithoutSpace_CamelCase.GetCamelCase(vehicles.TypeVehicles.Type);
+                vehicles.TypeVehicles.Type = WithoutSpace_CamelCase.GetCamelCase(vehicles.TypeVehicles.Type);
             }
 
-            if(vehicles.BrandsModels != null)
+            if (vehicles.BrandsModels != null)
             {
-            vehicles.BrandsModels.Brands.BrandName = WithoutSpace_CamelCase.GetCamelCase(vehicles.BrandsModels.Brands.BrandName);
-            vehicles.BrandsModels.Model.ModelName = WithoutSpace_CamelCase.GetCamelCase(vehicles.BrandsModels.Model.ModelName);
+                vehicles.BrandsModels.Brands.BrandName = WithoutSpace_CamelCase.GetCamelCase(vehicles.BrandsModels.Brands.BrandName);
+                vehicles.BrandsModels.Model.ModelName = WithoutSpace_CamelCase.GetCamelCase(vehicles.BrandsModels.Model.ModelName);
             }
         }
 

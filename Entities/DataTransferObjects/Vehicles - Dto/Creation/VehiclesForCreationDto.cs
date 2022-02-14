@@ -1,8 +1,7 @@
 ﻿using Entities.DataTransferObjects.Brands___Dto;
 using Entities.DataTransferObjects.TypeVehicles___Dto;
+using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Entities.DataTransferObjects.Vehicles___Dto.Creation
 {
@@ -14,11 +13,10 @@ namespace Entities.DataTransferObjects.Vehicles___Dto.Creation
 
         public int VehicleYear { get; set; }
 
-
         public string VehicleDescription { get; set; }
 
         public Boolean VehicleAvailability { get; set; } = true;
-        public string VehiclePicture { get; set; }
+        public IFormFile ImageFile { get; set; }
 
         public int? FK_EstateID { get; set; }
         public int? FK_EmployeeID { get; set; }

@@ -5,7 +5,6 @@ using Back_End.Models;
 using Contracts.Interfaces;
 using Entities.Helpers;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +17,7 @@ namespace Repository
 
         private IMapper _mapper;
         //ctor
-       
+
         public EmployeesRepository(CruzRojaContext cruzRojaContext, IMapper mapper) : base(cruzRojaContext)
         {
             _mapper = mapper;
@@ -31,11 +30,12 @@ namespace Repository
 
             var Collection = _cruzRojaContext.Employees as IQueryable<Employees>;
 
-           
-                Collection = Collection.Where(
-                    a => a.Users.Estates.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName
-                    && a.Users.Estates.Locations.LocationCityName == user.Estates.Locations.LocationCityName
-                    && a.Users.Estates.Locations.LocationMunicipalityName == user.Estates.Locations.LocationMunicipalityName);
+
+            Collection = Collection.Where(
+                a => a.Users.Estates.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName
+                && a.Users.Estates.Locations.LocationCityName == user.Estates.Locations.LocationCityName
+                && a.Users.Estates.Locations.LocationMunicipalityName == user.Estates.Locations.LocationMunicipalityName
+                && a.Users.UserID != user.UserID);
 
             return await Collection
                     .Include(i => i.Users)
@@ -70,7 +70,7 @@ namespace Repository
                     .Include(a => a.Users.Estates.EstatesTimes)
                     .ThenInclude(a => a.Times)
                     .ThenInclude(a => a.Schedules)
-                    .Include(a=>a.Users.Estates.Locations)
+                    .Include(a => a.Users.Estates.Locations)
                     .FirstOrDefaultAsync();
         }
 
@@ -97,12 +97,12 @@ namespace Repository
 
             Email.sendVerificationEmail(employee.Users);
             spaceCamelCase(employee);
-            
+
             employee.Users.UserPassword = Encrypt.GetSHA256(employee.Users.UserPassword);
 
             Create(employee);
 
-//            SaveAsync();
+            //            SaveAsync();
 
 
         }
@@ -110,13 +110,13 @@ namespace Repository
 
         public static Employees spaceCamelCase(Employees employee)
         {
-           employee.Users.UserDni = WithoutSpace_CamelCase.GetCamelCase(employee.Users.UserDni);
-           employee.Users.UserPassword = WithoutSpace_CamelCase.GetWithoutSpace(employee.Users.UserPassword);
-           employee.Users.Persons.FirstName = WithoutSpace_CamelCase.GetCamelCase(employee.Users.Persons.FirstName);
-           employee.Users.Persons.LastName = WithoutSpace_CamelCase.GetCamelCase(employee.Users.Persons.LastName);
-           employee.Users.Persons.Phone = WithoutSpace_CamelCase.GetCamelCase(employee.Users.Persons.Phone);
-           employee.Users.Persons.Address = WithoutSpace_CamelCase.GetCamelCase(employee.Users.Persons.Address);
-           employee.Users.Persons.Email = WithoutSpace_CamelCase.GetWithoutSpace(employee.Users.Persons.Email);
+            employee.Users.UserDni = WithoutSpace_CamelCase.GetCamelCase(employee.Users.UserDni);
+            employee.Users.UserPassword = WithoutSpace_CamelCase.GetWithoutSpace(employee.Users.UserPassword);
+            employee.Users.Persons.FirstName = WithoutSpace_CamelCase.GetCamelCase(employee.Users.Persons.FirstName);
+            employee.Users.Persons.LastName = WithoutSpace_CamelCase.GetCamelCase(employee.Users.Persons.LastName);
+            employee.Users.Persons.Phone = WithoutSpace_CamelCase.GetCamelCase(employee.Users.Persons.Phone);
+            employee.Users.Persons.Address = WithoutSpace_CamelCase.GetCamelCase(employee.Users.Persons.Address);
+            employee.Users.Persons.Email = WithoutSpace_CamelCase.GetWithoutSpace(employee.Users.Persons.Email);
 
             return employee;
         }
@@ -125,7 +125,7 @@ namespace Repository
         {
             string message;
 
-             message = $@"<p>Se creo con exito su cuenta</p>
+            message = $@"<p>Se creo con exito su cuenta</p>
              <p>Su usuario es: {employees.Users.UserDni}<p>
              <p>Su contraseña es: {employees.Users.UserPassword}</p>";
 

@@ -1,7 +1,6 @@
 ﻿using Back_End.Entities;
 using Back_End.Models;
 using FluentValidation;
-using System;
 using System.Linq;
 
 namespace Back_End.Validator

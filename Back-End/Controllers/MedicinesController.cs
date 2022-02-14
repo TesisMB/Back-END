@@ -37,9 +37,15 @@ namespace Back_End.Controllers
 
                 _logger.LogInfo($"Returned all Materials from database.");
 
-                var volunteersResult = _mapper.Map<IEnumerable<Resources_Dto>>(volunteers);
+                var medicinesResult = _mapper.Map<IEnumerable<Resources_Dto>>(volunteers);
 
-                return Ok(volunteersResult);
+                foreach (var item in medicinesResult)
+                {
+                    item.ImageSrc = String.Format("{0}://{1}{2}/StaticFiles/Images/{3}",
+                                                  Request.Scheme, Request.Host, Request.PathBase, item.Picture);
+                }
+
+                return Ok(medicinesResult);
 
             }
             catch (Exception ex)
@@ -52,7 +58,7 @@ namespace Back_End.Controllers
         }
 
         [HttpGet("{medicineId}")]
-        public async Task<ActionResult<Medicines>> GetMedicineWithDetails(int medicineId)
+        public async Task<ActionResult<Medicines>> GetMedicineWithDetails(string medicineId)
         {
             try
             {
@@ -96,6 +102,9 @@ namespace Back_End.Controllers
 
                 var medicineEntity = _mapper.Map<Medicines>(medicine);
 
+                medicineEntity.MedicinePicture = await UploadController.SaveImage(medicine.ImageFile);
+
+
                 _repository.Medicines.CreateMedicine(medicineEntity);
 
                 _repository.Medicines.SaveAsync();
@@ -114,7 +123,7 @@ namespace Back_End.Controllers
         }
 
         [HttpPatch("{medicineId}")]
-        public async Task<ActionResult> UpdateMedicine(int medicineId, JsonPatchDocument<MedicineForUpdateDto> patchDocument)
+        public async Task<ActionResult> UpdateMedicine(string medicineId, JsonPatchDocument<MedicineForUpdateDto> patchDocument)
         {
             try
             {
@@ -152,7 +161,7 @@ namespace Back_End.Controllers
         }
 
         [HttpDelete("{medicineId}")]
-        public async Task<ActionResult> DeleteMedicine(int medicineId)
+        public async Task<ActionResult> DeleteMedicine(string medicineId)
         {
             try
             {

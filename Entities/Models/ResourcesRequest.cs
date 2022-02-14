@@ -6,9 +6,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Models
 {
-    [Table("Resources_Request", Schema="dbo")]
-    public class Resources_Request
+    [Table("ResourcesRequest", Schema = "dbo")]
+    public class ResourcesRequest
     {
+
+    
         [Key]
         public int ID { get; set; }
 
@@ -20,6 +22,9 @@ namespace Entities.Models
 
         [Required]
         public Boolean Status { get; set; }
+
+        [Required]
+        public string Condition { get; set; }
 
         [ForeignKey("FK_UserID")]
         public Users Users { get; set; }
@@ -33,9 +38,9 @@ namespace Entities.Models
         [Required]
         public int FK_EmergencyDisasterID { get; set; }
 
-        [ForeignKey("FK_Resources_RequestID")]
-        public ICollection<Resources_RequestResources_Materials_Medicines_Vehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
-       
+        [ForeignKey("FK_Resource_RequestID")]
+        public ICollection<ResourcesRequestMaterialsMedicinesVehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
+
         //public Resources  Resources { get; set; }
     }
 }

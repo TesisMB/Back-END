@@ -41,6 +41,14 @@ namespace Back_End.Controllers
                 _logger.LogInfo($"Returned all vehicles from database.");
 
                 var employeesResult = _mapper.Map<IEnumerable<Resources_Dto>>(vehicles);
+
+
+                foreach (var item in employeesResult)
+                {
+                    item.ImageSrc = String.Format("{0}://{1}{2}/StaticFiles/Images/{3}",
+                                                  Request.Scheme, Request.Host, Request.PathBase, item.Picture);
+                }
+
                 return Ok(employeesResult);
 
             }
@@ -98,6 +106,8 @@ namespace Back_End.Controllers
                 }
 
                 var vehicleEntity = _mapper.Map<Vehicles>(vehicle);
+
+                vehicleEntity.VehiclePicture = await UploadController.SaveImage(vehicle.ImageFile);
 
                 _repository.Vehicles.CreateVehicle(vehicleEntity);
 

@@ -3,7 +3,6 @@ using Contracts.Interfaces;
 using Entities.Helpers;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -38,7 +37,18 @@ namespace Repository
                 .ToListAsync();
         }
 
-        public async Task<Medicines> GetMedicineById(int medicineId)
+        public static void status(Medicines medicines)
+        {
+
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            cruzRojaContext.Update(medicines);
+            cruzRojaContext.SaveChanges();
+
+        }
+
+
+        public async Task<Medicines> GetMedicineById(string medicineId)
         {
             return await FindByCondition(med => med.ID.Equals(medicineId))
                               .Include(a => a.Estates)
@@ -49,7 +59,7 @@ namespace Repository
                               .FirstOrDefaultAsync();
         }
 
-        public async Task<Medicines> GetMedicinelWithDetails(int medicineId)
+        public async Task<Medicines> GetMedicinelWithDetails(string medicineId)
         {
             return await FindByCondition(med => med.ID.Equals(medicineId))
                      .Include(a => a.Estates)

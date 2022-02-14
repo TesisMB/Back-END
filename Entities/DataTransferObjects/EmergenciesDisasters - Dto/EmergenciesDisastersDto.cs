@@ -2,7 +2,6 @@
 using Entities.DataTransferObjects.Alerts___Dto;
 using Entities.DataTransferObjects.Locations___Dto;
 using Entities.DataTransferObjects.TypesEmergenciesDisasters___Dto;
-using System;
 
 namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
 {

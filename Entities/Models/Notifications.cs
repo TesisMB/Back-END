@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Entities.Models
 {
-    [Table("Notifications", Schema= "dbo")]
+    [Table("Notifications", Schema = "dbo")]
     public class Notifications
     {
         [Key]
         public int ID { get; set; }
-        
+
         [Required]
         public string Message { get; set; }
 

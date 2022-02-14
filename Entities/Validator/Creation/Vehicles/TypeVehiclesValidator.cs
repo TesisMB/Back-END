@@ -1,8 +1,5 @@
 ﻿using Entities.DataTransferObjects.TypeVehicles___Dto;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Entities.Validator.Creation.Vehicles
 {

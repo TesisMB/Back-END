@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Entities.Models
 {
-    [Table("TypesChatRooms", Schema="dbo")]
+    [Table("TypesChatRooms", Schema = "dbo")]
     public class TypesChatRooms
     {
         [Key]

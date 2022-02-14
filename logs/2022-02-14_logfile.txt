@@ -89,3 +89,5 @@ System.Object -> System.Collections.Generic.IEnumerable`1[[Entities.DataTransfer
 2022-02-14 13:48:31.7195 INFO Returned all Volunteers from database.
 2022-02-14 14:02:09.7718 INFO Returned User.
 2022-02-14 14:02:11.6599 INFO Returned all Volunteers from database.
+2022-02-14 16:17:12.8033 INFO Returned User.
+2022-02-14 16:17:15.2503 INFO Returned all Volunteers from database.

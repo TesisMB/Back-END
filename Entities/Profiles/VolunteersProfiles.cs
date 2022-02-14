@@ -74,7 +74,9 @@ namespace Back_End.Profiles
 
             CreateMap<Volunteers, VolunteersAppDto>()
            .ForPath(dest => dest.VolunteersSkills, opts => opts.MapFrom(src => src.VolunteersSkills))
-           .ForPath(dest => dest.UsersVolunteers, opts => opts.MapFrom(src => src.Users));
+           .ForPath(dest => dest.UserDni, opts => opts.MapFrom(src => src.Users.UserDni))
+           .ForPath(dest => dest.Name, opts => opts.MapFrom(src => src.Users.Persons.FirstName + " " + src.Users.Persons.LastName))
+           .ForPath(dest => dest.Status, opts => opts.MapFrom(src => src.Users.Persons.Status));
 
             CreateMap<VolunteersForCreationDto, Volunteers>();
             CreateMap<VolunteersForUpdatoDto, Volunteers>();

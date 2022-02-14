@@ -48,6 +48,13 @@ namespace Back_End.Controllers
 
                 var volunteersResult = _mapper.Map<IEnumerable<Resources_Dto>>(volunteers);
 
+                foreach (var item in volunteersResult)
+                {
+                    item.ImageSrc = String.Format("{0}://{1}{2}/StaticFiles/Images/{3}",
+                                                  Request.Scheme, Request.Host, Request.PathBase, item.Picture);
+                }
+
+                
                 return Ok(volunteersResult);
             }
             catch (Exception ex)

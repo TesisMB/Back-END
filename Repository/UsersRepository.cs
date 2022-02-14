@@ -56,7 +56,9 @@ namespace Repository
             using (var db = new CruzRojaContext())
                 authUser = db.Users
                                .Include(u => u.Persons)
-                               .Where(u => u.Persons.Email == email).FirstOrDefault();
+                               .Where(u => u.Persons.Email == email)
+                               .AsNoTracking()
+                               .FirstOrDefault();
 
             //var account = _cruzRojaContext.Users.FirstOrDefault(i => i.Persons.Email == model.Email);
 
@@ -117,7 +119,9 @@ namespace Repository
             using (var db = new CruzRojaContext())
                 account = db.Users
                                .Where(u => u.ResetToken == token.Trim()
-                               && u.ResetTokenExpires > DateTime.Now).FirstOrDefault();
+                               && u.ResetTokenExpires > DateTime.Now)
+                               .AsNoTracking()
+                               .FirstOrDefault();
 
             account.UserPassword = Encrypt.GetSHA256(password);
             account.PasswordReset = DateTime.Now;
@@ -148,7 +152,9 @@ namespace Repository
                                .Include(u => u.Estates.Locations)
                                .Include(u => u.Volunteers)
                                 .Where(u => u.UserDni == user.UserDni
-                                   && u.UserPassword == ePass).FirstOrDefault();
+                                   && u.UserPassword == ePass)
+                                .AsNoTracking()
+                                .FirstOrDefault();
 
 
             if (authUser != null)

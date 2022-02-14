@@ -18,6 +18,7 @@ using System.IO;
 using Wkhtmltopdf.NetCore;
 using Back_End.Hubs;
 using Back_End.Entities;
+using Microsoft.Extensions.FileProviders;
 
 public class Startup
 {
@@ -133,7 +134,11 @@ public class Startup
 
 
         //habilita e uso de archivos estaticos para la solicitud.
-        app.UseStaticFiles();
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "StaticFiles", "Images")),
+            RequestPath = "/StaticFiles/Images"
+        });
 
         //Reenvia los encabezados del proxy a la solicitud actual.
         app.UseForwardedHeaders(new ForwardedHeadersOptions

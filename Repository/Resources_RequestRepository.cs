@@ -1,7 +1,6 @@
 ﻿using Back_End.Entities;
 using Back_End.Models;
 using Contracts.Interfaces;
-using Entities.DataTransferObjects.Resources_Request___Dto;
 using Entities.Helpers;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
@@ -181,9 +180,10 @@ namespace Repository
                 if(resources_Request.Status == false)
                 {
                     DeleteResource(userReq);
+                    userReq.Condition = "Rechazada";
                 }
 
-
+                userReq.Condition = "Aceptada";
                 Update(userReq);
 
                 SaveAsync();

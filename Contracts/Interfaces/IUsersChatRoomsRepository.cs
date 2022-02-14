@@ -6,7 +6,7 @@ namespace Contracts.Interfaces
 {
     public interface IUsersChatRoomsRepository : IRepositoryBase<UsersChatRooms>
     {
-        void JoinGroup(UsersChatRooms usersChat);
+        void JoinGroup(UsersChatRooms usersChat, decimal longitude, decimal latitude);
         void LeaveGroup(UsersChatRooms usersChat);
 
         Task<UsersChatRooms> GetUsersChatRooms(int userChat, int chatRoom);

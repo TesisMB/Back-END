@@ -4,6 +4,7 @@ using Entities.DataTransferObjects.CharRooms___Dto;
 using Entities.DataTransferObjects.Messages___Dto;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
+using Repository;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -110,9 +111,10 @@ namespace Back_End.Controllers
                     return BadRequest("UsersChat object is null");
                 }
 
+
                 var userChatRoom = _mapper.Map<UsersChatRooms>(usersChat);
 
-                _repository.UsersChatRooms.Create(userChatRoom);
+                _repository.UsersChatRooms.JoinGroup(userChatRoom, usersChat.LocationVolunteerLatitude, usersChat.LocationVolunteerLongitude);
 
                 _repository.Messages.SaveAsync();
 

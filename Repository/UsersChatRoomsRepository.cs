@@ -1,4 +1,5 @@
 ﻿using Back_End.Entities;
+using Back_End.Models;
 using Contracts.Interfaces;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
@@ -30,14 +31,37 @@ namespace Repository
                    .FirstOrDefaultAsync();
         }
 
-        public void JoinGroup(UsersChatRooms usersChat)
+        public void JoinGroup(UsersChatRooms usersChat, decimal longitude, decimal latitude)
         {
+            usersChat.FK_UserID = UsersRepository.authUser.UserID;
+            var rol = UsersRepository.authUser.Roles.RoleName;
+            usersChat.Users = null;
+
+            if(rol == "Voluntario")
+            {
+                LocationVolunteers locations = new LocationVolunteers();
+                locations.ID = usersChat.FK_UserID;
+                locations.LocationVolunteerLatitude = latitude;
+                locations.LocationVolunteerLongitude = longitude;
+
+                Coords(locations);
+            }
+
+
             Create(usersChat);
         }
 
         public void LeaveGroup(UsersChatRooms usersChat)
         {
             Delete(usersChat);
+        }
+
+
+        public void Coords(LocationVolunteers Locations)
+        {
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            cruzRojaContext.Update(Locations);
         }
     }
 }

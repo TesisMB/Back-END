@@ -23,6 +23,9 @@ namespace Entities.Models
         [Required]
         public Boolean Status { get; set; }
 
+        [Required]
+        public string Condition { get; set; }
+
         [ForeignKey("FK_UserID")]
         public Users Users { get; set; }
 

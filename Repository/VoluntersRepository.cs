@@ -3,6 +3,7 @@ using Back_End.Helpers;
 using Back_End.Models;
 using Contracts.Interfaces;
 using Entities.Helpers;
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -171,5 +172,12 @@ namespace Repository
                  .ThenInclude(a => a.FormationsDates)
                   .FirstOrDefaultAsync();
         }
+
+        public static void CoordsLocation(LocationVolunteers location){
+           
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            cruzRojaContext.Update(location);
+        }       
     }
 }

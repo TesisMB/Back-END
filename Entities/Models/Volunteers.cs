@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Entities.Models;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,6 +15,8 @@ namespace Back_End.Models
 
         public string VolunteerDescription { get; set; }
         public Users Users { get; set; }
+
+        public LocationVolunteers LocationVolunteers { get; set; }
 
         public ICollection<VolunteersSkills> VolunteersSkills { get; set; }
 

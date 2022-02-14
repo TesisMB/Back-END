@@ -16,6 +16,8 @@ namespace Entities.DataTransferObjects.Resources_Request___Dto
 
         public Boolean Status { get; set; }
 
+        public string Condition { get; set; }
+
         public EmployeesUsersDto Users { get; set; }
 
         public EmergenciesDisastersDto EmergenciesDisasters { get; set; }

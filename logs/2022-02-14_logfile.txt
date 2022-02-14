@@ -91,3 +91,27 @@ System.Object -> System.Collections.Generic.IEnumerable`1[[Entities.DataTransfer
 2022-02-14 14:02:11.6599 INFO Returned all Volunteers from database.
 2022-02-14 16:17:12.8033 INFO Returned User.
 2022-02-14 16:17:15.2503 INFO Returned all Volunteers from database.
+2022-02-14 16:51:14.3203 INFO Returned User.
+2022-02-14 16:52:00.1710 ERROR Something went wrong inside JoinGroup aciton: An error occurred while updating the entries. See the inner exception for details.
+2022-02-14 16:53:02.5540 INFO Returned User.
+2022-02-14 16:53:12.3467 ERROR Something went wrong inside JoinGroup aciton: Object reference not set to an instance of an object.
+2022-02-14 16:54:08.8031 INFO Returned User.
+2022-02-14 16:56:43.2427 INFO Returned User.
+2022-02-14 16:57:55.0700 INFO Returned User.
+2022-02-14 16:59:14.0865 INFO Returned User.
+2022-02-14 17:00:16.5548 INFO Returned User.
+2022-02-14 17:02:02.3356 INFO Returned User.
+2022-02-14 17:15:40.6490 INFO Returned User.
+2022-02-14 17:15:50.5219 ERROR Something went wrong inside JoinGroup aciton: An error occurred while updating the entries. See the inner exception for details.
+2022-02-14 17:18:08.4145 INFO Returned User.
+2022-02-14 17:18:55.1787 INFO Returned User.
+2022-02-14 17:19:58.1634 INFO Returned User.
+2022-02-14 17:20:24.0356 ERROR Something went wrong inside JoinGroup aciton: An error occurred while updating the entries. See the inner exception for details.
+2022-02-14 17:21:10.1630 INFO Returned User.
+2022-02-14 17:22:01.7727 INFO Returned User.
+2022-02-14 17:23:32.7900 INFO Returned User.
+2022-02-14 17:27:45.9286 ERROR Something went wrong inside CreateEmployee action: Object reference not set to an instance of an object.
+2022-02-14 17:29:07.3657 ERROR Something went wrong inside CreateEmployee action: Object reference not set to an instance of an object.
+2022-02-14 17:33:22.5388 ERROR Something went wrong inside CreateEmployee action: An error occurred while updating the entries. See the inner exception for details.
+2022-02-14 17:34:16.4915 ERROR Something went wrong inside CreateEmployee action: An error occurred while updating the entries. See the inner exception for details.
+2022-02-14 17:51:56.5848 ERROR Something went wrong inside CreateEmployee action: An error occurred while updating the entries. See the inner exception for details.

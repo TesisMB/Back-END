@@ -65,3 +65,27 @@
 2022-02-14 11:57:09.7977 INFO Returned all employees from database.
 2022-02-14 11:57:14.3469 INFO Returned employe with details for id: 7
 2022-02-14 11:57:24.3328 INFO Returned all employees from database.
+2022-02-14 13:44:44.2872 INFO Returned User.
+2022-02-14 13:45:15.5558 INFO Returned all Volunteers from database.
+2022-02-14 13:45:15.6311 ERROR Something went wrong inside GetAllVolunteersApp action:  Error mapping types.
+
+Mapping types:
+Object -> IEnumerable`1
+System.Object -> System.Collections.Generic.IEnumerable`1[[Entities.DataTransferObjects.Volunteers__Dto.VolunteersAppDto, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2022-02-14 13:47:16.5222 INFO Returned User.
+2022-02-14 13:47:18.1280 INFO Returned all Volunteers from database.
+2022-02-14 13:47:18.1952 ERROR Something went wrong inside GetAllVolunteersApp action:  Error mapping types.
+
+Mapping types:
+Object -> IEnumerable`1
+System.Object -> System.Collections.Generic.IEnumerable`1[[Entities.DataTransferObjects.Volunteers__Dto.VolunteersAppDto, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2022-02-14 13:47:41.0398 INFO Returned User.
+2022-02-14 13:47:43.1729 INFO Returned all Volunteers from database.
+2022-02-14 13:47:43.2459 ERROR Something went wrong inside GetAllVolunteersApp action:  Error mapping types.
+
+Mapping types:
+Object -> IEnumerable`1
+System.Object -> System.Collections.Generic.IEnumerable`1[[Entities.DataTransferObjects.Volunteers__Dto.VolunteersAppDto, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2022-02-14 13:48:31.7195 INFO Returned all Volunteers from database.
+2022-02-14 14:02:09.7718 INFO Returned User.
+2022-02-14 14:02:11.6599 INFO Returned all Volunteers from database.

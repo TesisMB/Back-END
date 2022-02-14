@@ -134,11 +134,11 @@ public class Startup
 
 
         //habilita e uso de archivos estaticos para la solicitud.
-        app.UseStaticFiles(new StaticFileOptions
+        app.UseStaticFiles(/*new StaticFileOptions
         {
             FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "StaticFiles", "Images")),
             RequestPath = "/StaticFiles/Images"
-        });
+        }*/);
 
         //Reenvia los encabezados del proxy a la solicitud actual.
         app.UseForwardedHeaders(new ForwardedHeadersOptions

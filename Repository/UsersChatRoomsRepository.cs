@@ -37,14 +37,27 @@ namespace Repository
             var rol = UsersRepository.authUser.Roles.RoleName;
             usersChat.Users = null;
 
-            if(rol == "Voluntario")
+            if (rol == "Voluntario")
             {
-                LocationVolunteers locations = new LocationVolunteers();
-                locations.ID = usersChat.FK_UserID;
-                locations.LocationVolunteerLatitude = latitude;
-                locations.LocationVolunteerLongitude = longitude;
+                LocationVolunteers locations = new LocationVolunteers()
+                {
+                    LocationVolunteerLatitude = latitude,
+                    LocationVolunteerLongitude = longitude
+                    };
 
-                Coords(locations);
+                _cruzRojaContext.Add(locations);
+                SaveAsync();
+
+
+               VolunteersLocationVolunteersEmergenciesDisasters volunteersLocationVolunteersEmergenciesDisasters = new VolunteersLocationVolunteersEmergenciesDisasters();
+
+                volunteersLocationVolunteersEmergenciesDisasters.FK_VolunteerID = usersChat.FK_UserID;
+                volunteersLocationVolunteersEmergenciesDisasters.FK_LocationVolunteerID = locations.ID;
+                volunteersLocationVolunteersEmergenciesDisasters.FK_EmergencyDisasterID = usersChat.FK_ChatRoomID;
+
+
+                _cruzRojaContext.Add(volunteersLocationVolunteersEmergenciesDisasters);
+                SaveAsync();
             }
 
 
@@ -61,7 +74,8 @@ namespace Repository
         {
             CruzRojaContext cruzRojaContext = new CruzRojaContext();
 
-            cruzRojaContext.Update(Locations);
+            cruzRojaContext.Add(Locations);
+            SaveAsync();
         }
     }
 }

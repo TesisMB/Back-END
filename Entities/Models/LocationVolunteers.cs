@@ -18,6 +18,8 @@ namespace Entities.Models
         [Column(TypeName = "decimal(9, 6)")]
         public decimal? LocationVolunteerLongitude { get; set; }
 
-        public Volunteers Volunteers { get; set; }
+        [ForeignKey("FK_LocationVolunteerID")]
+        public ICollection<VolunteersLocationVolunteersEmergenciesDisasters> VolunteersLocationVolunteersEmergenciesDisasters { get; set; }
+
     }
 }

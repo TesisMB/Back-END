@@ -173,11 +173,5 @@ namespace Repository
                   .FirstOrDefaultAsync();
         }
 
-        public static void CoordsLocation(LocationVolunteers location){
-           
-            CruzRojaContext cruzRojaContext = new CruzRojaContext();
-
-            cruzRojaContext.Update(location);
-        }       
     }
 }

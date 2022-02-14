@@ -1,117 +1,27 @@
-2022-02-14 10:36:13.9514 INFO Returned User.
-2022-02-14 10:36:52.5812 INFO Returned all Resources_Request from database.
-2022-02-14 10:37:39.2116 INFO Returned all Resources_Request from database.
-2022-02-14 10:39:11.2721 INFO Returned User.
-2022-02-14 10:40:24.5574 INFO Returned User.
-2022-02-14 10:40:33.2067 INFO Returned all Resources_Request from database.
-2022-02-14 10:41:11.1259 INFO Returned User.
-2022-02-14 10:41:19.9469 INFO Returned all Resources_Request from database.
-2022-02-14 10:42:48.7392 INFO Returned all Resources_Request from database.
-2022-02-14 10:43:06.5820 INFO Returned User.
-2022-02-14 10:43:09.7246 INFO Returned all Resources_Request from database.
-2022-02-14 11:25:45.2335 INFO Returned User.
-2022-02-14 11:25:45.2335 INFO Returned User.
-2022-02-14 11:25:53.4651 INFO Returned all ChatRooms from database. 
-2022-02-14 11:26:39.5837 INFO Returned all ChatRooms from database. 
-2022-02-14 11:27:19.4791 INFO Returned User.
-2022-02-14 11:27:21.7684 INFO Returned all emergenciesDisasters from database.
-2022-02-14 11:27:28.6608 INFO Returned all ChatRooms from database. 
-2022-02-14 11:27:31.5562 INFO Returned all emergenciesDisasters from database.
-2022-02-14 11:27:41.0330 INFO Returned all ChatRooms from database. 
-2022-02-14 11:27:41.6936 INFO Returned all emergenciesDisasters from database.
-2022-02-14 11:27:45.7226 INFO Returned all ChatRooms from database. 
-2022-02-14 11:30:39.0984 INFO Returned all emergenciesDisasters from database.
-2022-02-14 11:31:13.2943 INFO Returned all ChatRooms from database. 
-2022-02-14 11:31:14.3716 INFO Returned all emergenciesDisasters from database.
-2022-02-14 11:31:16.1373 INFO Returned all ChatRooms from database. 
-2022-02-14 11:40:21.1406 INFO Returned User.
-2022-02-14 11:40:40.3580 INFO Returned all Materials from database.
-2022-02-14 11:41:03.0670 INFO Returned User.
-2022-02-14 11:41:07.6694 INFO Returned all employees from database.
-2022-02-14 11:41:19.8267 INFO Returned all Volunteers from database.
-2022-02-14 11:44:32.6240 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
-2022-02-14 11:44:42.2524 INFO Returned employe with details for id: 3
-2022-02-14 11:45:25.8759 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
-2022-02-14 11:45:41.5122 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
-2022-02-14 11:45:43.5576 INFO Returned employe with details for id: 3
-2022-02-14 11:46:00.9586 INFO Returned User.
-2022-02-14 11:46:12.7858 INFO Returned all employees from database.
-2022-02-14 11:46:32.0808 INFO Returned User.
-2022-02-14 11:46:34.5014 INFO Returned all employees from database.
-2022-02-14 11:46:54.9057 INFO Returned User.
-2022-02-14 11:47:07.7001 INFO Returned all Materials from database.
-2022-02-14 11:47:20.6510 INFO Returned all Materials from database.
-2022-02-14 11:47:55.3694 INFO Returned User.
-2022-02-14 11:48:10.9263 INFO Returned User.
-2022-02-14 11:48:40.6800 INFO Returned User.
-2022-02-14 11:48:44.9018 INFO Returned all employees from database.
-2022-02-14 11:48:58.5284 INFO Returned User.
-2022-02-14 11:49:01.1729 INFO Returned all employees from database.
-2022-02-14 11:51:22.2659 INFO Returned User.
-2022-02-14 11:51:25.1796 INFO Returned all employees from database.
-2022-02-14 11:51:49.2392 INFO Returned User.
-2022-02-14 11:51:52.1628 INFO Returned all employees from database.
-2022-02-14 11:55:08.3592 INFO Returned User.
-2022-02-14 11:55:11.5525 INFO Returned all employees from database.
-2022-02-14 11:55:26.6652 INFO Returned all employees from database.
-2022-02-14 11:56:04.1897 INFO Returned User.
-2022-02-14 11:56:09.6425 INFO Returned all employees from database.
-2022-02-14 11:56:30.8906 INFO Returned User.
-2022-02-14 11:56:34.7696 INFO Returned all employees from database.
-2022-02-14 11:56:42.6340 INFO Returned all employees from database.
-2022-02-14 11:56:51.7781 INFO Returned User.
-2022-02-14 11:56:54.0647 INFO Returned all employees from database.
-2022-02-14 11:57:05.4704 INFO Returned User.
-2022-02-14 11:57:09.7977 INFO Returned all employees from database.
-2022-02-14 11:57:14.3469 INFO Returned employe with details for id: 7
-2022-02-14 11:57:24.3328 INFO Returned all employees from database.
-2022-02-14 13:44:44.2872 INFO Returned User.
-2022-02-14 13:45:15.5558 INFO Returned all Volunteers from database.
-2022-02-14 13:45:15.6311 ERROR Something went wrong inside GetAllVolunteersApp action:  Error mapping types.
-
-Mapping types:
-Object -> IEnumerable`1
-System.Object -> System.Collections.Generic.IEnumerable`1[[Entities.DataTransferObjects.Volunteers__Dto.VolunteersAppDto, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
-2022-02-14 13:47:16.5222 INFO Returned User.
-2022-02-14 13:47:18.1280 INFO Returned all Volunteers from database.
-2022-02-14 13:47:18.1952 ERROR Something went wrong inside GetAllVolunteersApp action:  Error mapping types.
-
-Mapping types:
-Object -> IEnumerable`1
-System.Object -> System.Collections.Generic.IEnumerable`1[[Entities.DataTransferObjects.Volunteers__Dto.VolunteersAppDto, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
-2022-02-14 13:47:41.0398 INFO Returned User.
-2022-02-14 13:47:43.1729 INFO Returned all Volunteers from database.
-2022-02-14 13:47:43.2459 ERROR Something went wrong inside GetAllVolunteersApp action:  Error mapping types.
-
-Mapping types:
-Object -> IEnumerable`1
-System.Object -> System.Collections.Generic.IEnumerable`1[[Entities.DataTransferObjects.Volunteers__Dto.VolunteersAppDto, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
-2022-02-14 13:48:31.7195 INFO Returned all Volunteers from database.
-2022-02-14 14:02:09.7718 INFO Returned User.
-2022-02-14 14:02:11.6599 INFO Returned all Volunteers from database.
-2022-02-14 16:17:12.8033 INFO Returned User.
-2022-02-14 16:17:15.2503 INFO Returned all Volunteers from database.
-2022-02-14 16:51:14.3203 INFO Returned User.
-2022-02-14 16:52:00.1710 ERROR Something went wrong inside JoinGroup aciton: An error occurred while updating the entries. See the inner exception for details.
-2022-02-14 16:53:02.5540 INFO Returned User.
-2022-02-14 16:53:12.3467 ERROR Something went wrong inside JoinGroup aciton: Object reference not set to an instance of an object.
-2022-02-14 16:54:08.8031 INFO Returned User.
-2022-02-14 16:56:43.2427 INFO Returned User.
-2022-02-14 16:57:55.0700 INFO Returned User.
-2022-02-14 16:59:14.0865 INFO Returned User.
-2022-02-14 17:00:16.5548 INFO Returned User.
-2022-02-14 17:02:02.3356 INFO Returned User.
-2022-02-14 17:15:40.6490 INFO Returned User.
-2022-02-14 17:15:50.5219 ERROR Something went wrong inside JoinGroup aciton: An error occurred while updating the entries. See the inner exception for details.
-2022-02-14 17:18:08.4145 INFO Returned User.
-2022-02-14 17:18:55.1787 INFO Returned User.
-2022-02-14 17:19:58.1634 INFO Returned User.
-2022-02-14 17:20:24.0356 ERROR Something went wrong inside JoinGroup aciton: An error occurred while updating the entries. See the inner exception for details.
-2022-02-14 17:21:10.1630 INFO Returned User.
-2022-02-14 17:22:01.7727 INFO Returned User.
-2022-02-14 17:23:32.7900 INFO Returned User.
-2022-02-14 17:27:45.9286 ERROR Something went wrong inside CreateEmployee action: Object reference not set to an instance of an object.
-2022-02-14 17:29:07.3657 ERROR Something went wrong inside CreateEmployee action: Object reference not set to an instance of an object.
-2022-02-14 17:33:22.5388 ERROR Something went wrong inside CreateEmployee action: An error occurred while updating the entries. See the inner exception for details.
-2022-02-14 17:34:16.4915 ERROR Something went wrong inside CreateEmployee action: An error occurred while updating the entries. See the inner exception for details.
-2022-02-14 17:51:56.5848 ERROR Something went wrong inside CreateEmployee action: An error occurred while updating the entries. See the inner exception for details.
+2022-02-14 18:33:28.5395 ERROR Something went wrong inside User: El nombre de columna 'LocationVolunteersID' no es válido.
+2022-02-14 18:35:28.3045 INFO Returned User.
+2022-02-14 18:35:33.3238 INFO Returned User.
+2022-02-14 18:36:43.2207 INFO Returned User.
+2022-02-14 18:36:47.7585 INFO Returned User.
+2022-02-14 18:37:38.8507 INFO Returned User.
+2022-02-14 18:40:16.8351 INFO Returned User.
+2022-02-14 18:42:42.4752 INFO Returned User.
+2022-02-14 18:49:26.6484 INFO Returned User.
+2022-02-14 18:50:41.3507 INFO Returned User.
+2022-02-14 18:59:49.6784 INFO Returned User.
+2022-02-14 19:02:40.2426 INFO Returned User.
+2022-02-14 19:04:10.3661 INFO Returned User.
+2022-02-14 19:05:24.7105 INFO Returned User.
+2022-02-14 19:06:46.7266 INFO Returned User.
+2022-02-14 19:10:21.3668 INFO Returned User.
+2022-02-14 19:18:36.9756 INFO Returned User.
+2022-02-14 19:18:54.4145 ERROR Something went wrong inside JoinGroup aciton: An error occurred while updating the entries. See the inner exception for details.
+2022-02-14 19:21:36.9592 INFO Returned User.
+2022-02-14 19:32:59.9436 INFO Returned User.
+2022-02-14 19:33:23.4238 ERROR Something went wrong inside JoinGroup aciton: An error occurred while updating the entries. See the inner exception for details.
+2022-02-14 19:40:17.2571 INFO Returned User.
+2022-02-14 19:45:37.3192 INFO Returned User.
+2022-02-14 19:49:16.9767 INFO Returned User.
+2022-02-14 19:50:15.4499 INFO Returned User.
+2022-02-14 19:50:18.9454 ERROR Something went wrong inside JoinGroup aciton: An error occurred while updating the entries. See the inner exception for details.
+2022-02-14 19:50:43.0155 INFO Returned User.

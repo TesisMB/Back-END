@@ -16,9 +16,10 @@ namespace Back_End.Models
         public string VolunteerDescription { get; set; }
         public Users Users { get; set; }
 
-        public LocationVolunteers LocationVolunteers { get; set; }
-
         public ICollection<VolunteersSkills> VolunteersSkills { get; set; }
+
+        [ForeignKey("FK_VolunteerID")]
+        public ICollection<VolunteersLocationVolunteersEmergenciesDisasters> VolunteersLocationVolunteersEmergenciesDisasters { get; set; }
 
     }
 }

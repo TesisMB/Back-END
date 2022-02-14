@@ -5,9 +5,11 @@ using Back_End.Models;
 using Back_End.Models.Employees___Dto;
 using Back_End.Models.Volunteers__Dto;
 using Contracts.Interfaces;
+using Entities.DataTransferObjects;
 using Entities.DataTransferObjects.ResourcesDto;
 using Entities.DataTransferObjects.Volunteers__Dto;
 using Entities.Helpers;
+using Entities.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -160,7 +162,7 @@ namespace Back_End.Controllers
 
         [Route("api/Voluntarios")]
         [HttpPost]
-        public async Task<ActionResult<Volunteers>> CreateVolunteer([FromForm][FromBody] VolunteersForCreationDto volunteer)
+        public async Task<ActionResult<Volunteers>> CreateVolunteer(VolunteersForCreationDto volunteer)
         {
             try
             {
@@ -178,9 +180,19 @@ namespace Back_End.Controllers
 
                 }
 
+
                 var volunteerEntity = _mapper.Map<Volunteers>(volunteer);
 
-                volunteerEntity.VolunteerAvatar = await UploadController.SaveImage(volunteer.ImageFile);
+
+               /* volunteerEntity.LocationVolunteers = new LocationVolunteers()
+                {
+                    ID = volunteerEntity.ID,
+                    LocationVolunteerLatitude = null,
+                    LocationVolunteerLongitude = null,
+                    Volunteers = volunteerEntity
+                };*/
+
+                //volunteerEntity.VolunteerAvatar = await UploadController.SaveImage(volunteer.ImageFile);
 
                 // Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
                 _repository.Volunteers.CreateVolunteer(volunteerEntity);

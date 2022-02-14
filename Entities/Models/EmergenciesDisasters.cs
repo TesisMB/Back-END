@@ -49,6 +49,9 @@ namespace Entities.Models
         [Required]
         public ICollection<ResourcesRequest> Resources_Requests { get; set; }
 
+        [ForeignKey("FK_EmergencyDisasterID")]
+        public ICollection<VolunteersLocationVolunteersEmergenciesDisasters> VolunteersLocationVolunteersEmergenciesDisasters { get; set; }
+
     }
 
 }

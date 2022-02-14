@@ -38,17 +38,10 @@ namespace Back_End.Controllers
             var resource_Request = await _repository.Resources_Requests.GetAllResourcesRequest();
             _logger.LogInfo($"Returned all Resources_Request from database.");
 
-            if (resource_Request == null)
-            {
-                return Unauthorized();
-            }
-
             var resource_RequestResult = _mapper.Map<IEnumerable<ResourcesRequestDto>>(resource_Request);
 
             return Ok(resource_RequestResult);
         }
-
-
 
 
         [HttpPost]
@@ -72,16 +65,10 @@ namespace Back_End.Controllers
 
                 var resourceRequest = _mapper.Map<ResourcesRequest>(resources_Request);
 
-                resourceRequest.FK_UserID = UsersRepository.authUser.UserID;
 
+                _repository.Resources_Requests.CreateResource_Resquest(resourceRequest, resources_Request.UserRequest);
 
-                //Revisar si hay en stock Materials o Medicines
-
-
-                //Pongo Null los valores Materials - Medicines - Vehicles para que no hay auna inconsistencia en los datos y algun error con la base de datos.
-
-                _repository.Resources_Requests.CreateResource_Resquest(resourceRequest);
-
+                _repository.Resources_Requests.SaveAsync();
 
                 return Ok();
             }

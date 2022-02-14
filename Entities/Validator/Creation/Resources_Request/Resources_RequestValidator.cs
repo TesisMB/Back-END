@@ -25,8 +25,9 @@ namespace Entities
 
             RuleFor(m => new { m.FK_MaterialID, m.Quantity }).Custom((id, context) =>
             {
-                materials = db.Materials.Where(x => x.ID == id.FK_MaterialID).FirstOrDefault();
-
+                materials = (Materials)db.Materials.Where(x => x.ID == id.FK_MaterialID)
+                .AsNoTracking()
+                .FirstOrDefault();
 
                 if (materials == null)
                 {
@@ -35,7 +36,7 @@ namespace Entities
                 }
                      else
                 {
-                    if (materials != null  && ((materials.MaterialQuantity - id.Quantity) < 0))
+                    if (materials != null  && ((materials.MaterialQuantity - id.Quantity) < 0 && materials.MaterialQuantity  == 0))
                     {
                         Key.Add("Material");
 
@@ -50,7 +51,9 @@ namespace Entities
 
             RuleFor(m => new { m.FK_MedicineID, m.Quantity }).Custom((id, context) =>
             {
-                medicines = db.Medicines.Where(x => x.ID == id.FK_MedicineID).FirstOrDefault();
+                medicines = db.Medicines.Where(x => x.ID == id.FK_MedicineID)
+                .AsNoTracking()
+                .FirstOrDefault();
 
                 if (medicines == null)
                 {
@@ -58,7 +61,7 @@ namespace Entities
                 }
                 else
                 {
-                    if (medicines != null && (medicines.MedicineQuantity - id.Quantity < 0))
+                    if (medicines != null && (medicines.MedicineQuantity - id.Quantity < 0) && medicines.MedicineQuantity == 0)
                     {
 
                         Key.Add("Medicine");
@@ -77,7 +80,7 @@ namespace Entities
                 .Include(a => a.BrandsModels)
                 .Include(a => a.BrandsModels.Model)
                 .Include(a => a.BrandsModels.Brands)
-
+                .AsNoTracking()
                 .FirstOrDefault();
 
                 if (vehicles == null)

@@ -16,6 +16,7 @@ namespace Entities.DataTransferObjects.Resources_Request___Dto
 
         public int FK_EmergencyDisasterID { get; set; }
 
+        public  int UserRequest { get; set; }
         public ICollection<ResourcesRequestMaterialsMedicinesVehiclesForCreationDto> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
 
     }

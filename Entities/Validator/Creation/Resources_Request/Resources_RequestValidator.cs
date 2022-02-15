@@ -36,7 +36,9 @@ namespace Entities
                 }
                      else
                 {
-                    if (materials != null  && ((materials.MaterialQuantity - id.Quantity) < 0 && materials.MaterialQuantity  == 0))
+                    var resta = materials.MaterialQuantity - id.Quantity;
+
+                    if (materials != null  && resta < 0 || materials.MaterialQuantity  == 0)
                     {
                         Key.Add("Material");
 
@@ -61,7 +63,8 @@ namespace Entities
                 }
                 else
                 {
-                    if (medicines != null && (medicines.MedicineQuantity - id.Quantity < 0) && medicines.MedicineQuantity == 0)
+                    var resta = medicines.MedicineQuantity - id.Quantity;
+                    if (medicines != null && resta < 0 || medicines.MedicineQuantity == 0)
                     {
 
                         Key.Add("Medicine");

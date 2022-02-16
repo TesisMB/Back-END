@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Back_End.Entities;
 using Back_End.Helpers;
 using Back_End.Models;
 using Back_End.Models.Employees___Dto;
@@ -9,6 +10,8 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using Wkhtmltopdf.NetCore;
 
@@ -187,9 +190,11 @@ namespace Back_End.Controllers
                     var userPass = employeeToPatch.Users.UserPassword;
                     employeeToPatch.Users.UserPassword = Encrypt.GetSHA256(userPass);
 
-                    // using (var db = new CruzRojaContext())
-                    //authUser = db.Users.Where(u => u.UserID == employeeEntity.Users.UserID
-                    //       && u.UserPassword == employeeToPatch.Users.UserPassword).FirstOrDefault();
+                    using (var db = new CruzRojaContext())
+                    authUser = db.Users.Where(u => u.UserID == employeeEntity.Users.UserID
+                           && u.UserPassword == employeeToPatch.Users.UserPassword)
+                            .AsNoTracking()
+                            .FirstOrDefault();
 
 
                     if (authUser == null)

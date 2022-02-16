@@ -182,8 +182,11 @@ namespace Repository
                     DeleteResource(userReq);
                     userReq.Condition = "Rechazada";
                 }
-
+                else
+                {
                 userReq.Condition = "Aceptada";
+                }
+
                 Update(userReq);
 
                 SaveAsync();

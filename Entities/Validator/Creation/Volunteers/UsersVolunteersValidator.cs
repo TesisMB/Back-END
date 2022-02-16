@@ -2,6 +2,7 @@
 using Back_End.Models.Users___Dto;
 using Back_End.Validator;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace Entities.Validator
@@ -11,7 +12,6 @@ namespace Entities.Validator
         public UsersVolunteersValidator()
         {
             RuleFor(x => x.UserDni)
-           .Cascade(CascadeMode.StopOnFirstFailure)
            .NotEmpty().WithMessage("{PropertyName} is required.")
            .Must(BeUniqueUrl).WithMessage("Dni already exists")
            .Must(IsValidNumber).WithMessage("{PropertyName} must not have spaces and should be all numbers.")
@@ -32,7 +32,9 @@ namespace Entities.Validator
         //Esta funcion me permite verificar que se ingresar en el campo UserDni valores unicos.
         private bool BeUniqueUrl(string Dni)
         {
-            return new CruzRojaContext().Users.FirstOrDefault(x => x.UserDni == Dni) == null;
+            return new CruzRojaContext().Users
+                .AsNoTracking()
+                .FirstOrDefault(x => x.UserDni == Dni) == null;
         }
 
 

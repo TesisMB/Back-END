@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -245,7 +246,9 @@ namespace Back_End.Controllers
 
                 using (var db = new CruzRojaContext())
                     authUser = db.Users.Where(u => u.UserID == userFromRepo.Users.UserID
-                          && u.UserPassword == userToPatch.Users.UserPassword).FirstOrDefault();
+                          && u.UserPassword == userToPatch.Users.UserPassword)
+                        .AsNoTracking()
+                        .FirstOrDefault();
 
 
                 if (authUser == null)

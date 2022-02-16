@@ -1,6 +1,7 @@
 ﻿using Back_End.Entities;
 using Back_End.Models;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace Back_End.Validator
@@ -30,7 +31,9 @@ namespace Back_End.Validator
         //Esta funcion me permite verificar que se ingresar en el campo UserDni valores unicos.
         private bool BeUniqueDni(string Dni)
         {
-            return new CruzRojaContext().Users.FirstOrDefault(x => x.UserDni == Dni) == null;
+            return new CruzRojaContext().Users
+                .AsNoTracking()
+                .FirstOrDefault(x => x.UserDni == Dni) == null;
         }
 
 

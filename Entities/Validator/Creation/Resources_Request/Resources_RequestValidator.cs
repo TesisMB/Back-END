@@ -109,12 +109,10 @@ namespace Entities
         public  class Resource
         {
             public  int? ID { get; set; }
-
             public  string Name { get; set; } // Define al nombre del Campo
         }
 
  
-
 
 
         public bool DifferentZero(int? id)

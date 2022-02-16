@@ -1,6 +1,7 @@
 ﻿using Back_End.Entities;
 using Back_End.Models;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 
@@ -11,17 +12,14 @@ namespace Back_End.Validator
         public PersonsValidator()
         {
             RuleFor(x => x.FirstName)
-           .Cascade(CascadeMode.StopOnFirstFailure)
            .NotEmpty().WithMessage("{PropertyName} is required")
            .MaximumLength(100).WithMessage("The {PropertyName} cannot be more than {MaxLength} characters.");
 
             RuleFor(x => x.LastName)
-           .Cascade(CascadeMode.StopOnFirstFailure)
            .NotEmpty().WithMessage("{PropertyName} is required")
            .MaximumLength(100).WithMessage("The {PropertyName} cannot be more than {MaxLength} characters.");
 
             RuleFor(x => x.Phone)
-           .Cascade(CascadeMode.StopOnFirstFailure)
            .NotEmpty().WithMessage("{PropertyName} is required")
            .Must(IsValidNumber).WithMessage("{PropertyName} must not have spaces and should be all numbers.")
            .MaximumLength(12).WithMessage("The {PropertyName} cannot be more than {MaxLength} characters.");
@@ -47,7 +45,9 @@ namespace Back_End.Validator
 
         private bool BeUniqueEmail(string Email)
         {
-            return new CruzRojaContext().Persons.FirstOrDefault(x => x.Email == Email) == null;
+            return new CruzRojaContext().Persons
+                .AsNoTracking()
+                .FirstOrDefault(x => x.Email == Email) == null;
         }
 
         private bool BeAValidAge(DateTime? date)

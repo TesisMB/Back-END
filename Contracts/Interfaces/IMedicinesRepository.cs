@@ -11,9 +11,9 @@ namespace Contracts.Interfaces
 
         Task<IEnumerable<Medicines>> GetAllMedicines();
 
-        Task<Medicines> GetMedicineById(string medicineId);
+        Task<Medicines> GetMedicineById(int medicineId);
 
-        Task<Medicines> GetMedicinelWithDetails(string medicineId);
+        Task<Medicines> GetMedicinelWithDetails(int medicineId);
 
         void CreateMedicine(Medicines medicine);
         void UpdateMedicine(Medicines medicine);

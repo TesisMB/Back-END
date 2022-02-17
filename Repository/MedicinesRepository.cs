@@ -48,7 +48,7 @@ namespace Repository
         }
 
 
-        public async Task<Medicines> GetMedicineById(string medicineId)
+        public async Task<Medicines> GetMedicineById(int medicineId)
         {
             return await FindByCondition(med => med.ID.Equals(medicineId))
                               .Include(a => a.Estates)
@@ -59,7 +59,7 @@ namespace Repository
                               .FirstOrDefaultAsync();
         }
 
-        public async Task<Medicines> GetMedicinelWithDetails(string medicineId)
+        public async Task<Medicines> GetMedicinelWithDetails(int medicineId)
         {
             return await FindByCondition(med => med.ID.Equals(medicineId))
                      .Include(a => a.Estates)

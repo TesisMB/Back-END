@@ -2,6 +2,7 @@
 using Entities.DataTransferObjects.Alerts___Dto;
 using Entities.DataTransferObjects.Locations___Dto;
 using Entities.DataTransferObjects.TypesEmergenciesDisasters___Dto;
+using System;
 
 namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
 {
@@ -9,7 +10,7 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
     {
         public int EmergencyDisasterID { get; set; }
 
-        public string EmergencyDisasterStartDate { get; set; }
+        public DateTime EmergencyDisasterStartDate { get; set; }
 
         public string? EmergencyDisasterEndDate { get; set; }
 

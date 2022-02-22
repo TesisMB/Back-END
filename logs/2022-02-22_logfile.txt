@@ -1,0 +1,1 @@
+2022-02-22 12:44:13.8810 INFO Returned all emergenciesDisasters from database.

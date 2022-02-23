@@ -22,19 +22,25 @@ namespace Repository
         }
 
 
-        public async Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequest()
+        public async Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequest( string Condition)
         {
             var user = UsersRepository.authUser;
 
             var collection = _cruzRojaContext.Resources_Requests as IQueryable<ResourcesRequest>;
 
             //Filtrado por departamento para el Encargado de Logistica retornando todos las solicitudes
-            if (user.Roles.RoleName == "Encargado de Logistica")
+            if (user.Roles.RoleName == "Encargado de Logistica" && string.IsNullOrEmpty(Condition))
              {
                 collection = collection.Where(
                              a => a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
              }
-             else
+            if (user.Roles.RoleName == "Encargado de Logistica" && !string.IsNullOrEmpty(Condition))
+            {
+                collection = collection.Where(
+                          a => a.Condition == Condition &&
+                          a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
+            }
+             else if(user.Roles.RoleName != "Encargado de Logistica")
              {
 
              //Filtrado por departamento para el Encargado de Logistica retornando todos las solicitudes
@@ -48,18 +54,22 @@ namespace Repository
             return await collection
                 .Include(i => i.Users)
                 .Include(i => i.EmergenciesDisasters)
-                //.ThenInclude(i => i.TypesEmergenciesDisasters)
+                .ThenInclude(i => i.TypesEmergenciesDisasters)
                 //.Include(i => i.EmergenciesDisasters.Alerts)
 
                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Vehicles)
-                //   .ThenInclude(i => i.TypeVehicles)
-                // .ThenInclude(i => i.Vehicles)
+            
+                .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .ThenInclude(i => i.Vehicles)
 
-                /*.ThenInclude(i => i.BrandsModels)
+                 .ThenInclude(i => i.TypeVehicles)
+                  .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .ThenInclude(i => i.Vehicles)
+                .ThenInclude(i => i.BrandsModels)
                 .ThenInclude(i => i.Brands)
                 .ThenInclude(i => i.BrandsModels)
-                .ThenInclude(i => i.Model)*/
+                .ThenInclude(i => i.Model)
 
                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Materials)
@@ -191,6 +201,7 @@ namespace Repository
 
                 SaveAsync();
             }
+
             else
             {
                 if (rec == null)

@@ -16,8 +16,15 @@ namespace Back_End.Profiles
             //Creo Las clases a ser mapeadas
 
             CreateMap<Users, EmployeesUsersDto>()
+
                  .ForMember(dest => dest.RoleName,
-                                 opt => opt.MapFrom(src => src.Roles.RoleName));
+                                 opt => opt.MapFrom(src => src.Roles.RoleName))
+
+                    .ForMember(dest => dest.Name,
+                                 opt => opt.MapFrom(src => src.Persons.FirstName + " " + src.Persons.LastName))
+
+                       .ForMember(dest => dest.Status,
+                                 opt => opt.MapFrom(src => src.Persons.Status));
 
             CreateMap<Users, VolunteersUsersAppDto>();
 

@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Back_End.Models;
 using Back_End.Models.Vehicles___Dto;
+using Entities.DataTransferObjects.Resources_RequestResources_Materials_Medicines_Vehicles___Dto;
 using Entities.DataTransferObjects.ResourcesDto;
+using Entities.DataTransferObjects.Vehicles___Dto;
 using Entities.DataTransferObjects.Vehicles___Dto.Creation;
 using Entities.DataTransferObjects.Vehicles___Dto.Update;
 
@@ -14,6 +16,17 @@ namespace Entities.Profiles
             CreateMap<Vehicles, VehiclesDto>()
 
                .ForPath(dest => dest.Type, opts => opts.MapFrom(src => src.TypeVehicles.Type));
+
+            CreateMap<Vehicles, ResourcesRequestMaterialsMedicinesVehiclesDto>()
+                               .ForPath(dest => dest.Name, opts => opts.MapFrom(src => src.BrandsModels.Brands.BrandName + " " + src.BrandsModels.Model.ModelName))
+
+                               .ForPath(dest => dest.Type, opts => opts.MapFrom(src => src.TypeVehicles.Type))
+
+
+                    .ForPath(dest => dest.VehicleYear, opts => opts.MapFrom(src => src.VehicleYear))
+
+                    .ForPath(dest => dest.ResourceID, opts => opts.MapFrom(src => src.ID));
+
 
             CreateMap<Vehicles, Resources_Dto>()
 

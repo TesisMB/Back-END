@@ -12,8 +12,13 @@ namespace Entities.Profiles
         {
             CreateMap<EmergenciesDisasters, EmergenciesDisastersDto>();
 
+            CreateMap<EmergenciesDisasters, EmergenciesDisasters2Dto>();
+
 
             CreateMap<EmergenciesDisastersForCreationDto, EmergenciesDisasters>();
+
+
+            
 
             CreateMap<EmergenciesDisastersForUpdateDto, EmergenciesDisasters>();
 

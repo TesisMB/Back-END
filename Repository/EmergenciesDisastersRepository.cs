@@ -27,6 +27,35 @@ namespace Repository
                 .ThenInclude(i => i.Users)
                 .ThenInclude(i => i.Persons)
                 .Include(i => i.Employees.Users.Roles)
+
+                .Include(i => i.Resources_Requests)
+                .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .ThenInclude(i => i.Materials)
+
+                 .Include(i => i.Resources_Requests)
+                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                 .ThenInclude(i => i.Vehicles)
+
+                 .ThenInclude(a => a.BrandsModels)
+                 .ThenInclude(a => a.Model)
+
+                       .Include(i => i.Resources_Requests)
+                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                 .ThenInclude(i => i.Vehicles)
+
+
+                 .ThenInclude(a => a.BrandsModels)
+                 .ThenInclude(a => a.Brands)
+
+                     .Include(i => i.Resources_Requests)
+                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                 .ThenInclude(i => i.Vehicles.TypeVehicles)
+
+
+                 .Include(i => i.Resources_Requests)
+                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                 .ThenInclude(i => i.Medicines)
+
                 .ToListAsync();
 
         }

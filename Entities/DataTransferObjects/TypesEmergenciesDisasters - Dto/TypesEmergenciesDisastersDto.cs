@@ -15,8 +15,6 @@ namespace Entities.DataTransferObjects.TypesEmergenciesDisasters___Dto
 
         public string TypeEmergencyDisasterDescription { get; set; }
 
-        //public ICollection<EmergenciesDisastersDto> EmergenciesDisasters { get; set; }
-
 
     }
 }

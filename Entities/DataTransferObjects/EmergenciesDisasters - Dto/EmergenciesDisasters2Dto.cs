@@ -1,4 +1,5 @@
-﻿using Entities.DataTransferObjects.TypesEmergenciesDisasters___Dto;
+﻿using Entities.DataTransferObjects.Locations___Dto;
+using Entities.DataTransferObjects.TypesEmergenciesDisasters___Dto;
 using System;
 
 namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
@@ -14,6 +15,8 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
         public string EmergencyDisasterInstruction { get; set; }
 
         public TypesEmergenciesDisastersDto TypesEmergenciesDisasters { get; set; }
+
+        public LocationsDto Locations { get; set; }
 
     }
 }

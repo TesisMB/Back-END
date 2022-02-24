@@ -439,3 +439,17 @@
 2022-02-23 20:57:09.8545 INFO Returned all Resources_Request from database.
 2022-02-23 20:57:14.4830 INFO Returned all Resources_Request from database.
 2022-02-23 20:58:14.5508 INFO Returned all Resources_Request from database.
+2022-02-23 21:08:19.7394 INFO Returned User.
+2022-02-23 21:08:26.4933 INFO Returned User.
+2022-02-23 21:10:25.1310 INFO Returned User.
+2022-02-23 21:11:20.5022 ERROR Something went wrong inside CreateResource_Request action: Object reference not set to an instance of an object.
+2022-02-23 21:12:18.5363 ERROR Something went wrong inside CreateResource_Request action: Object reference not set to an instance of an object.
+2022-02-23 21:15:48.8338 INFO Returned User.
+2022-02-23 21:16:32.1826 ERROR Something went wrong inside CreateResource_Request action: An error occurred while updating the entries. See the inner exception for details.
+2022-02-23 21:18:44.9125 INFO Returned User.
+2022-02-23 21:21:46.8978 INFO Returned User.
+2022-02-23 21:35:44.7102 INFO Returned User.
+2022-02-23 21:36:45.4427 INFO Returned User.
+2022-02-23 21:40:11.0550 INFO Returned User.
+2022-02-23 21:42:07.0372 INFO Returned User.
+2022-02-23 21:52:06.0538 INFO Returned User.

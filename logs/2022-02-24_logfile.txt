@@ -1,0 +1,15 @@
+2022-02-24 11:25:41.8026 INFO Returned User.
+2022-02-24 11:28:45.5855 INFO Returned User.
+2022-02-24 11:30:17.6946 INFO Returned User.
+2022-02-24 11:31:06.1178 INFO Returned User.
+2022-02-24 11:32:39.7225 ERROR Something went wrong inside CreateResource_Request action: Object reference not set to an instance of an object.
+2022-02-24 11:35:16.9597 INFO Returned User.
+2022-02-24 11:37:51.7253 INFO Returned User.
+2022-02-24 11:40:58.1935 INFO Returned User.
+2022-02-24 11:42:39.4616 ERROR Something went wrong inside CreateResource_Request action: The instance of entity type 'ResourcesRequest' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-02-24 11:42:44.9685 ERROR Something went wrong inside CreateResource_Request action: The instance of entity type 'ResourcesRequest' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-02-24 11:43:26.8365 ERROR Something went wrong inside CreateResource_Request action: The instance of entity type 'ResourcesRequest' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-02-24 11:47:33.5064 INFO Returned User.
+2022-02-24 11:48:27.5063 INFO Returned User.
+2022-02-24 11:49:19.6714 INFO Returned User.
+2022-02-24 11:51:17.9923 INFO Returned User.

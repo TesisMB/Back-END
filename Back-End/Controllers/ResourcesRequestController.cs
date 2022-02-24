@@ -12,6 +12,7 @@ using Entities.DataTransferObjects.Resources_RequestResources_Materials_Medicine
 using Entities.Helpers;
 using System;
 using Back_End.Models;
+using Repository;
 
 namespace Back_End.Controllers
 {
@@ -119,7 +120,6 @@ namespace Back_End.Controllers
                     }
                 }
             }
-       
 
 
             return Ok(resource_RequestResult);
@@ -134,12 +134,32 @@ namespace Back_End.Controllers
         {
             try
             {
+                var user = UsersRepository.authUser;
 
-               if (!ModelState.IsValid)
+                ResourcesRequest userReq = null;
+
+
+                userReq = db.Resources_Requests
+                 .Where(a => a.FK_EmergencyDisasterID == resources_Request.FK_EmergencyDisasterID
+                         && a.FK_UserID == user.UserID)
+                         .AsNoTracking()
+                         .FirstOrDefault();
+
+
+                if(userReq!= null && userReq.Condition != "Pendiente")
+                {
+                    return BadRequest(ErrorHelper.Response(400, "Su solicitud fue " +  userReq.Condition +" debe realizar una nueva solicitud"));
+
+                }
+
+                if (!ModelState.IsValid)
                {
                     return BadRequest(ErrorHelper.GetModelStateErrorsResourcesStock(ModelState));
 
                }
+                
+
+
 
                 if (resources_Request == null)
                 {

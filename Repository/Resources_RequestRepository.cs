@@ -22,7 +22,7 @@ namespace Repository
         }
 
 
-        public async Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequest( string Condition)
+        public async Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequest(string Condition)
         {
             var user = UsersRepository.authUser;
 

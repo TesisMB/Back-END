@@ -47,6 +47,32 @@ namespace Back_End.Controllers
             }
         }
 
+
+        [HttpGet("WithoutFilter")]
+        public async Task<ActionResult<EmergenciesDisasters>> GetAllEmergenciesDisastersWithoutFilter()
+        {
+            try
+            {
+                var emergenciesDisasters = await _repository.EmergenciesDisasters.GetAllEmergenciesDisastersWithourFilter();
+
+                _logger.LogInfo($"Returned all emergenciesDisasters from database.");
+
+                var emergenciesDisastersResult = _mapper.Map<IEnumerable<EmergenciesDisastersDto>>(emergenciesDisasters);
+
+
+                return Ok(emergenciesDisastersResult);
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside GetAllEmegenciesDisasters action: {ex.Message}");
+                return StatusCode(500, "Internal Server error");
+            }
+        }
+
+
+
+
         [HttpGet("{emegencyDisasterID}")]
         public async Task<ActionResult<EmergenciesDisasters>> GetEmegencyDisasterIDWithDetails(int emegencyDisasterID)
         {

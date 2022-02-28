@@ -2,6 +2,7 @@
 using Entities.DataTransferObjects.Medicines___Dto;
 using Entities.DataTransferObjects.Resources_RequestResources_Materials_Medicines_Vehicles___Dto;
 using Entities.DataTransferObjects.ResourcesDto;
+using Entities.DataTransferObjects.ResourcesRequestMaterialsMedicinesVehicles___Dto;
 using Entities.Helpers;
 using Entities.Models;
 
@@ -15,33 +16,19 @@ namespace Entities.Profiles
             CreateMap<Medicines, MedicinesDto>()
                                      .ForPath(dest => dest.MedicineExpirationDate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.MedicineExpirationDate)));
 
-            CreateMap<Medicines, ResourcesRequestMaterialsMedicinesVehiclesDto>()
+
+
+            CreateMap<Medicines, ResourcesMedicnesDto>()
                 .ForPath(dest => dest.MedicineExpirationDate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.MedicineExpirationDate)))
 
-                       .ForMember(dest => dest.Name,
-                            opt => opt.MapFrom(src => src.MedicineName))
 
 
-                  .ForMember(dest => dest.Quantity,
-                            opt => opt.MapFrom(src => src.MedicineQuantity))
+
+                .ForMember(dest => dest.Name,
+                            opt => opt.MapFrom(src => src.MedicineName));
 
 
-                          .ForMember(dest => dest.MedicineLab,
-                            opt => opt.MapFrom(src => src.MedicineLab))
-
-
-                          .ForMember(dest => dest.MedicineDrug,
-                            opt => opt.MapFrom(src => src.MedicineDrug))
-
-
-                          .ForMember(dest => dest.MedicineWeight,
-                            opt => opt.MapFrom(src => src.MedicineWeight))
-
-                                              .ForPath(dest => dest.ResourceID, opts => opts.MapFrom(src => src.ID))
-
-
-                           .ForMember(dest => dest.MedicineUnits,
-                            opt => opt.MapFrom(src => src.MedicineUnits));
+  
 
 
 

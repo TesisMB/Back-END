@@ -55,14 +55,16 @@ namespace Repository
                 .Include(i => i.Users)
                 .Include(i => i.EmergenciesDisasters)
                 .ThenInclude(i => i.TypesEmergenciesDisasters)
-                //.Include(i => i.EmergenciesDisasters.Alerts)
+
+                .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .ThenInclude(i => i.Materials)
+
+                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .ThenInclude(i => i.Medicines)
 
                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Vehicles)
             
-                .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
-                .ThenInclude(i => i.Vehicles)
-
                  .ThenInclude(i => i.TypeVehicles)
                   .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Vehicles)
@@ -71,11 +73,6 @@ namespace Repository
                 .ThenInclude(i => i.BrandsModels)
                 .ThenInclude(i => i.Model)
 
-                .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
-                .ThenInclude(i => i.Materials)
-
-                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
-                .ThenInclude(i => i.Medicines)
 
                 .Include(i => i.Users)
                 .Include(i => i.Users.Persons)

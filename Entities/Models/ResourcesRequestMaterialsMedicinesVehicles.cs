@@ -15,6 +15,7 @@ namespace Entities.Models
 
         public Materials Materials { get; set; }
         public int? FK_MaterialID { get; set; }
+        
 
         public Medicines Medicines { get; set; }
         public int? FK_MedicineID { get; set; }

@@ -1,18 +1,19 @@
 ﻿using AutoMapper;
 using Back_End.Entities;
+using Back_End.Models;
 using Contracts.Interfaces;
+using Entities.DataTransferObjects.Resources_Request___Dto;
+using Entities.DataTransferObjects.Resources_RequestResources_Materials_Medicines_Vehicles___Dto;
+using Entities.DataTransferObjects.ResourcesRequestMaterialsMedicinesVehicles___Dto;
+using Entities.Helpers;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
-using Entities.DataTransferObjects.Resources_Request___Dto;
-using System.Collections.Generic;
-using Entities.DataTransferObjects.Resources_RequestResources_Materials_Medicines_Vehicles___Dto;
-using Entities.Helpers;
-using System;
-using Back_End.Models;
 using Repository;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Back_End.Controllers
 {
@@ -25,8 +26,19 @@ namespace Back_End.Controllers
         private IRepositorWrapper _repository;
         public static ResourcesRequest resources_Request;
         public static ResourcesRequest reourceRequest;
+        List<ResourcesMaterialsDto> resources1 = new List<ResourcesMaterialsDto>();
 
-        public static CruzRojaContext db = new CruzRojaContext();
+        List<ResourcesMedicnesDto> resources2 = new List<ResourcesMedicnesDto>();
+
+        List<ResourcesVehiclesDto> resources3 = new List<ResourcesVehiclesDto>();
+
+        Materials materials = null;
+        Medicines medicines = null;
+        Vehicles vehicles = null;
+        CruzRojaContext db = new CruzRojaContext();
+
+        ResourcesRequestMaterialsMedicinesVehicles resources  = null;
+
 
         public ResourcesRequestController(IMapper mapper, ILoggerManager logger, IRepositorWrapper repository)
         {
@@ -45,88 +57,52 @@ namespace Back_End.Controllers
             var resource_RequestResult = _mapper.Map<IEnumerable<ResourcesRequestDto>>(resource_Request);
 
 
-
             var query = from st in resource_RequestResult
-                        select st; 
-            
-
-            Materials materials = null;
-            Medicines medicines = null;
-            Vehicles vehicles = null;
-            CruzRojaContext db = new CruzRojaContext();
+                         select st;
 
 
-            foreach (var item in query)
+            foreach (var item1 in query)
             {
 
-                foreach (var item2 in item.Resources_RequestResources_Materials_Medicines_Vehicles)
+                foreach (var item2 in item1.Resources_RequestResources_Materials_Medicines_Vehicles)
                 {
 
-                    ResourcesRequestMaterialsMedicinesVehicles resourcesRequestMaterialsMedicinesVehicles = null;
-
-                    //sin material y vehiculo
-                    if (item2.Brand != null)
-                    {
-                        resourcesRequestMaterialsMedicinesVehicles = db.Resources_RequestResources_Materials_Medicines_Vehicles
-                                                                            .Include(a => a.Materials)
-                                                                            .Where(a => a.ID == item2.ID)
-                                                                            .AsNoTracking()
-                                                                            .FirstOrDefault();
-
-
-                        item2.Name = resourcesRequestMaterialsMedicinesVehicles.Materials.MaterialName;
-                        item2.ResourceID = resourcesRequestMaterialsMedicinesVehicles.Materials.ID;
-                    }
-
-                    //sin medicamentos y vehiculo
-                    if(item2.MedicineLab != null)
-                    {
-                        resourcesRequestMaterialsMedicinesVehicles = db.Resources_RequestResources_Materials_Medicines_Vehicles
-                                                                           .Include(a => a.Medicines)
-                                                                            .Where(a => a.ID == item2.ID)
-                                                                           .AsNoTracking()
-                                                                           .FirstOrDefault();
-
-
-                        item2.Name = resourcesRequestMaterialsMedicinesVehicles.Medicines.MedicineName;
-                        item2.ResourceID = resourcesRequestMaterialsMedicinesVehicles.Medicines.ID; 
-                    }
-
-                    if(item2.VehiclePatent != null)
+                    if (item2.Materials != null)
                     {
 
-                
-                        resourcesRequestMaterialsMedicinesVehicles = db.Resources_RequestResources_Materials_Medicines_Vehicles
-                                                                .Where(a => a.ID == item2.ID)
-                                                                .Include(a => a.Vehicles)
-                                                                .ThenInclude(a => a.BrandsModels)
-                                                                .ThenInclude(a => a.Brands)
-                                                                .Include(a => a.Vehicles)
-                                                                .ThenInclude(a => a.BrandsModels)
-                                                                .ThenInclude(a => a.Model)
-                                                                .AsNoTracking()
-                                                                .FirstOrDefault();
+                        resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
+                                    .Where(a => a.FK_MaterialID == item2.Materials.ID
+                                            && a.FK_Resource_RequestID == item2.FK_Resource_RequestID)
+                                       .AsNoTracking()
+                                    .FirstOrDefault();
 
-
-                        vehicles = db.Vehicles
-                                  .Where(a => a.ID == resourcesRequestMaterialsMedicinesVehicles.FK_VehicleID)
-                                  .AsNoTracking()
-                                  .FirstOrDefault();
-
-
-                        item2.Name = resourcesRequestMaterialsMedicinesVehicles.Vehicles.BrandsModels.Brands.BrandName + " " + resourcesRequestMaterialsMedicinesVehicles.Vehicles.BrandsModels.Model.ModelName;
-                        item2.ResourceID = resourcesRequestMaterialsMedicinesVehicles.Vehicles.ID;
+                        item2.Materials.Quantity = resources.Quantity;
 
                     }
+
+                    if (item2.Medicines != null)
+                    {
+                        resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
+                             .Where(a => a.FK_MedicineID == item2.Medicines.ID
+                                     && a.FK_Resource_RequestID == item2.FK_Resource_RequestID)
+                                .AsNoTracking()
+                             .FirstOrDefault();
+
+                        item2.Medicines.Quantity = resources.Quantity;
+
+                    }
+
                 }
             }
+          
 
 
             return Ok(resource_RequestResult);
+
         }
 
 
-   
+
 
 
         [HttpPost]
@@ -146,18 +122,18 @@ namespace Back_End.Controllers
                          .FirstOrDefault();
 
 
-                if(userReq!= null && userReq.Condition != "Pendiente")
+                if (userReq != null && userReq.Condition != "Pendiente")
                 {
-                    return BadRequest(ErrorHelper.Response(400, "Su solicitud fue " +  userReq.Condition +" debe realizar una nueva solicitud"));
+                    return BadRequest(ErrorHelper.Response(400, "Su solicitud fue " + userReq.Condition + " debe realizar una nueva solicitud"));
 
                 }
 
                 if (!ModelState.IsValid)
-               {
+                {
                     return BadRequest(ErrorHelper.GetModelStateErrorsResourcesStock(ModelState));
 
-               }
-                
+                }
+
 
 
 

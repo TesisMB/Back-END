@@ -1,35 +1,19 @@
 ﻿
+using Entities.DataTransferObjects.ResourcesRequestMaterialsMedicinesVehicles___Dto;
+using System.Collections.Generic;
+
 namespace Entities.DataTransferObjects.Resources_RequestResources_Materials_Medicines_Vehicles___Dto
 {
     public class ResourcesRequestMaterialsMedicinesVehiclesDto
     {
         public int ID { get; set; }
-        public int Quantity { get; set; }
 
-        //NO
-        public int ResourceID { get; set; }
+        public int FK_Resource_RequestID { get; set; }
 
-        //NO
-        public string Name { get; set; }
+        public ResourcesMaterialsDto Materials { get; set; }
+        public ResourcesMedicnesDto Medicines { get; set; }
 
-        public string MedicineExpirationDate { get; set; }
-
-        public string MedicineLab { get; set; }
-
-        public string MedicineDrug { get; set; }
-
-        public double MedicineWeight { get; set; }
-
-        public string MedicineUnits { get; set; }
-        public string Brand { get; set; }
-        
-
-
-        public string VehiclePatent { get; set; }
-
-        public string Type { get; set; }
-
-        public int VehicleYear { get; set; }
+        public ResourcesVehiclesDto Vehicles { get; set; }
 
     }
 }

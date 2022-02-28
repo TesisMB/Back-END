@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Entities.DataTransferObjects.Medicines___Dto;
+using Entities.DataTransferObjects.Resources_RequestResources_Materials_Medicines_Vehicles___Dto;
 using Entities.DataTransferObjects.ResourcesDto;
+using Entities.DataTransferObjects.ResourcesRequestMaterialsMedicinesVehicles___Dto;
 using Entities.Helpers;
 using Entities.Models;
 
@@ -13,6 +15,23 @@ namespace Entities.Profiles
         {
             CreateMap<Medicines, MedicinesDto>()
                                      .ForPath(dest => dest.MedicineExpirationDate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.MedicineExpirationDate)));
+
+
+
+            CreateMap<Medicines, ResourcesMedicnesDto>()
+                .ForPath(dest => dest.MedicineExpirationDate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.MedicineExpirationDate)))
+
+
+
+
+                .ForMember(dest => dest.Name,
+                            opt => opt.MapFrom(src => src.MedicineName));
+
+
+  
+
+
+
 
             CreateMap<Medicines, Resources_Dto>()
 

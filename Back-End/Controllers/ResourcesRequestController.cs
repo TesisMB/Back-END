@@ -1,13 +1,18 @@
 ﻿using AutoMapper;
 using Back_End.Entities;
+using Back_End.Models;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.Resources_Request___Dto;
+using Entities.DataTransferObjects.Resources_RequestResources_Materials_Medicines_Vehicles___Dto;
+using Entities.DataTransferObjects.ResourcesRequestMaterialsMedicinesVehicles___Dto;
 using Entities.Helpers;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Back_End.Controllers
@@ -21,8 +26,19 @@ namespace Back_End.Controllers
         private IRepositorWrapper _repository;
         public static ResourcesRequest resources_Request;
         public static ResourcesRequest reourceRequest;
+        List<ResourcesMaterialsDto> resources1 = new List<ResourcesMaterialsDto>();
 
-        public static CruzRojaContext db = new CruzRojaContext();
+        List<ResourcesMedicnesDto> resources2 = new List<ResourcesMedicnesDto>();
+
+        List<ResourcesVehiclesDto> resources3 = new List<ResourcesVehiclesDto>();
+
+        Materials materials = null;
+        Medicines medicines = null;
+        Vehicles vehicles = null;
+        CruzRojaContext db = new CruzRojaContext();
+
+        ResourcesRequestMaterialsMedicinesVehicles resources  = null;
+
 
         public ResourcesRequestController(IMapper mapper, ILoggerManager logger, IRepositorWrapper repository)
         {
@@ -32,16 +48,61 @@ namespace Back_End.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ResourcesRequest>> GetAllResourceResquest()
+        public async Task<ActionResult<ResourcesRequest>> GetAllResourceResquest([FromQuery] string Condition)
         {
 
-            var resource_Request = await _repository.Resources_Requests.GetAllResourcesRequest();
+            var resource_Request = await _repository.Resources_Requests.GetAllResourcesRequest(Condition);
             _logger.LogInfo($"Returned all Resources_Request from database.");
 
             var resource_RequestResult = _mapper.Map<IEnumerable<ResourcesRequestDto>>(resource_Request);
 
+
+            var query = from st in resource_RequestResult
+                         select st;
+
+
+            foreach (var item1 in query)
+            {
+
+                foreach (var item2 in item1.Resources_RequestResources_Materials_Medicines_Vehicles)
+                {
+
+                    if (item2.Materials != null)
+                    {
+
+                        resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
+                                    .Where(a => a.FK_MaterialID == item2.Materials.ID
+                                            && a.FK_Resource_RequestID == item2.FK_Resource_RequestID)
+                                       .AsNoTracking()
+                                    .FirstOrDefault();
+
+                        item2.Materials.Quantity = resources.Quantity;
+
+                    }
+
+                    if (item2.Medicines != null)
+                    {
+                        resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
+                             .Where(a => a.FK_MedicineID == item2.Medicines.ID
+                                     && a.FK_Resource_RequestID == item2.FK_Resource_RequestID)
+                                .AsNoTracking()
+                             .FirstOrDefault();
+
+                        item2.Medicines.Quantity = resources.Quantity;
+
+                    }
+
+                }
+            }
+          
+
+
             return Ok(resource_RequestResult);
+
         }
+
+
+
 
 
         [HttpPost]
@@ -49,12 +110,32 @@ namespace Back_End.Controllers
         {
             try
             {
+                var user = UsersRepository.authUser;
 
-               if (!ModelState.IsValid)
-               {
+                ResourcesRequest userReq = null;
+
+
+                userReq = db.Resources_Requests
+                 .Where(a => a.FK_EmergencyDisasterID == resources_Request.FK_EmergencyDisasterID
+                         && a.FK_UserID == user.UserID)
+                         .AsNoTracking()
+                         .FirstOrDefault();
+
+
+                if (userReq != null && userReq.Condition != "Pendiente")
+                {
+                    return BadRequest(ErrorHelper.Response(400, "Su solicitud fue " + userReq.Condition + " debe realizar una nueva solicitud"));
+
+                }
+
+                if (!ModelState.IsValid)
+                {
                     return BadRequest(ErrorHelper.GetModelStateErrorsResourcesStock(ModelState));
 
-               }
+                }
+
+
+
 
                 if (resources_Request == null)
                 {

@@ -11,11 +11,10 @@ namespace Back_End.Models.Users___Dto.Users___Persons
 
         public string UserDni { get; set; }
         public string RoleName { get; set; }
-        public EmployeesPersonsDto Persons { get; set; }
 
-        public EstateDto Estates { get; set; }
-
-        //public LocationsDto Locations { get; set; }
+        public string Name { get; set; }
+ 
+        public Boolean Status { get; set; }
 
 
     }

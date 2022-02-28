@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Entities.DataTransferObjects.Materials___Dto;
+using Entities.DataTransferObjects.Resources_RequestResources_Materials_Medicines_Vehicles___Dto;
 using Entities.DataTransferObjects.ResourcesDto;
+using Entities.DataTransferObjects.ResourcesRequestMaterialsMedicinesVehicles___Dto;
 using Entities.Models;
 
 namespace Entities.Profiles
@@ -10,6 +12,15 @@ namespace Entities.Profiles
         public MaterialsProfiles()
         {
             CreateMap<Materials, MaterialsDto>();
+
+            CreateMap<Materials, ResourcesMaterialsDto>()
+
+
+                .ForPath(dest => dest.Brand, opts => opts.MapFrom(src => src.MaterialBrand))
+
+                .ForPath(dest => dest.Name, opts => opts.MapFrom(src => src.MaterialName));
+
+            
 
 
 

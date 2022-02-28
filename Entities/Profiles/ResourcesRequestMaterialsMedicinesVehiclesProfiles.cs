@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Entities.DataTransferObjects.Resources_Request___Dto;
 using Entities.DataTransferObjects.Resources_RequestResources_Materials_Medicines_Vehicles___Dto;
+using Entities.Helpers;
 using Entities.Models;
 
 namespace Entities.Profiles
@@ -10,6 +11,7 @@ namespace Entities.Profiles
         public ResourcesRequestMaterialsMedicinesVehiclesProfiles()
         {
             CreateMap<ResourcesRequestMaterialsMedicinesVehicles, ResourcesRequestMaterialsMedicinesVehiclesDto>();
+
 
 
             CreateMap<ResourcesRequestMaterialsMedicinesVehiclesForCreationDto, ResourcesRequestMaterialsMedicinesVehicles>();

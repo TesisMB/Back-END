@@ -6,7 +6,7 @@ namespace Contracts.Interfaces
 {
     public interface IResources_RequestRepository : IRepositoryBase<ResourcesRequest>
     {
-        Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequest();
+        Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequest(string Condition);
 
         Task<ResourcesRequest> GetResourcesRequestByID(int resource);
 

@@ -67,6 +67,7 @@ namespace Repository
                  .Include(i => i.Resources_Requests)
                  .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                  .ThenInclude(i => i.Medicines)
+                 .OrderByDescending(a => a.EmergencyDisasterStartDate)
 
                 .ToListAsync();
 
@@ -130,6 +131,12 @@ namespace Repository
            .ThenInclude(i => i.Users)
            .ThenInclude(i => i.Persons)
            .Include(i => i.Employees.Users.Roles)
+           .Include(i => i.Resources_Requests)
+           .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+           .Include(i => i.ChatRooms)
+           .ThenInclude(i => i.UsersChatRooms)
+           .Include(i => i.ChatRooms.Messages)
+           .Include(i => i.VolunteersLocationVolunteersEmergenciesDisasters)
            .FirstOrDefaultAsync();
         }
 

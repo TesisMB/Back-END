@@ -133,7 +133,7 @@ namespace Back_End.Controllers
             }
         }
 
-        [HttpPatch("{emegencyDisasterID}")]
+        [HttpPatch("WithoutFilter/{emegencyDisasterID}")]
         public async Task<ActionResult> UpdatePartialEmegencyDisaster(int emegencyDisasterID, JsonPatchDocument<EmergenciesDisastersForUpdateDto> _emergencyDisaster)
         {
             try
@@ -170,13 +170,13 @@ namespace Back_End.Controllers
             }
         }
 
-        [HttpDelete("{emegencyDisasterID}")]
+        [HttpDelete("WithoutFilter/{emegencyDisasterID}")]
         public async Task<ActionResult> DeletEmegencyDisaster(int emegencyDisasterID)
         {
             try
             {
 
-                var emegencyDisaster = await _repository.EmergenciesDisasters.GetEmergencyDisasterById(emegencyDisasterID);
+                var emegencyDisaster = await _repository.EmergenciesDisasters.GetEmergencyDisasterWithDetails(emegencyDisasterID);
 
                 if (emegencyDisaster == null)
                 {

@@ -20,12 +20,9 @@ namespace Entities.Profiles
 
             CreateMap<Vehicles, ResourcesVehiclesDto>()
 
-
                                .ForPath(dest => dest.Name, opts => opts.MapFrom(src => src.BrandsModels.Brands.BrandName + " " + src.BrandsModels.Model.ModelName))
 
                                .ForPath(dest => dest.Type, opts => opts.MapFrom(src => src.TypeVehicles.Type));
-
-
 
 
             CreateMap<Vehicles, Resources_Dto>()

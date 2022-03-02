@@ -53,8 +53,15 @@ namespace Back_End.Controllers
 
                 foreach (var item in volunteersResult)
                 {
-                    item.ImageSrc = String.Format("{0}://{1}{2}/StaticFiles/Images/{3}",
-                                                  Request.Scheme, Request.Host, Request.PathBase, item.Picture);
+                    if(item.Picture == null)
+                    {
+                        item.Picture = "https://i.imgur.com/8AACVdK.png";
+                    }
+                    else if (item.Picture != null)
+                    {
+                         item.ImageSrc = String.Format("{0}://{1}{2}/StaticFiles/Images/{3}",
+                                          Request.Scheme, Request.Host, Request.PathBase, item.Picture);
+                    }
                 }
 
                 

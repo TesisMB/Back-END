@@ -27,6 +27,11 @@ namespace Repository
             return await FindByCondition(emp => emp.UserID.Equals(userId))
                     .Include(a => a.Employees)
                     .Include(a => a.Persons)
+                    .Include(a => a.Messages)
+                    .Include(a => a.UsersChatRooms)
+                    .Include(a => a.Resources_Requests)
+                    .Include(a => a.Employees.Vehicles)
+                    .Include(a => a.UsersChat)
                     .FirstOrDefaultAsync();
         }
 

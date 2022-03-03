@@ -20,9 +20,6 @@ namespace Entities.Profiles
 
                 .ForPath(dest => dest.Name, opts => opts.MapFrom(src => src.MaterialName));
 
-            
-
-
 
             CreateMap<Materials, Resources_Dto>()
                 .ForMember(dest => dest.Name,

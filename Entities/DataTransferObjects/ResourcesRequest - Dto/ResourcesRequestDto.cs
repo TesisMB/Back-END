@@ -20,8 +20,6 @@ namespace Entities.DataTransferObjects.Resources_Request___Dto
 
         public EmployeesUsersDto Users { get; set; }
 
-        public EmergenciesDisasters2Dto EmergenciesDisasters { get; set; }
-
         public ICollection<ResourcesRequestMaterialsMedicinesVehiclesDto> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
     }
 }

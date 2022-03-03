@@ -34,13 +34,30 @@ namespace Repository
                 collection = collection.Where(
                              a => a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
              }
+
             if (user.Roles.RoleName == "Encargado de Logistica" && !string.IsNullOrEmpty(Condition))
             {
                 collection = collection.Where(
                           a => a.Condition == Condition &&
                           a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
             }
-             else if(user.Roles.RoleName != "Encargado de Logistica")
+
+            if (user.Roles.RoleName == "Admin" && string.IsNullOrEmpty(Condition))
+            {
+                collection = collection.Where(
+                             a => a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
+            }
+
+            if (user.Roles.RoleName == "Admin" && !string.IsNullOrEmpty(Condition))
+            {
+                collection = collection.Where(
+                          a => a.Condition == Condition &&
+                          a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
+            }
+
+
+
+            else if(user.Roles.RoleName != "Admin" && user.Roles.RoleName != "Encargado de Logistica")
              {
 
              //Filtrado por departamento para el Encargado de Logistica retornando todos las solicitudes

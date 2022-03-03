@@ -115,6 +115,7 @@ namespace Repository
                  .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                  .ThenInclude(i => i.Medicines)
 
+                 .OrderByDescending(i => i.Alerts.AlertID)
                 .ToListAsync();
 
         }

@@ -35,6 +35,7 @@ namespace Back_End.Controllers
             _mapper = mapper;
         }
 
+
         [HttpGet]
         public async Task<ActionResult<EmergenciesDisasters>> GetAllEmegenciesDisasters()
         {

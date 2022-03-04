@@ -199,7 +199,7 @@ namespace Repository
 
             if (userReq != null && rol == "Encargado de Logistica")
             {
-                resources_Request.Reason = userReq.Reason;
+                resources_Request.Description = userReq.Description;
                 userReq.Status = resources_Request.Status;
 
                 ActualizarEstado(userReq);

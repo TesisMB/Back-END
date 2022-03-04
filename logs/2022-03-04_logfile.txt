@@ -29,3 +29,5 @@
 2022-03-04 09:33:52.9510 INFO Returned all Materials from database.
 2022-03-04 09:34:02.7204 INFO Returned all Materials from database.
 2022-03-04 09:34:08.2444 INFO Returned all vehicles from database.
+2022-03-04 09:38:07.9256 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-04 09:38:07.9600 INFO Returned all emergenciesDisasters from database.

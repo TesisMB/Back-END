@@ -17,8 +17,10 @@ namespace Entities.Models
         [Required]
         public DateTime RequestDate { get; set; }
 
+     
+
         [Required]
-        public string Reason { get; set; }
+        public string Description { get; set; }
 
         [Required]
         public Boolean Status { get; set; }
@@ -26,8 +28,11 @@ namespace Entities.Models
         [Required]
         public string Condition { get; set; }
 
+        public string Reason { get; set; }
+
         [ForeignKey("FK_UserID")]
         public Users Users { get; set; }
+
 
         [ForeignKey("FK_EmergencyDisasterID")]
         public EmergenciesDisasters EmergenciesDisasters { get; set; }

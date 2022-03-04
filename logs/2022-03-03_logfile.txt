@@ -808,3 +808,180 @@
 2022-03-03 17:02:48.8443 INFO Returned User.
 2022-03-03 17:02:51.5277 INFO Returned all Resources_Request from database.
 2022-03-03 17:03:06.3795 INFO Returned all Resources_Request from database.
+2022-03-03 17:06:32.2373 INFO Returned all employees from database.
+2022-03-03 17:06:41.5184 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-03 17:06:41.6069 INFO Returned all emergenciesDisasters from database.
+2022-03-03 17:06:48.4645 INFO Returned all employees from database.
+2022-03-03 17:06:50.7619 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-03 17:06:50.8196 INFO Returned all emergenciesDisasters from database.
+2022-03-03 17:16:04.1219 INFO Returned User.
+2022-03-03 17:16:11.0320 INFO Returned all ChatRooms from database. 
+2022-03-03 17:16:12.6219 INFO Returned all ChatRooms from database. 
+2022-03-03 17:16:17.2813 INFO Returned all emergenciesDisasters from database.
+2022-03-03 17:16:21.4542 INFO Returned all ChatRooms from database. 
+2022-03-03 17:17:32.3251 INFO Returned all emergenciesDisasters from database.
+2022-03-03 17:17:33.3849 INFO Returned all ChatRooms from database. 
+2022-03-03 17:18:06.8881 INFO Returned User.
+2022-03-03 17:18:08.8014 INFO Returned all emergenciesDisasters from database.
+2022-03-03 17:18:10.0039 INFO Returned all ChatRooms from database. 
+2022-03-03 17:19:58.7083 INFO Returned all ChatRooms from database. 
+2022-03-03 17:20:16.6229 INFO Returned all ChatRooms from database. 
+2022-03-03 17:21:23.8707 INFO Returned all ChatRooms from database. 
+2022-03-03 17:21:25.9916 INFO Returned all ChatRooms from database. 
+2022-03-03 17:21:27.4651 INFO Returned all emergenciesDisasters from database.
+2022-03-03 17:22:16.9409 INFO Returned all ChatRooms from database. 
+2022-03-03 17:22:20.1943 INFO Returned all ChatRooms from database. 
+2022-03-03 17:22:49.0751 INFO Returned all ChatRooms from database. 
+2022-03-03 17:23:31.3952 INFO Returned all ChatRooms from database. 
+2022-03-03 17:25:15.3891 INFO Returned all employees from database.
+2022-03-03 17:25:37.3444 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-03 17:25:37.3767 INFO Returned all emergenciesDisasters from database.
+2022-03-03 17:25:41.0825 INFO Returned all Resources_Request from database.
+2022-03-03 17:26:08.7440 INFO Returned all Materials from database.
+2022-03-03 17:26:56.5713 INFO Returned Material with id: 1
+2022-03-03 17:26:58.9141 INFO Returned all Materials from database.
+2022-03-03 17:27:01.4012 INFO Returned Material with id: 2
+2022-03-03 17:27:03.0116 INFO Returned all Materials from database.
+2022-03-03 17:40:13.0352 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-03 17:40:13.0666 INFO Returned all emergenciesDisasters from database.
+2022-03-03 17:41:54.0210 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-03 17:41:54.0605 INFO Returned all emergenciesDisasters from database.
+2022-03-03 17:42:04.3118 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-03 17:42:04.3419 INFO Returned all emergenciesDisasters from database.
+2022-03-03 17:43:25.2305 INFO Returned User.
+2022-03-03 17:43:45.4103 INFO Returned all Resources_Request from database.
+2022-03-03 17:43:58.2939 INFO Returned User.
+2022-03-03 17:44:04.3572 INFO Returned all Materials from database.
+2022-03-03 18:40:11.6183 INFO Returned all Resources_Request from database.
+2022-03-03 18:40:27.7057 INFO Returned employe with details for id: 2
+2022-03-03 18:40:30.5212 INFO Returned employe with details for id: 2
+2022-03-03 18:58:48.9713 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-03 18:58:49.1530 INFO Returned all emergenciesDisasters from database.
+2022-03-03 18:59:51.9841 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-03 18:59:52.1284 INFO Returned all emergenciesDisasters from database.
+2022-03-03 19:01:18.8162 INFO Returned all Resources_Request from database.
+2022-03-03 19:06:19.4167 INFO Returned User.
+2022-03-03 19:06:35.7451 INFO Returned User.
+2022-03-03 19:06:44.9607 INFO Returned User.
+2022-03-03 19:06:55.3147 INFO Returned User.
+2022-03-03 19:06:59.2723 INFO Returned all employees from database.
+2022-03-03 19:07:19.8767 INFO Returned all employees from database.
+2022-03-03 19:07:48.5186 INFO Returned User.
+2022-03-03 19:07:54.1878 INFO Returned all employees from database.
+2022-03-03 19:08:11.8305 ERROR Something went wrong inside DeleteEmployee action: An error occurred while updating the entries. See the inner exception for details.
+2022-03-03 19:08:23.9277 INFO Returned all employees from database.
+2022-03-03 19:12:34.3379 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-03 19:12:34.4121 INFO Returned all emergenciesDisasters from database.
+2022-03-03 19:13:08.6246 INFO Returned all Materials from database.
+2022-03-03 19:13:42.5458 INFO Returned all Volunteers from database.
+2022-03-03 19:13:57.1533 INFO Returned volunteer with id: 31
+2022-03-03 19:14:01.7475 INFO Returned all Volunteers from database.
+2022-03-03 19:14:02.5908 INFO Returned volunteer with id: 15
+2022-03-03 19:14:06.8577 INFO Returned all Volunteers from database.
+2022-03-03 19:14:32.2003 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-03 19:14:32.2379 INFO Returned all emergenciesDisasters from database.
+2022-03-03 19:15:03.6888 INFO Returned all employees from database.
+2022-03-03 19:15:09.7165 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-03 19:15:09.7203 INFO Returned all emergenciesDisasters from database.
+2022-03-03 19:17:52.3918 INFO Returned all employees from database.
+2022-03-03 19:18:03.6649 ERROR Something went wrong inside DeleteEmployee action: An error occurred while updating the entries. See the inner exception for details.
+2022-03-03 19:19:22.4087 ERROR Something went wrong inside DeleteEmployee action: An error occurred while updating the entries. See the inner exception for details.
+2022-03-03 19:22:31.0781 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-03-03 19:22:31.5456 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-03-03 19:22:33.9637 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-03-03 19:22:39.9304 INFO Returned employe with details for id: 7
+2022-03-03 19:22:41.8247 INFO Returned employe with details for id: 7
+2022-03-03 19:22:51.8862 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-03-03 19:22:54.8456 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-03-03 19:23:21.7400 INFO Returned User.
+2022-03-03 19:23:26.7859 INFO Returned all employees from database.
+2022-03-03 19:23:41.2180 ERROR Something went wrong inside DeleteEmployee action: An error occurred while updating the entries. See the inner exception for details.
+2022-03-03 19:30:23.1269 INFO Returned all Resources_Request from database.
+2022-03-03 19:36:21.1002 INFO Returned all employees from database.
+2022-03-03 19:45:20.1135 ERROR Employee with id: 13, hasn't ben found in db.
+2022-03-03 19:45:23.7176 INFO Returned all employees from database.
+2022-03-03 19:45:50.4307 ERROR Employee with id: 44, hasn't ben found in db.
+2022-03-03 19:45:56.9739 INFO Returned all employees from database.
+2022-03-03 19:48:06.0698 INFO Returned all employees from database.
+2022-03-03 19:48:19.8989 INFO Returned all employees from database.
+2022-03-03 19:49:50.4241 INFO Returned all employees from database.
+2022-03-03 19:50:06.9548 INFO Returned all employees from database.
+2022-03-03 19:50:17.3095 INFO Returned all employees from database.
+2022-03-03 19:50:24.0916 INFO Returned all employees from database.
+2022-03-03 19:50:29.0750 INFO Returned all employees from database.
+2022-03-03 19:50:37.9081 INFO Returned all employees from database.
+2022-03-03 19:50:42.8448 INFO Returned all employees from database.
+2022-03-03 19:50:48.0314 INFO Returned all employees from database.
+2022-03-03 19:51:03.4359 INFO Returned all employees from database.
+2022-03-03 19:51:18.3199 INFO Returned all employees from database.
+2022-03-03 19:51:22.2885 INFO Returned all employees from database.
+2022-03-03 19:51:29.2000 INFO Returned all employees from database.
+2022-03-03 19:51:32.1486 INFO Returned all employees from database.
+2022-03-03 19:52:06.2132 INFO Returned all employees from database.
+2022-03-03 19:52:18.3781 INFO Returned all employees from database.
+2022-03-03 19:52:26.7407 INFO Returned all employees from database.
+2022-03-03 19:52:38.9920 INFO Returned all employees from database.
+2022-03-03 19:52:48.2231 INFO Returned all employees from database.
+2022-03-03 19:53:12.7242 INFO Returned all employees from database.
+2022-03-03 19:53:23.4790 INFO Returned all employees from database.
+2022-03-03 19:54:00.1570 ERROR Employee with id: 48, hasn't ben found in db.
+2022-03-03 19:54:02.4347 INFO Returned all employees from database.
+2022-03-03 19:54:33.8933 ERROR Employee with id: 51, hasn't ben found in db.
+2022-03-03 19:54:35.6885 INFO Returned all employees from database.
+2022-03-03 19:54:58.1296 INFO Returned all employees from database.
+2022-03-03 19:55:01.1655 INFO Returned all employees from database.
+2022-03-03 19:58:32.2188 INFO Returned all employees from database.
+2022-03-03 20:00:13.4862 INFO Returned all employees from database.
+2022-03-03 20:00:14.8002 INFO Returned all employees from database.
+2022-03-03 20:00:21.6837 INFO Returned all employees from database.
+2022-03-03 20:00:28.0714 INFO Returned all employees from database.
+2022-03-03 20:00:35.8678 INFO Returned all employees from database.
+2022-03-03 20:00:40.7754 INFO Returned all employees from database.
+2022-03-03 20:00:46.6326 INFO Returned all employees from database.
+2022-03-03 20:01:08.9950 INFO Returned all employees from database.
+2022-03-03 20:01:18.5452 INFO Returned all employees from database.
+2022-03-03 20:01:21.2338 INFO Returned all employees from database.
+2022-03-03 20:01:26.0956 INFO Returned all employees from database.
+2022-03-03 20:01:33.1836 INFO Returned all employees from database.
+2022-03-03 20:01:49.6503 INFO Returned all employees from database.
+2022-03-03 20:01:50.9058 INFO Returned all employees from database.
+2022-03-03 20:01:58.1078 INFO Returned all employees from database.
+2022-03-03 20:02:13.7331 INFO Returned all employees from database.
+2022-03-03 20:02:33.9385 INFO Returned all employees from database.
+2022-03-03 20:03:46.3479 INFO Returned all employees from database.
+2022-03-03 20:03:58.6294 INFO Returned all employees from database.
+2022-03-03 20:04:02.0754 INFO Returned all employees from database.
+2022-03-03 20:04:12.1581 INFO Returned all employees from database.
+2022-03-03 20:04:14.1260 INFO Returned all employees from database.
+2022-03-03 20:04:21.7235 INFO Returned all employees from database.
+2022-03-03 20:04:30.4275 INFO Returned all employees from database.
+2022-03-03 20:04:32.9332 INFO Returned all employees from database.
+2022-03-03 20:04:36.6951 INFO Returned all employees from database.
+2022-03-03 20:04:47.7586 INFO Returned all employees from database.
+2022-03-03 20:04:56.3118 INFO Returned all employees from database.
+2022-03-03 20:05:00.5728 INFO Returned all employees from database.
+2022-03-03 20:05:03.5613 INFO Returned all employees from database.
+2022-03-03 20:05:07.9563 INFO Returned all employees from database.
+2022-03-03 20:05:20.4211 INFO Returned all employees from database.
+2022-03-03 20:05:21.5484 INFO Returned all employees from database.
+2022-03-03 20:05:29.7876 INFO Returned all employees from database.
+2022-03-03 20:05:32.5433 INFO Returned all employees from database.
+2022-03-03 20:06:04.5501 INFO Returned all employees from database.
+2022-03-03 20:06:07.7277 INFO Returned all employees from database.
+2022-03-03 20:06:14.4642 INFO Returned all employees from database.
+2022-03-03 20:06:17.2593 INFO Returned all employees from database.
+2022-03-03 20:07:52.8537 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-03 20:07:52.9965 INFO Returned all emergenciesDisasters from database.
+2022-03-03 20:08:25.4406 INFO Returned all Resources_Request from database.
+2022-03-03 20:08:43.2452 INFO Returned User.
+2022-03-03 20:08:47.5469 INFO Returned all Resources_Request from database.
+2022-03-03 20:09:04.6302 INFO Returned employe with details for id: 2
+2022-03-03 20:09:25.4038 INFO Returned employe with details for id: 2
+2022-03-03 20:10:28.3953 INFO Returned all emergenciesDisasters from database.
+2022-03-03 20:10:31.2050 INFO Returned all emergenciesDisasters from database.
+2022-03-03 20:10:38.2616 INFO Returned all emergenciesDisasters from database.
+2022-03-03 20:10:40.5955 INFO Returned all emergenciesDisasters from database.
+2022-03-03 20:10:41.5076 INFO Returned all emergenciesDisasters from database.
+2022-03-03 20:11:25.9862 INFO Returned all Materials from database.
+2022-03-03 20:11:30.2327 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-03 20:11:30.2377 INFO Returned all emergenciesDisasters from database.

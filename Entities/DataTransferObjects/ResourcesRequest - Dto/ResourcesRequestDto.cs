@@ -12,6 +12,8 @@ namespace Entities.DataTransferObjects.Resources_Request___Dto
 
         public string RequestDate { get; set; }
 
+        public string Description { get; set; }
+
         public string Reason { get; set; }
 
         public Boolean Status { get; set; }

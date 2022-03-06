@@ -17,8 +17,6 @@ namespace Entities.Models
         [Required]
         public DateTime RequestDate { get; set; }
 
-     
-
         [Required]
         public string Description { get; set; }
 

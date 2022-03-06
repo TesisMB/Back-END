@@ -23,15 +23,20 @@ namespace Repository
         public async Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisasters()
         {
 
-        var user = UsersRepository.authUser;
+            var user = UsersRepository.authUser;
+            var collection = _cruzRojaContext.EmergenciesDisasters as IQueryable<EmergenciesDisasters>;
 
-            if(user.Roles.RoleName != "Coordinador General" || user.Roles.RoleName != "Admin")
+            if (user.Roles.RoleName != "Coordinador General" && user.Roles.RoleName != "Admin")
             {
                 return await GetAllEmergenciesDisastersFilter();
 
             }
+            else
+            {
+                collection = collection.Where(a => a.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
+            }
 
-            return await FindAll()
+            return await collection
                 .Include(i => i.TypesEmergenciesDisasters)
                 .Include(i => i.Alerts)
                 .Include(i => i.Locations)
@@ -145,15 +150,12 @@ namespace Repository
         {
 
             var user = UsersRepository.authUser;
-
-
             var collection = _cruzRojaContext.EmergenciesDisasters as IQueryable<EmergenciesDisasters>;
 
-            if (user.Roles.RoleName != "Coordinador General" && user.Roles.RoleName != "Admin")
-            {
-                collection = collection.Where(
-                                        a => a.Fk_EmplooyeeID == user.UserID);
-            }
+
+            collection = collection.Where(
+                                    a => a.Fk_EmplooyeeID == user.UserID)
+                                    .AsNoTracking();
 
             return await collection
                  .Include(i => i.TypesEmergenciesDisasters)

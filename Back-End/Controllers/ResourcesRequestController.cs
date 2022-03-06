@@ -102,9 +102,6 @@ namespace Back_End.Controllers
         }
 
 
-
-
-
         [HttpPost]
         public ActionResult<ResourcesRequest> CreateResource_Request([FromBody] ResourcesRequestForCreationDto resources_Request)
         {
@@ -122,7 +119,7 @@ namespace Back_End.Controllers
                          .FirstOrDefault();
 
 
-                if (userReq.Condition != "Pendiente" && user.Roles.RoleName == "Encargado de Logistica")
+                if (user.Roles.RoleName == "Encargado de Logistica" && userReq.Condition != "Pendiente")
                 {
                     return BadRequest(ErrorHelper.Response(400, "Esta solicitud ya fue evaluada y " + userReq.Condition));
 
@@ -155,6 +152,34 @@ namespace Back_End.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside CreateResource_Request action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ResourcesRequest>> DeleteResourceRequest(int id)
+        {
+            try
+            {
+                var resource = await _repository.Resources_Requests.GetResourcesRequestByID(id);
+
+                resource = _repository.Resources_Requests.UpdateStockDelete(resource);
+
+                if(resource == null)
+                {
+                    return NotFound();
+                }
+
+                _repository.Resources_Requests.Delete(resource);
+                _repository.Resources_Requests.SaveAsync();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogError($"Something went wrong inside DeleteResourceRequest action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
         }

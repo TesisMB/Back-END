@@ -1158,3 +1158,44 @@
 2022-03-06 22:30:33.5900 INFO Returned medicine with details for id: 14
 2022-03-06 22:30:36.7340 INFO Returned all emergenciesDisasters from database.
 2022-03-06 22:30:42.5467 INFO Returned all Resources_Request from database.
+2022-03-06 22:37:30.6590 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 22:37:30.7230 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:37:36.2823 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 22:37:36.2823 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:43:12.4740 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 22:43:12.5124 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:43:23.6230 INFO Returned all Resources_Request from database.
+2022-03-06 22:43:42.2532 INFO Returned User.
+2022-03-06 22:43:53.7467 INFO Returned User.
+2022-03-06 22:44:22.8595 INFO Returned User.
+2022-03-06 22:44:28.9027 INFO Returned all Materials from database.
+2022-03-06 22:46:24.8868 INFO Returned all Resources_Request from database.
+2022-03-06 22:47:08.9534 ERROR Something went wrong inside CreateResource_Request action: Object reference not set to an instance of an object.
+2022-03-06 22:47:17.0985 INFO Returned all Resources_Request from database.
+2022-03-06 22:47:24.9902 INFO Returned User.
+2022-03-06 22:47:28.5096 INFO Returned all Resources_Request from database.
+2022-03-06 22:49:09.0237 INFO Returned User.
+2022-03-06 22:49:14.3390 INFO Returned all Resources_Request from database.
+2022-03-06 22:50:30.8667 INFO Returned User.
+2022-03-06 22:50:34.7251 INFO Returned all Resources_Request from database.
+2022-03-06 22:51:20.8524 INFO Returned User.
+2022-03-06 22:51:22.8860 INFO Returned all Resources_Request from database.
+2022-03-06 22:52:21.1306 INFO Returned User.
+2022-03-06 22:52:24.0032 INFO Returned all Resources_Request from database.
+2022-03-06 22:53:14.0115 ERROR Something went wrong inside CreateResource_Request action: Object reference not set to an instance of an object.
+2022-03-06 23:01:08.9951 ERROR Something went wrong inside CreateResource_Request action: Object reference not set to an instance of an object.
+2022-03-06 23:01:13.5228 INFO Returned User.
+2022-03-06 23:01:13.5228 ERROR Something went wrong inside CreateResource_Request action: Object reference not set to an instance of an object.
+2022-03-06 23:01:19.5022 INFO Returned all emergenciesDisasters from database.
+2022-03-06 23:01:22.6072 INFO Returned all Resources_Request from database.
+2022-03-06 23:01:28.8182 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 23:01:28.8844 INFO Returned all emergenciesDisasters from database.
+2022-03-06 23:01:44.2844 INFO Returned all Resources_Request from database.
+2022-03-06 23:01:53.4792 INFO Returned User.
+2022-03-06 23:01:56.5859 INFO Returned all Resources_Request from database.
+2022-03-06 23:02:09.7031 INFO Returned all Resources_Request from database.
+2022-03-06 23:02:35.9939 INFO Returned all Materials from database.
+2022-03-06 23:02:37.0946 INFO Returned Material with id: 2
+2022-03-06 23:02:41.1465 INFO Returned all emergenciesDisasters from database.
+2022-03-06 23:02:52.2444 INFO Returned all Resources_Request from database.
+2022-03-06 23:03:06.0627 INFO Returned all Resources_Request from database.

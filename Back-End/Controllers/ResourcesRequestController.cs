@@ -110,7 +110,7 @@ namespace Back_End.Controllers
                          .FirstOrDefault();
 
 
-                if (user.Roles.RoleName == "Encargado de Logistica" && userReq.Condition != "Pendiente")
+                if (user.Roles.RoleName == "Encargado de Logistica" && userReq != null)
                 {
                     return BadRequest(ErrorHelper.Response(400, "Esta solicitud ya fue evaluada y " + userReq.Condition));
 
@@ -165,7 +165,7 @@ namespace Back_End.Controllers
                 _repository.Resources_Requests.Delete(resource);
                 _repository.Resources_Requests.SaveAsync();
 
-                return NoContent();
+                return Ok();
             }
             catch (Exception ex)
             {

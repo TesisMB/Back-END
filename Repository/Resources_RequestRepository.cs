@@ -201,9 +201,9 @@ namespace Repository
             }
 
 
-            if (userReq != null && rol == "Encargado de Logistica")
+            if (userReq == null && rol == "Encargado de Logistica")
             {
-                resources_Request.Description = userReq.Description;
+                resources_Request.Reason = userReq.Reason;
                 userReq.Status = resources_Request.Status;
 
 

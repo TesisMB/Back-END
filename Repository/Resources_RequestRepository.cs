@@ -162,7 +162,7 @@ namespace Repository
                     spaceCamelCase(resources_Request);
 
                     //añado el nuevo item
-                    db.Add(item);
+                    AddRecurso(item);
 
                     Stock(resources_Request, item);
 
@@ -254,6 +254,15 @@ namespace Repository
         }
 
 
+
+        public void AddRecurso(ResourcesRequestMaterialsMedicinesVehicles res)
+        {
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            cruzRojaContext.Add(res);
+
+            cruzRojaContext.SaveChanges();
+        }
 
         //Actualiza los recursos en la solicitud existente y mantengo actualizo el Stock
         public void UpdateResources(ResourcesRequestMaterialsMedicinesVehicles res, ResourcesRequest resources_Request)

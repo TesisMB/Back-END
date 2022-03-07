@@ -773,3 +773,388 @@
 2022-03-06 19:30:02.1295 INFO Returned all emergenciesDisasters from database.
 2022-03-06 19:30:08.2881 INFO Returned all emergenciesDisasters from database.
 2022-03-06 19:30:16.2050 INFO Returned all emergenciesDisasters from database.
+2022-03-06 19:40:39.8042 INFO Returned all emergenciesDisasters from database.
+2022-03-06 19:46:53.5494 INFO Returned User.
+2022-03-06 19:47:03.3453 INFO Returned all Volunteers from database.
+2022-03-06 19:47:06.5561 INFO Returned all Volunteers from database.
+2022-03-06 19:47:24.9288 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 19:47:24.9641 INFO Returned all emergenciesDisasters from database.
+2022-03-06 19:48:00.4636 INFO Returned User.
+2022-03-06 19:48:10.7706 INFO Returned all employees from database.
+2022-03-06 19:48:13.1572 INFO Returned all employees from database.
+2022-03-06 19:48:42.8792 INFO Returned employe with details for id: 12
+2022-03-06 19:49:23.8716 INFO Returned User.
+2022-03-06 19:49:43.4697 INFO Returned User.
+2022-03-06 19:49:46.9778 INFO Returned all employees from database.
+2022-03-06 19:50:03.9506 INFO Returned all employees from database.
+2022-03-06 19:50:13.5531 INFO Returned all employees from database.
+2022-03-06 19:50:33.0932 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 19:50:33.0998 INFO Returned all emergenciesDisasters from database.
+2022-03-06 19:50:34.6375 INFO Returned all employees from database.
+2022-03-06 19:51:10.2609 INFO Returned all employees from database.
+2022-03-06 19:51:13.1151 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 19:51:13.1151 INFO Returned all emergenciesDisasters from database.
+2022-03-06 19:51:14.5893 INFO Returned all employees from database.
+2022-03-06 19:51:19.6995 INFO Returned all employees from database.
+2022-03-06 19:51:45.1994 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 19:51:45.2269 INFO Returned all emergenciesDisasters from database.
+2022-03-06 19:51:48.6498 INFO Returned all emergenciesDisasters from database.
+2022-03-06 19:57:55.7176 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 19:57:55.7176 INFO Returned all emergenciesDisasters from database.
+2022-03-06 19:58:29.5869 INFO Returned all Resources_Request from database.
+2022-03-06 20:01:29.5979 INFO Returned all Materials from database.
+2022-03-06 20:01:35.4436 INFO Returned Material with id: 4
+2022-03-06 20:01:40.4705 INFO Returned all Materials from database.
+2022-03-06 20:01:41.4553 INFO Returned Material with id: 16
+2022-03-06 20:01:43.2890 INFO Returned all Materials from database.
+2022-03-06 20:01:43.9512 INFO Returned Material with id: 9
+2022-03-06 20:03:33.4894 INFO Returned Material with id: 9
+2022-03-06 20:04:16.4841 INFO Returned all Materials from database.
+2022-03-06 20:04:19.8363 INFO Returned all Materials from database.
+2022-03-06 20:04:23.3876 INFO Returned all Materials from database.
+2022-03-06 20:04:24.8089 INFO Returned all Volunteers from database.
+2022-03-06 20:04:26.8088 INFO Returned all vehicles from database.
+2022-03-06 20:04:29.8447 INFO Returned all Volunteers from database.
+2022-03-06 20:04:32.1083 INFO Returned all Materials from database.
+2022-03-06 20:04:38.4448 INFO Returned all Materials from database.
+2022-03-06 20:04:44.8274 INFO Returned all Volunteers from database.
+2022-03-06 20:05:07.4727 INFO Returned all Materials from database.
+2022-03-06 20:05:12.1709 INFO Returned medicine with details for id: 19
+2022-03-06 20:05:15.1682 INFO Returned all Materials from database.
+2022-03-06 20:05:36.1370 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 20:05:36.1730 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:06:38.6550 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 20:06:38.6914 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:06:42.2327 INFO Returned all Volunteers from database.
+2022-03-06 20:06:42.8970 INFO Returned volunteer with id: 59
+2022-03-06 20:06:47.6851 INFO Returned all Materials from database.
+2022-03-06 20:06:48.5088 INFO Returned Material with id: 4
+2022-03-06 20:06:53.5319 INFO Returned all vehicles from database.
+2022-03-06 20:06:54.1970 INFO Returned vehicle with id: 8
+2022-03-06 20:06:57.8766 INFO Returned all Materials from database.
+2022-03-06 20:07:00.4340 INFO Returned medicine with details for id: 19
+2022-03-06 20:07:10.2993 INFO Returned medicine with details for id: 19
+2022-03-06 20:07:17.5628 INFO Returned medicine with details for id: 19
+2022-03-06 20:07:18.7316 INFO Returned all Materials from database.
+2022-03-06 20:07:19.5794 INFO Returned medicine with details for id: 4
+2022-03-06 20:07:20.6739 INFO Returned all Materials from database.
+2022-03-06 20:07:23.3788 INFO Returned all Volunteers from database.
+2022-03-06 20:07:24.2338 INFO Returned volunteer with id: 55
+2022-03-06 20:07:43.9572 INFO Returned volunteer with id: 55
+2022-03-06 20:07:48.7110 INFO Returned all Volunteers from database.
+2022-03-06 20:07:51.1026 INFO Returned all Materials from database.
+2022-03-06 20:07:51.9689 INFO Returned Material with id: 4
+2022-03-06 20:07:53.5924 INFO Returned all Materials from database.
+2022-03-06 20:07:54.2090 INFO Returned Material with id: 16
+2022-03-06 20:07:55.5204 INFO Returned all Materials from database.
+2022-03-06 20:07:56.2570 INFO Returned Material with id: 10
+2022-03-06 20:07:57.5937 INFO Returned all Materials from database.
+2022-03-06 20:07:58.0991 INFO Returned Material with id: 9
+2022-03-06 20:07:59.6638 INFO Returned all Materials from database.
+2022-03-06 20:08:00.2171 INFO Returned Material with id: 4
+2022-03-06 20:08:01.5025 INFO Returned all Materials from database.
+2022-03-06 20:08:01.8556 INFO Returned Material with id: 9
+2022-03-06 20:08:06.3323 INFO Returned all Materials from database.
+2022-03-06 20:08:06.8226 INFO Returned Material with id: 4
+2022-03-06 20:08:08.2798 INFO Returned all Materials from database.
+2022-03-06 20:08:08.6396 INFO Returned Material with id: 9
+2022-03-06 20:08:26.3439 INFO Returned Material with id: 9
+2022-03-06 20:08:29.6445 INFO Returned all Materials from database.
+2022-03-06 20:08:30.6885 INFO Returned Material with id: 16
+2022-03-06 20:08:42.8850 INFO Returned Material with id: 16
+2022-03-06 20:08:50.6693 INFO Returned Material with id: 16
+2022-03-06 20:08:58.4153 INFO Returned Material with id: 16
+2022-03-06 20:09:04.8683 INFO Returned Material with id: 16
+2022-03-06 20:09:05.3572 INFO Returned Material with id: 16
+2022-03-06 20:09:10.2000 INFO Returned Material with id: 16
+2022-03-06 20:09:18.0828 INFO Returned Material with id: 16
+2022-03-06 20:09:25.0217 INFO Returned Material with id: 16
+2022-03-06 20:09:30.8551 INFO Returned Material with id: 16
+2022-03-06 20:09:36.2233 INFO Returned Material with id: 16
+2022-03-06 20:09:40.0430 INFO Returned all Materials from database.
+2022-03-06 20:09:42.9165 INFO Returned Material with id: 9
+2022-03-06 20:09:43.5061 INFO Returned all Materials from database.
+2022-03-06 20:09:45.1357 INFO Returned Material with id: 9
+2022-03-06 20:11:50.7724 INFO Returned Material with id: 9
+2022-03-06 20:11:53.8145 INFO Returned all Materials from database.
+2022-03-06 20:11:54.7821 INFO Returned Material with id: 16
+2022-03-06 20:12:14.6619 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:12:22.6599 INFO Returned all Materials from database.
+2022-03-06 20:12:28.1620 INFO Returned all vehicles from database.
+2022-03-06 20:12:31.4191 INFO Returned all Materials from database.
+2022-03-06 20:12:36.1852 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 20:12:36.2220 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:12:59.3074 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:13:14.9142 INFO Returned all Resources_Request from database.
+2022-03-06 20:13:25.4974 INFO Returned employe with details for id: 12
+2022-03-06 20:13:43.1965 INFO Returned employe with details for id: 12
+2022-03-06 20:17:29.0752 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 20:17:29.0752 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:17:31.6439 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:18:54.6724 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 20:18:54.8094 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:19:01.5067 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 20:19:01.5617 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:19:14.9680 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:19:25.6643 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:21:18.1006 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 20:21:18.1478 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:22:56.1853 INFO Returned employe with details for id: 12
+2022-03-06 20:23:25.8625 INFO Returned employe with details for id: 12
+2022-03-06 20:23:58.4508 INFO Returned employe with details for id: 12
+2022-03-06 20:24:11.6186 INFO Returned employe with details for id: 12
+2022-03-06 20:24:18.9534 INFO Returned employe with details for id: 12
+2022-03-06 20:24:23.7290 INFO Returned employe with details for id: 12
+2022-03-06 20:24:26.1472 INFO Returned employe with details for id: 12
+2022-03-06 20:24:57.7372 INFO Returned employe with details for id: 12
+2022-03-06 20:25:07.8088 INFO Returned employe with details for id: 12
+2022-03-06 20:25:28.4910 INFO Returned employe with details for id: 12
+2022-03-06 20:25:52.3156 INFO Returned employe with details for id: 12
+2022-03-06 20:25:55.4122 INFO Returned employe with details for id: 12
+2022-03-06 20:26:04.5680 INFO Returned employe with details for id: 12
+2022-03-06 20:26:10.9319 INFO Returned employe with details for id: 12
+2022-03-06 20:30:59.8784 INFO Returned employe with details for id: 12
+2022-03-06 20:31:02.5195 INFO Returned employe with details for id: 12
+2022-03-06 20:31:06.3810 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 20:31:06.4209 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:36:33.0344 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 20:36:33.0962 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:37:13.9692 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 20:37:13.9797 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:37:19.6115 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 20:37:19.7353 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:37:52.0525 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 20:37:52.1040 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:38:42.7041 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 20:38:42.7551 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:40:55.0783 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 20:40:55.1241 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:45:36.9682 INFO Returned User.
+2022-03-06 20:45:39.9246 INFO Returned all Materials from database.
+2022-03-06 20:45:41.9753 INFO Returned Material with id: 2
+2022-03-06 20:45:47.5352 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:46:35.6952 INFO Returned Material with id: 2
+2022-03-06 20:46:36.9928 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:46:54.7644 ERROR Something went wrong inside CreateResource_Request action: An error occurred while updating the entries. See the inner exception for details.
+2022-03-06 20:47:03.0715 INFO Returned Material with id: 2
+2022-03-06 20:47:03.8381 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:47:12.8553 ERROR Something went wrong inside CreateResource_Request action: An error occurred while updating the entries. See the inner exception for details.
+2022-03-06 20:47:27.2413 INFO Returned Material with id: 2
+2022-03-06 20:47:32.6679 INFO Returned all Materials from database.
+2022-03-06 20:47:34.6582 INFO Returned Material with id: 6
+2022-03-06 20:47:41.3199 INFO Returned all Resources_Request from database.
+2022-03-06 20:47:46.0812 INFO Returned all Resources_Request from database.
+2022-03-06 20:47:51.6261 INFO Returned all Resources_Request from database.
+2022-03-06 20:47:53.0532 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:47:58.0949 INFO Returned all Materials from database.
+2022-03-06 20:47:58.9347 INFO Returned Material with id: 2
+2022-03-06 20:48:03.1777 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:48:06.8699 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:48:41.2060 ERROR Something went wrong inside CreateResource_Request action: An error occurred while updating the entries. See the inner exception for details.
+2022-03-06 20:50:50.1654 INFO Returned Material with id: 2
+2022-03-06 20:51:09.1664 INFO Returned Material with id: 2
+2022-03-06 20:51:15.5897 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:51:19.7210 INFO Returned all emergenciesDisasters from database.
+2022-03-06 20:51:49.9279 INFO Returned all Resources_Request from database.
+2022-03-06 20:53:09.7810 INFO Returned all Resources_Request from database.
+2022-03-06 20:57:35.2653 INFO Returned User.
+2022-03-06 20:57:35.3031 INFO Returned all Resources_Request from database.
+2022-03-06 20:57:44.8650 INFO Returned all Resources_Request from database.
+2022-03-06 21:01:32.4682 INFO Returned all Resources_Request from database.
+2022-03-06 21:03:20.6009 INFO Returned all Resources_Request from database.
+2022-03-06 21:03:30.5956 INFO Returned all Resources_Request from database.
+2022-03-06 21:03:34.4650 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:03:34.6010 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:04:08.1337 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:04:08.2259 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:05:42.6552 INFO Returned all Resources_Request from database.
+2022-03-06 21:08:54.2628 INFO Returned User.
+2022-03-06 21:08:59.0334 INFO Returned all Resources_Request from database.
+2022-03-06 21:09:23.0266 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:09:23.0623 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:10:11.2753 INFO Returned User.
+2022-03-06 21:10:13.1730 INFO Returned all Resources_Request from database.
+2022-03-06 21:11:19.8355 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:11:19.9341 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:11:23.4730 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:11:23.5178 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:16:02.5379 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:16:02.6308 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:16:02.9946 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:16:03.0511 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:44:52.8220 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:44:53.5654 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:44:54.9335 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:44:55.0731 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:45:33.4430 INFO Returned all Resources_Request from database.
+2022-03-06 21:45:46.3834 INFO Returned all Materials from database.
+2022-03-06 21:45:48.3500 INFO Returned Material with id: 2
+2022-03-06 21:45:52.9770 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:46:19.0220 INFO Returned all Resources_Request from database.
+2022-03-06 21:46:39.0563 INFO Returned all Materials from database.
+2022-03-06 21:46:40.4568 INFO Returned Material with id: 2
+2022-03-06 21:46:44.3178 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:46:50.4935 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:46:55.9660 INFO Returned all Resources_Request from database.
+2022-03-06 21:47:39.7317 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:47:39.7725 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:49:06.5388 INFO Returned all Materials from database.
+2022-03-06 21:49:08.9763 INFO Returned medicine with details for id: 9
+2022-03-06 21:49:12.6173 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:49:20.2639 INFO Returned all Resources_Request from database.
+2022-03-06 21:49:33.0762 INFO Returned all Resources_Request from database.
+2022-03-06 21:49:35.2181 INFO Returned all Resources_Request from database.
+2022-03-06 21:49:36.2571 INFO Returned all Resources_Request from database.
+2022-03-06 21:49:52.1298 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:49:52.1689 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:49:58.8005 INFO Returned all Materials from database.
+2022-03-06 21:50:01.2675 INFO Returned medicine with details for id: 14
+2022-03-06 21:50:05.7962 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:50:16.0011 INFO Returned all Resources_Request from database.
+2022-03-06 21:51:48.5808 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:51:48.6020 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:55:32.6182 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:55:32.7348 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:55:36.1771 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:55:36.2457 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:55:37.5783 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:55:37.6301 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:55:45.6937 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:55:45.7592 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:55:47.7407 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:55:47.7971 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:55:47.8083 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:55:47.8083 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:55:57.7960 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:55:57.8569 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:55:59.1256 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:55:59.2015 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:56:04.3470 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:56:04.4198 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:56:05.5752 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:56:05.6395 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:56:05.7490 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:56:05.8120 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:56:09.9749 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:56:10.0244 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:56:10.5801 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:56:10.5801 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:56:17.7304 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:56:17.7906 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:56:18.7265 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:56:18.7710 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:56:23.4319 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:56:23.4891 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:56:25.2972 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:56:25.3510 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:58:01.6602 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:58:01.7483 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:58:02.7402 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:58:02.7897 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:58:05.7956 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:58:05.8595 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:58:06.8786 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:58:06.9454 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:58:12.5615 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:58:12.6000 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:58:19.6433 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:58:19.7138 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:58:39.5763 INFO Returned employe with details for id: 4
+2022-03-06 21:58:44.9953 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:58:45.0307 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:59:00.3661 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:59:00.3887 INFO Returned all emergenciesDisasters from database.
+2022-03-06 21:59:01.2851 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 21:59:01.2884 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:05:10.2986 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 22:05:10.3175 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:05:10.6302 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 22:05:10.6348 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:05:50.4971 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 22:05:50.4971 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:05:51.0007 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 22:05:51.0007 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:07:09.7948 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 22:07:09.8058 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:07:11.9662 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 22:07:12.0454 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:07:13.4184 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 22:07:13.5783 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:07:15.7658 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 22:07:15.7658 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:08:12.9257 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 22:08:13.0237 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:08:13.7919 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 22:08:13.8208 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:08:37.0127 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 22:08:37.0284 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 22:08:37.0986 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:08:37.2643 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:10:13.1996 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 22:10:13.2703 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:10:48.9483 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:10:50.6416 INFO Returned all Resources_Request from database.
+2022-03-06 22:10:58.6056 INFO Returned employe with details for id: 4
+2022-03-06 22:11:17.8846 INFO Returned all Materials from database.
+2022-03-06 22:11:20.6871 INFO Returned Material with id: 6
+2022-03-06 22:11:26.0978 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:11:51.9815 INFO Returned all Resources_Request from database.
+2022-03-06 22:11:59.5172 INFO Returned all Resources_Request from database.
+2022-03-06 22:12:22.2628 INFO Returned all Resources_Request from database.
+2022-03-06 22:13:18.7096 INFO Returned User.
+2022-03-06 22:13:27.0765 INFO Returned all Resources_Request from database.
+2022-03-06 22:13:49.3013 INFO Returned all Resources_Request from database.
+2022-03-06 22:13:54.3907 INFO Returned all Materials from database.
+2022-03-06 22:13:57.6737 INFO Returned Material with id: 2
+2022-03-06 22:14:01.3794 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:14:31.9740 INFO Returned all Resources_Request from database.
+2022-03-06 22:14:43.7472 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 22:14:43.8247 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:14:45.6522 INFO Returned all Materials from database.
+2022-03-06 22:14:46.7918 INFO Returned Material with id: 2
+2022-03-06 22:14:50.9113 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:16:13.7904 INFO Returned all Materials from database.
+2022-03-06 22:16:16.1340 INFO Returned all Materials from database.
+2022-03-06 22:16:17.4225 INFO Returned medicine with details for id: 9
+2022-03-06 22:16:21.3066 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:19:35.5382 INFO Returned User.
+2022-03-06 22:19:37.5265 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:19:42.2550 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-06 22:19:43.1752 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:19:45.1957 INFO Returned all Materials from database.
+2022-03-06 22:19:47.3409 INFO Returned medicine with details for id: 14
+2022-03-06 22:19:50.9945 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:19:54.0507 ERROR Something went wrong inside CreateResource_Request action: The instance of entity type 'ResourcesRequest' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-03-06 22:20:05.3955 INFO Returned all Materials from database.
+2022-03-06 22:20:56.6362 INFO Returned medicine with details for id: 9
+2022-03-06 22:21:00.3200 INFO Returned all Materials from database.
+2022-03-06 22:22:42.8846 INFO Returned medicine with details for id: 9
+2022-03-06 22:22:43.1479 INFO Returned all Materials from database.
+2022-03-06 22:22:45.7572 INFO Returned all Materials from database.
+2022-03-06 22:22:50.9217 INFO Returned medicine with details for id: 14
+2022-03-06 22:22:54.5916 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:22:58.2187 ERROR Something went wrong inside CreateResource_Request action: The instance of entity type 'ResourcesRequest' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-03-06 22:23:17.8303 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:23:20.5183 INFO Returned medicine with details for id: 14
+2022-03-06 22:23:32.6905 INFO Returned User.
+2022-03-06 22:23:32.7686 INFO Returned medicine with details for id: 14
+2022-03-06 22:23:39.7845 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:23:41.8383 ERROR Something went wrong inside CreateResource_Request action: The instance of entity type 'ResourcesRequest' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-03-06 22:23:55.6939 INFO Returned medicine with details for id: 14
+2022-03-06 22:23:57.0201 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:24:22.2569 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:24:31.1333 ERROR Something went wrong inside CreateResource_Request action: The instance of entity type 'ResourcesRequest' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-03-06 22:24:41.8353 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:25:02.1618 ERROR Something went wrong inside CreateResource_Request action: The instance of entity type 'ResourcesRequest' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-03-06 22:25:04.7937 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:29:14.8662 INFO Returned User.
+2022-03-06 22:29:16.3336 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:29:19.6110 INFO Returned all Materials from database.
+2022-03-06 22:29:22.1330 INFO Returned all Materials from database.
+2022-03-06 22:29:23.4597 INFO Returned medicine with details for id: 14
+2022-03-06 22:29:27.6195 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:30:28.3516 INFO Returned User.
+2022-03-06 22:30:32.9841 INFO Returned all Materials from database.
+2022-03-06 22:30:33.5900 INFO Returned medicine with details for id: 14
+2022-03-06 22:30:36.7340 INFO Returned all emergenciesDisasters from database.
+2022-03-06 22:30:42.5467 INFO Returned all Resources_Request from database.

@@ -26,15 +26,6 @@ namespace Back_End.Controllers
         private IRepositorWrapper _repository;
         public static ResourcesRequest resources_Request;
         public static ResourcesRequest reourceRequest;
-        List<ResourcesMaterialsDto> resources1 = new List<ResourcesMaterialsDto>();
-
-        List<ResourcesMedicnesDto> resources2 = new List<ResourcesMedicnesDto>();
-
-        List<ResourcesVehiclesDto> resources3 = new List<ResourcesVehiclesDto>();
-
-        Materials materials = null;
-        Medicines medicines = null;
-        Vehicles vehicles = null;
         CruzRojaContext db = new CruzRojaContext();
 
         ResourcesRequestMaterialsMedicinesVehicles resources  = null;

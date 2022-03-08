@@ -28,6 +28,8 @@ namespace Back_End.Models
         [Required]
         public string VehiclePicture { get; set; }
 
+        public int VehicleQuantity{ get; set; }
+
         [Required]
         public int VehicleYear { get; set; }
 

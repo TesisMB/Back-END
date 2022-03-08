@@ -71,7 +71,7 @@ namespace Back_End.Controllers
 
                     }
 
-                    if (item2.Medicines != null)
+                    else if (item2.Medicines != null)
                     {
                         resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
                              .Where(a => a.FK_MedicineID == item2.Medicines.ID
@@ -83,10 +83,20 @@ namespace Back_End.Controllers
 
                     }
 
+                    else if (item2.Vehicles != null)
+                    {
+                        resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
+                             .Where(a => a.FK_VehicleID == item2.Vehicles.ID
+                                     && a.FK_Resource_RequestID == item2.FK_Resource_RequestID)
+                                .AsNoTracking()
+                             .FirstOrDefault();
+
+                        item2.Vehicles.Quantity = resources.Quantity;
+
+                    }
+
                 }
             }
-          
-
 
             return Ok(resource_RequestResult);
 
@@ -100,7 +110,7 @@ namespace Back_End.Controllers
             {
                 var user = UsersRepository.authUser;
 
-                ResourcesRequest userReq = null;
+                /*ResourcesRequest userReq = null;
 
 
                 userReq = db.Resources_Requests
@@ -114,7 +124,7 @@ namespace Back_End.Controllers
                 {
                     return BadRequest(ErrorHelper.Response(400, "Esta solicitud ya fue evaluada y " + userReq.Condition));
 
-                }
+                }*/
 
 
                 if (!ModelState.IsValid)

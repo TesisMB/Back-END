@@ -29,49 +29,70 @@ namespace Repository
 
             var collection = _cruzRojaContext.Resources_Requests as IQueryable<ResourcesRequest>;
 
-            //Filtrado por departamento para el Encargado de Logistica retornando todos las solicitudes
-            if (user.Roles.RoleName == "Encargado de Logistica" && string.IsNullOrEmpty(Condition))
+            //Admin y C.General -> tiene acceso a todo en funcion del departamento
+
+            if(user.Roles.RoleName == "Admin" && string.IsNullOrEmpty(Condition))
             {
-                collection = collection.Where(
-                             a => a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
+                return await GetAllResourcesRequests(user.Estates.Locations.LocationDepartmentName);
             }
 
-            if (user.Roles.RoleName == "Encargado de Logistica" && !string.IsNullOrEmpty(Condition))
+            //Admin y C.General -> tiene acceso a sus propias solicitudes en funcion del departamento
+
+            else if (user.Roles.RoleName == "Admin"  && !string.IsNullOrEmpty(Condition))
             {
                 collection = collection.Where(
-                          a => a.Condition == Condition &&
-                          a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
+                                              a => a.Condition == Condition
+                                              && a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName)
+                                              .AsNoTracking();
+            }
+            else if (user.Roles.RoleName == "Coordinador General" && string.IsNullOrEmpty(Condition))
+            {
+                return await GetAllResourcesRequests(user.Estates.Locations.LocationDepartmentName);
             }
 
-            if (user.Roles.RoleName == "Admin" && string.IsNullOrEmpty(Condition))
+            else if (user.Roles.RoleName == "Coordinador General" && !string.IsNullOrEmpty(Condition))
             {
                 collection = collection.Where(
-                             a => a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
+                                              a => a.Condition == Condition
+                                              && a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName)
+                                              .AsNoTracking();
             }
 
-            if (user.Roles.RoleName == "Admin" && !string.IsNullOrEmpty(Condition))
+            //Encargado de logistica tiene acceso a las solicitudes pendientes nomas    
+
+            else if (user.Roles.RoleName == "Encargado de Logistica")
+            {
+                Condition = "Pendiente";
+
+                collection = collection.Where(
+                                              a => a.Condition == Condition 
+                                             && a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName)
+                                             .AsNoTracking();
+            }
+
+            else if (user.Roles.RoleName == "Encargado de Logistica" && !string.IsNullOrEmpty(Condition))
+            {
+
+                collection = collection.Where(
+                                              a => a.Condition == Condition
+                                             && a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName)
+                                             .AsNoTracking();
+            }
+            //C.Emergencias tiene acceso a solamente el historial de solicitudes
+            else
             {
                 collection = collection.Where(
-                          a => a.Condition == Condition &&
-                          a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
+                                            a => a.Condition == Condition
+                                            && a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName)
+                                            .AsNoTracking();
             }
 
-
-
-            else if (user.Roles.RoleName != "Admin" && user.Roles.RoleName != "Encargado de Logistica")
-            {
-
-                //Filtrado por departamento para el Encargado de Logistica retornando todos las solicitudes
-                collection = collection.Where(
-                            a => a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName
-                            && a.FK_UserID == user.UserID
-                            && a.Status == false);
-            }
 
             return await collection
                 .Include(i => i.Users)
                 .Include(i => i.EmergenciesDisasters)
                 .ThenInclude(i => i.TypesEmergenciesDisasters)
+                .Include(i => i.EmergenciesDisasters.Locations)
 
                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Materials)
@@ -84,12 +105,59 @@ namespace Repository
             
                  .ThenInclude(i => i.TypeVehicles)
 
-                  .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Vehicles)
                 .ThenInclude(i => i.BrandsModels)
                 .ThenInclude(i => i.Brands)
 
-                    .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .ThenInclude(i => i.Vehicles)
+                .ThenInclude(i => i.BrandsModels)
+                .ThenInclude(i => i.Model)
+
+
+                .Include(i => i.Users)
+                .Include(i => i.Users.Persons)
+                .Include(i => i.Users.Roles)
+                .Include(i => i.Users.Estates)
+                .Include(i => i.Users.Estates.LocationAddress)
+                .Include(i => i.Users.Estates.Locations)
+                .Include(i => i.Users.Locations)
+                .ToListAsync();
+        }
+
+
+
+        public async Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequests(string LocationDepartmentName)
+        {
+            var collection = _cruzRojaContext.Resources_Requests as IQueryable<ResourcesRequest>;
+
+            collection = collection.Where(a => a.EmergenciesDisasters.Locations.LocationDepartmentName == LocationDepartmentName)
+                                    .AsNoTracking();
+
+            return await collection
+                .Include(i => i.Users)
+                .Include(i => i.EmergenciesDisasters)
+                .ThenInclude(i => i.TypesEmergenciesDisasters)
+                .Include(i => i.EmergenciesDisasters.Locations)
+
+                .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .ThenInclude(i => i.Materials)
+
+                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .ThenInclude(i => i.Medicines)
+
+                .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .ThenInclude(i => i.Vehicles)
+
+                 .ThenInclude(i => i.TypeVehicles)
+
+                .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .ThenInclude(i => i.Vehicles)
+                .ThenInclude(i => i.BrandsModels)
+                .ThenInclude(i => i.Brands)
+
+                .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Vehicles)
                 .ThenInclude(i => i.BrandsModels)
                 .ThenInclude(i => i.Model)
@@ -201,7 +269,7 @@ namespace Repository
             }
 
 
-            if (userReq == null && rol == "Encargado de Logistica")
+            if (userReq != null && rol == "Encargado de Logistica")
             {
                 resources_Request.Reason = userReq.Reason;
                 userReq.Status = resources_Request.Status;
@@ -454,6 +522,7 @@ namespace Repository
 
                         materials = db.Materials
                                     .Where(a => a.ID == resources.FK_MaterialID)
+                                    .AsNoTracking()
                                     .FirstOrDefault();
 
                         materials.MaterialQuantity = materials.MaterialQuantity + resources.Quantity;
@@ -471,6 +540,7 @@ namespace Repository
 
                         medicines = db.Medicines
                                     .Where(a => a.ID == resources.FK_MedicineID)
+                                    .AsNoTracking()
                                     .FirstOrDefault();
 
                         medicines.MedicineQuantity = medicines.MedicineQuantity + resources.Quantity;
@@ -486,6 +556,7 @@ namespace Repository
 
                         vehicles = db.Vehicles
                                     .Where(a => a.ID == resources.FK_VehicleID)
+                                    .AsNoTracking()
                                     .FirstOrDefault();
 
                         vehicles.VehicleAvailability = true;
@@ -517,43 +588,28 @@ namespace Repository
                 //Revisar Material si existe en la base de datos
                 if (resources.FK_MaterialID != null)
                 {
-                    rec = db.Resources_RequestResources_Materials_Medicines_Vehicles
-                        .Where(a => a.FK_MaterialID == resources.FK_MaterialID
-                                && a.Resources_Request.FK_UserID == resources_Request.FK_UserID
-                                && a.Resources_Request.FK_EmergencyDisasterID == resources_Request.FK_EmergencyDisasterID)
-                          .AsNoTracking()
-                        .FirstOrDefault();
+                                        materials = db.Materials
+                                            .Where(a => a.ID == resources.FK_MaterialID)
+                                            .AsNoTracking()
+                                            .FirstOrDefault();
 
-                    if (rec == null)
+                           
+                                        materials.MaterialQuantity = materials.MaterialQuantity - resources.Quantity;
 
-                        materials = db.Materials
-                            .Where(a => a.ID == resources.FK_MaterialID)
-                            .AsNoTracking()
-                            .FirstOrDefault();
 
+                                        if (materials.MaterialQuantity == 0)
+                                        {
+                                            materials.MaterialAvailability = false;
+                                        }
+
+                                        MaterialsRepository.status(materials);
+                 }
+
+
+
+                    else if (resources.FK_MedicineID != null)
                     {
-                        materials.MaterialQuantity = materials.MaterialQuantity - resources.Quantity;
-
-                        if (materials.MaterialQuantity == 0)
-                        {
-                            materials.MaterialAvailability = false;
-                        }
-
-                        MaterialsRepository.status(materials);
-
-                    }
-
-
-                    if (resources.FK_MedicineID != null)
-                    {
-                        rec = db.Resources_RequestResources_Materials_Medicines_Vehicles
-                            .Where(a => a.FK_MedicineID == resources.FK_MedicineID
-                                    && a.Resources_Request.FK_UserID == resources_Request.FK_UserID
-                                    && a.Resources_Request.FK_EmergencyDisasterID == resources_Request.FK_EmergencyDisasterID)
-                            .FirstOrDefault();
-
-                        if (rec == null)
-                        {
+                      
 
                             medicines = db.Medicines
                                   .Where(a => a.ID == resources.FK_MedicineID)
@@ -570,38 +626,22 @@ namespace Repository
 
                             MedicinesRepository.status(medicines);
 
-                        }
-
-                        if (resources.FK_VehicleID != null)
-                        {
-                            rec = db.Resources_RequestResources_Materials_Medicines_Vehicles
-                                .Where(a => a.FK_VehicleID == resources.FK_VehicleID
-                                        && a.Resources_Request.FK_UserID == resources_Request.FK_UserID
-                                        && a.Resources_Request.FK_EmergencyDisasterID == resources_Request.FK_EmergencyDisasterID)
-                                .FirstOrDefault();
-
-                            if (rec == null)
-                            {
-
-                                vehicles = db.Vehicles
-                                            .Where(a => a.ID == resources.FK_VehicleID)
-                                            .AsNoTracking()
-                                            .FirstOrDefault();
-
-
-                                if (vehicles != null)
-                                {
-                                    vehicles.VehicleAvailability = false;
-
-                                    resources.Quantity = 1;
-
-                                    VehiclesRepository.status(vehicles);
-                                }
-
-                            }
-                        }
                     }
-                }
+
+                                else if (resources.FK_VehicleID != null)
+                                {
+                                    vehicles = db.Vehicles
+                                                .Where(a => a.ID == resources.FK_VehicleID)
+                                                .AsNoTracking()
+                                                .FirstOrDefault();
+
+
+                                        vehicles.VehicleAvailability = false;
+
+                                        resources.Quantity = 1;
+
+                                        VehiclesRepository.status(vehicles);
+                                }
             }
         }
 

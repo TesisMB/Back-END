@@ -5,7 +5,6 @@ namespace Entities.DataTransferObjects.ResourcesRequestMaterialsMedicinesVehicle
     {
         public int ID { get; set; }
 
-
         public string Name { get; set; }
 
         public string VehiclePatent { get; set; }
@@ -13,6 +12,8 @@ namespace Entities.DataTransferObjects.ResourcesRequestMaterialsMedicinesVehicle
         public string Type { get; set; }
 
         public int VehicleYear { get; set; }
+
+        public int Quantity { get; set; }
 
 
     }

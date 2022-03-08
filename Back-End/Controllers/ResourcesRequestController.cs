@@ -110,21 +110,21 @@ namespace Back_End.Controllers
             {
                 var user = UsersRepository.authUser;
 
-                /*ResourcesRequest userReq = null;
+                ResourcesRequest userReq = null;
 
 
                 userReq = db.Resources_Requests
                  .Where(a => a.FK_EmergencyDisasterID == resources_Request.FK_EmergencyDisasterID
-                         && a.FK_UserID == resources_Request.UserRequest)
+                         && a.FK_UserID == user.UserID)
                          .AsNoTracking()
                          .FirstOrDefault();
 
 
-                if (user.Roles.RoleName == "Encargado de Logistica" && userReq != null)
+                if (user.Roles.RoleName == "Coordinador de Emergencias y Desastres" && userReq != null)
                 {
                     return BadRequest(ErrorHelper.Response(400, "Esta solicitud ya fue evaluada y " + userReq.Condition));
 
-                }*/
+                }
 
 
                 if (!ModelState.IsValid)

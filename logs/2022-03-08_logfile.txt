@@ -507,3 +507,172 @@
 2022-03-08 15:27:01.2720 INFO Returned Material with id: 32
 2022-03-08 15:27:07.1492 INFO Returned all emergenciesDisasters from database.
 2022-03-08 15:55:48.9878 INFO Returned Material with id: 32
+2022-03-08 17:31:40.3976 ERROR Something went wrong inside GetAllEmegenciesDisasters action: Object reference not set to an instance of an object.
+2022-03-08 17:31:50.9595 INFO Returned User.
+2022-03-08 17:31:57.1720 INFO Returned all Resources_Request from database.
+2022-03-08 17:32:04.8719 INFO Returned all Resources_Request from database.
+2022-03-08 17:32:06.2225 INFO Returned all Resources_Request from database.
+2022-03-08 17:32:11.4995 INFO Returned all vehicles from database.
+2022-03-08 17:32:25.4682 INFO Returned vehicle with id: 1
+2022-03-08 17:32:26.8402 INFO Returned all vehicles from database.
+2022-03-08 17:32:32.9289 INFO Returned all Resources_Request from database.
+2022-03-08 17:32:39.3349 INFO Returned all vehicles from database.
+2022-03-08 17:32:40.8899 INFO Returned vehicle with id: 1
+2022-03-08 17:32:43.4114 INFO Returned all Materials from database.
+2022-03-08 17:32:46.7558 INFO Returned medicine with details for id: 14
+2022-03-08 17:32:51.7412 INFO Returned all emergenciesDisasters from database.
+2022-03-08 17:32:53.5870 INFO Returned all Materials from database.
+2022-03-08 17:32:55.8743 INFO Returned all Materials from database.
+2022-03-08 17:33:00.5844 INFO Returned Material with id: 32
+2022-03-08 17:33:06.7028 INFO Returned all Materials from database.
+2022-03-08 17:33:09.2395 INFO Returned all vehicles from database.
+2022-03-08 17:33:10.7071 INFO Returned vehicle with id: 1
+2022-03-08 17:33:12.1746 INFO Returned all emergenciesDisasters from database.
+2022-03-08 17:33:23.7435 INFO Returned all Resources_Request from database.
+2022-03-08 17:33:54.8270 INFO Returned all Materials from database.
+2022-03-08 17:33:57.6605 INFO Returned all Materials from database.
+2022-03-08 17:34:01.8224 INFO Returned all vehicles from database.
+2022-03-08 17:34:07.5157 INFO Returned vehicle with id: 1
+2022-03-08 17:34:09.3739 INFO Returned all emergenciesDisasters from database.
+2022-03-08 17:34:14.8155 INFO Returned all Resources_Request from database.
+2022-03-08 17:34:22.0925 INFO Returned all Materials from database.
+2022-03-08 17:34:22.7286 INFO Returned Material with id: 2
+2022-03-08 17:34:23.8869 INFO Returned all Materials from database.
+2022-03-08 17:34:26.6569 INFO Returned Material with id: 32
+2022-03-08 17:34:31.8791 INFO Returned all emergenciesDisasters from database.
+2022-03-08 17:34:41.9446 INFO Returned all Resources_Request from database.
+2022-03-08 17:35:03.2496 INFO Returned all Materials from database.
+2022-03-08 17:35:11.0281 INFO Returned all Materials from database.
+2022-03-08 17:35:18.2429 INFO Returned Material with id: 32
+2022-03-08 17:35:23.1304 INFO Returned all emergenciesDisasters from database.
+2022-03-08 17:35:28.1957 INFO Returned all Materials from database.
+2022-03-08 17:35:32.3643 INFO Returned all Resources_Request from database.
+2022-03-08 17:35:43.7093 INFO Returned all Materials from database.
+2022-03-08 17:35:54.5719 INFO Returned Material with id: 32
+2022-03-08 17:35:58.8853 INFO Returned all Materials from database.
+2022-03-08 17:36:00.2769 INFO Returned Material with id: 32
+2022-03-08 17:36:02.6489 INFO Returned all Materials from database.
+2022-03-08 17:36:06.3575 INFO Returned all Materials from database.
+2022-03-08 17:36:10.0248 INFO Returned Material with id: 32
+2022-03-08 17:36:13.4009 INFO Returned all Materials from database.
+2022-03-08 17:37:02.7347 INFO Returned all emergenciesDisasters from database.
+2022-03-08 17:37:16.1822 INFO Returned all Materials from database.
+2022-03-08 17:37:19.4293 INFO Returned all Materials from database.
+2022-03-08 17:37:24.1986 INFO Returned medicine with details for id: 14
+2022-03-08 17:37:28.2998 INFO Returned all Materials from database.
+2022-03-08 17:37:45.5851 INFO Returned all vehicles from database.
+2022-03-08 17:37:46.2499 INFO Returned vehicle with id: 1
+2022-03-08 17:37:48.2463 INFO Returned all emergenciesDisasters from database.
+2022-03-08 17:37:54.4536 INFO Returned all emergenciesDisasters from database.
+2022-03-08 17:38:04.7834 INFO Returned User.
+2022-03-08 17:38:09.2959 INFO Returned all Resources_Request from database.
+2022-03-08 17:38:10.9426 INFO Returned all Resources_Request from database.
+2022-03-08 17:38:11.8528 INFO Returned all Resources_Request from database.
+2022-03-08 17:38:13.8085 INFO Returned all Resources_Request from database.
+2022-03-08 17:38:28.9336 INFO Returned User.
+2022-03-08 17:38:32.4113 INFO Returned all Resources_Request from database.
+2022-03-08 17:38:34.4483 INFO Returned all Resources_Request from database.
+2022-03-08 17:38:37.6705 INFO Returned all Resources_Request from database.
+2022-03-08 17:38:38.5949 INFO Returned all Resources_Request from database.
+2022-03-08 17:38:40.8919 INFO Returned all Resources_Request from database.
+2022-03-08 17:38:42.0944 INFO Returned all Resources_Request from database.
+2022-03-08 17:38:47.1320 INFO Returned all Resources_Request from database.
+2022-03-08 17:40:16.5674 INFO Returned User.
+2022-03-08 17:41:44.4742 INFO Returned User.
+2022-03-08 17:41:49.2441 INFO Returned all Resources_Request from database.
+2022-03-08 17:42:03.9226 INFO Returned all Resources_Request from database.
+2022-03-08 17:42:45.4274 INFO Returned User.
+2022-03-08 17:42:50.0486 INFO Returned all Resources_Request from database.
+2022-03-08 17:42:55.3077 INFO Returned all Resources_Request from database.
+2022-03-08 17:43:12.1593 INFO Returned all Resources_Request from database.
+2022-03-08 17:43:13.4151 INFO Returned all Resources_Request from database.
+2022-03-08 17:43:14.5843 INFO Returned all Resources_Request from database.
+2022-03-08 17:43:28.5530 INFO Returned all Resources_Request from database.
+2022-03-08 17:43:29.9754 INFO Returned all Resources_Request from database.
+2022-03-08 17:43:31.4137 INFO Returned all Resources_Request from database.
+2022-03-08 17:43:31.8553 INFO Returned all Resources_Request from database.
+2022-03-08 17:43:33.4729 INFO Returned all Resources_Request from database.
+2022-03-08 17:43:37.5835 INFO Returned all Resources_Request from database.
+2022-03-08 17:43:39.8712 INFO Returned all Resources_Request from database.
+2022-03-08 17:43:40.7398 INFO Returned all Resources_Request from database.
+2022-03-08 17:44:48.9431 INFO Returned User.
+2022-03-08 17:44:55.2203 INFO Returned all Resources_Request from database.
+2022-03-08 17:44:56.9259 INFO Returned all Resources_Request from database.
+2022-03-08 17:44:58.0516 INFO Returned all Resources_Request from database.
+2022-03-08 17:44:59.2909 INFO Returned all Resources_Request from database.
+2022-03-08 17:46:24.9357 INFO Returned User.
+2022-03-08 17:46:29.9488 INFO Returned all Resources_Request from database.
+2022-03-08 17:46:31.4146 INFO Returned all Resources_Request from database.
+2022-03-08 17:46:32.3825 INFO Returned all Resources_Request from database.
+2022-03-08 17:46:38.7435 INFO Returned all Resources_Request from database.
+2022-03-08 17:46:47.3960 INFO Returned all Resources_Request from database.
+2022-03-08 17:47:20.8346 INFO Returned User.
+2022-03-08 17:47:54.5161 INFO Returned all Materials from database.
+2022-03-08 17:47:59.7621 INFO Returned all Resources_Request from database.
+2022-03-08 17:48:01.2103 INFO Returned all Resources_Request from database.
+2022-03-08 17:48:03.5900 INFO Returned all Resources_Request from database.
+2022-03-08 17:48:04.7932 INFO Returned all Resources_Request from database.
+2022-03-08 17:48:10.9740 INFO Returned all Materials from database.
+2022-03-08 17:48:14.6301 INFO Returned medicine with details for id: 20
+2022-03-08 17:48:15.6650 INFO Returned all Materials from database.
+2022-03-08 17:48:17.1049 INFO Returned all Materials from database.
+2022-03-08 17:48:24.9786 INFO Returned all Materials from database.
+2022-03-08 17:48:31.2608 INFO Returned all vehicles from database.
+2022-03-08 17:48:33.2692 INFO Returned vehicle with id: 5
+2022-03-08 17:48:35.0310 INFO Returned all emergenciesDisasters from database.
+2022-03-08 17:48:41.3711 INFO Returned all Resources_Request from database.
+2022-03-08 17:48:42.8730 INFO Returned all Resources_Request from database.
+2022-03-08 17:49:38.3420 INFO Returned all Resources_Request from database.
+2022-03-08 17:49:54.8366 INFO Returned User.
+2022-03-08 17:49:58.4724 INFO Returned all Resources_Request from database.
+2022-03-08 17:50:13.1766 INFO Returned all Resources_Request from database.
+2022-03-08 17:50:14.7974 INFO Returned all Resources_Request from database.
+2022-03-08 17:50:15.8975 INFO Returned all Resources_Request from database.
+2022-03-08 17:50:16.1869 INFO Returned all Resources_Request from database.
+2022-03-08 17:50:16.6949 INFO Returned all Resources_Request from database.
+2022-03-08 17:50:19.9866 INFO Returned all Resources_Request from database.
+2022-03-08 17:50:20.6071 INFO Returned all Resources_Request from database.
+2022-03-08 17:50:21.4183 INFO Returned all Resources_Request from database.
+2022-03-08 17:50:21.7095 INFO Returned all Resources_Request from database.
+2022-03-08 17:51:12.4119 INFO Returned User.
+2022-03-08 17:51:15.6791 INFO Returned all vehicles from database.
+2022-03-08 17:51:18.1385 INFO Returned vehicle with id: 1
+2022-03-08 17:51:19.4221 INFO Returned all emergenciesDisasters from database.
+2022-03-08 17:51:34.6588 INFO Returned all vehicles from database.
+2022-03-08 17:51:37.7091 INFO Returned vehicle with id: 5
+2022-03-08 17:51:39.0057 INFO Returned all emergenciesDisasters from database.
+2022-03-08 17:52:29.3671 INFO Returned User.
+2022-03-08 17:52:33.3976 INFO Returned all vehicles from database.
+2022-03-08 17:52:35.9369 INFO Returned vehicle with id: 5
+2022-03-08 17:52:37.4524 INFO Returned all emergenciesDisasters from database.
+2022-03-08 17:53:00.2197 INFO Returned vehicle with id: 5
+2022-03-08 17:53:02.8916 INFO Returned all vehicles from database.
+2022-03-08 17:53:12.6305 INFO Returned all Resources_Request from database.
+2022-03-08 17:53:14.6574 INFO Returned all Resources_Request from database.
+2022-03-08 17:53:15.7914 INFO Returned all Resources_Request from database.
+2022-03-08 17:53:39.9277 INFO Returned all Resources_Request from database.
+2022-03-08 17:53:45.3270 INFO Returned all Materials from database.
+2022-03-08 17:53:48.5137 INFO Returned Material with id: 32
+2022-03-08 17:53:52.6759 INFO Returned all emergenciesDisasters from database.
+2022-03-08 17:54:23.6272 INFO Returned User.
+2022-03-08 17:54:25.8735 INFO Returned all Resources_Request from database.
+2022-03-08 17:54:57.7160 INFO Returned User.
+2022-03-08 17:55:00.5206 INFO Returned all Materials from database.
+2022-03-08 17:55:01.9993 INFO Returned Material with id: 32
+2022-03-08 17:55:07.2091 INFO Returned all emergenciesDisasters from database.
+2022-03-08 17:56:09.4454 INFO Returned User.
+2022-03-08 17:56:20.9616 INFO Returned all Materials from database.
+2022-03-08 17:56:23.3118 INFO Returned Material with id: 32
+2022-03-08 17:56:27.4663 INFO Returned all emergenciesDisasters from database.
+2022-03-08 17:57:27.4870 INFO Returned all emergenciesDisasters from database.
+2022-03-08 17:57:29.1758 INFO Returned all emergenciesDisasters from database.
+2022-03-08 17:57:45.0298 INFO Returned all Resources_Request from database.
+2022-03-08 17:57:54.7944 INFO Returned User.
+2022-03-08 17:57:58.9696 INFO Returned all Resources_Request from database.
+2022-03-08 17:58:00.1483 INFO Returned all Resources_Request from database.
+2022-03-08 17:58:02.6297 INFO Returned all Resources_Request from database.
+2022-03-08 17:58:03.4926 INFO Returned all Resources_Request from database.
+2022-03-08 17:58:04.4985 INFO Returned all Resources_Request from database.
+2022-03-08 17:59:12.9858 INFO Returned all Resources_Request from database.
+2022-03-08 17:59:14.4764 INFO Returned all Resources_Request from database.
+2022-03-08 17:59:19.4011 INFO Returned all Resources_Request from database.

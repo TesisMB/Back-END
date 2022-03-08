@@ -60,7 +60,7 @@ namespace Repository
 
             //Encargado de logistica tiene acceso a las solicitudes pendientes nomas    
 
-            else if (user.Roles.RoleName == "Encargado de Logistica")
+            else if (user.Roles.RoleName == "Encargado de Logistica" && Condition == null)
             {
                 Condition = "Pendiente";
 

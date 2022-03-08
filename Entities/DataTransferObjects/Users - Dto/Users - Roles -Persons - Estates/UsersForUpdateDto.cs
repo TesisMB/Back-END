@@ -4,6 +4,8 @@ namespace Back_End.Models
 {
     public class UsersForUpdateDto
     {
+        public int userID { get; set; }
+        public string UserDni { get; set; }
         public string UserPassword { get; set; }
         public string UserNewPassword { get; set; }
         public Boolean UserAvailability { get; set; }

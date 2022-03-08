@@ -8,7 +8,7 @@ namespace Entities.Validator.Update
         public EmployeeValidator()
         {
 
-            RuleFor(stockImage => stockImage.Users.UserAvailability).Must(x => x == false || x == true);
+            RuleFor(a => a.Users.UserAvailability).Must(x => x == false || x == true);
 
             RuleFor(x => x.Users).SetValidator(new UsersEmployeesValidator());
 

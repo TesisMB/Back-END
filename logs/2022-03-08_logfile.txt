@@ -506,3 +506,4 @@
 2022-03-08 15:26:59.8743 INFO Returned all Materials from database.
 2022-03-08 15:27:01.2720 INFO Returned Material with id: 32
 2022-03-08 15:27:07.1492 INFO Returned all emergenciesDisasters from database.
+2022-03-08 15:55:48.9878 INFO Returned Material with id: 32

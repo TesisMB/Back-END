@@ -14,7 +14,7 @@ namespace Back_End.Models
         public int UserID { get; set; }
 
         [Required]
-        [MaxLength(8)]
+        [MaxLength(16)]
         public string UserDni { get; set; }
 
         [Required]

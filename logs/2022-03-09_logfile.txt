@@ -64,3 +64,100 @@ System.Object -> System.Collections.Generic.IEnumerable`1[[Entities.DataTransfer
 2022-03-09 15:15:00.5888 INFO Returned all Materials from database.
 2022-03-09 15:15:03.9146 INFO Returned all Resources_Request from database.
 2022-03-09 15:15:11.2004 INFO Returned all Materials from database.
+2022-03-09 15:52:56.1781 INFO Returned User.
+2022-03-09 15:53:05.9253 INFO Returned User.
+2022-03-09 15:53:09.8503 INFO Returned all employees from database.
+2022-03-09 15:53:13.4235 INFO Returned all employees from database.
+2022-03-09 15:53:20.4285 INFO Returned all employees from database.
+2022-03-09 15:53:35.7133 INFO Returned User.
+2022-03-09 15:53:38.8587 INFO Returned all employees from database.
+2022-03-09 15:55:03.2036 INFO Returned User.
+2022-03-09 15:55:13.7065 INFO Returned User.
+2022-03-09 15:55:22.3243 INFO Returned User.
+2022-03-09 15:55:31.0182 INFO Returned User.
+2022-03-09 15:55:41.7077 INFO Returned User.
+2022-03-09 15:55:51.1153 INFO Returned User.
+2022-03-09 15:56:17.8738 INFO Returned User.
+2022-03-09 15:56:27.3270 INFO Returned User.
+2022-03-09 15:56:49.7389 INFO Returned User.
+2022-03-09 16:02:05.1470 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2022-03-09 16:02:08.4035 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2022-03-09 16:02:14.8161 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2022-03-09 16:02:27.5654 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2022-03-09 16:02:41.4442 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2022-03-09 16:06:01.7235 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2022-03-09 16:45:12.0851 INFO Returned User.
+2022-03-09 16:46:28.0067 INFO Returned User.
+2022-03-09 16:46:31.9607 INFO Returned all employees from database.

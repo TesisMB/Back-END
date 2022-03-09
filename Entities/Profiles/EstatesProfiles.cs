@@ -25,6 +25,10 @@ namespace Back_End.Profiles
 
             CreateMap<Estates, EstatesDto>();
 
+            CreateMap<Estates, EstatesLoginDto>()
+                                 .ForPath(resp => resp.locationCityName, opt => opt.MapFrom(src => src.Locations.LocationCityName))
+;
+
 
 
 

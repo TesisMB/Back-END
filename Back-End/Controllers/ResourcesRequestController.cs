@@ -4,6 +4,7 @@ using Back_End.Models;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.Resources_Request___Dto;
 using Entities.DataTransferObjects.Resources_RequestResources_Materials_Medicines_Vehicles___Dto;
+using Entities.DataTransferObjects.ResourcesRequest___Dto;
 using Entities.DataTransferObjects.ResourcesRequestMaterialsMedicinesVehicles___Dto;
 using Entities.Helpers;
 using Entities.Models;
@@ -28,7 +29,7 @@ namespace Back_End.Controllers
         public static ResourcesRequest reourceRequest;
         CruzRojaContext db = new CruzRojaContext();
 
-        ResourcesRequestMaterialsMedicinesVehicles resources  = null;
+        ResourcesRequestMaterialsMedicinesVehicles resources = null;
 
 
         public ResourcesRequestController(IMapper mapper, ILoggerManager logger, IRepositorWrapper repository)
@@ -49,7 +50,7 @@ namespace Back_End.Controllers
 
 
             var query = from st in resource_RequestResult
-                         select st;
+                        select st;
 
 
             foreach (var item1 in query)
@@ -108,24 +109,6 @@ namespace Back_End.Controllers
         {
             try
             {
-                var user = UsersRepository.authUser;
-
-                ResourcesRequest userReq = null;
-
-
-                userReq = db.Resources_Requests
-                 .Where(a => a.FK_EmergencyDisasterID == resources_Request.FK_EmergencyDisasterID
-                         && a.FK_UserID == user.UserID)
-                         .AsNoTracking()
-                         .FirstOrDefault();
-
-
-                if (user.Roles.RoleName == "Coordinador de Emergencias y Desastres" && userReq != null)
-                {
-                    return BadRequest(ErrorHelper.Response(400, "Esta solicitud ya fue evaluada y " + userReq.Condition));
-
-                }
-
 
                 if (!ModelState.IsValid)
                 {
@@ -144,7 +127,7 @@ namespace Back_End.Controllers
                 var resourceRequest = _mapper.Map<ResourcesRequest>(resources_Request);
 
 
-                _repository.Resources_Requests.CreateResource_Resquest(resourceRequest, resources_Request.UserRequest);
+                _repository.Resources_Requests.CreateResource_Resquest(resourceRequest);
 
                 _repository.Resources_Requests.SaveAsync();
 
@@ -167,7 +150,7 @@ namespace Back_End.Controllers
 
                 resource = _repository.Resources_Requests.UpdateStockDelete(resource);
 
-                if(resource == null)
+                if (resource == null)
                 {
                     return NotFound();
                 }
@@ -184,6 +167,37 @@ namespace Back_End.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+
+
+
+
+        [HttpPost("{acceptRejectRequest}")]
+        public ActionResult<ResourcesRequest> AcceptRejectRequest([FromBody] AcceptRejectRequestDto acceptRejectRequest)
+        {
+            try
+            {
+                if (acceptRejectRequest == null)
+                {
+                    _logger.LogError("AcceptRejectRequest object sent from client is null.");
+                    return BadRequest("AcceptRejectRequest object is null");
+                }
+
+                var resourceRequest = _mapper.Map<ResourcesRequest>(acceptRejectRequest);
+
+                _repository.Resources_Requests.AcceptRejectRequest(resourceRequest, acceptRejectRequest.UserRequest);
+
+                return Ok();
+            }
+
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside AcceptRejectRequest action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+
+
     }
 
 }

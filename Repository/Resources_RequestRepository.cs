@@ -15,6 +15,7 @@ namespace Repository
         private CruzRojaContext _cruzRojaContext = new CruzRojaContext();
         public static CruzRojaContext db = new CruzRojaContext();
         public static ResourcesRequestMaterialsMedicinesVehicles recursos = null;
+        ResourcesRequest userReq = null;
 
         public Resources_RequestRepository(CruzRojaContext cruzRojaContext) : base(cruzRojaContext)
         {
@@ -174,11 +175,10 @@ namespace Repository
         }
 
 
-        public void CreateResource_Resquest(ResourcesRequest resources_Request, int UserRequest)
+        public void CreateResource_Resquest(ResourcesRequest resources_Request)
         {
 
             ResourcesRequest rec = null;
-            ResourcesRequest userReq = null;
 
             resources_Request.FK_UserID = UsersRepository.authUser.UserID;
             var rol = UsersRepository.authUser.Roles.RoleName;
@@ -188,16 +188,12 @@ namespace Repository
             rec = db.Resources_Requests
                 .Where(
                         a => a.FK_EmergencyDisasterID == resources_Request.FK_EmergencyDisasterID
-                        && a.FK_UserID == resources_Request.FK_UserID)
+                        && a.FK_UserID == resources_Request.FK_UserID
+                        && a.Condition == "Pendiente")
                         .Include(a => a.Resources_RequestResources_Materials_Medicines_Vehicles)
                        .FirstOrDefault();
 
-            userReq = db.Resources_Requests
-                    .Where(a => a.FK_EmergencyDisasterID == resources_Request.FK_EmergencyDisasterID
-                            && a.FK_UserID == UserRequest)
-                            .Include(a => a.Resources_RequestResources_Materials_Medicines_Vehicles)
-                            .FirstOrDefault();
-
+         
                 if(rec != null)
                 {
                     foreach (var item in resources_Request.Resources_RequestResources_Materials_Medicines_Vehicles)
@@ -269,31 +265,7 @@ namespace Repository
             }
 
 
-            if (userReq != null && rol == "Encargado de Logistica")
-            {
-                resources_Request.Reason = userReq.Reason;
-                userReq.Status = resources_Request.Status;
-
-
-                if (resources_Request.Status == false)
-                {
-                    ActualizarEstado(userReq);
-
-                    DeleteResource(userReq);
-                    userReq.Condition = "Rechazada";
-                }
-                else
-                {
-                    userReq.Condition = "Aceptada";
-                }
-
-                Update(userReq);
-
-                SaveAsync();
-            }
-
-            else
-            {
+         
                 if (rec == null)
                 {
 
@@ -306,8 +278,7 @@ namespace Repository
                     DeleteResource(resources_Request);
 
                     SaveAsync();
-                }
-            }
+                 }
             //cuando no exite ningun registro de solicitud se procede a crearla completa
         }
 
@@ -786,6 +757,43 @@ namespace Repository
            var update =  ActualizarEstado(resource);
 
             return update;
+        }
+
+
+
+        public void AcceptRejectRequest(ResourcesRequest resourcesRequest, int userRequestID)
+        {
+            userReq = _cruzRojaContext.Resources_Requests
+                  .Where(
+                          a => a.FK_EmergencyDisasterID == resourcesRequest.FK_EmergencyDisasterID
+                          && a.FK_UserID == userRequestID
+                          && a.Condition == "Pendiente")
+                          .Include(a => a.Resources_RequestResources_Materials_Medicines_Vehicles)
+                          .AsNoTracking()
+                         .FirstOrDefault();
+
+
+            if (userReq != null)
+            {
+
+                if (resourcesRequest.Status == false)
+                {
+                    UpdateResource_Resquest2(userReq);
+
+                    DeleteResource(userReq);
+
+                    userReq.Condition = "Rechazada";
+                }
+
+                else
+                {
+                    userReq.Condition = "Aceptada";
+                }
+
+                Update(userReq);
+
+                SaveAsync();
+            }
         }
     }
 

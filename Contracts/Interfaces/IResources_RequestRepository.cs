@@ -11,6 +11,7 @@ namespace Contracts.Interfaces
         Task<ResourcesRequest> GetResourcesRequestByID(int resource);
         ResourcesRequest UpdateStockDelete(ResourcesRequest resource);
 
-        void CreateResource_Resquest(ResourcesRequest resources_Request, int userRequest);
+        void CreateResource_Resquest(ResourcesRequest resources_Request);
+        void AcceptRejectRequest(ResourcesRequest resources_Request, int UserRequestID);
     }
 }

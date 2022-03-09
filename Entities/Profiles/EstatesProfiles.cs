@@ -11,20 +11,8 @@ namespace Back_End.Profiles
         public EstatesProfiles()
         {
             //Creo Las clases a ser mapeadas
-            CreateMap<Estates, EstatesDto>()
-
-                 .ForPath(resp => resp.LocationAddressID, opt => opt.MapFrom(src => src.LocationAddress.LocationAddressID))
-
-                 .ForPath(resp => resp.LocationsID, opt => opt.MapFrom(src => src.Locations.LocationID))
-
-                   .ForPath(resp => resp.Address, opt => opt.MapFrom(src => src.LocationAddress.Address))
-                 .ForPath(resp => resp.NumberAddress, opt => opt.MapFrom(src => src.LocationAddress.NumberAddress))
 
 
-                .ForPath(resp => resp.LocationCityName, opt => opt.MapFrom(src => src.Locations.LocationCityName))
-
-
-               .ForPath(resp => resp.PostalCode, opt => opt.MapFrom(src => src.LocationAddress.PostalCode));
 
 
             CreateMap<Estates, EstateDto>()
@@ -35,7 +23,7 @@ namespace Back_End.Profiles
 
             CreateMap<Estates, EstatesVehiclesDto>();
 
-            CreateMap<Estates, EstatesTypeDto>();
+            CreateMap<Estates, EstatesDto>();
 
 
 

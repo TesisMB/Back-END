@@ -1,0 +1,66 @@
+2022-03-09 15:05:31.6773 INFO Returned all estates from database.
+2022-03-09 15:05:31.8247 ERROR Something went wrong inside GetAllEstates action: Error mapping types.
+
+Mapping types:
+Object -> IEnumerable`1
+System.Object -> System.Collections.Generic.IEnumerable`1[[Entities.DataTransferObjects.Estates___Dto.EstatesTypeDto, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2022-03-09 15:05:53.3734 INFO Returned all estates from database.
+2022-03-09 15:07:34.1624 INFO Returned all estates from database.
+2022-03-09 15:07:54.0171 INFO Returned User.
+2022-03-09 15:07:56.4195 INFO Returned all Resources_Request from database.
+2022-03-09 15:07:58.2945 INFO Returned all Resources_Request from database.
+2022-03-09 15:07:59.2154 INFO Returned all Resources_Request from database.
+2022-03-09 15:08:00.1678 INFO Returned all Resources_Request from database.
+2022-03-09 15:08:01.5712 INFO Returned all Resources_Request from database.
+2022-03-09 15:08:04.0523 INFO Returned all Resources_Request from database.
+2022-03-09 15:08:13.3486 INFO Returned all vehicles from database.
+2022-03-09 15:08:17.6485 INFO Returned all Materials from database.
+2022-03-09 15:08:22.0921 INFO Returned Material with id: 32
+2022-03-09 15:08:25.5188 INFO Returned all emergenciesDisasters from database.
+2022-03-09 15:08:42.0287 INFO Returned Material with id: 32
+2022-03-09 15:08:44.3254 INFO Returned all emergenciesDisasters from database.
+2022-03-09 15:09:02.7339 INFO Returned Material with id: 32
+2022-03-09 15:09:11.7369 INFO Returned all emergenciesDisasters from database.
+2022-03-09 15:09:16.1491 INFO Returned Material with id: 32
+2022-03-09 15:09:17.4567 INFO Returned all emergenciesDisasters from database.
+2022-03-09 15:09:20.4675 INFO Returned Material with id: 32
+2022-03-09 15:09:24.4846 INFO Returned all emergenciesDisasters from database.
+2022-03-09 15:10:12.7236 INFO Returned User.
+2022-03-09 15:10:16.3735 INFO Returned all Materials from database.
+2022-03-09 15:10:20.3918 INFO Returned Material with id: 32
+2022-03-09 15:10:23.1878 INFO Returned all emergenciesDisasters from database.
+2022-03-09 15:10:28.6876 INFO Returned all Resources_Request from database.
+2022-03-09 15:10:50.9377 INFO Returned all estates from database.
+2022-03-09 15:11:03.2328 INFO Returned all Resources_Request from database.
+2022-03-09 15:11:04.7598 INFO Returned all Resources_Request from database.
+2022-03-09 15:11:10.1471 INFO Returned all Materials from database.
+2022-03-09 15:11:17.1382 INFO Returned all Materials from database.
+2022-03-09 15:11:48.4543 INFO Returned all Materials from database.
+2022-03-09 15:11:54.2774 INFO Returned all Materials from database.
+2022-03-09 15:11:57.8091 INFO Returned medicine with details for id: 1
+2022-03-09 15:12:01.8201 INFO Returned all emergenciesDisasters from database.
+2022-03-09 15:12:09.5082 INFO Returned all Resources_Request from database.
+2022-03-09 15:12:11.1745 INFO Returned all Resources_Request from database.
+2022-03-09 15:12:12.4610 INFO Returned all Resources_Request from database.
+2022-03-09 15:13:31.2397 INFO Returned User.
+2022-03-09 15:13:34.1418 INFO Returned all Materials from database.
+2022-03-09 15:13:37.1825 INFO Returned all Materials from database.
+2022-03-09 15:13:38.1908 INFO Returned medicine with details for id: 1
+2022-03-09 15:13:41.5778 INFO Returned all emergenciesDisasters from database.
+2022-03-09 15:13:46.2305 INFO Returned all Resources_Request from database.
+2022-03-09 15:13:51.9600 INFO Returned all Resources_Request from database.
+2022-03-09 15:14:05.7832 INFO Returned all Materials from database.
+2022-03-09 15:14:08.6732 INFO Returned all Materials from database.
+2022-03-09 15:14:10.0442 INFO Returned medicine with details for id: 1
+2022-03-09 15:14:13.4964 INFO Returned all Materials from database.
+2022-03-09 15:14:14.6430 INFO Returned medicine with details for id: 9
+2022-03-09 15:14:18.1112 INFO Returned all emergenciesDisasters from database.
+2022-03-09 15:14:23.0982 INFO Returned all Resources_Request from database.
+2022-03-09 15:14:33.0230 INFO Returned all Materials from database.
+2022-03-09 15:14:37.9453 INFO Returned all Resources_Request from database.
+2022-03-09 15:14:45.0687 INFO Returned all Materials from database.
+2022-03-09 15:14:46.6933 INFO Returned medicine with details for id: 9
+2022-03-09 15:14:56.5078 INFO Returned all emergenciesDisasters from database.
+2022-03-09 15:15:00.5888 INFO Returned all Materials from database.
+2022-03-09 15:15:03.9146 INFO Returned all Resources_Request from database.
+2022-03-09 15:15:11.2004 INFO Returned all Materials from database.

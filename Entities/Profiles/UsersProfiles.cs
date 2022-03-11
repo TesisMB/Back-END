@@ -17,10 +17,6 @@ namespace Back_End.Profiles
             //Creo Las clases a ser mapeadas
 
 
-            CreateMap<Users, EstatesLoginDto>()
-                        ;
-
-
             CreateMap<Users, EmployeesUsersDto>()
 
                  .ForMember(dest => dest.RoleName,
@@ -44,8 +40,6 @@ namespace Back_End.Profiles
 
            .ForMember(dest => dest.RoleName,
                               opt => opt.MapFrom(src => src.Roles.RoleName))
-
-
 
 
             .ForMember(dest => dest.VolunteerAvatar,

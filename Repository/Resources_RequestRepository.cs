@@ -123,7 +123,6 @@ namespace Repository
                 .Include(i => i.Users.Estates)
                 .Include(i => i.Users.Estates.LocationAddress)
                 .Include(i => i.Users.Estates.Locations)
-                .Include(i => i.Users.Locations)
                 .ToListAsync();
         }
 
@@ -170,7 +169,6 @@ namespace Repository
                 .Include(i => i.Users.Estates)
                 .Include(i => i.Users.Estates.LocationAddress)
                 .Include(i => i.Users.Estates.Locations)
-                .Include(i => i.Users.Locations)
                 .ToListAsync();
         }
 

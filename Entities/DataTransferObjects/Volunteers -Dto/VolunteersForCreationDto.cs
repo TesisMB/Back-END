@@ -13,8 +13,6 @@ namespace Back_End.Models.Employees___Dto
 
         public string VolunteerDescription { get; set; }
 
-        public UsersVolunteersForCreationDto Users { get; set; }
-
         public ICollection<VolunteersSkillsForCreationDto> VolunteersSkills { get; set; }
 
     }

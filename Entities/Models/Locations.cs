@@ -34,7 +34,5 @@ namespace Entities.Models
 
         public ICollection<EmergenciesDisasters> EmergenciesDisasters { get; set; }
 
-        public ICollection<Users> Users { get; set; }
-
     }
 }

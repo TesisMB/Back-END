@@ -9,7 +9,9 @@ namespace Back_End.Profiles
         public LocationAddressProfiles()
         {
             //Creo Las clases a ser mapeadas
-            CreateMap<LocationAddress, LocationAddressDto>();
+            CreateMap<LocationAddress, LocationAddressDto>()
+                
+                .ForMember(a => a.Address, src => src.MapFrom(a => a.Address + " " + a.NumberAddress));
 
             CreateMap<LocationAddress, LocationAddressVehiclesDto>();
         }

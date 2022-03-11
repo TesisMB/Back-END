@@ -1,0 +1,330 @@
+2022-03-10 18:26:46.1531 ERROR Something went wrong inside CreateEmployee action: 534: 5.7.14 <https://accounts.google.com/signin/continue?sarp=1&scc=1&plt=AKgnsbu
+5.7.14 rhwnZqRm5iLfwQHKixa2lGmbRuJGRpDDswT2iJ3c-CexCXPrv8fNEqBDBl25FYUQ9eBoC
+5.7.14 yrGerSHJjeKfKld2qr0tS8dN8Vzovlp8G_0vfZ6Mo10HDmLQRpIEO11HFU5suaJa>
+5.7.14 Please log in via your web browser and then try again.
+5.7.14  Learn more at
+5.7.14  https://support.google.com/mail/answer/78754 bb39-20020a05680816a700b002d9a8eb89fasm2733412oib.46 - gsmtp
+2022-03-10 19:06:17.3748 ERROR Employee with id: 1780, hasn't ben found in db.
+2022-03-10 19:07:11.0321 ERROR Employee with id: 1079, hasn't ben found in db.
+2022-03-10 19:07:18.3031 ERROR Something went wrong inside CreateEmployee action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-03-10 19:42:17.4699 ERROR Something went wrong inside User: Unable to cast object of type 'System.String' to type 'System.Int32'.
+2022-03-10 19:43:52.9545 ERROR Something went wrong inside User: Unable to cast object of type 'System.String' to type 'System.Int32'.
+2022-03-10 19:51:25.7852 ERROR Something went wrong inside User: Unable to cast object of type 'System.String' to type 'System.Int32'.
+2022-03-10 19:51:57.2666 ERROR Something went wrong inside User: Unable to cast object of type 'System.String' to type 'System.Int32'.
+2022-03-10 19:52:29.1061 ERROR Something went wrong inside User: Unable to cast object of type 'System.String' to type 'System.Int32'.
+2022-03-10 19:54:35.0788 ERROR Something went wrong inside User: Unable to cast object of type 'System.String' to type 'System.Int32'.
+2022-03-10 19:55:10.1767 ERROR Something went wrong inside User: Unable to cast object of type 'System.String' to type 'System.Int32'.
+2022-03-10 19:55:20.8347 ERROR Something went wrong inside User: Unable to cast object of type 'System.String' to type 'System.Int32'.
+2022-03-10 19:55:54.9385 ERROR Something went wrong inside User: Unable to cast object of type 'System.String' to type 'System.Int32'.
+2022-03-10 19:56:09.7571 ERROR Something went wrong inside User: Unable to cast object of type 'System.String' to type 'System.Int32'.
+2022-03-10 19:56:10.7085 ERROR Something went wrong inside User: Unable to cast object of type 'System.String' to type 'System.Int32'.
+2022-03-10 19:56:11.1485 ERROR Something went wrong inside User: Unable to cast object of type 'System.String' to type 'System.Int32'.
+2022-03-10 19:56:11.4841 ERROR Something went wrong inside User: Unable to cast object of type 'System.String' to type 'System.Int32'.
+2022-03-10 19:56:11.8746 ERROR Something went wrong inside User: Unable to cast object of type 'System.String' to type 'System.Int32'.
+2022-03-10 19:56:52.6421 ERROR Something went wrong inside GetAllMaterials action:  An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-03-10 19:57:36.4298 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-03-10 19:57:48.6079 ERROR Something went wrong inside GetAllVolunteers action:  An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-03-10 19:57:53.9154 ERROR Something went wrong inside GetAllMaterials action:  An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-03-10 20:06:59.0638 ERROR Something went wrong inside User: Unable to cast object of type 'System.String' to type 'System.Int32'.
+2022-03-10 20:07:22.3474 ERROR Something went wrong inside User: Unable to cast object of type 'System.String' to type 'System.Int32'.
+2022-03-10 20:09:03.7208 INFO Returned User.
+2022-03-10 20:11:18.2117 INFO Returned User.
+2022-03-10 20:11:39.9179 INFO Returned User.
+2022-03-10 20:11:56.7068 INFO Returned User.
+2022-03-10 20:11:58.7115 INFO Returned User.
+2022-03-10 20:12:12.3453 INFO Returned User.
+2022-03-10 20:12:36.2049 ERROR Something went wrong inside User: Unable to cast object of type 'System.String' to type 'System.Int32'.
+2022-03-10 20:12:47.0948 ERROR Something went wrong inside User: Unable to cast object of type 'System.String' to type 'System.Int32'.
+2022-03-10 20:13:04.6118 ERROR Something went wrong inside User: Unable to cast object of type 'System.String' to type 'System.Int32'.
+2022-03-10 20:15:13.6002 ERROR Something went wrong inside User: Unable to cast object of type 'System.String' to type 'System.Int32'.
+2022-03-10 20:15:39.8781 INFO Returned User.
+2022-03-10 20:15:56.8900 INFO Returned User.
+2022-03-10 20:16:10.0959 INFO Returned User.
+2022-03-10 20:18:20.9394 INFO Returned User.
+2022-03-10 20:19:02.6494 INFO Returned User.
+2022-03-10 20:19:10.5151 INFO Returned all employees from database.
+2022-03-10 20:19:28.5426 INFO Returned all Volunteers from database.
+2022-03-10 20:19:47.9356 INFO Returned all estates from database.
+2022-03-10 20:20:19.0232 INFO Returned all Materials from database.
+2022-03-10 20:20:24.1424 INFO Returned all Materials from database.
+2022-03-10 20:20:35.0723 INFO Returned all emergenciesDisasters from database.
+2022-03-10 20:31:33.7263 INFO Returned User.
+2022-03-10 20:31:46.7608 INFO Returned all employees from database.
+2022-03-10 20:32:19.2967 INFO Returned all Resources_Request from database.
+2022-03-10 20:32:20.9751 INFO Returned all Resources_Request from database.
+2022-03-10 20:32:22.7233 INFO Returned all Resources_Request from database.
+2022-03-10 20:32:23.6156 INFO Returned all Resources_Request from database.
+2022-03-10 20:32:27.7890 INFO Returned all Volunteers from database.
+2022-03-10 20:32:29.7962 INFO Returned all Materials from database.
+2022-03-10 20:32:34.7682 INFO Returned all Materials from database.
+2022-03-10 20:32:35.8533 INFO Returned all Materials from database.
+2022-03-10 20:32:37.2341 INFO Returned all vehicles from database.
+2022-03-10 20:32:45.5377 INFO Returned all estates from database.
+2022-03-10 20:32:55.6307 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-10 20:32:55.7060 INFO Returned all emergenciesDisasters from database.
+2022-03-10 20:33:00.4759 INFO Returned all Resources_Request from database.
+2022-03-10 20:33:01.8502 INFO Returned all Resources_Request from database.
+2022-03-10 20:33:02.1711 INFO Returned all Resources_Request from database.
+2022-03-10 20:33:04.3163 INFO Returned employe with details for id: 2
+2022-03-10 20:33:06.4889 INFO Returned all Resources_Request from database.
+2022-03-10 20:33:26.9163 INFO Returned all employees from database.
+2022-03-10 20:36:37.5671 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2022-03-10 20:36:42.7675 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2022-03-10 20:36:43.6498 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2022-03-10 20:36:56.7026 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2022-03-10 20:36:59.5345 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2022-03-10 20:37:00.1086 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2022-03-10 20:37:00.6080 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2022-03-10 20:37:01.1604 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2022-03-10 20:37:08.7501 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2022-03-10 20:37:09.5871 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2022-03-10 20:37:10.2926 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2022-03-10 20:37:10.8381 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2022-03-10 20:37:11.1127 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2022-03-10 20:37:11.3920 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2022-03-10 20:37:11.6251 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2022-03-10 20:37:11.8336 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2022-03-10 20:37:20.8431 ERROR Something went wrong inside User: Error mapping types.
+
+Mapping types:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Type Map configuration:
+Users -> UserEmployeeAuthDto
+Back_End.Models.Users -> Back_End.Models.UserEmployeeAuthDto
+
+Destination Member:
+Estates
+
+2022-03-10 20:37:51.5028 INFO Returned User.
+2022-03-10 20:37:55.4787 INFO Returned all employees from database.
+2022-03-10 20:39:33.8727 INFO Returned all employees from database.
+2022-03-10 20:39:39.1554 INFO Returned all employees from database.
+2022-03-10 20:39:57.6033 INFO Returned all employees from database.
+2022-03-10 20:40:22.0442 INFO Returned all employees from database.
+2022-03-10 20:41:05.7028 INFO Returned all employees from database.
+2022-03-10 20:43:43.9574 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-03-10 20:43:44.5613 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-03-10 20:43:52.6663 INFO Returned User.
+2022-03-10 20:43:55.3517 INFO Returned all employees from database.
+2022-03-10 20:45:54.0435 INFO Returned all estates from database.
+2022-03-10 20:53:09.4403 INFO Returned all estates from database.
+2022-03-10 20:53:09.4403 INFO Returned all estates from database.
+2022-03-10 20:53:43.1043 ERROR Something went wrong inside User: String reference not set to an instance of a String. (Parameter 's')
+2022-03-10 20:53:44.9786 ERROR Something went wrong inside User: String reference not set to an instance of a String. (Parameter 's')
+2022-03-10 20:54:07.2208 ERROR Something went wrong inside User: String reference not set to an instance of a String. (Parameter 's')
+2022-03-10 20:54:10.9504 ERROR Something went wrong inside User: String reference not set to an instance of a String. (Parameter 's')
+2022-03-10 20:54:34.5187 ERROR Something went wrong inside User: String reference not set to an instance of a String. (Parameter 's')
+2022-03-10 20:55:36.6264 ERROR Something went wrong inside User: String reference not set to an instance of a String. (Parameter 's')
+2022-03-10 20:56:03.4406 ERROR Something went wrong inside User: String reference not set to an instance of a String. (Parameter 's')
+2022-03-10 20:56:19.9229 ERROR Something went wrong inside User: String reference not set to an instance of a String. (Parameter 's')
+2022-03-10 20:56:20.7431 ERROR Something went wrong inside User: String reference not set to an instance of a String. (Parameter 's')
+2022-03-10 20:56:21.1697 ERROR Something went wrong inside User: String reference not set to an instance of a String. (Parameter 's')
+2022-03-10 20:56:21.6084 ERROR Something went wrong inside User: String reference not set to an instance of a String. (Parameter 's')
+2022-03-10 20:56:22.0505 ERROR Something went wrong inside User: String reference not set to an instance of a String. (Parameter 's')
+2022-03-10 20:56:22.5189 ERROR Something went wrong inside User: String reference not set to an instance of a String. (Parameter 's')
+2022-03-10 20:56:45.8727 ERROR Something went wrong inside User: String reference not set to an instance of a String. (Parameter 's')
+2022-03-10 20:57:05.9614 ERROR Something went wrong inside User: String reference not set to an instance of a String. (Parameter 's')
+2022-03-10 20:57:13.1992 INFO Returned User.
+2022-03-10 20:58:08.0650 INFO Returned User.
+2022-03-10 20:59:12.6149 INFO Returned all estates from database.
+2022-03-10 21:01:03.2056 INFO Returned all estates from database.
+2022-03-10 21:03:23.3632 INFO Returned all estates from database.
+2022-03-10 21:04:34.5456 INFO Returned all estates from database.
+2022-03-10 21:04:35.4464 INFO Returned all estates from database.
+2022-03-10 21:04:35.9585 INFO Returned all estates from database.
+2022-03-10 21:04:48.1439 INFO Returned all estates from database.
+2022-03-10 21:06:09.2836 INFO Returned all estates from database.

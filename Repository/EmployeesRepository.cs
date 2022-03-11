@@ -5,6 +5,7 @@ using Back_End.Models;
 using Contracts.Interfaces;
 using Entities.Helpers;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,7 +40,6 @@ namespace Repository
 
             return await Collection
                     .Include(i => i.Users)
-                    .Include(i => i.Users.Locations)
                     .Include(i => i.Users.Roles)
                     .Include(i => i.Users.Persons)
                     .Include(i => i.Users.Estates)
@@ -63,7 +63,6 @@ namespace Repository
         {
             return await FindByCondition(empl => empl.EmployeeID.Equals(employeeId))
                      .Include(i => i.Users)
-                     .Include(i => i.Users.Locations)
                     .Include(i => i.Users.Roles).Include(i => i.Users.Persons)
                     .Include(i => i.Users.Estates)
                     .ThenInclude(i => i.LocationAddress)
@@ -74,68 +73,35 @@ namespace Repository
                     .FirstOrDefaultAsync();
         }
 
-        public void CreateEmployee(Employees employee)
+        public void CreateEmployee(Users employee)
         {
-            //int longitud = 7;
-            //Guid miGuid = Guid.NewGuid();
 
-            //convierto de Guid a byte
-            //miGuid.ToByteArray() => Representa ese tipo guid como una matriz de bytes
-            // string token = Convert.ToBase64String(miGuid.ToByteArray());
+            Email.generatePassword(employee);
 
-            //Replazo los = y el signo +
-            //token = token.Replace("=", "").Replace("+", "");
-
-            //Devuelve los caracteres extraídos de una cadena según la posición 
-            //del carácter especificado para una cantidad especificada de caracteres.
-            //string codigo = token.Substring(0, longitud);
-
-            //employee.Users.UserPassword = codigo;
-
-
-            Email.generatePassword(employee.Users);
-
-            Email.sendVerificationEmail(employee.Users);
+            Email.sendVerificationEmail(employee);
             spaceCamelCase(employee);
 
-            employee.Users.UserPassword = Encrypt.GetSHA256(employee.Users.UserPassword);
-
-            Create(employee);
-
-            //            SaveAsync();
+            employee.UserPassword = Encrypt.GetSHA256(employee.UserPassword);
 
 
+            UsersRepository.CreateUser(employee);
         }
 
 
-        public static Employees spaceCamelCase(Employees employee)
+        public static Users spaceCamelCase(Users employee)
         {
-            employee.Users.UserDni = WithoutSpace_CamelCase.GetCamelCase(employee.Users.UserDni);
-            employee.Users.UserPassword = WithoutSpace_CamelCase.GetWithoutSpace(employee.Users.UserPassword);
-            employee.Users.Persons.FirstName = WithoutSpace_CamelCase.GetCamelCase(employee.Users.Persons.FirstName);
-            employee.Users.Persons.LastName = WithoutSpace_CamelCase.GetCamelCase(employee.Users.Persons.LastName);
-            employee.Users.Persons.Phone = WithoutSpace_CamelCase.GetCamelCase(employee.Users.Persons.Phone);
-            employee.Users.Persons.Address = WithoutSpace_CamelCase.GetCamelCase(employee.Users.Persons.Address);
-            employee.Users.Persons.Email = WithoutSpace_CamelCase.GetWithoutSpace(employee.Users.Persons.Email);
+            employee.UserDni = WithoutSpace_CamelCase.GetCamelCase(employee.UserDni);
+            employee.UserPassword = WithoutSpace_CamelCase.GetWithoutSpace(employee.UserPassword);
+            employee.Persons.FirstName = WithoutSpace_CamelCase.GetCamelCase(employee.Persons.FirstName);
+            employee.Persons.LastName = WithoutSpace_CamelCase.GetCamelCase(employee.Persons.LastName);
+            employee.Persons.Phone = WithoutSpace_CamelCase.GetCamelCase(employee.Persons.Phone);
+            employee.Persons.Address = WithoutSpace_CamelCase.GetCamelCase(employee.Persons.Address);
+            employee.Persons.Email = WithoutSpace_CamelCase.GetWithoutSpace(employee.Persons.Email);
 
             return employee;
         }
 
-        private void sendVerificationEmail(EmployeesForCreationDto employees)
-        {
-            string message;
-
-            message = $@"<p>Se creo con exito su cuenta</p>
-             <p>Su usuario es: {employees.Users.UserDni}<p>
-             <p>Su contraseña es: {employees.Users.UserPassword}</p>";
-
-            Email.Send(
-                to: employees.Users.Persons.Email,
-                subject: "Sign-up Verification API",
-                html: $@"<p>Bienvenido a SICREYD!</p>
-                         {message}"
-            );
-        }
+       
 
         public void UpdateEmployee(Employees employee)
         {

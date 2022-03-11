@@ -53,6 +53,17 @@ namespace Repository
         }
 
 
+
+        public static void CreateUser(Users user)
+        {
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            cruzRojaContext.Add(user);
+
+            cruzRojaContext.SaveChanges();
+        }
+
+
         //Funcion que sirve para poder recuperar la contraseña olvidada
         public void ForgotPassword(string email)
         {
@@ -147,7 +158,8 @@ namespace Repository
 
             //se conecta a la base de datos para verificar las datos del usuario en cuestion
             await using (var db = new CruzRojaContext())
-                authUser = db.Users.Include(u => u.Persons)
+                authUser = db.Users
+                                .Include(u => u.Persons)
                                .Include(u => u.Roles)
                                .Include(u => u.Estates)
                                .ThenInclude(u => u.LocationAddress)

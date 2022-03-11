@@ -13,5 +13,6 @@ namespace Entities.DataTransferObjects.Employees___Dto
         public string Gender { get; set; }
         public Boolean Status { get; set; }
         public string Birthdate { get; set; }
+        public string LocationName { get; set; }
     }
 }

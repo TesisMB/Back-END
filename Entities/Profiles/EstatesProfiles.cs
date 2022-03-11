@@ -16,14 +16,22 @@ namespace Back_End.Profiles
 
 
             CreateMap<Estates, EstateDto>()
-                 .ForPath(resp => resp.Address, opt => opt.MapFrom(src => src.LocationAddress.Address))
-                 .ForPath(resp => resp.NumberAddress, opt => opt.MapFrom(src => src.LocationAddress.NumberAddress));
+                                      .ForPath(resp => resp.LocationCityName, opt => opt.MapFrom(src => src.Locations.LocationCityName))
+                                      .ForPath(resp => resp.LocationAddress, opt => opt.MapFrom(src => src.LocationAddress));
+
             // .ForPath(resp => resp.Address, opt => opt.MapFrom(src => $"{src.LocationAddress.Address} {src.LocationAddress.NumberAddress}"));
 
 
             CreateMap<Estates, EstatesVehiclesDto>();
 
-            CreateMap<Estates, EstatesDto>();
+            CreateMap<Estates, EstatesDto>()
+                              .ForPath(resp => resp.LocationCityName, opt => opt.MapFrom(src => src.Locations.LocationCityName))
+
+
+                              .ForPath(resp => resp.PostalCode, opt => opt.MapFrom(src => src.LocationAddress.PostalCode))
+
+                              .ForPath(resp => resp.Address, opt => opt.MapFrom(src => src.LocationAddress.Address + " " + src.LocationAddress.NumberAddress));
+;
 
             CreateMap<Estates, EstatesLoginDto>()
                                  .ForPath(resp => resp.locationCityName, opt => opt.MapFrom(src => src.Locations.LocationCityName))

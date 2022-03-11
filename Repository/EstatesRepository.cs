@@ -22,6 +22,8 @@ namespace Repository
                 .ThenInclude(i => i.EstatesTimes)
                 .ThenInclude(i => i.Times)
                 .ThenInclude(i => i.Schedules)
+                .Include(i => i.Estates)
+                .ThenInclude(i => i.LocationAddress)
                 .ToListAsync();
         }
 

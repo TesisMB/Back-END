@@ -16,7 +16,7 @@ namespace Back_End.Models
         public string RoleName { get; set; }
 
         public EmployeePersonDto Persons { get; set; }
-        public EstatesLoginDto Estates { get; set; }
+        public EstatesDto Estates { get; set; }
 
         public string VolunteerAvatar { get; set; }
         public string token { get; set; } 

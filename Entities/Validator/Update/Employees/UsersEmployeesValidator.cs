@@ -34,7 +34,6 @@ namespace Entities.Validator.Update
 
             RuleFor(x => x.UserDni)
                  .NotEmpty().WithMessage("{PropertyName} is required.")
-                 .Must(IsValidNumber).WithMessage("{PropertyName} must not have spaces and should be all numbers.")
                  .MaximumLength(16).WithMessage("El Dni debe tener hasta 16 caracteres");
 
             RuleFor(x => x.UserNewPassword)

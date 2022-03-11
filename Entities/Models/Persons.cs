@@ -39,6 +39,10 @@ namespace Back_End.Models
 
         [Column("Available")]
         public Boolean Status { get; set; }
+
+        [Required]
+        public string LocationName { get; set; }
+
         public Users Users { get; set; }
     }
 }

@@ -47,12 +47,6 @@ namespace Back_End.Models
         [Required]
         public int FK_EstateID { get; set; }
 
-        [ForeignKey("FK_LocationID")]
-        public Locations Locations { get; set; }
-
-        [Required]
-        public int FK_LocationID { get; set; }
-
         public ICollection<ResourcesRequest> Resources_Requests { get; set; }
 
         [ForeignKey("FK_UserID")]

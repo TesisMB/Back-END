@@ -16,7 +16,6 @@ namespace Back_End.Validator
            .Cascade(CascadeMode.StopOnFirstFailure)
            .NotEmpty().WithMessage("{PropertyName} is required.")
            .Must(BeUniqueDni).WithMessage("El Dni ingresado ya existe en el sistema")
-           .Must(IsValidNumber).WithMessage("{PropertyName} must not have spaces and should be all numbers.")
            .MaximumLength(16).WithMessage("El Dni debe tener hasta 16 caracteres");
 
             RuleFor(x => x.FK_RoleID).NotEmpty().WithMessage("{PropertyName} is required.");

@@ -200,7 +200,7 @@ namespace Back_End.Controllers
                     Volunteers = volunteerEntity
                 };*/
 
-                //volunteerEntity.VolunteerAvatar = await UploadController.SaveImage(volunteer.ImageFile);
+                volunteerEntity.VolunteerAvatar = await UploadController.SaveImage(volunteer.ImageFile);
 
                 // Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
                 _repository.Volunteers.CreateVolunteer(volunteerEntity);

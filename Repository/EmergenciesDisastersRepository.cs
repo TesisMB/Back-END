@@ -82,8 +82,13 @@ namespace Repository
 
         public async Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisastersWithourFilter()
         {
+            var user = UsersRepository.authUser;
+           
+            var collection = _cruzRojaContext.EmergenciesDisasters as IQueryable<EmergenciesDisasters>;
 
-            return await FindAll()
+            collection = collection.Where(a => a.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
+
+            return await collection
                 .Include(i => i.TypesEmergenciesDisasters)
                 .Include(i => i.Alerts)
                 .Include(i => i.Locations)

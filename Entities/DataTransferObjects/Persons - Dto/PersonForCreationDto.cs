@@ -12,5 +12,8 @@ namespace Back_End.Models
         public string Address { get; set; }
         public DateTime? Birthdate { get; set; }
         public Boolean Status { get; set; } = true;
+
+        public string LocationName { get; set; }
+
     }
 }

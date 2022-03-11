@@ -8,7 +8,7 @@ namespace Entities.Validator
     {
         public EmployeesValidator()
         {
-            RuleFor(x => x.Users).SetValidator(new UsersEmployeesValidator());
+            //RuleFor(x => x.Users).SetValidator(new UsersEmployeesValidator());
         }
     }
 }

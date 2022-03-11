@@ -34,7 +34,6 @@ namespace Repository
             return await collection
                          .Include(a => a.Users)
                          .ThenInclude(a => a.Persons)
-                         .Include(a => a.Users.Locations)
                          .Include(a => a.Users.Roles)
                          .Include(a => a.Users.Estates)
                          .ThenInclude(a => a.LocationAddress)
@@ -139,7 +138,6 @@ namespace Repository
             return await FindByCondition(volunteer => volunteer.ID.Equals(volunteerId))
                     .Include(a => a.Users)
                     .ThenInclude(a => a.Persons)
-                    .Include(a => a.Users.Locations)
                     .Include(a => a.Users.Roles)
                     .Include(a => a.Users.Estates)
                     .ThenInclude(a => a.LocationAddress)

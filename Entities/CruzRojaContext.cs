@@ -82,6 +82,7 @@ namespace Back_End.Entities
         public DbSet<TypesChatRooms> TypesChatRooms { get; set; }
         public DbSet<UsersChatRooms> UsersChatRooms { get; set; }
         public DbSet<UsersChat> UsersChat { get; set; }
+        public DbSet<Victims> Victims { get; set; }
         public DbSet<ResourcesRequestMaterialsMedicinesVehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
 
         private const string Connection =

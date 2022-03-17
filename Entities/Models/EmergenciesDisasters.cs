@@ -35,6 +35,7 @@ namespace Entities.Models
 
         public ChatRooms ChatRooms { get; set; }
 
+        public Victims Victims { get; set; }
         public int? Fk_EmplooyeeID { get; set; }
 
         [Required]

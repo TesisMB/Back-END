@@ -72,6 +72,11 @@ namespace Repository
                  .Include(i => i.Resources_Requests)
                  .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                  .ThenInclude(i => i.Medicines)
+
+                 .Include(a => a.ChatRooms)
+                 .ThenInclude(a => a.UsersChatRooms)
+
+
                  .OrderByDescending(a => a.EmergencyDisasterStartDate)
 
                 .ToListAsync();
@@ -125,6 +130,8 @@ namespace Repository
                  .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                  .ThenInclude(i => i.Medicines)
 
+                 .Include(a => a.Victims)
+
                  .OrderByDescending(i => i.Alerts.AlertID)
                 .ToListAsync();
 
@@ -135,19 +142,47 @@ namespace Repository
         public async Task<EmergenciesDisasters> GetEmergencyDisasterWithDetails(int emergencydisasterId)
         {
             return await FindByCondition(emergdis => emergdis.EmergencyDisasterID.Equals(emergencydisasterId))
-           .Include(i => i.TypesEmergenciesDisasters)
-           .Include(i => i.Alerts)
-           .Include(i => i.Locations)
-           .Include(i => i.Employees)
-           .ThenInclude(i => i.Users)
-           .ThenInclude(i => i.Persons)
-           .Include(i => i.Employees.Users.Roles)
-           .Include(i => i.Resources_Requests)
-           .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
-           .Include(i => i.ChatRooms)
-           .ThenInclude(i => i.UsersChatRooms)
-           .Include(i => i.ChatRooms.Messages)
-           .Include(i => i.VolunteersLocationVolunteersEmergenciesDisasters)
+          .Include(i => i.TypesEmergenciesDisasters)
+                .Include(i => i.Alerts)
+                .Include(i => i.Locations)
+                .Include(i => i.Employees)
+                .ThenInclude(i => i.Users)
+                .ThenInclude(i => i.Persons)
+                .Include(i => i.Employees.Users.Roles)
+
+                .Include(i => i.Resources_Requests)
+                .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .ThenInclude(i => i.Materials)
+
+                 .Include(i => i.Resources_Requests)
+                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                 .ThenInclude(i => i.Vehicles)
+
+                 .ThenInclude(a => a.BrandsModels)
+                 .ThenInclude(a => a.Model)
+
+                  .Include(i => i.Resources_Requests)
+                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                 .ThenInclude(i => i.Vehicles)
+
+
+                 .ThenInclude(a => a.BrandsModels)
+                 .ThenInclude(a => a.Brands)
+
+                     .Include(i => i.Resources_Requests)
+                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                 .ThenInclude(i => i.Vehicles.TypeVehicles)
+
+
+                 .Include(i => i.Resources_Requests)
+                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                 .ThenInclude(i => i.Medicines)
+
+                 .Include(a => a.ChatRooms)
+                 .ThenInclude(a => a.UsersChatRooms)
+
+                 .Include(a => a.Victims)
+
            .FirstOrDefaultAsync();
         }
 

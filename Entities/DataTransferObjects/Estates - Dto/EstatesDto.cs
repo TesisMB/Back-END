@@ -5,6 +5,8 @@ namespace Back_End.Models.Employees___Dto
 {
     public class EstatesDto
     {
+        public int EstateID { get; set; }
+
         public int EstatePhone { get; set; }
         public string EstateTypes { get; set; }
         public string LocationCityName { get; set; }

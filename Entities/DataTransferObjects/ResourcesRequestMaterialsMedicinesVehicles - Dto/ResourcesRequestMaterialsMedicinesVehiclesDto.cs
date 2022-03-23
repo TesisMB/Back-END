@@ -1,4 +1,5 @@
 ﻿
+using Entities.DataTransferObjects.CharRooms___Dto;
 using Entities.DataTransferObjects.ResourcesRequestMaterialsMedicinesVehicles___Dto;
 using System.Collections.Generic;
 
@@ -14,6 +15,12 @@ namespace Entities.DataTransferObjects.Resources_RequestResources_Materials_Medi
         public ResourcesMedicnesDto Medicines { get; set; }
 
         public ResourcesVehiclesDto Vehicles { get; set; }
+
+
+
+
+
+
 
     }
 }

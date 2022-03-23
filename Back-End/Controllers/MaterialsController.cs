@@ -45,8 +45,17 @@ namespace Back_End.Controllers
 
                 foreach (var item in materialsResult)
                 {
+                    if(item.Picture == null)
+                    {
+                        item.Picture = "https://i.imgur.com/S9HJEwF.png";
+                    }
+                    else if (item.Picture != null) 
+                    {
+                        
                     item.ImageSrc = String.Format("{0}://{1}{2}/StaticFiles/Images/{3}",
                                                   Request.Scheme, Request.Host, Request.PathBase, item.Picture);
+                    }
+
                 }
 
                 return Ok(materialsResult);

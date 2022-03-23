@@ -27,7 +27,7 @@ namespace Back_End.Validator
             RuleFor(x => x.Email).NotEmpty().WithMessage("{PropertyName} is required")
            .EmailAddress().WithMessage("A valid email address is required.")
            .MaximumLength(50).WithMessage("The {PropertyName} cannot be more than {MaxLength} characters.")
-           .Must(BeUniqueEmail).WithMessage("Email already exists");
+           .Must(BeUniqueEmail).WithMessage("El email ingresado ya existe en el sistema");
 
             RuleFor(x => x.Gender).NotEmpty().WithMessage("{PropertyName} is required")
            .Must(x => new[] { "M", "F", "O" }.Contains(x))
@@ -39,8 +39,8 @@ namespace Back_End.Validator
             .MaximumLength(50).WithMessage("The {PropertyName} cannot be more than {MaxLength} characters.");
 
             RuleFor(x => x.Birthdate).NotEmpty().WithMessage("{PropertyName} is required.")
-            .Must(BeAValidAge).WithMessage("Must be a valid age")
-            .LessThan(p => DateTime.Now).WithMessage("the PropertyName} has not passed yet");
+            .Must(BeAValidAge).WithMessage("El usuario ingresado debe ser mayor de 18 años")
+            .LessThan(p => DateTime.Now).WithMessage("La fecha no puede sobrepasar la fecha actual");
         }
 
         private bool BeUniqueEmail(string Email)

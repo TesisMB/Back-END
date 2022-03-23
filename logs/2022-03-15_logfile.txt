@@ -1,0 +1,8 @@
+2022-03-15 16:14:17.0178 INFO Returned User.
+2022-03-15 16:14:22.6781 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-15 16:14:22.7010 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-15 16:14:23.1864 INFO Returned all emergenciesDisasters from database.
+2022-03-15 16:14:23.4366 INFO Returned all emergenciesDisasters from database.
+2022-03-15 16:14:27.9647 INFO Returned emegencyDisaster with details for id: 29
+2022-03-15 16:14:34.6883 INFO Returned all TypesEmergenciesDisasters from database.
+2022-03-15 16:14:34.7590 INFO Returned all emergenciesDisasters from database.

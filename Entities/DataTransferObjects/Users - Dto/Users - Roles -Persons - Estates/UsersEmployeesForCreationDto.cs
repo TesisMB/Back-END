@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Back_End.Models.Employees___Dto;
+using System;
 
 namespace Back_End.Models
 {
@@ -20,7 +21,10 @@ namespace Back_End.Models
         public PersonForCreationDto Persons { get; set; }
         public int FK_EstateID { get; set; }
 
-        public int FK_LocationID { get; set; }
+
+        public EmployeesForCreationDto Employees { get; set; }
+
+        public VolunteersForCreationDto Volunteers { get; set; }
 
 
     }

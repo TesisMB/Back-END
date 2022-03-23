@@ -25,6 +25,7 @@ namespace Back_End.Controllers
         private IRepositorWrapper _repository;
         private readonly IMapper _mapper;
         readonly IGeneratePdf _generatePdf;
+        private CruzRojaContext cruzRojaContext = new CruzRojaContext();
 
         public EmployeesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper, IGeneratePdf generatePdf)
         {
@@ -124,14 +125,24 @@ namespace Back_End.Controllers
 
         //[Authorize(Roles = "Coordinador General, Admin")] 
         [HttpPost]
-        public ActionResult<Employees> CreateEmployee([FromBody] EmployeesForCreationDto employee)
+        public async Task<ActionResult<Users>> CreateEmployee([FromBody] UsersEmployeesForCreationDto employee)
         {
             try
             {
+
+                Roles user = new Roles();
+
+                user = cruzRojaContext.Roles
+                        .Where(a => a.RoleID == employee.FK_RoleID)
+                        .AsNoTracking()
+                        .FirstOrDefault();
+
+
                 if (!ModelState.IsValid)
                 {
                     return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
                 }
+
 
                 if (employee == null)
 
@@ -141,11 +152,30 @@ namespace Back_End.Controllers
                 }
 
 
-                var employeeEntity = _mapper.Map<Employees>(employee);
+
+
+                if (user.RoleName == "Voluntario")
+                {
+                    if (employee.Volunteers.VolunteerAvatar == null)
+                    {
+                        employee.Volunteers.VolunteerAvatar = "https://i.imgur.com/8AACVdK.png";
+                    }
+                    else
+                    {
+                        employee.Volunteers.VolunteerAvatar = await UploadController.SaveImage(employee.Volunteers.ImageFile);
+                    }
+                }
+
+                if (user.RoleName != "Voluntario")
+                {
+                    employee.Employees = new EmployeesForCreationDto();
+                    employee.Employees.EmployeeCreatedate = DateTime.Now;
+
+                }
+
+                var employeeEntity = _mapper.Map<Users>(employee);
 
                 _repository.Employees.CreateEmployee(employeeEntity);
-
-                _repository.Employees.SaveAsync();
 
                 return Ok();
             }
@@ -263,6 +293,63 @@ namespace Back_End.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+
+
+        [NonAction]
+        public async Task<ActionResult<Volunteers>> CreateVolunteer(VolunteersForCreationDto volunteer)
+        {
+            try
+            {
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
+                }
+
+                if (volunteer == null)
+
+                {
+                    _logger.LogError("Volunteer object sent from client is null.");
+                    return BadRequest("Volunteer object is null");
+
+                }
+
+
+                var volunteerEntity = _mapper.Map<Volunteers>(volunteer);
+
+
+                /* volunteerEntity.LocationVolunteers = new LocationVolunteers()
+                 {
+                     ID = volunteerEntity.ID,
+                     LocationVolunteerLatitude = null,
+                     LocationVolunteerLongitude = null,
+                     Volunteers = volunteerEntity
+                 };*/
+
+                //volunteerEntity.VolunteerAvatar = await UploadController.SaveImage(volunteer.ImageFile);
+
+                // Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
+                _repository.Volunteers.CreateVolunteer(volunteerEntity);
+                volunteerEntity.Users.UserPassword = Encrypt.GetSHA256(volunteerEntity.Users.UserPassword);
+
+                _repository.Volunteers.SaveAsync();
+
+                //var createdVolunteer = _mapper.Map<VolunteersDto>(volunteerEntity);
+
+                return Ok();
+
+            }
+            catch (Exception ex)
+
+            {
+                _logger.LogError($"Something went wrong inside CreateEmployee action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
     }
+
+
+
+
 
 }

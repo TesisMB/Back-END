@@ -7,7 +7,7 @@ namespace Entities.Validator.Creation.Volunteers
     {
         public VolunteersValidator()
         {
-            RuleFor(x => x.Users).SetValidator(new UsersVolunteersValidator());
+            //RuleFor(x => x.Users).SetValidator(new UsersVolunteersValidator());
 
         }
     }

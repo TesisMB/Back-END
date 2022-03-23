@@ -27,6 +27,11 @@ namespace Repository
             return await FindByCondition(emp => emp.UserID.Equals(userId))
                     .Include(a => a.Employees)
                     .Include(a => a.Persons)
+                    .Include(a => a.Messages)
+                    .Include(a => a.UsersChatRooms)
+                    .Include(a => a.Resources_Requests)
+                    .Include(a => a.Employees.Vehicles)
+                    .Include(a => a.UsersChat)
                     .FirstOrDefaultAsync();
         }
 
@@ -45,6 +50,17 @@ namespace Repository
         public void DeletUser(Users user)
         {
             Delete(user);
+        }
+
+
+
+        public static void CreateUser(Users user)
+        {
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            cruzRojaContext.Add(user);
+
+            cruzRojaContext.SaveChanges();
         }
 
 
@@ -142,7 +158,8 @@ namespace Repository
 
             //se conecta a la base de datos para verificar las datos del usuario en cuestion
             await using (var db = new CruzRojaContext())
-                authUser = db.Users.Include(u => u.Persons)
+                authUser = db.Users
+                                .Include(u => u.Persons)
                                .Include(u => u.Roles)
                                .Include(u => u.Estates)
                                .ThenInclude(u => u.LocationAddress)

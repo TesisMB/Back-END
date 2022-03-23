@@ -10,6 +10,8 @@ namespace Entities.DataTransferObjects.Resources_Request___Dto
 
         public string Reason { get; set; }
 
+        public string? Description { get; set; }
+
         public bool Status { get; set; } = false;
 
         public string Condition { get; set; } = "Pendiente";

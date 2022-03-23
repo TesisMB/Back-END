@@ -14,7 +14,7 @@ namespace Back_End.Models
         public int UserID { get; set; }
 
         [Required]
-        [MaxLength(8)]
+        [MaxLength(16)]
         public string UserDni { get; set; }
 
         [Required]
@@ -46,12 +46,6 @@ namespace Back_End.Models
 
         [Required]
         public int FK_EstateID { get; set; }
-
-        [ForeignKey("FK_LocationID")]
-        public Locations Locations { get; set; }
-
-        [Required]
-        public int FK_LocationID { get; set; }
 
         public ICollection<ResourcesRequest> Resources_Requests { get; set; }
 

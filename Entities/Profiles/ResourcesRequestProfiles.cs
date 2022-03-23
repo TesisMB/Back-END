@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Entities.DataTransferObjects.Resources_Request___Dto;
 using Entities.DataTransferObjects.Resources_RequestResources_Materials_Medicines_Vehicles___Dto;
+using Entities.DataTransferObjects.ResourcesRequest___Dto;
 using Entities.Helpers;
 using Entities.Models;
 using System.Collections.Generic;
@@ -15,12 +16,14 @@ namespace Entities.Profiles
         {
             CreateMap<ResourcesRequest, ResourcesRequestDto>()
                    .ForPath(dest => dest.RequestDate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.RequestDate)));
-            
+
 
 
 
 
             CreateMap<ResourcesRequestForCreationDto, ResourcesRequest>();
+
+            CreateMap<AcceptRejectRequestDto, ResourcesRequest>();
 
             CreateMap<ResourcesRequest, ResourceRequestForUpdateDto>();
 

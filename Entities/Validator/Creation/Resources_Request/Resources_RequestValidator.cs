@@ -27,7 +27,7 @@ namespace Entities
 
             RuleFor(m => new { m.FK_MaterialID, m.Quantity }).Custom((id, context) =>
             {
-                materials = (Materials)db.Materials.Where(x => x.ID == id.FK_MaterialID)
+                materials = db.Materials.Where(x => x.ID == id.FK_MaterialID)
                 .AsNoTracking()
                 .FirstOrDefault();
 

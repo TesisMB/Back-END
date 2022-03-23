@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Back_End.Entities;
+using Back_End.Models;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.EmergenciesDisasters___Dto;
 using Entities.Helpers;
@@ -7,6 +9,8 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Back_End.Controllers
@@ -18,12 +22,21 @@ namespace Back_End.Controllers
         private ILoggerManager _logger;
         private IMapper _mapper;
         private IRepositorWrapper _repository;
+        Materials materials = null;
+        Medicines medicines = null;
+        Vehicles vehicles = null;
+        CruzRojaContext db = new CruzRojaContext();
+
+        ChatRooms queryUser = new ChatRooms();
+
+        ResourcesRequestMaterialsMedicinesVehicles resources = null;
         public EmergenciesDisastersController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper)
         {
             _logger = logger;
             _repository = repository;
             _mapper = mapper;
         }
+
 
         [HttpGet]
         public async Task<ActionResult<EmergenciesDisasters>> GetAllEmegenciesDisasters()
@@ -35,6 +48,53 @@ namespace Back_End.Controllers
                 _logger.LogInfo($"Returned all emergenciesDisasters from database.");
 
                 var emergenciesDisastersResult = _mapper.Map<IEnumerable<EmergenciesDisastersDto>>(emergenciesDisasters);
+
+
+
+
+                var query = from st in emergenciesDisastersResult
+                            select st;
+
+
+                foreach (var item1 in query)
+                {
+
+                    foreach (var item3 in item1.Resources_Requests)
+                    {
+
+                        foreach (var item2 in item3.Resources_RequestResources_Materials_Medicines_Vehicles)
+                        {
+
+
+                            if (item2.Materials != null)
+                            {
+
+                                resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
+                                            .Where(a => a.FK_MaterialID == item2.Materials.ID
+                                                    && a.FK_Resource_RequestID == item2.FK_Resource_RequestID)
+                                               .AsNoTracking()
+                                            .FirstOrDefault();
+
+                                item2.Materials.Quantity = resources.Quantity;
+
+                            }
+
+                            if (item2.Medicines != null)
+                            {
+                                resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
+                                     .Where(a => a.FK_MedicineID == item2.Medicines.ID
+                                             && a.FK_Resource_RequestID == item2.FK_Resource_RequestID)
+                                        .AsNoTracking()
+                                     .FirstOrDefault();
+
+                                item2.Medicines.Quantity = resources.Quantity;
+
+                            }
+
+                        }
+                    }
+                }
+
 
 
                 return Ok(emergenciesDisastersResult);
@@ -60,6 +120,52 @@ namespace Back_End.Controllers
                 var emergenciesDisastersResult = _mapper.Map<IEnumerable<EmergenciesDisastersDto>>(emergenciesDisasters);
 
 
+                var query = from st in emergenciesDisastersResult
+                            select st;
+
+
+                foreach (var item1 in query)
+                {
+
+                    foreach (var item3 in item1.Resources_Requests)
+                    {
+
+                        foreach (var item2 in item3.Resources_RequestResources_Materials_Medicines_Vehicles)
+                        {
+
+
+                            if (item2.Materials != null)
+                            {
+
+                                resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
+                                            .Where(a => a.FK_MaterialID == item2.Materials.ID
+                                                    && a.FK_Resource_RequestID == item2.FK_Resource_RequestID)
+                                               .AsNoTracking()
+                                            .FirstOrDefault();
+
+                                item2.Materials.Quantity = resources.Quantity;
+
+                            }
+
+                            if (item2.Medicines != null)
+                            {
+                                resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
+                                     .Where(a => a.FK_MedicineID == item2.Medicines.ID
+                                             && a.FK_Resource_RequestID == item2.FK_Resource_RequestID)
+                                        .AsNoTracking()
+                                     .FirstOrDefault();
+
+                                item2.Medicines.Quantity = resources.Quantity;
+
+                            }
+
+                        }
+                    }
+                }
+
+
+
+
                 return Ok(emergenciesDisastersResult);
 
             }
@@ -73,7 +179,7 @@ namespace Back_End.Controllers
 
 
 
-        [HttpGet("{emegencyDisasterID}")]
+        [HttpGet("WithoutFilter/{emegencyDisasterID}")]
         public async Task<ActionResult<EmergenciesDisasters>> GetEmegencyDisasterIDWithDetails(int emegencyDisasterID)
         {
             try
@@ -90,6 +196,78 @@ namespace Back_End.Controllers
                 _logger.LogInfo($"Returned emegencyDisaster with details for id: {emegencyDisasterID}");
 
                 var emergencyDisasterResult = _mapper.Map<EmergenciesDisastersDto>(emegencyDisaster);
+
+
+                var query = from st in emergencyDisasterResult.Resources_Requests
+                            select st;
+
+
+                foreach (var item3 in query)
+                    {
+
+                        foreach (var item2 in item3.Resources_RequestResources_Materials_Medicines_Vehicles)
+                        {
+
+
+                            if (item2.Materials != null)
+                            {
+
+                                resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
+                                            .Where(a => a.FK_MaterialID == item2.Materials.ID
+                                                    && a.FK_Resource_RequestID == item2.FK_Resource_RequestID)
+                                               .AsNoTracking()
+                                            .FirstOrDefault();
+
+                                item2.Materials.Quantity = resources.Quantity;
+
+                            }
+
+                            if (item2.Medicines != null)
+                            {
+                                resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
+                                     .Where(a => a.FK_MedicineID == item2.Medicines.ID
+                                             && a.FK_Resource_RequestID == item2.FK_Resource_RequestID)
+                                        .AsNoTracking()
+                                     .FirstOrDefault();
+
+                                item2.Medicines.Quantity = resources.Quantity;
+
+                            }
+
+                        }
+                }
+
+
+                if(emergencyDisasterResult.ChatRooms != null)
+                    {
+                        foreach (var item2 in emergencyDisasterResult.ChatRooms.UsersChatRooms)
+                        {
+                            Persons usersChatRooms = new Persons();
+                            Roles roles = new Roles();
+                            Users users = new Users();
+
+                        usersChatRooms = db.Persons
+                                            .Where(a => a.ID == item2.UserID)
+                                            .AsNoTracking()
+                                            .FirstOrDefault();
+                        users = db.Users
+                                       .Where(a => a.UserID == item2.UserID)
+                                       .AsNoTracking()
+                                       .FirstOrDefault();
+
+                        roles = db.Roles
+                                       .Where(a => a.RoleID == users.FK_RoleID)
+                                       .AsNoTracking()
+                                       .FirstOrDefault(); 
+
+
+                        item2.Name = usersChatRooms.FirstName + " " + usersChatRooms.LastName;
+                            item2.UserDni = users.UserDni;
+                            item2.RoleName = roles.RoleName;
+
+                    }
+                }
+                
 
                 return Ok(emergencyDisasterResult);
 
@@ -176,7 +354,7 @@ namespace Back_End.Controllers
             try
             {
 
-                var emegencyDisaster = await _repository.EmergenciesDisasters.GetEmergencyDisasterById(emegencyDisasterID);
+                var emegencyDisaster = await _repository.EmergenciesDisasters.GetEmergencyDisasterWithDetails(emegencyDisasterID);
 
                 if (emegencyDisaster == null)
                 {

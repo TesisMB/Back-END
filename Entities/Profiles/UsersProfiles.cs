@@ -4,6 +4,7 @@ using Back_End.Models;
 using Back_End.Models.Users___Dto;
 using Back_End.Models.Users___Dto.Users___Persons;
 using Entities.DataTransferObjects.Employees___Dto;
+using Entities.DataTransferObjects.Estates___Dto;
 using Entities.DataTransferObjects.Models.Vehicles___Dto;
 using Entities.DataTransferObjects.Volunteers__Dto;
 
@@ -14,6 +15,7 @@ namespace Back_End.Profiles
         public UsersProfiles()
         {
             //Creo Las clases a ser mapeadas
+
 
             CreateMap<Users, EmployeesUsersDto>()
 
@@ -38,8 +40,6 @@ namespace Back_End.Profiles
 
            .ForMember(dest => dest.RoleName,
                               opt => opt.MapFrom(src => src.Roles.RoleName))
-
-
 
 
             .ForMember(dest => dest.VolunteerAvatar,

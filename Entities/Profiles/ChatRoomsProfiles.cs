@@ -10,8 +10,7 @@ namespace Entities.Profiles
         public ChatRoomsProfiles()
         {
             CreateMap<ChatRoomsForCreationDto, ChatRooms>();
-            CreateMap<ChatRooms, ChatRoomsDto>()
-                .ForPath(src => src.ChatRoomID, a => a.MapFrom(i => i.ID));
+            CreateMap<ChatRooms, ChatRoomsDto>();
         }
     }
 }

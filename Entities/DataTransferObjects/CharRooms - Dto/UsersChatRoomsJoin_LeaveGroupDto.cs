@@ -5,8 +5,16 @@
         public int FK_UserID { get; set; }
         public int FK_ChatRoomID { get; set; }
 
-        public decimal LocationVolunteerLatitude { get; set; }
-        public decimal LocationVolunteerLongitude { get; set; }
 
+        public Coords Coords { get; set; }
+
+    }
+
+
+
+    public class Coords
+    {
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
     }
 }

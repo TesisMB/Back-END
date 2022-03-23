@@ -4,6 +4,7 @@ using Back_End.Models;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.Resources_Request___Dto;
 using Entities.DataTransferObjects.Resources_RequestResources_Materials_Medicines_Vehicles___Dto;
+using Entities.DataTransferObjects.ResourcesRequest___Dto;
 using Entities.DataTransferObjects.ResourcesRequestMaterialsMedicinesVehicles___Dto;
 using Entities.Helpers;
 using Entities.Models;
@@ -26,18 +27,9 @@ namespace Back_End.Controllers
         private IRepositorWrapper _repository;
         public static ResourcesRequest resources_Request;
         public static ResourcesRequest reourceRequest;
-        List<ResourcesMaterialsDto> resources1 = new List<ResourcesMaterialsDto>();
-
-        List<ResourcesMedicnesDto> resources2 = new List<ResourcesMedicnesDto>();
-
-        List<ResourcesVehiclesDto> resources3 = new List<ResourcesVehiclesDto>();
-
-        Materials materials = null;
-        Medicines medicines = null;
-        Vehicles vehicles = null;
         CruzRojaContext db = new CruzRojaContext();
 
-        ResourcesRequestMaterialsMedicinesVehicles resources  = null;
+        ResourcesRequestMaterialsMedicinesVehicles resources = null;
 
 
         public ResourcesRequestController(IMapper mapper, ILoggerManager logger, IRepositorWrapper repository)
@@ -58,7 +50,7 @@ namespace Back_End.Controllers
 
 
             var query = from st in resource_RequestResult
-                         select st;
+                        select st;
 
 
             foreach (var item1 in query)
@@ -80,7 +72,7 @@ namespace Back_End.Controllers
 
                     }
 
-                    if (item2.Medicines != null)
+                    else if (item2.Medicines != null)
                     {
                         resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
                              .Where(a => a.FK_MedicineID == item2.Medicines.ID
@@ -92,17 +84,24 @@ namespace Back_End.Controllers
 
                     }
 
+                    else if (item2.Vehicles != null)
+                    {
+                        resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
+                             .Where(a => a.FK_VehicleID == item2.Vehicles.ID
+                                     && a.FK_Resource_RequestID == item2.FK_Resource_RequestID)
+                                .AsNoTracking()
+                             .FirstOrDefault();
+
+                        item2.Vehicles.Quantity = resources.Quantity;
+
+                    }
+
                 }
             }
-          
-
 
             return Ok(resource_RequestResult);
 
         }
-
-
-
 
 
         [HttpPost]
@@ -110,31 +109,12 @@ namespace Back_End.Controllers
         {
             try
             {
-                var user = UsersRepository.authUser;
-
-                ResourcesRequest userReq = null;
-
-
-                userReq = db.Resources_Requests
-                 .Where(a => a.FK_EmergencyDisasterID == resources_Request.FK_EmergencyDisasterID
-                         && a.FK_UserID == user.UserID)
-                         .AsNoTracking()
-                         .FirstOrDefault();
-
-
-                if (userReq != null && userReq.Condition != "Pendiente")
-                {
-                    return BadRequest(ErrorHelper.Response(400, "Su solicitud fue " + userReq.Condition + " debe realizar una nueva solicitud"));
-
-                }
 
                 if (!ModelState.IsValid)
                 {
                     return BadRequest(ErrorHelper.GetModelStateErrorsResourcesStock(ModelState));
 
                 }
-
-
 
 
                 if (resources_Request == null)
@@ -147,7 +127,7 @@ namespace Back_End.Controllers
                 var resourceRequest = _mapper.Map<ResourcesRequest>(resources_Request);
 
 
-                _repository.Resources_Requests.CreateResource_Resquest(resourceRequest, resources_Request.UserRequest);
+                _repository.Resources_Requests.CreateResource_Resquest(resourceRequest);
 
                 _repository.Resources_Requests.SaveAsync();
 
@@ -159,6 +139,65 @@ namespace Back_End.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ResourcesRequest>> DeleteResourceRequest(int id)
+        {
+            try
+            {
+                var resource = await _repository.Resources_Requests.GetResourcesRequestByID(id);
+
+                resource = _repository.Resources_Requests.UpdateStockDelete(resource);
+
+                if (resource == null)
+                {
+                    return NotFound();
+                }
+
+                _repository.Resources_Requests.Delete(resource);
+                _repository.Resources_Requests.SaveAsync();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogError($"Something went wrong inside DeleteResourceRequest action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+
+
+
+        [HttpPost("{acceptRejectRequest}")]
+        public ActionResult<ResourcesRequest> AcceptRejectRequest([FromBody] AcceptRejectRequestDto acceptRejectRequest)
+        {
+            try
+            {
+                if (acceptRejectRequest == null)
+                {
+                    _logger.LogError("AcceptRejectRequest object sent from client is null.");
+                    return BadRequest("AcceptRejectRequest object is null");
+                }
+
+                var resourceRequest = _mapper.Map<ResourcesRequest>(acceptRejectRequest);
+
+                _repository.Resources_Requests.AcceptRejectRequest(resourceRequest, acceptRejectRequest.UserRequest);
+
+                return Ok();
+            }
+
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside AcceptRejectRequest action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+
+
     }
 
 }

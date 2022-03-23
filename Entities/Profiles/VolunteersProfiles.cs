@@ -5,6 +5,7 @@ using Back_End.Models.Volunteers__Dto;
 using Entities.DataTransferObjects.Login___Dto;
 using Entities.DataTransferObjects.ResourcesDto;
 using Entities.DataTransferObjects.Volunteers__Dto;
+using Entities.Helpers;
 
 namespace Back_End.Profiles
 {
@@ -40,7 +41,11 @@ namespace Back_End.Profiles
 
                .ForPath(dest => dest.Volunteers.Phone, opts => opts.MapFrom(src => src.Users.Persons.Phone))
 
-               .ForPath(dest => dest.Volunteers.Dni, opts => opts.MapFrom(src => src.Users.UserDni));
+               .ForPath(dest => dest.Volunteers.Dni, opts => opts.MapFrom(src => src.Users.UserDni))
+
+            .ForPath(dest => dest.Volunteers.Birthdate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.Users.Persons.Birthdate)))
+
+           .ForPath(dest => dest.Volunteers.Address, opts => opts.MapFrom(src => src.Users.Persons.Address));
 
 
             CreateMap<Volunteers, Resource_Dto>()
@@ -60,9 +65,10 @@ namespace Back_End.Profiles
 
            .ForPath(dest => dest.Volunteers.Dni, opts => opts.MapFrom(src => src.Users.UserDni))
 
-            .ForPath(dest => dest.Volunteers.Birthdate, opts => opts.MapFrom(src => src.Users.Persons.Birthdate))
+            .ForPath(dest => dest.Volunteers.Birthdate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.Users.Persons.Birthdate)))
 
            .ForPath(dest => dest.Volunteers.Address, opts => opts.MapFrom(src => src.Users.Persons.Address))
+
 
            .ForMember(dest => dest.Availability,
                         opt => opt.MapFrom(src => src.Users.Persons.Status))

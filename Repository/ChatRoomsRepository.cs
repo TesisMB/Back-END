@@ -36,19 +36,30 @@ namespace Repository
 
             return await collection
                 .Include(a => a.Chat)
+
                 .ThenInclude(a => a.UsersChat)
                  .ThenInclude(a => a.Users)
                 .ThenInclude(a => a.Persons)
+
+
+                 .Include(a => a.Chat)
+                .ThenInclude(a => a.UsersChat)
+                 .ThenInclude(a => a.Users.Roles)
+                
+
                 .Include(a => a.ChatRooms)
                 .ThenInclude(a => a.UsersChatRooms)
                 .ThenInclude(a => a.Users)
                 .ThenInclude(a => a.Persons)
+
                 .Include(a => a.ChatRooms)
                 .ThenInclude(a => a.EmergenciesDisasters)
                 .ThenInclude(a => a.Locations)
                 .Include(a => a.ChatRooms)
                 .ThenInclude(a => a.EmergenciesDisasters)
                 .ThenInclude(a => a.TypesEmergenciesDisasters)
+
+
                 .ToListAsync();
         }
     }

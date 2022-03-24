@@ -49,9 +49,6 @@ namespace Back_End.Controllers
 
                 var emergenciesDisastersResult = _mapper.Map<IEnumerable<EmergenciesDisastersDto>>(emergenciesDisasters);
 
-
-
-
                 var query = from st in emergenciesDisastersResult
                             select st;
 

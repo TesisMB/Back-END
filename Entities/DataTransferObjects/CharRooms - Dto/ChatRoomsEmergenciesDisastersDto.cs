@@ -6,14 +6,10 @@ namespace Entities.DataTransferObjects.CharRooms___Dto
 {
     public class ChatRoomsEmergenciesDisastersDto
     {
-        public int EmergencyDisasterID { get; set; }
+        public int ID { get; set; }
 
-        public string LocationCityName { get; set; }
+        public DateTime CreationDate { get; set; }
 
-        public int TypeEmergencyDisasterID { get; set; }
-
-        public string TypeEmergencyDisasterName { get; set; }
-
-        public string TypeEmergencyDisasterIcon { get; set; }
+        public ICollection<UsersChatRoomsEmergenciesDisastersDto> UsersChatRooms { get; set; }
     }
 }

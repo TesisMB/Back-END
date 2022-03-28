@@ -14,6 +14,7 @@ namespace Entities.DataTransferObjects.ResourcesDto
         public bool Availability { get; set; }
         public string Picture { get; set; }
         public string Description { get; set; }
+        public string ImageSrc { get; set; }
 
 
         public string LocationCityName { get; set; }

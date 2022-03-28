@@ -2,6 +2,7 @@
 using Back_End.Models.Vehicles___Dto;
 using Entities.DataTransferObjects.Materials___Dto;
 using Entities.DataTransferObjects.Medicines___Dto;
+using Microsoft.AspNetCore.Http;
 
 namespace Entities.DataTransferObjects.ResourcesDto
 {
@@ -14,7 +15,6 @@ namespace Entities.DataTransferObjects.ResourcesDto
         public string Picture { get; set; }
         public string Description { get; set; }
 
-        public string ImageSrc { get; set; }
 
         public string LocationCityName { get; set; }
 

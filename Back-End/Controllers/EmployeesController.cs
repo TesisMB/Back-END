@@ -154,7 +154,7 @@ namespace Back_End.Controllers
 
 
 
-                if (user.RoleName == "Voluntario")
+              /*  if (user.RoleName == "Voluntario")
                 {
                     if (employee.Volunteers.VolunteerAvatar == null)
                     {
@@ -171,7 +171,7 @@ namespace Back_End.Controllers
                     employee.Employees = new EmployeesForCreationDto();
                     employee.Employees.EmployeeCreatedate = DateTime.Now;
 
-                }
+                }*/
 
                 var employeeEntity = _mapper.Map<Users>(employee);
 

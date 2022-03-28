@@ -47,7 +47,7 @@ namespace Back_End.Controllers
                     }
                     else if(item.Picture != null)
                     {
-                        item.ImageSrc = String.Format("{0}://{1}{2}/StaticFiles/Images/{3}",
+                        item.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/{3}",
                                         Request.Scheme, Request.Host, Request.PathBase, item.Picture);
 
                     }
@@ -94,7 +94,7 @@ namespace Back_End.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Medicines>> CreateMedicine([FromBody] MedicineForCreationDto medicine)
+        public async Task<ActionResult<Medicines>> CreateMedicine([FromBody] Resources_ForCreationDto medicine)
         {
             try
             {
@@ -111,14 +111,35 @@ namespace Back_End.Controllers
 
                 var medicineEntity = _mapper.Map<Medicines>(medicine);
 
-                medicineEntity.MedicinePicture = await UploadController.SaveImage(medicine.ImageFile);
+
+                if(medicine.ImageFile == null)
+                {
+                    medicineEntity.MedicinePicture = "https://i.imgur.com/S9HJEwF.png";
+                }
+                else
+                {
+
+                    medicineEntity.MedicinePicture = await UploadController.SaveImage(medicine.ImageFile);
+                }
+
+                medicineEntity.MedicineName = medicine.Name;
+                medicineEntity.MedicineQuantity = medicine.Quantity;
+                medicineEntity.MedicineAvailability = medicine.Availability;
+                medicineEntity.MedicineUtility = medicine.Description;
+                medicineEntity.MedicineExpirationDate = medicine.Medicines.MedicineExpirationDate;
+                medicineEntity.MedicineLab = medicine.Medicines.MedicineLab;
+                medicineEntity.MedicineDrug = medicine.Medicines.MedicineDrug;
+                medicineEntity.MedicineWeight = medicine.Medicines.MedicineWeight;
+                medicineEntity.MedicineUnits = medicine.Medicines.MedicineUnits;
+
+
+
 
 
                 _repository.Medicines.CreateMedicine(medicineEntity);
 
                 _repository.Medicines.SaveAsync();
 
-                var createdVehicle = _mapper.Map<MedicinesDto>(medicineEntity);
 
                 return Ok();
 

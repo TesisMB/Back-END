@@ -1,0 +1,22 @@
+2022-03-28 10:35:12.4585 ERROR Something went wrong inside CreateMaterial action: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> Materials
+System.Object -> Entities.Models.Materials
+2022-03-28 10:40:24.3823 ERROR Something went wrong inside CreateMaterial action: Object reference not set to an instance of an object.
+2022-03-28 11:27:42.6827 ERROR Something went wrong inside CreateVehicle action: Object reference not set to an instance of an object.
+2022-03-28 11:31:26.0097 ERROR Something went wrong inside CreateVehicle action: Object reference not set to an instance of an object.
+2022-03-28 11:31:53.0353 ERROR Something went wrong inside CreateVehicle action: Object reference not set to an instance of an object.
+2022-03-28 11:48:07.9486 ERROR Something went wrong inside CreateVehicle action: Object reference not set to an instance of an object.
+2022-03-28 11:49:44.5871 ERROR Something went wrong inside DeleteVehicle action: An error occurred while updating the entries. See the inner exception for details.
+2022-03-28 11:51:07.9307 ERROR Something went wrong inside DeleteVehicle action: An error occurred while updating the entries. See the inner exception for details.
+2022-03-28 11:53:19.0915 ERROR Something went wrong inside DeleteVehicle action: An error occurred while updating the entries. See the inner exception for details.
+2022-03-28 11:54:49.9313 ERROR Something went wrong inside DeleteVehicle action: Database operation expected to affect 1 row(s) but actually affected 3 row(s). Data may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.
+2022-03-28 11:57:55.1179 ERROR Something went wrong inside DeleteVehicle action: An error occurred while updating the entries. See the inner exception for details.
+2022-03-28 11:59:21.0276 ERROR Something went wrong inside DeleteVehicle action: Database operation expected to affect 1 row(s) but actually affected 3 row(s). Data may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.
+2022-03-28 12:10:00.8375 ERROR Something went wrong inside DeleteVehicle action: An error occurred while updating the entries. See the inner exception for details.
+2022-03-28 12:11:32.6998 ERROR Something went wrong inside DeleteVehicle action: Database operation expected to affect 1 row(s) but actually affected 9 row(s). Data may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.
+2022-03-28 12:12:19.4973 ERROR Vehicle with id: 24, hasn't ben found in db.
+2022-03-28 12:12:22.8768 ERROR Vehicle with id: 416, hasn't ben found in db.
+2022-03-28 12:13:14.4027 ERROR Something went wrong inside DeleteVehicle action: Database operation expected to affect 1 row(s) but actually affected 2 row(s). Data may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.
+2022-03-28 12:13:54.7344 ERROR Something went wrong inside DeleteVehicle action: Database operation expected to affect 1 row(s) but actually affected 3 row(s). Data may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.

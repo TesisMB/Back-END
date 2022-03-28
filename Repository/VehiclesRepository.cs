@@ -68,6 +68,7 @@ namespace Repository
         public async Task<Vehicles> GetVehicleById(int vehicleId)
         {
             return await FindByCondition(vehicle => vehicle.ID == vehicleId)
+                .Include(a => a.BrandsModels)
                 .FirstOrDefaultAsync();
         }
 
@@ -105,7 +106,6 @@ namespace Repository
 
         public void CreateVehicle(Vehicles vehicles)
         {
-
             spaceCamelCase(vehicles);
             Create(vehicles);
         }
@@ -113,15 +113,15 @@ namespace Repository
         private void spaceCamelCase(Vehicles vehicles)
         {
             vehicles.VehiclePatent = WithoutSpace_CamelCase.GetCamelCase(vehicles.VehiclePatent);
-            vehicles.VehicleUtility = WithoutSpace_CamelCase.GetCamelCase(vehicles.VehiclePatent);
-            vehicles.VehicleDescription = WithoutSpace_CamelCase.GetCamelCase(vehicles.VehiclePatent);
+            vehicles.VehicleUtility = WithoutSpace_CamelCase.GetCamelCase(vehicles.VehicleUtility);
+            vehicles.VehicleDescription = WithoutSpace_CamelCase.GetCamelCase(vehicles.VehicleDescription);
 
             if (vehicles.TypeVehicles != null)
             {
                 vehicles.TypeVehicles.Type = WithoutSpace_CamelCase.GetCamelCase(vehicles.TypeVehicles.Type);
             }
 
-            if (vehicles.BrandsModels != null)
+            if (vehicles.BrandsModels.Brands != null || vehicles.BrandsModels.Model != null)
             {
                 vehicles.BrandsModels.Brands.BrandName = WithoutSpace_CamelCase.GetCamelCase(vehicles.BrandsModels.Brands.BrandName);
                 vehicles.BrandsModels.Model.ModelName = WithoutSpace_CamelCase.GetCamelCase(vehicles.BrandsModels.Model.ModelName);

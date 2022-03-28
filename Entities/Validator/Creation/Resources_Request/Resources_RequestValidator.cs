@@ -100,7 +100,7 @@ namespace Entities
                         Key.Add("Vehicle");
                         Resources.Add(new Resource() { ID = id.FK_VehicleID, Name = vehiculo });
 
-                        context.AddFailure("No se en cuentra disponible");
+                        context.AddFailure("No se encuentra disponible");
                     }
                 }
             });

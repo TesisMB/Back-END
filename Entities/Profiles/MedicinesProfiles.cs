@@ -79,6 +79,8 @@ namespace Entities.Profiles
 
             CreateMap<MedicineForCreationDto, Medicines>();
 
+            CreateMap<Resources_ForCreationDto, Medicines>();
+
 
             CreateMap<MedicineForUpdateDto, Medicines>()
                                .ForMember(a => a.MedicineQuantity, b => b.MapFrom(a => a.MedicineQuantity));

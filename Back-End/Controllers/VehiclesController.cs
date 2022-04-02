@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using Back_End.Models;
-using Back_End.Models.Vehicles___Dto;
 using Contracts.Interfaces;
-using Entities.DataTransferObjects.Brands___Dto;
 using Entities.DataTransferObjects.ResourcesDto;
 using Entities.DataTransferObjects.Vehicles___Dto;
 using Entities.DataTransferObjects.Vehicles___Dto.Update;
@@ -123,19 +121,19 @@ namespace Back_End.Controllers
                     vehicleEntity.VehiclePicture = await UploadController.SaveImage(vehicle.ImageFile);
                 }
 
-                    vehicleEntity.VehicleAvailability = vehicle.Availability;
-                    vehicleEntity.VehicleQuantity = 1;
-                    vehicleEntity.VehicleDescription = vehicle.Description;
+                vehicleEntity.VehicleAvailability = vehicle.Availability;
+                vehicleEntity.VehicleQuantity = 1;
+                vehicleEntity.VehicleDescription = vehicle.Description;
 
-                    vehicleEntity.VehiclePatent = vehicle.Vehicles.VehiclePatent;
+                vehicleEntity.VehiclePatent = vehicle.Vehicles.VehiclePatent;
 
-                    vehicleEntity.VehicleYear = vehicle.Vehicles.VehicleYear;
+                vehicleEntity.VehicleYear = vehicle.Vehicles.VehicleYear;
 
-                    vehicleEntity.VehicleUtility = vehicle.Vehicles.VehicleUtility;
+                vehicleEntity.VehicleUtility = vehicle.Vehicles.VehicleUtility;
 
-                    vehicleEntity.FK_EmployeeID = vehicle.Vehicles.FK_EmployeeID;
+                vehicleEntity.FK_EmployeeID = vehicle.Vehicles.FK_EmployeeID;
 
-                    vehicleEntity.Fk_TypeVehicleID = vehicle.Vehicles.Fk_TypeVehicleID;
+                vehicleEntity.Fk_TypeVehicleID = vehicle.Vehicles.Fk_TypeVehicleID;
 
                 if (vehicle.Vehicles.TypeVehicles != null)
                 {
@@ -143,11 +141,11 @@ namespace Back_End.Controllers
                     vehicleEntity.TypeVehicles.Type = vehicle.Vehicles.TypeVehicles.Type;
                 }
 
-                    vehicleEntity.BrandsModels = new BrandsModels();
-           
+                vehicleEntity.BrandsModels = new BrandsModels();
 
-                    vehicleEntity.BrandsModels.FK_BrandID = vehicle.Vehicles.BrandsModels.FK_BrandID;
-                    vehicleEntity.BrandsModels.FK_ModelID = vehicle.Vehicles.BrandsModels.FK_ModelID;
+
+                vehicleEntity.BrandsModels.FK_BrandID = vehicle.Vehicles.BrandsModels.FK_BrandID;
+                vehicleEntity.BrandsModels.FK_ModelID = vehicle.Vehicles.BrandsModels.FK_ModelID;
 
 
                 if (vehicle.Vehicles.BrandsModels.Brands != null || vehicle.Vehicles.BrandsModels.Model != null)

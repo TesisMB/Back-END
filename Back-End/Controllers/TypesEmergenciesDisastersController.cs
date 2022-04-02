@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Contracts.Interfaces;
+using Entities.DataTransferObjects.BrandsModels__Dto;
+using Entities.DataTransferObjects.MarksModels___Dto;
 using Entities.DataTransferObjects.TypesEmergenciesDisasters___Dto;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Back_End.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class TypesEmergenciesDisastersController : ControllerBase
     {
@@ -25,7 +27,7 @@ namespace Back_End.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet("TypesEmergenciesDisasters")]
         public async Task<ActionResult<Alerts>> GetAllTypesEmergenciesDisasters()
         {
             try
@@ -45,7 +47,7 @@ namespace Back_End.Controllers
             }
         }
 
-        [HttpGet("{typeEmergencyDisasterId}")]
+        [HttpGet("TypesEmergenciesDisasters/{typeEmergencyDisasterId}")]
         public async Task<ActionResult<TypesEmergenciesDisasters>> GetTypesEmergencyDisaster(int typeEmergencyDisasterId)
         {
             try
@@ -63,6 +65,30 @@ namespace Back_End.Controllers
                 _logger.LogError($"Something went wrong inside GetAllTypesEmergenciesDisasters action: {ex.Message}");
                 return StatusCode(500, "Internal Server error");
             }
+        }
+
+        [HttpGet("TypesVehicles")]
+        public async Task<ActionResult<BrandsModels>> GetTypesVehicles()
+        {
+            try
+            {
+                var types = await _repository.TypesVehicles.GetAllTypesVehicles();
+
+                _logger.LogInfo($"Returned all TypesVehicles from database.");
+
+                var typesResult = _mapper.Map<IEnumerable<BrandsModelsForSelectDto>>(types);
+
+
+                return Ok(typesResult);
+
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogError($"Something went wrong inside GetAllTypesVehicles action: {ex.Message}");
+                return StatusCode(500, "Internal Server error");
+            }
+
         }
 
     }

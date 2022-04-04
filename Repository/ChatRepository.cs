@@ -22,8 +22,14 @@ namespace Repository
             return await FindByCondition(i => i.ID.Equals(chatID))
                    .Include(i => i.TypesChatRooms)
                    .Include(i => i.UsersChatRooms)
+
                    .ThenInclude(i => i.Users)
                    .ThenInclude(i => i.Persons)
+
+                   .Include(i => i.UsersChatRooms)
+                   .ThenInclude(i=> i.Users.Roles)
+
+
                    .Include(i => i.EmergenciesDisasters)
                    .Include(i => i.EmergenciesDisasters.TypesEmergenciesDisasters)
                    .Include(i => i.EmergenciesDisasters)

@@ -32,6 +32,9 @@ namespace Back_End.Controllers
         {
             try
             {
+
+                //Voluntarios no tomo el RoleName
+
                 var chatRooms = await _repository.ChatRooms.GetChatRooms();
                 _logger.LogInfo($"Returned all ChatRooms from database. ");
 
@@ -114,7 +117,7 @@ namespace Back_End.Controllers
 
                 var userChatRoom = _mapper.Map<UsersChatRooms>(usersChat);
 
-                _repository.UsersChatRooms.JoinGroup(userChatRoom, usersChat.LocationVolunteerLatitude, usersChat.LocationVolunteerLongitude);
+                _repository.UsersChatRooms.JoinGroup(userChatRoom, usersChat.Coords.Latitude, usersChat.Coords.Longitude);
 
                 _repository.Messages.SaveAsync();
 

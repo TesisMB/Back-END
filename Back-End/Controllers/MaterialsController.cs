@@ -45,11 +45,7 @@ namespace Back_End.Controllers
 
                 foreach (var item in materialsResult)
                 {
-                    if(item.Picture == null)
-                    {
-                        item.Picture = "https://i.imgur.com/S9HJEwF.png";
-                    }
-                    else if (item.Picture != null) 
+                     if (item.ImageSrc != null) 
                     {
                         
                     item.ImageSrc = String.Format("{0}://{1}{2}/StaticFiles/Images/{3}",
@@ -106,7 +102,7 @@ namespace Back_End.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Materials>> CreateMaterial([FromBody] MaterialsForCreationDto material)
+        public async Task<ActionResult<Materials>> CreateMaterial([FromBody] Resources_ForCreationDto material)
         {
             try
             {
@@ -125,14 +121,27 @@ namespace Back_End.Controllers
 
                 var materialEntity = _mapper.Map<Materials>(material);
 
-                materialEntity.MaterialPicture = await UploadController.SaveImage(material.ImageFile);
 
+                if(material.ImageFile == null)
+                {
+                    materialEntity.MaterialPicture = "https://i.imgur.com/S9HJEwF.png";
+                }
+                else
+                {
+                    materialEntity.MaterialPicture = await UploadController.SaveImage(material.ImageFile);
+                }
+
+                materialEntity.MaterialName = material.Name;
+                materialEntity.MaterialAvailability = material.Availability;
+                materialEntity.MaterialBrand = material.Materials.Brand;
+                materialEntity.MaterialQuantity = material.Quantity;
+                materialEntity.MaterialUtility = material.Description;
 
                 _repository.Materials.CreateMaterial(materialEntity);
 
                  _repository.Materials.SaveAsync();
 
-                var createdVolunteer = _mapper.Map<MaterialsDto>(materialEntity);
+                //var createdVolunteer = _mapper.Map<MaterialsDto>(materialEntity);
 
                 return Ok();
 

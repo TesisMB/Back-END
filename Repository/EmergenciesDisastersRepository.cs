@@ -132,7 +132,11 @@ namespace Repository
 
                  .Include(a => a.Victims)
 
+                 .Include(a => a.ChatRooms)
+                 .Include(a => a.ChatRooms.UsersChatRooms)
+
                  .OrderByDescending(i => i.Alerts.AlertID)
+
                 .ToListAsync();
 
         }

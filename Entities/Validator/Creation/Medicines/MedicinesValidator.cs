@@ -8,7 +8,7 @@ namespace Entities.Validator.Creation.Medicines
     {
         public MedicinesValidator()
         {
-            RuleFor(x => x.MedicineName)
+          /*  RuleFor(x => x.MedicineName)
            .NotEmpty().WithMessage("{PropertyName} is required.")
            .MaximumLength(50).WithMessage("The {PropertyName} must be 50 characters. You entered {TotalLength} characters");
 
@@ -35,7 +35,7 @@ namespace Entities.Validator.Creation.Medicines
 
 
             RuleFor(x => x.FK_EstateID)
-         .NotEmpty().WithMessage("{PropertyName} is required.");
+         .NotEmpty().WithMessage("{PropertyName} is required.");*/
         }
 
         private bool IsPositiveNumber1(float num)

@@ -1,11 +1,8 @@
-﻿using Back_End.Models.Employees___Dto;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace Entities.DataTransferObjects.Medicines___Dto
 {
-   public class MedicinesDto
+    public class MedicinesDto
     {
         public string MedicineExpirationDate { get; set; }
 

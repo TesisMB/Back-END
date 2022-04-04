@@ -26,12 +26,7 @@ namespace Entities.Profiles
 
             CreateMap<EmergenciesDisasters, ChatRoomsEmergenciesDisastersDto>();
 
-            CreateMap<EmergenciesDisasters, ChatRoomsEmergenciesDisastersDto>()
-
-                .ForPath(src => src.LocationCityName, opt => opt.MapFrom(a => a.Locations.LocationCityName))
-                .ForPath(src => src.TypeEmergencyDisasterID, opt => opt.MapFrom(a => a.TypesEmergenciesDisasters.TypeEmergencyDisasterID))
-                .ForPath(src => src.TypeEmergencyDisasterName, opt => opt.MapFrom(a => a.TypesEmergenciesDisasters.TypeEmergencyDisasterName))
-                .ForPath(src => src.TypeEmergencyDisasterIcon, opt => opt.MapFrom(a => a.TypesEmergenciesDisasters.TypeEmergencyDisasterIcon));
+            CreateMap<EmergenciesDisasters, ChatRoomsEmergenciesDisastersDto>();
 
 
 

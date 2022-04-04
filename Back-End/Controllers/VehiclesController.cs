@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
 using Back_End.Models;
-using Back_End.Models.Vehicles___Dto;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.ResourcesDto;
 using Entities.DataTransferObjects.Vehicles___Dto;
-using Entities.DataTransferObjects.Vehicles___Dto.Creation;
 using Entities.DataTransferObjects.Vehicles___Dto.Update;
 using Entities.Helpers;
+using Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -45,14 +44,10 @@ namespace Back_End.Controllers
 
                 foreach (var item in employeesResult)
                 {
-                    if(item.Picture == null)
+                    if (item.ImageSrc != null)
                     {
-                        item.Picture = "https://i.imgur.com/S9HJEwF.png";
-                    }
-                    else if(item.Picture != null)
-                    {
-                         item.ImageSrc = String.Format("{0}://{1}{2}/StaticFiles/Images/{3}",
-                                         Request.Scheme, Request.Host, Request.PathBase, item.Picture);
+                        item.ImageSrc = String.Format("{0}://{1}{2}/StaticFiles/Images/{3}",
+                                        Request.Scheme, Request.Host, Request.PathBase, item.Picture);
                     }
 
                 }
@@ -97,7 +92,7 @@ namespace Back_End.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Vehicles>> CreateVehicle([FromBody] VehiclesForCreationDto vehicle)
+        public async Task<ActionResult<Vehicles>> CreateVehicle([FromBody] Resources_ForCreationDto vehicle)
         {
             try
             {
@@ -115,13 +110,55 @@ namespace Back_End.Controllers
 
                 var vehicleEntity = _mapper.Map<Vehicles>(vehicle);
 
-                vehicleEntity.VehiclePicture = await UploadController.SaveImage(vehicle.ImageFile);
+
+
+                if (vehicle.Picture == null)
+                {
+                    vehicleEntity.VehiclePicture = "https://i.imgur.com/S9HJEwF.png";
+                }
+                else
+                {
+                    vehicleEntity.VehiclePicture = await UploadController.SaveImage(vehicle.ImageFile);
+                }
+
+                vehicleEntity.VehicleAvailability = vehicle.Availability;
+                vehicleEntity.VehicleQuantity = 1;
+                vehicleEntity.VehicleDescription = vehicle.Description;
+
+                vehicleEntity.VehiclePatent = vehicle.Vehicles.VehiclePatent;
+
+                vehicleEntity.VehicleYear = vehicle.Vehicles.VehicleYear;
+
+                vehicleEntity.VehicleUtility = vehicle.Vehicles.VehicleUtility;
+
+                vehicleEntity.FK_EmployeeID = vehicle.Vehicles.FK_EmployeeID;
+
+                vehicleEntity.Fk_TypeVehicleID = vehicle.Vehicles.Fk_TypeVehicleID;
+
+                if (vehicle.Vehicles.TypeVehicles != null)
+                {
+                    vehicleEntity.TypeVehicles = new TypeVehicles();
+                    vehicleEntity.TypeVehicles.Type = vehicle.Vehicles.TypeVehicles.Type;
+                }
+
+                vehicleEntity.BrandsModels = new BrandsModels();
+
+
+                vehicleEntity.BrandsModels.FK_BrandID = vehicle.Vehicles.BrandsModels.FK_BrandID;
+                vehicleEntity.BrandsModels.FK_ModelID = vehicle.Vehicles.BrandsModels.FK_ModelID;
+
+
+                if (vehicle.Vehicles.BrandsModels.Brands != null || vehicle.Vehicles.BrandsModels.Model != null)
+                {
+                    vehicleEntity.BrandsModels.Brands = new Brands();
+                    vehicleEntity.BrandsModels.Model = new Model();
+                    vehicleEntity.BrandsModels.Brands.BrandName = vehicle.Vehicles.BrandsModels.Brands.BrandName;
+                    vehicleEntity.BrandsModels.Model.ModelName = vehicle.Vehicles.BrandsModels.Model.ModelName;
+                }
 
                 _repository.Vehicles.CreateVehicle(vehicleEntity);
 
                 _repository.Vehicles.SaveAsync();
-
-                var createdVehicle = _mapper.Map<VehiclesDto>(vehicleEntity);
 
                 return Ok();
 

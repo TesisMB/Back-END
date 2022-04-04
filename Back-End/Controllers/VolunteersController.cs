@@ -5,20 +5,15 @@ using Back_End.Models;
 using Back_End.Models.Employees___Dto;
 using Back_End.Models.Volunteers__Dto;
 using Contracts.Interfaces;
-using Entities.DataTransferObjects;
 using Entities.DataTransferObjects.ResourcesDto;
 using Entities.DataTransferObjects.Volunteers__Dto;
 using Entities.Helpers;
-using Entities.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace Back_End.Controllers
@@ -53,18 +48,18 @@ namespace Back_End.Controllers
 
                 foreach (var item in volunteersResult)
                 {
-                    if(item.Picture == null)
+                    if (item.Picture == null)
                     {
                         item.Picture = "https://i.imgur.com/8AACVdK.png";
                     }
                     else if (item.Picture != null)
                     {
-                         item.ImageSrc = String.Format("{0}://{1}{2}/StaticFiles/Images/{3}",
-                                          Request.Scheme, Request.Host, Request.PathBase, item.Picture);
+                /*        item.ImageSrc = String.Format("{0}://{1}{2}/StaticFiles/Images/{3}",
+                                         Request.Scheme, Request.Host, Request.PathBase, item.Picture);*/
                     }
                 }
 
-                
+
                 return Ok(volunteersResult);
             }
             catch (Exception ex)
@@ -192,15 +187,15 @@ namespace Back_End.Controllers
                 var volunteerEntity = _mapper.Map<Volunteers>(volunteer);
 
 
-               /* volunteerEntity.LocationVolunteers = new LocationVolunteers()
-                {
-                    ID = volunteerEntity.ID,
-                    LocationVolunteerLatitude = null,
-                    LocationVolunteerLongitude = null,
-                    Volunteers = volunteerEntity
-                };*/
+                /* volunteerEntity.LocationVolunteers = new LocationVolunteers()
+                 {
+                     ID = volunteerEntity.ID,
+                     LocationVolunteerLatitude = null,
+                     LocationVolunteerLongitude = null,
+                     Volunteers = volunteerEntity
+                 };*/
 
-                volunteerEntity.VolunteerAvatar = await UploadController.SaveImage(volunteer.ImageFile);
+               // volunteerEntity.VolunteerAvatar = await UploadController.SaveImage(volunteer.ImageFile);
 
                 // Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
                 _repository.Volunteers.CreateVolunteer(volunteerEntity);

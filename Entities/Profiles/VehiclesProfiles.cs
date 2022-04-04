@@ -56,6 +56,8 @@ namespace Entities.Profiles
 
             CreateMap<VehiclesForCreationDto, Vehicles>();
 
+            CreateMap<Resources_ForCreationDto, Vehicles>();
+
             CreateMap<VehiclesForUpdateDto, Vehicles>();
             CreateMap<Vehicles, VehiclesForUpdateDto>();
         }

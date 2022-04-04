@@ -35,5 +35,6 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
 
         public ICollection<ResourcesRequestDto> Resources_Requests { get; set; }
 
+
     }
 }

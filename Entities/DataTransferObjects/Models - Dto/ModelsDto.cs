@@ -1,9 +1,4 @@
-﻿using Entities.DataTransferObjects.Marks___Dto;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Entities.DataTransferObjects.Models___Dto
+﻿namespace Entities.DataTransferObjects.Models___Dto
 {
     public class ModelsDto
     {

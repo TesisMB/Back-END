@@ -12,12 +12,12 @@ namespace Entities.Validator.Creation.Vehicles
             .MaximumLength(9).WithMessage("The {PropertyName} must be 9 characters. You entered {TotalLength} characters");
 
 
-            RuleFor(x => x.VehicleUtility)
+           /* RuleFor(x => x.VehicleUtility)
            .NotEmpty().WithMessage("{PropertyName} is required.")
            .MaximumLength(50).WithMessage("The {PropertyName} must be 50 characters. You entered {TotalLength} characters");
 
 
-
+            */
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Repository
         private IMessageRepository _messages;
         private IResources_RequestRepository _resources_Request;
         private IUsersChatRoomsRepository _userChatRooms;
-
+        private ITypesVehicles _typesVehicles;
         private IMapper _mapper;
 
         public RepositoryWrapper(CruzRojaContext cruzRojaContext, IMapper mapper)
@@ -196,6 +196,19 @@ namespace Repository
                     _userChatRooms = new UsersChatRoomsRepository(_cruzRojaContext);
                 }
                 return _userChatRooms;
+            }
+        }
+
+
+        public ITypesVehicles TypesVehicles
+        {
+            get
+            {
+                if (_typesVehicles == null)
+                {
+                    _typesVehicles = new TypesVehiclesRepository(_cruzRojaContext);
+                }
+                return _typesVehicles;
             }
         }
 

@@ -24,3 +24,9 @@
 2022-04-06 16:02:14.2423 INFO Returned vehicle with id: 3
 2022-04-06 16:03:56.3287 INFO Returned vehicle with id: 3
 2022-04-06 16:06:30.4117 INFO Returned vehicle with id: 3
+2022-04-06 16:08:44.4433 INFO Returned all ChatRooms from database. 
+2022-04-06 16:08:52.8713 INFO Returned all ChatRooms from database. 
+2022-04-06 16:08:54.8334 INFO Returned all ChatRooms from database. 
+2022-04-06 16:08:56.3031 INFO Returned all ChatRooms from database. 
+2022-04-06 16:08:59.7268 INFO Returned all ChatRooms from database. 
+2022-04-06 16:09:07.6563 INFO Returned all ChatRooms from database. 

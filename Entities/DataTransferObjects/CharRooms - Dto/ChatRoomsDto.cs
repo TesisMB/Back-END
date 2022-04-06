@@ -15,5 +15,8 @@ namespace Entities.DataTransferObjects.CharRooms___Dto
 
         public ICollection<UsersChatRoomsDto> UsersChatRooms { get; set; }
 
+        public ICollection<MessagesDto> Messages { get; set; }
+
+
     }
 }

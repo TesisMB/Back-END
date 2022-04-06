@@ -56,6 +56,15 @@ namespace Entities.Profiles
 
             CreateMap<Materials, MaterialsForUpdateDto>();
 
+            CreateMap<Materials, Resources_ForCreationDto>()
+                     .ForPath(a => a.Quantity, b => b.MapFrom(a => a.MaterialQuantity))
+                     .ForPath(a => a.Name, b => b.MapFrom(a => a.MaterialName))
+                     .ForPath(a => a.Availability, b => b.MapFrom(a => a.MaterialAvailability))
+                     .ForPath(a => a.FK_EstateID, b => b.MapFrom(a => a.FK_EstateID))
+                     .ForPath(a => a.Description, b => b.MapFrom(a => a.MaterialUtility))
+                     .ForPath(a => a.Materials.Brand, b => b.MapFrom(a => a.MaterialBrand));
+            
+
 
         }
     }

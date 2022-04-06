@@ -1,0 +1,26 @@
+2022-04-06 11:12:08.7112 ERROR Material with id: 2, hasn't been found in db.
+2022-04-06 11:12:09.9591 INFO Returned Material with id: 3
+2022-04-06 11:19:34.0096 ERROR Something went wrong inside UpdatMaterial action: Object reference not set to an instance of an object.
+2022-04-06 11:21:32.4277 INFO Returned Material with id: 3
+2022-04-06 11:22:32.3490 INFO Returned Material with id: 3
+2022-04-06 11:22:51.5590 INFO Returned Material with id: 3
+2022-04-06 11:25:18.9450 INFO Returned Material with id: 3
+2022-04-06 11:53:02.7954 INFO Returned Material with id: 3
+2022-04-06 15:01:37.7877 ERROR Something went wrong inside UpdatMaterial action: An error occurred while updating the entries. See the inner exception for details.
+2022-04-06 15:02:38.2232 INFO Returned Material with id: 3
+2022-04-06 15:04:46.9427 INFO Returned Material with id: 3
+2022-04-06 15:21:31.9430 INFO Returned Material with id: 3
+2022-04-06 15:22:55.5421 INFO Returned Material with id: 3
+2022-04-06 15:23:19.4316 INFO Returned Material with id: 3
+2022-04-06 15:45:48.5056 INFO Returned medicine with details for id: 3
+2022-04-06 15:46:19.9993 INFO Returned medicine with details for id: 3
+2022-04-06 15:47:22.6922 ERROR Something went wrong inside UpdateMedicine action: An error occurred while updating the entries. See the inner exception for details.
+2022-04-06 15:48:03.4734 ERROR Something went wrong inside UpdateMedicine action: An error occurred while updating the entries. See the inner exception for details.
+2022-04-06 15:49:15.5050 INFO Returned medicine with details for id: 3
+2022-04-06 15:52:00.1181 INFO Returned medicine with details for id: 3
+2022-04-06 15:52:06.4109 INFO Returned Material with id: 3
+2022-04-06 15:52:20.2223 INFO Returned Material with id: 3
+2022-04-06 15:52:27.0327 INFO Returned Material with id: 3
+2022-04-06 16:02:14.2423 INFO Returned vehicle with id: 3
+2022-04-06 16:03:56.3287 INFO Returned vehicle with id: 3
+2022-04-06 16:06:30.4117 INFO Returned vehicle with id: 3

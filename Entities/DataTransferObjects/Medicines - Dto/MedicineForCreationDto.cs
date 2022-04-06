@@ -11,7 +11,7 @@ namespace Entities.DataTransferObjects.Medicines___Dto
 
         public String MedicineDrug { get; set; }
 
-        public double MedicineWeight { get; set; }
+        public float MedicineWeight { get; set; }
 
         public string MedicineUnits { get; set; }
     }

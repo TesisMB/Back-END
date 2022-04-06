@@ -10,7 +10,7 @@ namespace Entities.DataTransferObjects.ResourcesDto
     {
         public string Name { get; set; }
         public int Quantity { get; set; }
-        public bool Availability { get; set; } = true;
+        public bool Availability { get; set; }
         public string Picture { get; set; }
 
         public IFormFile ImageFile { get; set; }

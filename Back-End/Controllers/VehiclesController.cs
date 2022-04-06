@@ -172,7 +172,7 @@ namespace Back_End.Controllers
         }
 
         [HttpPatch("{vehicleId}")]
-        public async Task<ActionResult> UpdateVehicle(int vehicleId, JsonPatchDocument<VehiclesForUpdateDto> patchDocument)
+        public async Task<ActionResult> UpdateVehicle(int vehicleId, JsonPatchDocument<Resources_ForCreationDto> patchDocument)
         {
             try
             {
@@ -184,7 +184,7 @@ namespace Back_End.Controllers
                     return NotFound();
                 }
 
-                var vehicleToPatch = _mapper.Map<VehiclesForUpdateDto>(vehicleEntity);
+                var vehicleToPatch = _mapper.Map<Resources_ForCreationDto>(vehicleEntity);
 
                 patchDocument.ApplyTo(vehicleToPatch, ModelState);
 
@@ -194,7 +194,18 @@ namespace Back_End.Controllers
                     return ValidationProblem(ModelState);
                 }
 
-                var vehicleResult = _mapper.Map(vehicleToPatch, vehicleEntity);
+                VehiclesForUpdateDto vehicles = new VehiclesForUpdateDto();
+
+                vehicles.VehicleAvailability = vehicleToPatch.Availability;
+                vehicles.VehicleDescription = vehicleToPatch.Description;
+                vehicles.VehicleUtility = vehicleToPatch.Vehicles.VehicleUtility;
+                vehicles.FK_EstateID = vehicleToPatch.FK_EstateID;
+                vehicles.FK_EmployeeID = vehicleToPatch.Vehicles.FK_EmployeeID;
+                vehicles.VehicleYear = vehicleToPatch.Vehicles.VehicleYear;
+                vehicles.VehiclePatent = vehicleToPatch.Vehicles.VehiclePatent;
+
+
+                var vehicleResult = _mapper.Map(vehicles, vehicleEntity);
 
                 _repository.Vehicles.Update(vehicleResult);
 

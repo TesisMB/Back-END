@@ -132,7 +132,7 @@ namespace Back_End.Controllers
                 }
 
                 materialEntity.MaterialName = material.Name;
-                materialEntity.MaterialAvailability = material.Availability;
+                materialEntity.MaterialAvailability = true;
                 materialEntity.MaterialBrand = material.Materials.Brand;
                 materialEntity.MaterialQuantity = material.Quantity;
                 materialEntity.MaterialUtility = material.Description;
@@ -156,11 +156,12 @@ namespace Back_End.Controllers
 
         //[Authorize(Roles = "Coordinador General, Admin")] 
         [HttpPatch("{materialId}")]
-        public async Task<ActionResult> UpdatePartialUser(int materialId, JsonPatchDocument<MaterialsForUpdateDto> _materials)
+        public async Task<ActionResult> UpdatePartialUser(int materialId, JsonPatchDocument<Resources_ForCreationDto> _materials)
         {
 
             try
             {
+
 
                 var materialEntity = await _repository.Materials.GetMaterialById(materialId);
 
@@ -170,8 +171,11 @@ namespace Back_End.Controllers
                     return NotFound();
                 }
 
-                var materialToPatch = _mapper.Map<MaterialsForUpdateDto>(materialEntity);
 
+                var materialToPatch = _mapper.Map<Resources_ForCreationDto>(materialEntity);
+
+
+                //se aplican los cambios recien aca
                 _materials.ApplyTo(materialToPatch, ModelState);
 
 
@@ -180,13 +184,21 @@ namespace Back_End.Controllers
                     return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
                 }
 
-                var employeeResult = _mapper.Map(materialToPatch, materialEntity);
+                MaterialsForUpdateDto material = new MaterialsForUpdateDto();
+                material.MaterialQuantity = materialToPatch.Quantity;
+                material.MaterialName = materialToPatch.Name;
+                material.MaterialAvailability = materialToPatch.Availability;
+                material.FK_EstateID = materialToPatch.FK_EstateID;
+                material.Description = materialToPatch.Description;
+                material.MaterialBrand = materialToPatch.Materials.Brand;
+
+                var employeeResult = _mapper.Map(material, materialEntity);
 
                 _repository.Materials.UpdateMaterial(employeeResult);
               
                  _repository.Materials.SaveAsync();
 
-                return NoContent();
+                 return NoContent();
 
             }
 

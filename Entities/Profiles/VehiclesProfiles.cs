@@ -31,6 +31,9 @@ namespace Entities.Profiles
 
                 .ForMember(dest => dest.Description,
                             opt => opt.MapFrom(src => src.VehicleDescription))
+                
+                .ForMember(dest => dest.Donation,
+                            opt => opt.MapFrom(src => src.VehicleDonation))
 
                   .ForMember(dest => dest.Availability,
                             opt => opt.MapFrom(src => src.VehicleAvailability))
@@ -60,6 +63,19 @@ namespace Entities.Profiles
 
             CreateMap<VehiclesForUpdateDto, Vehicles>();
             CreateMap<Vehicles, VehiclesForUpdateDto>();
+
+            CreateMap<Vehicles, Resources_ForCreationDto>()
+                  .ForPath(dest => dest.Description, opts => opts.MapFrom(src => src.VehicleDescription))
+                  .ForPath(dest => dest.Donation, opts => opts.MapFrom(src => src.VehicleDonation))
+                  .ForPath(dest => dest.Vehicles.VehicleUtility, opts => opts.MapFrom(src => src.VehicleUtility))
+                  .ForPath(dest => dest.Availability, opts => opts.MapFrom(src => src.VehicleAvailability))
+                  .ForPath(dest => dest.FK_EstateID, opts => opts.MapFrom(src => src.FK_EstateID))
+                  
+                  .ForPath(dest => dest.Vehicles.FK_EmployeeID, opts => opts.MapFrom(src => src.FK_EmployeeID))
+                  .ForPath(dest => dest.Vehicles.Fk_TypeVehicleID, opts => opts.MapFrom(src => src.Fk_TypeVehicleID))
+
+                  .ForPath(dest => dest.Vehicles.VehiclePatent, opts => opts.MapFrom(src => src.VehiclePatent))
+                  .ForPath(dest => dest.Vehicles.VehicleYear, opts => opts.MapFrom(src => src.VehicleYear));
         }
     }
 }

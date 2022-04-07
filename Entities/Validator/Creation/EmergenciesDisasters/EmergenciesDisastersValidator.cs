@@ -8,7 +8,7 @@ namespace Entities.Validator.Creation.EmergenciesDisasters
         public EmergenciesDisastersValidator()
         {
 
-            RuleFor(x => x.FK_LocationID).NotEmpty().WithMessage("{PropertyName} is required.");
+            //RuleFor(x => x.FK_LocationID).NotEmpty().WithMessage("{PropertyName} is required.");
 
             RuleFor(x => x.FK_TypeEmergencyID).NotEmpty().WithMessage("{PropertyName} is required.");
 

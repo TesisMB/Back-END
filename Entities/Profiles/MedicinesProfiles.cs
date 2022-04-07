@@ -37,6 +37,9 @@ namespace Entities.Profiles
 
                 .ForMember(dest => dest.Name,
                             opt => opt.MapFrom(src => src.MedicineName))
+                
+                .ForMember(dest => dest.Donation,
+                            opt => opt.MapFrom(src => src.MedicineDonation))
 
                   .ForMember(dest => dest.Quantity,
                             opt => opt.MapFrom(src => src.MedicineQuantity))
@@ -86,6 +89,21 @@ namespace Entities.Profiles
                                .ForMember(a => a.MedicineQuantity, b => b.MapFrom(a => a.MedicineQuantity));
             
             CreateMap<Medicines, MedicineForUpdateDto>();
+
+            CreateMap<Medicines, Resources_ForCreationDto>()
+                 .ForPath(dest => dest.Quantity, opts => opts.MapFrom(src => src.MedicineQuantity))
+                 .ForPath(dest => dest.Donation, opts => opts.MapFrom(src => src.MedicineDonation))
+                 .ForPath(dest => dest.Name, opts => opts.MapFrom(src => src.MedicineName))
+                 .ForPath(dest => dest.Availability, opts => opts.MapFrom(src => src.MedicineAvailability))
+                 .ForPath(dest => dest.Picture, opts => opts.MapFrom(src => src.MedicinePicture))
+                 .ForPath(dest => dest.Description, opts => opts.MapFrom(src => src.MedicineUtility))
+                 .ForPath(dest => dest.FK_EstateID, opts => opts.MapFrom(src => src.FK_EstateID))
+
+                 .ForPath(dest => dest.Medicines.MedicineExpirationDate, opts => opts.MapFrom(src => src.MedicineExpirationDate))
+                 .ForPath(dest => dest.Medicines.MedicineLab, opts => opts.MapFrom(src => src.MedicineLab))
+                 .ForPath(dest => dest.Medicines.MedicineDrug, opts => opts.MapFrom(src => src.MedicineDrug))
+                 .ForPath(dest => dest.Medicines.MedicineWeight, opts => opts.MapFrom(src => src.MedicineWeight))
+                 .ForPath(dest => dest.Medicines.MedicineUnits, opts => opts.MapFrom(src => src.MedicineUnits));
         }
     }
 }

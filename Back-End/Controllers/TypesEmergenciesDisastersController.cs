@@ -7,6 +7,7 @@ using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Back_End.Controllers
@@ -18,7 +19,6 @@ namespace Back_End.Controllers
         private ILoggerManager _logger;
         private IRepositorWrapper _repository;
         private IMapper _mapper;
-
         public TypesEmergenciesDisastersController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper)
         {
             _logger = logger;
@@ -77,7 +77,6 @@ namespace Back_End.Controllers
                 _logger.LogInfo($"Returned all TypesVehicles from database.");
 
                 var typesResult = _mapper.Map<IEnumerable<BrandsModelsForSelectDto>>(types);
-
 
                 return Ok(typesResult);
 

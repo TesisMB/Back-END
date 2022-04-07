@@ -26,10 +26,17 @@ namespace Entities.Models
 
         public string MaterialUtility { get; set; }
 
+        [Required]
         public Boolean MaterialAvailability { get; set; }
+
+        [Required]
 
         public string MaterialPicture { get; set; }
 
+        [Required]
+        public Boolean MaterialDonation { get; set; }
+
+        [Required]
         public int FK_EstateID { get; set; }
 
         [ForeignKey("FK_EstateID")]

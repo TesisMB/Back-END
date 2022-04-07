@@ -220,6 +220,14 @@ namespace Repository
                 //No existe el recurso lo creo
                 if (re == null && rec != null)
                 {
+                    if (resources_Request.Description != null)
+                    {
+                        rec.Description = resources_Request.Description;
+                    }
+                    else
+                    {
+                        resources_Request.Description = rec.Description;
+                    }
 
                     spaceCamelCase(resources_Request);
 
@@ -230,16 +238,19 @@ namespace Repository
 
                     DeleteResource(resources_Request);
 
+                    Update(resources_Request);
+
                     SaveAsync();
                 }
 
                 //Actualizando recursos - existe la solicitud a esa Emegrnecia de un Usuario especifico
                 else if (re != null && rec != null)
                 {
-                    if(resources_Request.Reason == null)
+                    if(resources_Request.Description != null)
                     {
-                        resources_Request.Reason = rec.Reason;
+                         rec.Description = resources_Request.Description;
                     }
+
 
                     resources_Request.FK_UserID = rec.FK_UserID;
 

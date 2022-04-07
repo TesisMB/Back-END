@@ -12,6 +12,8 @@ namespace Entities.Profiles
         {
             CreateMap<Locations, LocationsDto>();
 
+            CreateMap<LocationsDto, Locations>();
+
             CreateMap<Locations, EstatesTypeDto>();
 
         }

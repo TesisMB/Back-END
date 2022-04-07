@@ -3,6 +3,7 @@ using Back_End.Models.Vehicles___Dto;
 using Entities.DataTransferObjects.Materials___Dto;
 using Entities.DataTransferObjects.Medicines___Dto;
 using Microsoft.AspNetCore.Http;
+using System;
 
 namespace Entities.DataTransferObjects.ResourcesDto
 {
@@ -11,11 +12,11 @@ namespace Entities.DataTransferObjects.ResourcesDto
         public int ID { get; set; }
         public string Name { get; set; }
         public int? Quantity { get; set; }
-        public bool Availability { get; set; }
+        public Boolean Availability { get; set; }
         public string Picture { get; set; }
         public string Description { get; set; }
         public string ImageSrc { get; set; }
-
+        public Boolean Donation { get; set; }
 
         public string LocationCityName { get; set; }
 

@@ -47,6 +47,9 @@ namespace Entities.Models
         public string MedicinePicture { get; set; }
 
         [Required]
+        public Boolean MedicineDonation { get; set; }
+
+        [Required]
         public int FK_EstateID { get; set; }
 
         [ForeignKey("FK_EstateID")]

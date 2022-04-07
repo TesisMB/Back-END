@@ -16,6 +16,7 @@ namespace Entities.DataTransferObjects.Medicines___Dto
 
         public String MedicineUtility { get; set; }
         public Boolean MedicineAvailability { get; set; }
+        public Boolean MedicineDonation { get; set; }
         public int FK_EstateID { get; set; }
     }
 }

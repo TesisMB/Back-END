@@ -120,17 +120,15 @@ namespace Back_End.Controllers
                 }
 
                 medicineEntity.MedicineName = medicine.Name;
+                medicineEntity.MedicineDonation = medicine.Donation;
                 medicineEntity.MedicineQuantity = medicine.Quantity;
-                medicineEntity.MedicineAvailability = medicine.Availability;
+                medicineEntity.MedicineAvailability = true;
                 medicineEntity.MedicineUtility = medicine.Description;
                 medicineEntity.MedicineExpirationDate = medicine.Medicines.MedicineExpirationDate;
                 medicineEntity.MedicineLab = medicine.Medicines.MedicineLab;
                 medicineEntity.MedicineDrug = medicine.Medicines.MedicineDrug;
                 medicineEntity.MedicineWeight = medicine.Medicines.MedicineWeight;
                 medicineEntity.MedicineUnits = medicine.Medicines.MedicineUnits;
-
-
-
 
 
                 _repository.Medicines.CreateMedicine(medicineEntity);
@@ -150,7 +148,7 @@ namespace Back_End.Controllers
         }
 
         [HttpPatch("{medicineId}")]
-        public async Task<ActionResult> UpdateMedicine(int medicineId, JsonPatchDocument<MedicineForUpdateDto> patchDocument)
+        public async Task<ActionResult> UpdateMedicine(int medicineId, JsonPatchDocument<Resources_ForCreationDto> patchDocument)
         {
             try
             {
@@ -162,7 +160,7 @@ namespace Back_End.Controllers
                     return NotFound();
                 }
 
-                var medicineToPatch = _mapper.Map<MedicineForUpdateDto>(medicineEntity);
+                var medicineToPatch = _mapper.Map<Resources_ForCreationDto>(medicineEntity);
 
                 patchDocument.ApplyTo(medicineToPatch, ModelState);
 
@@ -172,7 +170,21 @@ namespace Back_End.Controllers
                     return ValidationProblem(ModelState);
                 }
 
-                var medicineResult = _mapper.Map(medicineToPatch, medicineEntity);
+                MedicineForUpdateDto medicine = new MedicineForUpdateDto();
+                medicine.MedicineQuantity = medicineToPatch.Quantity;
+                medicine.MedicineName = medicineToPatch.Name;
+                medicine.MedicineAvailability = medicineToPatch.Availability;
+                medicine.MedicineDonation = medicineToPatch.Donation;
+                medicine.MedicineUtility = medicineToPatch.Description;
+                medicine.MedicineExpirationDate = medicineToPatch.Medicines.MedicineExpirationDate;
+                medicine.MedicineDrug = medicineToPatch.Medicines.MedicineDrug;
+                medicine.MedicineWeight = medicineToPatch.Medicines.MedicineWeight;
+                medicine.MedicineUnits = medicineToPatch.Medicines.MedicineUnits;
+                medicine.FK_EstateID = medicineToPatch.FK_EstateID;
+                medicine.MedicineLab = medicineToPatch.Medicines.MedicineLab;
+
+
+                var medicineResult = _mapper.Map(medicine, medicineEntity);
 
                 _repository.Medicines.Update(medicineResult);
 

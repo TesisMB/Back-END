@@ -3,6 +3,7 @@ using Entities.DataTransferObjects.Materials___Dto;
 using Entities.DataTransferObjects.Medicines___Dto;
 using Entities.DataTransferObjects.Vehicles___Dto.Creation;
 using Microsoft.AspNetCore.Http;
+using System;
 
 namespace Entities.DataTransferObjects.ResourcesDto
 {
@@ -10,7 +11,7 @@ namespace Entities.DataTransferObjects.ResourcesDto
     {
         public string Name { get; set; }
         public int Quantity { get; set; }
-        public bool Availability { get; set; }
+        public Boolean Availability { get; set; }
         public string Picture { get; set; }
 
         public IFormFile ImageFile { get; set; }
@@ -19,6 +20,7 @@ namespace Entities.DataTransferObjects.ResourcesDto
 
         public int FK_EstateID { get; set; }
 
+        public Boolean Donation { get; set; }
         public MaterialsDto Materials { get; set; }
 
         public MedicineForCreationDto Medicines { get; set; }

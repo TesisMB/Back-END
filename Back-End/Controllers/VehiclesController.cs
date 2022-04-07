@@ -121,7 +121,8 @@ namespace Back_End.Controllers
                     vehicleEntity.VehiclePicture = await UploadController.SaveImage(vehicle.ImageFile);
                 }
 
-                vehicleEntity.VehicleAvailability = vehicle.Availability;
+                vehicleEntity.VehicleAvailability = true;
+                vehicleEntity.VehicleDonation = vehicle.Donation;
                 vehicleEntity.VehicleQuantity = 1;
                 vehicleEntity.VehicleDescription = vehicle.Description;
 
@@ -197,6 +198,7 @@ namespace Back_End.Controllers
                 VehiclesForUpdateDto vehicles = new VehiclesForUpdateDto();
 
                 vehicles.VehicleAvailability = vehicleToPatch.Availability;
+                vehicles.VehicleDonation = vehicleToPatch.Donation;
                 vehicles.VehicleDescription = vehicleToPatch.Description;
                 vehicles.VehicleUtility = vehicleToPatch.Vehicles.VehicleUtility;
                 vehicles.FK_EstateID = vehicleToPatch.FK_EstateID;

@@ -1,0 +1,32 @@
+2022-04-07 11:19:43.8993 INFO Returned User.
+2022-04-07 11:19:47.2234 INFO Returned all Materials from database.
+2022-04-07 11:20:04.9163 ERROR Material with id: 1, hasn't been found in db.
+2022-04-07 11:20:06.3624 ERROR Material with id: 2, hasn't been found in db.
+2022-04-07 11:20:07.5180 INFO Returned Material with id: 3
+2022-04-07 11:20:11.1856 INFO Returned Material with id: 4
+2022-04-07 11:20:23.1916 INFO Returned all Materials from database.
+2022-04-07 11:20:30.3331 INFO Returned medicine with details for id: 5
+2022-04-07 11:20:33.5398 ERROR Medicine with id: 4, hasn't been found in db.
+2022-04-07 11:20:35.1545 INFO Returned medicine with details for id: 6
+2022-04-07 11:20:43.3417 INFO Returned all vehicles from database.
+2022-04-07 11:20:49.3070 INFO Returned vehicle with id: 3
+2022-04-07 11:20:51.0575 INFO Returned vehicle with id: 4
+2022-04-07 11:21:18.8049 INFO Returned Material with id: 3
+2022-04-07 11:21:29.9647 INFO Returned Material with id: 3
+2022-04-07 11:21:39.0911 INFO Returned Material with id: 3
+2022-04-07 11:21:48.4702 INFO Returned vehicle with id: 3
+2022-04-07 11:21:59.7562 INFO Returned vehicle with id: 3
+2022-04-07 11:22:09.0299 INFO Returned vehicle with id: 3
+2022-04-07 11:22:14.9556 INFO Returned medicine with details for id: 3
+2022-04-07 11:22:30.0622 INFO Returned medicine with details for id: 3
+2022-04-07 11:22:39.3219 INFO Returned medicine with details for id: 3
+2022-04-07 11:26:28.1955 INFO Returned all Materials from database.
+2022-04-07 11:27:15.3626 INFO Returned all Materials from database.
+2022-04-07 11:30:26.6354 INFO Returned medicine with details for id: 3
+2022-04-07 11:32:57.8370 INFO Returned User.
+2022-04-07 11:35:08.0455 INFO Returned vehicle with id: 3
+2022-04-07 11:39:32.1863 ERROR Something went wrong inside CreateVehicle action: Object reference not set to an instance of an object.
+2022-04-07 11:40:09.9905 ERROR Something went wrong inside CreateVehicle action: Object reference not set to an instance of an object.
+2022-04-07 11:40:28.8773 ERROR Something went wrong inside CreateVehicle action: Object reference not set to an instance of an object.
+2022-04-07 11:42:34.8008 ERROR Something went wrong inside DeleteVehicle action: Database operation expected to affect 1 row(s) but actually affected 2 row(s). Data may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.
+2022-04-07 11:42:36.5307 ERROR Something went wrong inside DeleteVehicle action: Database operation expected to affect 1 row(s) but actually affected 2 row(s). Data may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.

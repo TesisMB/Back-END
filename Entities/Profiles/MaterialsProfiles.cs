@@ -26,6 +26,9 @@ namespace Entities.Profiles
             CreateMap<Materials, Resources_Dto>()
                 .ForMember(dest => dest.Name,
                             opt => opt.MapFrom(src => src.MaterialName))
+                
+                .ForMember(dest => dest.Donation,
+                            opt => opt.MapFrom(src => src.MaterialDonation))
 
                 .ForPath(dest => dest.Materials.Brand, opts => opts.MapFrom(src => src.MaterialBrand))
 
@@ -58,6 +61,7 @@ namespace Entities.Profiles
 
             CreateMap<Materials, Resources_ForCreationDto>()
                      .ForPath(a => a.Quantity, b => b.MapFrom(a => a.MaterialQuantity))
+                     .ForPath(a => a.Donation, b => b.MapFrom(a => a.MaterialDonation))
                      .ForPath(a => a.Name, b => b.MapFrom(a => a.MaterialName))
                      .ForPath(a => a.Availability, b => b.MapFrom(a => a.MaterialAvailability))
                      .ForPath(a => a.FK_EstateID, b => b.MapFrom(a => a.FK_EstateID))

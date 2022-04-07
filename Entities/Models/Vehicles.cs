@@ -28,10 +28,15 @@ namespace Back_End.Models
         [Required]
         public string VehiclePicture { get; set; }
 
+        [Required]
         public int VehicleQuantity{ get; set; }
 
         [Required]
         public int VehicleYear { get; set; }
+
+        [Required]
+        public Boolean VehicleDonation { get; set; }
+
 
         [ForeignKey("FK_EstateID")]
         public Estates Estates { get; set; }

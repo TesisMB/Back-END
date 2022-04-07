@@ -132,6 +132,7 @@ namespace Back_End.Controllers
                 }
 
                 materialEntity.MaterialName = material.Name;
+                materialEntity.MaterialDonation = material.Donation;
                 materialEntity.MaterialAvailability = true;
                 materialEntity.MaterialBrand = material.Materials.Brand;
                 materialEntity.MaterialQuantity = material.Quantity;
@@ -186,6 +187,7 @@ namespace Back_End.Controllers
 
                 MaterialsForUpdateDto material = new MaterialsForUpdateDto();
                 material.MaterialQuantity = materialToPatch.Quantity;
+                material.MaterialDonation = materialToPatch.Donation;
                 material.MaterialName = materialToPatch.Name;
                 material.MaterialAvailability = materialToPatch.Availability;
                 material.FK_EstateID = materialToPatch.FK_EstateID;
@@ -225,11 +227,6 @@ namespace Back_End.Controllers
                     return NotFound();
                 }
 
-                /*if (_repository.Vehicles.VehciclesByEmployees(employeeId).Any())
-                {
-                    _logger.LogError($"Cannot delete employee with id: {employeeId}. It has related {_repository.Vehicles}. Delete those accounts first");
-                    return BadRequest();
-                }*/
 
                 _repository.Materials.Delete(material);
 

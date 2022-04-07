@@ -37,6 +37,9 @@ namespace Entities.Profiles
 
                 .ForMember(dest => dest.Name,
                             opt => opt.MapFrom(src => src.MedicineName))
+                
+                .ForMember(dest => dest.Donation,
+                            opt => opt.MapFrom(src => src.MedicineDonation))
 
                   .ForMember(dest => dest.Quantity,
                             opt => opt.MapFrom(src => src.MedicineQuantity))
@@ -89,6 +92,7 @@ namespace Entities.Profiles
 
             CreateMap<Medicines, Resources_ForCreationDto>()
                  .ForPath(dest => dest.Quantity, opts => opts.MapFrom(src => src.MedicineQuantity))
+                 .ForPath(dest => dest.Donation, opts => opts.MapFrom(src => src.MedicineDonation))
                  .ForPath(dest => dest.Name, opts => opts.MapFrom(src => src.MedicineName))
                  .ForPath(dest => dest.Availability, opts => opts.MapFrom(src => src.MedicineAvailability))
                  .ForPath(dest => dest.Picture, opts => opts.MapFrom(src => src.MedicinePicture))

@@ -120,8 +120,9 @@ namespace Back_End.Controllers
                 }
 
                 medicineEntity.MedicineName = medicine.Name;
+                medicineEntity.MedicineDonation = medicine.Donation;
                 medicineEntity.MedicineQuantity = medicine.Quantity;
-                medicineEntity.MedicineAvailability = medicine.Availability;
+                medicineEntity.MedicineAvailability = true;
                 medicineEntity.MedicineUtility = medicine.Description;
                 medicineEntity.MedicineExpirationDate = medicine.Medicines.MedicineExpirationDate;
                 medicineEntity.MedicineLab = medicine.Medicines.MedicineLab;
@@ -173,6 +174,7 @@ namespace Back_End.Controllers
                 medicine.MedicineQuantity = medicineToPatch.Quantity;
                 medicine.MedicineName = medicineToPatch.Name;
                 medicine.MedicineAvailability = medicineToPatch.Availability;
+                medicine.MedicineDonation = medicineToPatch.Donation;
                 medicine.MedicineUtility = medicineToPatch.Description;
                 medicine.MedicineExpirationDate = medicineToPatch.Medicines.MedicineExpirationDate;
                 medicine.MedicineDrug = medicineToPatch.Medicines.MedicineDrug;

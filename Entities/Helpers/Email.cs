@@ -57,7 +57,7 @@ namespace Repository
             // send email
             using var smtp = new SmtpClient();
             smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate("tesis.unc.mb@gmail.com", "larioja1450");
+            smtp.Authenticate("tesis.unc.mb@gmail.com", "laRioja1450");
             smtp.Send(email);
             smtp.Disconnect(true);
         }

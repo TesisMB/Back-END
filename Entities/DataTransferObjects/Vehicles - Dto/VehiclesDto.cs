@@ -4,15 +4,17 @@
     {
         public string VehiclePatent { get; set; }
 
-        //public string Utility { get; set; }
+        public int TypeVehicleID { get; set; }
+
         public string Type { get; set; }
-        //public string Types { get; set; }
 
         public int VehicleYear { get; set; }
 
-        //public EmployeesVehiclesDto Employees { get; set; }
+
+        public int UserID { get; set; }
         public string EmployeeName { get; set; }
 
-
+        public int BrandID { get; set; }
+        public int ModelID { get; set; }
     }
 }

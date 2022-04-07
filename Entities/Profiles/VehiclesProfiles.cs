@@ -17,6 +17,7 @@ namespace Entities.Profiles
             CreateMap<Vehicles, VehiclesDto>()
 
                .ForPath(dest => dest.Type, opts => opts.MapFrom(src => src.TypeVehicles.Type));
+          
 
             CreateMap<Vehicles, ResourcesVehiclesDto>()
 
@@ -51,9 +52,13 @@ namespace Entities.Profiles
                  .ForPath(dest => dest.Vehicles.VehicleYear, opts => opts.MapFrom(src => src.VehicleYear))
 
                  .ForPath(dest => dest.LocationCityName, opts => opts.MapFrom(src => src.Estates.Locations.LocationCityName))
+               
+                 .ForPath(dest => dest.Vehicles.TypeVehicleID, opts => opts.MapFrom(src => src.TypeVehicles.ID))
+               .ForPath(dest => dest.Vehicles.UserID, opts => opts.MapFrom(src => src.FK_EmployeeID))
+               .ForPath(dest => dest.Vehicles.BrandID, opts => opts.MapFrom(src => src.BrandsModels.FK_BrandID))
+               .ForPath(dest => dest.Vehicles.ModelID, opts => opts.MapFrom(src => src.BrandsModels.FK_ModelID))
 
                  .ForPath(dest => dest.Vehicles.EmployeeName, opts => opts.MapFrom(src => $"{src.Employees.Users.Persons.FirstName} {src.Employees.Users.Persons.LastName}"));
-            ;
 
 
 

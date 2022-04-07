@@ -27,6 +27,5 @@ namespace Entities.DataTransferObjects.ResourcesDto
 
         public VehiclesForCreationDto  Vehicles { get; set; }
 
-        //public VolunteersForCreationDto Volunteers { get; set; }
     }
 }

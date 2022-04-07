@@ -36,3 +36,10 @@
 2022-04-07 11:53:21.2230 INFO Returned all Volunteers from database.
 2022-04-07 11:55:20.2442 INFO Returned User.
 2022-04-07 11:55:21.9583 INFO Returned all Volunteers from database.
+2022-04-07 12:10:16.0712 INFO Returned User.
+2022-04-07 12:10:19.8172 INFO Returned all vehicles from database.
+2022-04-07 12:12:34.8841 INFO Returned User.
+2022-04-07 12:12:51.4304 INFO Returned all vehicles from database.
+2022-04-07 12:14:43.3370 INFO Returned User.
+2022-04-07 12:14:49.1200 INFO Returned all vehicles from database.
+2022-04-07 12:15:10.1241 INFO Returned vehicle with id: 4

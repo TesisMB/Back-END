@@ -9,6 +9,10 @@ namespace Entities.Profiles
         public VictimsProfiles()
         {
             CreateMap<Victims, VictimsDto>();
+
+            CreateMap<Victims, VictimsForUpdateDto>();
+
+            CreateMap<VictimsForUpdateDto, Victims>();
         }
     }
 }

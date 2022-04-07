@@ -792,11 +792,13 @@ namespace Repository
                     DeleteResource(userReq);
 
                     userReq.Condition = "Rechazada";
+                    userReq.Reason = resourcesRequest.Reason;
                 }
 
                 else
                 {
                     userReq.Condition = "Aceptada";
+                    userReq.Reason = resourcesRequest.Reason;
                 }
 
                 Update(userReq);

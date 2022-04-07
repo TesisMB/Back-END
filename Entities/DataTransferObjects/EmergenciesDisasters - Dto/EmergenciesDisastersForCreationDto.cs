@@ -21,5 +21,7 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
         public int FK_AlertID { get; set; }
 
         public ChatRoomsForCreationDto ChatRooms { get; set; }
+
+
     }
 }

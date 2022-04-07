@@ -20,11 +20,13 @@ namespace Repository
         {
 
             return await FindByCondition(i => i.ID.Equals(chatID))
+
+              
+
                    .Include(i => i.TypesChatRooms)
                    .Include(i => i.UsersChatRooms)
 
-                   .ThenInclude(i => i.Users)
-                   .ThenInclude(i => i.Persons)
+               
 
                    .Include(i => i.UsersChatRooms)
                    .ThenInclude(i=> i.Users.Roles)
@@ -35,6 +37,8 @@ namespace Repository
                    .Include(i => i.EmergenciesDisasters)
                    .ThenInclude(i => i.Locations)
                    .Include(i => i.Messages)
+                    .ThenInclude(i => i.Users)
+                    .ThenInclude(i => i.Persons)
                    .FirstOrDefaultAsync();
         }
     }

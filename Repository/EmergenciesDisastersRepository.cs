@@ -245,6 +245,7 @@ namespace Repository
         public async Task<EmergenciesDisasters> GetEmergencyDisasterById(int emergencydisasterId)
         {
             return await FindByCondition(emergdis => emergdis.EmergencyDisasterID.Equals(emergencydisasterId))
+           .Include(i => i.Victims)
             .FirstOrDefaultAsync();
 
         }

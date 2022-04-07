@@ -13,6 +13,8 @@ namespace Entities.DataTransferObjects.Messages___Dto
         public DateTime CreatedDate { get; set; }
 
         public int FK_UserID { get; set; }
-        
+
+        public string Name { get; set; }
+
     }
 }

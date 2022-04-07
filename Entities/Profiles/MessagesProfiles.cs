@@ -8,9 +8,11 @@ namespace Entities.Profiles
     {
         public MessagesProfiles()
         {
-            CreateMap<Messages, MessagesDto>();
+            CreateMap<Messages, MessagesDto>()
+                .ForMember(i => i.Name, opt => opt.MapFrom(src => src.Users.Persons.FirstName));
 
             CreateMap<Messages, MessagesForCreationDto>();
+            
             CreateMap<MessagesForCreationDto, Messages>();
         }
     }

@@ -17,5 +17,7 @@ namespace Entities.DataTransferObjects.Messages___Dto
 
         public int fK_UserID { get; set; }
 
+        public string name { get; set; }
+
     }
 }

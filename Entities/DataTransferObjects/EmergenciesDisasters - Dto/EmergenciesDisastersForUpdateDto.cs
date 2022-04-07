@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.DataTransferObjects.Victims___Dto;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -17,5 +18,9 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
         public int FK_TypeEmergencyID { get; set; }
 
         public int FK_AlertID { get; set; }
+
+        public VictimsForUpdateDto Victims { get; set; }
+
+
     }
 }

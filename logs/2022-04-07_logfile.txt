@@ -30,3 +30,9 @@
 2022-04-07 11:40:28.8773 ERROR Something went wrong inside CreateVehicle action: Object reference not set to an instance of an object.
 2022-04-07 11:42:34.8008 ERROR Something went wrong inside DeleteVehicle action: Database operation expected to affect 1 row(s) but actually affected 2 row(s). Data may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.
 2022-04-07 11:42:36.5307 ERROR Something went wrong inside DeleteVehicle action: Database operation expected to affect 1 row(s) but actually affected 2 row(s). Data may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.
+2022-04-07 11:52:55.9648 INFO Returned User.
+2022-04-07 11:53:03.9687 INFO Returned all vehicles from database.
+2022-04-07 11:53:13.9538 INFO Returned all Materials from database.
+2022-04-07 11:53:21.2230 INFO Returned all Volunteers from database.
+2022-04-07 11:55:20.2442 INFO Returned User.
+2022-04-07 11:55:21.9583 INFO Returned all Volunteers from database.

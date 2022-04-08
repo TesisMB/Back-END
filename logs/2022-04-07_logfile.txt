@@ -703,3 +703,17 @@
 2022-04-07 21:20:54.9460 ERROR Something went wrong inside CreateEmployee action: An error occurred while updating the entries. See the inner exception for details.
 2022-04-07 21:22:42.9285 ERROR Something went wrong inside CreateEmployee action: An error occurred while updating the entries. See the inner exception for details.
 2022-04-07 21:23:49.6853 INFO Returned employe with details for id: 1085
+2022-04-07 21:40:35.0553 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-07 21:40:36.8211 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-07 21:40:37.1330 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-07 21:40:37.4648 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-07 21:41:40.4997 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-07 21:41:43.9691 INFO Returned User.
+2022-04-07 21:41:46.9770 INFO Returned all employees from database.
+2022-04-07 21:42:03.6949 INFO Returned all Volunteers from database.
+2022-04-07 21:49:19.4467 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-07 21:49:44.9184 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-07 21:49:49.6819 INFO Returned User.
+2022-04-07 21:49:52.9491 INFO Returned all employees from database.
+2022-04-07 21:50:05.9803 INFO Returned all Volunteers from database.
+2022-04-07 21:50:41.5958 INFO Returned volunteer with id: 1087

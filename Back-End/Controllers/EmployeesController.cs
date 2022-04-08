@@ -8,6 +8,7 @@ using Entities.DataTransferObjects.Employees___Dto;
 using Entities.Helpers;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -130,7 +131,14 @@ namespace Back_End.Controllers
             try
             {
 
-               
+                Roles roles = new Roles();
+
+                CruzRojaContext db = new CruzRojaContext();
+
+                roles = db.Roles
+                    .Where(a => a.RoleID == employee.FK_RoleID)
+                    .FirstOrDefault();
+
 
                 if (!ModelState.IsValid)
                 {
@@ -144,6 +152,7 @@ namespace Back_End.Controllers
                     _logger.LogError("Employee object sent from client is null.");
                     return BadRequest("Employee object is null");
                 }
+
 
 
 
@@ -169,8 +178,27 @@ namespace Back_End.Controllers
 
                 var employeeEntity = _mapper.Map<Users>(employee);
 
-                employeeEntity.Employees = new Employees();
-                employeeEntity.Employees.EmployeeCreatedate = employee.EmployeeCreatedate;
+                if(roles.RoleName != "Voluntario")
+                {
+                    employeeEntity.Employees = new Employees();
+                    employeeEntity.Employees.EmployeeCreatedate = employee.Employees.EmployeeCreatedate;
+                }
+                else
+                {
+
+                    employee.Volunteers = new VolunteersForCreationDto();
+                    employeeEntity.Volunteers = new Volunteers();
+
+                    if (employee.Volunteers.VolunteerAvatar == null)
+                    {
+                        employeeEntity.Volunteers.VolunteerAvatar = "https://i.imgur.com/S9HJEwF.png";
+                    }
+                    else
+                    {
+                        employeeEntity.Volunteers.VolunteerAvatar = await UploadController.SaveImage(employee.Volunteers.ImageFile);
+                    }
+
+                }
 
                 _repository.Employees.CreateEmployee(employeeEntity);
 
@@ -220,7 +248,6 @@ namespace Back_End.Controllers
                     using (var db = new CruzRojaContext())
                     authUser = db.Users.Where(u => u.UserID == employeeEntity.Users.UserID
                            && u.UserPassword == employeeToPatch.Users.UserPassword)
-                            .AsNoTracking()
                             .FirstOrDefault();
 
 

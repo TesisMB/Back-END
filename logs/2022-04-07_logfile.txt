@@ -694,3 +694,12 @@
 2022-04-07 18:45:55.6492 INFO Returned all ChatRooms from database. 
 2022-04-07 18:47:30.9794 INFO Returned all ChatRooms from database. 
 2022-04-07 18:48:41.1963 INFO Returned all ChatRooms from database. 
+2022-04-07 18:53:33.3185 INFO Returned all ChatRooms from database. 
+2022-04-07 18:59:19.2065 INFO Returned all ChatRooms from database. 
+2022-04-07 21:09:04.1969 INFO Returned User.
+2022-04-07 21:09:18.8158 INFO Returned all employees from database.
+2022-04-07 21:18:08.0720 ERROR Something went wrong inside CreateEmployee action: An error occurred while updating the entries. See the inner exception for details.
+2022-04-07 21:18:56.1260 ERROR Something went wrong inside CreateEmployee action: An error occurred while updating the entries. See the inner exception for details.
+2022-04-07 21:20:54.9460 ERROR Something went wrong inside CreateEmployee action: An error occurred while updating the entries. See the inner exception for details.
+2022-04-07 21:22:42.9285 ERROR Something went wrong inside CreateEmployee action: An error occurred while updating the entries. See the inner exception for details.
+2022-04-07 21:23:49.6853 INFO Returned employe with details for id: 1085

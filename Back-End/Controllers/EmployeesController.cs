@@ -130,13 +130,7 @@ namespace Back_End.Controllers
             try
             {
 
-                Roles user = new Roles();
-
-                user = cruzRojaContext.Roles
-                        .Where(a => a.RoleID == employee.FK_RoleID)
-                        .AsNoTracking()
-                        .FirstOrDefault();
-
+               
 
                 if (!ModelState.IsValid)
                 {
@@ -174,6 +168,9 @@ namespace Back_End.Controllers
                 }*/
 
                 var employeeEntity = _mapper.Map<Users>(employee);
+
+                employeeEntity.Employees = new Employees();
+                employeeEntity.Employees.EmployeeCreatedate = employee.EmployeeCreatedate;
 
                 _repository.Employees.CreateEmployee(employeeEntity);
 

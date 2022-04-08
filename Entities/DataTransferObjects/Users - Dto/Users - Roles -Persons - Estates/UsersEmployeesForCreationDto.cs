@@ -21,8 +21,9 @@ namespace Back_End.Models
         public PersonForCreationDto Persons { get; set; }
         public int FK_EstateID { get; set; }
 
+        public DateTime EmployeeCreatedate { get; set; } = DateTime.Now;
 
-        public EmployeesForCreationDto Employees { get; set; }
+        //public EmployeesForCreationDto Employees { get; set; }
 
         public VolunteersForCreationDto Volunteers { get; set; }
 

@@ -12,7 +12,7 @@ namespace Repository
 
         public static void generatePassword(Users user)
         {
-            int longitud = 7;
+            int longitud = 8;
             Guid miGuid = Guid.NewGuid();
 
             //convierto de Guid a byte

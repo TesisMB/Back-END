@@ -181,7 +181,7 @@ namespace Back_End.Controllers
                 if(roles.RoleName != "Voluntario")
                 {
                     employeeEntity.Employees = new Employees();
-                    employeeEntity.Employees.EmployeeCreatedate = employee.Employees.EmployeeCreatedate;
+                    employeeEntity.Employees.EmployeeCreatedate = DateTime.Now;
                 }
                 else
                 {
@@ -191,7 +191,7 @@ namespace Back_End.Controllers
 
                     if (employee.Volunteers.VolunteerAvatar == null)
                     {
-                        employeeEntity.Volunteers.VolunteerAvatar = "https://i.imgur.com/S9HJEwF.png";
+                        employeeEntity.Volunteers.VolunteerAvatar = "https://i.imgur.com/8AACVdK.png";
                     }
                     else
                     {

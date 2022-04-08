@@ -787,7 +787,7 @@ namespace Repository
 
                 if (resourcesRequest.Status == false)
                 {
-                    UpdateResource_Resquest2(userReq);
+                    ActualizarEstado(userReq);
 
                     DeleteResource(userReq);
 

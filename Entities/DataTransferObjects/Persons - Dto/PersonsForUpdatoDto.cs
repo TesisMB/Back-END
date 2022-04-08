@@ -14,5 +14,7 @@ namespace Back_End.Models
         public string Address { get; set; }
         public Boolean Available { get; set; }
         public Boolean Status { get; set; }
+
+        public string LocationName { get; set; }
     }
 }

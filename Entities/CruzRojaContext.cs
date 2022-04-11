@@ -84,6 +84,7 @@ namespace Back_End.Entities
         public DbSet<UsersChat> UsersChat { get; set; }
         public DbSet<Victims> Victims { get; set; }
         public DbSet<ResourcesRequestMaterialsMedicinesVehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
+        public DbSet<PDF> PDF { get; set; }
 
         private const string Connection =
       @"Server=localhost;

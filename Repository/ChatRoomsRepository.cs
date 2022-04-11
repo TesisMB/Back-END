@@ -26,13 +26,6 @@ namespace Repository
 
             var collection = _cruzRojaContext.TypesChatRooms as IQueryable<TypesChatRooms>;
 
-            ChatRooms chat = null;
-
-            var db = new CruzRojaContext();
-
-            var item = db.ChatRooms
-                .Include(a => a.UsersChatRooms)
-                .FirstOrDefault();
 
             return await collection
                 .Include(a => a.Chat)

@@ -32,6 +32,13 @@ namespace Back_End.Controllers
                 var auth = await _repository.Users.ValidateUser(user);
                 if (auth.UserAvailability)
                 {
+
+                    if (auth.VolunteerAvatar != "https://i.imgur.com/8AACVdK.png")
+                    {
+                        auth.VolunteerAvatar = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
+                                        Request.Scheme, Request.Host, Request.PathBase, auth.VolunteerAvatar);
+                    }
+
                     ret = StatusCode(200, auth);
                     _logger.LogInfo($"Returned User.");
                 }

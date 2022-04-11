@@ -84,3 +84,9 @@
 2022-04-11 16:51:40.1569 INFO Returned all vehicles from database.
 2022-04-11 16:51:46.4281 INFO Returned all Materials from database.
 2022-04-11 16:51:48.9730 INFO Returned all Materials from database.
+2022-04-11 17:28:16.1308 INFO Returned all ChatRooms from database. 
+2022-04-11 17:32:39.1003 INFO Returned User.
+2022-04-11 18:03:38.1035 INFO Returned User.
+2022-04-11 18:03:49.6796 INFO Returned User.
+2022-04-11 18:05:08.6650 INFO Returned User.
+2022-04-11 18:05:23.4298 INFO Returned User.

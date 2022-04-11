@@ -8,10 +8,8 @@ using Entities.DataTransferObjects.Employees___Dto;
 using Entities.Helpers;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Wkhtmltopdf.NetCore;
@@ -40,16 +38,16 @@ namespace Back_End.Controllers
         public async Task<FileResult> GetEmployeeIDPDF(int employeeId)
         {
             var employee = await _repository.Employees.GetEmployeeWithDetails(employeeId);
-            
-                        var options = new ConvertOptions
-                        {
-                            PageMargins = new Wkhtmltopdf.NetCore.Options.Margins()
-                            {
-                                Top = 5
-                            }
-                        };
 
-             _generatePdf.SetConvertOptions(options);
+            var options = new ConvertOptions
+            {
+                PageMargins = new Wkhtmltopdf.NetCore.Options.Margins()
+                {
+                    Top = 5
+                }
+            };
+
+            _generatePdf.SetConvertOptions(options);
 
 
 
@@ -154,31 +152,9 @@ namespace Back_End.Controllers
                 }
 
 
-
-
-
-              /*  if (user.RoleName == "Voluntario")
-                {
-                    if (employee.Volunteers.VolunteerAvatar == null)
-                    {
-                        employee.Volunteers.VolunteerAvatar = "https://i.imgur.com/8AACVdK.png";
-                    }
-                    else
-                    {
-                        employee.Volunteers.VolunteerAvatar = await UploadController.SaveImage(employee.Volunteers.ImageFile);
-                    }
-                }
-
-                if (user.RoleName != "Voluntario")
-                {
-                    employee.Employees = new EmployeesForCreationDto();
-                    employee.Employees.EmployeeCreatedate = DateTime.Now;
-
-                }*/
-
                 var employeeEntity = _mapper.Map<Users>(employee);
 
-                if(roles.RoleName != "Voluntario")
+                if (roles.RoleName != "Voluntario")
                 {
                     employeeEntity.Employees = new Employees();
                     employeeEntity.Employees.EmployeeCreatedate = DateTime.Now;
@@ -246,9 +222,9 @@ namespace Back_End.Controllers
                     employeeToPatch.Users.UserPassword = Encrypt.GetSHA256(userPass);
 
                     using (var db = new CruzRojaContext())
-                    authUser = db.Users.Where(u => u.UserID == employeeEntity.Users.UserID
-                           && u.UserPassword == employeeToPatch.Users.UserPassword)
-                            .FirstOrDefault();
+                        authUser = db.Users.Where(u => u.UserID == employeeEntity.Users.UserID
+                               && u.UserPassword == employeeToPatch.Users.UserPassword)
+                                .FirstOrDefault();
 
 
                     if (authUser == null)

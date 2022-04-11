@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
+using Back_End.Entities;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.CharRooms___Dto;
 using Entities.DataTransferObjects.Messages___Dto;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Back_End.Controllers
@@ -40,6 +43,7 @@ namespace Back_End.Controllers
 
                 var chatRoomsToResult = _mapper.Map<IEnumerable<TypesChatsDto>>(chatRooms);
 
+
                 return Ok(chatRoomsToResult);
 
             }
@@ -63,7 +67,10 @@ namespace Back_End.Controllers
                     return NotFound();
                 }
 
+          
+
                 var chatRoomsToResult = _mapper.Map<ChatRoomsDto>(chatRooms);
+
 
                 return Ok(chatRoomsToResult);
             }

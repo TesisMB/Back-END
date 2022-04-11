@@ -123,7 +123,7 @@ namespace Back_End.Controllers
                 else
                 {
 
-                    medicineEntity.MedicinePicture = await UploadController.SaveImage(medicine.ImageFile);
+                    medicineEntity.MedicinePicture = await UploadController.SaveImage(medicine.ImageFile, "Resources");
                 }
 
                 medicineEntity.MedicineName = medicine.Name;

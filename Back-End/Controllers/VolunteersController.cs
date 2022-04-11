@@ -218,15 +218,15 @@ namespace Back_End.Controllers
                 var volunteerEntity = _mapper.Map<Volunteers>(volunteer);
 
 
-                /* volunteerEntity.LocationVolunteers = new LocationVolunteers()
-                 {
-                     ID = volunteerEntity.ID,
-                     LocationVolunteerLatitude = null,
-                     LocationVolunteerLongitude = null,
-                     Volunteers = volunteerEntity
-                 };*/
+                if (volunteer.ImageFile == null)
+                {
+                    volunteerEntity.VolunteerAvatar = "https://i.imgur.com/S9HJEwF.png";
+                }
+                else
+                {
+                    volunteerEntity.VolunteerAvatar = await UploadController.SaveImage(volunteer.ImageFile, "Resources");
+                }
 
-               // volunteerEntity.VolunteerAvatar = await UploadController.SaveImage(volunteer.ImageFile);
 
                 // Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
                 _repository.Volunteers.CreateVolunteer(volunteerEntity);
@@ -234,7 +234,6 @@ namespace Back_End.Controllers
 
                 _repository.Volunteers.SaveAsync();
 
-                //var createdVolunteer = _mapper.Map<VolunteersDto>(volunteerEntity);
 
                 return Ok();
 

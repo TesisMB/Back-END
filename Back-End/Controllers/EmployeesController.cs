@@ -195,7 +195,7 @@ namespace Back_End.Controllers
                     }
                     else
                     {
-                        employeeEntity.Volunteers.VolunteerAvatar = await UploadController.SaveImage(employee.Volunteers.ImageFile);
+                        employeeEntity.Volunteers.VolunteerAvatar = await UploadController.SaveImage(employee.Volunteers.ImageFile, "Resources");
                     }
 
                 }

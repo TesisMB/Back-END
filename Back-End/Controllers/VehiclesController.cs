@@ -128,7 +128,7 @@ namespace Back_End.Controllers
                 }
                 else
                 {
-                    vehicleEntity.VehiclePicture = await UploadController.SaveImage(vehicle.ImageFile);
+                    vehicleEntity.VehiclePicture = await UploadController.SaveImage(vehicle.ImageFile, "Resources");
                 }
 
                 vehicleEntity.VehicleAvailability = true;

@@ -135,7 +135,7 @@ namespace Back_End.Controllers
                 }
                 else
                 {
-                    materialEntity.MaterialPicture = await UploadController.SaveImage(material.ImageFile);
+                    materialEntity.MaterialPicture = await UploadController.SaveImage(material.ImageFile, "Resources");
                 }
 
                 materialEntity.MaterialName = material.Name;

@@ -44,9 +44,9 @@ namespace Back_End.Controllers
 
                 foreach (var item in employeesResult)
                 {
-                    if (item.ImageSrc != null)
+                    if (item.Picture != "https://i.imgur.com/S9HJEwF.png")
                     {
-                        item.ImageSrc = String.Format("{0}://{1}{2}/StaticFiles/Images/{3}",
+                        item.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
                                         Request.Scheme, Request.Host, Request.PathBase, item.Picture);
                     }
 
@@ -79,7 +79,17 @@ namespace Back_End.Controllers
                 else
                 {
                     _logger.LogInfo($"Returned vehicle with id: {vehicleId}");
+
+
+
                     var vehicleResult = _mapper.Map<Resources_Dto>(vehicle);
+
+                    if (vehicleResult.Picture != "https://i.imgur.com/S9HJEwF.png")
+                    {
+                        vehicleResult.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
+                                        Request.Scheme, Request.Host, Request.PathBase, vehicleResult.Picture);
+                    }
+
                     return Ok(vehicleResult);
                 }
 

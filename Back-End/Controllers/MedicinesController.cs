@@ -42,9 +42,9 @@ namespace Back_End.Controllers
                 foreach (var item in medicinesResult)
                 {
                     
-                     if(item.ImageSrc != null)
+                     if(item.Picture != "https://i.imgur.com/S9HJEwF.png")
                     {
-                        item.ImageSrc = String.Format("{0}://{1}{2}/StaticFiles/Images/{3}",
+                        item.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
                                         Request.Scheme, Request.Host, Request.PathBase, item.Picture);
 
                     }
@@ -80,6 +80,13 @@ namespace Back_End.Controllers
                     _logger.LogInfo($"Returned medicine with details for id: {medicineId}");
 
                     var employeeResult = _mapper.Map<Resources_Dto>(employee);
+
+                    if (employeeResult.Picture != "https://i.imgur.com/S9HJEwF.png")
+                    {
+                        employeeResult.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
+                                        Request.Scheme, Request.Host, Request.PathBase, employeeResult.Picture);
+                    }
+
                     return Ok(employeeResult);
                 }
             }

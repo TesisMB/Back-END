@@ -46,16 +46,14 @@ namespace Back_End.Controllers
 
                 var volunteersResult = _mapper.Map<IEnumerable<Resources_Dto>>(volunteers);
 
+
+
                 foreach (var item in volunteersResult)
                 {
-                    if (item.Picture == null)
+                    if (item.Picture != "https://i.imgur.com/8AACVdK.png")
                     {
-                        item.Picture = "https://i.imgur.com/8AACVdK.png";
-                    }
-                    else if (item.Picture != null)
-                    {
-                /*        item.ImageSrc = String.Format("{0}://{1}{2}/StaticFiles/Images/{3}",
-                                         Request.Scheme, Request.Host, Request.PathBase, item.Picture);*/
+                        item.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
+                                                 Request.Scheme, Request.Host, Request.PathBase, item.Picture);
                     }
                 }
 
@@ -82,6 +80,19 @@ namespace Back_End.Controllers
                 _logger.LogInfo($"Returned all Volunteers from database.");
 
                 var volunteersResult = _mapper.Map<IEnumerable<VolunteersAppDto>>(volunteers1);
+
+
+                foreach (var item in volunteersResult)
+                {
+                    if (item.VolunteerAvatar != "https://i.imgur.com/8AACVdK.png")
+                    {
+                        item.VolunteerAvatar = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
+                                                 Request.Scheme, Request.Host, Request.PathBase, item.VolunteerAvatar);
+                    }
+                }
+
+
+
 
                 return Ok(volunteersResult);
             }
@@ -114,6 +125,16 @@ namespace Back_End.Controllers
                 {
                     _logger.LogInfo($"Returned volunteer with id: {volunteerId}");
                     var volunteerResult = _mapper.Map<VolunteersAppDto>(volunteer);
+
+
+
+                    if (volunteerResult.VolunteerAvatar != "https://i.imgur.com/8AACVdK.png")
+                    {
+                        volunteerResult.VolunteerAvatar = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
+                                        Request.Scheme, Request.Host, Request.PathBase, volunteerResult.VolunteerAvatar);
+                    }
+
+
                     return Ok(volunteerResult);
 
                 }
@@ -149,6 +170,16 @@ namespace Back_End.Controllers
                 {
                     _logger.LogInfo($"Returned volunteer with id: {volunteerId}");
                     var volunteerResult = _mapper.Map<Resources_Dto>(volunteer);
+
+                    if (volunteerResult.Picture != "https://i.imgur.com/8AACVdK.png")
+                    {
+                        volunteerResult.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
+                                        Request.Scheme, Request.Host, Request.PathBase, volunteerResult.Picture);
+
+                    }
+
+
+
                     return Ok(volunteerResult);
 
                 }

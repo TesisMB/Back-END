@@ -14,7 +14,7 @@ namespace Back_End.Controllers
         {
             {
 
-                var folderName = Path.Combine("StaticFiles", "Images");
+                var folderName = Path.Combine("StaticFiles", "images");
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
 
                 var fileName = ContentDispositionHeaderValue.Parse(Image.ContentDisposition).FileName.Trim('"');

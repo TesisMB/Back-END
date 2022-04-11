@@ -1,0 +1,86 @@
+2022-04-11 12:39:24.5385 ERROR Something went wrong inside SavePDF action: Could not find a part of the path 'D:\Tesis\Back-End\Back-End\StaticFiles\Images\5326773306.pdf'.
+2022-04-11 12:55:12.9126 ERROR Something went wrong inside GetAllPDFaction:  The source IQueryable doesn't implement IDbAsyncEnumerable<Entities.Models.PDF>. Only sources that implement IDbAsyncEnumerable can be used for Entity Framework asynchronous operations. For more details see http://go.microsoft.com/fwlink/?LinkId=287068.
+2022-04-11 12:57:06.4122 INFO Returned all Materials from database.
+2022-04-11 13:06:56.5061 INFO Returned all Materials from database.
+2022-04-11 13:10:41.5503 INFO Returned all Materials from database.
+2022-04-11 15:24:12.0242 ERROR Something went wrong inside GetAllVolunteers action:  An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-11 15:25:24.2110 ERROR Something went wrong inside User: String reference not set to an instance of a String. (Parameter 's')
+2022-04-11 15:25:53.1837 INFO Returned User.
+2022-04-11 15:26:00.5860 INFO Returned all Volunteers from database.
+2022-04-11 15:27:18.4857 INFO Returned all Volunteers from database.
+2022-04-11 15:49:24.9283 INFO Returned User.
+2022-04-11 15:49:34.9075 INFO Returned all Volunteers from database.
+2022-04-11 15:58:15.9751 INFO Returned User.
+2022-04-11 15:58:20.4223 INFO Returned all Materials from database.
+2022-04-11 15:58:51.0676 INFO Returned all Materials from database.
+2022-04-11 15:59:02.9450 INFO Returned User.
+2022-04-11 15:59:04.3306 INFO Returned all Materials from database.
+2022-04-11 16:04:27.6004 INFO Returned User.
+2022-04-11 16:04:39.1535 INFO Returned all Materials from database.
+2022-04-11 16:09:58.1370 INFO Returned User.
+2022-04-11 16:10:02.8982 INFO Returned all vehicles from database.
+2022-04-11 16:10:48.9284 INFO Returned User.
+2022-04-11 16:10:50.9354 INFO Returned all vehicles from database.
+2022-04-11 16:12:13.9752 ERROR Something went wrong inside GetAllVehicles action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-11 16:12:16.3817 INFO Returned User.
+2022-04-11 16:12:18.3530 INFO Returned all vehicles from database.
+2022-04-11 16:17:53.7594 INFO Returned User.
+2022-04-11 16:17:59.7658 INFO Returned all Volunteers from database.
+2022-04-11 16:18:14.8258 INFO Returned all Materials from database.
+2022-04-11 16:18:26.6266 INFO Returned all Materials from database.
+2022-04-11 16:18:45.0753 INFO Returned all Volunteers from database.
+2022-04-11 16:19:16.5973 INFO Returned User.
+2022-04-11 16:19:19.8031 INFO Returned all Volunteers from database.
+2022-04-11 16:20:44.1560 INFO Returned volunteer with id: 19
+2022-04-11 16:21:13.0595 INFO Returned all Volunteers from database.
+2022-04-11 16:22:24.3073 INFO Returned all Volunteers from database.
+2022-04-11 16:32:09.6557 INFO Returned all Materials from database.
+2022-04-11 16:32:24.5141 INFO Returned User.
+2022-04-11 16:32:26.3423 INFO Returned all Volunteers from database.
+2022-04-11 16:35:24.8731 INFO Returned User.
+2022-04-11 16:35:27.1236 INFO Returned all Volunteers from database.
+2022-04-11 16:43:11.4286 INFO Returned User.
+2022-04-11 16:43:14.5866 INFO Returned all Volunteers from database.
+2022-04-11 16:43:22.3316 INFO Returned volunteer with id: 15
+2022-04-11 16:43:25.8346 ERROR Volunteer with id: 16, hasn't been found in db.
+2022-04-11 16:43:32.2705 INFO Returned volunteer with id: 31
+2022-04-11 16:44:04.8903 INFO Returned all Volunteers from database.
+2022-04-11 16:44:08.0856 INFO Returned volunteer with id: 14
+2022-04-11 16:44:09.9512 ERROR Volunteer with id: 167, hasn't been found in db.
+2022-04-11 16:44:10.6429 ERROR Volunteer with id: 16, hasn't been found in db.
+2022-04-11 16:44:12.1954 INFO Returned volunteer with id: 15
+2022-04-11 16:44:15.8669 INFO Returned all Volunteers from database.
+2022-04-11 16:44:23.5825 INFO Returned volunteer with id: 28
+2022-04-11 16:47:31.2810 INFO Returned User.
+2022-04-11 16:47:37.3390 INFO Returned all Materials from database.
+2022-04-11 16:47:45.2522 INFO Returned all Materials from database.
+2022-04-11 16:47:50.1507 INFO Returned all vehicles from database.
+2022-04-11 16:47:59.6273 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-11 16:47:59.6857 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-11 16:48:00.0153 INFO Returned all emergenciesDisasters from database.
+2022-04-11 16:48:00.1529 INFO Returned all emergenciesDisasters from database.
+2022-04-11 16:48:02.2225 INFO Returned all employees from database.
+2022-04-11 16:48:20.2817 INFO Returned all Volunteers from database.
+2022-04-11 16:48:40.0584 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-11 16:48:40.0849 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-11 16:48:40.1043 INFO Returned all emergenciesDisasters from database.
+2022-04-11 16:48:40.1392 INFO Returned all emergenciesDisasters from database.
+2022-04-11 16:48:45.0640 INFO Returned all Materials from database.
+2022-04-11 16:48:55.5074 INFO Returned all Volunteers from database.
+2022-04-11 16:49:47.9792 INFO Returned User.
+2022-04-11 16:49:50.6478 INFO Returned all Volunteers from database.
+2022-04-11 16:50:03.9587 INFO Returned all employees from database.
+2022-04-11 16:50:17.6845 INFO Returned all Volunteers from database.
+2022-04-11 16:50:20.1413 INFO Returned volunteer with id: 14
+2022-04-11 16:50:23.5797 INFO Returned all Volunteers from database.
+2022-04-11 16:50:25.2741 INFO Returned volunteer with id: 20
+2022-04-11 16:50:31.4168 INFO Returned all Volunteers from database.
+2022-04-11 16:50:33.2264 INFO Returned volunteer with id: 20
+2022-04-11 16:50:41.2676 INFO Returned all Volunteers from database.
+2022-04-11 16:51:12.0717 INFO Returned volunteer with id: 53
+2022-04-11 16:51:23.4651 INFO Returned all Volunteers from database.
+2022-04-11 16:51:30.9740 INFO Returned all Resources_Request from database.
+2022-04-11 16:51:34.0572 INFO Returned all Materials from database.
+2022-04-11 16:51:40.1569 INFO Returned all vehicles from database.
+2022-04-11 16:51:46.4281 INFO Returned all Materials from database.
+2022-04-11 16:51:48.9730 INFO Returned all Materials from database.

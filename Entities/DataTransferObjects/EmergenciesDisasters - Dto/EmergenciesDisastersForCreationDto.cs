@@ -1,5 +1,6 @@
 ﻿using Entities.DataTransferObjects.CharRooms___Dto;
 using Entities.DataTransferObjects.Locations___Dto;
+using Entities.DataTransferObjects.Victims___Dto;
 using System;
 
 namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
@@ -22,6 +23,7 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
 
         public ChatRoomsForCreationDto ChatRooms { get; set; }
 
+        public VictimsForUpdateDto Victims { get; set; }
 
     }
 }

@@ -45,10 +45,10 @@ namespace Back_End.Controllers
 
                 foreach (var item in materialsResult)
                 {
-                     if (item.ImageSrc != null) 
+                    if (item.Picture != "https://i.imgur.com/S9HJEwF.png") 
                     {
                         
-                    item.ImageSrc = String.Format("{0}://{1}{2}/StaticFiles/Images/{3}",
+                    item.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
                                                   Request.Scheme, Request.Host, Request.PathBase, item.Picture);
                     }
 
@@ -87,6 +87,13 @@ namespace Back_End.Controllers
                     _logger.LogInfo($"Returned Material with id: {materialId}");
                    
                     var volunteerResult = _mapper.Map<Resources_Dto>(volunteer);
+
+
+                    if (volunteerResult.Picture != "https://i.imgur.com/S9HJEwF.png")
+                    {
+                        volunteerResult.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
+                                        Request.Scheme, Request.Host, Request.PathBase, volunteerResult.Picture);
+                    }
                     return Ok(volunteerResult);
 
                 }

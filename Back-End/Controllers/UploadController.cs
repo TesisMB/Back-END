@@ -8,12 +8,17 @@ using System.Threading.Tasks;
 namespace Back_End.Controllers
 {
     [ApiController]
+
     public class UploadController : ControllerBase
     {
-        [NonAction]
+        [HttpPost]
+        [Route("api/upload")]
+
         public static async Task<string> SaveImage(IFormFile Image, string tipo)
         {
             {
+
+                tipo = "Resources";
 
                 var folderName = Path.Combine("StaticFiles", "images", tipo);
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);

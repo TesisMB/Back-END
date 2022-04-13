@@ -70,8 +70,8 @@ namespace Back_End.Entities
         public DbSet<TypesEmergenciesDisasters> TypesEmergenciesDisasters { get; set; }
         public DbSet<Alerts> Alerts { get; set; }
         public DbSet<VolunteersSkillsFormationEstates> VolunteersSkillsFormationEstates { get; set; }
-        public DbSet<BrandsModels> MarksModels { get; set; }
-        public DbSet<Brands> Marks { get; set; }
+        public DbSet<BrandsModels> BrandsModels { get; set; }
+        public DbSet<Brands> Brands { get; set; }
         public DbSet<Model> Models { get; set; }
         public DbSet<FormationsEstates> FormationsEstates { get; set; }
         public DbSet<ResourcesRequest> Resources_Requests { get; set; }

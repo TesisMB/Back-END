@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 
 namespace Back_End.Controllers
 {
+    [Route("api/upload")]
     [ApiController]
 
     public class UploadController : ControllerBase
     {
-        [HttpPost]
-        [Route("api/upload")]
-
-        public static async Task<string> SaveImage(IFormFile Image, string tipo)
+        [NonAction]
+        public static async Task<string> SaveImage([FromForm] IFormFile Image, string tipo)
         {
             {
 
@@ -30,14 +29,45 @@ namespace Back_End.Controllers
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     await Image.CopyToAsync(stream);
-
                 }
                 return fileName;
             }
 
         }
 
-        [NonAction]
+
+        [HttpPost, DisableRequestSizeLimit]
+        public IActionResult Upload()
+        {
+            try
+            {
+                var file = Request.Form.Files[0];
+                var folderName = Path.Combine("StaticFiles", "images", "Resources");
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                if (file.Length > 0)
+                {
+                    var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                    var fullPath = Path.Combine(pathToSave, fileName);
+                    var dbPath = Path.Combine(folderName, fileName);
+                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+                    return Ok(new { dbPath });
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex}");
+            }
+        }
+       
+
+                [NonAction]
 
         public static bool IsPDFFile(string fileName)
         {

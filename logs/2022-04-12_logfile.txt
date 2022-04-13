@@ -284,3 +284,6 @@
 2022-04-12 22:11:10.5953 INFO Returned all employees from database.
 2022-04-12 22:11:10.5953 INFO Returned all estates from database.
 2022-04-12 22:11:45.0679 INFO Returned all Materials from database.
+2022-04-12 22:25:20.8599 ERROR Something went wrong inside GetAllMaterials action:  An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-12 22:26:37.1998 ERROR Something went wrong inside GetAllMaterials action:  An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-12 22:29:51.0576 ERROR Something went wrong inside GetAllMaterials action:  An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.

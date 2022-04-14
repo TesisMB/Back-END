@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Back_End.Controllers
@@ -21,6 +22,7 @@ namespace Back_End.Controllers
         private ILoggerManager _logger;
         private IRepositorWrapper _repository;
         private readonly IMapper _mapper;
+        public static int contador = 0;
 
 
         public VehiclesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper)
@@ -42,15 +44,46 @@ namespace Back_End.Controllers
                 var employeesResult = _mapper.Map<IEnumerable<Resources_Dto>>(vehicles);
 
 
-                foreach (var item in employeesResult)
+                foreach (var item in vehicles)
                 {
-                    if (item.Picture != "https://i.imgur.com/S9HJEwF.png")
+                    foreach (var item2 in item.VehiclesBrandsModels)
                     {
-                        item.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
-                                        Request.Scheme, Request.Host, Request.PathBase, item.Picture);
-                    }
 
+
+                        foreach (var item3 in employeesResult)
+                        {
+
+                            var recurso = employeesResult.ElementAt(contador);
+
+
+                            if (recurso.Picture != "https://i.imgur.com/S9HJEwF.png")
+                            {
+                                recurso.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
+                                                Request.Scheme, Request.Host, Request.PathBase, recurso.Picture);
+                            }
+
+
+                            recurso.Name = item2.BrandsModels.Brands.BrandName + " " + item2.BrandsModels.Model.ModelName;
+
+                            recurso.Vehicles.FK_TypeVehicleID = item2.BrandsModels.FK_TypeVehicleID;
+                            recurso.Vehicles.Type = item2.BrandsModels.TypeVehicles.Type;
+
+                            recurso.Vehicles.FK_BrandID = item2.BrandsModels.FK_BrandID;
+                            recurso.Vehicles.FK_ModelID = item2.BrandsModels.FK_ModelID;
+
+
+                            contador += 1;
+
+                         break;
+
+                        }
+
+                        break;
+                    }
                 }
+
+                contador = 0;
+
 
                 return Ok(employeesResult);
 
@@ -84,11 +117,27 @@ namespace Back_End.Controllers
 
                     var vehicleResult = _mapper.Map<Resources_Dto>(vehicle);
 
-                    if (vehicleResult.Picture != "https://i.imgur.com/S9HJEwF.png")
+
+                    foreach (var item2 in vehicle.VehiclesBrandsModels)
                     {
-                        vehicleResult.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
-                                        Request.Scheme, Request.Host, Request.PathBase, vehicleResult.Picture);
+                        if (vehicleResult.Picture != "https://i.imgur.com/S9HJEwF.png")
+                        {
+                            vehicleResult.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
+                                            Request.Scheme, Request.Host, Request.PathBase, vehicleResult.Picture);
+                        }
+
+
+                        vehicleResult.Name = item2.BrandsModels.Brands.BrandName + " " + item2.BrandsModels.Model.ModelName;
+
+                        vehicleResult.Vehicles.FK_TypeVehicleID = item2.BrandsModels.FK_TypeVehicleID;
+                        vehicleResult.Vehicles.Type = item2.BrandsModels.TypeVehicles.Type;
+
+                        vehicleResult.Vehicles.FK_BrandID = item2.BrandsModels.FK_BrandID;
+                        vehicleResult.Vehicles.FK_ModelID = item2.BrandsModels.FK_ModelID;
+
                     }
+
+                  
 
                     return Ok(vehicleResult);
                 }
@@ -144,15 +193,35 @@ namespace Back_End.Controllers
 
                 vehicleEntity.FK_EmployeeID = vehicle.Vehicles.FK_EmployeeID;
 
-                vehicleEntity.Fk_TypeVehicleID = vehicle.Vehicles.Fk_TypeVehicleID;
 
-                if (vehicle.Vehicles.TypeVehicles != null)
+
+
+
+                vehicleEntity.VehiclesBrandsModels = new List<VehiclesBrandsModels>();
+
+
+
+                vehicleEntity.VehiclesBrandsModels.Add(new VehiclesBrandsModels()
+                {
+                });
+
+                foreach (var item in vehicleEntity.VehiclesBrandsModels)
+                {
+                    item.BrandsModels = new BrandsModels();
+
+                    item.BrandsModels.FK_TypeVehicleID = vehicle.Vehicles.FK_TypeVehicleID;
+                    item.BrandsModels.FK_BrandID = vehicle.Vehicles.FK_BrandID;
+                    item.BrandsModels.FK_ModelID = vehicle.Vehicles.FK_ModelID;
+                }
+
+          //      vehicleEntity.Fk_TypeVehicleID = vehicle.Vehicles.Fk_TypeVehicleID;
+
+            /*    if (vehicle.Vehicles.TypeVehicles != null)
                 {
                     vehicleEntity.TypeVehicles = new TypeVehicles();
                     vehicleEntity.TypeVehicles.Type = vehicle.Vehicles.TypeVehicles.Type;
                 }
 
-                vehicleEntity.BrandsModels = new BrandsModels();
 
 
                 vehicleEntity.BrandsModels.FK_BrandID = vehicle.Vehicles.BrandsModels.FK_BrandID;
@@ -165,7 +234,7 @@ namespace Back_End.Controllers
                     vehicleEntity.BrandsModels.Model = new Model();
                     vehicleEntity.BrandsModels.Brands.BrandName = vehicle.Vehicles.BrandsModels.Brands.BrandName;
                     vehicleEntity.BrandsModels.Model.ModelName = vehicle.Vehicles.BrandsModels.Model.ModelName;
-                }
+                }*/
 
                 _repository.Vehicles.CreateVehicle(vehicleEntity);
 
@@ -187,7 +256,7 @@ namespace Back_End.Controllers
         {
             try
             {
-                var vehicleEntity = await _repository.Vehicles.GetVehicleById(vehicleId);
+                var vehicleEntity = await _repository.Vehicles.GetVehicleWithDetails(vehicleId);
 
                 if (vehicleEntity == null)
                 {
@@ -217,6 +286,23 @@ namespace Back_End.Controllers
                 vehicles.VehiclePatent = vehicleToPatch.Vehicles.VehiclePatent;
 
 
+                vehicleEntity.VehiclesBrandsModels = new List<VehiclesBrandsModels>();
+
+                vehicleEntity.VehiclesBrandsModels.Add(new VehiclesBrandsModels()
+                {
+                });
+
+                foreach (var item in vehicleEntity.VehiclesBrandsModels)
+                {
+                    item.BrandsModels = new BrandsModels();
+
+                    item.BrandsModels.FK_TypeVehicleID = vehicleToPatch.Vehicles.FK_TypeVehicleID;
+                    item.BrandsModels.FK_BrandID = vehicleToPatch.Vehicles.FK_BrandID;
+                    item.BrandsModels.FK_ModelID = vehicleToPatch.Vehicles.FK_ModelID;
+                }
+
+
+
                 var vehicleResult = _mapper.Map(vehicles, vehicleEntity);
 
                 _repository.Vehicles.Update(vehicleResult);
@@ -239,7 +325,7 @@ namespace Back_End.Controllers
         {
             try
             {
-                var vehicle = await _repository.Vehicles.GetVehicleById(vehicleId);
+                var vehicle = await _repository.Vehicles.GetVehicleWithDetails(vehicleId);
 
                 if (vehicle == null)
                 {

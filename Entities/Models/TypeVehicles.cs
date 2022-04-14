@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Entities.Models;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,7 +15,11 @@ namespace Back_End.Models
         [MaxLength(25)]
         public string Type { get; set; }
 
-        public ICollection<Vehicles> Vehicles { get; set; }
+
+        [ForeignKey("FK_TypeVehicleID")]
+        public ICollection<BrandsModels> BrandModels { get; set; }
+
+        // public ICollection<Vehicles> Vehicles { get; set; }
 
     }
 }

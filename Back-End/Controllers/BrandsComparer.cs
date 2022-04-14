@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace Back_End.Controllers
 {
-    public class BrandsComparer : IEqualityComparer<BrandsSelect>
+    public class BrandsComparer : IEqualityComparer<BrandsModelsDto>
     {
-        public bool Equals(BrandsSelect x, BrandsSelect y)
+        public bool Equals(BrandsModelsDto x, BrandsModelsDto y)
         {
-            return x.BrandID == y.BrandID;
+            return x.FK_BrandID == y.FK_BrandID;
         }
 
-        public int GetHashCode(BrandsSelect obj)
+        public int GetHashCode(BrandsModelsDto obj)
         {
-            return obj.BrandID.GetHashCode();
+            return obj.FK_BrandID.GetHashCode();
         }
     }
 }

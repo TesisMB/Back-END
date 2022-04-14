@@ -10,12 +10,12 @@ namespace Back_End.Controllers
     {
         public bool Equals(BrandsModelsForSelectDto x, BrandsModelsForSelectDto y)
         {
-            return x.TypeID == y.TypeID;
+            return x.FK_TypeVehicleID == y.FK_TypeVehicleID;
         }
 
         public int GetHashCode(BrandsModelsForSelectDto obj)
         {
-            return obj.TypeID.GetHashCode();
+            return obj.FK_TypeVehicleID.GetHashCode();
         }
     }
 }

@@ -82,9 +82,9 @@ namespace Entities
             RuleFor(m => new { m.FK_VehicleID, m.Quantity }).Custom((id, context) =>
             {
                 vehicles = db.Vehicles.Where(x => x.ID == id.FK_VehicleID)
-                .Include(a => a.BrandsModels)
-                .Include(a => a.BrandsModels.Model)
-                .Include(a => a.BrandsModels.Brands)
+                //.Include(a => a.BrandsModels)
+          //      .Include(a => a.BrandsModels.Model)
+               // .Include(a => a.BrandsModels.Brands)
                 .AsNoTracking()
                 .FirstOrDefault();
 
@@ -96,9 +96,9 @@ namespace Entities
                 {
                     if (vehicles != null && (vehicles.VehicleAvailability == false))
                     {
-                        var vehiculo = vehicles.BrandsModels.Brands.BrandName + " " + vehicles.BrandsModels.Model.ModelName;
+                  //      var vehiculo = vehicles.BrandsModels.Brands.BrandName + " " + vehicles.BrandsModels.Model.ModelName;
                         Key.Add("Vehicle");
-                        Resources.Add(new Resource() { ID = id.FK_VehicleID, Name = vehiculo });
+                     //   Resources.Add(new Resource() { ID = id.FK_VehicleID, Name = vehiculo });
 
                         context.AddFailure("No se encuentra disponible");
                     }

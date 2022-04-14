@@ -1,0 +1,90 @@
+2022-04-14 16:34:51.5502 ERROR Something went wrong inside User: The relationship from 'VehiclesBrandsModels.BrandsModels' to 'BrandsModels.VehiclesBrandsModels' with foreign key properties {'FK_BrandModelID' : int} cannot target the primary key {'FK_BrandID' : int, 'FK_ModelID' : int} because it is not compatible. Configure a principal key or a set of compatible foreign key properties for this relationship.
+2022-04-14 16:40:07.7696 ERROR Something went wrong inside User: The relationship from 'VehiclesBrandsModels.BrandsModels' to 'BrandsModels.VehiclesBrandsModels' with foreign key properties {'FK_BrandModelID' : int} cannot target the primary key {'FK_BrandID' : int, 'FK_ModelID' : int} because it is not compatible. Configure a principal key or a set of compatible foreign key properties for this relationship.
+2022-04-14 16:40:28.6892 ERROR Something went wrong inside User: The relationship from 'VehiclesBrandsModels.BrandsModels' to 'BrandsModels.VehiclesBrandsModels' with foreign key properties {'FK_BrandModelID' : int} cannot target the primary key {'FK_BrandID' : int, 'FK_ModelID' : int} because it is not compatible. Configure a principal key or a set of compatible foreign key properties for this relationship.
+2022-04-14 16:42:37.9686 INFO Returned User.
+2022-04-14 16:42:41.2535 INFO Returned all vehicles from database.
+2022-04-14 16:44:33.3290 ERROR Something went wrong inside User: The child/dependent side could not be determined for the one-to-one relationship between 'Vehicles.VehiclesBrandsModels' and 'VehiclesBrandsModels.Vehicles'. To identify the child/dependent side of the relationship, configure the foreign key property. If these navigations should not be part of the same relationship configure them without specifying the inverse. See http://go.microsoft.com/fwlink/?LinkId=724062 for more details.
+2022-04-14 16:44:34.7849 ERROR Something went wrong inside User: The child/dependent side could not be determined for the one-to-one relationship between 'Vehicles.VehiclesBrandsModels' and 'VehiclesBrandsModels.Vehicles'. To identify the child/dependent side of the relationship, configure the foreign key property. If these navigations should not be part of the same relationship configure them without specifying the inverse. See http://go.microsoft.com/fwlink/?LinkId=724062 for more details.
+2022-04-14 16:45:03.0287 ERROR Something went wrong inside User: The child/dependent side could not be determined for the one-to-one relationship between 'Vehicles.VehiclesBrandsModels' and 'VehiclesBrandsModels.Vehicles'. To identify the child/dependent side of the relationship, configure the foreign key property. If these navigations should not be part of the same relationship configure them without specifying the inverse. See http://go.microsoft.com/fwlink/?LinkId=724062 for more details.
+2022-04-14 16:47:30.6269 INFO Returned User.
+2022-04-14 16:47:33.8508 INFO Returned all vehicles from database.
+2022-04-14 16:56:38.0946 INFO Returned User.
+2022-04-14 16:56:41.0817 INFO Returned all vehicles from database.
+2022-04-14 17:03:27.5627 INFO Returned User.
+2022-04-14 17:07:19.9094 INFO Returned User.
+2022-04-14 17:14:37.0316 INFO Returned User.
+2022-04-14 17:15:37.1090 INFO Returned User.
+2022-04-14 17:15:42.3378 ERROR Something went wrong inside GetAllVehicles action: El nombre de columna 'BrandsModelsID' no es válido.
+El nombre de columna 'BrandsModelsID' no es válido.
+El nombre de columna 'VehiclesID' no es válido.
+2022-04-14 17:20:38.6726 ERROR Something went wrong inside GetAllVehicles action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-14 17:20:42.4946 INFO Returned User.
+2022-04-14 17:20:58.5890 ERROR Something went wrong inside GetAllVehicles action: El nombre de columna 'VehiclesID' no es válido.
+El nombre de columna 'BrandsModelsID' no es válido.
+El nombre de columna 'VehiclesID' no es válido.
+2022-04-14 17:21:59.0467 INFO Returned User.
+2022-04-14 17:22:15.6690 INFO Returned all vehicles from database.
+2022-04-14 17:24:24.6406 INFO Returned User.
+2022-04-14 17:25:14.1419 INFO Returned User.
+2022-04-14 17:25:19.5614 INFO Returned all vehicles from database.
+2022-04-14 17:39:53.8752 INFO Returned User.
+2022-04-14 17:39:53.8752 INFO Returned User.
+2022-04-14 17:39:57.8706 INFO Returned all vehicles from database.
+2022-04-14 17:42:05.5639 INFO Returned User.
+2022-04-14 17:42:07.1509 INFO Returned all vehicles from database.
+2022-04-14 17:43:39.2510 INFO Returned User.
+2022-04-14 17:43:40.9906 INFO Returned all vehicles from database.
+2022-04-14 17:44:33.8193 ERROR Something went wrong inside GetAllVehicles action: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+2022-04-14 17:45:43.0001 INFO Returned User.
+2022-04-14 17:45:44.6007 INFO Returned all vehicles from database.
+2022-04-14 17:46:01.9734 INFO Returned all vehicles from database.
+2022-04-14 17:47:11.4477 INFO Returned all vehicles from database.
+2022-04-14 17:54:40.3133 INFO Returned User.
+2022-04-14 17:54:41.8746 INFO Returned all vehicles from database.
+2022-04-14 17:55:42.6354 ERROR Something went wrong inside GetAllVehicles action: Specified argument was out of the range of valid values. (Parameter 'index')
+2022-04-14 17:55:48.9901 INFO Returned all vehicles from database.
+2022-04-14 17:55:54.3345 ERROR Something went wrong inside GetAllVehicles action: Specified argument was out of the range of valid values. (Parameter 'index')
+2022-04-14 17:56:10.3766 INFO Returned User.
+2022-04-14 17:56:12.4621 INFO Returned all vehicles from database.
+2022-04-14 17:57:04.0212 ERROR Something went wrong inside GetAllVehicles action: Specified argument was out of the range of valid values. (Parameter 'index')
+2022-04-14 17:57:06.2073 INFO Returned all vehicles from database.
+2022-04-14 17:58:30.2505 INFO Returned User.
+2022-04-14 17:58:31.8685 INFO Returned all vehicles from database.
+2022-04-14 18:01:54.4905 INFO Returned all vehicles from database.
+2022-04-14 18:09:08.4536 INFO Returned User.
+2022-04-14 18:09:10.4136 INFO Returned all vehicles from database.
+2022-04-14 18:09:26.8545 INFO Returned all Materials from database.
+2022-04-14 18:09:31.4688 INFO Returned all Materials from database.
+2022-04-14 18:13:05.8440 INFO Returned vehicle with id: 1
+2022-04-14 18:13:13.3577 ERROR Vehicle with id: 2, hasn't been found in db.
+2022-04-14 18:13:14.6939 INFO Returned vehicle with id: 3
+2022-04-14 18:13:23.7053 INFO Returned vehicle with id: 4
+2022-04-14 18:13:27.4728 INFO Returned vehicle with id: 3
+2022-04-14 18:26:37.9685 INFO Returned all TypesVehicles from database.
+2022-04-14 18:26:38.1133 ERROR Something went wrong inside GetAllTypesVehicles action: Error mapping types.
+
+Mapping types:
+Object -> IEnumerable`1
+System.Object -> System.Collections.Generic.IEnumerable`1[[Entities.DataTransferObjects.BrandsModels__Dto.BrandsModelsForSelectDto, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2022-04-14 18:27:05.5381 INFO Returned all TypesVehicles from database.
+2022-04-14 18:27:11.4866 ERROR Something went wrong inside GetAllTypesVehicles action: Error mapping types.
+
+Mapping types:
+Object -> IEnumerable`1
+System.Object -> System.Collections.Generic.IEnumerable`1[[Entities.DataTransferObjects.BrandsModels__Dto.BrandsModelsForSelectDto, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2022-04-14 18:28:09.4017 INFO Returned all TypesVehicles from database.
+2022-04-14 18:29:51.8128 INFO Returned all TypesVehicles from database.
+2022-04-14 18:30:26.4114 ERROR Something went wrong inside GetAllTypesVehicles action: Error mapping types.
+
+Mapping types:
+Object -> IEnumerable`1
+System.Object -> System.Collections.Generic.IEnumerable`1[[Entities.DataTransferObjects.BrandsModels__Dto.BrandsModelsForSelectDto, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2022-04-14 18:30:58.5504 INFO Returned all TypesVehicles from database.
+2022-04-14 18:35:13.3140 INFO Returned all TypesVehicles from database.
+2022-04-14 18:36:14.4543 INFO Returned all TypesVehicles from database.
+2022-04-14 18:37:55.2210 INFO Returned all TypesVehicles from database.
+2022-04-14 19:16:33.5320 ERROR Something went wrong inside DeleteVehicle action: An error occurred while updating the entries. See the inner exception for details.
+2022-04-14 19:17:27.4690 ERROR Something went wrong inside DeleteVehicle action: An error occurred while updating the entries. See the inner exception for details.
+2022-04-14 19:17:42.2211 ERROR Something went wrong inside DeleteVehicle action: An error occurred while updating the entries. See the inner exception for details.
+2022-04-14 19:30:34.3628 INFO Returned vehicle with id: 15
+2022-04-14 19:40:40.6871 ERROR Something went wrong inside UpdateVehicle action: An error occurred while updating the entries. See the inner exception for details.

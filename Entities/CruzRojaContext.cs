@@ -31,9 +31,9 @@ namespace Back_End.Entities
 
           .HasKey(s => new { s.FK_VolunteerSkillID, s.FK_FormationEstateID });
 
-            modelBuilder.Entity<BrandsModels>()
+            //modelBuilder.Entity<BrandsModels>()
 
-          .HasKey(s => new { s.FK_BrandID, s.FK_ModelID });
+//          .HasKey(s => new { s.FK_BrandID, s.FK_ModelID });
 
             modelBuilder.Entity<UsersNotifications>()
 
@@ -45,7 +45,9 @@ namespace Back_End.Entities
 
             modelBuilder.Entity<UsersChat>()
 
-        .HasKey(s => new { s.FK_UserID, s.FK_ChatID });
+            .HasKey(s => new { s.FK_UserID, s.FK_ChatID });
+
+    
         }
 
         //Defino cada una de las Models, que se usan durante el proyecto, donde cada una de ellas representa una tabla de la base de datos
@@ -84,6 +86,7 @@ namespace Back_End.Entities
         public DbSet<UsersChat> UsersChat { get; set; }
         public DbSet<Victims> Victims { get; set; }
         public DbSet<ResourcesRequestMaterialsMedicinesVehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
+        public DbSet<VehiclesBrandsModels> VehiclesBrandsModels { get; set; }
         public DbSet<PDF> PDF { get; set; }
 
         private const string Connection =

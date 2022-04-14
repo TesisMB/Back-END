@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class TypesVehiclesRepository : RepositoryBase<BrandsModels>, ITypesVehicles
+    public class TypesVehiclesRepository : RepositoryBase<TypeVehicles>, ITypesVehicles
     {
         private CruzRojaContext _cruzRojaContext;
 
@@ -19,14 +19,18 @@ namespace Repository
             _cruzRojaContext = cruzRojaContext;
 
         }
-        public async Task<IEnumerable<BrandsModels>> GetAllTypesVehicles()
+        public async Task<IEnumerable<TypeVehicles>> GetAllTypesVehicles()
         {
 
             return await FindAll()
-            .Include(a => a.Vehicles)
-            .ThenInclude(a => a.TypeVehicles)
-            .Include(a => a.Brands)
-            .Include(a => a.Model)
+         //   .Include(a => a.Vehicles)
+         //   .ThenInclude(a => a.TypeVehicles)
+            .Include(a => a.BrandModels)
+            .ThenInclude(a => a.Brands)
+
+
+            .Include(a => a.BrandModels)
+            .ThenInclude(a => a.Model)
             .ToListAsync();
         }
 

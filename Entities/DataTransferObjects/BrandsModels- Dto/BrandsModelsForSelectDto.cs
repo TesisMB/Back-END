@@ -1,14 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using Entities.Models;
+using System.Collections.Generic;
 
 namespace Entities.DataTransferObjects.BrandsModels__Dto
 {
     public class BrandsModelsForSelectDto
     {
-        public int TypeID { get; set; }
+        public int FK_TypeVehicleID { get; set; }
 
         public string Type { get; set; }
 
-        public BrandsSelect Brands{ get; set; }
+
+
+         public ICollection<BrandsModelsDto> BrandModels { get; set; }
     }
 
     public class TypesSelect
@@ -18,10 +21,13 @@ namespace Entities.DataTransferObjects.BrandsModels__Dto
         public string Type { get; set; }
     }
 
-    public class BrandsSelect
+    public class BrandsModelsDto
     {
-        public int BrandID { get; set; }
+        public int FK_BrandID { get; set; }
         public string BrandsName { get; set; }
+
+        public int FK_ModelID { get; set; }
+        public string ModelName { get; set; }
     }
 
     public class ModelsSelect

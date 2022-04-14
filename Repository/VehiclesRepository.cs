@@ -33,10 +33,10 @@ namespace Repository
 
             if (!string.IsNullOrEmpty(vehicles.Type) && (vehicles.VehicleYear != null))
             {
-                collection = collection.Where(
+            /*    collection = collection.Where(
                                       a => a.TypeVehicles.Type == vehicles.Type
                                       &&
-                                       a.Estates.Locations.LocationDepartmentName == vehicles1.Estates.Locations.LocationDepartmentName);
+                                       a.Estates.Locations.LocationDepartmentName == vehicles1.Estates.Locations.LocationDepartmentName);*/
             }
 
 
@@ -57,18 +57,18 @@ namespace Repository
                       .Include(a => a.Employees)
                       .ThenInclude(a => a.Users)
                       .ThenInclude(a => a.Persons)
-                      .Include(a => a.TypeVehicles)
+                  //    .Include(a => a.TypeVehicles)
                       .Include(a => a.Estates.Locations)
-                      .Include(a => a.BrandsModels)
-                      .Include(a => a.BrandsModels.Brands)
-                      .Include(a => a.BrandsModels.Model)
+                    //  .Include(a => a.BrandsModels)
+                     // .Include(a => a.BrandsModels.Brands)
+                      //.Include(a => a.BrandsModels.Model)
                  .ToListAsync();
         }
 
         public async Task<Vehicles> GetVehicleById(int vehicleId)
         {
             return await FindByCondition(vehicle => vehicle.ID == vehicleId)
-                .Include(a => a.BrandsModels)
+            //    .Include(a => a.BrandsModels)
                 .FirstOrDefaultAsync();
         }
 
@@ -83,11 +83,26 @@ namespace Repository
                       .Include(a => a.Employees)
                       .ThenInclude(a => a.Users)
                       .ThenInclude(a => a.Persons)
-                      .Include(a => a.TypeVehicles)
                       .Include(a => a.Estates.Locations)
-                      .Include(a => a.BrandsModels)
-                      .Include(a => a.BrandsModels.Brands)
-                      .Include(a => a.BrandsModels.Model)
+
+
+                      .Include(a => a.VehiclesBrandsModels)
+                      .ThenInclude(a => a.BrandsModels)
+                      .ThenInclude(a => a.Brands)
+
+                      .Include(a => a.VehiclesBrandsModels)
+                      .ThenInclude(a => a.BrandsModels)
+                      .ThenInclude(a => a.Model)
+
+
+                       .Include(a => a.VehiclesBrandsModels)
+                      .ThenInclude(a => a.BrandsModels)
+                      .ThenInclude(a => a.TypeVehicles)
+
+                   //       .Include(a => a.TypeVehicles)
+                   //     .Include(a => a.BrandsModels)
+                   //    .Include(a => a.BrandsModels.Brands)
+                   //  .Include(a => a.BrandsModels.Model)
                    .FirstOrDefaultAsync();
         }
 
@@ -116,7 +131,7 @@ namespace Repository
             vehicles.VehicleUtility = WithoutSpace_CamelCase.GetCamelCase(vehicles.VehicleUtility);
             vehicles.VehicleDescription = WithoutSpace_CamelCase.GetCamelCase(vehicles.VehicleDescription);
 
-            if (vehicles.TypeVehicles != null)
+       /*     if (vehicles.TypeVehicles != null)
             {
                 vehicles.TypeVehicles.Type = WithoutSpace_CamelCase.GetCamelCase(vehicles.TypeVehicles.Type);
             }
@@ -125,7 +140,7 @@ namespace Repository
             {
                 vehicles.BrandsModels.Brands.BrandName = WithoutSpace_CamelCase.GetCamelCase(vehicles.BrandsModels.Brands.BrandName);
                 vehicles.BrandsModels.Model.ModelName = WithoutSpace_CamelCase.GetCamelCase(vehicles.BrandsModels.Model.ModelName);
-            }
+            }*/
         }
 
         public void UpdateVehicle(Vehicles vehicles)
@@ -157,11 +172,24 @@ namespace Repository
                    .Include(a => a.Employees)
                    .ThenInclude(a => a.Users)
                    .ThenInclude(a => a.Persons)
-                   .Include(a => a.TypeVehicles)
                    .Include(a => a.Estates.Locations)
-                   .Include(a => a.BrandsModels)
-                   .Include(a => a.BrandsModels.Brands)
-                   .Include(a => a.BrandsModels.Model)
+
+                      .Include(a => a.VehiclesBrandsModels)
+                     .ThenInclude(a => a.BrandsModels)
+                      .ThenInclude(a => a.Brands)
+
+                      .Include(a => a.VehiclesBrandsModels)
+                      .ThenInclude(a => a.BrandsModels)
+                      .ThenInclude(a => a.Model)
+
+
+                       .Include(a => a.VehiclesBrandsModels)
+                      .ThenInclude(a => a.BrandsModels)
+                      .ThenInclude(a => a.TypeVehicles)
+                 //  .Include(a => a.TypeVehicles)
+                 //.Include(a => a.BrandsModels)
+                 // .Include(a => a.BrandsModels.Brands)
+                 // .Include(a => a.BrandsModels.Model)
                  .ToList();
         }
     }

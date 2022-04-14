@@ -53,20 +53,20 @@ namespace Repository
                  .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                  .ThenInclude(i => i.Vehicles)
 
-                 .ThenInclude(a => a.BrandsModels)
-                 .ThenInclude(a => a.Model)
+          //       .ThenInclude(a => a.BrandsModels)
+            //     .ThenInclude(a => a.Model)
 
                   .Include(i => i.Resources_Requests)
                  .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                  .ThenInclude(i => i.Vehicles)
 
 
-                 .ThenInclude(a => a.BrandsModels)
-                 .ThenInclude(a => a.Brands)
+              //   .ThenInclude(a => a.BrandsModels)
+               //  .ThenInclude(a => a.Brands)
 
                      .Include(i => i.Resources_Requests)
                  .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
-                 .ThenInclude(i => i.Vehicles.TypeVehicles)
+                 //.ThenInclude(i => i.Vehicles.TypeVehicles)
 
 
                  .Include(i => i.Resources_Requests)
@@ -110,20 +110,20 @@ namespace Repository
                  .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                  .ThenInclude(i => i.Vehicles)
 
-                 .ThenInclude(a => a.BrandsModels)
-                 .ThenInclude(a => a.Model)
+                 //.ThenInclude(a => a.BrandsModels)
+                 //.ThenInclude(a => a.Model)
 
                   .Include(i => i.Resources_Requests)
                  .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                  .ThenInclude(i => i.Vehicles)
 
 
-                 .ThenInclude(a => a.BrandsModels)
-                 .ThenInclude(a => a.Brands)
+//                 .ThenInclude(a => a.BrandsModels)
+  //               .ThenInclude(a => a.Brands)
 
                      .Include(i => i.Resources_Requests)
                  .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
-                 .ThenInclude(i => i.Vehicles.TypeVehicles)
+            //     .ThenInclude(i => i.Vehicles.TypeVehicles)
 
 
                  .Include(i => i.Resources_Requests)
@@ -162,20 +162,20 @@ namespace Repository
                  .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                  .ThenInclude(i => i.Vehicles)
 
-                 .ThenInclude(a => a.BrandsModels)
-                 .ThenInclude(a => a.Model)
+           //      .ThenInclude(a => a.BrandsModels)
+             //    .ThenInclude(a => a.Model)
 
                   .Include(i => i.Resources_Requests)
                  .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                  .ThenInclude(i => i.Vehicles)
 
 
-                 .ThenInclude(a => a.BrandsModels)
-                 .ThenInclude(a => a.Brands)
+            //     .ThenInclude(a => a.BrandsModels)
+              //   .ThenInclude(a => a.Brands)
 
                      .Include(i => i.Resources_Requests)
                  .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
-                 .ThenInclude(i => i.Vehicles.TypeVehicles)
+           //      .ThenInclude(i => i.Vehicles.TypeVehicles)
 
 
                  .Include(i => i.Resources_Requests)
@@ -218,20 +218,20 @@ namespace Repository
                   .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                   .ThenInclude(i => i.Vehicles)
 
-                  .ThenInclude(a => a.BrandsModels)
-                  .ThenInclude(a => a.Model)
+//                  .ThenInclude(a => a.BrandsModels)
+  //                .ThenInclude(a => a.Model)
 
                    .Include(i => i.Resources_Requests)
                   .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                   .ThenInclude(i => i.Vehicles)
 
 
-                  .ThenInclude(a => a.BrandsModels)
-                  .ThenInclude(a => a.Brands)
+      //            .ThenInclude(a => a.BrandsModels)
+        //          .ThenInclude(a => a.Brands)
 
                       .Include(i => i.Resources_Requests)
                   .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
-                  .ThenInclude(i => i.Vehicles.TypeVehicles)
+             //     .ThenInclude(i => i.Vehicles.TypeVehicles)
 
 
                   .Include(i => i.Resources_Requests)

@@ -8,17 +8,17 @@ namespace Entities.Profiles
     {
         public BrandsModelsProfiles()
         {
-            CreateMap<BrandsModels, BrandsModelsForSelectDto>()
+            CreateMap<BrandsModels, BrandsModelsDto>()
 
-//             .ForPath(resp => resp.BrandID, opt => opt.MapFrom(a => a.FK_BrandID))
+       //             .ForPath(resp => resp.BrandID, opt => opt.MapFrom(a => a.FK_BrandID))
 
-  //           .ForPath(resp => resp.BrandsName, opt => opt.MapFrom(a => a.Brands.BrandName))
+       .ForPath(resp => resp.BrandsName, opt => opt.MapFrom(a => a.Brands.BrandName))
 
-    //         .ForPath(resp => resp.ModelID, opt => opt.MapFrom(a => a.Model.ID))
-      //       .ForPath(resp => resp.ModelName, opt => opt.MapFrom(a => a.Model.ModelName))
+       //         .ForPath(resp => resp.ModelID, opt => opt.MapFrom(a => a.Model.ID))
+       .ForPath(resp => resp.ModelName, opt => opt.MapFrom(a => a.Model.ModelName));
 
-             .ForPath(resp => resp.TypeID, opt => opt.MapFrom(a => a.Vehicles.TypeVehicles.ID))
-             .ForPath(resp => resp.Type, opt => opt.MapFrom(a => a.Vehicles.TypeVehicles.Type));
+           // .ForPath(resp => resp.TypeID, opt => opt.MapFrom(a => a.Vehicles.TypeVehicles.ID))
+             //.ForPath(resp => resp.Type, opt => opt.MapFrom(a => a.Vehicles.TypeVehicles.Type));
 
             }
 

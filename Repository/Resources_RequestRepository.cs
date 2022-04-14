@@ -104,17 +104,17 @@ namespace Repository
                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Vehicles)
             
-                 .ThenInclude(i => i.TypeVehicles)
+                // .ThenInclude(i => i.TypeVehicles)
 
                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Vehicles)
-                .ThenInclude(i => i.BrandsModels)
-                .ThenInclude(i => i.Brands)
+                //.ThenInclude(i => i.BrandsModels)
+                //.ThenInclude(i => i.Brands)
 
                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Vehicles)
-                .ThenInclude(i => i.BrandsModels)
-                .ThenInclude(i => i.Model)
+                //.ThenInclude(i => i.BrandsModels)
+                //.ThenInclude(i => i.Model)
 
 
                 .Include(i => i.Users)
@@ -150,17 +150,17 @@ namespace Repository
                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Vehicles)
 
-                 .ThenInclude(i => i.TypeVehicles)
+              //   .ThenInclude(i => i.TypeVehicles)
 
                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Vehicles)
-                .ThenInclude(i => i.BrandsModels)
-                .ThenInclude(i => i.Brands)
+                //.ThenInclude(i => i.BrandsModels)
+//                .ThenInclude(i => i.Brands)
 
                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Vehicles)
-                .ThenInclude(i => i.BrandsModels)
-                .ThenInclude(i => i.Model)
+               // .ThenInclude(i => i.BrandsModels)
+               // .ThenInclude(i => i.Model)
 
 
                 .Include(i => i.Users)

@@ -25,7 +25,7 @@ namespace Back_End.Controllers
         private IRepositorWrapper _repository;
         private IMapper _mapper;
         public static List<BrandsModelsForSelectDto> Key = new List<BrandsModelsForSelectDto>();
-        public static List<BrandsSelect> Brands = new List<BrandsSelect>();
+        public static List<BrandsModelsDto> Brands = new List<BrandsModelsDto>();
         public static List<TypesSelect> typesSelect = new List<TypesSelect>();
         public static List<ModelsSelect> modelSelect = new List<ModelsSelect>();
         public static IEnumerable<Vehicles> brands = null;
@@ -79,7 +79,7 @@ namespace Back_End.Controllers
         }
 
         [HttpGet("TypesVehicles")]
-        public async Task<ActionResult<BrandsModels>> GetTypesVehicles([FromQuery] BrandsModelsForSelectDto brandsModels)
+        public async Task<ActionResult<TypeVehicles>> GetTypesVehicles([FromQuery] BrandsModelsForSelectDto brandsModels)
         {
 
 
@@ -89,24 +89,24 @@ namespace Back_End.Controllers
 
                 _logger.LogInfo($"Returned all TypesVehicles from database.");
 
-                //var typesResult = _mapper.Map<IEnumerable<BrandsModelsForSelectDto>>(types);
+               var typesResult = _mapper.Map<IEnumerable<BrandsModelsForSelectDto>>(types);
 
 
                 //agrego x tipo de auto
-                foreach (var item in types)
-                {
-                    typesSelect.Add(new TypesSelect()
+             //   foreach (var item in types)
+               // {
+                  /*  typesSelect.Add(new TypesSelect()
                     {
                         TypeID = item.Vehicles.TypeVehicles.ID,
                         Type = item.Vehicles.TypeVehicles.Type,
-                    });
+                    });*/
 
-                    typesSelect = typesSelect.Distinct(new TypesSelectComparer()).ToList();
-                }
+                   // typesSelect = typesSelect.Distinct(new TypesSelectComparer()).ToList();
+                //}
 
 
                 //Marca
-                foreach (var item in types)
+              /*  foreach (var item in types)
                 {
 
                     Brands.Add(new BrandsSelect()
@@ -116,11 +116,11 @@ namespace Back_End.Controllers
                     });
 
                     Brands = Brands.Distinct(new BrandsComparer()).ToList();
-                }
+                }*/
 
 
                 //Modelo
-                foreach (var item in types)
+                /*foreach (var item in types)
                 {
 
                     modelSelect.Add(new ModelsSelect()
@@ -130,12 +130,12 @@ namespace Back_End.Controllers
                     });
 
                     modelSelect = modelSelect.Distinct(new ModelsComparer()).ToList();
-                }
+                }*/
 
 
 
 
-                foreach (var item in typesSelect)
+             /*   foreach (var item in typesSelect)
                 {
 
                     Key.Add(new BrandsModelsForSelectDto()
@@ -143,19 +143,19 @@ namespace Back_End.Controllers
                         TypeID = item.TypeID,
                         Type = item.Type,
                         Brands = Retornar()
-                    });
+                    });*/
 
 
-                    Key = Key.Distinct(new BrandsModelComparer()).ToList();
+                  //  Key = Key.Distinct(new BrandsModelComparer()).ToList();
 
                     //Key.Where(elem => elem.TypeID == item.Vehicles.TypeVehicles.ID);
 
                     //Key.Add(item.Brands.BrandName);
 
-                }
+                //}
 
                 //contador = 0;
-                return Ok(brands);
+                return Ok(typesResult);
 
             }
             catch (Exception ex)
@@ -168,24 +168,25 @@ namespace Back_End.Controllers
         }
 
 
-        public static IEnumerable<Vehicles> Select(BrandsSelect brand)
+        public static IEnumerable<Vehicles> Select(BrandsModelsDto brand)
             {
                 foreach (var item in typesSelect)
                 {
                     CruzRojaContext cruzRojaContext = new CruzRojaContext();
 
                     //todas las veces que aparece el tipo
-                    brands = cruzRojaContext.Vehicles.Where(
+              /*      brands = cruzRojaContext.Vehicles.Where(
                                         a => a.TypeVehicles.Type == item.Type
                                         && a.BrandsModels.Brands.ID == brand.BrandID)
                                         .AsNoTracking()
                                         .ToList();
+              */
                 }
 
                     return brands;
         }
 
-        public static BrandsSelect Retornar()
+        public static BrandsModelsDto Retornar()
         {
             var llave = Brands;
            

@@ -6,7 +6,7 @@ namespace Entities.DataTransferObjects.Vehicles___Dto.Update
     {
         public string VehicleUtility { get; set; }
         public string VehiclePatent { get; set; }
-        public int VehicleYear { get; set; }
+        public string VehicleYear { get; set; }
 
         public string VehicleDescription { get; set; }
 

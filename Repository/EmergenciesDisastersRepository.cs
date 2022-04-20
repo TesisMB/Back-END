@@ -53,7 +53,6 @@ namespace Repository
                  .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                  .ThenInclude(i => i.Vehicles)
 
-                 .ThenInclude(a => a.BrandsModels)
                  .ThenInclude(a => a.Model)
 
                   .Include(i => i.Resources_Requests)
@@ -61,7 +60,6 @@ namespace Repository
                  .ThenInclude(i => i.Vehicles)
 
 
-                 .ThenInclude(a => a.BrandsModels)
                  .ThenInclude(a => a.Brands)
 
                      .Include(i => i.Resources_Requests)
@@ -110,7 +108,6 @@ namespace Repository
                  .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                  .ThenInclude(i => i.Vehicles)
 
-                 .ThenInclude(a => a.BrandsModels)
                  .ThenInclude(a => a.Model)
 
                   .Include(i => i.Resources_Requests)
@@ -118,7 +115,6 @@ namespace Repository
                  .ThenInclude(i => i.Vehicles)
 
 
-                 .ThenInclude(a => a.BrandsModels)
                  .ThenInclude(a => a.Brands)
 
                      .Include(i => i.Resources_Requests)
@@ -162,7 +158,6 @@ namespace Repository
                  .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                  .ThenInclude(i => i.Vehicles)
 
-                 .ThenInclude(a => a.BrandsModels)
                  .ThenInclude(a => a.Model)
 
                   .Include(i => i.Resources_Requests)
@@ -170,7 +165,6 @@ namespace Repository
                  .ThenInclude(i => i.Vehicles)
 
 
-                 .ThenInclude(a => a.BrandsModels)
                  .ThenInclude(a => a.Brands)
 
                      .Include(i => i.Resources_Requests)
@@ -218,7 +212,6 @@ namespace Repository
                   .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                   .ThenInclude(i => i.Vehicles)
 
-                  .ThenInclude(a => a.BrandsModels)
                   .ThenInclude(a => a.Model)
 
                    .Include(i => i.Resources_Requests)
@@ -226,7 +219,6 @@ namespace Repository
                   .ThenInclude(i => i.Vehicles)
 
 
-                  .ThenInclude(a => a.BrandsModels)
                   .ThenInclude(a => a.Brands)
 
                       .Include(i => i.Resources_Requests)
@@ -260,7 +252,7 @@ namespace Repository
         {
             if (emergencyDisaster.EmergencyDisasterInstruction != null)
             {
-                emergencyDisaster.EmergencyDisasterInstruction = WithoutSpace_CamelCase.GetCamelCase(emergencyDisaster.EmergencyDisasterInstruction);
+                emergencyDisaster.EmergencyDisasterInstruction = WithoutSpace_CamelCase.GetWithoutSpace(emergencyDisaster.EmergencyDisasterInstruction);
             }
         }
 

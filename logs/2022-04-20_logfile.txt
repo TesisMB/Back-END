@@ -1,0 +1,285 @@
+2022-04-20 10:14:08.0831 INFO Returned User.
+2022-04-20 10:14:13.6947 INFO Returned all employees from database.
+2022-04-20 10:15:34.5283 INFO Returned all Volunteers from database.
+2022-04-20 10:16:15.7794 INFO Returned all Materials from database.
+2022-04-20 10:16:36.5880 INFO Returned all Materials from database.
+2022-04-20 10:16:51.5462 ERROR Something went wrong inside GetAllVehicles action: El nombre de objeto 'dbo.BrandsModels' no es válido.
+2022-04-20 10:17:12.1545 ERROR Something went wrong inside GetAllVehicles action: El nombre de objeto 'dbo.BrandsModels' no es válido.
+2022-04-20 10:18:10.6106 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 10:18:10.6291 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 10:18:10.8010 ERROR Something went wrong inside GetAllEmegenciesDisasters action: El nombre de objeto 'dbo.BrandsModels' no es válido.
+2022-04-20 10:18:10.8618 ERROR Something went wrong inside GetAllEmegenciesDisasters action: El nombre de objeto 'dbo.BrandsModels' no es válido.
+2022-04-20 10:19:05.0368 INFO Returned User.
+2022-04-20 10:19:07.7811 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 10:19:07.7996 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 10:19:07.8550 ERROR Something went wrong inside GetAllEmegenciesDisasters action: El nombre de objeto 'dbo.BrandsModels' no es válido.
+2022-04-20 10:19:07.9225 ERROR Something went wrong inside GetAllEmegenciesDisasters action: El nombre de objeto 'dbo.BrandsModels' no es válido.
+2022-04-20 10:19:26.7493 INFO Returned User.
+2022-04-20 10:19:29.1876 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 10:19:29.2013 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 10:19:29.2544 ERROR Something went wrong inside GetAllEmegenciesDisasters action: El nombre de objeto 'dbo.BrandsModels' no es válido.
+2022-04-20 10:19:29.3099 ERROR Something went wrong inside GetAllEmegenciesDisasters action: El nombre de objeto 'dbo.BrandsModels' no es válido.
+2022-04-20 10:20:43.0901 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 10:20:43.1208 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 10:20:43.1760 ERROR Something went wrong inside GetAllEmegenciesDisasters action: El nombre de objeto 'dbo.BrandsModels' no es válido.
+2022-04-20 10:20:43.3049 ERROR Something went wrong inside GetAllEmegenciesDisasters action: El nombre de objeto 'dbo.BrandsModels' no es válido.
+2022-04-20 10:21:14.7772 INFO Returned employe with details for id: 4
+2022-04-20 10:32:55.4335 INFO Returned all employees from database.
+2022-04-20 11:19:05.4704 INFO Returned all Volunteers from database.
+2022-04-20 11:45:49.5415 INFO Returned all employees from database.
+2022-04-20 11:45:55.2597 INFO Returned all Materials from database.
+2022-04-20 11:53:32.3434 INFO Returned Material with id: 22
+2022-04-20 12:08:20.9219 INFO Returned all Materials from database.
+2022-04-20 12:08:22.7470 INFO Returned all employees from database.
+2022-04-20 12:08:25.3925 INFO Returned all Materials from database.
+2022-04-20 12:08:26.8293 INFO Returned medicine with details for id: 7
+2022-04-20 12:48:50.6908 INFO Returned medicine with details for id: 7
+2022-04-20 12:48:54.6201 INFO Returned medicine with details for id: 7
+2022-04-20 12:48:55.8439 INFO Returned all Materials from database.
+2022-04-20 12:48:59.4789 ERROR Something went wrong inside GetAllVehicles action: Unable to cast object of type 'System.Int32' to type 'System.String'.
+2022-04-20 12:49:05.3293 INFO Returned all Materials from database.
+2022-04-20 12:50:19.3643 INFO Returned User.
+2022-04-20 12:50:21.8665 INFO Returned all Materials from database.
+2022-04-20 12:50:22.8903 INFO Returned all Materials from database.
+2022-04-20 12:50:29.4795 ERROR Something went wrong inside GetAllVehicles action: Unable to cast object of type 'System.Int32' to type 'System.String'.
+2022-04-20 12:50:32.3043 ERROR Something went wrong inside GetAllVehicles action: Unable to cast object of type 'System.Int32' to type 'System.String'.
+2022-04-20 12:52:23.1739 INFO Returned User.
+2022-04-20 12:52:28.4749 INFO Returned all vehicles from database.
+2022-04-20 12:52:46.2666 INFO Returned all Resources_Request from database.
+2022-04-20 12:52:47.7775 INFO Returned all Resources_Request from database.
+2022-04-20 12:52:50.2271 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 12:52:50.2393 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 12:52:50.4697 INFO Returned all emergenciesDisasters from database.
+2022-04-20 12:52:50.5075 INFO Returned all emergenciesDisasters from database.
+2022-04-20 12:52:53.6854 INFO Returned emegencyDisaster with details for id: 119
+2022-04-20 12:52:59.9773 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 12:53:00.0642 INFO Returned all employees from database.
+2022-04-20 12:53:02.3979 INFO Returned all Resources_Request from database.
+2022-04-20 12:53:26.8652 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 12:53:26.8894 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 12:53:26.9124 INFO Returned all emergenciesDisasters from database.
+2022-04-20 12:53:26.9246 INFO Returned all emergenciesDisasters from database.
+2022-04-20 12:53:29.8796 INFO Returned all Resources_Request from database.
+2022-04-20 12:54:40.5218 INFO Returned all Resources_Request from database.
+2022-04-20 12:54:52.4796 INFO Returned all Resources_Request from database.
+2022-04-20 12:54:59.0076 INFO Returned all Resources_Request from database.
+2022-04-20 12:55:00.3489 INFO Returned all Resources_Request from database.
+2022-04-20 16:43:06.4270 ERROR Something went wrong inside GetAllMaterials action:  An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-20 16:43:22.9289 ERROR Something went wrong inside GetAllMaterials action:  An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-20 16:43:36.0801 ERROR Something went wrong inside GetAllMaterials action:  An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-20 16:50:53.4721 ERROR Something went wrong inside GetAllMaterials action:  An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-20 16:51:02.9636 INFO Returned User.
+2022-04-20 16:51:07.3226 INFO Returned all employees from database.
+2022-04-20 16:51:30.2559 INFO Returned all Volunteers from database.
+2022-04-20 16:51:51.1603 INFO Returned volunteer with id: 29
+2022-04-20 16:51:55.4709 INFO Returned all Volunteers from database.
+2022-04-20 16:52:00.6126 INFO Returned all Materials from database.
+2022-04-20 16:52:05.3282 INFO Returned all Materials from database.
+2022-04-20 16:52:08.5828 INFO Returned Material with id: 17
+2022-04-20 16:52:09.5751 INFO Returned all Materials from database.
+2022-04-20 16:52:10.5238 INFO Returned all Materials from database.
+2022-04-20 16:52:11.4745 INFO Returned medicine with details for id: 5
+2022-04-20 16:52:12.7550 INFO Returned all Materials from database.
+2022-04-20 16:52:13.8106 INFO Returned all vehicles from database.
+2022-04-20 16:52:20.1020 INFO Returned vehicle with id: 3
+2022-04-20 16:52:22.0140 INFO Returned all vehicles from database.
+2022-04-20 16:52:23.5593 INFO Returned all Materials from database.
+2022-04-20 16:52:33.5488 INFO Returned all Resources_Request from database.
+2022-04-20 16:52:36.1164 INFO Returned all Resources_Request from database.
+2022-04-20 16:52:38.4822 INFO Returned all Resources_Request from database.
+2022-04-20 16:52:41.4554 INFO Returned all Resources_Request from database.
+2022-04-20 16:52:45.0036 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 16:52:45.0036 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 16:52:45.1802 INFO Returned all emergenciesDisasters from database.
+2022-04-20 16:52:45.2164 INFO Returned all emergenciesDisasters from database.
+2022-04-20 16:53:09.8134 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 16:53:09.8190 INFO Returned all employees from database.
+2022-04-20 16:53:22.6747 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 16:53:22.6911 INFO Returned all emergenciesDisasters from database.
+2022-04-20 16:53:23.8503 INFO Returned emegencyDisaster with details for id: 119
+2022-04-20 16:53:54.1006 INFO Returned all Materials from database.
+2022-04-20 16:53:56.9496 INFO Returned all employees from database.
+2022-04-20 16:53:57.0039 INFO Returned all estates from database.
+2022-04-20 16:54:16.8938 INFO Returned all Materials from database.
+2022-04-20 16:54:20.2531 INFO Returned all Materials from database.
+2022-04-20 16:54:21.2274 INFO Returned all Materials from database.
+2022-04-20 16:54:22.2628 INFO Returned all estates from database.
+2022-04-20 16:54:22.2628 INFO Returned all employees from database.
+2022-04-20 16:55:38.4432 INFO Returned all Materials from database.
+2022-04-20 16:55:51.0335 INFO Returned all Materials from database.
+2022-04-20 16:55:53.3852 INFO Returned all employees from database.
+2022-04-20 16:55:53.4016 INFO Returned all estates from database.
+2022-04-20 16:57:10.1573 INFO Returned all Materials from database.
+2022-04-20 16:57:15.4696 INFO Returned all Materials from database.
+2022-04-20 16:57:19.9796 INFO Returned medicine with details for id: 25
+2022-04-20 16:57:20.0041 INFO Returned all estates from database.
+2022-04-20 16:57:20.0041 INFO Returned all employees from database.
+2022-04-20 16:57:51.9285 INFO Returned all Materials from database.
+2022-04-20 16:57:54.6324 INFO Returned all estates from database.
+2022-04-20 16:57:54.6324 INFO Returned all employees from database.
+2022-04-20 18:04:46.8144 ERROR Something went wrong inside GetAllMaterials action:  An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-20 18:04:48.1777 ERROR Something went wrong inside GetAllVehicles action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-20 18:04:49.6709 ERROR Something went wrong inside GetAllMaterials action:  An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-20 18:04:59.5377 INFO Returned User.
+2022-04-20 18:05:11.0864 INFO Returned all Materials from database.
+2022-04-20 18:05:19.7710 INFO Returned all Materials from database.
+2022-04-20 18:06:04.0824 ERROR Something went wrong inside UpdateMedicine action: Input string was not in a correct format.
+2022-04-20 18:06:07.8923 INFO Returned all Materials from database.
+2022-04-20 18:06:11.6722 ERROR Something went wrong inside UpdateMedicine action: Input string was not in a correct format.
+2022-04-20 18:06:13.4622 INFO Returned all Materials from database.
+2022-04-20 18:06:18.7587 INFO Returned all Materials from database.
+2022-04-20 18:06:19.4629 INFO Returned all Materials from database.
+2022-04-20 18:06:23.2839 INFO Returned all Materials from database.
+2022-04-20 18:06:28.5133 INFO Returned all Materials from database.
+2022-04-20 18:06:37.4490 ERROR Something went wrong inside UpdateMedicine action: Input string was not in a correct format.
+2022-04-20 18:06:40.2307 INFO Returned all Materials from database.
+2022-04-20 18:06:42.9219 INFO Returned all Materials from database.
+2022-04-20 18:06:44.9586 INFO Returned all Materials from database.
+2022-04-20 18:06:48.2306 INFO Returned all Materials from database.
+2022-04-20 18:06:49.3145 INFO Returned all Materials from database.
+2022-04-20 18:06:51.3488 INFO Returned all Materials from database.
+2022-04-20 18:06:57.7105 INFO Returned all Materials from database.
+2022-04-20 18:06:59.5380 INFO Returned all Materials from database.
+2022-04-20 18:07:03.0172 ERROR Something went wrong inside UpdateMedicine action: Input string was not in a correct format.
+2022-04-20 18:07:06.5926 INFO Returned all Materials from database.
+2022-04-20 18:07:10.0827 INFO Returned all Materials from database.
+2022-04-20 18:07:13.8110 ERROR Something went wrong inside UpdateMedicine action: Input string was not in a correct format.
+2022-04-20 18:07:16.7790 INFO Returned all Materials from database.
+2022-04-20 18:07:20.3935 ERROR Something went wrong inside UpdateMedicine action: Input string was not in a correct format.
+2022-04-20 18:07:33.4441 INFO Returned all Materials from database.
+2022-04-20 18:07:47.7614 INFO Returned all Materials from database.
+2022-04-20 18:07:57.0888 INFO Returned all Materials from database.
+2022-04-20 18:08:00.5185 INFO Returned all Materials from database.
+2022-04-20 18:08:02.9635 INFO Returned all Materials from database.
+2022-04-20 18:08:03.6621 INFO Returned all Materials from database.
+2022-04-20 18:08:08.0081 ERROR Something went wrong inside UpdateMedicine action: Input string was not in a correct format.
+2022-04-20 18:08:09.5978 INFO Returned all Materials from database.
+2022-04-20 18:08:10.6335 INFO Returned all Materials from database.
+2022-04-20 18:08:23.6007 INFO Returned all vehicles from database.
+2022-04-20 18:08:29.2750 INFO Returned all vehicles from database.
+2022-04-20 18:08:34.1866 INFO Returned all vehicles from database.
+2022-04-20 18:08:59.7322 INFO Returned all vehicles from database.
+2022-04-20 18:09:02.2618 INFO Returned vehicle with id: 3
+2022-04-20 18:09:05.6063 INFO Returned all vehicles from database.
+2022-04-20 18:09:07.0527 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 18:09:07.0527 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 18:09:07.2510 INFO Returned all emergenciesDisasters from database.
+2022-04-20 18:09:07.3316 INFO Returned all emergenciesDisasters from database.
+2022-04-20 18:09:13.2357 INFO Returned all Resources_Request from database.
+2022-04-20 18:09:17.2418 INFO Returned all Resources_Request from database.
+2022-04-20 18:09:19.2316 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 18:09:19.2316 INFO Returned all emergenciesDisasters from database.
+2022-04-20 18:09:19.2392 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 18:09:19.2392 INFO Returned all emergenciesDisasters from database.
+2022-04-20 18:09:23.2333 INFO Returned all Materials from database.
+2022-04-20 18:09:25.3228 INFO Returned all vehicles from database.
+2022-04-20 18:09:27.0745 INFO Returned all estates from database.
+2022-04-20 18:09:27.0992 INFO Returned all employees from database.
+2022-04-20 18:23:25.9048 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-20 18:23:28.4092 ERROR Something went wrong inside GetAllMaterials action:  An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-20 18:23:31.4130 INFO Returned all estates from database.
+2022-04-20 18:24:41.7508 ERROR Something went wrong inside GetAllMaterials action:  An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-20 18:24:55.8731 INFO Returned User.
+2022-04-20 18:25:16.2744 INFO Returned all Materials from database.
+2022-04-20 18:25:20.0275 ERROR Something went wrong inside GetAllVehicles action: El nombre de columna 'BrandsID' no es válido.
+El nombre de columna 'ModelID' no es válido.
+El nombre de columna 'BrandsID' no es válido.
+El nombre de columna 'ModelID' no es válido.
+2022-04-20 18:25:21.1294 INFO Returned all estates from database.
+2022-04-20 18:25:21.2768 INFO Returned all employees from database.
+2022-04-20 18:30:50.3929 ERROR Something went wrong inside CreateVehicle action: An error occurred while updating the entries. See the inner exception for details.
+2022-04-20 18:32:51.0689 ERROR Something went wrong inside CreateVehicle action: An error occurred while updating the entries. See the inner exception for details.
+2022-04-20 18:33:41.8023 ERROR Something went wrong inside CreateVehicle action: An error occurred while updating the entries. See the inner exception for details.
+2022-04-20 18:34:42.2990 ERROR Something went wrong inside CreateVehicle action: An error occurred while updating the entries. See the inner exception for details.
+2022-04-20 18:36:58.1609 ERROR Something went wrong inside CreateVehicle action: An error occurred while updating the entries. See the inner exception for details.
+2022-04-20 18:37:51.5675 ERROR Something went wrong inside CreateVehicle action: An error occurred while updating the entries. See the inner exception for details.
+2022-04-20 18:41:08.6906 ERROR Something went wrong inside CreateVehicle action: An error occurred while updating the entries. See the inner exception for details.
+2022-04-20 18:42:16.7170 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-20 18:42:17.0828 INFO Returned all estates from database.
+2022-04-20 18:42:46.1881 INFO Returned User.
+2022-04-20 18:42:52.5257 INFO Returned all Materials from database.
+2022-04-20 18:42:53.3676 INFO Returned all estates from database.
+2022-04-20 18:42:53.4388 INFO Returned all employees from database.
+2022-04-20 18:43:27.1194 ERROR Something went wrong inside CreateVehicle action: An error occurred while updating the entries. See the inner exception for details.
+2022-04-20 18:44:43.0703 INFO Returned all estates from database.
+2022-04-20 18:44:43.0893 INFO Returned all employees from database.
+2022-04-20 18:46:38.6769 INFO Returned all estates from database.
+2022-04-20 18:46:38.7037 INFO Returned all employees from database.
+2022-04-20 18:47:47.2797 INFO Returned all Materials from database.
+2022-04-20 18:47:50.8091 INFO Returned all vehicles from database.
+2022-04-20 18:49:33.8802 INFO Returned User.
+2022-04-20 18:49:43.9205 INFO Returned all vehicles from database.
+2022-04-20 18:49:58.0063 INFO Returned all Materials from database.
+2022-04-20 18:50:04.0687 INFO Returned all Materials from database.
+2022-04-20 18:50:06.0409 INFO Returned all Materials from database.
+2022-04-20 18:50:07.5079 INFO Returned all vehicles from database.
+2022-04-20 18:50:11.9970 INFO Returned all estates from database.
+2022-04-20 18:50:12.0159 INFO Returned vehicle with id: 3
+2022-04-20 18:50:12.0441 INFO Returned all employees from database.
+2022-04-20 18:56:13.5334 INFO Returned all Materials from database.
+2022-04-20 18:56:16.3331 INFO Returned all estates from database.
+2022-04-20 18:56:16.3474 INFO Returned all employees from database.
+2022-04-20 18:56:16.3474 INFO Returned Material with id: 3
+2022-04-20 18:56:25.6692 INFO Returned all Materials from database.
+2022-04-20 18:56:32.7846 INFO Returned all Materials from database.
+2022-04-20 18:56:35.3851 INFO Returned all Materials from database.
+2022-04-20 18:56:37.1656 INFO Returned all Materials from database.
+2022-04-20 18:56:39.3363 INFO Returned all estates from database.
+2022-04-20 18:56:39.3363 INFO Returned all employees from database.
+2022-04-20 18:56:39.3839 INFO Returned medicine with details for id: 5
+2022-04-20 18:56:44.6528 INFO Returned all Materials from database.
+2022-04-20 18:56:48.3885 INFO Returned all Materials from database.
+2022-04-20 18:57:14.5884 INFO Returned all vehicles from database.
+2022-04-20 18:57:17.0158 INFO Returned all estates from database.
+2022-04-20 18:57:17.0158 INFO Returned all employees from database.
+2022-04-20 18:57:17.0216 INFO Returned vehicle with id: 3
+2022-04-20 18:57:32.5779 INFO Returned all Materials from database.
+2022-04-20 18:57:33.7875 INFO Returned all vehicles from database.
+2022-04-20 18:57:38.8234 INFO Returned all vehicles from database.
+2022-04-20 18:57:45.8939 INFO Returned all vehicles from database.
+2022-04-20 18:57:47.0046 INFO Returned all vehicles from database.
+2022-04-20 18:57:48.4049 INFO Returned all vehicles from database.
+2022-04-20 19:38:42.0505 INFO Returned all Materials from database.
+2022-04-20 19:50:42.1128 INFO Returned User.
+2022-04-20 19:50:42.2970 INFO Returned all Materials from database.
+2022-04-20 19:50:58.2295 INFO Returned all Materials from database.
+2022-04-20 19:50:58.8825 INFO Returned Material with id: 3
+2022-04-20 19:51:03.0773 INFO Returned all Materials from database.
+2022-04-20 19:51:05.3955 INFO Returned Material with id: 3
+2022-04-20 19:51:09.5178 INFO Returned all Materials from database.
+2022-04-20 19:51:10.1735 INFO Returned Material with id: 5
+2022-04-20 19:51:12.8025 INFO Returned all Materials from database.
+2022-04-20 19:51:16.2120 INFO Returned Material with id: 6
+2022-04-20 19:51:20.2216 INFO Returned all Materials from database.
+2022-04-20 19:51:22.7305 INFO Returned all Materials from database.
+2022-04-20 19:51:24.3076 INFO Returned medicine with details for id: 5
+2022-04-20 19:51:26.9635 INFO Returned all Materials from database.
+2022-04-20 19:51:29.1327 INFO Returned all vehicles from database.
+2022-04-20 19:51:30.5639 INFO Returned vehicle with id: 1
+2022-04-20 19:51:31.5431 INFO Returned all vehicles from database.
+2022-04-20 19:51:31.9913 INFO Returned vehicle with id: 3
+2022-04-20 19:51:34.5772 INFO Returned all emergenciesDisasters from database.
+2022-04-20 19:51:40.4280 INFO Returned all vehicles from database.
+2022-04-20 19:51:42.8514 INFO Returned vehicle with id: 7
+2022-04-20 19:51:43.9057 INFO Returned all emergenciesDisasters from database.
+2022-04-20 19:51:45.2291 INFO Returned all emergenciesDisasters from database.
+2022-04-20 19:51:51.8791 INFO Returned all vehicles from database.
+2022-04-20 19:51:54.8004 INFO Returned all Resources_Request from database.
+2022-04-20 19:52:06.1011 INFO Returned all vehicles from database.
+2022-04-20 19:52:08.4166 INFO Returned vehicle with id: 10
+2022-04-20 19:52:11.3566 INFO Returned all emergenciesDisasters from database.
+2022-04-20 19:52:16.5431 INFO Returned all Resources_Request from database.
+2022-04-20 19:52:28.7267 INFO Returned all vehicles from database.
+2022-04-20 19:52:31.5772 INFO Returned all Materials from database.
+2022-04-20 19:52:35.8293 INFO Returned all Materials from database.
+2022-04-20 19:52:42.2042 INFO Returned all Materials from database.
+2022-04-20 20:05:50.0810 ERROR Something went wrong inside GetAllMaterials action:  An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-20 20:05:58.1862 INFO Returned User.
+2022-04-20 20:06:04.0213 INFO Returned all Materials from database.
+2022-04-20 20:07:31.3399 INFO Returned all Materials from database.
+2022-04-20 20:07:34.7190 INFO Returned medicine with details for id: 5
+2022-04-20 20:07:42.4190 INFO Returned medicine with details for id: 5
+2022-04-20 20:08:38.6425 INFO Returned User.
+2022-04-20 20:08:46.6167 INFO Returned all Materials from database.
+2022-04-20 20:08:47.8741 INFO Returned medicine with details for id: 5
+2022-04-20 20:13:21.2182 INFO Returned medicine with details for id: 5

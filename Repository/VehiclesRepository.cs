@@ -59,16 +59,14 @@ namespace Repository
                       .ThenInclude(a => a.Persons)
                       .Include(a => a.TypeVehicles)
                       .Include(a => a.Estates.Locations)
-                      .Include(a => a.BrandsModels)
-                      .Include(a => a.BrandsModels.Brands)
-                      .Include(a => a.BrandsModels.Model)
+                      .Include(a => a.Brands)
+                      .Include(a => a.Model)
                  .ToListAsync();
         }
 
         public async Task<Vehicles> GetVehicleById(int vehicleId)
         {
             return await FindByCondition(vehicle => vehicle.ID == vehicleId)
-                .Include(a => a.BrandsModels)
                 .FirstOrDefaultAsync();
         }
 
@@ -85,9 +83,8 @@ namespace Repository
                       .ThenInclude(a => a.Persons)
                       .Include(a => a.TypeVehicles)
                       .Include(a => a.Estates.Locations)
-                      .Include(a => a.BrandsModels)
-                      .Include(a => a.BrandsModels.Brands)
-                      .Include(a => a.BrandsModels.Model)
+                      .Include(a => a.Brands)
+                      .Include(a => a.Model)
                    .FirstOrDefaultAsync();
         }
 
@@ -112,20 +109,20 @@ namespace Repository
 
         private void spaceCamelCase(Vehicles vehicles)
         {
-            vehicles.VehiclePatent = WithoutSpace_CamelCase.GetCamelCase(vehicles.VehiclePatent);
-            vehicles.VehicleUtility = WithoutSpace_CamelCase.GetCamelCase(vehicles.VehicleUtility);
-            vehicles.VehicleDescription = WithoutSpace_CamelCase.GetCamelCase(vehicles.VehicleDescription);
+            vehicles.VehiclePatent = WithoutSpace_CamelCase.GetWithoutSpaceWithTitleCase(vehicles.VehiclePatent);
+            vehicles.VehicleUtility = WithoutSpace_CamelCase.GetWithoutSpace(vehicles.VehicleUtility);
+            vehicles.VehicleDescription = WithoutSpace_CamelCase.GetWithoutSpace(vehicles.VehicleDescription);
 
             if (vehicles.TypeVehicles != null)
             {
-                vehicles.TypeVehicles.Type = WithoutSpace_CamelCase.GetCamelCase(vehicles.TypeVehicles.Type);
+                vehicles.TypeVehicles.Type = WithoutSpace_CamelCase.GetWithoutSpaceWithTitleCase(vehicles.TypeVehicles.Type);
             }
 
-            if (vehicles.BrandsModels.Brands != null || vehicles.BrandsModels.Model != null)
+          /*  if (vehicles.BrandsModels.Brands != null || vehicles.BrandsModels.Model != null)
             {
-                vehicles.BrandsModels.Brands.BrandName = WithoutSpace_CamelCase.GetCamelCase(vehicles.BrandsModels.Brands.BrandName);
-                vehicles.BrandsModels.Model.ModelName = WithoutSpace_CamelCase.GetCamelCase(vehicles.BrandsModels.Model.ModelName);
-            }
+                vehicles.BrandsModels.Brands.BrandName = WithoutSpace_CamelCase.GetWithoutSpaceWithTitleCase(vehicles.BrandsModels.Brands.BrandName);
+                vehicles.BrandsModels.Model.ModelName = WithoutSpace_CamelCase.GetWithoutSpaceWithTitleCase(vehicles.BrandsModels.Model.ModelName);
+            }*/
         }
 
         public void UpdateVehicle(Vehicles vehicles)
@@ -159,9 +156,8 @@ namespace Repository
                    .ThenInclude(a => a.Persons)
                    .Include(a => a.TypeVehicles)
                    .Include(a => a.Estates.Locations)
-                   .Include(a => a.BrandsModels)
-                   .Include(a => a.BrandsModels.Brands)
-                   .Include(a => a.BrandsModels.Model)
+                   .Include(a => a.Brands)
+                   .Include(a => a.Model)
                  .ToList();
         }
     }

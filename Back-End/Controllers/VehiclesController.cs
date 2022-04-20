@@ -146,25 +146,14 @@ namespace Back_End.Controllers
 
                 vehicleEntity.Fk_TypeVehicleID = vehicle.Vehicles.Fk_TypeVehicleID;
 
-                if (vehicle.Vehicles.TypeVehicles != null)
+             
+
+                if (vehicle.Vehicles.BrandName != null || vehicle.Vehicles.ModelName != null)
                 {
-                    vehicleEntity.TypeVehicles = new TypeVehicles();
-                    vehicleEntity.TypeVehicles.Type = vehicle.Vehicles.TypeVehicles.Type;
-                }
-
-                vehicleEntity.BrandsModels = new BrandsModels();
-
-
-                vehicleEntity.BrandsModels.FK_BrandID = vehicle.Vehicles.BrandsModels.FK_BrandID;
-                vehicleEntity.BrandsModels.FK_ModelID = vehicle.Vehicles.BrandsModels.FK_ModelID;
-
-
-                if (vehicle.Vehicles.BrandsModels.Brands != null || vehicle.Vehicles.BrandsModels.Model != null)
-                {
-                    vehicleEntity.BrandsModels.Brands = new Brands();
-                    vehicleEntity.BrandsModels.Model = new Model();
-                    vehicleEntity.BrandsModels.Brands.BrandName = vehicle.Vehicles.BrandsModels.Brands.BrandName;
-                    vehicleEntity.BrandsModels.Model.ModelName = vehicle.Vehicles.BrandsModels.Model.ModelName;
+                    vehicleEntity.Brands = new Brands();
+                    vehicleEntity.Model = new Model();
+                    vehicleEntity.Brands.BrandName = vehicle.Vehicles.BrandName;
+                    vehicleEntity.Model.ModelName = vehicle.Vehicles.ModelName;
                 }
 
                 _repository.Vehicles.CreateVehicle(vehicleEntity);

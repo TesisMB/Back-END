@@ -168,22 +168,7 @@ namespace Back_End.Controllers
         }
 
 
-        public static IEnumerable<Vehicles> Select(BrandsSelect brand)
-            {
-                foreach (var item in typesSelect)
-                {
-                    CruzRojaContext cruzRojaContext = new CruzRojaContext();
-
-                    //todas las veces que aparece el tipo
-                    brands = cruzRojaContext.Vehicles.Where(
-                                        a => a.TypeVehicles.Type == item.Type
-                                        && a.BrandsModels.Brands.ID == brand.BrandID)
-                                        .AsNoTracking()
-                                        .ToList();
-                }
-
-                    return brands;
-        }
+       
 
         public static BrandsSelect Retornar()
         {
@@ -198,7 +183,6 @@ namespace Back_End.Controllers
 
             contador += 1;
 
-            Select(valor);
 
             return valor;
         }

@@ -31,10 +31,6 @@ namespace Back_End.Entities
 
           .HasKey(s => new { s.FK_VolunteerSkillID, s.FK_FormationEstateID });
 
-            modelBuilder.Entity<BrandsModels>()
-
-          .HasKey(s => new { s.FK_BrandID, s.FK_ModelID });
-
             modelBuilder.Entity<UsersNotifications>()
 
            .HasKey(s => new { s.FK_UserID, s.FK_NotificationID });
@@ -70,7 +66,6 @@ namespace Back_End.Entities
         public DbSet<TypesEmergenciesDisasters> TypesEmergenciesDisasters { get; set; }
         public DbSet<Alerts> Alerts { get; set; }
         public DbSet<VolunteersSkillsFormationEstates> VolunteersSkillsFormationEstates { get; set; }
-        public DbSet<BrandsModels> BrandsModels { get; set; }
         public DbSet<Brands> Brands { get; set; }
         public DbSet<Model> Models { get; set; }
         public DbSet<FormationsEstates> FormationsEstates { get; set; }

@@ -14,23 +14,18 @@ namespace Entities.Profiles
         public MedicinesProfiles()
         {
             CreateMap<Medicines, MedicinesDto>()
-                                     .ForPath(dest => dest.MedicineExpirationDate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.MedicineExpirationDate)));
+                                     .ForPath(dest => dest.MedicineExpirationDate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDateToMedicine(src.MedicineExpirationDate)));
 
 
 
             CreateMap<Medicines, ResourcesMedicnesDto>()
-                .ForPath(dest => dest.MedicineExpirationDate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.MedicineExpirationDate)))
+                .ForPath(dest => dest.MedicineExpirationDate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDateToMedicine(src.MedicineExpirationDate)))
 
 
 
 
                 .ForMember(dest => dest.Name,
                             opt => opt.MapFrom(src => src.MedicineName));
-
-
-  
-
-
 
 
             CreateMap<Medicines, Resources_Dto>()
@@ -50,7 +45,7 @@ namespace Entities.Profiles
                       .ForMember(dest => dest.Availability,
                             opt => opt.MapFrom(src => src.MedicineAvailability))
 
-                     .ForPath(dest => dest.Medicines.MedicineExpirationDate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.MedicineExpirationDate)))
+                     .ForPath(dest => dest.Medicines.MedicineExpirationDate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDateToMedicine(src.MedicineExpirationDate)))
 
                      /* .ForMember(dest => dest.Medicines.MedicineExpirationDate,
                             opt => opt.MapFrom(src => src.MedicineExpirationDate))*/

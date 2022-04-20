@@ -32,7 +32,7 @@ namespace Back_End.Models
         public int VehicleQuantity{ get; set; }
 
         [Required]
-        public int VehicleYear { get; set; }
+        public string VehicleYear { get; set; }
 
         [Required]
         public Boolean VehicleDonation { get; set; }
@@ -50,7 +50,19 @@ namespace Back_End.Models
         public TypeVehicles TypeVehicles { get; set; }
         public int Fk_TypeVehicleID { get; set; }
 
-        public BrandsModels BrandsModels { get; set; }
+
+        [Required]
+        [ForeignKey("FK_BrandID")]
+        public Brands Brands { get; set; }
+        public int FK_BrandID { get; set; }
+
+        [Required]
+        [ForeignKey("FK_ModelID")]
+        public Model Model { get; set; }
+        public int FK_ModelID { get; set; }
+
+
+        //public BrandsModels BrandsModels { get; set; }
 
         [ForeignKey("FK_VehicleID")]
         public ICollection<ResourcesRequestMaterialsMedicinesVehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }

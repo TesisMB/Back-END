@@ -108,12 +108,10 @@ namespace Repository
 
                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Vehicles)
-                .ThenInclude(i => i.BrandsModels)
                 .ThenInclude(i => i.Brands)
 
                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Vehicles)
-                .ThenInclude(i => i.BrandsModels)
                 .ThenInclude(i => i.Model)
 
 
@@ -154,12 +152,10 @@ namespace Repository
 
                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Vehicles)
-                .ThenInclude(i => i.BrandsModels)
                 .ThenInclude(i => i.Brands)
 
                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Vehicles)
-                .ThenInclude(i => i.BrandsModels)
                 .ThenInclude(i => i.Model)
 
 
@@ -297,7 +293,7 @@ namespace Repository
             //Falta implementarlos en el PATCH
             if (resources_Request.Reason != null)
             {
-                resources_Request.Reason = WithoutSpace_CamelCase.GetCamelCase(resources_Request.Reason);
+                resources_Request.Reason = WithoutSpace_CamelCase.GetWithoutSpace(resources_Request.Reason);
             }
         }
 

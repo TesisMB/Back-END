@@ -80,9 +80,9 @@ namespace Repository
 
         private void spaceCamelCase(Materials material)
         {
-            material.MaterialName = WithoutSpace_CamelCase.GetCamelCase(material.MaterialName);
-            material.MaterialBrand = WithoutSpace_CamelCase.GetCamelCase(material.MaterialBrand);
-            material.MaterialUtility = WithoutSpace_CamelCase.GetCamelCase(material.MaterialUtility);
+            material.MaterialName = WithoutSpace_CamelCase.GetWithoutSpaceWithTitleCase(material.MaterialName);
+            material.MaterialBrand = WithoutSpace_CamelCase.GetWithoutSpaceWithTitleCase(material.MaterialBrand);
+            material.MaterialUtility = WithoutSpace_CamelCase.GetWithoutSpace(material.MaterialUtility);
         }
 
         public void UpdateMaterial(Materials material)

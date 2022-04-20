@@ -47,6 +47,13 @@ namespace Back_End.Controllers
                         item.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
                                         Request.Scheme, Request.Host, Request.PathBase, item.Picture);
 
+
+                        DateTime date = Convert.ToDateTime(item.Medicines.MedicineExpirationDate);
+
+                        if (date < DateTime.Now)
+                        {
+                            item.Availability = false;
+                        }
                     }
 
                 }
@@ -85,6 +92,15 @@ namespace Back_End.Controllers
                     {
                         employeeResult.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
                                         Request.Scheme, Request.Host, Request.PathBase, employeeResult.Picture);
+
+
+                        DateTime date = Convert.ToDateTime(employeeResult.Medicines.MedicineExpirationDate);
+
+                        if (date < DateTime.Now)
+                        {
+                            employeeResult.Availability = false;
+                        }
+
                     }
 
                     return Ok(employeeResult);
@@ -131,7 +147,7 @@ namespace Back_End.Controllers
                 medicineEntity.MedicineQuantity = medicine.Quantity;
                 medicineEntity.MedicineAvailability = true;
                 medicineEntity.MedicineUtility = medicine.Description;
-                medicineEntity.MedicineExpirationDate = medicine.Medicines.MedicineExpirationDate;
+                //medicineEntity.MedicineExpirationDate = medicine.Medicines.MedicineExpirationDate;
                 medicineEntity.MedicineLab = medicine.Medicines.MedicineLab;
                 medicineEntity.MedicineDrug = medicine.Medicines.MedicineDrug;
                 medicineEntity.MedicineWeight = medicine.Medicines.MedicineWeight;
@@ -183,7 +199,7 @@ namespace Back_End.Controllers
                 medicine.MedicineAvailability = medicineToPatch.Availability;
                 medicine.MedicineDonation = medicineToPatch.Donation;
                 medicine.MedicineUtility = medicineToPatch.Description;
-                medicine.MedicineExpirationDate = medicineToPatch.Medicines.MedicineExpirationDate;
+                //medicine.MedicineExpirationDate = medicineToPatch.Medicines.MedicineExpirationDate;
                 medicine.MedicineDrug = medicineToPatch.Medicines.MedicineDrug;
                 medicine.MedicineWeight = medicineToPatch.Medicines.MedicineWeight;
                 medicine.MedicineUnits = medicineToPatch.Medicines.MedicineUnits;

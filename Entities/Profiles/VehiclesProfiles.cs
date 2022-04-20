@@ -21,14 +21,14 @@ namespace Entities.Profiles
 
             CreateMap<Vehicles, ResourcesVehiclesDto>()
 
-                               .ForPath(dest => dest.Name, opts => opts.MapFrom(src => src.BrandsModels.Brands.BrandName + " " + src.BrandsModels.Model.ModelName))
+                               .ForPath(dest => dest.Name, opts => opts.MapFrom(src => src.Brands.BrandName + " " + src.Model.ModelName))
 
                                .ForPath(dest => dest.Type, opts => opts.MapFrom(src => src.TypeVehicles.Type));
 
 
             CreateMap<Vehicles, Resources_Dto>()
 
-               .ForMember(dest => dest.Name, opts => opts.MapFrom(src => $"{src.BrandsModels.Brands.BrandName } {src.BrandsModels.Model.ModelName}"))
+               .ForMember(dest => dest.Name, opts => opts.MapFrom(src => $"{src.Brands.BrandName } {src.Model.ModelName}"))
 
                 .ForMember(dest => dest.Description,
                             opt => opt.MapFrom(src => src.VehicleDescription))
@@ -55,8 +55,8 @@ namespace Entities.Profiles
                
                  .ForPath(dest => dest.Vehicles.TypeVehicleID, opts => opts.MapFrom(src => src.TypeVehicles.ID))
                .ForPath(dest => dest.Vehicles.UserID, opts => opts.MapFrom(src => src.FK_EmployeeID))
-               .ForPath(dest => dest.Vehicles.BrandID, opts => opts.MapFrom(src => src.BrandsModels.FK_BrandID))
-               .ForPath(dest => dest.Vehicles.ModelID, opts => opts.MapFrom(src => src.BrandsModels.FK_ModelID))
+               .ForPath(dest => dest.Vehicles.BrandID, opts => opts.MapFrom(src => src.FK_BrandID))
+               .ForPath(dest => dest.Vehicles.ModelID, opts => opts.MapFrom(src => src.FK_ModelID))
 
                  .ForPath(dest => dest.Vehicles.EmployeeName, opts => opts.MapFrom(src => $"{src.Employees.Users.Persons.FirstName} {src.Employees.Users.Persons.LastName}"));
 

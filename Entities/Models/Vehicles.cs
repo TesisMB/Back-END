@@ -67,5 +67,6 @@ namespace Back_End.Models
         [ForeignKey("FK_VehicleID")]
         public ICollection<ResourcesRequestMaterialsMedicinesVehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
 
+
     }
 }

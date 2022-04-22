@@ -45,6 +45,43 @@ namespace Repository
         }
 
 
+        public static void sendResourcesRequest(Users user, Users user2)
+        {
+            string message;
+
+            //Falta legajo - Dni
+            message = $@"<p>Nueva solicitud de recursos</p>
+                         <p>El Usuario: {user.Persons.FirstName} {user.Persons.LastName}
+                            hizo una nueva solicitud</p>";
+
+            Email.Send(
+                to: user2.Persons.Email,
+                subject: "Solicitud de recursos",
+                html: $@"{message}"
+                );
+        }
+
+        //Legajo - actualizacion pedido
+
+
+        //Falta quien lo rechazo y email.
+        public static void sendAcceptRejectRequest(Users user, string condition)
+        {
+            string message;
+
+            message = $@"<p>Estado de solicitud de recursos</p>
+                         <p>Su solicitud fue {condition}</p>
+                        ";
+
+            Email.Send(
+                to: user.Persons.Email,
+                subject: "Estado de solicitud de recursos",
+                html: $@"{message}"
+                );
+        }
+
+
+
         public static void Send(string to, string subject, string html, string from = null)
         {
             // create message

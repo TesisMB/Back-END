@@ -11,3 +11,29 @@
 2022-04-22 10:13:54.9410 INFO Returned all vehicles from database.
 2022-04-22 10:13:56.3092 INFO Returned vehicle with id: 1
 2022-04-22 10:14:04.4280 INFO Returned all Volunteers from database.
+2022-04-22 10:58:58.4063 ERROR Something went wrong inside User: Unable to determine the relationship represented by navigation property 'Users.Resources_Requests' of type 'ICollection<ResourcesRequest>'. Either manually configure the relationship, or ignore this property using the '[NotMapped]' attribute or by using 'EntityTypeBuilder.Ignore' in 'OnModelCreating'.
+2022-04-22 10:59:07.9748 ERROR Something went wrong inside User: Unable to determine the relationship represented by navigation property 'Users.Resources_Requests' of type 'ICollection<ResourcesRequest>'. Either manually configure the relationship, or ignore this property using the '[NotMapped]' attribute or by using 'EntityTypeBuilder.Ignore' in 'OnModelCreating'.
+2022-04-22 10:59:16.7364 ERROR Something went wrong inside User: Unable to determine the relationship represented by navigation property 'Users.Resources_Requests' of type 'ICollection<ResourcesRequest>'. Either manually configure the relationship, or ignore this property using the '[NotMapped]' attribute or by using 'EntityTypeBuilder.Ignore' in 'OnModelCreating'.
+2022-04-22 11:00:45.8128 INFO Returned User.
+2022-04-22 11:02:51.9054 INFO Returned User.
+2022-04-22 11:05:29.0201 INFO Returned User.
+2022-04-22 11:05:36.8654 INFO Returned all Materials from database.
+2022-04-22 11:07:28.9067 INFO Returned User.
+2022-04-22 11:08:16.3119 INFO Returned User.
+2022-04-22 11:08:20.7649 INFO Returned all Resources_Request from database.
+2022-04-22 11:08:26.1735 INFO Returned all Resources_Request from database.
+2022-04-22 11:08:29.7854 INFO Returned all Resources_Request from database.
+2022-04-22 11:08:36.9345 INFO Returned all Resources_Request from database.
+2022-04-22 11:08:54.7618 INFO Returned all Resources_Request from database.
+2022-04-22 11:08:56.8018 INFO Returned all Resources_Request from database.
+2022-04-22 11:08:59.7285 INFO Returned employe with details for id: 5
+2022-04-22 11:08:59.8148 INFO Returned all estates from database.
+2022-04-22 11:09:35.6351 INFO Returned all Resources_Request from database.
+2022-04-22 11:09:52.1212 INFO Returned all Resources_Request from database.
+2022-04-22 11:09:59.1819 INFO Returned User.
+2022-04-22 11:10:01.8826 INFO Returned all Materials from database.
+2022-04-22 11:10:03.4076 INFO Returned medicine with details for id: 1
+2022-04-22 11:10:07.0407 INFO Returned all emergenciesDisasters from database.
+2022-04-22 11:10:32.0015 INFO Returned all Resources_Request from database.
+2022-04-22 11:10:41.6734 INFO Returned all Resources_Request from database.
+2022-04-22 11:10:44.0374 INFO Returned all Resources_Request from database.

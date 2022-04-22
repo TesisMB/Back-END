@@ -85,6 +85,11 @@ namespace Repository
             medicine.MedicineDrug = WithoutSpace_CamelCase.GetWithoutSpaceWithTitleCase(medicine.MedicineDrug);
             medicine.MedicineUnits = WithoutSpace_CamelCase.GetWithoutSpaceWithTitleCase(medicine.MedicineUnits);
             medicine.MedicineUtility = WithoutSpace_CamelCase.GetWithoutSpace(medicine.MedicineUtility);
+            //Sacar WithoutSpace_CamelCase de Title case //dos funciones separadas
+       //     medicine.MedicineName = WithoutSpace_CamelCase.GetWithoutSpace(medicine.MedicineName);
+         //   medicine.MedicineLab = WithoutSpace_CamelCase.GetCamelCase(medicine.MedicineLab);
+           // medicine.MedicineDrug = WithoutSpace_CamelCase.GetCamelCase(medicine.MedicineDrug);
+            //medicine.MedicineUtility = WithoutSpace_CamelCase.GetCamelCase(medicine.MedicineUtility);
         }
 
         public void UpdateMedicine(Medicines medicine)

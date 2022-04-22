@@ -25,6 +25,7 @@ namespace Back_End.Profiles
                     .ForMember(dest => dest.Name,
                                  opt => opt.MapFrom(src => src.Persons.FirstName + " " + src.Persons.LastName))
 
+
                        .ForMember(dest => dest.Status,
                                  opt => opt.MapFrom(src => src.Persons.Status));
 

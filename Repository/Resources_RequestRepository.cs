@@ -174,9 +174,23 @@ namespace Repository
         {
 
             ResourcesRequest rec = null;
-
             resources_Request.FK_UserID = UsersRepository.authUser.UserID;
             var rol = UsersRepository.authUser.Roles.RoleName;
+
+
+            //Traigo todos los encargados de Logistica para enviarles un email
+            //con la solicitudes nuevas o alguna actualizacion 
+
+            List<Users> logsitica = new List<Users>();
+
+            logsitica = db.Users
+                .Where(
+                        a => a.Roles.RoleName == "Encargado de Logistica"
+                        && a.Estates.Locations.LocationDepartmentName == UsersRepository.authUser.Estates.Locations.LocationDepartmentName)
+                        .Include(a => a.Persons)
+                        .Include(a => a.Employees)
+                .ToList();
+
 
             //var userRequest = ResourcesRequestForCreationDto.UserRequest;
 
@@ -272,6 +286,7 @@ namespace Repository
 
 
          
+                //cuando no exite ningun registro de solicitud se procede a crearla completa
                 if (rec == null)
                 {
 
@@ -283,9 +298,13 @@ namespace Repository
 
                     DeleteResource(resources_Request);
 
+                    foreach (var item in logsitica)
+                    {
+                        Email.sendResourcesRequest(UsersRepository.authUser, item);
+                    }
+
                     SaveAsync();
                  }
-            //cuando no exite ningun registro de solicitud se procede a crearla completa
         }
 
 
@@ -779,27 +798,39 @@ namespace Repository
                          .FirstOrDefault();
 
 
+
+
+            Users user = new Users();
+            user = db.Users
+                .Where(a => a.UserID == userRequestID)
+                .Include(a => a.Persons)
+                .Include(a => a.Employees)
+                .FirstOrDefault();
+
+
             if (userReq != null)
             {
 
                 if (resourcesRequest.Status == false)
                 {
                     ActualizarEstado(userReq);
-
                     DeleteResource(userReq);
 
                     userReq.Condition = "Rechazada";
                     userReq.Reason = resourcesRequest.Reason;
+                    //Email.sendAcceptRejectRequest(user, userReq.Condition);
                 }
 
                 else
                 {
                     userReq.Condition = "Aceptada";
                     userReq.Reason = resourcesRequest.Reason;
+                    //Email.sendAcceptRejectRequest(user, userReq.Condition);
                 }
 
-                Update(userReq);
+                //userReq.FK_InCharge = UsersRepository.authUser.UserID;
 
+                Update(userReq);
                 SaveAsync();
             }
         }

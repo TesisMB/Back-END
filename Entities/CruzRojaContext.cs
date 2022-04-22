@@ -19,13 +19,12 @@ namespace Back_End.Entities
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<EstatesTimes>()
 
            .HasKey(s => new { s.FK_EstateID, s.FK_TimeID });
-
-            modelBuilder.Entity<TypeVehiclesModels>()
-
-           .HasKey(s => new { s.FK_TypeVehicleID, s.FK_ModelID });
 
             modelBuilder.Entity<VolunteersSkillsFormationEstates>()
 
@@ -40,12 +39,14 @@ namespace Back_End.Entities
             .HasKey(s => new { s.FK_UserID, s.FK_ChatRoomID });
 
             modelBuilder.Entity<UsersChat>()
+            .HasKey(s => new { s.FK_UserID, s.FK_ChatID });
 
-        .HasKey(s => new { s.FK_UserID, s.FK_ChatID });
+           
         }
 
         //Defino cada una de las Models, que se usan durante el proyecto, donde cada una de ellas representa una tabla de la base de datos
         public DbSet<Users> Users { get; set; }
+        public DbSet<Users> InCharge { get; set; }
         public DbSet<Persons> Persons { get; set; }
         public DbSet<Employees> Employees { get; set; }
         public DbSet<Schedules> Schedules { get; set; }

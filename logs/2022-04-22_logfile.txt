@@ -171,3 +171,13 @@
 2022-04-22 11:40:32.2810 INFO Returned all Materials from database.
 2022-04-22 11:40:33.1347 INFO Returned Material with id: 3
 2022-04-22 11:40:35.7957 INFO Returned all emergenciesDisasters from database.
+2022-04-22 11:41:46.8506 INFO Returned all emergenciesDisasters from database.
+2022-04-22 11:42:22.4308 INFO Returned User.
+2022-04-22 11:42:26.7376 INFO Returned all Materials from database.
+2022-04-22 11:42:29.0078 INFO Returned all estates from database.
+2022-04-22 11:42:29.0743 INFO Returned all employees from database.
+2022-04-22 11:44:29.5300 INFO Returned all estates from database.
+2022-04-22 11:46:37.6393 INFO Returned all estates from database.
+2022-04-22 11:46:37.6536 INFO Returned all employees from database.
+2022-04-22 12:33:44.1250 INFO Returned User.
+2022-04-22 12:33:52.8711 INFO Returned all vehicles from database.

@@ -28,6 +28,9 @@ namespace Entities.Profiles
 
             CreateMap<Vehicles, Resources_Dto>()
 
+                .ForPath(dest => dest.Name, opts => opts.MapFrom(src => src.Brands.BrandName + " " + src.Model.ModelName))
+
+
                 .ForMember(dest => dest.Description,
                             opt => opt.MapFrom(src => src.VehicleDescription))
                 

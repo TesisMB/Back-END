@@ -38,7 +38,6 @@ namespace Repository
             }
 
             //Admin y C.General -> tiene acceso a sus propias solicitudes en funcion del departamento
-
             else if (user.Roles.RoleName == "Admin"  && !string.IsNullOrEmpty(Condition))
             {
                 collection = collection.Where(
@@ -46,6 +45,7 @@ namespace Repository
                                               && a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName)
                                               .AsNoTracking();
             }
+
             else if (user.Roles.RoleName == "Coordinador General" && string.IsNullOrEmpty(Condition))
             {
                 return await GetAllResourcesRequests(user.Estates.Locations.LocationDepartmentName);
@@ -79,6 +79,7 @@ namespace Repository
                                              && a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName)
                                              .AsNoTracking();
             }
+
             //C.Emergencias tiene acceso a solamente el historial de solicitudes
             else
             {

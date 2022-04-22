@@ -1,0 +1,13 @@
+2022-04-22 10:02:17.1865 INFO Returned User.
+2022-04-22 10:02:22.1569 INFO Returned all vehicles from database.
+2022-04-22 10:04:51.1255 INFO Returned User.
+2022-04-22 10:04:53.1844 INFO Returned all vehicles from database.
+2022-04-22 10:08:55.6552 INFO Returned User.
+2022-04-22 10:09:01.7505 INFO Returned all vehicles from database.
+2022-04-22 10:10:28.1236 INFO Returned User.
+2022-04-22 10:10:29.5368 INFO Returned all vehicles from database.
+2022-04-22 10:13:50.0937 INFO Returned User.
+2022-04-22 10:13:51.9614 INFO Returned all vehicles from database.
+2022-04-22 10:13:54.9410 INFO Returned all vehicles from database.
+2022-04-22 10:13:56.3092 INFO Returned vehicle with id: 1
+2022-04-22 10:14:04.4280 INFO Returned all Volunteers from database.

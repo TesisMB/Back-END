@@ -283,3 +283,21 @@ El nombre de columna 'ModelID' no es válido.
 2022-04-20 20:08:46.6167 INFO Returned all Materials from database.
 2022-04-20 20:08:47.8741 INFO Returned medicine with details for id: 5
 2022-04-20 20:13:21.2182 INFO Returned medicine with details for id: 5
+2022-04-20 20:15:04.0157 INFO Returned medicine with details for id: 5
+2022-04-20 20:16:04.8637 INFO Returned medicine with details for id: 5
+2022-04-20 20:33:17.5538 INFO Returned User.
+2022-04-20 20:33:27.8585 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 20:33:27.8829 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 20:33:28.2820 INFO Returned all emergenciesDisasters from database.
+2022-04-20 20:33:28.3731 INFO Returned all emergenciesDisasters from database.
+2022-04-20 20:33:34.1032 INFO Returned all vehicles from database.
+2022-04-20 20:34:08.9817 INFO Returned vehicle with id: 3
+2022-04-20 20:34:26.4811 INFO Returned all vehicles from database.
+2022-04-20 20:35:08.1473 INFO Returned all Materials from database.
+2022-04-20 20:35:20.1516 INFO Returned all Materials from database.
+2022-04-20 20:35:30.1225 INFO Returned all vehicles from database.
+2022-04-20 20:35:47.9047 INFO Returned all emergenciesDisasters from database.
+2022-04-20 20:35:47.9445 INFO Returned all emergenciesDisasters from database.
+2022-04-20 20:35:48.0009 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 20:35:48.0083 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-20 20:35:52.0351 INFO Returned emegencyDisaster with details for id: 4

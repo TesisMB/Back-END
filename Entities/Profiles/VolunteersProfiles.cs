@@ -34,8 +34,15 @@ namespace Back_End.Profiles
 
               .ForPath(dest => dest.LocationCityName, opts => opts.MapFrom(src => src.Users.Estates.Locations.LocationCityName))
 
-              .ForMember(dest => dest.Availability,
+
+              //FALTA DEVOLVER EL DATO DE ACCESO AL SISTEMA
+
+              .ForPath(dest => dest.Availability,
                             opt => opt.MapFrom(src => src.Users.Persons.Status))
+
+
+                  .ForPath(dest => dest.Volunteers.UserAvailability,
+                            opt => opt.MapFrom(src => src.Users.UserAvailability))
 
                .ForPath(dest => dest.Volunteers.Email, opts => opts.MapFrom(src => src.Users.Persons.Email))
 

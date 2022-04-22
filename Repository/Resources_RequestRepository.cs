@@ -32,50 +32,24 @@ namespace Repository
 
             //Admin y C.General -> tiene acceso a todo en funcion del departamento
 
-            if(user.Roles.RoleName == "Admin" && string.IsNullOrEmpty(Condition))
+            if(user.Roles.RoleName == "Admin")
             {
-                return await GetAllResourcesRequests(user.Estates.Locations.LocationDepartmentName);
+                return await GetAllResourcesRequests(user.Estates.Locations.LocationDepartmentName, Condition);
             }
 
-            //Admin y C.General -> tiene acceso a sus propias solicitudes en funcion del departamento
-            else if (user.Roles.RoleName == "Admin"  && !string.IsNullOrEmpty(Condition))
+            else if (user.Roles.RoleName == "Coordinador General")
             {
-                collection = collection.Where(
-                                              a => a.Condition == Condition
-                                              && a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName)
-                                              .AsNoTracking();
+                return await GetAllResourcesRequests(user.Estates.Locations.LocationDepartmentName, Condition);
             }
 
-            else if (user.Roles.RoleName == "Coordinador General" && string.IsNullOrEmpty(Condition))
-            {
-                return await GetAllResourcesRequests(user.Estates.Locations.LocationDepartmentName);
-            }
-
-            else if (user.Roles.RoleName == "Coordinador General" && !string.IsNullOrEmpty(Condition))
-            {
-                collection = collection.Where(
-                                              a => a.Condition == Condition
-                                              && a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName)
-                                              .AsNoTracking();
-            }
 
             //Encargado de logistica tiene acceso a las solicitudes pendientes nomas    
 
-            else if (user.Roles.RoleName == "Encargado de Logistica" && Condition == null)
+            else if (user.Roles.RoleName == "Encargado de Logistica")
             {
-                Condition = "Pendiente";
 
                 collection = collection.Where(
                                               a => a.Condition == Condition 
-                                             && a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName)
-                                             .AsNoTracking();
-            }
-
-            else if (user.Roles.RoleName == "Encargado de Logistica" && !string.IsNullOrEmpty(Condition))
-            {
-
-                collection = collection.Where(
-                                              a => a.Condition == Condition
                                              && a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName)
                                              .AsNoTracking();
             }
@@ -85,7 +59,8 @@ namespace Repository
             {
                 collection = collection.Where(
                                             a => a.Condition == Condition
-                                            && a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName)
+                                            && a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName
+                                            && a.FK_UserID == user.UserID)
                                             .AsNoTracking();
             }
 
@@ -127,11 +102,12 @@ namespace Repository
 
 
 
-        public async Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequests(string LocationDepartmentName)
+        public async Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequests(string LocationDepartmentName, string Condition)
         {
             var collection = _cruzRojaContext.Resources_Requests as IQueryable<ResourcesRequest>;
 
-            collection = collection.Where(a => a.EmergenciesDisasters.Locations.LocationDepartmentName == LocationDepartmentName)
+            collection = collection.Where(a => a.EmergenciesDisasters.Locations.LocationDepartmentName == LocationDepartmentName
+                                        && a.Condition == Condition)
                                     .AsNoTracking();
 
             return await collection

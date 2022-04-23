@@ -188,10 +188,10 @@ namespace Back_End.Controllers
                 patchDocument.ApplyTo(medicineToPatch, ModelState);
 
 
-                if (!TryValidateModel(medicineToPatch))
+              /*  if (!TryValidateModel(medicineToPatch))
                 {
                     return ValidationProblem(ModelState);
-                }
+                }*/
 
                 MedicineForUpdateDto medicine = new MedicineForUpdateDto();
                 medicine.MedicineQuantity = medicineToPatch.Quantity;

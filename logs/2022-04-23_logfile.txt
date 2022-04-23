@@ -1,0 +1,74 @@
+2022-04-23 13:34:03.2579 INFO Returned User.
+2022-04-23 13:34:13.3313 INFO Returned all Materials from database.
+2022-04-23 13:34:14.4732 INFO Returned all Materials from database.
+2022-04-23 13:34:17.7313 INFO Returned medicine with details for id: 1
+2022-04-23 13:34:17.7530 INFO Returned all estates from database.
+2022-04-23 13:34:17.8633 INFO Returned all employees from database.
+2022-04-23 13:34:28.8801 ERROR Something went wrong inside UpdateMedicine action: Input string was not in a correct format.
+2022-04-23 13:34:51.7691 INFO Returned all employees from database.
+2022-04-23 13:34:51.7775 INFO Returned all estates from database.
+2022-04-23 13:34:51.7908 INFO Returned medicine with details for id: 1
+2022-04-23 13:35:46.4002 ERROR Something went wrong inside UpdateMedicine action: Input string was not in a correct format.
+2022-04-23 13:35:53.8838 INFO Returned all Materials from database.
+2022-04-23 13:35:56.2897 INFO Returned all estates from database.
+2022-04-23 13:35:56.3047 INFO Returned all employees from database.
+2022-04-23 13:35:56.3253 INFO Returned Material with id: 3
+2022-04-23 13:36:41.3448 INFO Returned all Materials from database.
+2022-04-23 13:36:48.2048 INFO Returned all Materials from database.
+2022-04-23 13:36:51.3490 INFO Returned medicine with details for id: 9
+2022-04-23 13:36:51.3490 INFO Returned all estates from database.
+2022-04-23 13:36:51.3803 INFO Returned all employees from database.
+2022-04-23 13:37:09.5528 INFO Returned all employees from database.
+2022-04-23 13:37:09.5718 INFO Returned all estates from database.
+2022-04-23 13:37:09.6062 INFO Returned medicine with details for id: 9
+2022-04-23 13:37:31.9666 INFO Returned User.
+2022-04-23 13:37:36.7253 INFO Returned all Materials from database.
+2022-04-23 13:37:38.7494 INFO Returned all Materials from database.
+2022-04-23 13:37:41.9677 INFO Returned medicine with details for id: 1
+2022-04-23 13:37:41.9752 INFO Returned all estates from database.
+2022-04-23 13:37:41.9752 INFO Returned all employees from database.
+2022-04-23 13:38:10.9341 ERROR Something went wrong inside UpdateMedicine action: Input string was not in a correct format.
+2022-04-23 13:39:06.3471 INFO Returned medicine with details for id: 1
+2022-04-23 13:39:06.3722 INFO Returned all estates from database.
+2022-04-23 13:39:06.3831 INFO Returned all employees from database.
+2022-04-23 13:42:07.3965 ERROR Something went wrong inside UpdateMedicine action: Input string was not in a correct format.
+2022-04-23 13:48:31.1464 INFO Returned medicine with details for id: 1
+2022-04-23 13:48:31.1464 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-23 13:48:31.1464 INFO Returned all estates from database.
+2022-04-23 13:48:38.8713 ERROR Something went wrong inside GetAllMaterials action:  An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-23 13:48:58.3472 INFO Returned User.
+2022-04-23 13:49:02.1971 INFO Returned all Materials from database.
+2022-04-23 13:49:04.6456 INFO Returned all Materials from database.
+2022-04-23 13:49:12.3003 INFO Returned all Materials from database.
+2022-04-23 13:49:16.8305 INFO Returned medicine with details for id: 1
+2022-04-23 13:49:16.8305 INFO Returned all estates from database.
+2022-04-23 13:49:16.9081 INFO Returned all employees from database.
+2022-04-23 13:49:19.7383 INFO Returned all Materials from database.
+2022-04-23 13:49:21.2329 INFO Returned all Materials from database.
+2022-04-23 13:49:23.9898 INFO Returned all estates from database.
+2022-04-23 13:49:23.9898 INFO Returned medicine with details for id: 9
+2022-04-23 13:49:23.9898 INFO Returned all employees from database.
+2022-04-23 13:49:39.7615 INFO Returned all estates from database.
+2022-04-23 13:49:39.7743 INFO Returned all employees from database.
+2022-04-23 13:49:39.7743 INFO Returned medicine with details for id: 9
+2022-04-23 13:50:05.4596 INFO Returned User.
+2022-04-23 13:50:09.1679 INFO Returned all Materials from database.
+2022-04-23 13:50:11.0071 INFO Returned all Materials from database.
+2022-04-23 13:50:15.2358 INFO Returned all estates from database.
+2022-04-23 13:50:15.2644 INFO Returned medicine with details for id: 9
+2022-04-23 13:50:15.3118 INFO Returned all employees from database.
+2022-04-23 13:51:20.6593 INFO Returned User.
+2022-04-23 13:51:25.4600 INFO Returned all Materials from database.
+2022-04-23 13:51:26.9785 INFO Returned all Materials from database.
+2022-04-23 13:51:29.3054 INFO Returned medicine with details for id: 9
+2022-04-23 13:51:29.3054 INFO Returned all estates from database.
+2022-04-23 13:51:29.3247 INFO Returned all employees from database.
+2022-04-23 13:52:22.8968 INFO Returned User.
+2022-04-23 13:52:29.2156 INFO Returned all Materials from database.
+2022-04-23 13:52:32.5191 INFO Returned all Materials from database.
+2022-04-23 13:52:35.1548 INFO Returned all Materials from database.
+2022-04-23 13:52:36.6370 INFO Returned all Materials from database.
+2022-04-23 13:52:47.5877 INFO Returned all Materials from database.
+2022-04-23 13:52:52.0938 INFO Returned all Materials from database.
+2022-04-23 13:53:02.0396 INFO Returned all vehicles from database.
+2022-04-23 13:53:02.7733 INFO Returned all Materials from database.

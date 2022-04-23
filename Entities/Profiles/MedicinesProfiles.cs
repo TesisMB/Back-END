@@ -94,7 +94,7 @@ namespace Entities.Profiles
                  .ForPath(dest => dest.Description, opts => opts.MapFrom(src => src.MedicineUtility))
                  .ForPath(dest => dest.FK_EstateID, opts => opts.MapFrom(src => src.FK_EstateID))
 
-                 .ForPath(dest => dest.Medicines.MedicineExpirationDate, opts => opts.MapFrom(src => src.MedicineExpirationDate))
+                 //.ForPath(dest => dest.Medicines.MedicineExpirationDate, opts => opts.MapFrom(src => src.MedicineExpirationDate))
                  .ForPath(dest => dest.Medicines.MedicineLab, opts => opts.MapFrom(src => src.MedicineLab))
                  .ForPath(dest => dest.Medicines.MedicineDrug, opts => opts.MapFrom(src => src.MedicineDrug))
                  .ForPath(dest => dest.Medicines.MedicineWeight, opts => opts.MapFrom(src => src.MedicineWeight))

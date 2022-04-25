@@ -15,6 +15,7 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
 
         public int? Fk_EmplooyeeID { get; set; }
 
+        public int FK_LocationID { get; set; }
         public LocationsDto Locations { get; set; }
 
         public int FK_TypeEmergencyID { get; set; }

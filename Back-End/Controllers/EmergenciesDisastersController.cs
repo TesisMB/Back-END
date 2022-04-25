@@ -320,14 +320,21 @@ namespace Back_End.Controllers
                     return NotFound();
                 }
 
+
                 var emergencyDisasterToPatch = _mapper.Map<EmergenciesDisastersForUpdateDto>(emergencyDisaster);
 
                 _emergencyDisaster.ApplyTo(emergencyDisasterToPatch, ModelState);
+
+                if(emergencyDisasterToPatch != null)
+                {
+                    emergencyDisasterToPatch.EmergencyDisasterEndDate = DateTime.Now;
+                }
 
                 if (!TryValidateModel(emergencyDisasterToPatch))
                 {
                     return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
                 }
+
 
                 var emergencyDisasterResult = _mapper.Map(emergencyDisasterToPatch, emergencyDisaster);
 

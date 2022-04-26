@@ -6,6 +6,7 @@ using Entities.DataTransferObjects.Vehicles___Dto;
 using Entities.DataTransferObjects.Vehicles___Dto.Update;
 using Entities.Helpers;
 using Entities.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -102,7 +103,7 @@ namespace Back_End.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Vehicles>> CreateVehicle([FromBody] Resources_ForCreationDto vehicle)
+        public async Task<ActionResult<Vehicles>> CreateVehicle([FromForm] IFormFile ImageFile, [FromForm] Resources_ForCreationDto vehicle)
         {
             try
             {
@@ -121,8 +122,9 @@ namespace Back_End.Controllers
                 var vehicleEntity = _mapper.Map<Vehicles>(vehicle);
 
 
+                vehicle.ImageFile = ImageFile;
 
-                if (vehicle.Picture == null)
+                if (vehicle.ImageFile == null)
                 {
                     vehicleEntity.VehiclePicture = "https://i.imgur.com/S9HJEwF.png";
                 }

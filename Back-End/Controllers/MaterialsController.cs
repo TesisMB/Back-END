@@ -4,6 +4,7 @@ using Entities.DataTransferObjects.Materials___Dto;
 using Entities.DataTransferObjects.ResourcesDto;
 using Entities.Helpers;
 using Entities.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -108,8 +109,8 @@ namespace Back_End.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Materials>> CreateMaterial([FromBody] Resources_ForCreationDto material)
+        [HttpPost()]
+        public async Task<ActionResult<Materials>> CreateMaterial([FromForm] IFormFile ImageFile, [FromForm] Resources_ForCreationDto material)
         {
             try
             {
@@ -128,6 +129,7 @@ namespace Back_End.Controllers
 
                 var materialEntity = _mapper.Map<Materials>(material);
 
+                material.ImageFile = ImageFile;
 
                 if(material.ImageFile == null)
                 {
@@ -135,7 +137,7 @@ namespace Back_End.Controllers
                 }
                 else
                 {
-                    materialEntity.MaterialPicture = await UploadController.SaveImage(material.ImageFile, "Resources");
+                    material.Picture = await UploadController.SaveImage(material.ImageFile, "Resources");
                 }
 
                 materialEntity.MaterialName = material.Name;
@@ -146,6 +148,8 @@ namespace Back_End.Controllers
                 materialEntity.MaterialUtility = material.Description;
 
                 _repository.Materials.CreateMaterial(materialEntity);
+
+
 
                  _repository.Materials.SaveAsync();
 

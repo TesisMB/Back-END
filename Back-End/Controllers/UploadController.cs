@@ -18,7 +18,6 @@ namespace Back_End.Controllers
             {
 
                 tipo = "Resources";
-
                 var folderName = Path.Combine("StaticFiles", "images", tipo);
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
 
@@ -26,10 +25,13 @@ namespace Back_End.Controllers
                 var fullPath = Path.Combine(pathToSave, fileName);
                 var dbPath = Path.Combine(folderName, fileName);
 
+                //crear nueva funcion
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     await Image.CopyToAsync(stream);
                 }
+                //
+
                 return fileName;
             }
 

@@ -4,6 +4,7 @@ using Entities.DataTransferObjects.Medicines___Dto;
 using Entities.DataTransferObjects.ResourcesDto;
 using Entities.Helpers;
 using Entities.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -114,7 +115,7 @@ namespace Back_End.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Medicines>> CreateMedicine([FromBody] Resources_ForCreationDto medicine)
+        public async Task<ActionResult<Medicines>> CreateMedicine([FromForm] IFormFile ImageFile, [FromForm] Resources_ForCreationDto medicine)
         {
             try
             {
@@ -131,6 +132,8 @@ namespace Back_End.Controllers
 
                 var medicineEntity = _mapper.Map<Medicines>(medicine);
 
+
+                medicine.ImageFile = ImageFile;
 
                 if(medicine.ImageFile == null)
                 {

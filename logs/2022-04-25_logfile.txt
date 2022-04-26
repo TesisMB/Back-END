@@ -1,1 +1,0 @@
-2022-04-25 18:39:15.6234 ERROR Something went wrong inside CreateEmergenciesDisaster action: An error occurred while updating the entries. See the inner exception for details.

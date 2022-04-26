@@ -739,7 +739,6 @@ namespace Repository
                 if (item.Medicines != null)
                 {
                     item.Medicines = null;
-
                 }
 
                 if (item.Vehicles != null)

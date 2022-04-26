@@ -89,6 +89,7 @@ namespace Repository
            
             var collection = _cruzRojaContext.EmergenciesDisasters as IQueryable<EmergenciesDisasters>;
 
+            //Falta filtrar unicamente los recursos solamente aceptados
             collection = collection.Where(a => a.FK_EstateID == user.FK_EstateID);
 
             return await collection

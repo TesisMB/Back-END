@@ -1,70 +1,73 @@
-2022-04-26 11:33:21.4212 INFO Returned User.
-2022-04-26 11:33:26.2663 INFO Returned all vehicles from database.
-2022-04-26 11:33:31.3779 INFO Returned all estates from database.
-2022-04-26 11:34:09.2583 INFO Returned all estates from database.
-2022-04-26 11:34:23.6512 INFO Returned all emergenciesDisasters from database.
-2022-04-26 11:37:45.5313 INFO Returned all emergenciesDisasters from database.
-2022-04-26 11:51:13.9359 INFO Returned User.
-2022-04-26 11:51:16.4074 INFO Returned all emergenciesDisasters from database.
-2022-04-26 11:52:25.5955 INFO Returned User.
-2022-04-26 11:52:31.7157 INFO Returned all emergenciesDisasters from database.
-2022-04-26 11:52:50.6862 INFO Returned User.
-2022-04-26 11:52:53.6238 INFO Returned all emergenciesDisasters from database.
-2022-04-26 11:53:08.6762 INFO Returned User.
-2022-04-26 11:53:10.9001 INFO Returned all emergenciesDisasters from database.
-2022-04-26 11:53:17.4020 INFO Returned User.
-2022-04-26 11:53:19.1282 INFO Returned all emergenciesDisasters from database.
-2022-04-26 11:54:15.4043 ERROR Something went wrong inside GetAllEmegenciesDisasters action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
-2022-04-26 11:54:18.2624 INFO Returned User.
-2022-04-26 11:54:19.5403 INFO Returned all emergenciesDisasters from database.
-2022-04-26 11:54:29.8045 INFO Returned User.
-2022-04-26 11:54:34.0250 INFO Returned all emergenciesDisasters from database.
-2022-04-26 12:02:20.0139 INFO Returned User.
-2022-04-26 12:02:28.1807 INFO Returned all employees from database.
-2022-04-26 12:03:51.1772 INFO Returned all employees from database.
-2022-04-26 12:03:59.6592 INFO Returned User.
-2022-04-26 12:04:02.3637 INFO Returned all employees from database.
-2022-04-26 12:04:05.4891 INFO Returned all TypesEmergenciesDisasters from database.
-2022-04-26 12:04:05.7111 INFO Returned all emergenciesDisasters from database.
-2022-04-26 12:05:09.4742 INFO Returned all TypesEmergenciesDisasters from database.
-2022-04-26 12:05:09.5395 INFO Returned all emergenciesDisasters from database.
-2022-04-26 12:05:35.3437 INFO Returned all TypesEmergenciesDisasters from database.
-2022-04-26 12:05:35.3890 INFO Returned all emergenciesDisasters from database.
-2022-04-26 12:05:43.8169 INFO Returned emegencyDisaster with details for id: 126
-2022-04-26 12:06:08.0497 INFO Returned emegencyDisaster with details for id: 126
-2022-04-26 12:06:17.7556 INFO Returned emegencyDisaster with details for id: 126
-2022-04-26 12:06:24.1215 INFO Returned emegencyDisaster with details for id: 126
-2022-04-26 12:07:32.4692 INFO Returned all Materials from database.
-2022-04-26 12:07:33.1458 INFO Returned Material with id: 3
-2022-04-26 12:07:39.4862 INFO Returned all emergenciesDisasters from database.
-2022-04-26 12:08:27.1573 INFO Returned Material with id: 3
-2022-04-26 12:08:30.9734 INFO Returned all emergenciesDisasters from database.
-2022-04-26 12:08:46.9738 INFO Returned all Materials from database.
-2022-04-26 12:08:49.3480 INFO Returned all Resources_Request from database.
-2022-04-26 12:08:52.8930 INFO Returned all Resources_Request from database.
-2022-04-26 12:09:03.3599 INFO Returned all Resources_Request from database.
-2022-04-26 12:09:06.0589 INFO Returned all Resources_Request from database.
-2022-04-26 12:09:06.8812 INFO Returned all Resources_Request from database.
-2022-04-26 12:09:08.8926 INFO Returned all Resources_Request from database.
-2022-04-26 12:54:32.5151 INFO Returned User.
-2022-04-26 12:54:36.7146 INFO Returned all employees from database.
-2022-04-26 12:54:43.2189 INFO Returned all Resources_Request from database.
-2022-04-26 12:56:10.2180 INFO Returned all Resources_Request from database.
-2022-04-26 12:56:22.2653 INFO Returned all Resources_Request from database.
-2022-04-26 12:56:32.1343 INFO Returned all Resources_Request from database.
-2022-04-26 12:56:40.5501 INFO Returned User.
-2022-04-26 12:56:42.5567 INFO Returned all Resources_Request from database.
-2022-04-26 12:56:43.7197 INFO Returned all Resources_Request from database.
-2022-04-26 12:57:13.8744 INFO Returned User.
-2022-04-26 12:57:16.3057 INFO Returned all Resources_Request from database.
-2022-04-26 12:57:19.2083 INFO Returned all Resources_Request from database.
-2022-04-26 12:57:32.9404 INFO Returned all employees from database.
-2022-04-26 12:57:32.9404 INFO Returned all TypesEmergenciesDisasters from database.
-2022-04-26 12:57:39.7332 INFO Returned all employees from database.
-2022-04-26 12:57:41.1716 INFO Returned all Volunteers from database.
-2022-04-26 12:57:43.1404 INFO Returned volunteer with id: 29
-2022-04-26 12:57:44.4297 INFO Returned all Volunteers from database.
-2022-04-26 12:57:49.4589 INFO Returned all TypesEmergenciesDisasters from database.
-2022-04-26 12:57:49.6589 INFO Returned all emergenciesDisasters from database.
-2022-04-26 12:57:51.1635 INFO Returned emegencyDisaster with details for id: 126
-2022-04-26 12:59:28.1426 INFO Returned all Materials from database.
+2022-04-26 13:47:02.0953 INFO Returned User.
+2022-04-26 13:47:03.6981 INFO Returned all ChatRooms from database. 
+2022-04-26 13:47:03.7916 ERROR Something went wrong inside GetAllChatRooms aciton: Unable to cast object of type '<ExceptIterator>d__80`1[Entities.Models.UsersChatRooms]' to type 'System.Collections.Generic.List`1[Entities.Models.UsersChatRooms]'.
+2022-04-26 13:48:05.7649 INFO Returned User.
+2022-04-26 13:48:07.4166 INFO Returned all ChatRooms from database. 
+2022-04-26 13:48:07.5135 ERROR Something went wrong inside GetAllChatRooms aciton: Unable to cast object of type '<ExceptIterator>d__80`1[Entities.Models.UsersChatRooms]' to type 'System.Collections.Generic.List`1[Entities.Models.UsersChatRooms]'.
+2022-04-26 13:55:18.9830 INFO Returned User.
+2022-04-26 13:55:20.8762 INFO Returned all ChatRooms from database. 
+2022-04-26 13:59:38.0779 INFO Returned User.
+2022-04-26 13:59:41.6359 INFO Returned all ChatRooms from database. 
+2022-04-26 14:06:13.2047 INFO Returned User.
+2022-04-26 14:06:16.2972 INFO Returned all ChatRooms from database. 
+2022-04-26 14:08:07.7057 INFO Returned all ChatRooms from database. 
+2022-04-26 14:08:32.5221 INFO Returned User.
+2022-04-26 14:08:36.5656 INFO Returned all ChatRooms from database. 
+2022-04-26 14:10:28.8644 INFO Returned User.
+2022-04-26 14:10:31.4144 INFO Returned all ChatRooms from database. 
+2022-04-26 14:10:39.2415 INFO Returned User.
+2022-04-26 14:10:40.2629 INFO Returned all ChatRooms from database. 
+2022-04-26 14:15:43.1108 INFO Returned User.
+2022-04-26 14:15:45.0002 INFO Returned all ChatRooms from database. 
+2022-04-26 14:15:54.1149 INFO Returned User.
+2022-04-26 14:15:56.6611 INFO Returned all ChatRooms from database. 
+2022-04-26 14:20:10.4699 INFO Returned User.
+2022-04-26 14:20:12.7428 INFO Returned all ChatRooms from database. 
+2022-04-26 14:20:25.5263 INFO Returned User.
+2022-04-26 14:20:26.9633 INFO Returned all ChatRooms from database. 
+2022-04-26 14:20:39.7096 INFO Returned User.
+2022-04-26 14:20:41.7477 INFO Returned all ChatRooms from database. 
+2022-04-26 14:22:20.4706 INFO Returned User.
+2022-04-26 14:22:21.8046 INFO Returned all ChatRooms from database. 
+2022-04-26 14:23:12.6388 INFO Returned User.
+2022-04-26 14:23:14.1017 INFO Returned all ChatRooms from database. 
+2022-04-26 14:28:37.9717 INFO Returned User.
+2022-04-26 14:28:39.5982 INFO Returned all ChatRooms from database. 
+2022-04-26 14:28:40.7824 INFO Returned all ChatRooms from database. 
+2022-04-26 14:29:22.6736 INFO Returned User.
+2022-04-26 14:34:32.7324 INFO Returned User.
+2022-04-26 14:34:37.1295 INFO Returned all ChatRooms from database. 
+2022-04-26 14:35:20.3418 INFO Returned all ChatRooms from database. 
+2022-04-26 14:35:20.7076 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-26 14:35:22.2565 INFO Returned User.
+2022-04-26 14:35:24.1036 INFO Returned all ChatRooms from database. 
+2022-04-26 14:35:51.4259 INFO Returned all ChatRooms from database. 
+2022-04-26 14:36:11.6382 INFO Returned all ChatRooms from database. 
+2022-04-26 14:36:11.7726 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-26 14:36:13.0438 INFO Returned User.
+2022-04-26 14:36:14.0417 INFO Returned all ChatRooms from database. 
+2022-04-26 14:39:34.3592 INFO Returned all ChatRooms from database. 
+2022-04-26 14:39:34.5526 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-26 14:39:38.9407 INFO Returned User.
+2022-04-26 14:39:40.4762 INFO Returned all ChatRooms from database. 
+2022-04-26 14:40:00.7870 INFO Returned all ChatRooms from database. 
+2022-04-26 14:41:08.5955 INFO Returned User.
+2022-04-26 14:41:10.7084 INFO Returned all ChatRooms from database. 
+2022-04-26 14:43:10.7955 INFO Returned User.
+2022-04-26 14:43:13.5036 ERROR Something went wrong inside GetAllChatRooms aciton: The LINQ expression 'DbSet<ChatRooms>
+    .Join(
+        outer: DbSet<EmergenciesDisasters>, 
+        inner: c => EF.Property<Nullable<int>>(c, "ID"), 
+        outerKeySelector: e => EF.Property<Nullable<int>>(e, "EmergencyDisasterID"), 
+        innerKeySelector: (o, i) => new TransparentIdentifier<ChatRooms, EmergenciesDisasters>(
+            Outer = o, 
+            Inner = i
+        ))
+    .Where(c => __userChatRooms_0
+        .Any(a => a.FK_ChatRoomID == c.Outer.ID && c.Inner.EmergencyDisasterEndDate == null))' could not be translated. Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to either AsEnumerable(), AsAsyncEnumerable(), ToList(), or ToListAsync(). See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.
+2022-04-26 14:44:42.3271 INFO Returned User.
+2022-04-26 14:44:46.4908 INFO Returned all ChatRooms from database. 
+2022-04-26 14:44:53.3766 INFO Returned User.
+2022-04-26 14:44:54.7125 INFO Returned all ChatRooms from database. 
+2022-04-26 14:47:36.6863 INFO Returned User.
+2022-04-26 14:47:39.1921 INFO Returned all ChatRooms from database. 

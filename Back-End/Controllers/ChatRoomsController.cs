@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Back_End.Controllers
@@ -29,14 +31,17 @@ namespace Back_End.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<TypesChatRooms>> GetAllChatRooms()
+        public async Task<ActionResult<ChatRooms>> GetAllChatRooms()
         {
             try
             {
                 var chatRooms = await _repository.ChatRooms.GetChatRooms();
                 _logger.LogInfo($"Returned all ChatRooms from database. ");
 
-                var chatRoomsToResult = _mapper.Map<IEnumerable<TypesChatsDto>>(chatRooms);
+
+
+             
+                var chatRoomsToResult = _mapper.Map<IEnumerable<ChatRoomsDto>>(chatRooms);
 
                 return Ok(chatRoomsToResult);
 

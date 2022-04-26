@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class ChatRoomsRepository : RepositoryBase<TypesChatRooms>, IChatRoomsRepository
+    public class ChatRoomsRepository : RepositoryBase<ChatRooms>, IChatRoomsRepository
     {
         private readonly CruzRojaContext _cruzRojaContext;
 
@@ -18,41 +18,26 @@ namespace Repository
 
         }
 
-        public async Task<IEnumerable<TypesChatRooms>> GetChatRooms()
+        public async Task<IEnumerable<ChatRooms>> GetChatRooms()
         {
-
             var users = UsersRepository.authUser;
+            CruzRojaContext _cruzRojaContext = new CruzRojaContext();
+            var collection = _cruzRojaContext.ChatRooms as IQueryable<ChatRooms>;
 
 
-            var collection = _cruzRojaContext.TypesChatRooms as IQueryable<TypesChatRooms>;
+            collection = collection.Where(x => x.UsersChatRooms.Any(a => a.FK_UserID == users.UserID
+                                                                  && x.EmergenciesDisasters.EmergencyDisasterEndDate == null));
+
+            //collection = (from x in collection where userChatRooms.Any(a => a.FK_ChatRoomID == x.ID && x.EmergenciesDisasters.EmergencyDisasterEndDate == null) select x).ToList();
 
 
             return await collection
-                .Include(a => a.Chat)
-
-                .ThenInclude(a => a.UsersChat)
-                 .ThenInclude(a => a.Users)
-                .ThenInclude(a => a.Persons)
-
-
-                 .Include(a => a.Chat)
-                .ThenInclude(a => a.UsersChat)
-                 .ThenInclude(a => a.Users.Roles)
-                
-
-                .Include(a => a.ChatRooms)
-                .ThenInclude(a => a.UsersChatRooms)
+                .Include(a => a.UsersChatRooms)
                 .ThenInclude(a => a.Users)
                 .ThenInclude(a => a.Persons)
-
-                .Include(a => a.ChatRooms)
-                .ThenInclude(a => a.EmergenciesDisasters)
+                .Include(a => a.EmergenciesDisasters)
                 .ThenInclude(a => a.LocationsEmergenciesDisasters)
-                .Include(a => a.ChatRooms)
-                .ThenInclude(a => a.EmergenciesDisasters)
-                .ThenInclude(a => a.TypesEmergenciesDisasters)
-
-
+                .Include(a => a.EmergenciesDisasters.TypesEmergenciesDisasters)
                 .ToListAsync();
         }
     }

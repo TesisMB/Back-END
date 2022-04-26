@@ -1,0 +1,21 @@
+2022-04-26 11:33:21.4212 INFO Returned User.
+2022-04-26 11:33:26.2663 INFO Returned all vehicles from database.
+2022-04-26 11:33:31.3779 INFO Returned all estates from database.
+2022-04-26 11:34:09.2583 INFO Returned all estates from database.
+2022-04-26 11:34:23.6512 INFO Returned all emergenciesDisasters from database.
+2022-04-26 11:37:45.5313 INFO Returned all emergenciesDisasters from database.
+2022-04-26 11:51:13.9359 INFO Returned User.
+2022-04-26 11:51:16.4074 INFO Returned all emergenciesDisasters from database.
+2022-04-26 11:52:25.5955 INFO Returned User.
+2022-04-26 11:52:31.7157 INFO Returned all emergenciesDisasters from database.
+2022-04-26 11:52:50.6862 INFO Returned User.
+2022-04-26 11:52:53.6238 INFO Returned all emergenciesDisasters from database.
+2022-04-26 11:53:08.6762 INFO Returned User.
+2022-04-26 11:53:10.9001 INFO Returned all emergenciesDisasters from database.
+2022-04-26 11:53:17.4020 INFO Returned User.
+2022-04-26 11:53:19.1282 INFO Returned all emergenciesDisasters from database.
+2022-04-26 11:54:15.4043 ERROR Something went wrong inside GetAllEmegenciesDisasters action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-26 11:54:18.2624 INFO Returned User.
+2022-04-26 11:54:19.5403 INFO Returned all emergenciesDisasters from database.
+2022-04-26 11:54:29.8045 INFO Returned User.
+2022-04-26 11:54:34.0250 INFO Returned all emergenciesDisasters from database.

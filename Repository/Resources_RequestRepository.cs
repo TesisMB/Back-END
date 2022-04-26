@@ -12,10 +12,10 @@ namespace Repository
 {
     public class Resources_RequestRepository : RepositoryBase<ResourcesRequest>, IResources_RequestRepository
     {
-        private CruzRojaContext _cruzRojaContext = new CruzRojaContext();
-        public static CruzRojaContext db = new CruzRojaContext();
-        public static ResourcesRequestMaterialsMedicinesVehicles recursos = null;
-        ResourcesRequest userReq = null;
+        private readonly CruzRojaContext _cruzRojaContext = new CruzRojaContext();
+        public readonly static CruzRojaContext db = new CruzRojaContext();
+        public  static ResourcesRequestMaterialsMedicinesVehicles recursos = null;
+        public ResourcesRequest userReq = null;
 
         public Resources_RequestRepository(CruzRojaContext cruzRojaContext) : base(cruzRojaContext)
         {
@@ -50,7 +50,7 @@ namespace Repository
 
                 collection = collection.Where(
                                               a => a.Condition == Condition 
-                                             && a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName)
+                                             && a.EmergenciesDisasters.LocationsEmergenciesDisasters.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName)
                                              .AsNoTracking();
             }
 
@@ -59,7 +59,7 @@ namespace Repository
             {
                 collection = collection.Where(
                                             a => a.Condition == Condition
-                                            && a.EmergenciesDisasters.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName
+                                            && a.EmergenciesDisasters.LocationsEmergenciesDisasters.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName
                                             && a.FK_UserID == user.UserID)
                                             .AsNoTracking();
             }
@@ -69,7 +69,7 @@ namespace Repository
                 .Include(i => i.Users)
                 .Include(i => i.EmergenciesDisasters)
                 .ThenInclude(i => i.TypesEmergenciesDisasters)
-                .Include(i => i.EmergenciesDisasters.Locations)
+                .Include(i => i.EmergenciesDisasters.LocationsEmergenciesDisasters)
 
                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Materials)
@@ -106,7 +106,7 @@ namespace Repository
         {
             var collection = _cruzRojaContext.Resources_Requests as IQueryable<ResourcesRequest>;
 
-            collection = collection.Where(a => a.EmergenciesDisasters.Locations.LocationDepartmentName == LocationDepartmentName
+            collection = collection.Where(a => a.EmergenciesDisasters.LocationsEmergenciesDisasters.LocationDepartmentName == LocationDepartmentName
                                         && a.Condition == Condition)
                                     .AsNoTracking();
 
@@ -114,7 +114,7 @@ namespace Repository
                 .Include(i => i.Users)
                 .Include(i => i.EmergenciesDisasters)
                 .ThenInclude(i => i.TypesEmergenciesDisasters)
-                .Include(i => i.EmergenciesDisasters.Locations)
+                .Include(i => i.EmergenciesDisasters.LocationsEmergenciesDisasters)
 
                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Materials)
@@ -202,7 +202,7 @@ namespace Repository
             // Usuario existe entonces puedo actualizar y crear añadir nuevos recursos a la solicitud
             foreach (var item in resources_Request.Resources_RequestResources_Materials_Medicines_Vehicles)
             {
-                var re = recurso(resources_Request, item);
+                var re = Recurso(resources_Request, item);
 
                 //No existe el recurso lo creo
                 if (re == null && rec != null)
@@ -216,7 +216,7 @@ namespace Repository
                         resources_Request.Description = rec.Description;
                     }
 
-                    spaceCamelCase(resources_Request);
+                    SpaceCamelCase(resources_Request);
 
                     //añado el nuevo item
                     AddRecurso(item);
@@ -245,7 +245,7 @@ namespace Repository
 
                     resources_Request.FK_EmergencyDisasterID = rec.FK_EmergencyDisasterID;
 
-                    spaceCamelCase(rec);
+                    SpaceCamelCase(rec);
 
                     DeleteResource(rec);
 
@@ -266,7 +266,7 @@ namespace Repository
                 if (rec == null)
                 {
 
-                     spaceCamelCase(resources_Request);
+                     SpaceCamelCase(resources_Request);
 
                     Create(resources_Request);
 
@@ -284,7 +284,7 @@ namespace Repository
         }
 
 
-        private void spaceCamelCase(ResourcesRequest resources_Request)
+        private void SpaceCamelCase(ResourcesRequest resources_Request)
         {
             //Falta implementarlos en el PATCH
             if (resources_Request.Reason != null)
@@ -312,7 +312,7 @@ namespace Repository
             Vehicles vehicles = null;
 
                 //borrar
-                var rec = recurso(resources_Request, res);
+                var rec = Recurso(resources_Request, res);
 
                 if (res.FK_MaterialID != null && rec != null)
                 {
@@ -348,7 +348,7 @@ namespace Repository
                 if (res.FK_MaterialID != null && rec != null && materials.MaterialQuantity > 0)
                 {
 
-                    materials.MaterialQuantity = (materials.MaterialQuantity - res.Quantity);
+                    materials.MaterialQuantity -= res.Quantity;
 
                     res.ID = rec.ID;
 
@@ -409,7 +409,7 @@ namespace Repository
         }
 
 
-        public static ICollection<ResourcesRequestMaterialsMedicinesVehicles> valorId()
+        public static ICollection<ResourcesRequestMaterialsMedicinesVehicles> ValorId()
         {
 
             ICollection<ResourcesRequestMaterialsMedicinesVehicles> recs =
@@ -426,7 +426,7 @@ namespace Repository
 
 
         //Reviso la exitencia de los recursos de la slicitud existente 
-        public static ResourcesRequestMaterialsMedicinesVehicles recurso(ResourcesRequest resources_Request, ResourcesRequestMaterialsMedicinesVehicles _Resources_RequestResources_Materials_Medicines_Vehicles)
+        public static ResourcesRequestMaterialsMedicinesVehicles Recurso(ResourcesRequest resources_Request, ResourcesRequestMaterialsMedicinesVehicles _Resources_RequestResources_Materials_Medicines_Vehicles)
         {
 
             if (_Resources_RequestResources_Materials_Medicines_Vehicles.FK_MaterialID != null)
@@ -497,7 +497,7 @@ namespace Repository
                                     .AsNoTracking()
                                     .FirstOrDefault();
 
-                        materials.MaterialQuantity = materials.MaterialQuantity + resources.Quantity;
+                        materials.MaterialQuantity += resources.Quantity;
 
                         materials.MaterialAvailability = true;
 
@@ -515,7 +515,7 @@ namespace Repository
                                     .AsNoTracking()
                                     .FirstOrDefault();
 
-                        medicines.MedicineQuantity = medicines.MedicineQuantity + resources.Quantity;
+                        medicines.MedicineQuantity += resources.Quantity;
                         medicines.MedicineAvailability = true;
 
                         MedicinesRepository.status(medicines);
@@ -551,7 +551,6 @@ namespace Repository
             Materials materials = null;
             Medicines medicines = null;
             Vehicles vehicles = null;
-            ResourcesRequestMaterialsMedicinesVehicles rec = null;
 
 
             foreach (var resources in resources_Request.Resources_RequestResources_Materials_Medicines_Vehicles)
@@ -566,7 +565,7 @@ namespace Repository
                                             .FirstOrDefault();
 
                            
-                                        materials.MaterialQuantity = materials.MaterialQuantity - resources.Quantity;
+                                        materials.MaterialQuantity -= resources.Quantity;
 
 
                                         if (materials.MaterialQuantity == 0)
@@ -581,14 +580,14 @@ namespace Repository
 
                     else if (resources.FK_MedicineID != null)
                     {
-                      
 
-                            medicines = db.Medicines
+
+                    medicines = db.Medicines
                                   .Where(a => a.ID == resources.FK_MedicineID)
                                   .AsNoTracking()
                                   .FirstOrDefault();
 
-                            medicines.MedicineQuantity = medicines.MedicineQuantity - resources.Quantity;
+                            medicines.MedicineQuantity -= resources.Quantity;
 
 
                             if (medicines.MedicineQuantity == 0)

@@ -11,7 +11,7 @@ namespace Repository
 {
     public class EmergenciesDisastersRepository : RepositoryBase<EmergenciesDisasters>, IEmergenciesDisastersRepository
     {
-        private CruzRojaContext _cruzRojaContext = new CruzRojaContext();
+        private readonly CruzRojaContext _cruzRojaContext = new CruzRojaContext();
 
         public EmergenciesDisastersRepository(CruzRojaContext cruzRojaContext) : base(cruzRojaContext)
         {
@@ -33,13 +33,13 @@ namespace Repository
             }
             else
             {
-                collection = collection.Where(a => a.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
+                collection = collection.Where(a => a.FK_EstateID == user.FK_EstateID);
             }
 
             return await collection
                 .Include(i => i.TypesEmergenciesDisasters)
                 .Include(i => i.Alerts)
-                .Include(i => i.Locations)
+                .Include(i => i.LocationsEmergenciesDisasters)
                 .Include(i => i.Employees)
                 .ThenInclude(i => i.Users)
                 .ThenInclude(i => i.Persons)
@@ -89,12 +89,12 @@ namespace Repository
            
             var collection = _cruzRojaContext.EmergenciesDisasters as IQueryable<EmergenciesDisasters>;
 
-            collection = collection.Where(a => a.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
+            collection = collection.Where(a => a.FK_EstateID == user.FK_EstateID);
 
             return await collection
                 .Include(i => i.TypesEmergenciesDisasters)
                 .Include(i => i.Alerts)
-                .Include(i => i.Locations)
+                .Include(i => i.LocationsEmergenciesDisasters)
                 .Include(i => i.Employees)
                 .ThenInclude(i => i.Users)
                 .ThenInclude(i => i.Persons)
@@ -144,7 +144,7 @@ namespace Repository
             return await FindByCondition(emergdis => emergdis.EmergencyDisasterID.Equals(emergencydisasterId))
           .Include(i => i.TypesEmergenciesDisasters)
                 .Include(i => i.Alerts)
-                .Include(i => i.Locations)
+                .Include(i => i.LocationsEmergenciesDisasters)
                 .Include(i => i.Employees)
                 .ThenInclude(i => i.Users)
                 .ThenInclude(i => i.Persons)
@@ -198,7 +198,7 @@ namespace Repository
             return await collection
                  .Include(i => i.TypesEmergenciesDisasters)
                  .Include(i => i.Alerts)
-                 .Include(i => i.Locations)
+                 .Include(i => i.LocationsEmergenciesDisasters)
                  .Include(i => i.Employees)
                  .ThenInclude(i => i.Users)
                  .ThenInclude(i => i.Persons)
@@ -243,12 +243,12 @@ namespace Repository
         }
         public void CreateEmergencyDisaster(EmergenciesDisasters emergencyDisaster)
         {
-            spaceCamelCase(emergencyDisaster);
+            SpaceCamelCase(emergencyDisaster);
 
             Create(emergencyDisaster);
         }
 
-        private void spaceCamelCase(EmergenciesDisasters emergencyDisaster)
+        private void SpaceCamelCase(EmergenciesDisasters emergencyDisaster)
         {
             if (emergencyDisaster.EmergencyDisasterInstruction != null)
             {
@@ -258,7 +258,7 @@ namespace Repository
 
         public void UpdateEmergencyDisaster(EmergenciesDisasters emergencyDisaster)
         {
-            spaceCamelCase(emergencyDisaster);
+            SpaceCamelCase(emergencyDisaster);
 
             Update(emergencyDisaster);
         }

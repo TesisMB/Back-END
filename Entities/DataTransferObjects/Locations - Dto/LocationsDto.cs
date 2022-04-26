@@ -8,9 +8,5 @@
 
         public string LocationMunicipalityName { get; set; }
 
-        public decimal LocationLongitude { get; set; }
-
-        public decimal LocationLatitude { get; set; }
-
     }
 }

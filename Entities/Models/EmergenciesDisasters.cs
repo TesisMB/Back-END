@@ -24,8 +24,7 @@ namespace Entities.Models
         [ForeignKey("Fk_EmplooyeeID")]
         public Employees Employees { get; set; }
 
-        [ForeignKey("FK_LocationID")]
-        public Locations Locations { get; set; }
+        public LocationsEmergenciesDisasters LocationsEmergenciesDisasters { get; set; }
 
         [ForeignKey("FK_TypeEmergencyID")]
         public TypesEmergenciesDisasters TypesEmergenciesDisasters { get; set; }
@@ -33,19 +32,25 @@ namespace Entities.Models
         [ForeignKey("FK_AlertID")]
         public Alerts Alerts { get; set; }
 
+        [ForeignKey("FK_EstateID")]
+        public Estates Estates { get; set; }
+
         public ChatRooms ChatRooms { get; set; }
 
         public Victims Victims { get; set; }
-        public int? Fk_EmplooyeeID { get; set; }
 
         [Required]
-        public int FK_LocationID { get; set; }
+        public int? Fk_EmplooyeeID { get; set; }
+
 
         [Required]
         public int FK_TypeEmergencyID { get; set; }
 
         [Required]
         public int FK_AlertID { get; set; }
+
+        [Required]
+        public int FK_EstateID { get; set; }
 
         [Required]
         public ICollection<ResourcesRequest> Resources_Requests { get; set; }

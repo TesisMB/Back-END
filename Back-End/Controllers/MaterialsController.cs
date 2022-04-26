@@ -18,8 +18,8 @@ namespace Back_End.Controllers
     [ApiController]
     public class MaterialsController : ControllerBase
     {
-        private ILoggerManager _logger;
-        private IRepositorWrapper _repository;
+        private readonly ILoggerManager _logger;
+        private readonly IRepositorWrapper _repository;
         private readonly IMapper _mapper;
 
         /*Este metodo va a permitir despues poder conectarme tanto para mapear, como para obtener 
@@ -196,14 +196,16 @@ namespace Back_End.Controllers
                     return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
                 }
 
-                MaterialsForUpdateDto material = new MaterialsForUpdateDto();
-                material.MaterialQuantity = materialToPatch.Quantity;
-                material.MaterialDonation = materialToPatch.Donation;
-                material.MaterialName = materialToPatch.Name;
-                material.MaterialAvailability = materialToPatch.Availability;
-                material.FK_EstateID = materialToPatch.FK_EstateID;
-                material.Description = materialToPatch.Description;
-                material.MaterialBrand = materialToPatch.Materials.Brand;
+                MaterialsForUpdateDto material = new MaterialsForUpdateDto
+                {
+                    MaterialQuantity = materialToPatch.Quantity,
+                    MaterialDonation = materialToPatch.Donation,
+                    MaterialName = materialToPatch.Name,
+                    MaterialAvailability = materialToPatch.Availability,
+                    FK_EstateID = materialToPatch.FK_EstateID,
+                    Description = materialToPatch.Description,
+                    MaterialBrand = materialToPatch.Materials.Brand
+                };
 
                 var employeeResult = _mapper.Map(material, materialEntity);
 

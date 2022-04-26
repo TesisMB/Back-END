@@ -36,7 +36,8 @@ namespace Entities.Validator.Creation.Medicines
             int dateTime = Convert.ToInt32(DateTime.Now.Year);
 
 
-            string variable = date.Substring(3);
+            //string variable = date.Substring(3);
+            string variable = date[3..];
 
             int dateInt = Convert.ToInt32(variable);
 
@@ -50,7 +51,6 @@ namespace Entities.Validator.Creation.Medicines
 
         private bool BeAValidDay(string date)
         {
-            int dateTime = Convert.ToInt32(DateTime.Now.Day);
 
             string variable = date.Substring(0, 2);
 

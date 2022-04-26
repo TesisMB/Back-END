@@ -17,8 +17,8 @@ namespace Back_End.Controllers
     [ApiController]
     public class MedicinesController : ControllerBase
     {
-        private ILoggerManager _logger;
-        private IRepositorWrapper _repository;
+        private readonly ILoggerManager _logger;
+        private readonly IRepositorWrapper _repository;
         private readonly IMapper _mapper;
 
         public MedicinesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper)
@@ -191,23 +191,25 @@ namespace Back_End.Controllers
                 patchDocument.ApplyTo(medicineToPatch, ModelState);
 
 
-              /*  if (!TryValidateModel(medicineToPatch))
-                {
-                    return ValidationProblem(ModelState);
-                }*/
+                /*  if (!TryValidateModel(medicineToPatch))
+                  {
+                      return ValidationProblem(ModelState);
+                  }*/
 
-                MedicineForUpdateDto medicine = new MedicineForUpdateDto();
-                medicine.MedicineQuantity = medicineToPatch.Quantity;
-                medicine.MedicineName = medicineToPatch.Name;
-                medicine.MedicineAvailability = medicineToPatch.Availability;
-                medicine.MedicineDonation = medicineToPatch.Donation;
-                medicine.MedicineUtility = medicineToPatch.Description;
-                //medicine.MedicineExpirationDate = medicineToPatch.Medicines.MedicineExpirationDate;
-                medicine.MedicineDrug = medicineToPatch.Medicines.MedicineDrug;
-                medicine.MedicineWeight = medicineToPatch.Medicines.MedicineWeight;
-                medicine.MedicineUnits = medicineToPatch.Medicines.MedicineUnits;
-                medicine.FK_EstateID = medicineToPatch.FK_EstateID;
-                medicine.MedicineLab = medicineToPatch.Medicines.MedicineLab;
+                MedicineForUpdateDto medicine = new MedicineForUpdateDto
+                {
+                    MedicineQuantity = medicineToPatch.Quantity,
+                    MedicineName = medicineToPatch.Name,
+                    MedicineAvailability = medicineToPatch.Availability,
+                    MedicineDonation = medicineToPatch.Donation,
+                    MedicineUtility = medicineToPatch.Description,
+                    //medicine.MedicineExpirationDate = medicineToPatch.Medicines.MedicineExpirationDate;
+                    MedicineDrug = medicineToPatch.Medicines.MedicineDrug,
+                    MedicineWeight = medicineToPatch.Medicines.MedicineWeight,
+                    MedicineUnits = medicineToPatch.Medicines.MedicineUnits,
+                    FK_EstateID = medicineToPatch.FK_EstateID,
+                    MedicineLab = medicineToPatch.Medicines.MedicineLab
+                };
 
 
                 var medicineResult = _mapper.Map(medicine, medicineEntity);

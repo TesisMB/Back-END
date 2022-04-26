@@ -82,6 +82,8 @@ namespace Back_End.Entities
         public DbSet<ResourcesRequestMaterialsMedicinesVehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
         public DbSet<PDF> PDF { get; set; }
 
+        public DbSet<LocationsEmergenciesDisasters> LocationsEmergenciesDisasters { get; set; }
+
         private const string Connection =
       @"Server=localhost;
             Database=CruzRojaDB - Testing;

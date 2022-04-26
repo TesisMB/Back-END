@@ -24,15 +24,7 @@ namespace Entities.Models
         [MaxLength(25)]
         public string LocationCityName { get; set; }
 
-        [Column(TypeName = "decimal(8, 6)")]
-        public decimal LocationLongitude { get; set; }
-
-        [Column(TypeName = "decimal(9, 6)")]
-        public decimal LocationLatitude { get; set; }
-
         public ICollection<Estates> Estates { get; set; }
-
-        public ICollection<EmergenciesDisasters> EmergenciesDisasters { get; set; }
 
     }
 }

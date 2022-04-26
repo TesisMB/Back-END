@@ -6,7 +6,6 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 
 
 namespace Entities
@@ -33,14 +32,14 @@ namespace Entities
 
                 if (materials == null)
                 {
-                DifferentZero(id.FK_MaterialID);
+                    DifferentZero(id.FK_MaterialID);
 
                 }
-                     else
+                else
                 {
                     var resta = materials.MaterialQuantity - id.Quantity;
 
-                    if (materials != null  && resta < 0 || materials.MaterialQuantity  == 0)
+                    if (materials != null && resta < 0 || materials.MaterialQuantity == 0)
                     {
                         Key.Add("Material");
 
@@ -107,13 +106,13 @@ namespace Entities
         }
 
 
-        public  class Resource
+        public class Resource
         {
-            public  int? ID { get; set; }
-            public  string Name { get; set; } // Define al nombre del Campo
+            public int? ID { get; set; }
+            public string Name { get; set; } // Define al nombre del Campo
         }
 
- 
+
 
 
         public bool DifferentZero(int? id)
@@ -123,7 +122,7 @@ namespace Entities
                 return true;
             }
 
-               return false;
+            return false;
         }
 
 
@@ -135,7 +134,7 @@ namespace Entities
             }
 
             return false;
-        
+
         }
 
 

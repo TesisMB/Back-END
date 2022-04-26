@@ -19,17 +19,11 @@ namespace Back_End.Controllers
     [ApiController]
     public class EmergenciesDisastersController : ControllerBase
     {
-        private ILoggerManager _logger;
-        private IMapper _mapper;
-        private IRepositorWrapper _repository;
-        Materials materials = null;
-        Medicines medicines = null;
-        Vehicles vehicles = null;
-        CruzRojaContext db = new CruzRojaContext();
-
-        ChatRooms queryUser = new ChatRooms();
-
-        ResourcesRequestMaterialsMedicinesVehicles resources = null;
+        private readonly ILoggerManager _logger;
+        private readonly IMapper _mapper;
+        private readonly IRepositorWrapper _repository;
+        public readonly CruzRojaContext db = new CruzRojaContext();
+        public ResourcesRequestMaterialsMedicinesVehicles resources = null;
         public EmergenciesDisastersController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper)
         {
             _logger = logger;
@@ -110,6 +104,7 @@ namespace Back_End.Controllers
         {
             try
             {
+                //cambia el filtrado por emergenicas cargadas por filial
                 var emergenciesDisasters = await _repository.EmergenciesDisasters.GetAllEmergenciesDisastersWithourFilter();
 
                 _logger.LogInfo($"Returned all emergenciesDisasters from database.");
@@ -200,48 +195,48 @@ namespace Back_End.Controllers
 
 
                 foreach (var item3 in query)
+                {
+
+                    foreach (var item2 in item3.Resources_RequestResources_Materials_Medicines_Vehicles)
                     {
 
-                        foreach (var item2 in item3.Resources_RequestResources_Materials_Medicines_Vehicles)
+
+                        if (item2.Materials != null)
                         {
 
+                            resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
+                                        .Where(a => a.FK_MaterialID == item2.Materials.ID
+                                                && a.FK_Resource_RequestID == item2.FK_Resource_RequestID)
+                                           .AsNoTracking()
+                                        .FirstOrDefault();
 
-                            if (item2.Materials != null)
-                            {
-
-                                resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
-                                            .Where(a => a.FK_MaterialID == item2.Materials.ID
-                                                    && a.FK_Resource_RequestID == item2.FK_Resource_RequestID)
-                                               .AsNoTracking()
-                                            .FirstOrDefault();
-
-                                item2.Materials.Quantity = resources.Quantity;
-
-                            }
-
-                            if (item2.Medicines != null)
-                            {
-                                resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
-                                     .Where(a => a.FK_MedicineID == item2.Medicines.ID
-                                             && a.FK_Resource_RequestID == item2.FK_Resource_RequestID)
-                                        .AsNoTracking()
-                                     .FirstOrDefault();
-
-                                item2.Medicines.Quantity = resources.Quantity;
-
-                            }
+                            item2.Materials.Quantity = resources.Quantity;
 
                         }
+
+                        if (item2.Medicines != null)
+                        {
+                            resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
+                                 .Where(a => a.FK_MedicineID == item2.Medicines.ID
+                                         && a.FK_Resource_RequestID == item2.FK_Resource_RequestID)
+                                    .AsNoTracking()
+                                 .FirstOrDefault();
+
+                            item2.Medicines.Quantity = resources.Quantity;
+
+                        }
+
+                    }
                 }
 
 
-                if(emergencyDisasterResult.ChatRooms != null)
+                if (emergencyDisasterResult.ChatRooms != null)
+                {
+                    foreach (var item2 in emergencyDisasterResult.ChatRooms.UsersChatRooms)
                     {
-                        foreach (var item2 in emergencyDisasterResult.ChatRooms.UsersChatRooms)
-                        {
-                            Persons usersChatRooms = new Persons();
-                            Roles roles = new Roles();
-                            Users users = new Users();
+                        Persons usersChatRooms = new Persons();
+                        Roles roles = new Roles();
+                        Users users = new Users();
 
                         usersChatRooms = db.Persons
                                             .Where(a => a.ID == item2.UserID)
@@ -255,16 +250,16 @@ namespace Back_End.Controllers
                         roles = db.Roles
                                        .Where(a => a.RoleID == users.FK_RoleID)
                                        .AsNoTracking()
-                                       .FirstOrDefault(); 
+                                       .FirstOrDefault();
 
 
                         item2.Name = usersChatRooms.FirstName + " " + usersChatRooms.LastName;
-                            item2.UserDni = users.UserDni;
-                            item2.RoleName = roles.RoleName;
+                        item2.UserDni = users.UserDni;
+                        item2.RoleName = roles.RoleName;
 
                     }
                 }
-                
+
 
                 return Ok(emergencyDisasterResult);
 
@@ -325,7 +320,7 @@ namespace Back_End.Controllers
 
                 _emergencyDisaster.ApplyTo(emergencyDisasterToPatch, ModelState);
 
-                if(emergencyDisasterToPatch != null)
+                if (emergencyDisasterToPatch != null)
                 {
                     emergencyDisasterToPatch.EmergencyDisasterEndDate = DateTime.Now;
                 }

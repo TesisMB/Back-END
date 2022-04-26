@@ -34,12 +34,12 @@ namespace Repository
 
             if(user.Roles.RoleName == "Admin")
             {
-                return await GetAllResourcesRequests(user.Estates.Locations.LocationDepartmentName, Condition);
+                return await GetAllResourcesRequests(user.FK_EstateID, Condition);
             }
 
             else if (user.Roles.RoleName == "Coordinador General")
             {
-                return await GetAllResourcesRequests(user.Estates.Locations.LocationDepartmentName, Condition);
+                return await GetAllResourcesRequests(user.FK_EstateID, Condition);
             }
 
 
@@ -50,7 +50,7 @@ namespace Repository
 
                 collection = collection.Where(
                                               a => a.Condition == Condition 
-                                             && a.EmergenciesDisasters.LocationsEmergenciesDisasters.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName)
+                                             && a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID)
                                              .AsNoTracking();
             }
 
@@ -59,7 +59,7 @@ namespace Repository
             {
                 collection = collection.Where(
                                             a => a.Condition == Condition
-                                            && a.EmergenciesDisasters.LocationsEmergenciesDisasters.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName
+                                            && a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID
                                             && a.FK_UserID == user.UserID)
                                             .AsNoTracking();
             }
@@ -102,11 +102,11 @@ namespace Repository
 
 
 
-        public async Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequests(string LocationDepartmentName, string Condition)
+        public async Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequests(int fK_EstateID, string Condition)
         {
             var collection = _cruzRojaContext.Resources_Requests as IQueryable<ResourcesRequest>;
 
-            collection = collection.Where(a => a.EmergenciesDisasters.LocationsEmergenciesDisasters.LocationDepartmentName == LocationDepartmentName
+            collection = collection.Where(a => a.EmergenciesDisasters.FK_EstateID == fK_EstateID
                                         && a.Condition == Condition)
                                     .AsNoTracking();
 

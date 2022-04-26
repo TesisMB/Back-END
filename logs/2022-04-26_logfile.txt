@@ -19,3 +19,52 @@
 2022-04-26 11:54:19.5403 INFO Returned all emergenciesDisasters from database.
 2022-04-26 11:54:29.8045 INFO Returned User.
 2022-04-26 11:54:34.0250 INFO Returned all emergenciesDisasters from database.
+2022-04-26 12:02:20.0139 INFO Returned User.
+2022-04-26 12:02:28.1807 INFO Returned all employees from database.
+2022-04-26 12:03:51.1772 INFO Returned all employees from database.
+2022-04-26 12:03:59.6592 INFO Returned User.
+2022-04-26 12:04:02.3637 INFO Returned all employees from database.
+2022-04-26 12:04:05.4891 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-26 12:04:05.7111 INFO Returned all emergenciesDisasters from database.
+2022-04-26 12:05:09.4742 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-26 12:05:09.5395 INFO Returned all emergenciesDisasters from database.
+2022-04-26 12:05:35.3437 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-26 12:05:35.3890 INFO Returned all emergenciesDisasters from database.
+2022-04-26 12:05:43.8169 INFO Returned emegencyDisaster with details for id: 126
+2022-04-26 12:06:08.0497 INFO Returned emegencyDisaster with details for id: 126
+2022-04-26 12:06:17.7556 INFO Returned emegencyDisaster with details for id: 126
+2022-04-26 12:06:24.1215 INFO Returned emegencyDisaster with details for id: 126
+2022-04-26 12:07:32.4692 INFO Returned all Materials from database.
+2022-04-26 12:07:33.1458 INFO Returned Material with id: 3
+2022-04-26 12:07:39.4862 INFO Returned all emergenciesDisasters from database.
+2022-04-26 12:08:27.1573 INFO Returned Material with id: 3
+2022-04-26 12:08:30.9734 INFO Returned all emergenciesDisasters from database.
+2022-04-26 12:08:46.9738 INFO Returned all Materials from database.
+2022-04-26 12:08:49.3480 INFO Returned all Resources_Request from database.
+2022-04-26 12:08:52.8930 INFO Returned all Resources_Request from database.
+2022-04-26 12:09:03.3599 INFO Returned all Resources_Request from database.
+2022-04-26 12:09:06.0589 INFO Returned all Resources_Request from database.
+2022-04-26 12:09:06.8812 INFO Returned all Resources_Request from database.
+2022-04-26 12:09:08.8926 INFO Returned all Resources_Request from database.
+2022-04-26 12:54:32.5151 INFO Returned User.
+2022-04-26 12:54:36.7146 INFO Returned all employees from database.
+2022-04-26 12:54:43.2189 INFO Returned all Resources_Request from database.
+2022-04-26 12:56:10.2180 INFO Returned all Resources_Request from database.
+2022-04-26 12:56:22.2653 INFO Returned all Resources_Request from database.
+2022-04-26 12:56:32.1343 INFO Returned all Resources_Request from database.
+2022-04-26 12:56:40.5501 INFO Returned User.
+2022-04-26 12:56:42.5567 INFO Returned all Resources_Request from database.
+2022-04-26 12:56:43.7197 INFO Returned all Resources_Request from database.
+2022-04-26 12:57:13.8744 INFO Returned User.
+2022-04-26 12:57:16.3057 INFO Returned all Resources_Request from database.
+2022-04-26 12:57:19.2083 INFO Returned all Resources_Request from database.
+2022-04-26 12:57:32.9404 INFO Returned all employees from database.
+2022-04-26 12:57:32.9404 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-26 12:57:39.7332 INFO Returned all employees from database.
+2022-04-26 12:57:41.1716 INFO Returned all Volunteers from database.
+2022-04-26 12:57:43.1404 INFO Returned volunteer with id: 29
+2022-04-26 12:57:44.4297 INFO Returned all Volunteers from database.
+2022-04-26 12:57:49.4589 INFO Returned all TypesEmergenciesDisasters from database.
+2022-04-26 12:57:49.6589 INFO Returned all emergenciesDisasters from database.
+2022-04-26 12:57:51.1635 INFO Returned emegencyDisaster with details for id: 126
+2022-04-26 12:59:28.1426 INFO Returned all Materials from database.

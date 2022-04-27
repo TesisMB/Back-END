@@ -135,13 +135,13 @@ namespace Back_End.Controllers
 
              //   medicine.ImageFile = ImageFile;
 
-                if(medicine.ImageFile == null)
+                if(medicine.Picture == null)
                 {
                     medicineEntity.MedicinePicture = "https://i.imgur.com/S9HJEwF.png";
                 }
                 else
                 {
-                    medicineEntity.MedicinePicture = medicine.ImageFile;
+                    medicineEntity.MedicinePicture = medicine.Picture;
              //       medicineEntity.MedicinePicture = await UploadController.SaveImage(medicine.ImageFile, "Resources");
                 }
 

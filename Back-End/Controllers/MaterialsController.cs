@@ -132,16 +132,15 @@ namespace Back_End.Controllers
 
            //     material.ImageFile = file;
 
-                if(material.ImageFile == null)
+                if(material.Picture == null)
                 {
                     materialEntity.MaterialPicture = "https://i.imgur.com/S9HJEwF.png";
                 }
                 else
                 {
-                    materialEntity.MaterialPicture = material.ImageFile;
-           //         material.Picture = await UploadController.SaveImage(material.ImageFile, "Resources");
+                    materialEntity.MaterialPicture = material.Picture;
+                    //         material.Picture = await UploadController.SaveImage(material.ImageFile, "Resources");
                 }
-
                 materialEntity.MaterialName = material.Name;
                 materialEntity.MaterialDonation = material.Donation;
                 materialEntity.MaterialAvailability = true;

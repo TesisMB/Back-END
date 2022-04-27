@@ -118,19 +118,19 @@ namespace Back_End.Controllers
                     _logger.LogError("Vehicle object sent from client is null.");
                     return BadRequest("Vehicle object is null");
                 }
-
+                
                 var vehicleEntity = _mapper.Map<Vehicles>(vehicle);
 
 
               //  vehicle.ImageFile = ImageFile;
 
-                if (vehicle.ImageFile == null)
+                if (vehicle.Picture == null)
                 {
                     vehicleEntity.VehiclePicture = "https://i.imgur.com/S9HJEwF.png";
                 }
                 else
                 {
-                      vehicleEntity.VehiclePicture = vehicle.ImageFile;
+                      vehicleEntity.VehiclePicture = vehicle.Picture;
              //       vehicleEntity.VehiclePicture = await UploadController.SaveImage(vehicle.ImageFile, "Resources");
                 }
 

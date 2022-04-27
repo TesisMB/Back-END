@@ -110,7 +110,7 @@ namespace Back_End.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult<Materials>> CreateMaterial([FromForm] IFormFile ImageFile, [FromForm] Resources_ForCreationDto material)
+        public async Task<ActionResult<Materials>> CreateMaterial([FromBody] Resources_ForCreationDto material)
         {
             try
             {
@@ -126,10 +126,11 @@ namespace Back_End.Controllers
                     return BadRequest("Material object is null");
 
                 }
+               // var file = Request.Form.Files[0];
 
                 var materialEntity = _mapper.Map<Materials>(material);
 
-                material.ImageFile = ImageFile;
+           //     material.ImageFile = file;
 
                 if(material.ImageFile == null)
                 {
@@ -137,7 +138,8 @@ namespace Back_End.Controllers
                 }
                 else
                 {
-                    material.Picture = await UploadController.SaveImage(material.ImageFile, "Resources");
+                    materialEntity.MaterialPicture = material.ImageFile;
+           //         material.Picture = await UploadController.SaveImage(material.ImageFile, "Resources");
                 }
 
                 materialEntity.MaterialName = material.Name;

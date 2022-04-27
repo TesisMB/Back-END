@@ -115,7 +115,7 @@ namespace Back_End.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Medicines>> CreateMedicine([FromForm] IFormFile ImageFile, [FromForm] Resources_ForCreationDto medicine)
+        public async Task<ActionResult<Medicines>> CreateMedicine([FromBody] Resources_ForCreationDto medicine)
         {
             try
             {
@@ -133,7 +133,7 @@ namespace Back_End.Controllers
                 var medicineEntity = _mapper.Map<Medicines>(medicine);
 
 
-                medicine.ImageFile = ImageFile;
+             //   medicine.ImageFile = ImageFile;
 
                 if(medicine.ImageFile == null)
                 {
@@ -141,8 +141,8 @@ namespace Back_End.Controllers
                 }
                 else
                 {
-
-                    medicineEntity.MedicinePicture = await UploadController.SaveImage(medicine.ImageFile, "Resources");
+                    medicineEntity.MedicinePicture = medicine.ImageFile;
+             //       medicineEntity.MedicinePicture = await UploadController.SaveImage(medicine.ImageFile, "Resources");
                 }
 
                 medicineEntity.MedicineName = medicine.Name;

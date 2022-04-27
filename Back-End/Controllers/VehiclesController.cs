@@ -103,7 +103,7 @@ namespace Back_End.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Vehicles>> CreateVehicle([FromForm] IFormFile ImageFile, [FromForm] Resources_ForCreationDto vehicle)
+        public async Task<ActionResult<Vehicles>> CreateVehicle([FromBody] Resources_ForCreationDto vehicle)
         {
             try
             {
@@ -122,7 +122,7 @@ namespace Back_End.Controllers
                 var vehicleEntity = _mapper.Map<Vehicles>(vehicle);
 
 
-                vehicle.ImageFile = ImageFile;
+              //  vehicle.ImageFile = ImageFile;
 
                 if (vehicle.ImageFile == null)
                 {
@@ -130,7 +130,8 @@ namespace Back_End.Controllers
                 }
                 else
                 {
-                    vehicleEntity.VehiclePicture = await UploadController.SaveImage(vehicle.ImageFile, "Resources");
+                      vehicleEntity.VehiclePicture = vehicle.ImageFile;
+             //       vehicleEntity.VehiclePicture = await UploadController.SaveImage(vehicle.ImageFile, "Resources");
                 }
 
                 vehicleEntity.VehicleAvailability = true;

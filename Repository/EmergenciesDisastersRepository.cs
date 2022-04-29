@@ -29,7 +29,6 @@ namespace Repository
             if (user.Roles.RoleName != "Coordinador General" && user.Roles.RoleName != "Admin")
             {
                 return await GetAllEmergenciesDisastersFilter();
-
             }
             else
             {
@@ -62,7 +61,7 @@ namespace Repository
 
                  .ThenInclude(a => a.Brands)
 
-                     .Include(i => i.Resources_Requests)
+                  .Include(i => i.Resources_Requests)
                  .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                  .ThenInclude(i => i.Vehicles.TypeVehicles)
 
@@ -180,7 +179,12 @@ namespace Repository
                  .Include(a => a.ChatRooms)
                  .ThenInclude(a => a.UsersChatRooms)
 
+                 .Include(a => a.ChatRooms)
+                 .ThenInclude(a => a.Messages)
+
                  .Include(a => a.Victims)
+
+                 .Include(a => a.VolunteersLocationVolunteersEmergenciesDisasters)
 
            .FirstOrDefaultAsync();
         }
@@ -191,10 +195,8 @@ namespace Repository
             var user = UsersRepository.authUser;
             var collection = _cruzRojaContext.EmergenciesDisasters as IQueryable<EmergenciesDisasters>;
 
+            collection = collection.Where(a => a.FK_EstateID == user.FK_EstateID && a.EmergencyDisasterEndDate == null);
 
-            collection = collection.Where(
-                                    a => a.Fk_EmplooyeeID == user.UserID && a.EmergencyDisasterEndDate == null)
-                                    .AsNoTracking();
 
             return await collection
                  .Include(i => i.TypesEmergenciesDisasters)
@@ -230,6 +232,8 @@ namespace Repository
                   .Include(i => i.Resources_Requests)
                   .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                   .ThenInclude(i => i.Medicines)
+
+
 
                  .ToListAsync();
         }

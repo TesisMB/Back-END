@@ -41,7 +41,7 @@ namespace Repository
         {
 
             CruzRojaContext cruzRojaContext = new CruzRojaContext();
-
+            medicines.Resources_RequestResources_Materials_Medicines_Vehicles = null;
             cruzRojaContext.Update(medicines);
             cruzRojaContext.SaveChanges();
 

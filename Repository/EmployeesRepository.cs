@@ -35,8 +35,7 @@ namespace Repository
             Collection = Collection.Where(
                 a => a.Users.Estates.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName
                 && a.Users.Estates.Locations.LocationCityName == user.Estates.Locations.LocationCityName
-                && a.Users.Estates.Locations.LocationMunicipalityName == user.Estates.Locations.LocationMunicipalityName
-                && a.Users.UserID != user.UserID);
+                && a.Users.Estates.Locations.LocationMunicipalityName == user.Estates.Locations.LocationMunicipalityName);
 
             return await Collection
                     .Include(i => i.Users)

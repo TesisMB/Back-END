@@ -674,7 +674,7 @@ namespace Repository
                     if (rec == null)
                     {
                         medicines = db.Medicines
-                          .Where(a => a.ID == resources_Request.FK_MedicineID)
+                          .Where(a => a.ID == resource.FK_MedicineID)
                           .FirstOrDefault();
 
                         resources_Request.Medicines = medicines;

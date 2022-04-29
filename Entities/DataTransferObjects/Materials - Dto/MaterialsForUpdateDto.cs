@@ -11,7 +11,7 @@ namespace Entities.DataTransferObjects.Materials___Dto
         public Boolean MaterialAvailability { get; set; }
         public Boolean MaterialDonation { get; set; }
 
-        public string MedicinePicture { get; set; }
+        public string MaterialPicture { get; set; }
         public int FK_EstateID { get; set; }
         public string Description { get; set; }
 

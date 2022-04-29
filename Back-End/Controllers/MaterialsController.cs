@@ -139,8 +139,9 @@ namespace Back_End.Controllers
                 else
                 {
                     materialEntity.MaterialPicture = material.Picture;
-                    //         material.Picture = await UploadController.SaveImage(material.ImageFile, "Resources");
+                    //material.Picture = await UploadController.SaveImage(materialEntity.MaterialPicture, "Resources");
                 }
+
                 materialEntity.MaterialName = material.Name;
                 materialEntity.MaterialDonation = material.Donation;
                 materialEntity.MaterialAvailability = true;
@@ -175,7 +176,6 @@ namespace Back_End.Controllers
             try
             {
 
-
                 var materialEntity = await _repository.Materials.GetMaterialById(materialId);
 
                 if (materialEntity == null)
@@ -200,6 +200,7 @@ namespace Back_End.Controllers
                 MaterialsForUpdateDto material = new MaterialsForUpdateDto
                 {
                     MaterialQuantity = materialToPatch.Quantity,
+                    MaterialPicture = materialToPatch.Picture,
                     MaterialDonation = materialToPatch.Donation,
                     MaterialName = materialToPatch.Name,
                     MaterialAvailability = materialToPatch.Availability,

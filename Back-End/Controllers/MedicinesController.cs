@@ -199,6 +199,7 @@ namespace Back_End.Controllers
                 MedicineForUpdateDto medicine = new MedicineForUpdateDto
                 {
                     MedicineQuantity = medicineToPatch.Quantity,
+                    MedicinePicture = medicineToPatch.Picture,
                     MedicineName = medicineToPatch.Name,
                     MedicineAvailability = medicineToPatch.Availability,
                     MedicineDonation = medicineToPatch.Donation,

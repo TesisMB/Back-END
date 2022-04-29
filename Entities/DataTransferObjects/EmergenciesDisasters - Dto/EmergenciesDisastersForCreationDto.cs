@@ -1,4 +1,5 @@
-﻿using Entities.DataTransferObjects.CharRooms___Dto;
+﻿using Entities.DataTransferObjects.Alerts___Dto;
+using Entities.DataTransferObjects.CharRooms___Dto;
 using Entities.DataTransferObjects.Locations___Dto;
 using Entities.DataTransferObjects.LocationsEmergenciesDisasters___Dto;
 using Entities.DataTransferObjects.Victims___Dto;
@@ -20,6 +21,8 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
         public LocationsEmergenciesDisastersDto LocationsEmergenciesDisasters { get; set; }
 
         public int FK_TypeEmergencyID { get; set; }
+
+        public AlertsDto Alerts { get; set; }
 
         public int FK_AlertID { get; set; }
         public int FK_EstateID { get; set; }

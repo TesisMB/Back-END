@@ -16,7 +16,6 @@ namespace Back_End.Controllers
         public static async Task<string> SaveImage([FromForm] IFormFile Image, string tipo)
         {
             {
-
                 tipo = "Resources";
                 var folderName = Path.Combine("StaticFiles", "images", tipo);
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
@@ -44,14 +43,15 @@ namespace Back_End.Controllers
             try
             {
                 var file = Request.Form.Files[0];
-             //   var folderName = Path.Combine("StaticFiles", "images", "Resources");
-              //  var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                var folderName = Path.Combine("StaticFiles", "images", "Resources");
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
                 if (file.Length > 0)
                 {
                     var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                 //   var fullPath = Path.Combine(pathToSave, fileName);
-                 //   var dbPath = Path.Combine(folderName, fileName);
-                    using (var stream = new FileStream(fileName, FileMode.Create))
+                    var fullPath = Path.Combine(pathToSave, fileName);
+                    var dbPath = Path.Combine(folderName, fileName);
+
+                    using (var stream = new FileStream(dbPath, FileMode.Create))
                     {
                         file.CopyTo(stream);
                     }

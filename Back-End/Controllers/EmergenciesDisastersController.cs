@@ -320,7 +320,7 @@ namespace Back_End.Controllers
 
                 _emergencyDisaster.ApplyTo(emergencyDisasterToPatch, ModelState);
 
-                if (emergencyDisasterToPatch != null)
+                if (emergencyDisasterToPatch.EmergencyDisasterEndDate != null)
                 {
                     emergencyDisasterToPatch.EmergencyDisasterEndDate = DateTime.Now;
                 }

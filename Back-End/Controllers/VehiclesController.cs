@@ -200,6 +200,7 @@ namespace Back_End.Controllers
                 VehiclesForUpdateDto vehicles = new VehiclesForUpdateDto();
 
                 vehicles.VehicleAvailability = vehicleToPatch.Availability;
+                vehicles.VehiclePicture = vehicleToPatch.Picture;
                 vehicles.VehicleDonation = vehicleToPatch.Donation;
                 vehicles.VehicleDescription = vehicleToPatch.Description;
                 vehicles.VehicleUtility = vehicleToPatch.Vehicles.VehicleUtility;

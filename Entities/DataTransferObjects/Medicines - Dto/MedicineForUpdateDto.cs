@@ -13,6 +13,7 @@ namespace Entities.DataTransferObjects.Medicines___Dto
         public String MedicineDrug { get; set; }
         public float MedicineWeight { get; set; }
         public string MedicineUnits { get; set; }
+        public string MedicinePicture { get; set; }
 
         public String MedicineUtility { get; set; }
         public Boolean MedicineAvailability { get; set; }

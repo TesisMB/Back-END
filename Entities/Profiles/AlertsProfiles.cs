@@ -9,6 +9,8 @@ namespace Entities.Profiles
         public AlertsProfiles()
         {
             CreateMap<Alerts, AlertsDto>();
+
+            CreateMap<AlertsDto, Alerts>();
         }
     }
 }

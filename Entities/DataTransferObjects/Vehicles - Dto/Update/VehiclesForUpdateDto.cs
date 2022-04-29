@@ -9,6 +9,7 @@ namespace Entities.DataTransferObjects.Vehicles___Dto.Update
         public string VehicleYear { get; set; }
 
         public string VehicleDescription { get; set; }
+        public string VehiclePicture { get; set; }
 
         public Boolean VehicleAvailability { get; set; }
         public Boolean VehicleDonation { get; set; }

@@ -33,7 +33,7 @@ namespace Repository
             }
             else
             {
-                collection = collection.Where(a => a.FK_EstateID == user.FK_EstateID);
+                collection = collection.Where(a => a.FK_EstateID == user.FK_EstateID && a.EmergencyDisasterEndDate == null);
             }
 
             return await collection
@@ -193,7 +193,7 @@ namespace Repository
 
 
             collection = collection.Where(
-                                    a => a.Fk_EmplooyeeID == user.UserID)
+                                    a => a.Fk_EmplooyeeID == user.UserID && a.EmergencyDisasterEndDate == null)
                                     .AsNoTracking();
 
             return await collection

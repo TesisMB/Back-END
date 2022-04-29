@@ -40,5 +40,8 @@ namespace Back_End.Models
 
         public ICollection<Medicines> Medicines { get; set; }
 
+        public ICollection<EmergenciesDisasters> EmergenciesDisasters { get; set; }
+
+
     }
 }

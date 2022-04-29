@@ -5,7 +5,7 @@ namespace Entities.DataTransferObjects.Medicines___Dto
 {
     public class MedicineForCreationDto
     {
-        public DateTime MedicineExpirationDate { get; set; }
+        public string MedicineExpirationDate { get; set; }
 
         public String MedicineLab { get; set; }
 

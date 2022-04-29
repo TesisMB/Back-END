@@ -96,7 +96,7 @@ namespace Repository
         private void SpaceCamelCase(Volunteers volunteer)
         {
             //VER LA NUEVA CONTRASEÑA
-            volunteer.VolunteerDescription = WithoutSpace_CamelCase.GetCamelCase(volunteer.VolunteerDescription);
+            volunteer.VolunteerDescription = WithoutSpace_CamelCase.GetWithoutSpace(volunteer.VolunteerDescription);
 
             foreach (var vol in volunteer.VolunteersSkills)
             {
@@ -105,26 +105,26 @@ namespace Repository
                 {
                     if (vol.Skills != null)
                     {
-                        vol.Skills.SkillName = WithoutSpace_CamelCase.GetCamelCase(vol.Skills.SkillName);
-                        vol.Skills.SkillDescription = WithoutSpace_CamelCase.GetCamelCase(vol.Skills.SkillDescription);
+                        vol.Skills.SkillName = WithoutSpace_CamelCase.GetWithoutSpace(vol.Skills.SkillName);
+                        vol.Skills.SkillDescription = WithoutSpace_CamelCase.GetWithoutSpace(vol.Skills.SkillDescription);
                     }
 
                     if (v.FormationsEstates != null)
                     {
-                        v.FormationsEstates.FormationEstateName = WithoutSpace_CamelCase.GetCamelCase(v.FormationsEstates.FormationEstateName);
+                        v.FormationsEstates.FormationEstateName = WithoutSpace_CamelCase.GetWithoutSpace(v.FormationsEstates.FormationEstateName);
                     }
 
                 }
 
             }
 
-            volunteer.Users.UserDni = WithoutSpace_CamelCase.GetCamelCase(volunteer.Users.UserDni);
+            volunteer.Users.UserDni = WithoutSpace_CamelCase.GetWithoutSpaceWithTitleCase(volunteer.Users.UserDni);
             volunteer.Users.UserPassword = WithoutSpace_CamelCase.GetWithoutSpace(volunteer.Users.UserPassword);
-            volunteer.Users.Persons.FirstName = WithoutSpace_CamelCase.GetCamelCase(volunteer.Users.Persons.FirstName);
-            volunteer.Users.Persons.LastName = WithoutSpace_CamelCase.GetCamelCase(volunteer.Users.Persons.LastName);
-            volunteer.Users.Persons.Phone = WithoutSpace_CamelCase.GetCamelCase(volunteer.Users.Persons.Phone);
-            volunteer.Users.Persons.Address = WithoutSpace_CamelCase.GetCamelCase(volunteer.Users.Persons.Address);
-            volunteer.Users.Persons.Email = WithoutSpace_CamelCase.GetWithoutSpace(volunteer.Users.Persons.Email);
+            volunteer.Users.Persons.FirstName = WithoutSpace_CamelCase.GetWithoutSpaceWithTitleCase(volunteer.Users.Persons.FirstName);
+            volunteer.Users.Persons.LastName = WithoutSpace_CamelCase.GetWithoutSpaceWithTitleCase(volunteer.Users.Persons.LastName);
+            volunteer.Users.Persons.Phone = WithoutSpace_CamelCase.GetWithoutSpaceWithTitleCase(volunteer.Users.Persons.Phone);
+            volunteer.Users.Persons.Address = WithoutSpace_CamelCase.GetWithoutSpaceWithTitleCase(volunteer.Users.Persons.Address);
+            volunteer.Users.Persons.Email = WithoutSpace_CamelCase.GetWithoutSpaceWithTitleCase(volunteer.Users.Persons.Email);
 
         }
 

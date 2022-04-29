@@ -6,7 +6,6 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 
 
 namespace Entities
@@ -33,14 +32,14 @@ namespace Entities
 
                 if (materials == null)
                 {
-                DifferentZero(id.FK_MaterialID);
+                    DifferentZero(id.FK_MaterialID);
 
                 }
-                     else
+                else
                 {
                     var resta = materials.MaterialQuantity - id.Quantity;
 
-                    if (materials != null  && resta < 0 || materials.MaterialQuantity  == 0)
+                    if (materials != null && resta < 0 || materials.MaterialQuantity == 0)
                     {
                         Key.Add("Material");
 
@@ -82,9 +81,8 @@ namespace Entities
             RuleFor(m => new { m.FK_VehicleID, m.Quantity }).Custom((id, context) =>
             {
                 vehicles = db.Vehicles.Where(x => x.ID == id.FK_VehicleID)
-                //.Include(a => a.BrandsModels)
-          //      .Include(a => a.BrandsModels.Model)
-               // .Include(a => a.BrandsModels.Brands)
+                .Include(a => a.Model)
+                .Include(a => a.Brands)
                 .AsNoTracking()
                 .FirstOrDefault();
 
@@ -96,9 +94,9 @@ namespace Entities
                 {
                     if (vehicles != null && (vehicles.VehicleAvailability == false))
                     {
-                  //      var vehiculo = vehicles.BrandsModels.Brands.BrandName + " " + vehicles.BrandsModels.Model.ModelName;
+                        var vehiculo = vehicles.Brands.BrandName + " " + vehicles.Model.ModelName;
                         Key.Add("Vehicle");
-                     //   Resources.Add(new Resource() { ID = id.FK_VehicleID, Name = vehiculo });
+                        Resources.Add(new Resource() { ID = id.FK_VehicleID, Name = vehiculo });
 
                         context.AddFailure("No se encuentra disponible");
                     }
@@ -108,13 +106,13 @@ namespace Entities
         }
 
 
-        public  class Resource
+        public class Resource
         {
-            public  int? ID { get; set; }
-            public  string Name { get; set; } // Define al nombre del Campo
+            public int? ID { get; set; }
+            public string Name { get; set; } // Define al nombre del Campo
         }
 
- 
+
 
 
         public bool DifferentZero(int? id)
@@ -124,7 +122,7 @@ namespace Entities
                 return true;
             }
 
-               return false;
+            return false;
         }
 
 
@@ -136,7 +134,7 @@ namespace Entities
             }
 
             return false;
-        
+
         }
 
 

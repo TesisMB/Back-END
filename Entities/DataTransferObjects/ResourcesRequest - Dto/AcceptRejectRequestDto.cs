@@ -12,5 +12,7 @@ namespace Entities.DataTransferObjects.ResourcesRequest___Dto
 
         public int UserRequest { get; set; }
 
+        public int FK_EmployeeID { get; set; }
+
     }
 }

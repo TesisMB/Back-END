@@ -15,7 +15,8 @@ namespace Entities.Profiles
         public ResourcesRequestProfiles()
         {
             CreateMap<ResourcesRequest, ResourcesRequestDto>()
-                   .ForPath(dest => dest.RequestDate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.RequestDate)));
+
+                 .ForPath(dest => dest.RequestDate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.RequestDate)));
 
 
 

@@ -47,11 +47,9 @@ namespace Back_End.Models
         [Required]
         public int FK_EstateID { get; set; }
 
-        public ICollection<ResourcesRequest> Resources_Requests { get; set; }
-
+       
         [ForeignKey("FK_UserID")]
         public ICollection<UsersNotifications> UsersNotifications { get; set; }
-
 
         [ForeignKey("FK_UserID")]
         public ICollection<UsersChat> UsersChat { get; set; }
@@ -59,6 +57,8 @@ namespace Back_End.Models
         [ForeignKey("FK_UserID")]
         public ICollection<UsersChatRooms> UsersChatRooms { get; set; }
         public Messages Messages { get; set; }
+
+        public ICollection<ResourcesRequest> ResourcesRequests { get; set; }
 
     }
 }

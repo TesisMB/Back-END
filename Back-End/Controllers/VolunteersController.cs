@@ -23,8 +23,8 @@ namespace Back_End.Controllers
     public class VolunteersController : ControllerBase
     {
 
-        private ILoggerManager _logger;
-        private IRepositorWrapper _repository;
+        private readonly ILoggerManager _logger;
+        private readonly IRepositorWrapper _repository;
         private readonly IMapper _mapper;
 
         public VolunteersController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper)

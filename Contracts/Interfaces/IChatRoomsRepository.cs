@@ -1,13 +1,11 @@
 ﻿using Entities.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Contracts.Interfaces
 {
-    public interface IChatRoomsRepository: IRepositoryBase<TypesChatRooms>
+    public interface IChatRoomsRepository : IRepositoryBase<ChatRooms>
     {
-        Task<IEnumerable<TypesChatRooms>> GetChatRooms();
+        Task<IEnumerable<ChatRooms>> GetChatRooms();
     }
 }

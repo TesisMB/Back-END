@@ -13,7 +13,6 @@ namespace Back_End.Validator
         {
 
             RuleFor(x => x.UserDni)
-           .Cascade(CascadeMode.StopOnFirstFailure)
            .NotEmpty().WithMessage("{PropertyName} is required.")
            .Must(BeUniqueDni).WithMessage("El Dni ingresado ya existe en el sistema")
            .MaximumLength(16).WithMessage("El Dni debe tener hasta 16 caracteres");
@@ -36,9 +35,5 @@ namespace Back_End.Validator
         }
 
 
-        private static bool IsValidNumber(string name)
-        {
-            return name.All(char.IsNumber);
-        }
     }
 }

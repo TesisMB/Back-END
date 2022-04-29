@@ -8,7 +8,6 @@ namespace Entities.Validator.Creation.Resources_Request
         public Resource_RequesForUpdateValidator()
         {
 
-
             RuleForEach(x => x.Resources_RequestResources_Materials_Medicines_Vehicles).SetValidator(new Resources_RequestValidator());
 
         }

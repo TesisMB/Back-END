@@ -1,11 +1,9 @@
 ﻿using Entities.DataTransferObjects.Victims___Dto;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
 {
-   public class EmergenciesDisastersForUpdateDto
+    public class EmergenciesDisastersForUpdateDto
     {
         public DateTime? EmergencyDisasterEndDate { get; set; }
 
@@ -13,7 +11,8 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
 
         public int? Fk_EmplooyeeID { get; set; }
 
-        public int FK_LocationID { get; set; }
+
+        //public int FK_LocationID { get; set; }
 
         public int FK_TypeEmergencyID { get; set; }
 

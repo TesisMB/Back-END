@@ -1,0 +1,73 @@
+2022-04-26 13:47:02.0953 INFO Returned User.
+2022-04-26 13:47:03.6981 INFO Returned all ChatRooms from database. 
+2022-04-26 13:47:03.7916 ERROR Something went wrong inside GetAllChatRooms aciton: Unable to cast object of type '<ExceptIterator>d__80`1[Entities.Models.UsersChatRooms]' to type 'System.Collections.Generic.List`1[Entities.Models.UsersChatRooms]'.
+2022-04-26 13:48:05.7649 INFO Returned User.
+2022-04-26 13:48:07.4166 INFO Returned all ChatRooms from database. 
+2022-04-26 13:48:07.5135 ERROR Something went wrong inside GetAllChatRooms aciton: Unable to cast object of type '<ExceptIterator>d__80`1[Entities.Models.UsersChatRooms]' to type 'System.Collections.Generic.List`1[Entities.Models.UsersChatRooms]'.
+2022-04-26 13:55:18.9830 INFO Returned User.
+2022-04-26 13:55:20.8762 INFO Returned all ChatRooms from database. 
+2022-04-26 13:59:38.0779 INFO Returned User.
+2022-04-26 13:59:41.6359 INFO Returned all ChatRooms from database. 
+2022-04-26 14:06:13.2047 INFO Returned User.
+2022-04-26 14:06:16.2972 INFO Returned all ChatRooms from database. 
+2022-04-26 14:08:07.7057 INFO Returned all ChatRooms from database. 
+2022-04-26 14:08:32.5221 INFO Returned User.
+2022-04-26 14:08:36.5656 INFO Returned all ChatRooms from database. 
+2022-04-26 14:10:28.8644 INFO Returned User.
+2022-04-26 14:10:31.4144 INFO Returned all ChatRooms from database. 
+2022-04-26 14:10:39.2415 INFO Returned User.
+2022-04-26 14:10:40.2629 INFO Returned all ChatRooms from database. 
+2022-04-26 14:15:43.1108 INFO Returned User.
+2022-04-26 14:15:45.0002 INFO Returned all ChatRooms from database. 
+2022-04-26 14:15:54.1149 INFO Returned User.
+2022-04-26 14:15:56.6611 INFO Returned all ChatRooms from database. 
+2022-04-26 14:20:10.4699 INFO Returned User.
+2022-04-26 14:20:12.7428 INFO Returned all ChatRooms from database. 
+2022-04-26 14:20:25.5263 INFO Returned User.
+2022-04-26 14:20:26.9633 INFO Returned all ChatRooms from database. 
+2022-04-26 14:20:39.7096 INFO Returned User.
+2022-04-26 14:20:41.7477 INFO Returned all ChatRooms from database. 
+2022-04-26 14:22:20.4706 INFO Returned User.
+2022-04-26 14:22:21.8046 INFO Returned all ChatRooms from database. 
+2022-04-26 14:23:12.6388 INFO Returned User.
+2022-04-26 14:23:14.1017 INFO Returned all ChatRooms from database. 
+2022-04-26 14:28:37.9717 INFO Returned User.
+2022-04-26 14:28:39.5982 INFO Returned all ChatRooms from database. 
+2022-04-26 14:28:40.7824 INFO Returned all ChatRooms from database. 
+2022-04-26 14:29:22.6736 INFO Returned User.
+2022-04-26 14:34:32.7324 INFO Returned User.
+2022-04-26 14:34:37.1295 INFO Returned all ChatRooms from database. 
+2022-04-26 14:35:20.3418 INFO Returned all ChatRooms from database. 
+2022-04-26 14:35:20.7076 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-26 14:35:22.2565 INFO Returned User.
+2022-04-26 14:35:24.1036 INFO Returned all ChatRooms from database. 
+2022-04-26 14:35:51.4259 INFO Returned all ChatRooms from database. 
+2022-04-26 14:36:11.6382 INFO Returned all ChatRooms from database. 
+2022-04-26 14:36:11.7726 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-26 14:36:13.0438 INFO Returned User.
+2022-04-26 14:36:14.0417 INFO Returned all ChatRooms from database. 
+2022-04-26 14:39:34.3592 INFO Returned all ChatRooms from database. 
+2022-04-26 14:39:34.5526 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-04-26 14:39:38.9407 INFO Returned User.
+2022-04-26 14:39:40.4762 INFO Returned all ChatRooms from database. 
+2022-04-26 14:40:00.7870 INFO Returned all ChatRooms from database. 
+2022-04-26 14:41:08.5955 INFO Returned User.
+2022-04-26 14:41:10.7084 INFO Returned all ChatRooms from database. 
+2022-04-26 14:43:10.7955 INFO Returned User.
+2022-04-26 14:43:13.5036 ERROR Something went wrong inside GetAllChatRooms aciton: The LINQ expression 'DbSet<ChatRooms>
+    .Join(
+        outer: DbSet<EmergenciesDisasters>, 
+        inner: c => EF.Property<Nullable<int>>(c, "ID"), 
+        outerKeySelector: e => EF.Property<Nullable<int>>(e, "EmergencyDisasterID"), 
+        innerKeySelector: (o, i) => new TransparentIdentifier<ChatRooms, EmergenciesDisasters>(
+            Outer = o, 
+            Inner = i
+        ))
+    .Where(c => __userChatRooms_0
+        .Any(a => a.FK_ChatRoomID == c.Outer.ID && c.Inner.EmergencyDisasterEndDate == null))' could not be translated. Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to either AsEnumerable(), AsAsyncEnumerable(), ToList(), or ToListAsync(). See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.
+2022-04-26 14:44:42.3271 INFO Returned User.
+2022-04-26 14:44:46.4908 INFO Returned all ChatRooms from database. 
+2022-04-26 14:44:53.3766 INFO Returned User.
+2022-04-26 14:44:54.7125 INFO Returned all ChatRooms from database. 
+2022-04-26 14:47:36.6863 INFO Returned User.
+2022-04-26 14:47:39.1921 INFO Returned all ChatRooms from database. 

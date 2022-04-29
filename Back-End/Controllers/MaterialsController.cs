@@ -4,6 +4,7 @@ using Entities.DataTransferObjects.Materials___Dto;
 using Entities.DataTransferObjects.ResourcesDto;
 using Entities.Helpers;
 using Entities.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -17,8 +18,8 @@ namespace Back_End.Controllers
     [ApiController]
     public class MaterialsController : ControllerBase
     {
-        private ILoggerManager _logger;
-        private IRepositorWrapper _repository;
+        private readonly ILoggerManager _logger;
+        private readonly IRepositorWrapper _repository;
         private readonly IMapper _mapper;
 
         /*Este metodo va a permitir despues poder conectarme tanto para mapear, como para obtener 
@@ -108,7 +109,7 @@ namespace Back_End.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost()]
         public async Task<ActionResult<Materials>> CreateMaterial([FromBody] Resources_ForCreationDto material)
         {
             try
@@ -125,17 +126,20 @@ namespace Back_End.Controllers
                     return BadRequest("Material object is null");
 
                 }
+               // var file = Request.Form.Files[0];
 
                 var materialEntity = _mapper.Map<Materials>(material);
 
+           //     material.ImageFile = file;
 
-                if(material.ImageFile == null)
+                if(material.Picture == null)
                 {
                     materialEntity.MaterialPicture = "https://i.imgur.com/S9HJEwF.png";
                 }
                 else
                 {
-                    materialEntity.MaterialPicture = await UploadController.SaveImage(material.ImageFile, "Resources");
+                    materialEntity.MaterialPicture = material.Picture;
+                    //material.Picture = await UploadController.SaveImage(materialEntity.MaterialPicture, "Resources");
                 }
 
                 materialEntity.MaterialName = material.Name;
@@ -146,6 +150,8 @@ namespace Back_End.Controllers
                 materialEntity.MaterialUtility = material.Description;
 
                 _repository.Materials.CreateMaterial(materialEntity);
+
+
 
                  _repository.Materials.SaveAsync();
 
@@ -170,7 +176,6 @@ namespace Back_End.Controllers
             try
             {
 
-
                 var materialEntity = await _repository.Materials.GetMaterialById(materialId);
 
                 if (materialEntity == null)
@@ -192,14 +197,17 @@ namespace Back_End.Controllers
                     return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
                 }
 
-                MaterialsForUpdateDto material = new MaterialsForUpdateDto();
-                material.MaterialQuantity = materialToPatch.Quantity;
-                material.MaterialDonation = materialToPatch.Donation;
-                material.MaterialName = materialToPatch.Name;
-                material.MaterialAvailability = materialToPatch.Availability;
-                material.FK_EstateID = materialToPatch.FK_EstateID;
-                material.Description = materialToPatch.Description;
-                material.MaterialBrand = materialToPatch.Materials.Brand;
+                MaterialsForUpdateDto material = new MaterialsForUpdateDto
+                {
+                    MaterialQuantity = materialToPatch.Quantity,
+                    MaterialPicture = materialToPatch.Picture,
+                    MaterialDonation = materialToPatch.Donation,
+                    MaterialName = materialToPatch.Name,
+                    MaterialAvailability = materialToPatch.Availability,
+                    FK_EstateID = materialToPatch.FK_EstateID,
+                    Description = materialToPatch.Description,
+                    MaterialBrand = materialToPatch.Materials.Brand
+                };
 
                 var employeeResult = _mapper.Map(material, materialEntity);
 

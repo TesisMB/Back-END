@@ -3,7 +3,7 @@
     public class WithoutSpace_CamelCase
     {
 
-        public static string GetCamelCase(string camelCase)
+        public static string GetWithoutSpaceWithTitleCase(string camelCase)
         {
             System.Globalization.TextInfo textInfo = new System.Globalization.CultureInfo("en-US", false).TextInfo;
 
@@ -12,6 +12,7 @@
 
             return camelCase;
         }
+
 
         public static string GetWithoutSpace(string space)
         {

@@ -1,15 +1,11 @@
 ﻿using AutoMapper;
-using Back_End.Entities;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.CharRooms___Dto;
 using Entities.DataTransferObjects.Messages___Dto;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Back_End.Controllers
@@ -18,10 +14,9 @@ namespace Back_End.Controllers
     [ApiController]
     public class ChatRoomsController : ControllerBase
     {
-        private ILoggerManager _logger;
-        private IMapper _mapper;
-        private IRepositorWrapper _repository;
-
+        private readonly ILoggerManager _logger;
+        private readonly IMapper _mapper;
+        private readonly IRepositorWrapper _repository;
 
         public ChatRoomsController(ILoggerManager logger, IMapper mapper, IRepositorWrapper repository)
         {
@@ -31,18 +26,17 @@ namespace Back_End.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<TypesChatRooms>> GetAllChatRooms()
+        public async Task<ActionResult<ChatRooms>> GetAllChatRooms()
         {
             try
             {
-
-                //Voluntarios no tomo el RoleName
-
                 var chatRooms = await _repository.ChatRooms.GetChatRooms();
                 _logger.LogInfo($"Returned all ChatRooms from database. ");
 
-                var chatRoomsToResult = _mapper.Map<IEnumerable<TypesChatsDto>>(chatRooms);
 
+
+
+                var chatRoomsToResult = _mapper.Map<IEnumerable<ChatRoomsDto>>(chatRooms);
 
                 return Ok(chatRoomsToResult);
 
@@ -67,10 +61,7 @@ namespace Back_End.Controllers
                     return NotFound();
                 }
 
-          
-
                 var chatRoomsToResult = _mapper.Map<ChatRoomsDto>(chatRooms);
-
 
                 return Ok(chatRoomsToResult);
             }

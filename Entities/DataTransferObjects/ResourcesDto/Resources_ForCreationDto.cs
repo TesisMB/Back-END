@@ -13,7 +13,7 @@ namespace Entities.DataTransferObjects.ResourcesDto
         public Boolean Availability { get; set; }
         public string Picture { get; set; }
 
-        public IFormFile ImageFile { get; set; }
+        public string? ImageFile { get; set; }
 
         public string Description { get; set; }
 

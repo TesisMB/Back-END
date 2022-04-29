@@ -20,11 +20,10 @@ namespace Back_End.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private ILoggerManager _logger;
-        private IRepositorWrapper _repository;
+        private readonly ILoggerManager _logger;
+        private readonly IRepositorWrapper _repository;
         private readonly IMapper _mapper;
-        readonly IGeneratePdf _generatePdf;
-        private CruzRojaContext cruzRojaContext = new CruzRojaContext();
+        public  readonly IGeneratePdf _generatePdf;
 
         public EmployeesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper, IGeneratePdf generatePdf)
         {
@@ -156,8 +155,10 @@ namespace Back_End.Controllers
 
                 if (roles.RoleName != "Voluntario")
                 {
-                    employeeEntity.Employees = new Employees();
-                    employeeEntity.Employees.EmployeeCreatedate = DateTime.Now;
+                    employeeEntity.Employees = new Employees
+                    {
+                        EmployeeCreatedate = DateTime.Now
+                    };
                 }
                 else
                 {
@@ -296,7 +297,7 @@ namespace Back_End.Controllers
 
 
         [NonAction]
-        public async Task<ActionResult<Volunteers>> CreateVolunteer(VolunteersForCreationDto volunteer)
+        public ActionResult<Volunteers> CreateVolunteer(VolunteersForCreationDto volunteer)
         {
             try
             {

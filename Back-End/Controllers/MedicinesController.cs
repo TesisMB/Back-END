@@ -4,6 +4,7 @@ using Entities.DataTransferObjects.Medicines___Dto;
 using Entities.DataTransferObjects.ResourcesDto;
 using Entities.Helpers;
 using Entities.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,8 +17,8 @@ namespace Back_End.Controllers
     [ApiController]
     public class MedicinesController : ControllerBase
     {
-        private ILoggerManager _logger;
-        private IRepositorWrapper _repository;
+        private readonly ILoggerManager _logger;
+        private readonly IRepositorWrapper _repository;
         private readonly IMapper _mapper;
 
         public MedicinesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper)
@@ -47,6 +48,13 @@ namespace Back_End.Controllers
                         item.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
                                         Request.Scheme, Request.Host, Request.PathBase, item.Picture);
 
+
+                        DateTime date = Convert.ToDateTime(item.Medicines.MedicineExpirationDate);
+
+                        if (date < DateTime.Now)
+                        {
+                            item.Availability = false;
+                        }
                     }
 
                 }
@@ -85,6 +93,15 @@ namespace Back_End.Controllers
                     {
                         employeeResult.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
                                         Request.Scheme, Request.Host, Request.PathBase, employeeResult.Picture);
+
+
+                        DateTime date = Convert.ToDateTime(employeeResult.Medicines.MedicineExpirationDate);
+
+                        if (date < DateTime.Now)
+                        {
+                            employeeResult.Availability = false;
+                        }
+
                     }
 
                     return Ok(employeeResult);
@@ -116,14 +133,16 @@ namespace Back_End.Controllers
                 var medicineEntity = _mapper.Map<Medicines>(medicine);
 
 
-                if(medicine.ImageFile == null)
+             //   medicine.ImageFile = ImageFile;
+
+                if(medicine.Picture == null)
                 {
                     medicineEntity.MedicinePicture = "https://i.imgur.com/S9HJEwF.png";
                 }
                 else
                 {
-
-                    medicineEntity.MedicinePicture = await UploadController.SaveImage(medicine.ImageFile, "Resources");
+                    medicineEntity.MedicinePicture = medicine.Picture;
+             //       medicineEntity.MedicinePicture = await UploadController.SaveImage(medicine.ImageFile, "Resources");
                 }
 
                 medicineEntity.MedicineName = medicine.Name;
@@ -131,7 +150,7 @@ namespace Back_End.Controllers
                 medicineEntity.MedicineQuantity = medicine.Quantity;
                 medicineEntity.MedicineAvailability = true;
                 medicineEntity.MedicineUtility = medicine.Description;
-                medicineEntity.MedicineExpirationDate = medicine.Medicines.MedicineExpirationDate;
+                //medicineEntity.MedicineExpirationDate = medicine.Medicines.MedicineExpirationDate;
                 medicineEntity.MedicineLab = medicine.Medicines.MedicineLab;
                 medicineEntity.MedicineDrug = medicine.Medicines.MedicineDrug;
                 medicineEntity.MedicineWeight = medicine.Medicines.MedicineWeight;
@@ -172,23 +191,26 @@ namespace Back_End.Controllers
                 patchDocument.ApplyTo(medicineToPatch, ModelState);
 
 
-                if (!TryValidateModel(medicineToPatch))
-                {
-                    return ValidationProblem(ModelState);
-                }
+                /*  if (!TryValidateModel(medicineToPatch))
+                  {
+                      return ValidationProblem(ModelState);
+                  }*/
 
-                MedicineForUpdateDto medicine = new MedicineForUpdateDto();
-                medicine.MedicineQuantity = medicineToPatch.Quantity;
-                medicine.MedicineName = medicineToPatch.Name;
-                medicine.MedicineAvailability = medicineToPatch.Availability;
-                medicine.MedicineDonation = medicineToPatch.Donation;
-                medicine.MedicineUtility = medicineToPatch.Description;
-                medicine.MedicineExpirationDate = medicineToPatch.Medicines.MedicineExpirationDate;
-                medicine.MedicineDrug = medicineToPatch.Medicines.MedicineDrug;
-                medicine.MedicineWeight = medicineToPatch.Medicines.MedicineWeight;
-                medicine.MedicineUnits = medicineToPatch.Medicines.MedicineUnits;
-                medicine.FK_EstateID = medicineToPatch.FK_EstateID;
-                medicine.MedicineLab = medicineToPatch.Medicines.MedicineLab;
+                MedicineForUpdateDto medicine = new MedicineForUpdateDto
+                {
+                    MedicineQuantity = medicineToPatch.Quantity,
+                    MedicinePicture = medicineToPatch.Picture,
+                    MedicineName = medicineToPatch.Name,
+                    MedicineAvailability = medicineToPatch.Availability,
+                    MedicineDonation = medicineToPatch.Donation,
+                    MedicineUtility = medicineToPatch.Description,
+                    //medicine.MedicineExpirationDate = medicineToPatch.Medicines.MedicineExpirationDate;
+                    MedicineDrug = medicineToPatch.Medicines.MedicineDrug,
+                    MedicineWeight = medicineToPatch.Medicines.MedicineWeight,
+                    MedicineUnits = medicineToPatch.Medicines.MedicineUnits,
+                    FK_EstateID = medicineToPatch.FK_EstateID,
+                    MedicineLab = medicineToPatch.Medicines.MedicineLab
+                };
 
 
                 var medicineResult = _mapper.Map(medicine, medicineEntity);

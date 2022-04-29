@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Back_End.Models;
 using Contracts.Interfaces;
+using Entities.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -71,9 +72,14 @@ namespace Back_End.Controllers
                     ret = StatusCode(200, auth);
                     _logger.LogInfo($"Returned User.");
                 }
-                else
+                else if (!auth.UserAvailability && auth.RoleName != "Voluntario")
                 {
                     ret = Unauthorized();
+                }
+                else
+                {
+
+                    return BadRequest(ErrorHelper.Response(400, "No puede acceder al sistema porque es voluntario"));
                 }
 
             } catch (Exception ex)

@@ -10,7 +10,6 @@ namespace Entities.Models
     public class ResourcesRequest
     {
 
-    
         [Key]
         public int ID { get; set; }
 
@@ -27,15 +26,15 @@ namespace Entities.Models
 
         public string Reason { get; set; }
 
+        [Required]
         [ForeignKey("FK_UserID")]
         public Users Users { get; set; }
+        public int FK_UserID { get; set; }
+
 
 
         [ForeignKey("FK_EmergencyDisasterID")]
         public EmergenciesDisasters EmergenciesDisasters { get; set; }
-
-        [Required]
-        public int FK_UserID { get; set; }
 
         [Required]
         public int FK_EmergencyDisasterID { get; set; }

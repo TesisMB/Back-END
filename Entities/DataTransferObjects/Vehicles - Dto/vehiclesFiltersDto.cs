@@ -6,7 +6,7 @@
 
         public string Type { get; set; }
 
-        public int? VehicleYear { get; set; }
+        public string? VehicleYear { get; set; }
 
         //public string EmployeeName { get; set; }
     }

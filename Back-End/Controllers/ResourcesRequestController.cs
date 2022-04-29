@@ -45,8 +45,8 @@ namespace Back_End.Controllers
             var resource_RequestResult = _mapper.Map<IEnumerable<ResourcesRequestDto>>(resource_Request);
 
 
-            var query = from st in resource_RequestResult
-                        select st;
+           var query = from st in resource_RequestResult
+                      select st;
 
 
             foreach (var item1 in query)
@@ -92,8 +92,12 @@ namespace Back_End.Controllers
 
                     }
 
+
                 }
             }
+
+
+        
 
             return Ok(resource_RequestResult);
 

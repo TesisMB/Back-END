@@ -90,12 +90,12 @@ namespace Repository
 
         public static Users spaceCamelCase(Users employee)
         {
-            employee.UserDni = WithoutSpace_CamelCase.GetCamelCase(employee.UserDni);
+            employee.UserDni = WithoutSpace_CamelCase.GetWithoutSpaceWithTitleCase(employee.UserDni);
             employee.UserPassword = WithoutSpace_CamelCase.GetWithoutSpace(employee.UserPassword);
-            employee.Persons.FirstName = WithoutSpace_CamelCase.GetCamelCase(employee.Persons.FirstName);
-            employee.Persons.LastName = WithoutSpace_CamelCase.GetCamelCase(employee.Persons.LastName);
-            employee.Persons.Phone = WithoutSpace_CamelCase.GetCamelCase(employee.Persons.Phone);
-            employee.Persons.Address = WithoutSpace_CamelCase.GetCamelCase(employee.Persons.Address);
+            employee.Persons.FirstName = WithoutSpace_CamelCase.GetWithoutSpaceWithTitleCase(employee.Persons.FirstName);
+            employee.Persons.LastName = WithoutSpace_CamelCase.GetWithoutSpaceWithTitleCase(employee.Persons.LastName);
+            employee.Persons.Phone = WithoutSpace_CamelCase.GetWithoutSpaceWithTitleCase(employee.Persons.Phone);
+            employee.Persons.Address = WithoutSpace_CamelCase.GetWithoutSpaceWithTitleCase(employee.Persons.Address);
             employee.Persons.Email = WithoutSpace_CamelCase.GetWithoutSpace(employee.Persons.Email);
 
             return employee;

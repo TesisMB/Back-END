@@ -8,8 +8,7 @@ namespace Repository
 {
     public class ChatRepository : RepositoryBase<ChatRooms>, IChatRepository
     {
-        private CruzRojaContext _cruzRojaContext;
-
+        public readonly CruzRojaContext _cruzRojaContext;
         public ChatRepository(CruzRojaContext cruzRojaContext) : base(cruzRojaContext)
         {
             _cruzRojaContext = cruzRojaContext;
@@ -32,7 +31,7 @@ namespace Repository
                    .Include(i => i.EmergenciesDisasters)
                    .Include(i => i.EmergenciesDisasters.TypesEmergenciesDisasters)
                    .Include(i => i.EmergenciesDisasters)
-                   .ThenInclude(i => i.Locations)
+                   .ThenInclude(i => i.LocationsEmergenciesDisasters)
                    .Include(i => i.Messages)
                     .ThenInclude(i => i.Users)
                     .ThenInclude(i => i.Persons)

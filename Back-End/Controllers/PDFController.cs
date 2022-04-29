@@ -3,10 +3,7 @@ using Contracts.Interfaces;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
-using Repository;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,8 +15,8 @@ namespace Back_End.Controllers
     public class PDFController : ControllerBase
     {
 
-        private ILoggerManager _logger;
-        private CruzRojaContext _cruzRojaContext = new CruzRojaContext();
+        private readonly ILoggerManager _logger;
+        private readonly CruzRojaContext _cruzRojaContext = new CruzRojaContext();
         public PDFController(ILoggerManager logger, CruzRojaContext cruzRojaContext)
         {
             _logger = logger;
@@ -28,11 +25,11 @@ namespace Back_End.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<PDF>> GetPDF()
+        public ActionResult<PDF> GetPDF()
         {
             try
             {
-                var folderName = Path.Combine("StaticFiles", "images" , "PDF");
+                var folderName = Path.Combine("StaticFiles", "images", "PDF");
                 var pathToRead = Path.Combine(Directory.GetCurrentDirectory(), folderName);
                 var pdf = Directory.EnumerateFiles(pathToRead)
                     .Select(fullPath => Path.Combine(folderName, Path.GetFileName(fullPath)))
@@ -52,7 +49,7 @@ namespace Back_End.Controllers
         {
             try
             {
-                if(pdf == null)
+                if (pdf == null)
                 {
                     _logger.LogError("PDF object sent from client is null.");
                     return BadRequest("Material object is null");
@@ -98,9 +95,8 @@ namespace Back_End.Controllers
         private string GetContentType(string path)
         {
             var provider = new FileExtensionContentTypeProvider();
-            string contentType;
 
-            if (!provider.TryGetContentType(path, out contentType))
+            if (!provider.TryGetContentType(path, out string contentType))
             {
                 contentType = "application/octet-stream";
             }

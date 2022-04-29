@@ -19,21 +19,16 @@ namespace Back_End.Entities
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<EstatesTimes>()
 
            .HasKey(s => new { s.FK_EstateID, s.FK_TimeID });
 
-            modelBuilder.Entity<TypeVehiclesModels>()
-
-           .HasKey(s => new { s.FK_TypeVehicleID, s.FK_ModelID });
-
             modelBuilder.Entity<VolunteersSkillsFormationEstates>()
 
           .HasKey(s => new { s.FK_VolunteerSkillID, s.FK_FormationEstateID });
-
-            //modelBuilder.Entity<BrandsModels>()
-
-//          .HasKey(s => new { s.FK_BrandID, s.FK_ModelID });
 
             modelBuilder.Entity<UsersNotifications>()
 
@@ -44,14 +39,14 @@ namespace Back_End.Entities
             .HasKey(s => new { s.FK_UserID, s.FK_ChatRoomID });
 
             modelBuilder.Entity<UsersChat>()
-
             .HasKey(s => new { s.FK_UserID, s.FK_ChatID });
 
-    
+           
         }
 
         //Defino cada una de las Models, que se usan durante el proyecto, donde cada una de ellas representa una tabla de la base de datos
         public DbSet<Users> Users { get; set; }
+        public DbSet<Users> InCharge { get; set; }
         public DbSet<Persons> Persons { get; set; }
         public DbSet<Employees> Employees { get; set; }
         public DbSet<Schedules> Schedules { get; set; }
@@ -72,7 +67,6 @@ namespace Back_End.Entities
         public DbSet<TypesEmergenciesDisasters> TypesEmergenciesDisasters { get; set; }
         public DbSet<Alerts> Alerts { get; set; }
         public DbSet<VolunteersSkillsFormationEstates> VolunteersSkillsFormationEstates { get; set; }
-        public DbSet<BrandsModels> BrandsModels { get; set; }
         public DbSet<Brands> Brands { get; set; }
         public DbSet<Model> Models { get; set; }
         public DbSet<FormationsEstates> FormationsEstates { get; set; }
@@ -86,8 +80,9 @@ namespace Back_End.Entities
         public DbSet<UsersChat> UsersChat { get; set; }
         public DbSet<Victims> Victims { get; set; }
         public DbSet<ResourcesRequestMaterialsMedicinesVehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
-        public DbSet<VehiclesBrandsModels> VehiclesBrandsModels { get; set; }
         public DbSet<PDF> PDF { get; set; }
+
+        public DbSet<LocationsEmergenciesDisasters> LocationsEmergenciesDisasters { get; set; }
 
         private const string Connection =
       @"Server=localhost;

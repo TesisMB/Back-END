@@ -189,6 +189,9 @@ namespace Back_End.Controllers
 
                 var vehicleToPatch = _mapper.Map<Resources_ForCreationDto>(vehicleEntity);
 
+                vehicleToPatch.Picture = vehicleEntity.VehiclePicture;
+
+
                 patchDocument.ApplyTo(vehicleToPatch, ModelState);
 
 

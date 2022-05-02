@@ -274,10 +274,10 @@ namespace Repository
 
                     DeleteResource(resources_Request);
 
-                    foreach (var item in logsitica)
+                    /*foreach (var item in logsitica)
                     {
                         Email.sendResourcesRequest(UsersRepository.authUser, item);
-                    }
+                    }*/
 
                     SaveAsync();
                  }

@@ -51,7 +51,7 @@ namespace Back_End.Controllers
 
                         DateTime date = Convert.ToDateTime(item.Medicines.MedicineExpirationDate);
 
-                        if (date < DateTime.Now)
+                        if (date > DateTime.Now)
                         {
                             item.Availability = false;
                         }
@@ -187,6 +187,9 @@ namespace Back_End.Controllers
                 }
 
                 var medicineToPatch = _mapper.Map<Resources_ForCreationDto>(medicineEntity);
+
+                medicineToPatch.Picture = medicineEntity.MedicinePicture;
+
 
                 patchDocument.ApplyTo(medicineToPatch, ModelState);
 

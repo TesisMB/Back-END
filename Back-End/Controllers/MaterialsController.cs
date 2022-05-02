@@ -185,8 +185,10 @@ namespace Back_End.Controllers
                 }
 
 
+
                 var materialToPatch = _mapper.Map<Resources_ForCreationDto>(materialEntity);
 
+                materialToPatch.Picture = materialEntity.MaterialPicture;
 
                 //se aplican los cambios recien aca
                 _materials.ApplyTo(materialToPatch, ModelState);

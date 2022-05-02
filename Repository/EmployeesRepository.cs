@@ -77,8 +77,8 @@ namespace Repository
 
             Email.generatePassword(employee);
 
-            Email.sendVerificationEmail(employee);
-            spaceCamelCase(employee);
+            //Email.sendVerificationEmail(employee);
+            //spaceCamelCase(employee);
 
             employee.UserPassword = Encrypt.GetSHA256(employee.UserPassword);
 

@@ -33,9 +33,6 @@ namespace Back_End.Controllers
                 var chatRooms = await _repository.ChatRooms.GetChatRooms();
                 _logger.LogInfo($"Returned all ChatRooms from database. ");
 
-
-
-
                 var chatRoomsToResult = _mapper.Map<IEnumerable<ChatRoomsDto>>(chatRooms);
 
                 return Ok(chatRoomsToResult);

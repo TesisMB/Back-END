@@ -1,13 +1,12 @@
 ﻿
 using AutoMapper;
-using Back_End.Entities;
 using Back_End.Models;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.BrandsModels__Dto;
+using Entities.DataTransferObjects.Locations___Dto;
 using Entities.DataTransferObjects.TypesEmergenciesDisasters___Dto;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
@@ -168,13 +167,13 @@ namespace Back_End.Controllers
         }
 
 
-       
+
 
         public static BrandsSelect Retornar()
         {
             var llave = Brands;
-           
-            if(llave.Count == contador)
+
+            if (llave.Count == contador)
             {
                 contador = 0;
             }
@@ -187,6 +186,26 @@ namespace Back_End.Controllers
             return valor;
         }
 
+
+        [HttpGet("locations")]
+        public ActionResult<LocationVolunteers> GetLocations()
+        {
+            try
+            {
+                var locations = _repository.Estates.GetAllLocations();
+                _logger.LogInfo($"Returned all Locations from database.");
+
+                //var alertResult = _mapper.Map<LocationsVolunteersDto>(locations);
+
+                return Ok(locations);
+            }
+
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside Locations action: {ex.Message}");
+                return StatusCode(500, "Internal Server error");
+            }
+        }
 
 
     }

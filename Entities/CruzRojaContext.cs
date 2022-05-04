@@ -17,6 +17,7 @@ namespace Back_End.Entities
               : base(options)
         {
         }
+     
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -83,12 +84,13 @@ namespace Back_End.Entities
         public DbSet<PDF> PDF { get; set; }
 
         public DbSet<LocationsEmergenciesDisasters> LocationsEmergenciesDisasters { get; set; }
+        public DbSet<LocationVolunteers> locationVolunteers { get; set; }
 
         private const string Connection =
-      @"Server=localhost;
-            Database=CruzRojaDB - Testing;
-            Trusted_Connection=True;
-            MultipleActiveResultSets=true";
+              @"Server=localhost;
+                    Database=CruzRojaDB - Testing;
+                    Trusted_Connection=True;
+                    MultipleActiveResultSets=true";
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

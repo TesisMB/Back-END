@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Wkhtmltopdf.NetCore;
 
 namespace Back_End.Controllers
 {
@@ -17,16 +18,18 @@ namespace Back_End.Controllers
     {
         private ILoggerManager _logger;
         private IRepositorWrapper _repository;
+        private byte[] pdf;
         private readonly IMapper _mapper;
+        public readonly IGeneratePdf _generatePdf;
 
-        public EstatesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper)
+        public EstatesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper, IGeneratePdf generatePdf)
         {
-
             _logger = logger;
             _repository = repository;
             _mapper = mapper;
-        }
+            _generatePdf = generatePdf;
 
+        }
 
 
 
@@ -48,6 +51,27 @@ namespace Back_End.Controllers
                 return StatusCode(500, "Internal Server error");
             }
         }
+
+
+        [HttpPost("Recursos/PDF")]
+        public async Task<FileResult> GetEmployeeIDPDF(string LocationDepartmentName)
+        {
+
+            if (LocationDepartmentName == null)
+            {
+                var employee =  _repository.Estates.GetAllEstatesByPdf(LocationDepartmentName);
+                 pdf = await _generatePdf.GetByteArray("Views/Resources/ResourcesInfo.cshtml", employee);
+            }
+            else
+            {
+                var employee = _repository.Estates.GetAllEstatesByPdf(LocationDepartmentName);
+                pdf = await _generatePdf.GetByteArray("Views/Resources/ResourceInfo.cshtml", employee);
+            }
+
+            return new FileContentResult(pdf, "application/pdf");
+        }
+
+        
     }
 }
 

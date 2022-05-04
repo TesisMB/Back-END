@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Wkhtmltopdf.NetCore;
@@ -33,38 +34,14 @@ namespace Back_End.Controllers
             _generatePdf = generatePdf;
         }
 
-        [HttpGet("PDF/{employeeId}")]
+        [HttpPost("PDF/{employeeId}")]
         public async Task<FileResult> GetEmployeeIDPDF(int employeeId)
         {
             var employee = await _repository.Employees.GetEmployeeWithDetails(employeeId);
-
-            var options = new ConvertOptions
-            {
-                PageMargins = new Wkhtmltopdf.NetCore.Options.Margins()
-                {
-                    Top = 5
-                }
-            };
-
-            _generatePdf.SetConvertOptions(options);
-
-
-
-            // var filePath = $"{employee.Users.Persons.FirstName} {employee.Users.Persons.LastName}.pdf"; // Here, you should validate the request and the existance of the file.
-
-            // var bytes = await System.IO.File.ReadAllBytesAsync(filePath);
-            //return File(bytes, "Views/Employee/EmployeeInfo.cshtml", Path.GetFileName(filePath));
-
+   
             var pdf = await _generatePdf.GetByteArray("Views/Employee/EmployeeInfo.cshtml", employee);
 
-
-            //var pdf = await _generatePdf.GetByteArray("Views/Employee/EmployeeInfo.cshtml", employee);
-
-            //return new FileStreamResult(pdfStream, "application/pdf");
-
-            //return await _generatePdf.GetPdf("Views/Employee/EmployeeInfo.cshtml", pdfStream);
-
-            return File(pdf, "application/pdf", $"{employee.Users.Persons.FirstName} {employee.Users.Persons.LastName}.pdf");
+            return new FileContentResult(pdf, "application/pdf");
         }
 
 

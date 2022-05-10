@@ -132,7 +132,6 @@ namespace Back_End.Controllers
 
 
         //********************************* FUNCIONANDO *********************************
-
         [HttpPost]
         public ActionResult<EmergenciesDisasters> CreateEmergencyDisaster([FromBody] EmergenciesDisastersForCreationDto emergenciesDisasters)
         {
@@ -223,14 +222,13 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
 
-        //TODO Probar con carrito
         [HttpDelete("{emegencyDisasterID}")]
         public async Task<ActionResult> DeletEmegencyDisaster(int emegencyDisasterID)
         {
             try
             {
 
-                var emegencyDisaster = await _repository.EmergenciesDisasters.GetEmergencyDisasterWithDetails(emegencyDisasterID);
+                var emegencyDisaster = await _repository.EmergenciesDisasters.GetEmergencyDisasterById(emegencyDisasterID);
 
                 if (emegencyDisaster == null)
                 {

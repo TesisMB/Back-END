@@ -4,6 +4,7 @@ using Contracts.Interfaces;
 using Entities.Helpers;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -229,7 +230,6 @@ namespace Repository
             {
                 var re = Recurso(resources_Request, item);
 
-                //No existe el recurso lo creo
                 if (re == null && rec != null)
                 {
                     if (resources_Request.Description != null)
@@ -241,7 +241,9 @@ namespace Repository
                         resources_Request.Description = rec.Description;
                     }
 
-                    SpaceCamelCase(resources_Request);
+                    //SpaceCamelCase(resources_Request);
+
+                    resources_Request.RequestDateModified = DateTime.Now;
 
                     //añado el nuevo item
                     AddRecurso(item);
@@ -262,6 +264,8 @@ namespace Repository
                     {
                          rec.Description = resources_Request.Description;
                     }
+
+                    resources_Request.RequestDateModified = rec.RequestDateModified;
 
 
                     resources_Request.CreatedBy = rec.CreatedBy;
@@ -783,8 +787,6 @@ namespace Repository
             return update;
         }
 
-
-
         public void AcceptRejectRequest(ResourcesRequest resourcesRequest, int userRequestID)
         {
             userReq = _cruzRojaContext.Resources_Requests
@@ -797,7 +799,9 @@ namespace Repository
                          .FirstOrDefault();
 
 
-
+            userReq.RequestDateModified = DateTime.Now;
+            userReq.AnsweredBy = resourcesRequest.AnsweredBy;
+            userReq.Status = resourcesRequest.Status;
 
             Users user = new Users();
             user = db.Users

@@ -106,7 +106,8 @@ namespace Repository
         public async Task<EmergenciesDisasters> GetEmergencyDisasterWithDetails(int emergencydisasterId)
         {
             return await FindByCondition(emergdis => emergdis.EmergencyDisasterID.Equals(emergencydisasterId))
-          .Include(i => i.TypesEmergenciesDisasters)
+        
+                .Include(i => i.TypesEmergenciesDisasters)
                 .Include(i => i.Alerts)
                 .Include(i => i.LocationsEmergenciesDisasters)
                 .Include(i => i.EmployeeIncharge)
@@ -166,7 +167,7 @@ namespace Repository
                  .ThenInclude(i => i.Persons)
                  .Include(i => i.EmployeeModified.Users.Roles)
 
-                  .Include(i => i.EmployeeCreated)
+                 .Include(i => i.EmployeeCreated)
                  .ThenInclude(i => i.Users)
                  .ThenInclude(i => i.Persons)
                  .Include(i => i.EmployeeCreated.Users.Roles)
@@ -176,7 +177,6 @@ namespace Repository
                  .ThenInclude(i => i.Users)
                  .ThenInclude(i => i.Persons)
                  .Include(i => i.EmployeeCreated.Users.Roles)
-
 
                  .Include(i => i.Resources_Requests)
                  .ThenInclude(i => i.EmployeeModified)
@@ -243,7 +243,14 @@ namespace Repository
         public async Task<EmergenciesDisasters> GetEmergencyDisasterById(int emergencydisasterId)
         {
             return await FindByCondition(emergdis => emergdis.EmergencyDisasterID.Equals(emergencydisasterId))
-           .Include(i => i.Victims)
+                 .Include(i => i.LocationsEmergenciesDisasters)
+                  .Include(i => i.Resources_Requests)
+                  .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                  .Include(a => a.ChatRooms)
+                  .ThenInclude(a => a.UsersChatRooms)
+
+                   .Include(a => a.ChatRooms)
+                  .ThenInclude(a => a.Messages)
             .FirstOrDefaultAsync();
 
         }

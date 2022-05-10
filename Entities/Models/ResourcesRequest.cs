@@ -33,6 +33,8 @@ namespace Entities.Models
 
         [ForeignKey("ModifiedBy")]
         public Employees EmployeeModified{ get; set; }
+
+        public DateTime? RequestDateModified { get; set; }
         public int? ModifiedBy { get; set; }
 
         [ForeignKey("AnsweredBy")]

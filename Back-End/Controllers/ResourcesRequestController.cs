@@ -35,6 +35,7 @@ namespace Back_End.Controllers
             _repository = repository;
         }
 
+        //********************************* FUNCIONANDO *********************************
         [HttpGet]
         public async Task<ActionResult<ResourcesRequest>> GetAllResourceResquest([FromQuery] string Condition)
         {
@@ -104,6 +105,8 @@ namespace Back_End.Controllers
         }
 
 
+        //********************************* FUNCIONANDO *********************************
+
         [HttpPost]
         public ActionResult<ResourcesRequest> CreateResource_Request([FromBody] ResourcesRequestForCreationDto resources_Request)
         {
@@ -170,6 +173,7 @@ namespace Back_End.Controllers
 
 
 
+        //********************************* FUNCIONANDO *********************************
 
         [HttpPost("{acceptRejectRequest}")]
         public ActionResult<ResourcesRequest> AcceptRejectRequest([FromBody] AcceptRejectRequestDto acceptRejectRequest)

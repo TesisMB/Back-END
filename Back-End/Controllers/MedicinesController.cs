@@ -119,7 +119,7 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpPost]
-        public async Task<ActionResult<Medicines>> CreateMedicine([FromBody] MedicineForUpdateDto medicine)
+        public async Task<ActionResult<Medicines>> CreateMedicine([FromBody] Resources_ForCreationDto medicine)
         {
             try
             {

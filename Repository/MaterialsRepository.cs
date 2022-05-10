@@ -94,7 +94,7 @@ namespace Repository
 
         public void CreateMaterial(Materials material)
         {
-            spaceCamelCase(material);
+            //spaceCamelCase(material);
 
             Create(material);
         }

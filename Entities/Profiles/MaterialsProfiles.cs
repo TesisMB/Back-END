@@ -55,20 +55,19 @@ namespace Entities.Profiles
                            .ForPath(dest => dest.LocationCityName,
                                        opt => opt.MapFrom(src => src.Estates.Locations.LocationCityName));
 
-            CreateMap<MaterialsForCreationDto, Materials>();
+            CreateMap<Materials, Resources_ForCreationDto>();
 
 
 
-            CreateMap<Materials, Resources_ForCreationDto>()
-                     .ForPath(a => a.Quantity, b => b.MapFrom(a => a.MaterialQuantity))
-                     .ForPath(a => a.Donation, b => b.MapFrom(a => a.MaterialDonation))
-                     .ForPath(a => a.Name, b => b.MapFrom(a => a.MaterialName))
-                     .ForPath(a => a.Availability, b => b.MapFrom(a => a.MaterialAvailability))
-                     .ForPath(a => a.FK_EstateID, b => b.MapFrom(a => a.FK_EstateID))
-                     .ForPath(a => a.Picture, b => b.MapFrom(a => a.MaterialPicture))
-                     .ForPath(a => a.Description, b => b.MapFrom(a => a.MaterialUtility))
-                     .ForPath(a => a.DateCreated, b => b.MapFrom(a => a.MaterialDateCreated))
-                     .ForPath(a => a.Materials.Brand, b => b.MapFrom(a => a.MaterialBrand));
+            CreateMap<Resources_ForCreationDto, Materials>()
+                     .ForPath(a => a.MaterialQuantity, b => b.MapFrom(a => a.Quantity))
+                     .ForPath(a => a.MaterialDonation, b => b.MapFrom(a => a.Donation))
+                     .ForPath(a => a.MaterialName, b => b.MapFrom(a => a.Name))
+                     .ForPath(a => a.MaterialAvailability, b => b.MapFrom(a => a.Availability))
+                     .ForPath(a => a.MaterialPicture, b => b.MapFrom(a => a.Picture))
+                     .ForPath(a => a.MaterialUtility, b => b.MapFrom(a => a.Description))
+                     .ForPath(a => a.MaterialDateCreated, b => b.MapFrom(a => a.DateCreated))
+                     .ForPath(a => a.MaterialBrand, b => b.MapFrom(a => a.Materials.Brand));
 
 
 

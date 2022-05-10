@@ -1,0 +1,8 @@
+2022-05-10 13:57:37.0293 ERROR Something went wrong inside DeleteEmployee action: An error occurred while updating the entries. See the inner exception for details.
+2022-05-10 16:07:07.6700 ERROR Something went wrong inside CreateMaterial action: Object reference not set to an instance of an object.
+2022-05-10 16:07:19.0414 ERROR Something went wrong inside CreateMaterial action: Object reference not set to an instance of an object.
+2022-05-10 16:08:26.2639 ERROR Something went wrong inside CreateMaterial action: An error occurred while updating the entries. See the inner exception for details.
+2022-05-10 16:10:19.3749 ERROR Something went wrong inside CreateMaterial action: An error occurred while updating the entries. See the inner exception for details.
+2022-05-10 16:13:50.4663 INFO Returned Material with id: MA0024
+2022-05-10 16:16:09.4973 INFO Returned vehicle with id: VE0018
+2022-05-10 16:17:06.9856 INFO Returned medicine with details for id: ME0085

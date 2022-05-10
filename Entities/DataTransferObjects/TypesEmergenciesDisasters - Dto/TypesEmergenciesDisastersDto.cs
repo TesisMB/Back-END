@@ -1,8 +1,4 @@
-﻿using Entities.DataTransferObjects.EmergenciesDisasters___Dto;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace Entities.DataTransferObjects.TypesEmergenciesDisasters___Dto
 {
    public class TypesEmergenciesDisastersDto
@@ -12,9 +8,6 @@ namespace Entities.DataTransferObjects.TypesEmergenciesDisasters___Dto
         public string TypeEmergencyDisasterName { get; set; }
 
         public string TypeEmergencyDisasterIcon { get; set; }
-
-        public string TypeEmergencyDisasterDescription { get; set; }
-
 
     }
 }

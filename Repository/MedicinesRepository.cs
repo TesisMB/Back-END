@@ -34,6 +34,16 @@ namespace Repository
                 .ThenInclude(a => a.Times)
                 .ThenInclude(a => a.Schedules)
                 .Include(a => a.Estates.Locations)
+
+                .Include(a => a.EmployeeCreated)
+                .ThenInclude(i => i.Users)
+                .ThenInclude(i => i.Persons)
+                .Include(i => i.EmployeeCreated.Users.Roles)
+
+                .Include(i => i.EmployeeModified)
+                .ThenInclude(i => i.Users)
+                .ThenInclude(i => i.Persons)
+                .Include(i => i.EmployeeModified.Users.Roles)
                 .ToListAsync();
         }
 
@@ -48,7 +58,7 @@ namespace Repository
         }
 
 
-        public async Task<Medicines> GetMedicineById(int medicineId)
+        public async Task<Medicines> GetMedicineById(string medicineId)
         {
             return await FindByCondition(med => med.ID.Equals(medicineId))
                               .Include(a => a.Estates)
@@ -59,7 +69,7 @@ namespace Repository
                               .FirstOrDefaultAsync();
         }
 
-        public async Task<Medicines> GetMedicinelWithDetails(int medicineId)
+        public async Task<Medicines> GetMedicinelWithDetails(string medicineId)
         {
             return await FindByCondition(med => med.ID.Equals(medicineId))
                      .Include(a => a.Estates)
@@ -68,6 +78,16 @@ namespace Repository
                      .ThenInclude(a => a.Times)
                      .ThenInclude(a => a.Schedules)
                      .Include(a => a.Estates.Locations)
+
+                    .Include(a => a.EmployeeCreated)
+                    .ThenInclude(i => i.Users)
+                    .ThenInclude(i => i.Persons)
+                    .Include(i => i.EmployeeCreated.Users.Roles)
+
+                    .Include(i => i.EmployeeModified)
+                    .ThenInclude(i => i.Users)
+                    .ThenInclude(i => i.Persons)
+                    .Include(i => i.EmployeeModified.Users.Roles)
                      .FirstOrDefaultAsync();
         }
 

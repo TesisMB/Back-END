@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Entities.DataTransferObjects.CharRooms___Dto;
 using Entities.DataTransferObjects.EmergenciesDisasters___Dto;
-using Entities.Helpers;
 using Entities.Models;
 
 namespace Entities.Profiles
@@ -10,15 +9,31 @@ namespace Entities.Profiles
     {
         public EmergenciesDisastersProfiles()
         {
-            CreateMap<EmergenciesDisasters, EmergenciesDisastersDto>();
+            CreateMap<EmergenciesDisasters, EmergenciesDisastersDto>()
 
-            CreateMap<EmergenciesDisasters, EmergenciesDisasters2Dto>();
+                .ForMember(dest => dest.EmployeeName,
+                                opt => opt.MapFrom(src => src.EmployeeIncharge.Users.Persons.FirstName + " " + src.EmployeeIncharge.Users.Persons.LastName))
+
+
+                .ForMember(dest => dest.CreatedByEmployee,
+                                opt => opt.MapFrom(src => src.EmployeeCreated.Users.Persons.FirstName + " " + src.EmployeeCreated.Users.Persons.LastName))
+
+
+                    .ForMember(dest => dest.ModifiedByEmployee,
+                                opt => opt.MapFrom(src => src.EmployeeModified.Users.Persons.FirstName + " " + src.EmployeeModified.Users.Persons.LastName));
+
+
+
+
+            CreateMap<EmergenciesDisasters, EmergenciesDisastersSelectDto>();
+
+            CreateMap<EmergenciesDisasters, EmergenciesDisastersAppDto>();
 
 
             CreateMap<EmergenciesDisastersForCreationDto, EmergenciesDisasters>();
 
 
-            
+
 
             CreateMap<EmergenciesDisastersForUpdateDto, EmergenciesDisasters>();
 

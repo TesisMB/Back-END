@@ -7,5 +7,6 @@
 
         public string UserDni { get; set; }
         public string RoleName { get; set; }
+        public string Picture { get; set; }
     }
 }

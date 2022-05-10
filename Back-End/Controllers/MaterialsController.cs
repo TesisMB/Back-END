@@ -33,24 +33,26 @@ namespace Back_End.Controllers
         }
 
 
+
+        //********************************* FUNCIONANDO *********************************
         [HttpGet]
         public async Task<ActionResult<Materials>> GetAllVolunteers()
         {
             try
             {
-                var volunteers = await _repository.Materials.GetAllMaterials();
+                var materials = await _repository.Materials.GetAllMaterials();
 
                 _logger.LogInfo($"Returned all Materials from database.");
 
-                var materialsResult = _mapper.Map<IEnumerable<Resources_Dto>>(volunteers);
+                var materialsResult = _mapper.Map<IEnumerable<Resources_Dto>>(materials);
 
                 foreach (var item in materialsResult)
                 {
-                    if (item.Picture != "https://i.imgur.com/S9HJEwF.png") 
+                    if (item.Picture != "https://i.imgur.com/S9HJEwF.png")
                     {
-                        
-                    item.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
-                                                  Request.Scheme, Request.Host, Request.PathBase, item.Picture);
+
+                        item.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
+                                                      Request.Scheme, Request.Host, Request.PathBase, item.Picture);
                     }
 
                 }
@@ -66,8 +68,10 @@ namespace Back_End.Controllers
             }
         }
 
+
+        //********************************* FUNCIONANDO *********************************
         [HttpGet("{materialId}")]
-        public async Task<ActionResult<Materials>> GetMaterial(int materialId)
+        public async Task<ActionResult<Materials>> GetMaterial(string materialId)
         {
             try
             {
@@ -86,7 +90,7 @@ namespace Back_End.Controllers
 
                 {
                     _logger.LogInfo($"Returned Material with id: {materialId}");
-                   
+
                     var volunteerResult = _mapper.Map<Resources_Dto>(volunteer);
 
 
@@ -109,6 +113,8 @@ namespace Back_End.Controllers
             }
         }
 
+
+        //********************************* FUNCIONANDO *********************************
         [HttpPost()]
         public async Task<ActionResult<Materials>> CreateMaterial([FromBody] Resources_ForCreationDto material)
         {
@@ -126,36 +132,21 @@ namespace Back_End.Controllers
                     return BadRequest("Material object is null");
 
                 }
-               // var file = Request.Form.Files[0];
 
                 var materialEntity = _mapper.Map<Materials>(material);
 
-           //     material.ImageFile = file;
-
-                if(material.Picture == null)
+                if (material.Picture == null)
                 {
                     materialEntity.MaterialPicture = "https://i.imgur.com/S9HJEwF.png";
                 }
                 else
                 {
                     materialEntity.MaterialPicture = material.Picture;
-                    //material.Picture = await UploadController.SaveImage(materialEntity.MaterialPicture, "Resources");
                 }
 
-                materialEntity.MaterialName = material.Name;
-                materialEntity.MaterialDonation = material.Donation;
-                materialEntity.MaterialAvailability = true;
-                materialEntity.MaterialBrand = material.Materials.Brand;
-                materialEntity.MaterialQuantity = material.Quantity;
-                materialEntity.MaterialUtility = material.Description;
 
                 _repository.Materials.CreateMaterial(materialEntity);
-
-
-
-                 _repository.Materials.SaveAsync();
-
-                //var createdVolunteer = _mapper.Map<MaterialsDto>(materialEntity);
+                _repository.Materials.SaveAsync();
 
                 return Ok();
 
@@ -168,9 +159,11 @@ namespace Back_End.Controllers
             }
         }
 
-        //[Authorize(Roles = "Coordinador General, Admin")] 
+
+        //********************************* FUNCIONANDO *********************************
+        //TO DO falta revisar picture junto con el Front
         [HttpPatch("{materialId}")]
-        public async Task<ActionResult> UpdatePartialUser(int materialId, JsonPatchDocument<Resources_ForCreationDto> _materials)
+        public async Task<ActionResult> UpdatePartialUser(string materialId, JsonPatchDocument<MaterialsForUpdateDto> _materials)
         {
 
             try
@@ -185,10 +178,9 @@ namespace Back_End.Controllers
                 }
 
 
+                var materialToPatch = _mapper.Map<MaterialsForUpdateDto>(materialEntity);
 
-                var materialToPatch = _mapper.Map<Resources_ForCreationDto>(materialEntity);
-
-                materialToPatch.Picture = materialEntity.MaterialPicture;
+                materialToPatch.DateModified = DateTime.Now;
 
                 //se aplican los cambios recien aca
                 _materials.ApplyTo(materialToPatch, ModelState);
@@ -198,26 +190,15 @@ namespace Back_End.Controllers
                 {
                     return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
                 }
+            
 
-                MaterialsForUpdateDto material = new MaterialsForUpdateDto
-                {
-                    MaterialQuantity = materialToPatch.Quantity,
-                    MaterialPicture = materialToPatch.Picture,
-                    MaterialDonation = materialToPatch.Donation,
-                    MaterialName = materialToPatch.Name,
-                    MaterialAvailability = materialToPatch.Availability,
-                    FK_EstateID = materialToPatch.FK_EstateID,
-                    Description = materialToPatch.Description,
-                    MaterialBrand = materialToPatch.Materials.Brand
-                };
-
-                var employeeResult = _mapper.Map(material, materialEntity);
+                var employeeResult = _mapper.Map(materialToPatch, materialEntity);
 
                 _repository.Materials.UpdateMaterial(employeeResult);
-              
-                 _repository.Materials.SaveAsync();
 
-                 return NoContent();
+                _repository.Materials.SaveAsync();
+
+                return NoContent();
 
             }
 
@@ -230,8 +211,10 @@ namespace Back_End.Controllers
             }
         }
 
+
+        //********************************* FUNCIONANDO *********************************
         [HttpDelete("{materialId}")]
-        public async Task<ActionResult> DeleteEmployee(int materialId)
+        public async Task<ActionResult> DeleteEmployee(string materialId)
         {
 
             try

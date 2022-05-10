@@ -18,6 +18,8 @@ using System.IO;
 using Wkhtmltopdf.NetCore;
 using Back_End.Hubs;
 using Microsoft.Extensions.FileProviders;
+using DinkToPdf.Contracts;
+using DinkToPdf;
 
 public class Startup
 {
@@ -30,6 +32,9 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
+
+        services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+
 
         services.ConfigureCors();
         services.ConfigureIISIntegreation();

@@ -24,7 +24,7 @@ namespace Back_End.Controllers
         private readonly ILoggerManager _logger;
         private readonly IRepositorWrapper _repository;
         private readonly IMapper _mapper;
-        public  readonly IGeneratePdf _generatePdf;
+        public readonly IGeneratePdf _generatePdf;
 
         public EmployeesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper, IGeneratePdf generatePdf)
         {
@@ -38,17 +38,29 @@ namespace Back_End.Controllers
         public async Task<FileResult> GetEmployeeIDPDF(int employeeId)
         {
             var employee = await _repository.Employees.GetEmployeeWithDetails(employeeId);
-   
+
+
+            var options = new ConvertOptions
+            {
+                PageMargins = new Wkhtmltopdf.NetCore.Options.Margins()
+                {
+                    Top = 5,
+                    Left = 0,
+                    Right = 0
+                }
+            };
+
+            _generatePdf.SetConvertOptions(options);
+
+
             var pdf = await _generatePdf.GetByteArray("Views/Employee/EmployeeInfo.cshtml", employee);
 
             return new FileContentResult(pdf, "application/pdf");
         }
 
-
-
+        //********************************* FUNCIONANDO *********************************
 
         [HttpGet]
-        // [Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
         public async Task<ActionResult<Employees>> GetAllEmployees()
         {
             try
@@ -69,9 +81,8 @@ namespace Back_End.Controllers
             }
         }
 
-
+        //********************************* FUNCIONANDO *********************************
         [HttpGet("{employeeId}")]
-        //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
         public async Task<ActionResult<Employees>> GetEmployeeWithDetails(int employeeId)
         {
             try
@@ -98,7 +109,9 @@ namespace Back_End.Controllers
             }
         }
 
-        //[Authorize(Roles = "Coordinador General, Admin")] 
+
+        //********************************* FUNCIONANDO *********************************
+
         [HttpPost]
         public async Task<ActionResult<Users>> CreateEmployee([FromBody] UsersEmployeesForCreationDto employee)
         {
@@ -167,7 +180,9 @@ namespace Back_End.Controllers
             }
         }
 
-        //[Authorize(Roles = "Coordinador General, Admin")] 
+
+        //********************************* FUNCIONANDO *********************************
+    
         [HttpPatch("{employeeId}")]
         public async Task<ActionResult> UpdatePartialUser(int employeeId, JsonPatchDocument<EmployeeForUpdateDto> _Employees)
         {
@@ -239,7 +254,9 @@ namespace Back_End.Controllers
 
             }
         }
-        //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
+
+
+        //********************************* FUNCIONANDO *********************************
         [HttpDelete("{employeeId}")]
         public async Task<ActionResult> DeleteEmployee(int employeeId)
         {
@@ -272,59 +289,9 @@ namespace Back_End.Controllers
             }
         }
 
-
-        [NonAction]
-        public ActionResult<Volunteers> CreateVolunteer(VolunteersForCreationDto volunteer)
-        {
-            try
-            {
-
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
-                }
-
-                if (volunteer == null)
-
-                {
-                    _logger.LogError("Volunteer object sent from client is null.");
-                    return BadRequest("Volunteer object is null");
-
-                }
-
-
-                var volunteerEntity = _mapper.Map<Volunteers>(volunteer);
-
-
-                /* volunteerEntity.LocationVolunteers = new LocationVolunteers()
-                 {
-                     ID = volunteerEntity.ID,
-                     LocationVolunteerLatitude = null,
-                     LocationVolunteerLongitude = null,
-                     Volunteers = volunteerEntity
-                 };*/
-
-                //volunteerEntity.VolunteerAvatar = await UploadController.SaveImage(volunteer.ImageFile);
-
-                // Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
-                _repository.Volunteers.CreateVolunteer(volunteerEntity);
-                volunteerEntity.Users.UserPassword = Encrypt.GetSHA256(volunteerEntity.Users.UserPassword);
-
-                _repository.Volunteers.SaveAsync();
-
-                //var createdVolunteer = _mapper.Map<VolunteersDto>(volunteerEntity);
-
-                return Ok();
-
-            }
-            catch (Exception ex)
-
-            {
-                _logger.LogError($"Something went wrong inside CreateEmployee action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
-            }
-        }
     }
+      
+   
 
 
 

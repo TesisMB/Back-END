@@ -31,7 +31,7 @@ namespace Back_End.Controllers
             _mapper = mapper;
         }
 
-
+        //********************************* FUNCIONANDO *********************************
         [HttpGet]
         public async Task<ActionResult<Vehicles>> GetAllVehicles([FromQuery] vehiclesFiltersDto vehiclesFilters)
         {
@@ -40,10 +40,10 @@ namespace Back_End.Controllers
                 var vehicles = await _repository.Vehicles.GetAllVehiclesFilters(vehiclesFilters);
                 _logger.LogInfo($"Returned all vehicles from database.");
 
-                var employeesResult = _mapper.Map<IEnumerable<Resources_Dto>>(vehicles);
+                var vehiclesResult = _mapper.Map<IEnumerable<Resources_Dto>>(vehicles);
 
 
-                foreach (var item in employeesResult)
+                foreach (var item in vehiclesResult)
                 {
                     if (item.Picture != "https://i.imgur.com/S9HJEwF.png")
                     {
@@ -53,7 +53,7 @@ namespace Back_End.Controllers
 
                 }
 
-                return Ok(employeesResult);
+                return Ok(vehiclesResult);
 
             }
             catch (Exception ex)
@@ -63,9 +63,10 @@ namespace Back_End.Controllers
             }
         }
 
-
+      
+        //********************************* FUNCIONANDO *********************************
         [HttpGet("{vehicleId}")]
-        public async Task<ActionResult<Vehicles>> GetVehicle(int vehicleId)
+        public async Task<ActionResult<Vehicles>> GetVehicle(string vehicleId)
         {
             try
             {
@@ -102,6 +103,8 @@ namespace Back_End.Controllers
             }
         }
 
+
+        //********************************* FUNCIONANDO *********************************
         [HttpPost]
         public async Task<ActionResult<Vehicles>> CreateVehicle([FromBody] Resources_ForCreationDto vehicle)
         {
@@ -121,43 +124,11 @@ namespace Back_End.Controllers
                 
                 var vehicleEntity = _mapper.Map<Vehicles>(vehicle);
 
-
-              //  vehicle.ImageFile = ImageFile;
-
                 if (vehicle.Picture == null)
-                {
                     vehicleEntity.VehiclePicture = "https://i.imgur.com/S9HJEwF.png";
-                }
                 else
-                {
-                      vehicleEntity.VehiclePicture = vehicle.Picture;
-             //       vehicleEntity.VehiclePicture = await UploadController.SaveImage(vehicle.ImageFile, "Resources");
-                }
-
-                vehicleEntity.VehicleAvailability = true;
-                vehicleEntity.VehicleDonation = vehicle.Donation;
-                vehicleEntity.VehicleQuantity = 1;
-                vehicleEntity.VehicleDescription = vehicle.Description;
-
-                vehicleEntity.VehiclePatent = vehicle.Vehicles.VehiclePatent;
-
-                vehicleEntity.VehicleYear = vehicle.Vehicles.VehicleYear;
-
-                vehicleEntity.VehicleUtility = vehicle.Vehicles.VehicleUtility;
-
-                vehicleEntity.FK_EmployeeID = vehicle.Vehicles.FK_EmployeeID;
-
-                vehicleEntity.Fk_TypeVehicleID = vehicle.Vehicles.Fk_TypeVehicleID;
-
-             
-
-                if (vehicle.Vehicles.BrandName != null || vehicle.Vehicles.ModelName != null)
-                {
-                    vehicleEntity.Brands = new Brands();
-                    vehicleEntity.Model = new Model();
-                    vehicleEntity.Brands.BrandName = vehicle.Vehicles.BrandName;
-                    vehicleEntity.Model.ModelName = vehicle.Vehicles.ModelName;
-                }
+                     vehicleEntity.VehiclePicture = vehicle.Picture;
+                
 
                 _repository.Vehicles.CreateVehicle(vehicleEntity);
 
@@ -174,8 +145,10 @@ namespace Back_End.Controllers
             }
         }
 
+      
+        //********************************* FUNCIONANDO *********************************
         [HttpPatch("{vehicleId}")]
-        public async Task<ActionResult> UpdateVehicle(int vehicleId, JsonPatchDocument<Resources_ForCreationDto> patchDocument)
+        public async Task<ActionResult> UpdateVehicle(string vehicleId, JsonPatchDocument<VehiclesForUpdateDto> patchDocument)
         {
             try
             {
@@ -187,10 +160,9 @@ namespace Back_End.Controllers
                     return NotFound();
                 }
 
-                var vehicleToPatch = _mapper.Map<Resources_ForCreationDto>(vehicleEntity);
+                var vehicleToPatch = _mapper.Map<VehiclesForUpdateDto>(vehicleEntity);
 
-                vehicleToPatch.Picture = vehicleEntity.VehiclePicture;
-
+                vehicleToPatch.DateModified = DateTime.Now;
 
                 patchDocument.ApplyTo(vehicleToPatch, ModelState);
 
@@ -200,20 +172,8 @@ namespace Back_End.Controllers
                     return ValidationProblem(ModelState);
                 }
 
-                VehiclesForUpdateDto vehicles = new VehiclesForUpdateDto();
 
-                vehicles.VehicleAvailability = vehicleToPatch.Availability;
-                vehicles.VehiclePicture = vehicleToPatch.Picture;
-                vehicles.VehicleDonation = vehicleToPatch.Donation;
-                vehicles.VehicleDescription = vehicleToPatch.Description;
-                vehicles.VehicleUtility = vehicleToPatch.Vehicles.VehicleUtility;
-                vehicles.FK_EstateID = vehicleToPatch.FK_EstateID;
-                vehicles.FK_EmployeeID = vehicleToPatch.Vehicles.FK_EmployeeID;
-                vehicles.VehicleYear = vehicleToPatch.Vehicles.VehicleYear;
-                vehicles.VehiclePatent = vehicleToPatch.Vehicles.VehiclePatent;
-
-
-                var vehicleResult = _mapper.Map(vehicles, vehicleEntity);
+                var vehicleResult = _mapper.Map(vehicleToPatch, vehicleEntity);
 
                 _repository.Vehicles.Update(vehicleResult);
 
@@ -229,9 +189,10 @@ namespace Back_End.Controllers
             }
         }
 
-
+       
+        //********************************* FUNCIONANDO *********************************
         [HttpDelete("{vehicleId}")]
-        public async Task<ActionResult> DeleteVehicle(int vehicleId)
+        public async Task<ActionResult> DeleteVehicle(string vehicleId)
         {
             try
             {

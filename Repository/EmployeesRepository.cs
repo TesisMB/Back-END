@@ -77,6 +77,8 @@ namespace Repository
 
             Email.generatePassword(employee);
 
+            //TO DO Falta hacer funcionar email (Facultad)
+
             //Email.sendVerificationEmail(employee);
             //spaceCamelCase(employee);
 

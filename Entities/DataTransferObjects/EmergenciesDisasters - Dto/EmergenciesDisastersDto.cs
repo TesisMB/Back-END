@@ -22,11 +22,26 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
 
         public string EmergencyDisasterInstruction { get; set; }
 
-        public EmployeesDto Employees { get; set; }
+       public DateTime EmergencyDisasterDateModified { get; set; }
 
-        public LocationsEmergenciesDisastersDto LocationsEmergenciesDisasters { get; set; }
 
         public TypesEmergenciesDisastersDto TypesEmergenciesDisasters { get; set; }
+
+        public int Fk_EmplooyeeID { get; set; }
+        public string EmployeeName { get; set; }
+
+        public int ModifiedBy { get; set; }
+        public string ModifiedByEmployee { get; set; }
+
+        public int CreatedBy { get; set; }
+        public string CreatedByEmployee { get; set; }
+
+        //public EmployeesDto EmployeeIncharge { get; set; }
+
+        //public EmployeesDto EmployeeModified { get; set; }
+        //public EmployeesDto EmployeeCreated { get; set; }
+
+        public LocationsEmergenciesDisastersDto LocationsEmergenciesDisasters { get; set; }
 
         public AlertsDto Alerts { get; set; }
 

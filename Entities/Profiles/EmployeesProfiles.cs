@@ -13,12 +13,12 @@ namespace Back_End.Profiles
         {
             //Creo Las clases a ser mapeadas
             CreateMap<Employees, EmployeesDto>()
-                                .ForMember(i => i.UserID, opt => opt.MapFrom(src => src.Users.UserID))
                                 .ForMember(i => i.UserDni, opt => opt.MapFrom(src => src.Users.UserDni))
                                 .ForMember(i => i.UserAvailability, opt => opt.MapFrom(src => src.Users.UserAvailability))
                                 .ForMember(i => i.RoleName, opt => opt.MapFrom(src => src.Users.Roles.RoleName))
                                 .ForMember(i => i.Name, opt => opt.MapFrom(src => src.Users.Persons.FirstName + " " + src.Users.Persons.LastName))
                                 .ForMember(i => i.Status, opt => opt.MapFrom(src => src.Users.Persons.Status));
+
 
             CreateMap<Employees, EmployeeDto>()
                 .ForMember(i => i.EmployeeCreatedate, opt => opt.MapFrom(src => DateTimeOffsetExtensions.GetDateTime(src.EmployeeCreatedate)));

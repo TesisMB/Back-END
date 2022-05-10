@@ -61,16 +61,26 @@ namespace Repository
                       .Include(a => a.Estates.Locations)
                       .Include(a => a.Brands)
                       .Include(a => a.Model)
+
+                      .Include(a => a.EmployeeCreated)
+                      .ThenInclude(i => i.Users)
+                      .ThenInclude(i => i.Persons)
+                      .Include(i => i.EmployeeCreated.Users.Roles)
+
+                      .Include(i => i.EmployeeModified)
+                      .ThenInclude(i => i.Users)
+                      .ThenInclude(i => i.Persons)
+                      .Include(i => i.EmployeeModified.Users.Roles)
                  .ToListAsync();
         }
 
-        public async Task<Vehicles> GetVehicleById(int vehicleId)
+        public async Task<Vehicles> GetVehicleById(string vehicleId)
         {
             return await FindByCondition(vehicle => vehicle.ID == vehicleId)
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<Vehicles> GetVehicleWithDetails(int vehicleId)
+        public async Task<Vehicles> GetVehicleWithDetails(string vehicleId)
         {
             return await FindByCondition(vehicle => vehicle.ID == vehicleId)
                       .Include(a => a.Estates)
@@ -85,6 +95,16 @@ namespace Repository
                       .Include(a => a.Estates.Locations)
                       .Include(a => a.Brands)
                       .Include(a => a.Model)
+
+                      .Include(a => a.EmployeeCreated)
+                      .ThenInclude(i => i.Users)
+                      .ThenInclude(i => i.Persons)
+                      .Include(i => i.EmployeeCreated.Users.Roles)
+
+                      .Include(i => i.EmployeeModified)
+                      .ThenInclude(i => i.Users)
+                      .ThenInclude(i => i.Persons)
+                      .Include(i => i.EmployeeModified.Users.Roles)
                    .FirstOrDefaultAsync();
         }
 
@@ -103,7 +123,7 @@ namespace Repository
 
         public void CreateVehicle(Vehicles vehicles)
         {
-            spaceCamelCase(vehicles);
+            //spaceCamelCase(vehicles);
             Create(vehicles);
         }
 
@@ -158,6 +178,17 @@ namespace Repository
                    .Include(a => a.Estates.Locations)
                    .Include(a => a.Brands)
                    .Include(a => a.Model)
+
+                   .Include(a => a.EmployeeCreated)
+                   .ThenInclude(i => i.Users)
+                   .ThenInclude(i => i.Persons)
+                   .Include(i => i.EmployeeCreated.Users.Roles)
+
+                   .Include(i => i.EmployeeModified)
+                   .ThenInclude(i => i.Users)
+                   .ThenInclude(i => i.Persons)
+                   .Include(i => i.EmployeeModified.Users.Roles)
+
                  .ToList();
         }
     }

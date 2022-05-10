@@ -108,14 +108,14 @@ namespace Entities
 
         public class Resource
         {
-            public int? ID { get; set; }
+            public string? ID { get; set; }
             public string Name { get; set; } // Define al nombre del Campo
         }
 
 
 
 
-        public bool DifferentZero(int? id)
+        public bool DifferentZero(string? id)
         {
             if (id == null)
             {
@@ -126,7 +126,7 @@ namespace Entities
         }
 
 
-        private bool DifferentZero2(int? id)
+        private bool DifferentZero2(string? id)
         {
             if (id == null)
             {
@@ -138,7 +138,7 @@ namespace Entities
         }
 
 
-        private bool DifferentZero3(int? id)
+        private bool DifferentZero3(string? id)
         {
             if (id == null)
             {

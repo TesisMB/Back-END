@@ -37,47 +37,10 @@ namespace Repository
 
             return await collection
                 .Include(i => i.TypesEmergenciesDisasters)
-                .Include(i => i.Alerts)
                 .Include(i => i.LocationsEmergenciesDisasters)
-                .Include(i => i.Employees)
-                .ThenInclude(i => i.Users)
-                .ThenInclude(i => i.Persons)
-                .Include(i => i.Employees.Users.Roles)
-
-                .Include(i => i.Resources_Requests)
-                .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
-                .ThenInclude(i => i.Materials)
-
-                 .Include(i => i.Resources_Requests)
-                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
-                 .ThenInclude(i => i.Vehicles)
-
-                 .ThenInclude(a => a.Model)
-
-                  .Include(i => i.Resources_Requests)
-                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
-                 .ThenInclude(i => i.Vehicles)
-
-
-                 .ThenInclude(a => a.Brands)
-
-                  .Include(i => i.Resources_Requests)
-                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
-                 .ThenInclude(i => i.Vehicles.TypeVehicles)
-
-
-                 .Include(i => i.Resources_Requests)
-                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
-                 .ThenInclude(i => i.Medicines)
-
-                 .Include(a => a.ChatRooms)
-                 .ThenInclude(a => a.UsersChatRooms)
-
-
-                 .OrderByDescending(a => a.EmergencyDisasterStartDate)
-
+                 .Include(a => a.EmployeeModified)
+                 .OrderBy(a => a.EmergencyDisasterStartDate)
                 .ToListAsync();
-
         }
 
 
@@ -85,7 +48,7 @@ namespace Repository
         public async Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisastersWithourFilter()
         {
             var user = UsersRepository.authUser;
-           
+
             var collection = _cruzRojaContext.EmergenciesDisasters as IQueryable<EmergenciesDisasters>;
 
             //Falta filtrar unicamente los recursos solamente aceptados
@@ -95,48 +58,49 @@ namespace Repository
                 .Include(i => i.TypesEmergenciesDisasters)
                 .Include(i => i.Alerts)
                 .Include(i => i.LocationsEmergenciesDisasters)
-                .Include(i => i.Employees)
+                .Include(i => i.EmployeeIncharge)
                 .ThenInclude(i => i.Users)
                 .ThenInclude(i => i.Persons)
-                .Include(i => i.Employees.Users.Roles)
-
-                .Include(i => i.Resources_Requests)
-                .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
-                .ThenInclude(i => i.Materials)
-
-                 .Include(i => i.Resources_Requests)
-                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
-                 .ThenInclude(i => i.Vehicles)
-
-                 .ThenInclude(a => a.Model)
-
-                  .Include(i => i.Resources_Requests)
-                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
-                 .ThenInclude(i => i.Vehicles)
-
-
-                 .ThenInclude(a => a.Brands)
-
-                     .Include(i => i.Resources_Requests)
-                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
-                 .ThenInclude(i => i.Vehicles.TypeVehicles)
-
-
-                 .Include(i => i.Resources_Requests)
-                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
-                 .ThenInclude(i => i.Medicines)
-
-                 .Include(a => a.Victims)
-
-                 .Include(a => a.ChatRooms)
-                 .Include(a => a.ChatRooms.UsersChatRooms)
-
-                 .OrderByDescending(i => i.Alerts.AlertID)
-
+                .Include(i => i.EmployeeIncharge.Users.Roles)
+                 .OrderBy(i => i.EmergencyDisasterStartDate)
                 .ToListAsync();
 
         }
 
+
+        public async Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisastersWithourFilterApp()
+        {
+            var user = UsersRepository.authUser;
+
+            var collection = _cruzRojaContext.EmergenciesDisasters as IQueryable<EmergenciesDisasters>;
+
+            //Falta filtrar unicamente los recursos solamente aceptados
+            collection = collection.Where(a => a.FK_EstateID == user.FK_EstateID);
+
+            return await collection
+                .Include(i => i.TypesEmergenciesDisasters)
+                .Include(i => i.Alerts)
+                .Include(i => i.LocationsEmergenciesDisasters)
+                .Include(i => i.EmployeeIncharge)
+                .ThenInclude(i => i.Users)
+                .ThenInclude(i => i.Persons)
+                .Include(i => i.EmployeeIncharge.Users.Roles)
+
+
+                 .Include(a => a.ChatRooms)
+                 .Include(a => a.ChatRooms.UsersChatRooms)
+                 .ThenInclude(i => i.Users)
+                 .ThenInclude(i => i.Persons)
+
+                 .Include(a => a.ChatRooms)
+                 .Include(a => a.ChatRooms.UsersChatRooms)
+                 .ThenInclude(i => i.Users)
+                 .ThenInclude(i => i.Roles)
+
+                 .OrderBy(i => i.EmergencyDisasterStartDate)
+                .ToListAsync();
+
+        }
 
 
         public async Task<EmergenciesDisasters> GetEmergencyDisasterWithDetails(int emergencydisasterId)
@@ -145,10 +109,10 @@ namespace Repository
           .Include(i => i.TypesEmergenciesDisasters)
                 .Include(i => i.Alerts)
                 .Include(i => i.LocationsEmergenciesDisasters)
-                .Include(i => i.Employees)
+                .Include(i => i.EmployeeIncharge)
                 .ThenInclude(i => i.Users)
                 .ThenInclude(i => i.Persons)
-                .Include(i => i.Employees.Users.Roles)
+                .Include(i => i.EmployeeIncharge.Users.Roles)
 
                 .Include(i => i.Resources_Requests)
                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
@@ -178,6 +142,17 @@ namespace Repository
 
                  .Include(a => a.ChatRooms)
                  .ThenInclude(a => a.UsersChatRooms)
+                 .ThenInclude(a => a.Users)
+                 .ThenInclude(a => a.Persons)
+
+                 .Include(a => a.ChatRooms)
+                 .ThenInclude(a => a.UsersChatRooms)
+                 .ThenInclude(a => a.Users)
+                 .ThenInclude(a => a.Roles )
+
+                 .Include(a => a.ChatRooms)
+                 .ThenInclude(a => a.UsersChatRooms)
+                 .ThenInclude(a => a.Users.Volunteers)
 
                  .Include(a => a.ChatRooms)
                  .ThenInclude(a => a.Messages)
@@ -185,6 +160,29 @@ namespace Repository
                  .Include(a => a.Victims)
 
                  .Include(a => a.VolunteersLocationVolunteersEmergenciesDisasters)
+
+                  .Include(i => i.EmployeeModified)
+                 .ThenInclude(i => i.Users)
+                 .ThenInclude(i => i.Persons)
+                 .Include(i => i.EmployeeModified.Users.Roles)
+
+                  .Include(i => i.EmployeeCreated)
+                 .ThenInclude(i => i.Users)
+                 .ThenInclude(i => i.Persons)
+                 .Include(i => i.EmployeeCreated.Users.Roles)
+
+                 .Include(i => i.Resources_Requests)
+                 .ThenInclude(i => i.EmployeeCreated)
+                 .ThenInclude(i => i.Users)
+                 .ThenInclude(i => i.Persons)
+                 .Include(i => i.EmployeeCreated.Users.Roles)
+
+
+                 .Include(i => i.Resources_Requests)
+                 .ThenInclude(i => i.EmployeeModified)
+                 .ThenInclude(i => i.Users)
+                 .ThenInclude(i => i.Persons)
+                 .Include(i => i.EmployeeModified.Users.Roles)
 
            .FirstOrDefaultAsync();
         }
@@ -202,10 +200,10 @@ namespace Repository
                  .Include(i => i.TypesEmergenciesDisasters)
                  .Include(i => i.Alerts)
                  .Include(i => i.LocationsEmergenciesDisasters)
-                 .Include(i => i.Employees)
+                 .Include(i => i.EmployeeIncharge)
                  .ThenInclude(i => i.Users)
                  .ThenInclude(i => i.Persons)
-                 .Include(i => i.Employees.Users.Roles)
+                 .Include(i => i.EmployeeIncharge.Users.Roles)
 
                  .Include(i => i.Resources_Requests)
                  .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
@@ -217,14 +215,14 @@ namespace Repository
 
                   .ThenInclude(a => a.Model)
 
-                   .Include(i => i.Resources_Requests)
+                  .Include(i => i.Resources_Requests)
                   .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                   .ThenInclude(i => i.Vehicles)
 
 
                   .ThenInclude(a => a.Brands)
 
-                      .Include(i => i.Resources_Requests)
+                   .Include(i => i.Resources_Requests)
                   .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                   .ThenInclude(i => i.Vehicles.TypeVehicles)
 
@@ -233,7 +231,10 @@ namespace Repository
                   .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                   .ThenInclude(i => i.Medicines)
 
-
+                  .Include(i => i.EmployeeModified)
+                 .ThenInclude(i => i.Users)
+                 .ThenInclude(i => i.Persons)
+                 .Include(i => i.EmployeeModified.Users.Roles)
 
                  .ToListAsync();
         }

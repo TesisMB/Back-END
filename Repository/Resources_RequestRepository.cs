@@ -60,13 +60,13 @@ namespace Repository
                 collection = collection.Where(
                                             a => a.Condition == Condition
                                             && a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID
-                                            && a.FK_UserID == user.UserID)
+                                            && a.CreatedBy == user.UserID)
                                             .AsNoTracking();
             }
 
 
             return await collection
-                .Include(i => i.Users)
+                .Include(i => i.EmployeeCreated)
                 .Include(i => i.EmergenciesDisasters)
                 .ThenInclude(i => i.TypesEmergenciesDisasters)
                 .Include(i => i.EmergenciesDisasters.LocationsEmergenciesDisasters)
@@ -91,12 +91,21 @@ namespace Repository
                 .ThenInclude(i => i.Model)
 
 
-                .Include(i => i.Users)
-                .Include(i => i.Users.Persons)
-                .Include(i => i.Users.Roles)
-                .Include(i => i.Users.Estates)
-                .Include(i => i.Users.Estates.LocationAddress)
-                .Include(i => i.Users.Estates.Locations)
+                .Include(i => i.EmployeeCreated)
+                .Include(i => i.EmployeeCreated.Users.Persons)
+                .Include(i => i.EmployeeCreated.Users.Roles)
+                .Include(i => i.EmployeeCreated.Users.Estates)
+                .Include(i => i.EmployeeCreated.Users.Estates.LocationAddress)
+                .Include(i => i.EmployeeCreated.Users.Estates.Locations)
+
+
+
+                 .Include(i => i.EmployeeModified)
+                .Include(i => i.EmployeeModified.Users.Persons)
+                .Include(i => i.EmployeeModified.Users.Roles)
+                .Include(i => i.EmployeeModified.Users.Estates)
+                .Include(i => i.EmployeeModified.Users.Estates.LocationAddress)
+                .Include(i => i.EmployeeModified.Users.Estates.Locations)
                 .ToListAsync();
         }
 
@@ -111,7 +120,7 @@ namespace Repository
                                     .AsNoTracking();
 
             return await collection
-                .Include(i => i.Users)
+                .Include(i => i.EmployeeCreated)
                 .Include(i => i.EmergenciesDisasters)
                 .ThenInclude(i => i.TypesEmergenciesDisasters)
                 .Include(i => i.EmergenciesDisasters.LocationsEmergenciesDisasters)
@@ -136,12 +145,28 @@ namespace Repository
                 .ThenInclude(i => i.Model)
 
 
-                .Include(i => i.Users)
-                .Include(i => i.Users.Persons)
-                .Include(i => i.Users.Roles)
-                .Include(i => i.Users.Estates)
-                .Include(i => i.Users.Estates.LocationAddress)
-                .Include(i => i.Users.Estates.Locations)
+                .Include(i => i.EmployeeCreated)
+                .Include(i => i.EmployeeCreated.Users.Persons)
+                .Include(i => i.EmployeeCreated.Users.Roles)
+                .Include(i => i.EmployeeCreated.Users.Estates)
+                .Include(i => i.EmployeeCreated.Users.Estates.LocationAddress)
+                .Include(i => i.EmployeeCreated.Users.Estates.Locations)
+
+
+                 .Include(i => i.EmployeeModified)
+                .Include(i => i.EmployeeModified.Users.Persons)
+                .Include(i => i.EmployeeModified.Users.Roles)
+                .Include(i => i.EmployeeModified.Users.Estates)
+                .Include(i => i.EmployeeModified.Users.Estates.LocationAddress)
+                .Include(i => i.EmployeeModified.Users.Estates.Locations)
+
+
+                .Include(i => i.EmployeeResponse)
+                .Include(i => i.EmployeeResponse.Users.Persons)
+                .Include(i => i.EmployeeResponse.Users.Roles)
+                .Include(i => i.EmployeeResponse.Users.Estates)
+                .Include(i => i.EmployeeResponse.Users.Estates.LocationAddress)
+                .Include(i => i.EmployeeResponse.Users.Estates.Locations)
                 .ToListAsync();
         }
 
@@ -150,7 +175,7 @@ namespace Repository
         {
 
             ResourcesRequest rec = null;
-            resources_Request.FK_UserID = UsersRepository.authUser.UserID;
+            resources_Request.CreatedBy = UsersRepository.authUser.UserID;
             var rol = UsersRepository.authUser.Roles.RoleName;
 
 
@@ -173,7 +198,7 @@ namespace Repository
             rec = db.Resources_Requests
                 .Where(
                         a => a.FK_EmergencyDisasterID == resources_Request.FK_EmergencyDisasterID
-                        && a.FK_UserID == resources_Request.FK_UserID
+                        && a.CreatedBy == resources_Request.CreatedBy
                         && a.Condition == "Pendiente")
                         .Include(a => a.Resources_RequestResources_Materials_Medicines_Vehicles)
                        .FirstOrDefault();
@@ -239,7 +264,7 @@ namespace Repository
                     }
 
 
-                    resources_Request.FK_UserID = rec.FK_UserID;
+                    resources_Request.CreatedBy = rec.CreatedBy;
 
                     resources_Request.Status = rec.Status;
 
@@ -438,7 +463,7 @@ namespace Repository
                                     a => a.FK_Resource_RequestID == _Resources_RequestResources_Materials_Medicines_Vehicles.FK_Resource_RequestID
                                     && a.FK_MaterialID == _Resources_RequestResources_Materials_Medicines_Vehicles.FK_MaterialID
                                     && a.Resources_Request.FK_EmergencyDisasterID == resources_Request.FK_EmergencyDisasterID
-                                    && a.Resources_Request.FK_UserID == resources_Request.FK_UserID)
+                                    && a.Resources_Request.CreatedBy == resources_Request.CreatedBy)
                                      .Include(a => a.Materials)
                                     .FirstOrDefault();
             }
@@ -454,7 +479,7 @@ namespace Repository
                                     a => a.FK_Resource_RequestID == _Resources_RequestResources_Materials_Medicines_Vehicles.FK_Resource_RequestID
                                     && a.FK_MedicineID == _Resources_RequestResources_Materials_Medicines_Vehicles.FK_MedicineID
                                     && a.Resources_Request.FK_EmergencyDisasterID == resources_Request.FK_EmergencyDisasterID
-                                    && a.Resources_Request.FK_UserID == resources_Request.FK_UserID)
+                                    && a.Resources_Request.CreatedBy == resources_Request.CreatedBy)
                                      .Include(a => a.Medicines)
                                     .FirstOrDefault();
             }
@@ -467,7 +492,7 @@ namespace Repository
                       a => a.FK_Resource_RequestID == _Resources_RequestResources_Materials_Medicines_Vehicles.FK_Resource_RequestID
                       && a.FK_VehicleID == _Resources_RequestResources_Materials_Medicines_Vehicles.FK_VehicleID
                       && a.Resources_Request.FK_EmergencyDisasterID == resources_Request.FK_EmergencyDisasterID
-                      && a.Resources_Request.FK_UserID == resources_Request.FK_UserID)
+                      && a.Resources_Request.CreatedBy == resources_Request.CreatedBy)
                        .Include(a => a.Vehicles)
                       .FirstOrDefault();
             }
@@ -634,7 +659,7 @@ namespace Repository
                     rec = db.Resources_RequestResources_Materials_Medicines_Vehicles
                     .Where(a => a.FK_MaterialID == resources_Request.FK_MaterialID
                             && a.FK_Resource_RequestID == resources.ID
-                            && a.Resources_Request.FK_UserID == resources.FK_UserID
+                            && a.Resources_Request.CreatedBy == resources.CreatedBy
                             && a.Resources_Request.FK_EmergencyDisasterID == resources.FK_EmergencyDisasterID)
                     .FirstOrDefault();
 
@@ -666,7 +691,7 @@ namespace Repository
                     rec = db.Resources_RequestResources_Materials_Medicines_Vehicles
                         .Where(a => a.FK_MedicineID == resources_Request.FK_MedicineID
                                 && a.FK_Resource_RequestID == resources_Request.ID
-                                && a.Resources_Request.FK_UserID == resources.FK_UserID
+                                && a.Resources_Request.CreatedBy == resources.CreatedBy
                                 && a.Resources_Request.FK_EmergencyDisasterID == resources.FK_EmergencyDisasterID)
                         .FirstOrDefault();
 
@@ -698,7 +723,7 @@ namespace Repository
                     rec = db.Resources_RequestResources_Materials_Medicines_Vehicles
                         .Where(a => a.FK_VehicleID == resources_Request.FK_VehicleID
                                 && a.FK_Resource_RequestID == resources_Request.ID
-                                && a.Resources_Request.FK_UserID == resources.FK_UserID
+                                && a.Resources_Request.CreatedBy == resources.CreatedBy
                                 && a.Resources_Request.FK_EmergencyDisasterID == resources.FK_EmergencyDisasterID)
                         .FirstOrDefault();
 
@@ -765,7 +790,7 @@ namespace Repository
             userReq = _cruzRojaContext.Resources_Requests
                   .Where(
                           a => a.FK_EmergencyDisasterID == resourcesRequest.FK_EmergencyDisasterID
-                          && a.FK_UserID == userRequestID
+                          && a.CreatedBy == userRequestID
                           && a.Condition == "Pendiente")
                           .Include(a => a.Resources_RequestResources_Materials_Medicines_Vehicles)
                           .AsNoTracking()

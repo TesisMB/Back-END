@@ -16,7 +16,10 @@ namespace Entities.Profiles
 
                      .ForPath(resp => resp.RoleName, opt => opt.MapFrom(a => a.Users.Roles.RoleName))
 
+                     .ForPath(resp => resp.Picture, opt => opt.MapFrom(a => a.Users.Volunteers.VolunteerAvatar))
+
                     .ForPath(resp => resp.Name, opt => opt.MapFrom(a => a.Users.Persons.FirstName + " " + a.Users.Persons.LastName));
+
 
 
 

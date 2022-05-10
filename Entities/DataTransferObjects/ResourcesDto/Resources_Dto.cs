@@ -9,7 +9,7 @@ namespace Entities.DataTransferObjects.ResourcesDto
 {
     public class Resources_Dto
     {
-        public int ID { get; set; }
+        public String ID { get; set; }
         public string Name { get; set; }
         public int? Quantity { get; set; }
         public Boolean Availability { get; set; }
@@ -17,6 +17,12 @@ namespace Entities.DataTransferObjects.ResourcesDto
         public string Description { get; set; }
         public string ImageSrc { get; set; }
         public Boolean Donation { get; set; }
+
+        public int CreatedBy { get; set; }
+        public int ModifiedBy { get; set; }
+
+        public string CreatedByEmployee { get; set; }
+        public string ModifiedByEmployee { get; set; }
 
         public string LocationCityName { get; set; }
 

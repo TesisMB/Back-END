@@ -31,33 +31,37 @@
             margin: 20px;
         }
 
+
         .principal {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+             display: -webkit-box; /* wkhtmltopdf uses this one */
+            -webkit-box-pack: center; /* wkhtmltopdf uses this one */
         }
 
         .logo {
-            border-left: 1px solid rgba(172, 161, 161, 0.501);
             border-bottom: 1px solid rgba(172, 161, 161, 0.501);
-            border-top: 1px solid rgba(172, 161, 161, 0.501);
+            border-right: 1px solid rgba(172, 161, 161, 0.501);
             height: 70px;
-            flex: .4;
+            -webkit-box-flex: 2;
+            -webkit-flex: 2;
+            flex: 2;
         }
 
         .fecha {
-            border-right: 1px solid rgba(172, 161, 161, 0.501);
             border-bottom: 1px solid rgba(172, 161, 161, 0.501);
-            border-top: 1px solid rgba(172, 161, 161, 0.501);
+            border-left: 1px solid rgba(172, 161, 161, 0.501);
             height: 70px;
-            flex: .4;
+            -webkit-box-flex: 4;
+            -webkit-flex: 4;
+            flex: 4;
         }
 
         .titulo {
-            flex: 2;
             width: 50%;
-            border: 1px solid rgba(172, 161, 161, 0.501);
+            border-bottom: 1px solid rgba(172, 161, 161, 0.501);
             height: 70px;
+            -webkit-box-flex: 2;
+            -webkit-flex: 2;
+            flex: 2;
         }
 
             .titulo > h2 {
@@ -88,22 +92,30 @@
             width: 173px;
         }
 
-        .data {
-            display: grid;
-            grid-template-columns: 1fr 1fr 18%;
-            grid-template-rows: 2rem, 2rem, 1rem;
-            flex: 2;
-            margin-top: 1.5rem;
+        .datos{
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: flex;
         }
 
-        .dataP {
-            display: grid;
-            grid-template-columns: 1fr 46% 21%;
-            grid-template-rows: 2rem, 2rem, 1rem;
-            flex: 2;
-            margin-top: 1.5rem;
-            margin-left: 10px;
+        .datos > div{
+             -webkit-box-flex: 1;
+              -webkit-flex: 1;
+              flex: 1;
+              margin-right: 10%;
+              background-color: yellow;
+              border: 1px dashed black;
         }
+
+        ..datos > div:last-child {
+             margin-right: 0;
+}
+
+   
+        .dataP {
+            margin-top: 1.5rem;
+/*            margin-left: 10px;
+*/        }
 
 
         .dataIT {
@@ -127,13 +139,10 @@
                 grid-row: 2 / 4;
             }
 
-        .datos img {
-            width: 130px;
-        }
 
         .datos {
-            display: flex;
-            align-items: center;
+             display: -webkit-box; 
+             -webkit-align-items: center;
         }
 
         .datosPersonales {
@@ -176,14 +185,20 @@
 
             <div class="datos">
                 <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhUOA8HwyYFBnh7VnZxQwveTFGUwt6_dXazOIPRBmZuKrbMiPMC_cImvxRqYZepbi2npcWouLyiXG9IVarImm1NlgL8OX6PTg9qd8KmGjryq_ckdZJq3MmJudBFp6iB-drHF36baZa8UDMZJGgkusq90G79JNBdAAwvBfh0xhfKRchan_L30yQJZ70i">
-                <div class="dataP data">
+             
+                <div class="dataP">
                     <p>Nª de empleado: <span>@Model.EmployeeID</span></p>
                     <p>Empleado: <span>@Model.Users.Persons.FirstName @Model.Users.Persons.LastName</span></p>
                     <p>Documento: <span>@Model.Users.UserDni</span></p>
+                </div>
+                
+                  <div class="dataP">
                     <p>Genero: <span>@Model.Users.Persons.Gender</span></p>
                     <p>Fecha de nacimiento: <span>@Model.Users.Persons.Birthdate</span></p>
-                </div>
+                  </div>
             </div>
+
+
         </div>
 
 
@@ -191,10 +206,16 @@
             <h6>Información de contacto</h6>
 
             <div class="datos">
-                <div class="data">
+                <div class="data" style="width:40%">
                     <p>Correo electronico: <span>@Model.Users.Persons.Email</span></p>
                     <p>Telefono de contacto: <span>@Model.Users.Persons.Phone</span></p>
+                </div>
+
+                <div class="data"  style="width:40%">
                     <p>Ciudad de residencia: <span>@Model.Users.Persons.LocationName</span></p>
+                </div>
+
+                <div class="data" style="width:50%">
                     <p>Domicilio: <span>@Model.Users.Persons.Address</span></p>
                 </div>
             </div>
@@ -208,19 +229,6 @@
                     <p>Cargo: <span>@Model.Users.Roles.RoleName</span></p>
                     <p>Dirección de tabajo y tipo: <span>@Model.Users.Estates.LocationAddress.Address @Model.Users.Estates.LocationAddress.NumberAddress - @Model.Users.Estates.EstateTypes</span></p>
                     <p>Ciudad: <span>@Model.Users.Estates.Locations.LocationCityName</span></p>
-
-
-
-
-                    @foreach (var item in Model.Users.Estates.EstatesTimes)
-                    {
-                        <p>Horarios laborales: </p>
-                        <p>@Html.DisplayFor(modelItem => item.Times.StartTime)</p>
-                        <p>@Html.DisplayFor(modelItem => item.Times.Schedules.ScheduleDate): <span>@Html.DisplayFor(modelItem => item.Times.StartTime) - @Html.DisplayFor(modelItem => item.Times.EndTime)</span></p>
-                        <p>Telefono de la filial: <span>4875501</span></p>
-                    }
-
-
                 </div>
             </div>
         </div>
@@ -236,6 +244,16 @@
                 </div>
             </div>
         </div>
+
+                    <p>Horarios laborales: </p>
+                    @foreach (var item in Model.Users.Estates.EstatesTimes)
+                    {
+                        <p>@Html.DisplayFor(modelItem => item.Times.Schedules.ScheduleDate): <span>@Html.DisplayFor(modelItem => item.Times.StartTime) - @Html.DisplayFor(modelItem => item.Times.EndTime)</span></p>
+                    }
+
+                        <p>Telefono de la filial: <span>4875501</span></p>
+
+
     </section>
 </body>
 

@@ -21,6 +21,25 @@ namespace Back_End.Models
         public ICollection<Vehicles> Vehicles { get; set; }
 
         public ICollection<EmergenciesDisasters> EmergenciesDisasters { get; set; }
+        public ICollection<EmergenciesDisasters> EmergenciesDisastersModified { get; set; }
+        public ICollection<EmergenciesDisasters> EmergenciesDisastersCreated { get; set; }
+
+        public ICollection<Vehicles> VehicleModified { get; set; }
+        public ICollection<Vehicles> VehicleCreated { get; set; }
+
+
+        public ICollection<Medicines> MedicinesModified { get; set; }
+        public ICollection<Medicines> MedicinesCreated { get; set; }
+
+
+        public ICollection<Materials> MaterialsModified { get; set; }
+        public ICollection<Materials> MaterialsCreated { get; set; }
+
+
+        public ICollection<ResourcesRequest> ResourcesModified { get; set; }
+        public ICollection<ResourcesRequest> ResourcesCreated { get; set; }
+        public ICollection<ResourcesRequest> ResourcesResponse { get; set; }
+
 
     }
 }

@@ -34,6 +34,8 @@ namespace Back_End.Controllers
             _mapper = mapper;
         }
 
+        //********************************* FUNCIONANDO *********************************
+
         [Route("api/Voluntarios")]
         [HttpGet]
         public async Task<ActionResult<Volunteers>> GetAllVolunteers()
@@ -69,85 +71,9 @@ namespace Back_End.Controllers
             }
         }
 
-        [Route("api/app/Volunteers")]
-        [HttpGet]
-        public async Task<ActionResult<Volunteers>> GetAllVolunteersApp()
-        {
-            try
-            {
-                var volunteers1 = await _repository.Volunteers.GetAllVolunteersApp();
-
-                _logger.LogInfo($"Returned all Volunteers from database.");
-
-                var volunteersResult = _mapper.Map<IEnumerable<VolunteersAppDto>>(volunteers1);
 
 
-                foreach (var item in volunteersResult)
-                {
-                    if (item.VolunteerAvatar != "https://i.imgur.com/8AACVdK.png")
-                    {
-                        item.VolunteerAvatar = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
-                                                 Request.Scheme, Request.Host, Request.PathBase, item.VolunteerAvatar);
-                    }
-                }
-
-
-
-
-                return Ok(volunteersResult);
-            }
-
-            catch (Exception ex)
-            {
-                _logger.LogError($"Something went wrong inside GetAllVolunteersApp action:  {ex.Message}");
-                return StatusCode(500, "Internal Server error");
-            }
-        }
-
-        [Route("api/app/Volunteers/{volunteerId}")]
-        [HttpGet]
-        public async Task<ActionResult<Volunteers>> GetAllVolunteerApp(int volunteerId)
-        {
-            try
-            {
-                var volunteer = await _repository.Volunteers.GetVolunteerAppWithDetails(volunteerId);
-
-                if (volunteer == null)
-
-                {
-                    _logger.LogError($"Volunteer with id: {volunteerId}, hasn't been found in db.");
-                    return NotFound();
-
-
-                }
-                else
-
-                {
-                    _logger.LogInfo($"Returned volunteer with id: {volunteerId}");
-                    var volunteerResult = _mapper.Map<VolunteersAppDto>(volunteer);
-
-
-
-                    if (volunteerResult.VolunteerAvatar != "https://i.imgur.com/8AACVdK.png")
-                    {
-                        volunteerResult.VolunteerAvatar = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
-                                        Request.Scheme, Request.Host, Request.PathBase, volunteerResult.VolunteerAvatar);
-                    }
-
-
-                    return Ok(volunteerResult);
-
-                }
-
-            }
-            catch (Exception ex)
-
-            {
-                _logger.LogError($"Something went wrong inside GetEmployeeById action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
-
-            }
-        }
+        //********************************* FUNCIONANDO *********************************
 
         [Route("api/Voluntarios/{volunteerId}")]
         [HttpGet]
@@ -194,60 +120,93 @@ namespace Back_End.Controllers
             }
         }
 
-        [Route("api/Voluntarios")]
-        [HttpPost]
-        public async Task<ActionResult<Volunteers>> CreateVolunteer(VolunteersForCreationDto volunteer)
+
+        //********************************* FUNCIONANDO *********************************
+        [Route("api/app/Volunteers")]
+        [HttpGet]
+        public async Task<ActionResult<Volunteers>> GetAllVolunteersApp()
         {
             try
             {
+                var volunteers1 = await _repository.Volunteers.GetAllVolunteersApp();
 
-                if (!ModelState.IsValid)
+                _logger.LogInfo($"Returned all Volunteers from database.");
+
+                var volunteersResult = _mapper.Map<IEnumerable<VolunteersAppDto>>(volunteers1);
+
+
+                foreach (var item in volunteersResult)
                 {
-                    return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
+                    if (item.VolunteerAvatar != "https://i.imgur.com/8AACVdK.png")
+                    {
+                        item.VolunteerAvatar = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
+                                                 Request.Scheme, Request.Host, Request.PathBase, item.VolunteerAvatar);
+                    }
                 }
+
+
+
+
+                return Ok(volunteersResult);
+            }
+
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside GetAllVolunteersApp action:  {ex.Message}");
+                return StatusCode(500, "Internal Server error");
+            }
+        }
+
+       
+        //********************************* FUNCIONANDO *********************************
+        [Route("api/app/Volunteers/{volunteerId}")]
+        [HttpGet]
+        public async Task<ActionResult<Volunteers>> GetAllVolunteerApp(int volunteerId)
+        {
+            try
+            {
+                var volunteer = await _repository.Volunteers.GetVolunteerAppWithDetails(volunteerId);
 
                 if (volunteer == null)
 
                 {
-                    _logger.LogError("Volunteer object sent from client is null.");
-                    return BadRequest("Volunteer object is null");
-
-                }
+                    _logger.LogError($"Volunteer with id: {volunteerId}, hasn't been found in db.");
+                    return NotFound();
 
 
-                var volunteerEntity = _mapper.Map<Volunteers>(volunteer);
-
-
-                if (volunteer.ImageFile == null)
-                {
-                    volunteerEntity.VolunteerAvatar = "https://i.imgur.com/S9HJEwF.png";
                 }
                 else
+
                 {
-                    volunteerEntity.VolunteerAvatar = await UploadController.SaveImage(volunteer.ImageFile, "Resources");
+                    _logger.LogInfo($"Returned volunteer with id: {volunteerId}");
+                    var volunteerResult = _mapper.Map<VolunteersAppDto>(volunteer);
+
+
+
+                    if (volunteerResult.VolunteerAvatar != "https://i.imgur.com/8AACVdK.png")
+                    {
+                        volunteerResult.VolunteerAvatar = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
+                                        Request.Scheme, Request.Host, Request.PathBase, volunteerResult.VolunteerAvatar);
+                    }
+
+
+                    return Ok(volunteerResult);
+
                 }
-
-
-                // Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
-                _repository.Volunteers.CreateVolunteer(volunteerEntity);
-                volunteerEntity.Users.UserPassword = Encrypt.GetSHA256(volunteerEntity.Users.UserPassword);
-
-                _repository.Volunteers.SaveAsync();
-
-
-                return Ok();
 
             }
             catch (Exception ex)
 
             {
-                _logger.LogError($"Something went wrong inside CreateEmployee action: {ex.Message}");
+                _logger.LogError($"Something went wrong inside GetEmployeeById action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
+
             }
         }
 
+       
 
-        //[Authorize(Roles = "Coordinador General, Admin")] 
+        //TODO - Revisar como funciona el patch de voluntarios en el Front
         [Route("api/Voluntarios/{volunteerId}")]
         [HttpPatch]
         public async Task<ActionResult> UpdatePartialUser(int volunteerId, JsonPatchDocument<VolunteersForUpdatoDto> patchDocument)
@@ -309,6 +268,8 @@ namespace Back_End.Controllers
             return NoContent();
         }
 
+
+        //TODO - Revisar como funciona el delete de voluntarios en el Front
 
         [Route("api/Voluntarios/{volunteerId}")]
         [HttpDelete]

@@ -13,7 +13,6 @@ namespace Entities.Profiles
             CreateMap<ResourcesRequestMaterialsMedicinesVehicles, ResourcesRequestMaterialsMedicinesVehiclesDto>();
 
 
-
             CreateMap<ResourcesRequestMaterialsMedicinesVehiclesForCreationDto, ResourcesRequestMaterialsMedicinesVehicles>();
 
             CreateMap<ResourcesRequestMaterialsMedicinesVehicles, ResourcesRequestMaterialsMedicinesVehiclesForCreationDto>();

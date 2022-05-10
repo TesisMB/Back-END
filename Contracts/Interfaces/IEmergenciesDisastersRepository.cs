@@ -10,6 +10,7 @@ namespace Contracts.Interfaces
     {
         Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisasters();
         Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisastersWithourFilter();
+        Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisastersWithourFilterApp();
 
 
         Task<EmergenciesDisasters> GetEmergencyDisasterById(int emergencydisasterId);

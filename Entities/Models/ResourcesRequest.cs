@@ -27,10 +27,17 @@ namespace Entities.Models
         public string Reason { get; set; }
 
         [Required]
-        [ForeignKey("FK_UserID")]
-        public Users Users { get; set; }
-        public int FK_UserID { get; set; }
+        [ForeignKey("CreatedBy")]
+        public Employees EmployeeCreated { get; set; }
+        public int CreatedBy { get; set; }
 
+        [ForeignKey("ModifiedBy")]
+        public Employees EmployeeModified{ get; set; }
+        public int? ModifiedBy { get; set; }
+
+        [ForeignKey("AnsweredBy")]
+        public Employees EmployeeResponse{ get; set; }
+        public int? AnsweredBy { get; set; }
 
 
         [ForeignKey("FK_EmergencyDisasterID")]

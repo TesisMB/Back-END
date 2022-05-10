@@ -36,6 +36,7 @@ namespace Back_End.Controllers
             _mapper = mapper;
         }
 
+        //********************************* FUNCIONANDO *********************************
 
         [HttpGet("TypesEmergenciesDisasters")]
         public async Task<ActionResult<Alerts>> GetAllTypesEmergenciesDisasters()
@@ -57,136 +58,8 @@ namespace Back_End.Controllers
             }
         }
 
-        [HttpGet("TypesEmergenciesDisasters/{typeEmergencyDisasterId}")]
-        public async Task<ActionResult<TypesEmergenciesDisasters>> GetTypesEmergencyDisaster(int typeEmergencyDisasterId)
-        {
-            try
-            {
-                var alerts = await _repository.TypesEmergenciesDisasters.GetTypeEmergencyDisaster(typeEmergencyDisasterId);
-                _logger.LogInfo($"Returned all TypesEmergenciesDisasters from database.");
-
-                var alertResult = _mapper.Map<TypesEmergenciesDisastersDto>(alerts);
-
-                return Ok(alertResult);
-            }
-
-            catch (Exception ex)
-            {
-                _logger.LogError($"Something went wrong inside GetAllTypesEmergenciesDisasters action: {ex.Message}");
-                return StatusCode(500, "Internal Server error");
-            }
-        }
-
-        [HttpGet("TypesVehicles")]
-        public async Task<ActionResult<BrandsModels>> GetTypesVehicles([FromQuery] BrandsModelsForSelectDto brandsModels)
-        {
-
-
-            try
-            {
-                var types = await _repository.TypesVehicles.GetAllTypesVehicles();
-
-                _logger.LogInfo($"Returned all TypesVehicles from database.");
-
-                //var typesResult = _mapper.Map<IEnumerable<BrandsModelsForSelectDto>>(types);
-
-
-                //agrego x tipo de auto
-                foreach (var item in types)
-                {
-                    typesSelect.Add(new TypesSelect()
-                    {
-                        TypeID = item.Vehicles.TypeVehicles.ID,
-                        Type = item.Vehicles.TypeVehicles.Type,
-                    });
-
-                    typesSelect = typesSelect.Distinct(new TypesSelectComparer()).ToList();
-                }
-
-
-                //Marca
-                foreach (var item in types)
-                {
-
-                    Brands.Add(new BrandsSelect()
-                    {
-                        BrandID = item.Brands.ID,
-                        BrandsName = item.Brands.BrandName
-                    });
-
-                    Brands = Brands.Distinct(new BrandsComparer()).ToList();
-                }
-
-
-                //Modelo
-                foreach (var item in types)
-                {
-
-                    modelSelect.Add(new ModelsSelect()
-                    {
-                        ModelID = item.Model.ID,
-                        ModelName = item.Model.ModelName
-                    });
-
-                    modelSelect = modelSelect.Distinct(new ModelsComparer()).ToList();
-                }
-
-
-
-
-                foreach (var item in typesSelect)
-                {
-
-                    Key.Add(new BrandsModelsForSelectDto()
-                    {
-                        TypeID = item.TypeID,
-                        Type = item.Type,
-                        Brands = Retornar()
-                    });
-
-
-                    Key = Key.Distinct(new BrandsModelComparer()).ToList();
-
-                    //Key.Where(elem => elem.TypeID == item.Vehicles.TypeVehicles.ID);
-
-                    //Key.Add(item.Brands.BrandName);
-
-                }
-
-                //contador = 0;
-                return Ok(brands);
-
-            }
-            catch (Exception ex)
-            {
-
-                _logger.LogError($"Something went wrong inside GetAllTypesVehicles action: {ex.Message}");
-                return StatusCode(500, "Internal Server error");
-            }
-
-        }
-
-
-
-
-        public static BrandsSelect Retornar()
-        {
-            var llave = Brands;
-
-            if (llave.Count == contador)
-            {
-                contador = 0;
-            }
-
-            var valor = llave.ElementAt(contador);
-
-            contador += 1;
-
-
-            return valor;
-        }
-
-
+        //********************************* FUNCIONANDO *********************************
+        //TO DO - Modificar retorno de datos
         [HttpGet("locations")]
         public ActionResult<LocationVolunteers> GetLocations()
         {

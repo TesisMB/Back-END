@@ -27,7 +27,13 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
         public int FK_AlertID { get; set; }
         public int FK_EstateID { get; set; }
 
-        public ChatRoomsForCreationDto ChatRooms { get; set; }
+        public int CreatedBy { get; set; }
+
+
+        public DateTime CreationDate { get; set; } = DateTime.Now;
+        public int FK_TypeChatRoomID { get; set; } = 1;
+
+        //public ChatRoomsForCreationDto ChatRooms { get; set; }
 
         public VictimsForUpdateDto Victims { get; set; }
 

@@ -25,6 +25,9 @@ namespace Back_End.Controllers
             _repository = repository;
         }
 
+        //********************************* FUNCIONANDO *********************************
+
+        //TODO Cambia modelo 
         [HttpGet]
         public async Task<ActionResult<ChatRooms>> GetAllChatRooms()
         {
@@ -45,6 +48,8 @@ namespace Back_End.Controllers
             }
         }
 
+
+        //********************************* FUNCIONANDO *********************************
         [HttpGet("{chatRoomID}")]
         public async Task<ActionResult<ChatRooms>> GetChatRoom(int chatRoomID)
         {
@@ -58,6 +63,16 @@ namespace Back_End.Controllers
                     return NotFound();
                 }
 
+
+                foreach (var item in chatRooms.UsersChatRooms)
+                {
+                    if (item.Users.Volunteers != null && item.Users.Volunteers.VolunteerAvatar != "https://i.imgur.com/8AACVdK.png")
+                    {
+                        item.Users.Volunteers.VolunteerAvatar = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
+                                        Request.Scheme, Request.Host, Request.PathBase, item.Users.Volunteers.VolunteerAvatar);
+                    }
+                }
+
                 var chatRoomsToResult = _mapper.Map<ChatRoomsDto>(chatRooms);
 
                 return Ok(chatRoomsToResult);
@@ -69,6 +84,10 @@ namespace Back_End.Controllers
             }
         }
 
+
+
+        //********************************* FUNCIONANDO *********************************
+        //Revisar con APP
         [HttpPost]
         public IActionResult SendMessage([FromBody] MessagesForCreationDto message)
         {
@@ -98,6 +117,9 @@ namespace Back_End.Controllers
         }
 
 
+        //********************************* FUNCIONANDO *********************************
+
+        //TODO Revisar con APP
         [HttpPost("JoinGroup")]
         public IActionResult JoinGroup([FromBody] UsersChatRoomsJoin_LeaveGroupDto usersChat)
         {
@@ -125,6 +147,7 @@ namespace Back_End.Controllers
                 return StatusCode(500, "interval Server Error");
             }
         }
+
 
 
         [HttpDelete("LeaveGroup/{UserID}/{chatRoomID}")]

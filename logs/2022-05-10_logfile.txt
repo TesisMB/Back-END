@@ -6,3 +6,100 @@
 2022-05-10 16:13:50.4663 INFO Returned Material with id: MA0024
 2022-05-10 16:16:09.4973 INFO Returned vehicle with id: VE0018
 2022-05-10 16:17:06.9856 INFO Returned medicine with details for id: ME0085
+2022-05-10 16:39:43.4042 INFO Returned User.
+2022-05-10 16:40:05.4495 INFO Returned all emergenciesDisasters from database.
+2022-05-10 16:40:16.5604 INFO Returned all emergenciesDisasters from database.
+2022-05-10 16:44:43.2547 ERROR Something went wrong inside CreateEmergenciesDisaster action: An error occurred while updating the entries. See the inner exception for details.
+2022-05-10 16:45:09.6236 ERROR Something went wrong inside CreateEmergenciesDisaster action: An error occurred while updating the entries. See the inner exception for details.
+2022-05-10 16:45:29.6834 ERROR Something went wrong inside CreateEmergenciesDisaster action: An error occurred while updating the entries. See the inner exception for details.
+2022-05-10 16:45:41.9199 ERROR Something went wrong inside CreateEmergenciesDisaster action: An error occurred while updating the entries. See the inner exception for details.
+2022-05-10 16:46:17.9679 ERROR Something went wrong inside CreateEmergenciesDisaster action: An error occurred while updating the entries. See the inner exception for details.
+2022-05-10 16:46:33.4359 ERROR Something went wrong inside CreateEmergenciesDisaster action: An error occurred while updating the entries. See the inner exception for details.
+2022-05-10 16:47:09.9174 ERROR Something went wrong inside CreateEmergenciesDisaster action: An error occurred while updating the entries. See the inner exception for details.
+2022-05-10 16:48:29.8881 ERROR Something went wrong inside CreateEmergenciesDisaster action: An error occurred while updating the entries. See the inner exception for details.
+2022-05-10 16:50:50.1566 ERROR Something went wrong inside GetAllEmegenciesDisasters action: Object reference not set to an instance of an object.
+2022-05-10 16:50:53.6300 INFO Returned User.
+2022-05-10 16:50:56.1822 INFO Returned all emergenciesDisasters from database.
+2022-05-10 16:51:09.6019 INFO Returned all emergenciesDisasters from database.
+2022-05-10 16:51:22.2432 INFO Returned emegencyDisaster with details for id: 219
+2022-05-10 16:54:04.9522 INFO Returned emegencyDisaster with details for id: 219
+2022-05-10 16:54:08.4358 ERROR Something went wrong inside GetEmegencyDisasterIDWithDetails action: Object reference not set to an instance of an object.
+2022-05-10 17:00:04.1248 ERROR Something went wrong inside CreateEmergenciesDisaster action: Error mapping types.
+
+Mapping types:
+EmergenciesDisastersForCreationDto -> EmergenciesDisasters
+Entities.DataTransferObjects.EmergenciesDisasters___Dto.EmergenciesDisastersForCreationDto -> Entities.Models.EmergenciesDisasters
+
+Type Map configuration:
+EmergenciesDisastersForCreationDto -> EmergenciesDisasters
+Entities.DataTransferObjects.EmergenciesDisasters___Dto.EmergenciesDisastersForCreationDto -> Entities.Models.EmergenciesDisasters
+
+Destination Member:
+ChatRooms.TypesChatRooms
+
+2022-05-10 17:09:04.4516 ERROR Something went wrong inside CreateEmergenciesDisaster action: Error mapping types.
+
+Mapping types:
+EmergenciesDisastersForCreationDto -> EmergenciesDisasters
+Entities.DataTransferObjects.EmergenciesDisasters___Dto.EmergenciesDisastersForCreationDto -> Entities.Models.EmergenciesDisasters
+
+Type Map configuration:
+EmergenciesDisastersForCreationDto -> EmergenciesDisasters
+Entities.DataTransferObjects.EmergenciesDisasters___Dto.EmergenciesDisastersForCreationDto -> Entities.Models.EmergenciesDisasters
+
+Destination Member:
+ChatRooms.TypesChatRooms
+
+2022-05-10 17:10:42.1226 INFO Returned User.
+2022-05-10 17:10:44.3580 INFO Returned all emergenciesDisasters from database.
+2022-05-10 17:10:54.1792 INFO Returned all emergenciesDisasters from database.
+2022-05-10 17:11:18.3531 INFO Returned emegencyDisaster with details for id: 219
+2022-05-10 17:11:31.5429 ERROR Something went wrong inside GetEmegencyDisasterIDWithDetails action: Object reference not set to an instance of an object.
+2022-05-10 17:11:39.8904 INFO Returned emegencyDisaster with details for id: 222
+2022-05-10 17:14:45.4823 ERROR Something went wrong inside GetAllEmegenciesDisasters action: Object reference not set to an instance of an object.
+2022-05-10 17:14:49.0478 INFO Returned User.
+2022-05-10 17:14:51.3730 INFO Returned all emergenciesDisasters from database.
+2022-05-10 17:17:46.2954 ERROR Something went wrong inside UpdatePartialEmegencyDisaster action: An error occurred while updating the entries. See the inner exception for details.
+2022-05-10 17:22:33.8888 ERROR Something went wrong inside GetAllEmegenciesDisasters action: Object reference not set to an instance of an object.
+2022-05-10 17:22:36.9002 INFO Returned User.
+2022-05-10 17:22:39.2969 INFO Returned all emergenciesDisasters from database.
+2022-05-10 17:22:44.6309 INFO Returned all emergenciesDisasters from database.
+2022-05-10 17:22:51.3876 INFO Returned emegencyDisaster with details for id: 222
+2022-05-10 17:24:46.3440 INFO Returned emegencyDisaster with details for id: 222
+2022-05-10 17:25:31.0605 INFO Returned User.
+2022-05-10 17:25:42.9293 INFO Returned User.
+2022-05-10 17:25:46.0785 INFO Returned emegencyDisaster with details for id: 222
+2022-05-10 17:26:48.0922 INFO Returned User.
+2022-05-10 17:26:53.5503 INFO Returned all ChatRooms from database. 
+2022-05-10 17:28:09.2948 ERROR Something went wrong inside GetAllEmegenciesDisasters action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-05-10 17:28:12.4069 INFO Returned User.
+2022-05-10 17:28:15.3062 INFO Returned all emergenciesDisasters from database.
+2022-05-10 17:28:21.0075 INFO Returned emegencyDisaster with details for id: 222
+2022-05-10 17:29:51.5448 INFO Returned User.
+2022-05-10 17:29:53.8644 INFO Returned emegencyDisaster with details for id: 222
+2022-05-10 17:31:39.9670 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-05-10 17:32:00.0596 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-05-10 17:32:23.8783 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-05-10 17:32:27.5095 INFO Returned User.
+2022-05-10 17:32:31.6335 INFO Returned all ChatRooms from database. 
+2022-05-10 17:34:16.5618 INFO Returned all ChatRooms from database. 
+2022-05-10 17:36:13.4983 INFO Returned User.
+2022-05-10 17:36:18.8394 INFO Returned all ChatRooms from database. 
+2022-05-10 17:39:31.7483 INFO Returned User.
+2022-05-10 17:39:33.6683 INFO Returned all ChatRooms from database. 
+2022-05-10 17:45:05.2954 INFO Returned User.
+2022-05-10 17:45:07.5665 INFO Returned all ChatRooms from database. 
+2022-05-10 17:46:47.1875 INFO Returned all ChatRooms from database. 
+2022-05-10 17:47:26.2181 INFO Returned all ChatRooms from database. 
+2022-05-10 17:49:30.6736 INFO Returned all ChatRooms from database. 
+2022-05-10 17:49:42.1200 INFO Returned all ChatRooms from database. 
+2022-05-10 17:50:17.5620 INFO Returned all ChatRooms from database. 
+2022-05-10 17:50:31.5966 INFO Returned all ChatRooms from database. 
+2022-05-10 17:51:11.6552 INFO Returned all ChatRooms from database. 
+2022-05-10 17:52:00.7329 INFO Returned all ChatRooms from database. 
+2022-05-10 17:52:52.1553 INFO Returned all ChatRooms from database. 
+2022-05-10 17:53:13.4720 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-05-10 17:53:21.3688 INFO Returned User.
+2022-05-10 17:53:26.7197 INFO Returned all ChatRooms from database. 
+2022-05-10 17:54:07.4684 INFO Returned User.
+2022-05-10 17:54:10.6311 INFO Returned all ChatRooms from database. 

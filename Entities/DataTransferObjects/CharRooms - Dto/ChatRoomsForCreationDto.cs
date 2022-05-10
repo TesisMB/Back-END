@@ -10,7 +10,6 @@ namespace Entities.DataTransferObjects.CharRooms___Dto
 
         public int FK_TypeChatRoomID { get; set; }
 
-        //public TypesChatRoomsForCreationDto TypesChatRooms { get; set; }
 
     }
 }

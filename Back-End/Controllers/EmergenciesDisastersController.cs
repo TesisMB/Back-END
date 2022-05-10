@@ -32,6 +32,7 @@ namespace Back_End.Controllers
         }
 
 
+        //********************************* FUNCIONANDO *********************************
         [HttpGet]
         public async Task<ActionResult<EmergenciesDisasters>> GetAllEmegenciesDisasters()
         {
@@ -58,6 +59,7 @@ namespace Back_End.Controllers
         }
 
 
+        //********************************* FUNCIONANDO *********************************
         [HttpGet("WithoutFilter")]
         public async Task<ActionResult<EmergenciesDisasters>> GetAllEmergenciesDisastersWithoutFilter()
         {
@@ -82,6 +84,9 @@ namespace Back_End.Controllers
 
 
 
+        //********************************* FUNCIONANDO *********************************
+
+        //TODO Hacer modelo dto aparte tanto para victims como resourceRequest(WebApp)
         [HttpGet("WithoutFilter/{emegencyDisasterID}")]
         public async Task<ActionResult<EmergenciesDisasters>> GetEmegencyDisasterIDWithDetails(int emegencyDisasterID)
         {
@@ -126,6 +131,7 @@ namespace Back_End.Controllers
         }
 
 
+        //********************************* FUNCIONANDO *********************************
 
         [HttpPost]
         public ActionResult<EmergenciesDisasters> CreateEmergencyDisaster([FromBody] EmergenciesDisastersForCreationDto emergenciesDisasters)
@@ -146,6 +152,13 @@ namespace Back_End.Controllers
 
                 var emergencyDisaster = _mapper.Map<EmergenciesDisasters>(emergenciesDisasters);
 
+                emergencyDisaster.ChatRooms = new ChatRooms();
+                emergencyDisaster.ChatRooms.CreationDate = emergenciesDisasters.CreationDate;
+                emergencyDisaster.ChatRooms.FK_TypeChatRoomID = emergenciesDisasters.FK_TypeChatRoomID;
+
+
+
+
                 _repository.EmergenciesDisasters.CreateEmergencyDisaster(emergencyDisaster);
 
                 _repository.EmergenciesDisasters.SaveAsync();
@@ -160,6 +173,7 @@ namespace Back_End.Controllers
         }
 
 
+        //********************************* FUNCIONANDO *********************************
         [HttpPatch("{emegencyDisasterID}")]
         public async Task<ActionResult> UpdatePartialEmegencyDisaster(int emegencyDisasterID, JsonPatchDocument<EmergenciesDisastersForUpdateDto> _emergencyDisaster)
         {
@@ -174,6 +188,8 @@ namespace Back_End.Controllers
 
 
                 var emergencyDisasterToPatch = _mapper.Map<EmergenciesDisastersForUpdateDto>(emergencyDisaster);
+
+                emergencyDisasterToPatch.EmergencyDisasterDateModified = DateTime.Now;
 
                 _emergencyDisaster.ApplyTo(emergencyDisasterToPatch, ModelState);
 
@@ -205,6 +221,9 @@ namespace Back_End.Controllers
         }
 
 
+        //********************************* FUNCIONANDO *********************************
+
+        //TODO Probar con carrito
         [HttpDelete("{emegencyDisasterID}")]
         public async Task<ActionResult> DeletEmegencyDisaster(int emegencyDisasterID)
         {

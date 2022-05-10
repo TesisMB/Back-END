@@ -32,9 +32,6 @@ namespace Repository
 
 
             return await collection
-                .Include(a => a.UsersChatRooms)
-                .ThenInclude(a => a.Users)
-                .ThenInclude(a => a.Persons)
                 .Include(a => a.EmergenciesDisasters)
                 .ThenInclude(a => a.LocationsEmergenciesDisasters)
                 .Include(a => a.EmergenciesDisasters.TypesEmergenciesDisasters)

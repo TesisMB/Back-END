@@ -36,11 +36,6 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
         public int CreatedBy { get; set; }
         public string CreatedByEmployee { get; set; }
 
-        //public EmployeesDto EmployeeIncharge { get; set; }
-
-        //public EmployeesDto EmployeeModified { get; set; }
-        //public EmployeesDto EmployeeCreated { get; set; }
-
         public LocationsEmergenciesDisastersDto LocationsEmergenciesDisasters { get; set; }
 
         public AlertsDto Alerts { get; set; }

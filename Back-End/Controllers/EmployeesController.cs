@@ -4,10 +4,15 @@ using Back_End.Helpers;
 using Back_End.Models;
 using Back_End.Models.Employees___Dto;
 using Contracts.Interfaces;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 using Entities.DataTransferObjects.Employees___Dto;
+using Entities.DataTransferObjects.Locations___Dto;
 using Entities.Helpers;
+using Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using PDF_Generator.Utility;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,47 +30,66 @@ namespace Back_End.Controllers
         private readonly IRepositorWrapper _repository;
         private readonly IMapper _mapper;
         public readonly IGeneratePdf _generatePdf;
+        public byte[] pdf;
+        private IConverter _converter;
 
-        public EmployeesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper, IGeneratePdf generatePdf)
+        public EmployeesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper, IGeneratePdf generatePdf, IConverter converter)
         {
             _logger = logger;
             _repository = repository;
             _mapper = mapper;
             _generatePdf = generatePdf;
+            _converter = converter;
         }
 
-        [HttpPost("PDF/{employeeId}")]
-        public async Task<FileResult> GetEmployeeIDPDF(int employeeId)
+
+
+        [HttpGet("PDF/{employeeId}")]
+        public IActionResult CreatePDF(int employeeId)
         {
-            var employee = await _repository.Employees.GetEmployeeWithDetails(employeeId);
 
+            var employees =  _repository.Employees.GetEmployeeWithDetails(employeeId);
 
-            var options = new ConvertOptions
+            //ar employees = DataStorage.GetAllEmployees();
+
+            var globalSettings = new GlobalSettings
             {
-                PageMargins = new Wkhtmltopdf.NetCore.Options.Margins()
-                {
-                    Top = 5,
-                    Left = 0,
-                    Right = 0
-                }
+                ColorMode = ColorMode.Color,
+                Orientation = Orientation.Portrait,
+                PaperSize = PaperKind.A4,
+                Margins = new MarginSettings { Top = 10 },
+                DocumentTitle = $"Reporte de {employees.Users.Persons.FirstName} {employees.Users.Persons.LastName}",
             };
 
-            _generatePdf.SetConvertOptions(options);
+            var objectSettings = new ObjectSettings
+            {
+                PagesCount = true,
+                HtmlContent = TemplateGenerator.GetHTMLString(employees),
+                //Page = "https://code-maze.com/", //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE
+                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "styles.css") },
+                FooterSettings = { FontName = "Arial", FontSize = 9, Right = "[page]", Line = true,},
+                //FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+            };
 
+            var pdf = new HtmlToPdfDocument()
+            {
+                GlobalSettings = globalSettings,
+                Objects = { objectSettings }
+            };
 
-            var pdf = await _generatePdf.GetByteArray("Views/Employee/EmployeeInfo.cshtml", employee);
+            var file = _converter.Convert(pdf);
 
-            return new FileContentResult(pdf, "application/pdf");
+            return File(file, "application/pdf");
         }
 
         //********************************* FUNCIONANDO *********************************
 
         [HttpGet]
-        public async Task<ActionResult<Employees>> GetAllEmployees()
+        public async Task<ActionResult<Employees>> GetAllEmployees([FromQuery] int userId)
         {
             try
             {
-                var employees = await _repository.Employees.GetAllEmployees();
+                var employees = await _repository.Employees.GetAllEmployees(userId);
 
                 _logger.LogInfo($"Returned all employees from database.");
 
@@ -87,7 +111,7 @@ namespace Back_End.Controllers
         {
             try
             {
-                var employee = await _repository.Employees.GetEmployeeWithDetails(employeeId);
+                var employee =  _repository.Employees.GetEmployeeWithDetails(employeeId);
 
                 if (employee == null)
                 {

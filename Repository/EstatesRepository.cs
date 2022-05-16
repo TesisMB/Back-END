@@ -36,39 +36,68 @@ namespace Repository
                      .ToList();
         }
 
-        public IEnumerable<Estates> GetAllEstatesByPdf(string LocationDepartmentName)
+        public IEnumerable<Estates> GetAllEstatesByPdf()
         {
 
             var collection = _cruzRojaContext.Estates as IQueryable<Estates>;
-
-            if (string.IsNullOrEmpty(LocationDepartmentName))
-            {
-                return GetAllEstatesByPdf();
-            }
-            else
-            {
-            collection = collection.Where(
-                a => a.Locations.LocationDepartmentName == LocationDepartmentName);
-            }
-
+          
 
             return collection
                            .Include(i => i.EstatesTimes)
                            .ThenInclude(i => i.Times)
                            .ThenInclude(i => i.Schedules)
                            .Include(i => i.Locations)
+                           .Include(i => i.LocationAddress)
+                           .Include(i => i.Materials)
+                           .Include(i => i.Medicines)
+
+                           .Include(i => i.Vehicles)
+                           .ThenInclude(i => i.Brands)
+
+                           .Include(i => i.Vehicles)
+                           .ThenInclude(i => i.Model)
+
+                           .Include(i => i.Vehicles)
+                           .ThenInclude(i => i.TypeVehicles)
                            .ToList();
         }
 
-        public IEnumerable<Estates> GetAllEstatesByPdf()
+
+        public Estates GetAllEstateByPdf(int estateId)
         {
-            return _cruzRojaContext.Estates
-                          .Include(i => i.EstatesTimes)
-                          .ThenInclude(i => i.Times)
-                          .ThenInclude(i => i.Schedules)
-                          .Include(i => i.Locations)
-                          .ToList();
+
+            var collection = _cruzRojaContext.Estates as IQueryable<Estates>;
+
+            collection = collection.Where(
+                a => a.EstateID == estateId
+                && a.Materials.Any(i => i.MaterialQuantity > 0)
+                && a.Medicines.Any(i => i.MedicineAvailability != false
+                && a.Vehicles.Any(i => i.VehicleAvailability != false))
+                );
+
+
+            return  collection
+                           .Include(i => i.EstatesTimes)
+                           .ThenInclude(i => i.Times)
+                           .ThenInclude(i => i.Schedules)
+                           .Include(i => i.Locations)
+                           .Include(i => i.LocationAddress)
+                           .Include(i => i.Materials)
+                           .Include(i => i.Medicines)
+
+                           .Include(i => i.Vehicles)
+                           .ThenInclude(i => i.Brands)
+                           
+                           .Include(i => i.Vehicles)
+                           .ThenInclude(i => i.Model)
+
+                           .Include(i => i.Vehicles)
+                           .ThenInclude(i => i.TypeVehicles)
+                           .FirstOrDefault();
         }
+
+
+
 
             public async Task<IEnumerable<Locations>> GetAllEstatesType()
         {

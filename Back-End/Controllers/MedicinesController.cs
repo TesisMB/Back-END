@@ -30,11 +30,11 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpGet]
-        public async Task<ActionResult<Medicines>> GetAllMedicines()
+        public async Task<ActionResult<Medicines>> GetAllMedicines([FromQuery] int userId)
         {
             try
             {
-                var medicines  = await _repository.Medicines.GetAllMedicines();
+                var medicines  = await _repository.Medicines.GetAllMedicines(userId);
 
                 _logger.LogInfo($"Returned all Materials from database.");
 

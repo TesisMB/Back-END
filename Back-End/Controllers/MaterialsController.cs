@@ -36,11 +36,11 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpGet]
-        public async Task<ActionResult<Materials>> GetAllVolunteers()
+        public async Task<ActionResult<Materials>> GetAllVolunteers([FromQuery] int userId)
         {
             try
             {
-                var materials = await _repository.Materials.GetAllMaterials();
+                var materials = await _repository.Materials.GetAllMaterials(userId);
 
                 _logger.LogInfo($"Returned all Materials from database.");
 

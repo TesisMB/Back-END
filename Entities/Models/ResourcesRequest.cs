@@ -49,7 +49,7 @@ namespace Entities.Models
         public int FK_EmergencyDisasterID { get; set; }
 
         [ForeignKey("FK_Resource_RequestID")]
-        public ICollection<ResourcesRequestMaterialsMedicinesVehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
+        public IEnumerable<ResourcesRequestMaterialsMedicinesVehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
 
         //public Resources  Resources { get; set; }
     }

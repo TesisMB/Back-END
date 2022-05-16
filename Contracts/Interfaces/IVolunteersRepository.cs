@@ -7,7 +7,7 @@ namespace Contracts.Interfaces
 {
     public interface IVolunteersRepository : IRepositoryBase<Volunteers>
     {
-        Task<IEnumerable<Volunteers>> GetAllVolunteers();
+        Task<IEnumerable<Volunteers>> GetAllVolunteers(int userId);
 
         Task<IEnumerable<Volunteers>> GetAllVolunteersApp();
 

@@ -1,4 +1,5 @@
-﻿using Entities.Models;
+﻿using Back_End.Models;
+using Entities.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6,7 +7,7 @@ namespace Contracts.Interfaces
 {
     public interface IMaterialsRepository : IRepositoryBase<Materials>
     {
-        Task<IEnumerable<Materials>> GetAllMaterials();
+        Task<IEnumerable<Materials>> GetAllMaterials(int userId);
 
         Task<Materials> GetMaterialById(string materialId);
 

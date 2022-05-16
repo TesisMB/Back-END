@@ -24,10 +24,13 @@ namespace Repository
         }
 
 
-        public async Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequest(string Condition)
+        public IEnumerable<ResourcesRequest> GetAllResourcesRequest(int userId, string Condition)
         {
 
-            var user = UsersRepository.authUser;
+            //var user = UsersRepository.authUser;
+
+            var user = EmployeesRepository.GetAllEmployeesById(userId);
+
 
             var collection = _cruzRojaContext.Resources_Requests as IQueryable<ResourcesRequest>;
 
@@ -35,12 +38,12 @@ namespace Repository
 
             if(user.Roles.RoleName == "Admin")
             {
-                return await GetAllResourcesRequests(user.FK_EstateID, Condition);
+                return  GetAllResourcesRequests(user.FK_EstateID, Condition);
             }
 
             else if (user.Roles.RoleName == "Coordinador General")
             {
-                return await GetAllResourcesRequests(user.FK_EstateID, Condition);
+                return  GetAllResourcesRequests(user.FK_EstateID, Condition);
             }
 
 
@@ -66,8 +69,7 @@ namespace Repository
             }
 
 
-            return await collection
-                .Include(i => i.EmployeeCreated)
+            return  collection
                 .Include(i => i.EmergenciesDisasters)
                 .ThenInclude(i => i.TypesEmergenciesDisasters)
                 .Include(i => i.EmergenciesDisasters.LocationsEmergenciesDisasters)
@@ -100,19 +102,18 @@ namespace Repository
                 .Include(i => i.EmployeeCreated.Users.Estates.Locations)
 
 
-
-                 .Include(i => i.EmployeeModified)
-                .Include(i => i.EmployeeModified.Users.Persons)
-                .Include(i => i.EmployeeModified.Users.Roles)
-                .Include(i => i.EmployeeModified.Users.Estates)
-                .Include(i => i.EmployeeModified.Users.Estates.LocationAddress)
-                .Include(i => i.EmployeeModified.Users.Estates.Locations)
-                .ToListAsync();
+                .Include(i => i.EmployeeResponse)
+                .Include(i => i.EmployeeResponse.Users.Persons)
+                .Include(i => i.EmployeeResponse.Users.Roles)
+                .Include(i => i.EmployeeResponse.Users.Estates)
+                .Include(i => i.EmployeeResponse.Users.Estates.LocationAddress)
+                .Include(i => i.EmployeeResponse.Users.Estates.Locations)
+                .ToList();
         }
 
 
 
-        public async Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequests(int fK_EstateID, string Condition)
+        public  IEnumerable<ResourcesRequest> GetAllResourcesRequests(int fK_EstateID, string Condition)
         {
             var collection = _cruzRojaContext.Resources_Requests as IQueryable<ResourcesRequest>;
 
@@ -120,7 +121,7 @@ namespace Repository
                                         && a.Condition == Condition)
                                     .AsNoTracking();
 
-            return await collection
+            return  collection
                 .Include(i => i.EmployeeCreated)
                 .Include(i => i.EmergenciesDisasters)
                 .ThenInclude(i => i.TypesEmergenciesDisasters)
@@ -168,7 +169,7 @@ namespace Repository
                 .Include(i => i.EmployeeResponse.Users.Estates)
                 .Include(i => i.EmployeeResponse.Users.Estates.LocationAddress)
                 .Include(i => i.EmployeeResponse.Users.Estates.Locations)
-                .ToListAsync();
+                .ToList();
         }
 
 
@@ -176,22 +177,22 @@ namespace Repository
         {
 
             ResourcesRequest rec = null;
-            resources_Request.CreatedBy = UsersRepository.authUser.UserID;
-            var rol = UsersRepository.authUser.Roles.RoleName;
+            //resources_Request.CreatedBy = UsersRepository.authUser.UserID;
+            //var rol = UsersRepository.authUser.Roles.RoleName;
 
 
             //Traigo todos los encargados de Logistica para enviarles un email
             //con la solicitudes nuevas o alguna actualizacion 
 
-            List<Users> logsitica = new List<Users>();
+            //List<Users> logsitica = new List<Users>();
 
-            logsitica = db.Users
-                .Where(
-                        a => a.Roles.RoleName == "Encargado de Logistica"
-                        && a.Estates.Locations.LocationDepartmentName == UsersRepository.authUser.Estates.Locations.LocationDepartmentName)
-                        .Include(a => a.Persons)
-                        .Include(a => a.Employees)
-                .ToList();
+            //logsitica = db.Users
+            //    .Where(
+            //            a => a.Roles.RoleName == "Encargado de Logistica"
+            //            && a.Estates.Locations.LocationDepartmentName == UsersRepository.authUser.Estates.Locations.LocationDepartmentName)
+            //            .Include(a => a.Persons)
+            //            .Include(a => a.Employees)
+            //    .ToList();
 
 
             //var userRequest = ResourcesRequestForCreationDto.UserRequest;

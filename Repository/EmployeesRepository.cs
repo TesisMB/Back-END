@@ -3,7 +3,9 @@ using Back_End.Entities;
 using Back_End.Helpers;
 using Back_End.Models;
 using Contracts.Interfaces;
+using Entities.DataTransferObjects.Locations___Dto;
 using Entities.Helpers;
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,7 +16,7 @@ namespace Repository
 {
     public class EmployeesRepository : RepositoryBase<Employees>, IEmployeesRepository
     {
-        private CruzRojaContext _cruzRojaContext;
+        private static CruzRojaContext _cruzRojaContext = new CruzRojaContext();
 
         private IMapper _mapper;
         //ctor
@@ -22,20 +24,22 @@ namespace Repository
         public EmployeesRepository(CruzRojaContext cruzRojaContext, IMapper mapper) : base(cruzRojaContext)
         {
             _mapper = mapper;
-            _cruzRojaContext = cruzRojaContext;
         }
 
-        public async Task<IEnumerable<Employees>> GetAllEmployees()
+        public async Task<IEnumerable<Employees>> GetAllEmployees(int userId)
         {
-            var user = UsersRepository.authUser;
+            //var user = UsersRepository.authUser;
 
+          
             var Collection = _cruzRojaContext.Employees as IQueryable<Employees>;
+
+            var locations = GetAllEmployeesById(userId);
 
 
             Collection = Collection.Where(
-                a => a.Users.Estates.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName
-                && a.Users.Estates.Locations.LocationCityName == user.Estates.Locations.LocationCityName
-                && a.Users.Estates.Locations.LocationMunicipalityName == user.Estates.Locations.LocationMunicipalityName);
+                a => a.Users.Estates.Locations.LocationDepartmentName == locations.Estates.Locations.LocationDepartmentName
+                && a.Users.Estates.Locations.LocationCityName == locations.Estates.Locations.LocationCityName
+                && a.Users.Estates.Locations.LocationMunicipalityName == locations.Estates.Locations.LocationMunicipalityName);
 
             return await Collection
                     .Include(i => i.Users)
@@ -50,6 +54,21 @@ namespace Repository
                     .ToListAsync();
         }
 
+
+        public static Users GetAllEmployeesById(int id)
+        {
+            Users user = null;
+
+            user = _cruzRojaContext.Users
+                .Where(a => a.UserID.Equals(id))
+                .Include(a => a.Roles)
+                .Include(a => a.Estates)
+                .ThenInclude(a => a.Locations)
+                .FirstOrDefault();
+
+            return user;
+        }
+
         public async Task<Employees> GetEmployeeById(int employeeId)
         {
             return await FindByCondition(empl => empl.EmployeeID.Equals(employeeId))
@@ -58,9 +77,9 @@ namespace Repository
                     .FirstOrDefaultAsync();
         }
 
-        public async Task<Employees> GetEmployeeWithDetails(int employeeId)
+        public Employees GetEmployeeWithDetails(int employeeId)
         {
-            return await FindByCondition(empl => empl.EmployeeID.Equals(employeeId))
+            return FindByCondition(empl => empl.EmployeeID.Equals(employeeId))
                      .Include(i => i.Users)
                     .Include(i => i.Users.Roles).Include(i => i.Users.Persons)
                     .Include(i => i.Users.Estates)
@@ -69,7 +88,7 @@ namespace Repository
                     .ThenInclude(a => a.Times)
                     .ThenInclude(a => a.Schedules)
                     .Include(a => a.Users.Estates.Locations)
-                    .FirstOrDefaultAsync();
+                    .FirstOrDefault();
         }
 
         public void CreateEmployee(Users employee)
@@ -102,11 +121,13 @@ namespace Repository
             return employee;
         }
 
-       
+
 
         public void UpdateEmployee(Employees employee)
         {
             Update(employee);
         }
+
+
     }
 }

@@ -18,14 +18,16 @@ namespace Repository
             _cruzRojaContext = cruzRojaContext;
         }
 
-        public async Task<IEnumerable<Medicines>> GetAllMedicines()
+        public async Task<IEnumerable<Medicines>> GetAllMedicines(int userId)
         {
-            var medicines = UsersRepository.authUser;
+            //var medicines = UsersRepository.authUser;
+
+            var user = EmployeesRepository.GetAllEmployeesById(userId);
 
             var collection = _cruzRojaContext.Medicines as IQueryable<Medicines>;
 
             collection = collection.Where(
-                                            a => a.Estates.Locations.LocationDepartmentName == medicines.Estates.Locations.LocationDepartmentName);
+                                            a => a.Estates.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
 
             return await collection
                 .Include(a => a.Estates)
@@ -93,7 +95,7 @@ namespace Repository
 
         public void CreateMedicine(Medicines medicine)
         {
-            spaceCamelCase(medicine);
+            //spaceCamelCase(medicine);
 
             Create(medicine);
         }

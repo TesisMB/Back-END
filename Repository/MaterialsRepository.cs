@@ -18,16 +18,17 @@ namespace Repository
         {
             _cruzRojaContext = cruzRojaContext;
         }
-        public async Task<IEnumerable<Materials>> GetAllMaterials()
+        public async Task<IEnumerable<Materials>> GetAllMaterials(int userId)
         {
-            var material = UsersRepository.authUser;
+            //var material = UsersRepository.authUser;
 
+            var user = EmployeesRepository.GetAllEmployeesById(userId);
 
             var collection = _cruzRojaContext.Materials as IQueryable<Materials>;
 
 
             collection = collection.Where(
-                a => a.Estates.Locations.LocationDepartmentName == material.Estates.Locations.LocationDepartmentName);
+                a => a.Estates.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
 
 
 

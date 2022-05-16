@@ -38,11 +38,11 @@ namespace Back_End.Controllers
 
         [Route("api/Voluntarios")]
         [HttpGet]
-        public async Task<ActionResult<Volunteers>> GetAllVolunteers()
+        public async Task<ActionResult<Volunteers>> GetAllVolunteers([FromQuery] int userId)
         {
             try
             {
-                var volunteers = await _repository.Volunteers.GetAllVolunteers();
+                var volunteers = await _repository.Volunteers.GetAllVolunteers(userId);
 
                 _logger.LogInfo($"Returned all Volunteers from database.");
 

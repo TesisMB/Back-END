@@ -16,6 +16,8 @@ namespace Entities.DataTransferObjects.Resources_Request___Dto
 
         public string Condition { get; set; } = "Pendiente";
 
+        public int CreatedBy { get; set; }
+
         public int FK_UserID { get; set; }
 
         public int? ModifiedBy { get; set; }

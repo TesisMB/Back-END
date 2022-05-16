@@ -30,7 +30,6 @@ namespace Repository
 
             //collection = (from x in collection where userChatRooms.Any(a => a.FK_ChatRoomID == x.ID && x.EmergenciesDisasters.EmergencyDisasterEndDate == null) select x).ToList();
 
-
             return await collection
                 .Include(a => a.EmergenciesDisasters)
                 .ThenInclude(a => a.LocationsEmergenciesDisasters)

@@ -33,11 +33,11 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpGet]
-        public async Task<ActionResult<Vehicles>> GetAllVehicles([FromQuery] vehiclesFiltersDto vehiclesFilters)
+        public async Task<ActionResult<Vehicles>> GetAllVehicles([FromQuery] int userId)
         {
             try
             {
-                var vehicles = await _repository.Vehicles.GetAllVehiclesFilters(vehiclesFilters);
+                var vehicles = await _repository.Vehicles.GetAllVehiclesFilters(userId);
                 _logger.LogInfo($"Returned all vehicles from database.");
 
                 var vehiclesResult = _mapper.Map<IEnumerable<Resources_Dto>>(vehicles);

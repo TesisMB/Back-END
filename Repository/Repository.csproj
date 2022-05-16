@@ -21,6 +21,7 @@
     <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="5.2.4" />
     <PackageReference Include="MimeKit" Version="2.13.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.1.4" />
+    <PackageReference Include="Wkhtmltopdf.NetCore" Version="3.0.2" />
   </ItemGroup>
 
   <ItemGroup>

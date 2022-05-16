@@ -1,7 +1,6 @@
 ﻿using Back_End.Entities;
 using Back_End.Models;
 using Contracts.Interfaces;
-using Entities.DataTransferObjects.Vehicles___Dto;
 using Entities.Helpers;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -19,34 +18,14 @@ namespace Repository
         {
             _cruzRojaContext = cruzRojaContext;
         }
-        public async Task<IEnumerable<Vehicles>> GetAllVehiclesFilters(vehiclesFiltersDto vehicles)
+        public async Task<IEnumerable<Vehicles>> GetAllVehiclesFilters(int userId)
         {
-            var vehicles1 = UsersRepository.authUser;
+            var user = EmployeesRepository.GetAllEmployeesById(userId);
 
             var collection = _cruzRojaContext.Vehicles as IQueryable<Vehicles>;
 
-            if (string.IsNullOrEmpty(vehicles.Type) && (vehicles.VehicleYear == null))
-            {
-                return GetAllVehicles();
-            }
-
-
-            if (!string.IsNullOrEmpty(vehicles.Type) && (vehicles.VehicleYear != null))
-            {
-                collection = collection.Where(
-                                      a => a.TypeVehicles.Type == vehicles.Type
-                                      &&
-                                       a.Estates.Locations.LocationDepartmentName == vehicles1.Estates.Locations.LocationDepartmentName);
-            }
-
-
-            if ((vehicles.VehicleYear != null))
-            {
-                collection = collection.Where(
-                                      a => a.VehicleYear == vehicles.VehicleYear
-                                      &&
-                                       a.Estates.Locations.LocationDepartmentName == vehicles1.Estates.Locations.LocationDepartmentName);
-            }
+            collection = collection.Where(a=>  a.Estates.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
+            
 
             return await collection
                       .Include(a => a.Estates)

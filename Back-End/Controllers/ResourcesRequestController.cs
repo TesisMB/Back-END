@@ -46,7 +46,7 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpGet]
-        public async Task<ActionResult<ResourcesRequest>> GetAllResourceResquest([FromQuery] int userId ,[FromQuery] string Condition)
+        public async Task<ActionResult<ResourcesRequest>> GetAllResourceResquest([FromQuery] int userId ,[FromQuery] string? Condition)
         {
 
             var resource_Request =  _repository.Resources_Requests.GetAllResourcesRequest(userId, Condition);

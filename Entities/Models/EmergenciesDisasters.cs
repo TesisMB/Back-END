@@ -44,7 +44,7 @@ namespace Entities.Models
 
         public ChatRooms ChatRooms { get; set; }
 
-        public Victims Victims { get; set; }
+        public Victims? Victims { get; set; }
 
         public DateTime? EmergencyDisasterDateModified { get; set; }
 

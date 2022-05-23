@@ -19,7 +19,6 @@ namespace Repository
         private static CruzRojaContext _cruzRojaContext = new CruzRojaContext();
 
         private IMapper _mapper;
-        //ctor
 
         public EmployeesRepository(CruzRojaContext cruzRojaContext, IMapper mapper) : base(cruzRojaContext)
         {

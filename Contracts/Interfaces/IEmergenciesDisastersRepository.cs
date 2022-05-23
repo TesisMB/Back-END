@@ -8,9 +8,8 @@ namespace Contracts.Interfaces
 {
     public interface IEmergenciesDisastersRepository : IRepositoryBase<EmergenciesDisasters>
     {
-        Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisasters();
-        Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisastersWithourFilter();
-        Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisastersWithourFilterApp();
+        Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisasters(int userId);
+        Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisastersWithourFilter(int userId, string limit);
 
 
         Task<EmergenciesDisasters> GetEmergencyDisasterById(int emergencydisasterId);

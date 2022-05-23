@@ -35,8 +35,20 @@ namespace Repository
             var collection = _cruzRojaContext.Resources_Requests as IQueryable<ResourcesRequest>;
 
             //Admin y C.General -> tiene acceso a todo en funcion del departamento
+            if (String.IsNullOrEmpty(Condition))
+            {
+                collection = collection.Where(
+                            a => a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID
+                            && a.CreatedBy == user.UserID)
+                            .OrderByDescending(a => a.ID)
+                            .Take(2)
+                            .AsNoTracking();
 
-            if(user.Roles.RoleName == "Admin")
+
+            }
+            else
+            {
+                if (user.Roles.RoleName == "Admin")
             {
                 return  GetAllResourcesRequests(user.FK_EstateID, Condition);
             }
@@ -66,6 +78,7 @@ namespace Repository
                                             && a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID
                                             && a.CreatedBy == user.UserID)
                                             .AsNoTracking();
+            }
             }
 
 

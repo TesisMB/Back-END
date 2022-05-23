@@ -20,10 +20,12 @@ namespace Repository
         }
 
 
-        public async Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisasters()
+        public async Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisasters(int userId)
         {
 
-            var user = UsersRepository.authUser;
+            //var user = UsersRepository.authUser;
+            var user = EmployeesRepository.GetAllEmployeesById(userId);
+
             var collection = _cruzRojaContext.EmergenciesDisasters as IQueryable<EmergenciesDisasters>;
 
             if (user.Roles.RoleName != "Coordinador General" && user.Roles.RoleName != "Admin")
@@ -45,14 +47,29 @@ namespace Repository
 
 
 
-        public async Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisastersWithourFilter()
+        public async Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisastersWithourFilter(int userId, string limit)
         {
-            var user = UsersRepository.authUser;
+            //var user = UsersRepository.authUser;
+
+            var user = EmployeesRepository.GetAllEmployeesById(userId);
 
             var collection = _cruzRojaContext.EmergenciesDisasters as IQueryable<EmergenciesDisasters>;
+            if (string.IsNullOrEmpty(limit))
+            {
+                collection = collection.Where(a => a.FK_EstateID == user.FK_EstateID);
+
+            }
+            else {
+
+                collection = collection.Where(a => a.FK_EstateID == user.FK_EstateID)
+                    .OrderByDescending(a => a.FK_AlertID)
+                    .Take(2)
+                    .AsNoTracking();
+
+            }
+
 
             //Falta filtrar unicamente los recursos solamente aceptados
-            collection = collection.Where(a => a.FK_EstateID == user.FK_EstateID);
 
             return await collection
                 .Include(i => i.TypesEmergenciesDisasters)

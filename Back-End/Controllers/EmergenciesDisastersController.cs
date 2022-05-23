@@ -34,11 +34,11 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpGet]
-        public async Task<ActionResult<EmergenciesDisasters>> GetAllEmegenciesDisasters()
+        public async Task<ActionResult<EmergenciesDisasters>> GetAllEmegenciesDisasters(int userId)
         {
             try
             {
-                var emergenciesDisasters = await _repository.EmergenciesDisasters.GetAllEmergenciesDisasters();
+                var emergenciesDisasters = await _repository.EmergenciesDisasters.GetAllEmergenciesDisasters(userId);
 
                 _logger.LogInfo($"Returned all emergenciesDisasters from database.");
 
@@ -61,11 +61,11 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpGet("WithoutFilter")]
-        public async Task<ActionResult<EmergenciesDisasters>> GetAllEmergenciesDisastersWithoutFilter()
+        public async Task<ActionResult<EmergenciesDisasters>> GetAllEmergenciesDisastersWithoutFilter(int userId, string? limit)
         {
             try
             {
-                var emergenciesDisasters = await _repository.EmergenciesDisasters.GetAllEmergenciesDisastersWithourFilter();
+                var emergenciesDisasters = await _repository.EmergenciesDisasters.GetAllEmergenciesDisastersWithourFilter(userId, limit);
 
                 _logger.LogInfo($"Returned all emergenciesDisasters from database.");
 

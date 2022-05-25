@@ -20,7 +20,7 @@ namespace Repository
         }
         public async Task<IEnumerable<Vehicles>> GetAllVehiclesFilters(int userId)
         {
-            var user = EmployeesRepository.GetAllEmployeesById(userId);
+            var user =  EmployeesRepository.GetAllEmployeesById(userId);
 
             var collection = _cruzRojaContext.Vehicles as IQueryable<Vehicles>;
 

@@ -17,6 +17,7 @@ namespace Repository
         public readonly static CruzRojaContext db = new CruzRojaContext();
         public  static ResourcesRequestMaterialsMedicinesVehicles recursos = null;
         public ResourcesRequest userReq = null;
+        private Users user = null;
 
         public Resources_RequestRepository(CruzRojaContext cruzRojaContext) : base(cruzRojaContext)
         {
@@ -24,18 +25,24 @@ namespace Repository
         }
 
 
-        public IEnumerable<ResourcesRequest> GetAllResourcesRequest(int userId, string Condition)
+        public async Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequest(int userId, string Condition)
         {
 
             //var user = UsersRepository.authUser;
 
-            var user = EmployeesRepository.GetAllEmployeesById(userId);
+            //user = await EmployeesRepository.GetAllEmployeesById(userId);
 
+            user = await _cruzRojaContext.Users
+               .Where(a => a.UserID.Equals(userId))
+               .Include(a => a.Roles)
+               .Include(a => a.Estates)
+               .ThenInclude(a => a.Locations)
+               .FirstOrDefaultAsync();
 
             var collection = _cruzRojaContext.Resources_Requests as IQueryable<ResourcesRequest>;
 
             //Admin y C.General -> tiene acceso a todo en funcion del departamento
-            if (String.IsNullOrEmpty(Condition))
+            if (!String.IsNullOrEmpty(Condition))
             {
                 collection = collection.Where(
                             a => a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID
@@ -43,8 +50,6 @@ namespace Repository
                             .OrderByDescending(a => a.ID)
                             .Take(2)
                             .AsNoTracking();
-
-
             }
             else
             {

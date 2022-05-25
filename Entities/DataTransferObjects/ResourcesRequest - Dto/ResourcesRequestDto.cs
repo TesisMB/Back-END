@@ -32,7 +32,7 @@ namespace Entities.DataTransferObjects.Resources_Request___Dto
 
         //Emergencias
         public int EmergencyDisasterID { get; set; }
-
+        public string EmergencyDisasterEndDate{ get; set; }
 
         //Locations
 

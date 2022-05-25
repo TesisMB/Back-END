@@ -24,9 +24,11 @@ namespace Entities.Profiles
                  .ForMember(dest => dest.AnsweredByEmployee, opts => opts.MapFrom(src => src.EmployeeResponse.Users.Persons.FirstName + " " + src.EmployeeResponse.Users.Persons.LastName))
 
                  //Emergencia
-                 
+
                  .ForMember(dest => dest.EmergencyDisasterID, opts => opts.MapFrom(src => src.EmergenciesDisasters.EmergencyDisasterID))
-             
+
+                 .ForMember(dest => dest.EmergencyDisasterEndDate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDate2(src.EmergenciesDisasters.EmergencyDisasterEndDate)))
+
 
                  //Locations
                  .ForMember(dest => dest.LocationCityName, opts => opts.MapFrom(src => src.EmergenciesDisasters.LocationsEmergenciesDisasters.LocationCityName))

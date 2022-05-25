@@ -26,7 +26,7 @@ namespace Repository
 
             //var volunteers = UsersRepository.authUser;
 
-            var user = EmployeesRepository.GetAllEmployeesById(userId);
+            var user =  EmployeesRepository .GetAllEmployeesById(userId);
 
             var collection = _cruzRojaContext.Volunteers as IQueryable<Volunteers>;
 

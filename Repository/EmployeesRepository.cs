@@ -18,6 +18,9 @@ namespace Repository
     {
         private static CruzRojaContext _cruzRojaContext = new CruzRojaContext();
 
+        public static Users user;
+
+
         private IMapper _mapper;
 
         public EmployeesRepository(CruzRojaContext cruzRojaContext, IMapper mapper) : base(cruzRojaContext)
@@ -32,7 +35,7 @@ namespace Repository
           
             var Collection = _cruzRojaContext.Employees as IQueryable<Employees>;
 
-            var locations = GetAllEmployeesById(userId);
+            var locations =  GetAllEmployeesById(userId);
 
 
             Collection = Collection.Where(
@@ -56,13 +59,12 @@ namespace Repository
 
         public static Users GetAllEmployeesById(int id)
         {
-            Users user = null;
-
-            user = _cruzRojaContext.Users
+            user =  _cruzRojaContext.Users
                 .Where(a => a.UserID.Equals(id))
                 .Include(a => a.Roles)
                 .Include(a => a.Estates)
                 .ThenInclude(a => a.Locations)
+                .AsNoTracking()
                 .FirstOrDefault();
 
             return user;

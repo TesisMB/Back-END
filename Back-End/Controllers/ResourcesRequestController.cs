@@ -49,7 +49,7 @@ namespace Back_End.Controllers
         public async Task<ActionResult<ResourcesRequest>> GetAllResourceResquest([FromQuery] int userId ,[FromQuery] string? Condition)
         {
 
-            var resource_Request =  _repository.Resources_Requests.GetAllResourcesRequest(userId, Condition);
+            var resource_Request =  await _repository.Resources_Requests.GetAllResourcesRequest(userId, Condition);
             _logger.LogInfo($"Returned all Resources_Request from database.");
 
             var resource_RequestResult = _mapper.Map<IEnumerable<ResourcesRequestDto>>(resource_Request);
@@ -208,7 +208,7 @@ namespace Back_End.Controllers
         }
 
         [HttpGet("PDF/{userId}")]
-        public IActionResult CreatePDF(int userId)
+        public async Task<IActionResult> CreatePDF(int userId)
         {
             var requests = _repository.Resources_Requests.GetAllResourcesRequest(userId, "Pendiente");
 
@@ -224,7 +224,7 @@ namespace Back_End.Controllers
                 var objectSettings = new ObjectSettings
                 {
                     PagesCount = true,
-                    HtmlContent = RequestHistory.GetHTMLString(requests),
+                   // HtmlContent = await RequestHistory.GetHTMLString(requests),
                     WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "stylesForRequest.css") },
                     FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
                 };

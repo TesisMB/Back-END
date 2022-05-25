@@ -22,7 +22,8 @@ namespace Repository
         {
             //var material = UsersRepository.authUser;
 
-            var user = EmployeesRepository.GetAllEmployeesById(userId);
+            var user =  EmployeesRepository.GetAllEmployeesById(userId);
+
 
             var collection = _cruzRojaContext.Materials as IQueryable<Materials>;
 

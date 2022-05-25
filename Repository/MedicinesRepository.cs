@@ -22,7 +22,7 @@ namespace Repository
         {
             //var medicines = UsersRepository.authUser;
 
-            var user = EmployeesRepository.GetAllEmployeesById(userId);
+            var user =  EmployeesRepository .GetAllEmployeesById(userId);
 
             var collection = _cruzRojaContext.Medicines as IQueryable<Medicines>;
 

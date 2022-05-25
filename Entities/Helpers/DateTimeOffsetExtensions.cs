@@ -15,6 +15,14 @@ namespace Entities.Helpers
             return fecha;
         }
 
+        public static string GetDate2(DateTime? date)
+        {
+            var fecha = date?.ToString("dd/MM/yyyy");
+
+            return fecha;
+        }
+
+
         public static string GetDateToMedicine(DateTime date)
         {
             var fecha = date.ToString("MM/yyyy");

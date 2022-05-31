@@ -1,5 +1,8 @@
-﻿using Entities.DataTransferObjects.Vehicles___Dto.Creation;
+﻿using Back_End.Entities;
+using Entities.DataTransferObjects.Vehicles___Dto.Creation;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Entities.Validator.Creation.Vehicles
 {
@@ -8,16 +11,18 @@ namespace Entities.Validator.Creation.Vehicles
         public VehiclesValidator()
         {
             RuleFor(x => x.VehiclePatent)
-            .NotEmpty().WithMessage("{PropertyName} is required.")
-            .MaximumLength(9).WithMessage("The {PropertyName} must be 9 characters. You entered {TotalLength} characters");
+            .Must(BeUniqueDni).WithMessage("Esta patente ya existe en el sistema");
 
 
-           /* RuleFor(x => x.VehicleUtility)
-           .NotEmpty().WithMessage("{PropertyName} is required.")
-           .MaximumLength(50).WithMessage("The {PropertyName} must be 50 characters. You entered {TotalLength} characters");
-
-
-            */
         }
+
+        private bool BeUniqueDni(string patente)
+        {
+                return new CruzRojaContext().Vehicles
+                    .AsNoTracking()
+                    .FirstOrDefault(x => x.VehiclePatent == patente) == null;
+        }
+
+
     }
 }

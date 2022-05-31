@@ -27,10 +27,19 @@ namespace Entities.Models
         public string Reason { get; set; }
 
         [Required]
-        [ForeignKey("FK_UserID")]
-        public Users Users { get; set; }
-        public int FK_UserID { get; set; }
+        [ForeignKey("CreatedBy")]
+        public Employees EmployeeCreated { get; set; }
+        public int CreatedBy { get; set; }
 
+        [ForeignKey("ModifiedBy")]
+        public Employees EmployeeModified{ get; set; }
+
+        public DateTime? RequestDateModified { get; set; }
+        public int? ModifiedBy { get; set; }
+
+        [ForeignKey("AnsweredBy")]
+        public Employees EmployeeResponse{ get; set; }
+        public int? AnsweredBy { get; set; }
 
 
         [ForeignKey("FK_EmergencyDisasterID")]
@@ -40,7 +49,7 @@ namespace Entities.Models
         public int FK_EmergencyDisasterID { get; set; }
 
         [ForeignKey("FK_Resource_RequestID")]
-        public ICollection<ResourcesRequestMaterialsMedicinesVehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
+        public IEnumerable<ResourcesRequestMaterialsMedicinesVehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
 
         //public Resources  Resources { get; set; }
     }

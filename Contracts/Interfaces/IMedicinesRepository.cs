@@ -9,11 +9,11 @@ namespace Contracts.Interfaces
     public interface IMedicinesRepository : IRepositoryBase<Medicines>
     {
 
-        Task<IEnumerable<Medicines>> GetAllMedicines();
+        Task<IEnumerable<Medicines>> GetAllMedicines(int userId);
 
-        Task<Medicines> GetMedicineById(int medicineId);
+        Task<Medicines> GetMedicineById(string medicineId);
 
-        Task<Medicines> GetMedicinelWithDetails(int medicineId);
+        Task<Medicines> GetMedicinelWithDetails(string medicineId);
 
         void CreateMedicine(Medicines medicine);
         void UpdateMedicine(Medicines medicine);

@@ -8,10 +8,10 @@ namespace Entities.Validator.Update.Vehicles
         public VehiclesValidator()
         {
 
-            RuleFor(x => x.VehicleUtility)
-           .MaximumLength(50).WithMessage("The {PropertyName} must be 50 characters. You entered {TotalLength} characters");
+           // RuleFor(x => x.VehicleUtility)
+           //.MaximumLength(50).WithMessage("The {PropertyName} must be 50 characters. You entered {TotalLength} characters");
 
-            RuleFor(x => x.VehicleAvailability).Must(x => x == false || x == true);
+           // RuleFor(x => x.VehicleAvailability).Must(x => x == false || x == true);
 
 
 

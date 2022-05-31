@@ -25,6 +25,8 @@ namespace Back_End.Controllers
 
         ActionResult ret = null;
 
+        //********************************* FUNCIONANDO *********************************
+
         [HttpPost("app/login")]
         public async Task<ActionResult<Users>> LoginApp([FromBody] UserLoginDto user)
         {
@@ -34,11 +36,15 @@ namespace Back_End.Controllers
                 if (auth.UserAvailability)
                 {
 
-                    if (auth.VolunteerAvatar != "https://i.imgur.com/8AACVdK.png")
+                     if(auth.VolunteerAvatar != null)
                     {
+
                         auth.VolunteerAvatar = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
-                                        Request.Scheme, Request.Host, Request.PathBase, auth.VolunteerAvatar);
+                                            Request.Scheme, Request.Host, Request.PathBase, auth.VolunteerAvatar);
                     }
+
+
+                    
 
                     ret = StatusCode(200, auth);
                     _logger.LogInfo($"Returned User.");
@@ -58,8 +64,7 @@ namespace Back_End.Controllers
         }
 
 
-
-
+        //********************************* FUNCIONANDO *********************************
         [HttpPost("login")]
         public async Task<ActionResult<UserEmployeeAuthDto>> LoginWeb([FromBody] UserLoginDto user)
         {
@@ -90,6 +95,8 @@ namespace Back_End.Controllers
             return ret;
         }
 
+     
+        
         [HttpPost("forgot-password")]
         public ActionResult ForgotPassword([FromBody] Persons email)
         {

@@ -1,9 +1,4 @@
-﻿using Back_End.Models.Employees___Dto;
-using Back_End.Models.Users___Dto.Users___Persons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace Back_End.Models
 {
@@ -11,14 +6,14 @@ namespace Back_End.Models
     {
         public int EmployeeID { get; set; }
 
-
-        public int UserID { get; set; }
-        public Boolean UserAvailability { get; set; }
+        public string Name { get; set; }
 
         public string UserDni { get; set; }
+
         public string RoleName { get; set; }
 
-        public string Name { get; set; }
+        public Boolean UserAvailability { get; set; }
+
         public Boolean Status { get; set; }
 
     }

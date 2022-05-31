@@ -25,7 +25,7 @@ namespace Repository
                 .Include(i => i.EmergenciesDisasters)
                 .ThenInclude(i => i.Alerts)
                 .Include(i => i.EmergenciesDisasters)
-                .ThenInclude(i => i.Employees)
+                .ThenInclude(i => i.EmployeeIncharge)
                 .Include(i => i.EmergenciesDisasters)
                 .ThenInclude(i => i.LocationsEmergenciesDisasters)
                 .FirstOrDefaultAsync();

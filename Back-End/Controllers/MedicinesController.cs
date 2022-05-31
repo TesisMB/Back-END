@@ -4,7 +4,6 @@ using Entities.DataTransferObjects.Medicines___Dto;
 using Entities.DataTransferObjects.ResourcesDto;
 using Entities.Helpers;
 using Entities.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -29,21 +28,22 @@ namespace Back_End.Controllers
             _mapper = mapper;
         }
 
+        //********************************* FUNCIONANDO *********************************
         [HttpGet]
-        public async Task<ActionResult<Medicines>> GetAllMedicines()
+        public async Task<ActionResult<Medicines>> GetAllMedicines([FromQuery] int userId)
         {
             try
             {
-                var volunteers = await _repository.Medicines.GetAllMedicines();
+                var medicines  = await _repository.Medicines.GetAllMedicines(userId);
 
                 _logger.LogInfo($"Returned all Materials from database.");
 
-                var medicinesResult = _mapper.Map<IEnumerable<Resources_Dto>>(volunteers);
+                var medicinesResult = _mapper.Map<IEnumerable<Resources_Dto>>(medicines);
 
                 foreach (var item in medicinesResult)
                 {
-                    
-                     if(item.Picture != "https://i.imgur.com/S9HJEwF.png")
+
+                    if (item.Picture != "https://i.imgur.com/S9HJEwF.png")
                     {
                         item.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
                                         Request.Scheme, Request.Host, Request.PathBase, item.Picture);
@@ -51,7 +51,7 @@ namespace Back_End.Controllers
 
                         DateTime date = Convert.ToDateTime(item.Medicines.MedicineExpirationDate);
 
-                        if (date < DateTime.Now)
+                        if (date > DateTime.Now)
                         {
                             item.Availability = false;
                         }
@@ -71,8 +71,10 @@ namespace Back_End.Controllers
             }
         }
 
+      
+        //********************************* FUNCIONANDO *********************************
         [HttpGet("{medicineId}")]
-        public async Task<ActionResult<Medicines>> GetMedicineWithDetails(int medicineId)
+        public async Task<ActionResult<Medicines>> GetMedicineWithDetails(string medicineId)
         {
             try
             {
@@ -114,6 +116,8 @@ namespace Back_End.Controllers
             }
         }
 
+
+        //********************************* FUNCIONANDO *********************************
         [HttpPost]
         public async Task<ActionResult<Medicines>> CreateMedicine([FromBody] Resources_ForCreationDto medicine)
         {
@@ -132,30 +136,11 @@ namespace Back_End.Controllers
 
                 var medicineEntity = _mapper.Map<Medicines>(medicine);
 
-
-             //   medicine.ImageFile = ImageFile;
-
-                if(medicine.Picture == null)
-                {
+                if (medicine.Picture == null) 
                     medicineEntity.MedicinePicture = "https://i.imgur.com/S9HJEwF.png";
-                }
                 else
-                {
                     medicineEntity.MedicinePicture = medicine.Picture;
-             //       medicineEntity.MedicinePicture = await UploadController.SaveImage(medicine.ImageFile, "Resources");
-                }
-
-                medicineEntity.MedicineName = medicine.Name;
-                medicineEntity.MedicineDonation = medicine.Donation;
-                medicineEntity.MedicineQuantity = medicine.Quantity;
-                medicineEntity.MedicineAvailability = true;
-                medicineEntity.MedicineUtility = medicine.Description;
-                //medicineEntity.MedicineExpirationDate = medicine.Medicines.MedicineExpirationDate;
-                medicineEntity.MedicineLab = medicine.Medicines.MedicineLab;
-                medicineEntity.MedicineDrug = medicine.Medicines.MedicineDrug;
-                medicineEntity.MedicineWeight = medicine.Medicines.MedicineWeight;
-                medicineEntity.MedicineUnits = medicine.Medicines.MedicineUnits;
-
+                
 
                 _repository.Medicines.CreateMedicine(medicineEntity);
 
@@ -173,8 +158,10 @@ namespace Back_End.Controllers
             }
         }
 
+        
+        //********************************* FUNCIONANDO *********************************
         [HttpPatch("{medicineId}")]
-        public async Task<ActionResult> UpdateMedicine(int medicineId, JsonPatchDocument<Resources_ForCreationDto> patchDocument)
+        public async Task<ActionResult> UpdateMedicine(string medicineId, JsonPatchDocument<MedicineForUpdateDto> patchDocument)
         {
             try
             {
@@ -186,34 +173,20 @@ namespace Back_End.Controllers
                     return NotFound();
                 }
 
-                var medicineToPatch = _mapper.Map<Resources_ForCreationDto>(medicineEntity);
+                var medicineToPatch = _mapper.Map<MedicineForUpdateDto>(medicineEntity);
+                medicineToPatch.DateModified = DateTime.Now;
+
 
                 patchDocument.ApplyTo(medicineToPatch, ModelState);
 
 
-                /*  if (!TryValidateModel(medicineToPatch))
-                  {
-                      return ValidationProblem(ModelState);
-                  }*/
-
-                MedicineForUpdateDto medicine = new MedicineForUpdateDto
+                if (!TryValidateModel(medicineToPatch))
                 {
-                    MedicineQuantity = medicineToPatch.Quantity,
-                    MedicinePicture = medicineToPatch.Picture,
-                    MedicineName = medicineToPatch.Name,
-                    MedicineAvailability = medicineToPatch.Availability,
-                    MedicineDonation = medicineToPatch.Donation,
-                    MedicineUtility = medicineToPatch.Description,
-                    //medicine.MedicineExpirationDate = medicineToPatch.Medicines.MedicineExpirationDate;
-                    MedicineDrug = medicineToPatch.Medicines.MedicineDrug,
-                    MedicineWeight = medicineToPatch.Medicines.MedicineWeight,
-                    MedicineUnits = medicineToPatch.Medicines.MedicineUnits,
-                    FK_EstateID = medicineToPatch.FK_EstateID,
-                    MedicineLab = medicineToPatch.Medicines.MedicineLab
-                };
+                    return ValidationProblem(ModelState);
+                }
 
 
-                var medicineResult = _mapper.Map(medicine, medicineEntity);
+                var medicineResult = _mapper.Map(medicineToPatch, medicineEntity);
 
                 _repository.Medicines.Update(medicineResult);
 
@@ -228,8 +201,10 @@ namespace Back_End.Controllers
             }
         }
 
+      
+        //********************************* FUNCIONANDO *********************************
         [HttpDelete("{medicineId}")]
-        public async Task<ActionResult> DeleteMedicine(int medicineId)
+        public async Task<ActionResult> DeleteMedicine(string medicineId)
         {
             try
             {

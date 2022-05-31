@@ -36,9 +36,10 @@ namespace Back_End.Models
 
         public ICollection<Users> Users { get; set; }
 
-        public ICollection<Vehicles> Vehicles { get; set; }
+        public IEnumerable<Vehicles> Vehicles { get; set; }
 
-        public ICollection<Medicines> Medicines { get; set; }
+        public IEnumerable<Medicines> Medicines { get; set; }
+        public IEnumerable<Materials> Materials { get; set; }
 
         public ICollection<EmergenciesDisasters> EmergenciesDisasters { get; set; }
 

@@ -17,6 +17,7 @@ namespace Back_End.Entities
               : base(options)
         {
         }
+     
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -41,12 +42,76 @@ namespace Back_End.Entities
             modelBuilder.Entity<UsersChat>()
             .HasKey(s => new { s.FK_UserID, s.FK_ChatID });
 
-           
+
+            modelBuilder.Entity<EmergenciesDisasters>()
+                .HasOne(x => x.EmployeeIncharge)
+                .WithMany(x => x.EmergenciesDisasters)
+                .HasForeignKey(x => x.Fk_EmplooyeeID);
+
+
+            modelBuilder.Entity<EmergenciesDisasters>()
+              .HasOne(x => x.EmployeeModified)
+              .WithMany(x => x.EmergenciesDisastersModified)
+              .HasForeignKey(x => x.ModifiedBy);
+
+
+            modelBuilder.Entity<EmergenciesDisasters>()
+              .HasOne(x => x.EmployeeCreated)
+              .WithMany(x => x.EmergenciesDisastersCreated)
+              .HasForeignKey(x => x.CreatedBy);
+
+
+            modelBuilder.Entity<Medicines>()
+                  .HasOne(x => x.EmployeeCreated)
+                  .WithMany(x => x.MedicinesCreated)
+                  .HasForeignKey(x => x.CreatedBy);
+
+            modelBuilder.Entity<Medicines>()
+                  .HasOne(x => x.EmployeeModified)
+                  .WithMany(x => x.MedicinesModified)
+                  .HasForeignKey(x => x.ModifiedBy);
+
+
+            modelBuilder.Entity<Materials>()
+                 .HasOne(x => x.EmployeeCreated)
+                 .WithMany(x => x.MaterialsCreated)
+                 .HasForeignKey(x => x.CreatedBy);
+
+            modelBuilder.Entity<Materials>()
+                  .HasOne(x => x.EmployeeModified)
+                  .WithMany(x => x.MaterialsModified)
+                  .HasForeignKey(x => x.ModifiedBy);
+
+            modelBuilder.Entity<Vehicles>()
+                 .HasOne(x => x.EmployeeCreated)
+                 .WithMany(x => x.VehicleCreated)
+                 .HasForeignKey(x => x.CreatedBy);
+
+            modelBuilder.Entity<Vehicles>()
+                  .HasOne(x => x.EmployeeModified)
+                  .WithMany(x => x.VehicleModified)
+                  .HasForeignKey(x => x.ModifiedBy);
+
+
+            modelBuilder.Entity<ResourcesRequest>()
+                  .HasOne(x => x.EmployeeCreated)
+                  .WithMany(x => x.ResourcesCreated)
+                  .HasForeignKey(x => x.CreatedBy);
+
+            modelBuilder.Entity<ResourcesRequest>()
+                   .HasOne(x => x.EmployeeModified)
+                   .WithMany(x => x.ResourcesModified)
+                   .HasForeignKey(x => x.ModifiedBy);
+
+            modelBuilder.Entity<ResourcesRequest>()
+                   .HasOne(x => x.EmployeeResponse)
+                   .WithMany(x => x.ResourcesResponse)
+                   .HasForeignKey(x => x.AnsweredBy);
+
         }
 
         //Defino cada una de las Models, que se usan durante el proyecto, donde cada una de ellas representa una tabla de la base de datos
         public DbSet<Users> Users { get; set; }
-        public DbSet<Users> InCharge { get; set; }
         public DbSet<Persons> Persons { get; set; }
         public DbSet<Employees> Employees { get; set; }
         public DbSet<Schedules> Schedules { get; set; }
@@ -81,14 +146,14 @@ namespace Back_End.Entities
         public DbSet<Victims> Victims { get; set; }
         public DbSet<ResourcesRequestMaterialsMedicinesVehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
         public DbSet<PDF> PDF { get; set; }
-
         public DbSet<LocationsEmergenciesDisasters> LocationsEmergenciesDisasters { get; set; }
+        public DbSet<LocationVolunteers> locationVolunteers { get; set; }
 
         private const string Connection =
-      @"Server=localhost;
-            Database=CruzRojaDB - Testing;
-            Trusted_Connection=True;
-            MultipleActiveResultSets=true";
+              @"Server=localhost;
+                    Database=CruzRojaDB - Testing;
+                    Trusted_Connection=True;
+                    MultipleActiveResultSets=true";
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

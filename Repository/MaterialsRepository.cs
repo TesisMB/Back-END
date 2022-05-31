@@ -18,16 +18,18 @@ namespace Repository
         {
             _cruzRojaContext = cruzRojaContext;
         }
-        public async Task<IEnumerable<Materials>> GetAllMaterials()
+        public async Task<IEnumerable<Materials>> GetAllMaterials(int userId)
         {
-            var material = UsersRepository.authUser;
+            //var material = UsersRepository.authUser;
+
+            var user =  EmployeesRepository.GetAllEmployeesById(userId);
 
 
             var collection = _cruzRojaContext.Materials as IQueryable<Materials>;
 
 
             collection = collection.Where(
-                a => a.Estates.Locations.LocationDepartmentName == material.Estates.Locations.LocationDepartmentName);
+                a => a.Estates.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
 
 
 
@@ -38,6 +40,16 @@ namespace Repository
                        .ThenInclude(a => a.Times)
                        .ThenInclude(a => a.Schedules)
                        .Include(a => a.Estates.Locations)
+
+                        .Include(a => a.EmployeeCreated)
+                        .ThenInclude(i => i.Users)
+                        .ThenInclude(i => i.Persons)
+                        .Include(i => i.EmployeeCreated.Users.Roles)
+
+                        .Include(i => i.EmployeeModified)
+                        .ThenInclude(i => i.Users)
+                        .ThenInclude(i => i.Persons)
+                        .Include(i => i.EmployeeModified.Users.Roles)
                        .ToListAsync();
 
         }
@@ -54,13 +66,13 @@ namespace Repository
             cruzRojaContext.SaveChanges();
         }
 
-        public async Task<Materials> GetMaterialById(int materialId)
+        public async Task<Materials> GetMaterialById(string materialId)
         {
             return await FindByCondition(material => material.ID == materialId)
                            .FirstOrDefaultAsync();
         }
 
-        public async Task<Materials> GetMaterialWithDetails(int materialId)
+        public async Task<Materials> GetMaterialWithDetails(string materialId)
         {
             return await FindByCondition(material => material.ID == materialId)
                        .Include(a => a.Estates)
@@ -69,12 +81,22 @@ namespace Repository
                        .ThenInclude(a => a.Times)
                        .ThenInclude(a => a.Schedules)
                        .Include(a => a.Estates.Locations)
+
+                       .Include(a => a.EmployeeCreated)
+                        .ThenInclude(i => i.Users)
+                        .ThenInclude(i => i.Persons)
+                        .Include(i => i.EmployeeCreated.Users.Roles)
+
+                        .Include(i => i.EmployeeModified)
+                        .ThenInclude(i => i.Users)
+                        .ThenInclude(i => i.Persons)
+                        .Include(i => i.EmployeeModified.Users.Roles)
                        .FirstOrDefaultAsync();
         }
 
         public void CreateMaterial(Materials material)
         {
-            spaceCamelCase(material);
+            //spaceCamelCase(material);
 
             Create(material);
         }

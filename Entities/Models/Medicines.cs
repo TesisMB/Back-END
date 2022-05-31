@@ -10,7 +10,7 @@ namespace Entities.Models
     public class Medicines
     {
         [Key]
-        public int ID { get; set; }
+        public string ID { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -52,8 +52,25 @@ namespace Entities.Models
         [Required]
         public int FK_EstateID { get; set; }
 
+
+        public DateTime MedicineDateCreated { get; set; }
+        public DateTime? MedicineDateModified{ get; set; }
+
         [ForeignKey("FK_EstateID")]
         public Estates Estates { get; set; }
+
+        public int CreatedBy { get; set; }
+
+        public int? ModifiedBy { get; set; }
+
+
+        [ForeignKey("CreatedBy")]
+        public Employees EmployeeCreated { get; set; }
+
+        [ForeignKey("ModifiedBy")]
+        public Employees? EmployeeModified { get; set; }
+
+
 
         [ForeignKey("FK_MedicineID")]
         public ICollection<ResourcesRequestMaterialsMedicinesVehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }

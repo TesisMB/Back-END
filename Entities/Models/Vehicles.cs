@@ -11,7 +11,7 @@ namespace Back_End.Models
     {
 
         [Key]
-        public int ID { get; set; }
+        public string ID { get; set; }
 
         [Required]
         [MaxLength(9)]
@@ -61,8 +61,21 @@ namespace Back_End.Models
         public Model Model { get; set; }
         public int FK_ModelID { get; set; }
 
+        public DateTime VehicleDateCreated { get; set; }
+        public DateTime? VehicleDateModified{ get; set; }
 
-        //public BrandsModels BrandsModels { get; set; }
+
+        public int CreatedBy { get; set; }
+
+        public int? ModifiedBy { get; set; }
+
+        [ForeignKey("CreatedBy")]
+        public Employees EmployeeCreated { get; set; }
+
+        [ForeignKey("ModifiedBy")]
+        public Employees? EmployeeModified { get; set; }
+
+
 
         [ForeignKey("FK_VehicleID")]
         public ICollection<ResourcesRequestMaterialsMedicinesVehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }

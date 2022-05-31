@@ -21,15 +21,17 @@ namespace Repository
             _cruzRojaContext = cruzRojaContext;
         }
 
-        public async Task<IEnumerable<Volunteers>> GetAllVolunteers()
+        public async Task<IEnumerable<Volunteers>> GetAllVolunteers(int userId)
         {
 
-            var volunteers = UsersRepository.authUser;
+            //var volunteers = UsersRepository.authUser;
+
+            var user =  EmployeesRepository .GetAllEmployeesById(userId);
 
             var collection = _cruzRojaContext.Volunteers as IQueryable<Volunteers>;
 
             collection = collection.Where(
-                                        a => a.Users.Estates.Locations.LocationDepartmentName == volunteers.Estates.Locations.LocationDepartmentName);
+                                        a => a.Users.Estates.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
 
             return await collection
                          .Include(a => a.Users)

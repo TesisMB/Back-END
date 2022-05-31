@@ -1,7 +1,6 @@
 ﻿using Back_End.Entities;
 using Back_End.Models;
 using Contracts.Interfaces;
-using Entities.DataTransferObjects.Vehicles___Dto;
 using Entities.Helpers;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -19,34 +18,14 @@ namespace Repository
         {
             _cruzRojaContext = cruzRojaContext;
         }
-        public async Task<IEnumerable<Vehicles>> GetAllVehiclesFilters(vehiclesFiltersDto vehicles)
+        public async Task<IEnumerable<Vehicles>> GetAllVehiclesFilters(int userId)
         {
-            var vehicles1 = UsersRepository.authUser;
+            var user =  EmployeesRepository.GetAllEmployeesById(userId);
 
             var collection = _cruzRojaContext.Vehicles as IQueryable<Vehicles>;
 
-            if (string.IsNullOrEmpty(vehicles.Type) && (vehicles.VehicleYear == null))
-            {
-                return GetAllVehicles();
-            }
-
-
-            if (!string.IsNullOrEmpty(vehicles.Type) && (vehicles.VehicleYear != null))
-            {
-                collection = collection.Where(
-                                      a => a.TypeVehicles.Type == vehicles.Type
-                                      &&
-                                       a.Estates.Locations.LocationDepartmentName == vehicles1.Estates.Locations.LocationDepartmentName);
-            }
-
-
-            if ((vehicles.VehicleYear != null))
-            {
-                collection = collection.Where(
-                                      a => a.VehicleYear == vehicles.VehicleYear
-                                      &&
-                                       a.Estates.Locations.LocationDepartmentName == vehicles1.Estates.Locations.LocationDepartmentName);
-            }
+            collection = collection.Where(a=>  a.Estates.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
+            
 
             return await collection
                       .Include(a => a.Estates)
@@ -61,16 +40,26 @@ namespace Repository
                       .Include(a => a.Estates.Locations)
                       .Include(a => a.Brands)
                       .Include(a => a.Model)
+
+                      .Include(a => a.EmployeeCreated)
+                      .ThenInclude(i => i.Users)
+                      .ThenInclude(i => i.Persons)
+                      .Include(i => i.EmployeeCreated.Users.Roles)
+
+                      .Include(i => i.EmployeeModified)
+                      .ThenInclude(i => i.Users)
+                      .ThenInclude(i => i.Persons)
+                      .Include(i => i.EmployeeModified.Users.Roles)
                  .ToListAsync();
         }
 
-        public async Task<Vehicles> GetVehicleById(int vehicleId)
+        public async Task<Vehicles> GetVehicleById(string vehicleId)
         {
             return await FindByCondition(vehicle => vehicle.ID == vehicleId)
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<Vehicles> GetVehicleWithDetails(int vehicleId)
+        public async Task<Vehicles> GetVehicleWithDetails(string vehicleId)
         {
             return await FindByCondition(vehicle => vehicle.ID == vehicleId)
                       .Include(a => a.Estates)
@@ -85,6 +74,16 @@ namespace Repository
                       .Include(a => a.Estates.Locations)
                       .Include(a => a.Brands)
                       .Include(a => a.Model)
+
+                      .Include(a => a.EmployeeCreated)
+                      .ThenInclude(i => i.Users)
+                      .ThenInclude(i => i.Persons)
+                      .Include(i => i.EmployeeCreated.Users.Roles)
+
+                      .Include(i => i.EmployeeModified)
+                      .ThenInclude(i => i.Users)
+                      .ThenInclude(i => i.Persons)
+                      .Include(i => i.EmployeeModified.Users.Roles)
                    .FirstOrDefaultAsync();
         }
 
@@ -103,7 +102,7 @@ namespace Repository
 
         public void CreateVehicle(Vehicles vehicles)
         {
-            spaceCamelCase(vehicles);
+            //spaceCamelCase(vehicles);
             Create(vehicles);
         }
 
@@ -158,6 +157,17 @@ namespace Repository
                    .Include(a => a.Estates.Locations)
                    .Include(a => a.Brands)
                    .Include(a => a.Model)
+
+                   .Include(a => a.EmployeeCreated)
+                   .ThenInclude(i => i.Users)
+                   .ThenInclude(i => i.Persons)
+                   .Include(i => i.EmployeeCreated.Users.Roles)
+
+                   .Include(i => i.EmployeeModified)
+                   .ThenInclude(i => i.Users)
+                   .ThenInclude(i => i.Persons)
+                   .Include(i => i.EmployeeModified.Users.Roles)
+
                  .ToList();
         }
     }

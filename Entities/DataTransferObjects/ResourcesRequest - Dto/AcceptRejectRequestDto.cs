@@ -14,5 +14,7 @@ namespace Entities.DataTransferObjects.ResourcesRequest___Dto
 
         public int FK_EmployeeID { get; set; }
 
+        public int AnsweredBy { get; set; }
+
     }
 }

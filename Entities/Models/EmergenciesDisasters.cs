@@ -22,7 +22,14 @@ namespace Entities.Models
 
 
         [ForeignKey("Fk_EmplooyeeID")]
-        public Employees Employees { get; set; }
+        public Employees EmployeeIncharge { get; set; }
+
+
+        [ForeignKey("ModifiedBy")]
+        public Employees EmployeeModified { get; set; }
+
+        [ForeignKey("CreatedBy")]
+        public Employees EmployeeCreated { get; set; }
 
         public LocationsEmergenciesDisasters LocationsEmergenciesDisasters { get; set; }
 
@@ -37,10 +44,15 @@ namespace Entities.Models
 
         public ChatRooms ChatRooms { get; set; }
 
-        public Victims Victims { get; set; }
+        public Victims? Victims { get; set; }
+
+        public DateTime? EmergencyDisasterDateModified { get; set; }
 
         [Required]
         public int? Fk_EmplooyeeID { get; set; }
+
+        public int? ModifiedBy { get; set; }
+        public int CreatedBy { get; set; }
 
 
         [Required]

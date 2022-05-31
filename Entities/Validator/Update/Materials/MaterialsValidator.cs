@@ -9,10 +9,10 @@ namespace Entities.Validator.Update.Materials
         public MaterialsValidator()
         {
 
-            RuleFor(x => x.MaterialQuantity)
-            .Must(MedicinesValidator.IsPositiveNumber).WithMessage("Must be a valid age");
+            //RuleFor(x => x.MaterialQuantity)
+            //.Must(MedicinesValidator.IsPositiveNumber).WithMessage("Must be a valid age");
 
-            RuleFor(x => x.MaterialAvailability).Must(x => x == false || x == true);
+            //RuleFor(x => x.MaterialAvailability).Must(x => x == false || x == true);
         }
     }
 }

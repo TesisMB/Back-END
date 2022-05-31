@@ -10,14 +10,15 @@ namespace Entities.Profiles
         public UsersChatRoomsProfiles()
         {
             CreateMap<UsersChatRooms, UsersChatRoomsDto>()
-                     .ForPath(resp => resp.UserID, opt => opt.MapFrom(a => a.FK_UserID))
+                     .ForMember(resp => resp.UserID, opt => opt.MapFrom(a => a.FK_UserID))
 
-                     .ForPath(resp => resp.UserDni, opt => opt.MapFrom(a => a.Users.UserDni))
+                     .ForMember(resp => resp.UserDni, opt => opt.MapFrom(a => a.Users.UserDni))
 
-                     .ForPath(resp => resp.RoleName, opt => opt.MapFrom(a => a.Users.Roles.RoleName))
+                     .ForMember(resp => resp.RoleName, opt => opt.MapFrom(a => a.Users.Roles.RoleName))
 
-                    .ForPath(resp => resp.Name, opt => opt.MapFrom(a => a.Users.Persons.FirstName + " " + a.Users.Persons.LastName));
+                     .ForMember(resp => resp.Picture, opt => opt.MapFrom(a => a.Users.Volunteers.VolunteerAvatar))
 
+                    .ForMember(resp => resp.Name, opt => opt.MapFrom(a => a.Users.Persons.FirstName + " " + a.Users.Persons.LastName));
 
 
             CreateMap<UsersChatRoomsJoin_LeaveGroupDto, UsersChatRooms>();

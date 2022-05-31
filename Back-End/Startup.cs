@@ -18,6 +18,9 @@ using System.IO;
 using Wkhtmltopdf.NetCore;
 using Back_End.Hubs;
 using Microsoft.Extensions.FileProviders;
+using DinkToPdf.Contracts;
+using DinkToPdf;
+using PDF_Generator.Utility;
 
 public class Startup
 {
@@ -30,7 +33,10 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-
+        var context = new CustomAssemblyLoadContext();
+        context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "libwkhtmltox.dll"));
+        services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+       
         services.ConfigureCors();
         services.ConfigureIISIntegreation();
         services.ConfigureLoggerService();

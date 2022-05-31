@@ -9,9 +9,9 @@ namespace Entities.Validator.Update.Medicines
         public MedicinesValidator()
         {
 
-            RuleFor(x => x.MedicineExpirationDate).LessThan(p => DateTime.Now).WithMessage("the PropertyName} has not passed yet");
+            //RuleFor(x => x.MedicineExpirationDate).LessThan(p => DateTime.Now).WithMessage("the PropertyName} has not passed yet");
 
-            RuleFor(x => x.MedicineAvailability).Must(x => x == false || x == true);
+            //RuleFor(x => x.MedicineAvailability).Must(x => x == false || x == true);
 
         }
     }

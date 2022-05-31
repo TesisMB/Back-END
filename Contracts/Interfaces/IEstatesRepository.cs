@@ -11,6 +11,9 @@ namespace Contracts.Interfaces
     {
        Task<IEnumerable<Locations>> GetAllEstates();
         Task<IEnumerable<Locations>> GetAllEstatesType();
+        IEnumerable<Estates> GetAllEstatesByPdf();
+        Estates GetAllEstateByPdf(int estateId);
+        IEnumerable<LocationVolunteers> GetAllLocations();
 
     }
 }

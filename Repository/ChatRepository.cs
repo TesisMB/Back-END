@@ -26,15 +26,22 @@ namespace Repository
 
                    .Include(i => i.UsersChatRooms)
                    .ThenInclude(i=> i.Users.Roles)
+                   
+                   .Include(i => i.UsersChatRooms)
+                   .ThenInclude(i=> i.Users.Persons)
 
+                    .Include(i => i.UsersChatRooms)
+                   .ThenInclude(i => i.Users.Volunteers)
 
                    .Include(i => i.EmergenciesDisasters)
                    .Include(i => i.EmergenciesDisasters.TypesEmergenciesDisasters)
                    .Include(i => i.EmergenciesDisasters)
                    .ThenInclude(i => i.LocationsEmergenciesDisasters)
+
                    .Include(i => i.Messages)
-                    .ThenInclude(i => i.Users)
-                    .ThenInclude(i => i.Persons)
+                    .ThenInclude(i=> i.Users)
+                    .ThenInclude(i=> i.Persons)
+
                    .FirstOrDefaultAsync();
         }
     }

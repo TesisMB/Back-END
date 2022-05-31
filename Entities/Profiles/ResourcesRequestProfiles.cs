@@ -16,6 +16,39 @@ namespace Entities.Profiles
         {
             CreateMap<ResourcesRequest, ResourcesRequestDto>()
 
+
+                 .ForMember(dest => dest.CreatedByEmployee, opts => opts.MapFrom(src => src.EmployeeCreated.Users.Persons.FirstName + " " + src.EmployeeCreated.Users.Persons.LastName))
+                
+                 .ForMember(dest => dest.ModifiedByEmployee, opts => opts.MapFrom(src => src.EmployeeModified.Users.Persons.FirstName + " " + src.EmployeeModified.Users.Persons.LastName))
+                 
+                 .ForMember(dest => dest.AnsweredByEmployee, opts => opts.MapFrom(src => src.EmployeeResponse.Users.Persons.FirstName + " " + src.EmployeeResponse.Users.Persons.LastName))
+
+                 //Emergencia
+
+                 .ForMember(dest => dest.EmergencyDisasterID, opts => opts.MapFrom(src => src.EmergenciesDisasters.EmergencyDisasterID))
+
+                 .ForMember(dest => dest.EmergencyDisasterEndDate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDate2(src.EmergenciesDisasters.EmergencyDisasterEndDate)))
+
+
+                 //Locations
+                 .ForMember(dest => dest.LocationCityName, opts => opts.MapFrom(src => src.EmergenciesDisasters.LocationsEmergenciesDisasters.LocationCityName))
+             
+                 
+                 .ForMember(dest => dest.LocationDepartmentName, opts => opts.MapFrom(src => src.EmergenciesDisasters.LocationsEmergenciesDisasters.LocationDepartmentName))
+                
+                 .ForMember(dest => dest.LocationMunicipalityName, opts => opts.MapFrom(src => src.EmergenciesDisasters.LocationsEmergenciesDisasters.LocationMunicipalityName))
+              
+                
+                 //Tipo de emergencia
+                 .ForMember(dest => dest.TypeEmergencyDisasterID, opts => opts.MapFrom(src => src.EmergenciesDisasters.TypesEmergenciesDisasters.TypeEmergencyDisasterID))
+                 
+                 .ForMember(dest => dest.TypeEmergencyDisasterName, opts => opts.MapFrom(src => src.EmergenciesDisasters.TypesEmergenciesDisasters.TypeEmergencyDisasterName))
+
+
+
+
+
+
                  .ForPath(dest => dest.RequestDate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.RequestDate)));
 
 

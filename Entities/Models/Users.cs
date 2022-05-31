@@ -58,7 +58,5 @@ namespace Back_End.Models
         public ICollection<UsersChatRooms> UsersChatRooms { get; set; }
         public Messages Messages { get; set; }
 
-        public ICollection<ResourcesRequest> ResourcesRequests { get; set; }
-
     }
 }

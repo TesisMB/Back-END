@@ -9,8 +9,8 @@
 
         public string LocationCityName { get; set; }
 
-        public decimal LocationLongitude { get; set; }
+        public decimal locationlongitude { get; set; }
 
-        public decimal LocationLatitude { get; set; }
+        public decimal locationlatitude { get; set; }
     }
 }

@@ -1,6 +1,4 @@
-﻿using Back_End.Models.Users___Dto.Users___Persons;
-using Entities.DataTransferObjects.CharRooms___Dto;
-using Entities.DataTransferObjects.EmergenciesDisasters___Dto;
+﻿
 using Entities.DataTransferObjects.Resources_RequestResources_Materials_Medicines_Vehicles___Dto;
 using System;
 using System.Collections.Generic;
@@ -21,10 +19,42 @@ namespace Entities.DataTransferObjects.Resources_Request___Dto
 
         public string Condition { get; set; }
 
-        public EmployeesUsersDto Users { get; set; }
-        public EmployeesUsersDto InCharge { get; set; }
-        public EmergenciesDisastersDto EmergenciesDisasters { get; set; }
 
+        public int CreatedBy { get; set; }
+        public string CreatedByEmployee { get; set; }
+
+        public int ModifiedBy { get; set; }
+        public string ModifiedByEmployee { get; set; }
+
+        public int AnsweredBy { get; set; }
+        public string AnsweredByEmployee { get; set; }
+
+
+        //Emergencias
+        public int EmergencyDisasterID { get; set; }
+        public string EmergencyDisasterEndDate{ get; set; }
+
+        //Locations
+
+        public string LocationDepartmentName { get; set; }
+
+        public string LocationMunicipalityName { get; set; }
+
+        public string LocationCityName { get; set; }
+
+
+        //Tipo de emergencia
+
+        public int TypeEmergencyDisasterID { get; set; }
+
+        public string TypeEmergencyDisasterName { get; set; }
+
+
+
+        //public EmployeesDto EmployeeCreated { get; set; }
+
+        //public EmergenciesDisastersDto EmergenciesDisasters { get; set; }
+        
 
         public ICollection<ResourcesRequestMaterialsMedicinesVehiclesDto> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
     }

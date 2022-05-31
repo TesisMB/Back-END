@@ -4,12 +4,18 @@ using Back_End.Helpers;
 using Back_End.Models;
 using Back_End.Models.Employees___Dto;
 using Contracts.Interfaces;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 using Entities.DataTransferObjects.Employees___Dto;
+using Entities.DataTransferObjects.Locations___Dto;
 using Entities.Helpers;
+using Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using PDF_Generator.Utility;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Wkhtmltopdf.NetCore;
@@ -23,60 +29,67 @@ namespace Back_End.Controllers
         private readonly ILoggerManager _logger;
         private readonly IRepositorWrapper _repository;
         private readonly IMapper _mapper;
-        public  readonly IGeneratePdf _generatePdf;
+        public readonly IGeneratePdf _generatePdf;
+        public byte[] pdf;
+        private IConverter _converter;
 
-        public EmployeesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper, IGeneratePdf generatePdf)
+        public EmployeesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper, IGeneratePdf generatePdf, IConverter converter)
         {
             _logger = logger;
             _repository = repository;
             _mapper = mapper;
             _generatePdf = generatePdf;
+            _converter = converter;
         }
+
+
 
         [HttpGet("PDF/{employeeId}")]
-        public async Task<FileResult> GetEmployeeIDPDF(int employeeId)
+        public IActionResult CreatePDF(int employeeId)
         {
-            var employee = await _repository.Employees.GetEmployeeWithDetails(employeeId);
 
-            var options = new ConvertOptions
+            var employees =  _repository.Employees.GetEmployeeWithDetails(employeeId);
+
+            //ar employees = DataStorage.GetAllEmployees();
+
+            var globalSettings = new GlobalSettings
             {
-                PageMargins = new Wkhtmltopdf.NetCore.Options.Margins()
-                {
-                    Top = 5
-                }
+                ColorMode = ColorMode.Color,
+                Orientation = Orientation.Portrait,
+                PaperSize = PaperKind.A4,
+                Margins = new MarginSettings { Top = 10 },
+                DocumentTitle = $"Reporte de {employees.Users.Persons.FirstName} {employees.Users.Persons.LastName}",
             };
 
-            _generatePdf.SetConvertOptions(options);
+            var objectSettings = new ObjectSettings
+            {
+                PagesCount = true,
+                HtmlContent = TemplateGenerator.GetHTMLString(employees),
+                //Page = "https://code-maze.com/", //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE
+                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "styles.css") },
+                FooterSettings = { FontName = "Arial", FontSize = 9, Right = "[page]", Line = true,},
+                //FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+            };
 
+            var pdf = new HtmlToPdfDocument()
+            {
+                GlobalSettings = globalSettings,
+                Objects = { objectSettings }
+            };
 
+            var file = _converter.Convert(pdf);
 
-            // var filePath = $"{employee.Users.Persons.FirstName} {employee.Users.Persons.LastName}.pdf"; // Here, you should validate the request and the existance of the file.
-
-            // var bytes = await System.IO.File.ReadAllBytesAsync(filePath);
-            //return File(bytes, "Views/Employee/EmployeeInfo.cshtml", Path.GetFileName(filePath));
-
-            var pdf = await _generatePdf.GetByteArray("Views/Employee/EmployeeInfo.cshtml", employee);
-
-
-            //var pdf = await _generatePdf.GetByteArray("Views/Employee/EmployeeInfo.cshtml", employee);
-
-            //return new FileStreamResult(pdfStream, "application/pdf");
-
-            //return await _generatePdf.GetPdf("Views/Employee/EmployeeInfo.cshtml", pdfStream);
-
-            return File(pdf, "application/pdf", $"{employee.Users.Persons.FirstName} {employee.Users.Persons.LastName}.pdf");
+            return File(file, "application/pdf");
         }
 
-
-
+        //********************************* FUNCIONANDO *********************************
 
         [HttpGet]
-        // [Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
-        public async Task<ActionResult<Employees>> GetAllEmployees()
+        public async Task<ActionResult<Employees>> GetAllEmployees([FromQuery] int userId)
         {
             try
             {
-                var employees = await _repository.Employees.GetAllEmployees();
+                var employees = await _repository.Employees.GetAllEmployees(userId);
 
                 _logger.LogInfo($"Returned all employees from database.");
 
@@ -92,14 +105,13 @@ namespace Back_End.Controllers
             }
         }
 
-
+        //********************************* FUNCIONANDO *********************************
         [HttpGet("{employeeId}")]
-        //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
         public async Task<ActionResult<Employees>> GetEmployeeWithDetails(int employeeId)
         {
             try
             {
-                var employee = await _repository.Employees.GetEmployeeWithDetails(employeeId);
+                var employee =  _repository.Employees.GetEmployeeWithDetails(employeeId);
 
                 if (employee == null)
                 {
@@ -121,7 +133,9 @@ namespace Back_End.Controllers
             }
         }
 
-        //[Authorize(Roles = "Coordinador General, Admin")] 
+
+        //********************************* FUNCIONANDO *********************************
+
         [HttpPost]
         public async Task<ActionResult<Users>> CreateEmployee([FromBody] UsersEmployeesForCreationDto employee)
         {
@@ -190,7 +204,9 @@ namespace Back_End.Controllers
             }
         }
 
-        //[Authorize(Roles = "Coordinador General, Admin")] 
+
+        //********************************* FUNCIONANDO *********************************
+    
         [HttpPatch("{employeeId}")]
         public async Task<ActionResult> UpdatePartialUser(int employeeId, JsonPatchDocument<EmployeeForUpdateDto> _Employees)
         {
@@ -262,7 +278,9 @@ namespace Back_End.Controllers
 
             }
         }
-        //[Authorize(Roles = "Coordinador General, Admin")]  //Autorizo unicamente los usuarios que tenga el permiso de listar los usuarios
+
+
+        //********************************* FUNCIONANDO *********************************
         [HttpDelete("{employeeId}")]
         public async Task<ActionResult> DeleteEmployee(int employeeId)
         {
@@ -295,59 +313,9 @@ namespace Back_End.Controllers
             }
         }
 
-
-        [NonAction]
-        public ActionResult<Volunteers> CreateVolunteer(VolunteersForCreationDto volunteer)
-        {
-            try
-            {
-
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
-                }
-
-                if (volunteer == null)
-
-                {
-                    _logger.LogError("Volunteer object sent from client is null.");
-                    return BadRequest("Volunteer object is null");
-
-                }
-
-
-                var volunteerEntity = _mapper.Map<Volunteers>(volunteer);
-
-
-                /* volunteerEntity.LocationVolunteers = new LocationVolunteers()
-                 {
-                     ID = volunteerEntity.ID,
-                     LocationVolunteerLatitude = null,
-                     LocationVolunteerLongitude = null,
-                     Volunteers = volunteerEntity
-                 };*/
-
-                //volunteerEntity.VolunteerAvatar = await UploadController.SaveImage(volunteer.ImageFile);
-
-                // Al crear un Usuario se encripta dicha contraseña para mayor seguridad.
-                _repository.Volunteers.CreateVolunteer(volunteerEntity);
-                volunteerEntity.Users.UserPassword = Encrypt.GetSHA256(volunteerEntity.Users.UserPassword);
-
-                _repository.Volunteers.SaveAsync();
-
-                //var createdVolunteer = _mapper.Map<VolunteersDto>(volunteerEntity);
-
-                return Ok();
-
-            }
-            catch (Exception ex)
-
-            {
-                _logger.LogError($"Something went wrong inside CreateEmployee action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
-            }
-        }
     }
+      
+   
 
 
 

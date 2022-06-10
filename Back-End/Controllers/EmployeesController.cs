@@ -18,7 +18,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Wkhtmltopdf.NetCore;
+//using Wkhtmltopdf.NetCore;
 
 namespace Back_End.Controllers
 {
@@ -29,20 +29,16 @@ namespace Back_End.Controllers
         private readonly ILoggerManager _logger;
         private readonly IRepositorWrapper _repository;
         private readonly IMapper _mapper;
-        public readonly IGeneratePdf _generatePdf;
         public byte[] pdf;
         private IConverter _converter;
 
-        public EmployeesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper, IGeneratePdf generatePdf, IConverter converter)
+        public EmployeesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper, IConverter converter)
         {
             _logger = logger;
             _repository = repository;
             _mapper = mapper;
-            _generatePdf = generatePdf;
             _converter = converter;
         }
-
-
 
         [HttpGet("PDF/{employeeId}")]
         public IActionResult CreatePDF(int employeeId)

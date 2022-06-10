@@ -15,7 +15,7 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Wkhtmltopdf.NetCore;
+//using Wkhtmltopdf.NetCore;
 
 namespace Back_End.Controllers
 {

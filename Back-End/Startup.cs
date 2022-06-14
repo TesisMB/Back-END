@@ -21,9 +21,9 @@ using System.IO;
 //using Wkhtmltopdf.NetCore;
 using Back_End.Hubs;
 using Microsoft.Extensions.FileProviders;
-//using DinkToPdf.Contracts;
-//using DinkToPdf;
-//using PDF_Generator.Utility;
+using DinkToPdf.Contracts;
+using DinkToPdf;
+using PDF_Generator.Utility;
 
 public class Startup
 {
@@ -48,7 +48,7 @@ public class Startup
     {
         //var context = new CustomAssemblyLoadContext();
         //context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "libwkhtmltox.dll"));
-        //services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+        services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
        
         services.ConfigureCors();
         services.ConfigureIISIntegreation();
@@ -169,20 +169,20 @@ public class Startup
             });
         }
 
-        //app.UseStaticFiles();
-        //app.UseStaticFiles(new StaticFileOptions()
+        // app.UseStaticFiles();
+        // app.UseStaticFiles(new StaticFileOptions()
         //{
-        //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"StaticFiles")),
+        //     FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"StaticFiles")),
         //    RequestPath = new PathString("/StaticFiles")
-        //});
+        // });
 
 
         //habilita e uso de archivos estaticos para la solicitud.
-        /*app.UseStaticFiles(new StaticFileOptions
-        {
-            FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "StaticFiles", "Images")),
-            RequestPath = "/StaticFiles/Images"
-        });*/  
+        //app.UseStaticFiles(new StaticFileOptions
+        //{
+        //    FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "StaticFiles", "Images")),
+        //    RequestPath = "/StaticFiles/Images"
+        //});
 
         //Reenvia los encabezados del proxy a la solicitud actual.
         app.UseForwardedHeaders(new ForwardedHeadersOptions

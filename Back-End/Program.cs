@@ -13,7 +13,9 @@ namespace Back_End
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseStartup<Startup>()
+                    .UseAzureAppServices(); // <-- Add this
+
                 });
     }
 }

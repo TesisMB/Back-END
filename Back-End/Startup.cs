@@ -21,9 +21,9 @@ using System.IO;
 //using Wkhtmltopdf.NetCore;
 using Back_End.Hubs;
 using Microsoft.Extensions.FileProviders;
-using DinkToPdf.Contracts;
-using DinkToPdf;
-using PDF_Generator.Utility;
+//using DinkToPdf.Contracts;
+//using DinkToPdf;
+//using PDF_Generator.Utility;
 
 public class Startup
 {
@@ -33,7 +33,7 @@ public class Startup
        // ,IConfiguration configuration
         )
     {
-        LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
+        //LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
         //Configuration = configuration;
 
         var builder = new ConfigurationBuilder().
@@ -48,7 +48,7 @@ public class Startup
     {
         //var context = new CustomAssemblyLoadContext();
         //context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "libwkhtmltox.dll"));
-        services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+        //services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
        
         services.ConfigureCors();
         services.ConfigureIISIntegreation();
@@ -152,22 +152,22 @@ public class Startup
 
 
         //Entornoo de desarollo
-        if (env.IsDevelopment())
-        {
+        //if (env.IsDevelopment())
+        //{
             app.UseDeveloperExceptionPage();
 
-    }
-        else
-        {
-            app.UseExceptionHandler(appBuilder =>
-            {
-                appBuilder.Run(async context =>
-                {
-                    context.Response.StatusCode = 500;
-                    await context.Response.WriteAsync("An unexpected fault happened. Try again later. ");
-});
-            });
-        }
+//    }
+//        else
+//        {
+//            app.UseExceptionHandler(appBuilder =>
+//            {
+//                appBuilder.Run(async context =>
+//                {
+//                    context.Response.StatusCode = 500;
+//                    await context.Response.WriteAsync("An unexpected fault happened. Try again later. ");
+//});
+//            });
+//        }
 
         // app.UseStaticFiles();
         // app.UseStaticFiles(new StaticFileOptions()

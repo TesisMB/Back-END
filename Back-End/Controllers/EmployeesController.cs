@@ -4,8 +4,8 @@ using Back_End.Helpers;
 using Back_End.Models;
 using Back_End.Models.Employees___Dto;
 using Contracts.Interfaces;
-using DinkToPdf;
-using DinkToPdf.Contracts;
+//using DinkToPdf;
+//using DinkToPdf.Contracts;
 using Entities.DataTransferObjects.Employees___Dto;
 using Entities.DataTransferObjects.Locations___Dto;
 using Entities.Helpers;
@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using PDF_Generator.Utility;
 using System;
 using System.Collections.Generic;
-using System.IO;
+//using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 //using Wkhtmltopdf.NetCore;
@@ -30,17 +30,17 @@ namespace Back_End.Controllers
         private readonly IRepositorWrapper _repository;
         private readonly IMapper _mapper;
         public byte[] pdf;
-        private IConverter _converter;
+        //private IConverter _converter;
 
-        public EmployeesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper, IConverter converter)
+        public EmployeesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper)
         {
             _logger = logger;
             _repository = repository;
             _mapper = mapper;
-            _converter = converter;
+            //_converter = converter;
         }
 
-        [HttpGet("PDF/{employeeId}")]
+    /*    [HttpGet("PDF/{employeeId}")]
         public IActionResult CreatePDF(int employeeId)
         {
 
@@ -61,7 +61,7 @@ namespace Back_End.Controllers
             {
                 PagesCount = true,
                 HtmlContent = TemplateGenerator.GetHTMLString(employees),
-                //Page = "https://code-maze.com/", //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE
+                /Page = "https://code-maze.com/", //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE
                 WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "styles.css") },
                 FooterSettings = { FontName = "Arial", FontSize = 9, Right = "[page]", Line = true,},
                 //FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
@@ -77,7 +77,7 @@ namespace Back_End.Controllers
 
             return File(file, "application/pdf");
         }
-
+    */
         //********************************* FUNCIONANDO *********************************
 
         [HttpGet]

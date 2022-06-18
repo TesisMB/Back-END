@@ -150,10 +150,7 @@ namespace Back_End.Entities
         public DbSet<LocationVolunteers> locationVolunteers { get; set; }
 
         private const string Connection =
-              @"Server=localhost;
-                    Database=CruzRojaDB - Testing;
-                    Trusted_Connection=True;
-                    MultipleActiveResultSets=true";
+              @"Server=CruzRojaDB.mssql.somee.com; Initial Catalog=CruzRojaDB;user id=Yoel_SQLLogin_1;pwd=dloouh4pgl;";
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

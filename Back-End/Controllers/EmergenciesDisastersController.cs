@@ -82,8 +82,30 @@ namespace Back_End.Controllers
                 return StatusCode(500, "Internal Server error");
             }
         }
+        //********************************* FUNCIONANDO *********************************
+
+        [HttpGet("WithoutFilterApp")]
+
+        public async Task<ActionResult<EmergenciesDisasters>> GetAllEmergenciesDisastersWithoutFilterApp([FromQuery] int userId)
+        {
+            try
+            {
+                var emergenciesDisasters = await _repository.EmergenciesDisasters.GetAllEmergenciesDisastersWithourFilterApp(userId);
+
+                _logger.LogInfo($"Returned all emergenciesDisasters from database.");
+
+                var emergenciesDisastersResult = _mapper.Map<IEnumerable<EmergenciesDisastersAppDto>>(emergenciesDisasters);
 
 
+                return Ok(emergenciesDisastersResult);
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside GetAllEmegenciesDisasters action: {ex.Message}");
+                return StatusCode(500, "Internal Server error");
+            }
+        }
 
         //********************************* FUNCIONANDO *********************************
 

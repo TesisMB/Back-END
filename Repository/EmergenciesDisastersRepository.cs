@@ -86,7 +86,7 @@ namespace Repository
         }
 
 
-        public async Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisastersWithourFilterApp()
+        public async Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisastersWithourFilterApp(int userId)
         {
             var user = UsersRepository.authUser;
 

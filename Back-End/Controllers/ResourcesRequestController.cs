@@ -37,71 +37,74 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpGet]
-        public async Task<ActionResult<ResourcesRequest>> GetAllResourceResquest([FromQuery] int userId, [FromQuery] string? Condition)
+        public async Task<ActionResult<ResourcesRequest>> GetAllResourceResquest([FromQuery] int userId, [FromQuery] string? Condition, [FromQuery] string? state)
         {
-
-            var resource_Request = await _repository.Resources_Requests.GetAllResourcesRequest(userId, Condition);
-            _logger.LogInfo($"Returned all Resources_Request from database.");
-
-            var resource_RequestResult = _mapper.Map<IEnumerable<ResourcesRequestDto>>(resource_Request);
-
-
-            var query = from st in resource_RequestResult
-                        select st;
-
-
-            foreach (var item1 in query)
             {
 
-                foreach (var item2 in item1.Resources_RequestResources_Materials_Medicines_Vehicles)
+                var resource_Request = await _repository.Resources_Requests.GetAllResourcesRequest(userId, Condition, state);
+                _logger.LogInfo($"Returned all Resources_Request from database.");
+
+                var resource_RequestResult = _mapper.Map<IEnumerable<ResourcesRequestDto>>(resource_Request);
+
+
+                var query = from st in resource_RequestResult
+                            select st;
+
+
+
+
+                foreach (var item1 in query)
                 {
 
-                    if (item2.Materials != null)
+                    foreach (var item2 in item1.Resources_RequestResources_Materials_Medicines_Vehicles)
                     {
 
-                        resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
-                                    .Where(a => a.FK_MaterialID == item2.Materials.ID
-                                            && a.FK_Resource_RequestID == item2.FK_Resource_RequestID)
-                                       .AsNoTracking()
-                                    .FirstOrDefault();
+                        if (item2.Materials != null)
+                        {
 
-                        item2.Materials.Quantity = resources.Quantity;
+                            resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
+                                        .Where(a => a.FK_MaterialID == item2.Materials.ID
+                                                && a.FK_Resource_RequestID == item2.FK_Resource_RequestID)
+                                           .AsNoTracking()
+                                        .FirstOrDefault();
+
+                            item2.Materials.Quantity = resources.Quantity;
+
+                        }
+
+                        else if (item2.Medicines != null)
+                        {
+                            resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
+                                 .Where(a => a.FK_MedicineID == item2.Medicines.ID
+                                         && a.FK_Resource_RequestID == item2.FK_Resource_RequestID)
+                                    .AsNoTracking()
+                                 .FirstOrDefault();
+
+                            item2.Medicines.Quantity = resources.Quantity;
+
+                        }
+
+                        else if (item2.Vehicles != null)
+                        {
+                            resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
+                                 .Where(a => a.FK_VehicleID == item2.Vehicles.ID
+                                         && a.FK_Resource_RequestID == item2.FK_Resource_RequestID)
+                                    .AsNoTracking()
+                                 .FirstOrDefault();
+
+                            item2.Vehicles.Quantity = resources.Quantity;
+
+                        }
+
 
                     }
-
-                    else if (item2.Medicines != null)
-                    {
-                        resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
-                             .Where(a => a.FK_MedicineID == item2.Medicines.ID
-                                     && a.FK_Resource_RequestID == item2.FK_Resource_RequestID)
-                                .AsNoTracking()
-                             .FirstOrDefault();
-
-                        item2.Medicines.Quantity = resources.Quantity;
-
-                    }
-
-                    else if (item2.Vehicles != null)
-                    {
-                        resources = db.Resources_RequestResources_Materials_Medicines_Vehicles
-                             .Where(a => a.FK_VehicleID == item2.Vehicles.ID
-                                     && a.FK_Resource_RequestID == item2.FK_Resource_RequestID)
-                                .AsNoTracking()
-                             .FirstOrDefault();
-
-                        item2.Vehicles.Quantity = resources.Quantity;
-
-                    }
-
-
                 }
+
+
+                return Ok(resource_RequestResult);
+
             }
-
-
-            return Ok(resource_RequestResult);
-
         }
-
 
         //********************************* FUNCIONANDO *********************************
 

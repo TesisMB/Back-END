@@ -25,7 +25,7 @@ namespace Repository
         }
 
 
-        public async Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequest(int userId, string Condition)
+        public async Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequest(int userId, string Condition, string state)
         {
 
             //var user = UsersRepository.authUser;
@@ -33,16 +33,16 @@ namespace Repository
             //user = await EmployeesRepository.GetAllEmployeesById(userId);
 
             user = await _cruzRojaContext.Users
-               .Where(a => a.UserID.Equals(userId))
-               .Include(a => a.Roles)
-               .Include(a => a.Estates)
-               .ThenInclude(a => a.Locations)
-               .FirstOrDefaultAsync();
+                .Where(a => a.UserID.Equals(userId))
+                .Include(a => a.Roles)
+                .Include(a => a.Estates)
+                .ThenInclude(a => a.Locations)
+                .FirstOrDefaultAsync();
 
             var collection = _cruzRojaContext.Resources_Requests as IQueryable<ResourcesRequest>;
 
             //Admin y C.General -> tiene acceso a todo en funcion del departamento
-            if (!String.IsNullOrEmpty(Condition))
+            if (!String.IsNullOrEmpty(Condition) && state == "solicitud")
             {
                 collection = collection.Where(
                             a => a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID

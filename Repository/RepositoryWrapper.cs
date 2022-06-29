@@ -24,6 +24,7 @@ namespace Repository
         private IUsersChatRoomsRepository _userChatRooms;
         private ITypesVehicles _typesVehicles;
         private IMapper _mapper;
+        private IPDFRepository _pdf;
         private readonly BlobServiceClient _blobServiceClient;
 
         public RepositoryWrapper(CruzRojaContext cruzRojaContext, IMapper mapper, BlobServiceClient blobServiceClient)
@@ -215,6 +216,19 @@ namespace Repository
                 return _typesVehicles;
             }
         }
+
+        public IPDFRepository PDF
+        {
+            get
+            {
+                if (_pdf == null)
+                {
+                    _pdf = new PDFRepository(_cruzRojaContext, _blobServiceClient);
+                }
+                return _pdf;
+            }
+        }
+
 
 
         /*public void Save()

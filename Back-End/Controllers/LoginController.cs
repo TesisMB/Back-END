@@ -36,15 +36,15 @@ namespace Back_End.Controllers
                 if (auth.UserAvailability)
                 {
 
-                    // if(auth.VolunteerAvatar != null)
-                    //{
+                    if (auth.VolunteerAvatar != null)
+                    {
 
-                    //    auth.VolunteerAvatar = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
-                    //                        Request.Scheme, Request.Host, Request.PathBase, auth.VolunteerAvatar);
-                    //}
+                        auth.VolunteerAvatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{auth.VolunteerAvatar}";
+
+                    }
 
 
-                    
+
 
                     ret = StatusCode(200, auth);
                     _logger.LogInfo($"Returned User.");

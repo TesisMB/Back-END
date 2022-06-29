@@ -14,12 +14,10 @@ namespace Entities.Models
 
         public string Location { get; set; }
         public DateTime CreateDate { get; set; } = DateTime.Now;
-        public string Category { get; set; }
+        public string Category { get; set; } = "Monitoreo";
 
         [NotMapped]
         public IFormFile LocationFile { get; set; }
 
-        [NotMapped]
-        public string LocationFiles { get; set; }
     }
 }

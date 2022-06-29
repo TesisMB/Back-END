@@ -9,11 +9,8 @@ using System.Threading.Tasks;
 
 namespace Back_End.Controllers
 {
-
-
-    [Route("api/upload")]
+    [Route("api/upload/")]
     [ApiController]
-
     public class UploadController : ControllerBase
     {
     private readonly BlobServiceClient _blobServiceClient;
@@ -23,9 +20,12 @@ namespace Back_End.Controllers
             _blobServiceClient = blobServiceClient;
         }
 
-        [NonAction]
-        public  async Task<string> SaveImage([FromForm] IFormFile Image)
+        [HttpPost, DisableRequestSizeLimit]
+        public async Task<string> SaveImage()
         {
+                var Image = Request.Form.Files[0];
+
+
                 var blobContainer = _blobServiceClient.GetBlobContainerClient("publicuploads");
 
                 var blobClient = blobContainer.GetBlobClient(Image.FileName);
@@ -61,36 +61,73 @@ namespace Back_End.Controllers
         }
 
 
-        [HttpPost, DisableRequestSizeLimit]
-        public IActionResult Upload()
+        [HttpPost("pdf")]
+        public async Task<string> SavePDF([FromForm] IFormFile pdf)
         {
-            try
-            {
-                var file = Request.Form.Files[0];
-                var folderName = Path.Combine("StaticFiles", "images", "Resources");
-                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-                if (file.Length > 0)
-                {
-                    var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                    var fullPath = Path.Combine(pathToSave, fileName);
-                    var dbPath = Path.Combine(folderName, fileName);
+            var blobContainer = _blobServiceClient.GetBlobContainerClient("publicpdf");
 
-                    using (var stream = new FileStream(dbPath, FileMode.Create))
-                    {
-                        file.CopyTo(stream);
-                    }
-                    return Ok(new { fileName });
-                }
-                else
-                {
-                    return BadRequest();
-                }
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex}");
-            }
+            var blobClient = blobContainer.GetBlobClient(pdf.FileName);
+
+            var blobHttpHeader = new BlobHttpHeaders { ContentType = "application/pdf" };
+
+            //await blobClient.UploadAsync(pdf.LocationFile.OpenReadStream());
+
+            await blobClient.UploadAsync(pdf.OpenReadStream(), new BlobUploadOptions { HttpHeaders = blobHttpHeader });
+
+            var fileName = ContentDispositionHeaderValue.Parse(pdf.ContentDisposition).FileName.Trim('"');
+
+
+            //return Ok();
+
+            //{
+            //    tipo = "Resources";
+            //    var folderName = Path.Combine("StaticFiles", "images", tipo);
+            //    var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+
+            //    var fileName = ContentDispositionHeaderValue.Parse(Image.ContentDisposition).FileName.Trim('"');
+            //    var fullPath = Path.Combine(pathToSave, fileName);
+            //    var dbPath = Path.Combine(folderName, fileName);
+
+            //    //crear nueva funcion
+            //    using (var stream = new FileStream(fullPath, FileMode.Create))
+            //    {
+            //        await Image.CopyToAsync(stream);
+            //    }
+            //
+
+            return fileName;
         }
+
+        //[HttpPost, DisableRequestSizeLimit]
+        //public IActionResult Upload()
+        //{
+        //    try
+        //    {
+        //        var file = Request.Form.Files[0];
+        //        var folderName = Path.Combine("StaticFiles", "images", "Resources");
+        //        var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+        //        if (file.Length > 0)
+        //        {
+        //            var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+        //            var fullPath = Path.Combine(pathToSave, fileName);
+        //            var dbPath = Path.Combine(folderName, fileName);
+
+        //            using (var stream = new FileStream(dbPath, FileMode.Create))
+        //            {
+        //                file.CopyTo(stream);
+        //            }
+        //            return Ok(new { fileName });
+        //        }
+        //        else
+        //        {
+        //            return BadRequest();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, $"Internal server error: {ex}");
+        //    }
+        //}
        
 
                 [NonAction]

@@ -27,6 +27,7 @@
 
         IUsersChatRoomsRepository UsersChatRooms { get; }
         ITypesVehicles TypesVehicles { get; }
+        IPDFRepository PDF { get; }
 
 
         // void Save();

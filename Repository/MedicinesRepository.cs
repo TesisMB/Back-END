@@ -144,7 +144,7 @@ namespace Repository
 
             var blobHttpHeader = new BlobHttpHeaders { ContentType = "image/jpeg" };
 
-            await blobClient.UploadAsync(medicine.ImageFile.OpenReadStream());
+            //await blobClient.UploadAsync(medicine.ImageFile.OpenReadStream());
 
             await blobClient.UploadAsync(medicine.ImageFile.OpenReadStream(), new BlobUploadOptions { HttpHeaders = blobHttpHeader });
         }

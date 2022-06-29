@@ -134,8 +134,10 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpPost]
-        public ActionResult<EmergenciesDisasters> CreateEmergencyDisaster([FromBody] EmergenciesDisastersForCreationDto emergenciesDisasters)
+        public ActionResult<EmergenciesDisasters> CreateEmergencyDisaster([FromBody] EmergenciesDisastersForCreationDto emergenciesDisasters, [FromQuery] int userId)
         {
+            emergenciesDisasters.CreatedBy = userId;
+
             try
             {
                 if (!ModelState.IsValid)

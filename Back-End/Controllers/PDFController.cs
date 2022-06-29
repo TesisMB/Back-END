@@ -43,33 +43,33 @@ namespace Back_End.Controllers
         }
 
 
-        [HttpPost]
-        [Route("upload")]
-        public async Task<ActionResult<PDF>> PDF([FromForm] PDF pdf)
-        {
-            try
-            {
-                if (pdf == null)
-                {
-                    _logger.LogError("PDF object sent from client is null.");
-                    return BadRequest("Material object is null");
-                }
+        //[HttpPost]
+        //[Route("upload")]
+        //public async Task<ActionResult<PDF>> PDF([FromForm] PDF pdf)
+        //{
+        //    try
+        //    {
+        //        if (pdf == null)
+        //        {
+        //            _logger.LogError("PDF object sent from client is null.");
+        //            return BadRequest("Material object is null");
+        //        }
 
-                pdf.Location = await UploadController.SaveImage(pdf.LocationFile, "PDF");
+        //        pdf.Location = await UploadController.SaveImage(pdf.LocationFile, "PDF");
 
-                _cruzRojaContext.Add(pdf);
+        //        _cruzRojaContext.Add(pdf);
 
-                _cruzRojaContext.SaveChanges();
+        //        _cruzRojaContext.SaveChanges();
 
-                return Ok();
-            }
-            catch (Exception ex)
-            {
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                _logger.LogError($"Something went wrong inside SavePDF action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
-            }
-        }
+        //        _logger.LogError($"Something went wrong inside SavePDF action: {ex.Message}");
+        //        return StatusCode(500, "Internal server error");
+        //    }
+        //}
 
         [HttpGet]
         [Route("download")]

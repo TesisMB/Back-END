@@ -21,6 +21,10 @@ using System.IO;
 //using Wkhtmltopdf.NetCore;
 using Back_End.Hubs;
 using Microsoft.Extensions.FileProviders;
+using Azure.Storage.Blobs;
+using Microsoft.Extensions.Azure;
+using Azure.Storage.Queues;
+using Azure.Core.Extensions;
 //using DinkToPdf.Contracts;
 //using DinkToPdf;
 //using PDF_Generator.Utility;
@@ -57,6 +61,10 @@ public class Startup
         services.ConfigureRepositoryWrapper();
         services.Fluent();
         //services.AddWkhtmltopdf("WkhtmltoPdf");
+
+        services.AddScoped(_ => {
+            return new BlobServiceClient(Configuration.GetConnectionString("AzureBlobStorage"));
+        });
 
         services.AddCors(options =>
         {

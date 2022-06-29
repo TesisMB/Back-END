@@ -180,10 +180,10 @@ namespace Back_End.Controllers
                     {
                         employeeEntity.Volunteers.VolunteerAvatar = "https://i.imgur.com/8AACVdK.png";
                     }
-                    else
-                    {
-                        employeeEntity.Volunteers.VolunteerAvatar = await UploadController.SaveImage(employee.Volunteers.ImageFile, "Resources");
-                    }
+                    //else
+                    //{
+                    //    employeeEntity.Volunteers.VolunteerAvatar =  UploadController.SaveImage(employee.Volunteers.ImageFile);
+                    //}
 
                 }
 

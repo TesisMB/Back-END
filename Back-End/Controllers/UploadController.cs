@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
@@ -7,33 +9,55 @@ using System.Threading.Tasks;
 
 namespace Back_End.Controllers
 {
+
+
     [Route("api/upload")]
     [ApiController]
 
     public class UploadController : ControllerBase
     {
-        [NonAction]
-        public static async Task<string> SaveImage([FromForm] IFormFile Image, string tipo)
+    private readonly BlobServiceClient _blobServiceClient;
+
+        public UploadController(BlobServiceClient blobServiceClient)
         {
-            {
-                tipo = "Resources";
-                var folderName = Path.Combine("StaticFiles", "images", tipo);
-                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+            _blobServiceClient = blobServiceClient;
+        }
+
+        [NonAction]
+        public  async Task<string> SaveImage([FromForm] IFormFile Image)
+        {
+                var blobContainer = _blobServiceClient.GetBlobContainerClient("publicuploads");
+
+                var blobClient = blobContainer.GetBlobClient(Image.FileName);
+
+                var blobHttpHeader = new BlobHttpHeaders { ContentType = "image/jpeg" };
+
+                await blobClient.UploadAsync(Image.OpenReadStream());
+
+                await blobClient.UploadAsync(Image.OpenReadStream(), new BlobUploadOptions { HttpHeaders = blobHttpHeader });
 
                 var fileName = ContentDispositionHeaderValue.Parse(Image.ContentDisposition).FileName.Trim('"');
-                var fullPath = Path.Combine(pathToSave, fileName);
-                var dbPath = Path.Combine(folderName, fileName);
 
-                //crear nueva funcion
-                using (var stream = new FileStream(fullPath, FileMode.Create))
-                {
-                    await Image.CopyToAsync(stream);
-                }
+
+            //return Ok();
+
+            //{
+            //    tipo = "Resources";
+            //    var folderName = Path.Combine("StaticFiles", "images", tipo);
+            //    var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+
+            //    var fileName = ContentDispositionHeaderValue.Parse(Image.ContentDisposition).FileName.Trim('"');
+            //    var fullPath = Path.Combine(pathToSave, fileName);
+            //    var dbPath = Path.Combine(folderName, fileName);
+
+            //    //crear nueva funcion
+            //    using (var stream = new FileStream(fullPath, FileMode.Create))
+            //    {
+            //        await Image.CopyToAsync(stream);
+            //    }
                 //
 
                 return fileName;
-            }
-
         }
 
 

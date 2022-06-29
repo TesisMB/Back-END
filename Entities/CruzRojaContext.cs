@@ -150,7 +150,7 @@ namespace Back_End.Entities
         public DbSet<LocationVolunteers> locationVolunteers { get; set; }
 
         private const string Connection =
-              @"Server=tcp:cruzrojadb.database.windows.net,1433;Initial Catalog=CruzRojaDB;Persist Security Info=False;User ID=usuarioazure;Password=Larioja1450;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+              "Server=tcp:cruzrojadb.database.windows.net,1433;Initial Catalog=CruzRojaDB;Persist Security Info=False;User ID=usuarioazure;Password=Larioja1450;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -54,8 +54,8 @@ namespace Back_End.Controllers
                 {
                     if (item.Picture != "https://i.imgur.com/8AACVdK.png")
                     {
-                        item.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
-                                                 Request.Scheme, Request.Host, Request.PathBase, item.Picture);
+                        item.Picture = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{item.Picture}";
+
                     }
                 }
 
@@ -99,11 +99,9 @@ namespace Back_End.Controllers
 
                     if (volunteerResult.Picture != "https://i.imgur.com/8AACVdK.png")
                     {
-                        volunteerResult.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
-                                        Request.Scheme, Request.Host, Request.PathBase, volunteerResult.Picture);
+                        volunteerResult.Picture = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{volunteerResult.Picture}";
 
                     }
-
 
 
                     return Ok(volunteerResult);
@@ -139,8 +137,8 @@ namespace Back_End.Controllers
                 {
                     if (item.VolunteerAvatar != "https://i.imgur.com/8AACVdK.png")
                     {
-                        item.VolunteerAvatar = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
-                                                 Request.Scheme, Request.Host, Request.PathBase, item.VolunteerAvatar);
+                        item.VolunteerAvatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{item.VolunteerAvatar}";
+
                     }
                 }
 

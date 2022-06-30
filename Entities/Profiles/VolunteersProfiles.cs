@@ -14,7 +14,11 @@ namespace Back_End.Profiles
         public VolunteersProfiles()
         {
             CreateMap<Volunteers, Resources_Dto>()
-              .ForMember(dest => dest.Description,
+
+                .ForPath(dest => dest.Volunteers.ID,
+                            opt => opt.MapFrom(src => src.ID))
+
+                .ForMember(dest => dest.Description,
                             opt => opt.MapFrom(src => src.VolunteerDescription))
 
 

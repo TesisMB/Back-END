@@ -10,6 +10,7 @@ using Entities.DataTransferObjects.Volunteers__Dto;
 using Entities.Helpers;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Repository;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -52,6 +53,14 @@ namespace Back_End.Controllers
 
                 foreach (var item in volunteersResult)
                 {
+                    var user = EmployeesRepository.GetAllEmployeesById(item.Volunteers.ID);
+                    
+                    item.Name = user.Persons.FirstName + " " + user.Persons.LastName;
+                    item.Volunteers.Address = user.Persons.Address;
+                    item.Volunteers.Phone = user.Persons.Phone;
+                    item.Volunteers.Birthdate = user.Persons.Birthdate;
+                    item.Availability = user.Persons.Status;
+
                     if (item.Picture != "https://i.imgur.com/8AACVdK.png")
                     {
                         item.Picture = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{item.Picture}";
@@ -96,6 +105,16 @@ namespace Back_End.Controllers
                 {
                     _logger.LogInfo($"Returned volunteer with id: {volunteerId}");
                     var volunteerResult = _mapper.Map<Resources_Dto>(volunteer);
+
+                    var user = EmployeesRepository.GetAllEmployeesById(volunteerId);
+
+                    volunteerResult.Name = user.Persons.FirstName + " " + user.Persons.LastName;
+                    volunteerResult.Volunteers.Address = user.Persons.Address;
+                    volunteerResult.Volunteers.Phone = user.Persons.Phone;
+                    volunteerResult.Volunteers.Birthdate = user.Persons.Birthdate;
+                    volunteerResult.Availability = user.Persons.Status;
+
+
 
                     if (volunteerResult.Picture != "https://i.imgur.com/8AACVdK.png")
                     {

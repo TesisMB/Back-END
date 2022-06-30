@@ -6,6 +6,7 @@ namespace Back_End.Models.Employees___Dto
 {
     public class VolunteersDto
     {
+        public int ID { get; set; }
         public Boolean UserAvailability { get; set; }
 
         public string Dni { get; set; }

@@ -61,6 +61,7 @@ namespace Repository
         {
             user =  _cruzRojaContext.Users
                 .Where(a => a.UserID.Equals(id))
+                .Include(a => a.Persons)
                 .Include(a => a.Roles)
                 .Include(a => a.Estates)
                 .ThenInclude(a => a.Locations)

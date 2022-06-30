@@ -22,38 +22,38 @@ namespace Entities.Profiles
 
             CreateMap<Resources_ForCreationDto, Materials>();
 
-            CreateMap<Materials, Resources_Dto>()
-                .ForMember(dest => dest.Name,
-                            opt => opt.MapFrom(src => src.MaterialName))
+            CreateMap<Materials, Resources_Dto>();
+                //.ForMember(dest => dest.Name,
+                //            opt => opt.MapFrom(src => src.MaterialName))
 
-                .ForMember(dest => dest.Donation,
-                            opt => opt.MapFrom(src => src.MaterialDonation))
+                //.ForMember(dest => dest.Donation,
+                //            opt => opt.MapFrom(src => src.MaterialDonation))
 
-                .ForPath(dest => dest.Materials.Brand, opts => opts.MapFrom(src => src.MaterialBrand))
+                //.ForPath(dest => dest.Materials.Brand, opts => opts.MapFrom(src => src.MaterialBrand))
 
-                    .ForMember(dest => dest.Quantity,
-                            opt => opt.MapFrom(src => src.MaterialQuantity))
+                //    .ForMember(dest => dest.Quantity,
+                //            opt => opt.MapFrom(src => src.MaterialQuantity))
 
-                      .ForMember(dest => dest.Availability,
-                            opt => opt.MapFrom(src => src.MaterialAvailability))
+                //      .ForMember(dest => dest.Availability,
+                //            opt => opt.MapFrom(src => src.MaterialAvailability))
 
-                        .ForMember(dest => dest.Picture,
-                            opt => opt.MapFrom(src => src.MaterialPicture))
+                //        .ForMember(dest => dest.Picture,
+                //            opt => opt.MapFrom(src => src.MaterialPicture))
 
-                        .ForMember(dest => dest.Description,
-                                       opt => opt.MapFrom(src => src.MaterialUtility))
+                //        .ForMember(dest => dest.Description,
+                //                       opt => opt.MapFrom(src => src.MaterialUtility))
 
-                           .ForMember(dest => dest.Description,
-                                       opt => opt.MapFrom(src => src.MaterialUtility))
+                //           .ForMember(dest => dest.Description,
+                //                       opt => opt.MapFrom(src => src.MaterialUtility))
 
-                           .ForMember(dest => dest.CreatedByEmployee,
-                                       opt => opt.MapFrom(src => src.EmployeeCreated.Users.Persons.FirstName + " " + src.EmployeeCreated.Users.Persons.LastName))
+                //           .ForMember(dest => dest.CreatedByEmployee,
+                //                       opt => opt.MapFrom(src => src.EmployeeCreated.Users.Persons.FirstName + " " + src.EmployeeCreated.Users.Persons.LastName))
 
-                           .ForMember(dest => dest.ModifiedByEmployee,
-                                       opt => opt.MapFrom(src => src.EmployeeModified.Users.Persons.FirstName + " " + src.EmployeeModified.Users.Persons.LastName))
+                //           .ForMember(dest => dest.ModifiedByEmployee,
+                //                       opt => opt.MapFrom(src => src.EmployeeModified.Users.Persons.FirstName + " " + src.EmployeeModified.Users.Persons.LastName))
 
-                           .ForPath(dest => dest.LocationCityName,
-                                       opt => opt.MapFrom(src => src.Estates.Locations.LocationCityName));
+                //           .ForPath(dest => dest.LocationCityName,
+                //                       opt => opt.MapFrom(src => src.Estates.Locations.LocationCityName));
 
             CreateMap<Materials, Resources_ForCreationDto>();
 

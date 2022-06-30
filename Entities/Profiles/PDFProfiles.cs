@@ -14,6 +14,10 @@ namespace Entities.Profiles
         {
             CreateMap<PDF, PDFDto>()
                         .ForMember(i => i.CreateDate, opt => opt.MapFrom(src => DateTimeOffsetExtensions.GetDate2(src.CreateDate)));
+
+
+            CreateMap<PDFForCreationDto, PDF>();
+
         }
     }
 }

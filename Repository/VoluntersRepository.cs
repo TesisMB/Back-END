@@ -26,7 +26,7 @@ namespace Repository
 
             //var volunteers = UsersRepository.authUser;
 
-            var user =  EmployeesRepository .GetAllEmployeesById(userId);
+            var user =  EmployeesRepository.GetAllEmployeesById(userId);
 
             var collection = _cruzRojaContext.Volunteers as IQueryable<Volunteers>;
 
@@ -35,8 +35,7 @@ namespace Repository
 
             return await collection
                          .Include(a => a.Users)
-                         .ThenInclude(a => a.Persons)
-                         .Include(a => a.Users.Roles)
+                         //.Include(a => a.Users.Persons)
                          .Include(a => a.Users.Estates)
                          .ThenInclude(a => a.LocationAddress)
                          .Include(a => a.Users.Estates.EstatesTimes)

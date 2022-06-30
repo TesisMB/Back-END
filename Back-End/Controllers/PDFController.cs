@@ -72,7 +72,7 @@ namespace Back_End.Controllers
 
         [HttpPost]
         [Route("upload")]
-        public async Task<ActionResult<PDF>> PDF([FromForm] PDF pdf)
+        public async Task<ActionResult<PDF>> PDF([FromForm] PDFForCreationDto pdf)
         {
             try
             {
@@ -82,12 +82,14 @@ namespace Back_End.Controllers
                     return BadRequest("Material object is null");
                 }
 
-                 //await _repository.PDF.Upload(pdf);
+                var pdfEntity = _mapper.Map<PDF>(pdf);
+                
+                await _repository.PDF.Upload(pdf);
 
-                _cruzRojaContext.Add(pdf);
+                _repository.PDF.Create(pdfEntity);
 
-                _cruzRojaContext.SaveChanges();
 
+                _repository.PDF.SaveAsync();
                 return Ok();
             }
             catch (Exception ex)

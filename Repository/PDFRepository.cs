@@ -2,6 +2,7 @@
 using Azure.Storage.Blobs.Models;
 using Back_End.Entities;
 using Contracts.Interfaces;
+using Entities.DataTransferObjects.PDF___Dto;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -34,10 +35,19 @@ namespace Repository
             //                                a => a.Estates.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
 
             return await FindAll()
+                .Include(a=> a.EmergenciesDisasters)
+                .ThenInclude(a=> a.TypesEmergenciesDisasters)
+
+                .Include(a => a.EmergenciesDisasters)
+                .ThenInclude(a => a.Alerts)
+
+
+                .Include(a => a.EmergenciesDisasters)
+                .ThenInclude(a => a.LocationsEmergenciesDisasters)
                .ToListAsync();
         }
 
-        public async Task Upload(PDF pdf)
+        public async Task Upload(PDFForCreationDto pdf)
         {
             var blobContainer = _blobServiceClient.GetBlobContainerClient("publicpdf");
 
@@ -62,6 +72,11 @@ namespace Repository
                 await downloadContent.Value.Content.CopyToAsync(ms);
                 return ms.ToArray();
             }
+        }
+
+        public void CreatePDF(PDF pdf)
+        {
+            Create(pdf);
         }
     }
 }

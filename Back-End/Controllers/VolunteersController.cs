@@ -66,7 +66,7 @@ namespace Back_End.Controllers
             {
 
                 _logger.LogError($"Something went wrong inside GetAllVolunteers action:  {ex.Message}");
-                return StatusCode(500, "Internal Server error");
+                return StatusCode(500, ex.Message);
 
             }
         }

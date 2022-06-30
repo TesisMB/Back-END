@@ -1,5 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
+  
 	<PropertyGroup>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
 		<RootNamespace>Back_End</RootNamespace>
@@ -19,7 +20,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="libwkhtmltox.dll" />
 	  <None Remove="Resources\ResourcesInfo.html" />
 	</ItemGroup>
 
@@ -69,8 +69,10 @@
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
 		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
 		<PackageReference Include="NLog.Extensions.Logging" Version="1.7.3" />
+		<PackageReference Include="NReco.PdfGenerator" Version="1.2.0" />
 		<PackageReference Include="System.Linq.Queryable" Version="4.3.0" />
-	</ItemGroup>
+		<PackageReference Include="WkHtmlToPdf" Version="1.0.2" />
+  </ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Contracts\Contracts.csproj" />

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Entities.DataTransferObjects.PDF___Dto;
+using Entities.Helpers;
 using Entities.Models;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,8 @@ namespace Entities.Profiles
     {
         public PDFProfiles()
         {
-            CreateMap<PDF, PDFDto>();
+            CreateMap<PDF, PDFDto>()
+                        .ForMember(i => i.CreateDate, opt => opt.MapFrom(src => DateTimeOffsetExtensions.GetDate2(src.CreateDate)));
         }
     }
 }

@@ -124,6 +124,8 @@ namespace Back_End.Controllers
                 
                 var vehicleEntity = _mapper.Map<Vehicles>(vehicle);
 
+                vehicleEntity.VehicleDescription = vehicle.Description;
+
                 if (vehicle.Picture == null)
                     vehicleEntity.VehiclePicture = "https://i.imgur.com/S9HJEwF.png";
                 else

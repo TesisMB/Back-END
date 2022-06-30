@@ -60,10 +60,13 @@ namespace Back_End.Controllers
                 return fileName;
         }
 
-
-        [HttpPost("pdf")]
-        public async Task<string> SavePDF([FromForm] IFormFile pdf)
+        [HttpPost("pdf"), DisableRequestSizeLimit]
+        //[HttpPost("pdf")]
+        public async Task<string> SavePDF()
         {
+            var pdf = Request.Form.Files[0];
+
+
             var blobContainer = _blobServiceClient.GetBlobContainerClient("publicpdf");
 
             var blobClient = blobContainer.GetBlobClient(pdf.FileName);

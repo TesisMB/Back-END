@@ -108,6 +108,17 @@ namespace Back_End.Entities
                    .WithMany(x => x.ResourcesResponse)
                    .HasForeignKey(x => x.AnsweredBy);
 
+            modelBuilder.Entity<PDF>()
+               .HasOne(x => x.EmployeeCreated)
+               .WithMany(x => x.PDFCreated)
+               .HasForeignKey(x => x.CreatedBy);
+
+            modelBuilder.Entity<PDF>()
+                  .HasOne(x => x.EmployeeModified)
+                  .WithMany(x => x.PDFModified)
+                  .HasForeignKey(x => x.ModifiedBy);
+
+
         }
 
         //Defino cada una de las Models, que se usan durante el proyecto, donde cada una de ellas representa una tabla de la base de datos

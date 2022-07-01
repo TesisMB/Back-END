@@ -70,7 +70,7 @@ namespace Entities.Models
         [ForeignKey("FK_EmergencyDisasterID")]
         public ICollection<VolunteersLocationVolunteersEmergenciesDisasters> VolunteersLocationVolunteersEmergenciesDisasters { get; set; }
 
-        public PDF PDF { get; set; }
+        public ICollection<PDF> PDF { get; set; }
 
 
     }

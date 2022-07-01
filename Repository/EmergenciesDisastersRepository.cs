@@ -31,7 +31,7 @@ namespace Repository
 
             if (user.Roles.RoleName != "Coordinador General" && user.Roles.RoleName != "Admin")
             {
-                return await GetAllEmergenciesDisastersFilter();
+                return await GetAllEmergenciesDisastersFilter(userId);
             }
             else
             {
@@ -88,6 +88,7 @@ namespace Repository
 
         public async Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisastersWithourFilterApp()
         {
+
             var user = UsersRepository.authUser;
 
             var collection = _cruzRojaContext.EmergenciesDisasters as IQueryable<EmergenciesDisasters>;
@@ -205,10 +206,11 @@ namespace Repository
            .FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisastersFilter()
+        public async Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisastersFilter(int userId)
         {
+            var user = EmployeesRepository.GetAllEmployeesById(userId);
 
-            var user = UsersRepository.authUser;
+            //var user = UsersRepository.authUser;
             var collection = _cruzRojaContext.EmergenciesDisasters as IQueryable<EmergenciesDisasters>;
 
             collection = collection.Where(a => a.FK_EstateID == user.FK_EstateID && a.EmergencyDisasterEndDate == null);
@@ -269,6 +271,7 @@ namespace Repository
 
                    .Include(a => a.ChatRooms)
                   .ThenInclude(a => a.Messages)
+                  .Include(a => a.PDF)
             .FirstOrDefaultAsync();
 
         }

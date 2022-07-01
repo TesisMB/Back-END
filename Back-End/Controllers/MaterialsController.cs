@@ -50,9 +50,7 @@ namespace Back_End.Controllers
                 {
                     if (item.Picture != "https://i.imgur.com/S9HJEwF.png")
                     {
-
                         item.Picture = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{item.Picture}";
-
                     }
 
                 }
@@ -100,7 +98,6 @@ namespace Back_End.Controllers
 
                     }
                     return Ok(volunteerResult);
-
                 }
 
             }
@@ -161,7 +158,6 @@ namespace Back_End.Controllers
 
 
         //********************************* FUNCIONANDO *********************************
-        //TO DO falta revisar picture junto con el Front
         [HttpPatch("{materialId}")]
         public async Task<ActionResult> UpdatePartialUser(string materialId, JsonPatchDocument<MaterialsForUpdateDto> _materials)
         {

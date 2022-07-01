@@ -41,5 +41,7 @@ namespace Back_End.Models
         public ICollection<ResourcesRequest> ResourcesResponse { get; set; }
 
 
+        public ICollection<PDF> PDFModified { get; set; }
+        public ICollection<PDF> PDFCreated { get; set; }
     }
 }

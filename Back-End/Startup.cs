@@ -25,6 +25,8 @@ using Azure.Storage.Blobs;
 using Microsoft.Extensions.Azure;
 using Azure.Storage.Queues;
 using Azure.Core.Extensions;
+using DinkToPdf.Contracts;
+using DinkToPdf;
 //using DinkToPdf.Contracts;
 //using DinkToPdf;
 //using PDF_Generator.Utility;
@@ -50,8 +52,8 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        //var context = new CustomAssemblyLoadContext();
-        //context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "libwkhtmltox.dll"));
+        var context = new CustomAssemblyLoadContext();
+        context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "libwkhtmltox.dll"));
         //services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
        
         services.ConfigureCors();
@@ -61,6 +63,7 @@ public class Startup
         services.ConfigureRepositoryWrapper();
         services.Fluent();
         //services.AddWkhtmltopdf("WkhtmltoPdf");
+        services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 
         services.AddScoped(_ => {
             return new BlobServiceClient(Configuration.GetConnectionString("AzureBlobStorage"));

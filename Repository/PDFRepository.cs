@@ -27,12 +27,12 @@ namespace Repository
         }
         public async Task<IEnumerable<PDF>> GetAllPDF(int userId)
         {
-            //var user = EmployeesRepository.GetAllEmployeesById(userId);
+            var user = EmployeesRepository.GetAllEmployeesById(userId);
 
-            //var collection = _cruzRojaContext.PDF as IQueryable<PDF>;
+            var collection = _cruzRojaContext.PDF as IQueryable<PDF>;
 
-            //collection = collection.Where(
-            //                                a => a.Estates.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
+            collection = collection.Where(a => a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID);
+
 
             return await FindAll()
                 .Include(a=> a.EmergenciesDisasters)
@@ -44,6 +44,16 @@ namespace Repository
 
                 .Include(a => a.EmergenciesDisasters)
                 .ThenInclude(a => a.LocationsEmergenciesDisasters)
+
+                   .Include(a => a.EmployeeCreated)
+                   .ThenInclude(i => i.Users)
+                   .ThenInclude(i => i.Persons)
+                   .Include(i => i.EmployeeCreated.Users.Roles)
+
+                   .Include(i => i.EmployeeModified)
+                   .ThenInclude(i => i.Users)
+                   .ThenInclude(i => i.Persons)
+                   .Include(i => i.EmployeeModified.Users.Roles)
                .ToListAsync();
         }
 
@@ -77,6 +87,22 @@ namespace Repository
         public void CreatePDF(PDF pdf)
         {
             Create(pdf);
+        }
+
+        public async Task<PDF> GetPdf(int pdfId)
+        {
+            return await FindByCondition(med => med.ID.Equals(pdfId))
+                .FirstOrDefaultAsync();
+        }
+
+        public void DeletePdf(PDF pdf)
+        {
+            Delete(pdf);
+        }
+
+        public void UpdatePDF(PDF pdf)
+        {
+            Update(pdf);
         }
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
 using System.Net.Http.Headers;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace Back_End.Controllers
@@ -23,12 +24,19 @@ namespace Back_End.Controllers
         [HttpPost, DisableRequestSizeLimit]
         public async Task<string> SaveImage()
         {
-                var Image = Request.Form.Files[0];
+
+            using var rngCryptoServiceProvider = new RNGCryptoServiceProvider();
+            var randomBytes = new byte[5];
+            rngCryptoServiceProvider.GetBytes(randomBytes);
+            // convert random bytes to hex string
+            var name = BitConverter.ToString(randomBytes).Replace("-", "");
+
+            var Image = Request.Form.Files[0];
 
 
                 var blobContainer = _blobServiceClient.GetBlobContainerClient("publicuploads");
 
-                var blobClient = blobContainer.GetBlobClient(Image.FileName);
+                var blobClient = blobContainer.GetBlobClient(name);
 
                 var blobHttpHeader = new BlobHttpHeaders { ContentType = "image/jpeg" };
 
@@ -36,7 +44,7 @@ namespace Back_End.Controllers
 
                 await blobClient.UploadAsync(Image.OpenReadStream(), new BlobUploadOptions { HttpHeaders = blobHttpHeader });
 
-                var fileName = ContentDispositionHeaderValue.Parse(Image.ContentDisposition).FileName.Trim('"');
+                //var fileName = ContentDispositionHeaderValue.Parse(Image.ContentDisposition).FileName.Trim('"');
 
 
             //return Ok();
@@ -57,19 +65,25 @@ namespace Back_End.Controllers
             //    }
                 //
 
-                return fileName;
+                return name;
         }
 
         [HttpPost("pdf"), DisableRequestSizeLimit]
         //[HttpPost("pdf")]
         public async Task<string> SavePDF()
         {
+            using var rngCryptoServiceProvider = new RNGCryptoServiceProvider();
+            var randomBytes = new byte[5];
+            rngCryptoServiceProvider.GetBytes(randomBytes);
+            // convert random bytes to hex string
+            var name = BitConverter.ToString(randomBytes).Replace("-", "");
+
             var pdf = Request.Form.Files[0];
 
 
             var blobContainer = _blobServiceClient.GetBlobContainerClient("publicpdf");
 
-            var blobClient = blobContainer.GetBlobClient(pdf.FileName);
+            var blobClient = blobContainer.GetBlobClient(name);
 
             var blobHttpHeader = new BlobHttpHeaders { ContentType = "application/pdf" };
 
@@ -77,7 +91,7 @@ namespace Back_End.Controllers
 
             await blobClient.UploadAsync(pdf.OpenReadStream(), new BlobUploadOptions { HttpHeaders = blobHttpHeader });
 
-            var fileName = ContentDispositionHeaderValue.Parse(pdf.ContentDisposition).FileName.Trim('"');
+            //var fileName = ContentDispositionHeaderValue.Parse(pdf.ContentDisposition).FileName.Trim('"');
 
 
             //return Ok();
@@ -98,7 +112,7 @@ namespace Back_End.Controllers
             //    }
             //
 
-            return fileName;
+            return name;
         }
 
         //[HttpPost, DisableRequestSizeLimit]

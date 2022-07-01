@@ -2,7 +2,9 @@
 using Back_End.Entities;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.PDF___Dto;
+using Entities.Helpers;
 using Entities.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 using System;
@@ -59,7 +61,8 @@ namespace Back_End.Controllers
 
                 foreach (var item in pdfResult)
                 {
-                    item.LocationFile = $"https://almacenamientotesis.blob.core.windows.net/publicpdf/{item.Location}";                }
+                    item.LocationFile = $"https://almacenamientotesis.blob.core.windows.net/publicpdf/{item.Location}";             
+                }
 
                 return Ok(pdfResult);
             }
@@ -71,8 +74,7 @@ namespace Back_End.Controllers
 
 
         [HttpPost]
-        [Route("upload")]
-        public async Task<ActionResult<PDF>> PDF([FromForm] PDFForCreationDto pdf)
+        public async Task<ActionResult<PDF>> PDF([FromBody] PDFForCreationDto pdf)
         {
             try
             {
@@ -84,10 +86,9 @@ namespace Back_End.Controllers
 
                 var pdfEntity = _mapper.Map<PDF>(pdf);
                 
-                await _repository.PDF.Upload(pdf);
+                //await _repository.PDF.Upload(pdf);
 
-                _repository.PDF.Create(pdfEntity);
-
+                _repository.PDF.CreatePDF(pdfEntity);
 
                 _repository.PDF.SaveAsync();
                 return Ok();
@@ -96,7 +97,7 @@ namespace Back_End.Controllers
             {
 
                 _logger.LogError($"Something went wrong inside SavePDF action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, ex.Message);
             }
         }
 
@@ -142,6 +143,86 @@ namespace Back_End.Controllers
             }
 
             return contentType;
+        }
+
+
+        [HttpPatch("{pdfId}")]
+        public async Task<ActionResult> UpdatePartialUser(int pdfId, JsonPatchDocument<PDFForUpdateDto> _pdf)
+        {
+
+            try
+            {
+
+                var pdfEntity = await _repository.PDF.GetPdf(pdfId);
+
+                if (pdfEntity == null)
+                {
+                    _logger.LogError($"PDF with id: {pdfId}, hasn't been found in db.");
+                    return NotFound();
+                }
+
+
+                var pdfToPatch = _mapper.Map<PDFForUpdateDto>(pdfEntity);
+
+                 pdfToPatch.PDFDateModified = DateTime.Now;
+
+                //se aplican los cambios recien aca
+                _pdf.ApplyTo(pdfToPatch, ModelState);
+
+
+                if (!TryValidateModel(pdfToPatch))
+                {
+                    return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
+                }
+
+
+                var employeeResult = _mapper.Map(pdfToPatch, pdfEntity);
+
+                _repository.PDF.UpdatePDF(employeeResult);
+
+                _repository.PDF.SaveAsync();
+
+                return NoContent();
+            }
+
+
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside UpdatMaterial action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+
+            }
+        }
+
+
+
+        //********************************* FUNCIONANDO *********************************
+        [HttpDelete("{pdfId}")]
+        public async Task<ActionResult> DeletePdf(int pdfId)
+        {
+
+            try
+            {
+                var pdf = await _repository.PDF.GetPdf(pdfId);
+
+                if (pdf == null)
+                {
+                    _logger.LogError($"PDF with id: {pdfId}, hasn't ben found in db.");
+                    return NotFound();
+                }
+
+
+                _repository.PDF.Delete(pdf);
+
+                _repository.PDF.SaveAsync();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside DeletePDF action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
 

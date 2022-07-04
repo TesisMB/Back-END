@@ -1,20 +1,20 @@
 ﻿using AutoMapper;
+using Back_End.EmployeesPDF;
 using Back_End.Entities;
 using Back_End.Helpers;
 using Back_End.Models;
 using Back_End.Models.Employees___Dto;
 using Contracts.Interfaces;
-//using DinkToPdf;
-//using DinkToPdf.Contracts;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 using Entities.DataTransferObjects.Employees___Dto;
-using Entities.DataTransferObjects.Locations___Dto;
 using Entities.Helpers;
-using Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using PDF_Generator.Utility;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.IO;
 //using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,23 +30,31 @@ namespace Back_End.Controllers
         private readonly IRepositorWrapper _repository;
         private readonly IMapper _mapper;
         public byte[] pdf;
-        //private IConverter _converter;
+        private IConverter _converter;
 
-        public EmployeesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper)
+        public EmployeesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper, IConverter converter)
         {
             _logger = logger;
             _repository = repository;
             _mapper = mapper;
-            //_converter = converter;
+            _converter = converter;
         }
 
-    /*    [HttpGet("PDF/{employeeId}")]
+        [HttpGet("PDF/{employeeId}")]
         public IActionResult CreatePDF(int employeeId)
         {
 
-            var employees =  _repository.Employees.GetEmployeeWithDetails(employeeId);
+            var employees = _repository.Employees.GetEmployeeWithDetails(employeeId);
 
-            //ar employees = DataStorage.GetAllEmployees();
+            //quien es el actual usuario
+            Users user = new Users();
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            user = cruzRojaContext.Users
+                    .Where(x => x.UserID == employeeId)
+                    .Include(a => a.Estates)
+                    .AsNoTracking()
+                    .FirstOrDefault();
 
             var globalSettings = new GlobalSettings
             {
@@ -60,10 +68,10 @@ namespace Back_End.Controllers
             var objectSettings = new ObjectSettings
             {
                 PagesCount = true,
-                HtmlContent = TemplateGenerator.GetHTMLString(employees),
-                /Page = "https://code-maze.com/", //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE
+                HtmlContent = EmployeePdf.GetHTMLString(employees),
+                // Page = "https://code-maze.com/", //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE
                 WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "styles.css") },
-                FooterSettings = { FontName = "Arial", FontSize = 9, Right = "[page]", Line = true,},
+                FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
                 //FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
             };
 
@@ -77,7 +85,106 @@ namespace Back_End.Controllers
 
             return File(file, "application/pdf");
         }
-    */
+
+
+        [HttpGet("GetAll/PDF/{employeeId}")]
+        public async Task<IActionResult> CreatePDFEmployees(int employeeId)
+        {
+
+            var employees = await _repository.Employees.GetAllEmployees(employeeId);
+
+            //quien es el actual usuario
+            Users user = null;
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            string title = string.Empty;
+            foreach (var emp in employees)
+            {
+                title = emp.Users.Estates.Locations.LocationCityName;
+            }
+
+            user = cruzRojaContext.Users
+                    .Where(x => x.UserID == employeeId)
+                    .AsNoTracking()
+                    .FirstOrDefault();
+
+            var globalSettings = new GlobalSettings
+            {
+                ColorMode = ColorMode.Color,
+                Orientation = Orientation.Portrait,
+                PaperSize = PaperKind.A4,
+                Margins = new MarginSettings { Top = 10 },
+                DocumentTitle = $"Reporte de empleados - {title}",
+            };
+
+            var objectSettings = new ObjectSettings
+            {
+                PagesCount = true,
+                HtmlContent = EmployeesPdf.GetHTMLString(employees),
+                // Page = "https://code-maze.com/", //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE
+                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "StylesForEmployeescss.css") },
+                FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+                //FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+            };
+
+            var pdf = new HtmlToPdfDocument()
+            {
+                GlobalSettings = globalSettings,
+                Objects = { objectSettings }
+            };
+
+            var file = _converter.Convert(pdf);
+
+            return File(file, "application/pdf");
+        }
+
+        [HttpGet("Credential/{employeeId}")]
+        public IActionResult CredentialPDF(int employeeId)
+        {
+
+            var employees = _repository.Employees.GetEmployeeWithDetails(employeeId);
+
+            //quien es el actual usuario
+            Users user = new Users();
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            user = cruzRojaContext.Users
+                    .Where(x => x.UserID == employeeId)
+                    .Include(a => a.Estates)
+                    .AsNoTracking()
+                    .FirstOrDefault();
+
+            var globalSettings = new GlobalSettings
+            {
+                ColorMode = ColorMode.Color,
+                Orientation = Orientation.Portrait,
+                PaperSize = PaperKind.A4,
+                Margins = new MarginSettings { Top = 10 },
+                DocumentTitle = $"Credencial",
+            };
+
+            var objectSettings = new ObjectSettings
+            {
+                PagesCount = true,
+                HtmlContent = Credential.GetHTMLString(employees),
+                // Page = "https://code-maze.com/", //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE
+                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "Credential.css") },
+                FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+                //FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+            };
+
+            var pdf = new HtmlToPdfDocument()
+            {
+                GlobalSettings = globalSettings,
+                Objects = { objectSettings }
+            };
+
+            var file = _converter.Convert(pdf);
+
+            return File(file, "application/pdf");
+        }
+
+
         //********************************* FUNCIONANDO *********************************
 
         [HttpGet]
@@ -107,7 +214,7 @@ namespace Back_End.Controllers
         {
             try
             {
-                var employee =  _repository.Employees.GetEmployeeWithDetails(employeeId);
+                var employee = _repository.Employees.GetEmployeeWithDetails(employeeId);
 
                 if (employee == null)
                 {
@@ -202,7 +309,7 @@ namespace Back_End.Controllers
 
 
         //********************************* FUNCIONANDO *********************************
-    
+
         [HttpPatch("{employeeId}")]
         public async Task<ActionResult> UpdatePartialUser(int employeeId, JsonPatchDocument<EmployeeForUpdateDto> _Employees)
         {
@@ -310,8 +417,8 @@ namespace Back_End.Controllers
         }
 
     }
-      
-   
+
+
 
 
 

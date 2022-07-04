@@ -12,6 +12,7 @@ namespace Contracts.Interfaces
     {
 
         Task<IEnumerable<Medicines>> GetAllMedicines(int userId);
+        IEnumerable<Medicines> GetAllMedicines(DateTime dateStart, DateTime dateEnd);
 
         Task<Medicines> GetMedicineById(string medicineId);
 
@@ -25,8 +26,7 @@ namespace Contracts.Interfaces
         Task Upload(MedicineImg medicine);
 
         Task<byte[]> Get(string imageName);
-
-
+        IEnumerable<Medicines> GetAllMedicines(DateTime dateConvert, DateTime dateConvertEnd, int estateId);
     }
 }
 

@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace Back_End.Controllers
 {
-    [Route("api/")]
+    [Route("api/Estates")]
     [ApiController]
     public class EstatesController : ControllerBase
     {
@@ -27,23 +27,18 @@ namespace Back_End.Controllers
         private IRepositorWrapper _repository;
         private byte[] pdf;
         private readonly IMapper _mapper;
-      /// <summary>
-      ///  private IConverter _converter;
-      /// </summary>
+        private IConverter _converter;
         private ObjectSettings objectSettings = new ObjectSettings();
         private GlobalSettings globalSettings = new GlobalSettings();
-        public EstatesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper) //IConverter converter)
+        public EstatesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper, IConverter converter)
         {
             _logger = logger;
             _repository = repository;
             _mapper = mapper;
-          //  _converter = converter;
-
+            _converter = converter;
         }
 
-
-
-        [HttpGet("Estates")]
+        [HttpGet]
         public async Task<ActionResult<Estates>> GetAllEstatesType()
         {
             try
@@ -63,116 +58,210 @@ namespace Back_End.Controllers
         }
 
 
-        //[HttpGet("PDF/{estateId}")]
-        //public IActionResult CreatePDF(int estateId)
-        //{
+        [HttpGet("PDF/{estateId}")]
+        public IActionResult CreatePDF(int estateId, [FromQuery] string dateStart, [FromQuery] string? dateEnd )
+        {
+            //quien es el actual usuario
+            Users user = null;
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+            DateTime dateConvert, dateConvertEnd;
+            dateConvertEnd = Convert.ToDateTime("01/01/0001");
 
-        //    //quien es el actual usuario
-        //    Users user = null;
-        //    CruzRojaContext cruzRojaContext = new CruzRojaContext();
+                        //Fecha de comienzo
+                        dateStart = dateStart.Substring(4, 11);
+                        var monthStart = dateStart.Substring(0, 3);
+                        var dayStart = dateStart.Substring(3, 4);
+                        var yearStart = dateStart.Substring(6, 5);
 
-        //    user = cruzRojaContext.Users
-        //            .Where(x => x.UserID == estateId)
-        //            .AsNoTracking()
-        //            .FirstOrDefault();
+                        monthStart = _repository.Estates.Date(monthStart);
 
-        // if(estateId != 2)
-        //    {
-        //        var estates = _repository.Estates.GetAllEstateByPdf(estateId);
-
-        //        estates.Materials =
-        //                    from x in estates.Materials
-        //                    where x.MaterialQuantity != 0
-        //                    select x;
-
-        //        estates.Medicines =
-        //                  from x in estates.Medicines
-        //                  where x.MedicineExpirationDate > DateTime.Now && x.MedicineQuantity != 0
-        //                  select x;
-
-        //        estates.Vehicles =
-        //               from x in estates.Vehicles
-        //               where x.VehicleAvailability != false
-        //               select x;
-
-        //        objectSettings = new ObjectSettings
-        //        {
-        //            PagesCount = true,
-        //            HtmlContent = Resource.GetHTMLString(estates),
-        //            WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "stylesForResource.css") },
-        //            FooterSettings = { FontName = "Arial", FontSize = 9, Right = "[page]", Line = true, },
-        //        };
-
-        //        var globalSettings = new GlobalSettings
-        //        {
-        //            ColorMode = ColorMode.Color,
-        //            Orientation = Orientation.Portrait,
-        //            PaperSize = PaperKind.A4,
-        //            Margins = new MarginSettings { Top = 10 },
-        //            DocumentTitle = $"Reporte de recursos - {estates.EstateTypes} {estates.Locations.LocationCityName}",
-        //        };
-
-        //    }else
-        //    {
-        //        var estates = _repository.Estates.GetAllEstatesByPdf();
-
-        //        foreach (var item in estates)
-        //        {
-        //            item.Materials =
-        //                        from x in item.Materials
-        //                        where x.MaterialQuantity == 0
-        //                        select x;
-
-        //            item.Medicines =
-        //                      from x in item.Medicines
-        //                      where x.MedicineQuantity == 0
-        //                      select x;
-
-        //            item.Vehicles =
-        //                   from x in item.Vehicles
-        //                   where x.VehicleAvailability != true
-        //                   select x;
-        //        }
-
-        //        objectSettings = new ObjectSettings
-        //        {
-        //            PagesCount = true,
-        //            HtmlContent = Resources.GetHTMLString(estates),
-        //            WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "stylesForResource.css") },
-        //            //HeaderSettings = { HtmUrl = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "ResourcesInfo.html") },
-        //            //FooterSettings = { FontName = "Arial", FontSize = 9, Right = "[page]", Line = true}
-        //             //HeaderSettings = { HtmUrl = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "ResourcesInfo.html"),Spacing= 1.8},
-        //            //FooterSettings = { HtmUrl = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "ResourcesInfo.html") },  
-        //            FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
-        //        };
-
-        //        var globalSettings = new GlobalSettings
-        //        {
-        //            ColorMode = ColorMode.Color,
-        //            Orientation = Orientation.Landscape,
-        //            PaperSize = PaperKind.A4,
-        //            Margins = new MarginSettings { Top = 10 },
-        //            DocumentTitle = "Reporte de recursos",
-        //        };
-        //    }
+                        var dateStartNew = dayStart + "/" + monthStart + "/" + yearStart;
+                        dateConvert = Convert.ToDateTime(dateStartNew);
 
 
+                    //Fecha de finalizacion Opcional
+                    if (dateEnd != null)
+                    {
+                        dateEnd = dateEnd.Substring(4, 11);
+                        var monthEnd= dateEnd.Substring(0, 3);
+                        var dayEnd = dateEnd.Substring(3, 4);
+                        var yearEnd = dateEnd.Substring(6, 5);
+
+                        monthEnd = _repository.Estates.Date(monthEnd);
+                        Console.WriteLine("Mes final " + monthEnd);
+                        var dateEndNew = dayEnd + "/" + monthEnd + "/" + yearEnd;
+                        dateConvertEnd = Convert.ToDateTime(dateEndNew);
+                    }
+
+                         Console.WriteLine("Fecha" + dateConvertEnd);
+
+
+            user = cruzRojaContext.Users
+                    .Where(x => x.UserID == estateId)
+                    .AsNoTracking()
+                    .FirstOrDefault();
+
+            if (estateId != 2)
+            {
+                var estates = _repository.Estates.GetAllEstateByPdf(estateId);
+
+                var materiales = _repository.Materials.GetAllMaterials(dateConvert, dateConvertEnd, estateId);
+                var medicamentos = _repository.Medicines.GetAllMedicines(dateConvert, dateConvertEnd, estateId);
+                var vehiculos = _repository.Vehicles.GetAllVehicles(dateConvert, dateConvertEnd, estateId);
+
+                if (String.IsNullOrEmpty(dateEnd))
+                {
+                    estates.Materials =
+                                from x in estates.Materials
+                                where x.MaterialDateCreated >= dateConvert && x.MaterialAvailability != false
+                                && x.FK_EstateID == estates.EstateID
+                                select x;
+
+                    estates.Medicines =
+                              from x in estates.Medicines
+                              where x.MedicineDateCreated >= dateConvert
+                              && x.MedicineAvailability != false
+                              && x.FK_EstateID == estates.EstateID
+                              select x;
+
+                    estates.Vehicles =
+                           from x in estates.Vehicles
+                           where x.VehicleDateCreated >= dateConvert 
+                           && x.VehicleAvailability != false
+                           && x.FK_EstateID == estates.EstateID
+                           select x;
+                }
+                else
+                {
+                    estates.Materials =
+                             from x in estates.Materials
+                             where x.MaterialDateCreated >= dateConvert 
+                             && x.MaterialDateCreated <= dateConvertEnd
+                             && x.MaterialAvailability == true
+                             && x.FK_EstateID == estates.EstateID
+                             select x;
+
+                    estates.Medicines =
+                              from x in estates.Medicines
+                              where x.MedicineDateCreated >= dateConvert
+                              && x.MedicineDateCreated <= dateConvertEnd
+                              && x.MedicineAvailability == true
+                              && x.FK_EstateID == estates.EstateID
+                              select x;
+
+                    estates.Vehicles =
+                           from x in estates.Vehicles
+                           where x.VehicleDateCreated >= dateConvert
+                           && x.VehicleDateCreated <= dateConvertEnd
+                           && x.VehicleAvailability == true
+                           && x.FK_EstateID == estates.EstateID
+                           select x;
+                }
+
+                var globalSettings = new GlobalSettings
+                {
+                    ColorMode = ColorMode.Color,
+                    Orientation = Orientation.Portrait,
+                    PaperSize = PaperKind.A4,
+                    Margins = new MarginSettings { Top = 10 },
+                    DocumentTitle = "Reporte",
+                };
+
+                objectSettings = new ObjectSettings
+                {
+                    PagesCount = true,
+                    HtmlContent = Resource.GetHTMLString(estates, materiales, medicamentos, vehiculos, dateConvert, dateConvertEnd),
+                    WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "stylesForResource.css") },
+                    FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+                };
+
+            }
+            else
+            {
+                var estates = _repository.Estates.GetAllEstatesByPdf();
+
+                //Sin stock
+                var materiales = _repository.Materials.GetAllMaterials(dateConvert, dateConvertEnd);
+                var medicamentos = _repository.Medicines.GetAllMedicines(dateConvert, dateConvertEnd);
+                var vehiculos = _repository.Vehicles.GetAllVehicles(dateConvert, dateConvertEnd);
+
+
+                foreach (var item in estates)
+                {
+                    if (String.IsNullOrEmpty(dateEnd))
+                    {
+                        item.Materials =
+                                    from x in item.Materials
+                                    where x.MaterialDateCreated >= dateConvert && x.MaterialAvailability != false
+                                    select x;
+
+                        item.Medicines =
+                                  from x in item.Medicines
+                                  where x.MedicineDateCreated >= dateConvert && x.MedicineAvailability != false
+                                  select x;
+
+                        item.Vehicles =
+                               from x in item.Vehicles
+                               where x.VehicleDateCreated >= dateConvert && x.VehicleAvailability != false
+                               select x;
+                    }
+                    else
+                    {
+                        item.Materials =
+                                 from x in item.Materials
+                                 where x.MaterialDateCreated >= dateConvert && x.MaterialDateCreated <= dateConvertEnd && x.MaterialAvailability == true
+                                 select x;
+
+                        item.Medicines =
+                                  from x in item.Medicines
+                                  where x.MedicineDateCreated >= dateConvert && x.MedicineDateCreated<= dateConvertEnd && x.MedicineAvailability == true
+                                  select x;
+
+                        item.Vehicles =
+                               from x in item.Vehicles
+                               where x.VehicleDateCreated >= dateConvert && x.VehicleDateCreated <= dateConvertEnd && x.VehicleAvailability == true
+                               select x;
+                    }
+                }
+
+
+                var globalSettings = new GlobalSettings
+                {
+                    ColorMode = ColorMode.Color,
+                    Orientation = Orientation.Landscape,
+                    PaperSize = PaperKind.A4,
+                    Margins = new MarginSettings { Top = 10 },
+                    DocumentTitle = "Reporte de recursos",
+                };
+
+                objectSettings = new ObjectSettings
+                {
+                    PagesCount = true,
+                    HtmlContent = Resources.GetHTMLString(estates, materiales, medicamentos, vehiculos, dateConvert, dateConvertEnd),
+                    WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "stylesForResource.css") },
+                    FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+                };
+
+            }
+
+            var pdf = new HtmlToPdfDocument()
+            {
+                GlobalSettings = globalSettings,
+                Objects = { objectSettings }
+            };
+
+            var file = _converter.Convert(pdf);
+
+            return File(file, "application/pdf");
+        }
 
 
 
-        //    var pdf = new HtmlToPdfDocument()
-        //    {
-        //        GlobalSettings = globalSettings,
-        //        Objects = { objectSettings }
-        //    };
-
-        //    var file = _converter.Convert(pdf);
-
-        //    return File(file, "application/pdf");
-        //}
 
 
-        
+
+
+
     }
 }
 

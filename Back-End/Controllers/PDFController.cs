@@ -35,7 +35,7 @@ namespace Back_End.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<PDF>> GetAllPDF([FromQuery] int userId)
+        public async Task<ActionResult<PDF>> GetAllPDF([FromQuery] int userId, [FromQuery] string? limit)
         {
                 //var folderName = Path.Combine("StaticFiles", "images", "PDF");
                 //var pathToRead = Path.Combine(Directory.GetCurrentDirectory(), folderName);
@@ -52,7 +52,7 @@ namespace Back_End.Controllers
             try
             {
 
-                var pdfAll = await _repository.PDF.GetAllPDF(userId);
+                var pdfAll = await _repository.PDF.GetAllPDF(userId, limit);
 
 
                 _logger.LogInfo($"Returned all PDF from database.");

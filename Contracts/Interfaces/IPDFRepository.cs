@@ -7,7 +7,7 @@ namespace Contracts.Interfaces
 {
     public interface IPDFRepository: IRepositoryBase<PDF>
     {
-        Task<IEnumerable<PDF>> GetAllPDF(int userId);
+        Task<IEnumerable<PDF>> GetAllPDF(int userId, string limit);
         Task<PDF> GetPdf(int pdfId);
 
         Task Upload(PDFForCreationDto pdf);

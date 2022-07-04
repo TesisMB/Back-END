@@ -25,13 +25,28 @@ namespace Repository
             _blobServiceClient = blobServiceClient;
 
         }
-        public async Task<IEnumerable<PDF>> GetAllPDF(int userId)
+        public async Task<IEnumerable<PDF>> GetAllPDF(int userId, string limit)
         {
-            var user = EmployeesRepository.GetAllEmployeesById(userId);
+            //var user = EmployeesRepository.GetAllEmployeesById(userId);
+
+           var user = await _cruzRojaContext.Users
+                    .Where(a => a.UserID.Equals(userId))
+                    .Include(a => a.Roles)
+                    .Include(a => a.Estates)
+                    .ThenInclude(a => a.Locations)
+                    .FirstOrDefaultAsync();
 
             var collection = _cruzRojaContext.PDF as IQueryable<PDF>;
 
-            collection = collection.Where(a => a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID);
+            if (String.IsNullOrEmpty(limit))
+                    collection = collection.Where(a => a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID);
+            else
+            {
+                collection = collection.Where(a => a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID)
+                                    .OrderByDescending(a => a.ID)
+                                    .Take(2)
+                                    .AsNoTracking();
+            }
 
 
             return await FindAll()

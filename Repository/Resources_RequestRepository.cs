@@ -130,6 +130,94 @@ namespace Repository
         }
 
 
+        public async Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequest(int userId, string Condition)
+        {
+
+            //var user = UsersRepository.authUser;
+            user =  EmployeesRepository.GetAllEmployeesById(userId);
+
+          
+
+            var collection = _cruzRojaContext.Resources_Requests as IQueryable<ResourcesRequest>;
+
+            //Admin y C.General -> tiene acceso a todo en funcion del departamento
+           
+            if (user.Roles.RoleName == "Admin")
+                {
+                    return GetAllResourcesRequests(user.FK_EstateID, Condition);
+                }
+
+                else if (user.Roles.RoleName == "Coordinador General")
+                {
+                    return GetAllResourcesRequests(user.FK_EstateID, Condition);
+                }
+
+
+                //Encargado de logistica tiene acceso a las solicitudes pendientes nomas    
+
+                else if (user.Roles.RoleName == "Encargado de Logistica")
+                {
+
+                    collection = collection.Where(
+                                                  a => a.Condition == Condition
+                                                 && a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID)
+                                                 .AsNoTracking();
+                }
+
+                //C.Emergencias tiene acceso a solamente el historial de solicitudes
+                else
+                {
+                    collection = collection.Where(
+                                                a => a.Condition == Condition
+                                                && a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID
+                                                && a.CreatedBy == user.UserID)
+                                                .AsNoTracking();
+                 }
+
+
+            return collection
+                .Include(i => i.EmergenciesDisasters)
+                .ThenInclude(i => i.TypesEmergenciesDisasters)
+                .Include(i => i.EmergenciesDisasters.LocationsEmergenciesDisasters)
+
+                .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .ThenInclude(i => i.Materials)
+
+                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .ThenInclude(i => i.Medicines)
+
+                .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .ThenInclude(i => i.Vehicles)
+
+                 .ThenInclude(i => i.TypeVehicles)
+
+                .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .ThenInclude(i => i.Vehicles)
+                .ThenInclude(i => i.Brands)
+
+                .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .ThenInclude(i => i.Vehicles)
+                .ThenInclude(i => i.Model)
+
+
+                .Include(i => i.EmployeeCreated)
+                .Include(i => i.EmployeeCreated.Users.Persons)
+                .Include(i => i.EmployeeCreated.Users.Roles)
+                .Include(i => i.EmployeeCreated.Users.Estates)
+                .Include(i => i.EmployeeCreated.Users.Estates.LocationAddress)
+                .Include(i => i.EmployeeCreated.Users.Estates.Locations)
+
+
+                .Include(i => i.EmployeeResponse)
+                .Include(i => i.EmployeeResponse.Users.Persons)
+                .Include(i => i.EmployeeResponse.Users.Roles)
+                .Include(i => i.EmployeeResponse.Users.Estates)
+                .Include(i => i.EmployeeResponse.Users.Estates.LocationAddress)
+                .Include(i => i.EmployeeResponse.Users.Estates.Locations)
+                .ToList();
+        }
+
+
 
         public  IEnumerable<ResourcesRequest> GetAllResourcesRequests(int fK_EstateID, string Condition)
         {

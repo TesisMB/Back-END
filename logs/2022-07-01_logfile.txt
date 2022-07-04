@@ -1,0 +1,21 @@
+2022-07-01 15:00:56.1922 INFO Returned all employees from database.
+2022-07-01 15:01:08.2637 INFO Returned all employees from database.
+2022-07-01 15:10:02.2713 INFO Returned all Materials from database.
+2022-07-01 15:10:38.3022 INFO Returned all Materials from database.
+2022-07-01 15:10:54.0380 INFO Returned all Materials from database.
+2022-07-01 15:11:35.7089 INFO Returned all Materials from database.
+2022-07-01 15:13:18.8027 INFO Returned all Materials from database.
+2022-07-01 15:14:01.9175 INFO Returned all Materials from database.
+2022-07-01 15:16:03.5360 INFO Returned all Materials from database.
+2022-07-01 15:16:47.9440 INFO Returned all Volunteers from database.
+2022-07-01 15:17:07.6386 INFO Returned volunteer with id: 19
+2022-07-01 15:20:04.9278 INFO Returned volunteer with id: 19
+2022-07-01 15:20:15.7092 INFO Returned all Materials from database.
+2022-07-01 15:20:24.3084 INFO Returned all Materials from database.
+2022-07-01 17:06:10.4582 INFO Returned all employees from database.
+2022-07-01 17:07:10.2365 INFO Returned all estates from database.
+2022-07-01 17:14:19.7721 INFO Returned all employees from database.
+2022-07-01 17:33:21.5218 INFO Returned all Materials from database.
+2022-07-01 17:46:18.5394 INFO Returned all estates from database.
+2022-07-01 17:53:06.8227 ERROR Something went wrong inside UpdatMaterial action: An error occurred while updating the entries. See the inner exception for details.
+2022-07-01 17:53:12.9984 ERROR Something went wrong inside UpdatMaterial action: An error occurred while updating the entries. See the inner exception for details.

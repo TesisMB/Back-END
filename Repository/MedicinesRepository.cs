@@ -7,6 +7,7 @@ using Entities.DataTransferObjects.ResourcesDto;
 using Entities.Helpers;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -56,6 +57,49 @@ namespace Repository
                 .ThenInclude(i => i.Persons)
                 .Include(i => i.EmployeeModified.Users.Roles)
                 .ToListAsync();
+        }
+
+        public IEnumerable<Medicines> GetAllMedicines(DateTime dateStart, DateTime dateEnd)
+        {
+
+            var collection = _cruzRojaContext.Medicines as IQueryable<Medicines>;
+
+            if(dateEnd == null)
+            {
+            collection = collection.Where(
+                                            a => a.MedicineDateCreated >= dateStart ||
+                                            a.MedicineAvailability == false && a.MedicineExpirationDate < DateTime.Now
+                                           );
+            }
+            else
+            {
+                collection = collection.Where(
+                                a => a.MedicineDateCreated >= dateStart && a.MedicineDateCreated <= dateEnd
+                                &&
+                                a.MedicineAvailability == false
+                               );
+            }
+
+     
+
+            return  collection
+                .Include(a => a.Estates)
+                .ThenInclude(a => a.LocationAddress)
+                .Include(a => a.Estates.EstatesTimes)
+                .ThenInclude(a => a.Times)
+                .ThenInclude(a => a.Schedules)
+                .Include(a => a.Estates.Locations)
+
+                .Include(a => a.EmployeeCreated)
+                .ThenInclude(i => i.Users)
+                .ThenInclude(i => i.Persons)
+                .Include(i => i.EmployeeCreated.Users.Roles)
+
+                .Include(i => i.EmployeeModified)
+                .ThenInclude(i => i.Users)
+                .ThenInclude(i => i.Persons)
+                .Include(i => i.EmployeeModified.Users.Roles)
+                .ToList();
         }
 
         public static void status(Medicines medicines)
@@ -160,6 +204,52 @@ namespace Repository
                 await downloadContent.Value.Content.CopyToAsync(ms);
                 return ms.ToArray();
             }
+        }
+
+        public IEnumerable<Medicines> GetAllMedicines(DateTime dateStart, DateTime dateEnd, int estateId)
+        {
+            var collection = _cruzRojaContext.Medicines as IQueryable<Medicines>;
+            var user = EmployeesRepository.GetAllEmployeesById(estateId);
+
+            var fecha = Convert.ToDateTime("01/01/0001");
+
+            if (dateEnd == fecha)
+            {
+                collection = collection.Where(
+                                                a => a.MedicineDateCreated >= dateStart &&
+                                                a.MedicineAvailability == false
+                                                && a.FK_EstateID == estateId);
+            }
+            else
+            {
+                collection = collection.Where(
+                                a => a.MedicineDateCreated >= dateStart && a.MedicineDateCreated <= dateEnd
+                                &&
+                                a.MedicineAvailability == false
+                                && a.FK_EstateID == user.FK_EstateID
+                               );
+            }
+
+
+
+            return collection
+                .Include(a => a.Estates)
+                .ThenInclude(a => a.LocationAddress)
+                .Include(a => a.Estates.EstatesTimes)
+                .ThenInclude(a => a.Times)
+                .ThenInclude(a => a.Schedules)
+                .Include(a => a.Estates.Locations)
+
+                .Include(a => a.EmployeeCreated)
+                .ThenInclude(i => i.Users)
+                .ThenInclude(i => i.Persons)
+                .Include(i => i.EmployeeCreated.Users.Roles)
+
+                .Include(i => i.EmployeeModified)
+                .ThenInclude(i => i.Users)
+                .ThenInclude(i => i.Persons)
+                .Include(i => i.EmployeeModified.Users.Roles)
+                .ToList();
         }
     }
 }

@@ -3,6 +3,7 @@ using Contracts.Interfaces;
 using Entities.Helpers;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -51,6 +52,45 @@ namespace Repository
                         .ThenInclude(i => i.Persons)
                         .Include(i => i.EmployeeModified.Users.Roles)
                        .ToListAsync();
+
+        }
+
+
+
+        public IEnumerable<Materials> GetAllMaterials(DateTime dateStart, DateTime dateEnd)
+        {
+
+            var collection = _cruzRojaContext.Materials as IQueryable<Materials>;
+
+            if (dateEnd == null)
+            {
+                collection = collection.Where(
+                    a => a.MaterialDateCreated >= dateStart && a.MaterialQuantity == 0);
+            }
+            else
+            {
+                collection = collection.Where(
+                    a => a.MaterialDateCreated >= dateStart && a.MaterialDateCreated<=dateEnd && a.MaterialAvailability == false);
+            }
+
+            return collection
+                       .Include(a => a.Estates)
+                       .Include(a => a.Estates.LocationAddress)
+                       .Include(a => a.Estates.EstatesTimes)
+                       .ThenInclude(a => a.Times)
+                       .ThenInclude(a => a.Schedules)
+                       .Include(a => a.Estates.Locations)
+
+                        .Include(a => a.EmployeeCreated)
+                        .ThenInclude(i => i.Users)
+                        .ThenInclude(i => i.Persons)
+                        .Include(i => i.EmployeeCreated.Users.Roles)
+
+                        .Include(i => i.EmployeeModified)
+                        .ThenInclude(i => i.Users)
+                        .ThenInclude(i => i.Persons)
+                        .Include(i => i.EmployeeModified.Users.Roles)
+                       .ToList();
 
         }
 
@@ -118,6 +158,46 @@ namespace Repository
             Delete(material);
         }
 
+        public IEnumerable<Materials> GetAllMaterials(DateTime dateStart, DateTime dateEnd, int estateId)
+        {
+            var user = EmployeesRepository.GetAllEmployeesById(estateId);
 
+            var collection = _cruzRojaContext.Materials as IQueryable<Materials>;
+
+            var fecha = Convert.ToDateTime("01/01/0001");
+
+            if (dateEnd == fecha)
+            {
+                collection = collection.Where(
+                    a => a.MaterialDateCreated >= dateStart && a.MaterialAvailability == false 
+                    && a.FK_EstateID == user.FK_EstateID);
+            }
+            else
+            {
+                collection = collection.Where(
+                    a => a.MaterialDateCreated >= dateStart && a.MaterialDateCreated <= dateEnd
+                            && a.MaterialAvailability == false
+                            && a.FK_EstateID == user.FK_EstateID);
+            }
+
+            return collection
+                       .Include(a => a.Estates)
+                       .Include(a => a.Estates.LocationAddress)
+                       .Include(a => a.Estates.EstatesTimes)
+                       .ThenInclude(a => a.Times)
+                       .ThenInclude(a => a.Schedules)
+                       .Include(a => a.Estates.Locations)
+
+                        .Include(a => a.EmployeeCreated)
+                        .ThenInclude(i => i.Users)
+                        .ThenInclude(i => i.Persons)
+                        .Include(i => i.EmployeeCreated.Users.Roles)
+
+                        .Include(i => i.EmployeeModified)
+                        .ThenInclude(i => i.Users)
+                        .ThenInclude(i => i.Persons)
+                        .Include(i => i.EmployeeModified.Users.Roles)
+                       .ToList();
+        }
     }
 }

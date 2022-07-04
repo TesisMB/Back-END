@@ -15,5 +15,7 @@ namespace Contracts.Interfaces
         Estates GetAllEstateByPdf(int estateId);
         IEnumerable<LocationVolunteers> GetAllLocations();
 
+        string Date(string month); 
+
     }
 }

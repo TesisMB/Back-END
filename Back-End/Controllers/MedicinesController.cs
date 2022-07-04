@@ -32,11 +32,6 @@ namespace Back_End.Controllers
         [HttpGet]
         public async Task<ActionResult<Medicines>> GetAllMedicines([FromQuery] int userId)
         {
-//            var imgBytes = await _repository.Medicines.Get(fileName);
-////          return File(imgBytes, "application/pdf ");
-
-//            return File(imgBytes, "image/webp");
-
             try
             {
                 var medicines = await _repository.Medicines.GetAllMedicines(userId);

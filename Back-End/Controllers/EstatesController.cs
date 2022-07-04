@@ -6,6 +6,7 @@ using Contracts.Interfaces;
 using DinkToPdf;
 using DinkToPdf.Contracts;
 using Entities.DataTransferObjects.Estates___Dto;
+using Entities.Helpers;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using PDF_Generator.Utility;
@@ -59,7 +60,7 @@ namespace Back_End.Controllers
 
 
         [HttpGet("PDF/{estateId}")]
-        public IActionResult CreatePDF(int estateId, [FromQuery] string dateStart, [FromQuery] string? dateEnd )
+        public IActionResult CreatePDF(int estateId, [FromQuery] string dateStart, [FromQuery] string? dateEnd, [FromQuery] string? getall)
         {
             //quien es el actual usuario
             Users user = null;
@@ -101,13 +102,23 @@ namespace Back_End.Controllers
                     .AsNoTracking()
                     .FirstOrDefault();
 
-            if (estateId != 2)
+            if (getall == null)
             {
                 var estates = _repository.Estates.GetAllEstateByPdf(estateId);
 
                 var materiales = _repository.Materials.GetAllMaterials(dateConvert, dateConvertEnd, estateId);
                 var medicamentos = _repository.Medicines.GetAllMedicines(dateConvert, dateConvertEnd, estateId);
                 var vehiculos = _repository.Vehicles.GetAllVehicles(dateConvert, dateConvertEnd, estateId);
+
+
+                List<bool> matList = new List<bool>();
+                List<bool> medList = new List<bool>();
+                List<bool> vehList = new List<bool>();
+                bool med = false;
+                bool mat = false;
+                bool veh = false;
+
+
 
                 if (String.IsNullOrEmpty(dateEnd))
                 {
@@ -117,6 +128,9 @@ namespace Back_End.Controllers
                                 && x.FK_EstateID == estates.EstateID
                                 select x;
 
+                    mat = estates.Materials.GetEnumerator().MoveNext();
+                    matList.Add(mat);
+
                     estates.Medicines =
                               from x in estates.Medicines
                               where x.MedicineDateCreated >= dateConvert
@@ -124,12 +138,19 @@ namespace Back_End.Controllers
                               && x.FK_EstateID == estates.EstateID
                               select x;
 
+                    med = estates.Medicines.GetEnumerator().MoveNext();
+                    medList.Add(med);
+
+
                     estates.Vehicles =
                            from x in estates.Vehicles
                            where x.VehicleDateCreated >= dateConvert 
                            && x.VehicleAvailability != false
                            && x.FK_EstateID == estates.EstateID
                            select x;
+
+                    veh = estates.Vehicles.GetEnumerator().MoveNext();
+                    vehList.Add(veh);
                 }
                 else
                 {
@@ -141,6 +162,9 @@ namespace Back_End.Controllers
                              && x.FK_EstateID == estates.EstateID
                              select x;
 
+                    mat = estates.Materials.GetEnumerator().MoveNext();
+                    matList.Add(mat);
+
                     estates.Medicines =
                               from x in estates.Medicines
                               where x.MedicineDateCreated >= dateConvert
@@ -149,6 +173,10 @@ namespace Back_End.Controllers
                               && x.FK_EstateID == estates.EstateID
                               select x;
 
+
+                    med = estates.Medicines.GetEnumerator().MoveNext();
+                    medList.Add(med);
+
                     estates.Vehicles =
                            from x in estates.Vehicles
                            where x.VehicleDateCreated >= dateConvert
@@ -156,6 +184,16 @@ namespace Back_End.Controllers
                            && x.VehicleAvailability == true
                            && x.FK_EstateID == estates.EstateID
                            select x;
+
+                    veh = estates.Vehicles.GetEnumerator().MoveNext();
+                    vehList.Add(veh);
+                }
+
+
+                if (matList.Contains(false) && medList.Contains(false) && vehList.Contains(false) && estates.Materials.Count() == 0 && estates.Medicines.Count() == 0
+                           &&  estates.Vehicles.Count() == 0)
+                {
+                    return BadRequest(ErrorHelper.Response(400, "No hay ningun recurso en la fecha establecida."));
                 }
 
                 var globalSettings = new GlobalSettings
@@ -186,6 +224,14 @@ namespace Back_End.Controllers
                 var vehiculos = _repository.Vehicles.GetAllVehicles(dateConvert, dateConvertEnd);
 
 
+                List<bool> matList2 = new List<bool>();
+                List<bool> medList2 = new List<bool>();
+                List<bool> vehList2 = new List<bool>();
+                bool med2 = false;
+                bool mat2 = false;
+                bool veh2 = false;
+
+
                 foreach (var item in estates)
                 {
                     if (String.IsNullOrEmpty(dateEnd))
@@ -195,15 +241,25 @@ namespace Back_End.Controllers
                                     where x.MaterialDateCreated >= dateConvert && x.MaterialAvailability != false
                                     select x;
 
+                        mat2 = item.Materials.GetEnumerator().MoveNext();
+                        matList2.Add(mat2);
+
                         item.Medicines =
                                   from x in item.Medicines
                                   where x.MedicineDateCreated >= dateConvert && x.MedicineAvailability != false
                                   select x;
 
+                        med2 = item.Medicines.GetEnumerator().MoveNext();
+                        medList2.Add(med2);
+
+
                         item.Vehicles =
                                from x in item.Vehicles
                                where x.VehicleDateCreated >= dateConvert && x.VehicleAvailability != false
                                select x;
+
+                        veh2 = item.Vehicles.GetEnumerator().MoveNext();
+                        vehList2.Add(veh2);
                     }
                     else
                     {
@@ -212,17 +268,36 @@ namespace Back_End.Controllers
                                  where x.MaterialDateCreated >= dateConvert && x.MaterialDateCreated <= dateConvertEnd && x.MaterialAvailability == true
                                  select x;
 
+                        mat2 = item.Materials.GetEnumerator().MoveNext();
+                        matList2.Add(mat2);
+
                         item.Medicines =
                                   from x in item.Medicines
                                   where x.MedicineDateCreated >= dateConvert && x.MedicineDateCreated<= dateConvertEnd && x.MedicineAvailability == true
                                   select x;
 
+                        med2 = item.Medicines.GetEnumerator().MoveNext();
+                        medList2.Add(med2);
+
                         item.Vehicles =
                                from x in item.Vehicles
                                where x.VehicleDateCreated >= dateConvert && x.VehicleDateCreated <= dateConvertEnd && x.VehicleAvailability == true
                                select x;
+
+                        veh2 = item.Vehicles.GetEnumerator().MoveNext();
+                        vehList2.Add(veh2);
                     }
                 }
+
+
+
+
+                        if (matList2.Contains(false)  && medList2.Contains(false) && vehList2.Contains(false) && materiales.Count() == 0 && medicamentos.Count() == 0
+                        && vehiculos.Count() == 0)
+                        {
+                            return BadRequest(ErrorHelper.Response(400, "No hay ningun recurso en la fecha establecida."));
+                        }
+
 
 
                 var globalSettings = new GlobalSettings

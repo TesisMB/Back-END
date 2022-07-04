@@ -8,7 +8,7 @@ namespace PDF_Generator.Utility
 {
     public static class RequestHistory
     {
-        public static string GetHTMLString(IEnumerable<ResourcesRequest> request)
+        public static string GetHTMLString(IEnumerable<ResourcesRequest> request, string condition)
         {
             string date = DateTime.Now.ToString("dd/MM/yyyy");
             List<Materials> matList = new List<Materials>();
@@ -56,7 +56,7 @@ namespace PDF_Generator.Utility
                                                                                     </th>
                                                                                 </tr>
                                                                              <tr class='fondo'>
-                                                                            <th colspan='6'>RECHAZADAS</th>
+                                                                            <th colspan='6' style='text-transform: uppercase;'>{condition}s </th>
                                                                             </tr>
                                                                             <tr>
                                                                               <th>#Legajo</th>
@@ -84,13 +84,13 @@ namespace PDF_Generator.Utility
                                               <td>{item.EmployeeCreated.Users.Persons.FirstName} {item.EmployeeCreated.Users.Persons.LastName}</td>
                                               <td>Raul Fernandez</td>
                                               <td>{item.RequestDate.ToString("dd/MM/yyyy")} </td>
-                                        </tr> 
-                                     </tbody>
-                                  </table>
                                   ");
             }
 
             sb.Append($@"  
+                                                                   </tr>   
+                                                             </tbody>
+                                                          </table>
                                                                     <table class='table'>
                                                                           <thead>
                                                                              <tr class='fondo'>

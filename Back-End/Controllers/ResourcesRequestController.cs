@@ -209,26 +209,50 @@ namespace Back_End.Controllers
             }
         }
 
-        [HttpGet("PDF/{userId}")]
-        public async Task<IActionResult> CreatePDF(int userId)
+        [HttpGet("PDF")]
+        public async Task<IActionResult> CreatePDF([FromQuery] int userId, [FromQuery] string condition, [FromQuery] int emergency,
+                                                   [FromQuery] string dateStart, [FromQuery] string dateEnd)
         {
-            var requests = await _repository.Resources_Requests.GetAllResourcesRequest(userId, "Rechazada");
 
-            //quien es el actual usuario
-            Users user = null;
-            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+            DateTime dateConvert, dateConvertEnd;
+            dateConvertEnd = Convert.ToDateTime("01/01/0001");
 
-            user = cruzRojaContext.Users
-                    .Where(x => x.UserID == userId)
-                    .AsNoTracking()
-                    .FirstOrDefault();
+            //Fecha de comienzo
+            dateStart = dateStart.Substring(4, 11);
+            var monthStart = dateStart.Substring(0, 3);
+            var dayStart = dateStart.Substring(3, 4);
+            var yearStart = dateStart.Substring(6, 5);
+
+            monthStart = _repository.Estates.Date(monthStart);
+
+            var dateStartNew = dayStart + "/" + monthStart + "/" + yearStart;
+            dateConvert = Convert.ToDateTime(dateStartNew);
+
+            //Fecha de finalizacion Opcional
+            if (dateEnd != null)
+            {
+                dateEnd = dateEnd.Substring(4, 11);
+                var monthEnd = dateEnd.Substring(0, 3);
+                var dayEnd = dateEnd.Substring(3, 4);
+                var yearEnd = dateEnd.Substring(6, 5);
+
+                monthEnd = _repository.Estates.Date(monthEnd);
+                Console.WriteLine("Mes final " + monthEnd);
+                var dateEndNew = dayEnd + "/" + monthEnd + "/" + yearEnd;
+                dateConvertEnd = Convert.ToDateTime(dateEndNew);
+            }
+
+
+
+            var requests = await _repository.Resources_Requests.GetAllResourcesRequestPDF(userId, condition, emergency, dateConvert, dateConvertEnd);
+
 
             var objectSettings = new ObjectSettings
             {
                 PagesCount = true,
-                HtmlContent =  RequestHistory.GetHTMLString(requests),
+                HtmlContent =  RequestHistory.GetHTMLString(requests, condition),
                 WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "stylesForRequest.css") },
-                FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+                FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
             };
 
             //var globalSettings = new GlobalSettings

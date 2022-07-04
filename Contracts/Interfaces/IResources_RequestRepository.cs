@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,6 +9,7 @@ namespace Contracts.Interfaces
     {
         Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequest(int userId, string Condition, string state);
         Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequest(int userId, string Condition);
+        Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequestPDF(int userId, string Condition, int emergency, DateTime dateConvert, DateTime dateConvertEnd);
 
         Task<ResourcesRequest> GetResourcesRequestByID(int resource);
         ResourcesRequest UpdateStockDelete(ResourcesRequest resource);

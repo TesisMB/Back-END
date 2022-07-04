@@ -162,3 +162,6 @@
 2022-07-04 18:32:20.9585 INFO Returned emegencyDisaster with details for id: 237
 2022-07-04 18:32:24.0065 INFO Returned all TypesEmergenciesDisasters from database.
 2022-07-04 18:32:24.0633 INFO Returned all emergenciesDisasters from database.
+2022-07-04 19:36:21.8365 INFO Returned all emergenciesDisasters from database.
+2022-07-04 19:36:22.0571 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-04 19:52:30.7250 INFO Returned all Resources_Request from database.

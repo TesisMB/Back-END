@@ -15,18 +15,15 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
 
         public string EmergencyDisasterInstruction { get; set; }
 
-        public int? Fk_EmplooyeeID { get; set; }
+        public int Fk_EmplooyeeID { get; set; }
 
         //public int FK_LocationID { get; set; }
         public LocationsEmergenciesDisastersDto LocationsEmergenciesDisasters { get; set; }
 
         public int FK_TypeEmergencyID { get; set; }
 
-        public AlertsDto Alerts { get; set; }
-
         public int FK_AlertID { get; set; }
         public int FK_EstateID { get; set; }
-
         public int CreatedBy { get; set; }
 
 

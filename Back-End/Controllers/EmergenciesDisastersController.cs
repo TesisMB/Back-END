@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Back_End.Entities;
-using Back_End.Models;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.EmergenciesDisasters___Dto;
 using Entities.Helpers;
@@ -9,7 +8,6 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -106,15 +104,15 @@ namespace Back_End.Controllers
 
                 var emergencyDisasterResult = _mapper.Map<EmergenciesDisastersDto>(emegencyDisaster);
 
-                if(emergencyDisasterResult.ChatRooms.UsersChatRooms != null)
+                if (emergencyDisasterResult.ChatRooms.UsersChatRooms != null)
                 {
 
                     foreach (var item in emergencyDisasterResult.ChatRooms.UsersChatRooms)
                     {
                         if (item.Picture != null)
                         {
-                        item.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
-                                                     Request.Scheme, Request.Host, Request.PathBase, item.Picture);
+                            item.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
+                                                         Request.Scheme, Request.Host, Request.PathBase, item.Picture);
 
                         }
                     }
@@ -157,8 +155,6 @@ namespace Back_End.Controllers
                 emergencyDisaster.ChatRooms = new ChatRooms();
                 emergencyDisaster.ChatRooms.CreationDate = emergenciesDisasters.CreationDate;
                 emergencyDisaster.ChatRooms.FK_TypeChatRoomID = emergenciesDisasters.FK_TypeChatRoomID;
-
-
 
 
                 _repository.EmergenciesDisasters.CreateEmergencyDisaster(emergencyDisaster);

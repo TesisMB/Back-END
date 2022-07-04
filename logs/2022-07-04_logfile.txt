@@ -127,3 +127,38 @@
 2022-07-04 17:22:03.1233 INFO Returned employe with details for id: 2
 2022-07-04 17:22:37.1895 INFO Returned all Materials from database.
 2022-07-04 17:22:43.0555 INFO Returned all Resources_Request from database.
+2022-07-04 17:59:14.8181 INFO Returned all emergenciesDisasters from database.
+2022-07-04 17:59:15.0187 INFO Returned all PDF from database.
+2022-07-04 17:59:15.1444 INFO Returned all Resources_Request from database.
+2022-07-04 17:59:20.4630 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-04 17:59:20.5093 INFO Returned all emergenciesDisasters from database.
+2022-07-04 17:59:22.2811 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-04 17:59:22.5000 INFO Returned all employees from database.
+2022-07-04 18:01:34.6422 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-04 18:01:34.9533 INFO Returned all employees from database.
+2022-07-04 18:07:18.3808 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-04 18:07:18.4438 INFO Returned all employees from database.
+2022-07-04 18:08:47.6151 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-04 18:08:47.6579 INFO Returned all employees from database.
+2022-07-04 18:12:25.6935 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-04 18:12:25.8354 INFO Returned all employees from database.
+2022-07-04 18:14:30.1146 INFO Returned all employees from database.
+2022-07-04 18:14:30.1424 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-04 18:23:55.9604 INFO Returned all employees from database.
+2022-07-04 18:23:55.9604 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-04 18:26:48.1147 INFO Returned all emergenciesDisasters from database.
+2022-07-04 18:26:48.4134 INFO Returned all PDF from database.
+2022-07-04 18:27:23.0220 INFO Returned all emergenciesDisasters from database.
+2022-07-04 18:27:23.3978 INFO Returned all PDF from database.
+2022-07-04 18:27:23.4310 INFO Returned all Resources_Request from database.
+2022-07-04 18:27:32.1924 INFO Returned emegencyDisaster with details for id: 237
+2022-07-04 18:28:13.2681 INFO Returned emegencyDisaster with details for id: 237
+2022-07-04 18:30:29.8809 INFO Returned emegencyDisaster with details for id: 237
+2022-07-04 18:30:50.6487 INFO Returned emegencyDisaster with details for id: 237
+2022-07-04 18:31:12.7341 INFO Returned emegencyDisaster with details for id: 237
+2022-07-04 18:31:42.1780 INFO Returned emegencyDisaster with details for id: 237
+2022-07-04 18:32:15.0146 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-04 18:32:15.0954 INFO Returned all emergenciesDisasters from database.
+2022-07-04 18:32:20.9585 INFO Returned emegencyDisaster with details for id: 237
+2022-07-04 18:32:24.0065 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-04 18:32:24.0633 INFO Returned all emergenciesDisasters from database.

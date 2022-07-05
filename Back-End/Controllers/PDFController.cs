@@ -202,7 +202,7 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpDelete("{pdfId}")]
-        public async Task<ActionResult> DeletePdf(int pdfId)
+        public async Task<ActionResult> DeletePdf(int pdfId, [FromQuery] int limit, [FromQuery] int userId)
         {
 
             try

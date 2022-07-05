@@ -133,18 +133,22 @@ namespace Repository
                                                                                    DateTime dateConvert,
                                                                                    DateTime dateConvertEnd)
         {
+
+            user = EmployeesRepository.GetAllEmployeesById(userId);
+
+
             var collection = _cruzRojaContext.Resources_Requests as IQueryable<ResourcesRequest>;
 
             var dateEnd = Convert.ToDateTime("01/01/0001");
 
+           user = EmployeesRepository.GetAllEmployeesById(userId);
 
             if (userId != 0 && emergency == 0 && dateConvertEnd == dateEnd)
             {
-                    user = EmployeesRepository.GetAllEmployeesById(userId);
 
                     collection = collection.Where(
                                                       a => a.Condition == Condition
-                                                     && a.CreatedBy == user.UserID
+                                                     && a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID
                                                      && a.RequestDate >= dateConvert)
                                                      .AsNoTracking();
 

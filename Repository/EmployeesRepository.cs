@@ -96,7 +96,7 @@ namespace Repository
         public void CreateEmployee(Users employee)
         {
 
-            Email.generatePassword(employee);
+            //Email.generatePassword(employee);
 
             //TO DO Falta hacer funcionar email (Facultad)
 

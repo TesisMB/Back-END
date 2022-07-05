@@ -59,6 +59,8 @@ namespace Repository
 
                            .Include(i => i.Vehicles)
                            .ThenInclude(i => i.TypeVehicles)
+                              .Include(a => a.Users)
+                           .ThenInclude(a => a.Persons)
                            .ToList();
         }
 
@@ -88,6 +90,9 @@ namespace Repository
 
                            .Include(i => i.Vehicles)
                            .ThenInclude(i => i.TypeVehicles)
+
+                           .Include(a => a.Users)
+                           .ThenInclude(a => a.Persons)
                            .FirstOrDefault();
         }
 

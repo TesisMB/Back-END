@@ -50,11 +50,11 @@ namespace Back_End.Controllers
             Users user = new Users();
             CruzRojaContext cruzRojaContext = new CruzRojaContext();
 
-            user = cruzRojaContext.Users
-                    .Where(x => x.UserID == employeeId)
-                    .Include(a => a.Estates)
-                    .AsNoTracking()
-                    .FirstOrDefault();
+            //user = cruzRojaContext.Users
+            //        .Where(x => x.UserID == employeeId)
+            //        .Include(a => a.Estates)
+            //        .AsNoTracking()
+            //        .FirstOrDefault();
 
             var globalSettings = new GlobalSettings
             {
@@ -62,7 +62,7 @@ namespace Back_End.Controllers
                 Orientation = Orientation.Portrait,
                 PaperSize = PaperKind.A4,
                 Margins = new MarginSettings { Top = 10 },
-                DocumentTitle = $"Reporte de {employees.Users.Persons.FirstName} {employees.Users.Persons.LastName}",
+                DocumentTitle = $"Reporte de empleado",
             };
 
             var objectSettings = new ObjectSettings
@@ -71,7 +71,7 @@ namespace Back_End.Controllers
                 HtmlContent = EmployeePdf.GetHTMLString(employees),
                 // Page = "https://code-maze.com/", //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE
                 WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "styles.css") },
-                FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+                FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
                 //FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
             };
 

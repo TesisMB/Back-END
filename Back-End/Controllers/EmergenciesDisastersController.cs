@@ -227,7 +227,7 @@ namespace Back_End.Controllers
         //********************************* FUNCIONANDO *********************************
 
         [HttpDelete("{emegencyDisasterID}")]
-        public async Task<ActionResult> DeletEmegencyDisaster(int emegencyDisasterID)
+        public async Task<ActionResult> DeletEmegencyDisaster(int emegencyDisasterID, [FromQuery] int userId)
         {
             try
             {

@@ -50,13 +50,14 @@ namespace Back_End.Controllers
 
             var volunteer = await _repository.Volunteers.GetVolunteerWithDetails(volunteerId);
 
-            //quien es el actual usuario
+            ////quien es el actual usuario
             Users user = new Users();
             CruzRojaContext cruzRojaContext = new CruzRojaContext();
 
             user = cruzRojaContext.Users
                     .Where(x => x.UserID == volunteerId)
                     .Include(a => a.Estates)
+                    .Include(a => a.Persons)
                     .AsNoTracking()
                     .FirstOrDefault();
 
@@ -66,7 +67,7 @@ namespace Back_End.Controllers
                 Orientation = Orientation.Portrait,
                 PaperSize = PaperKind.A4,
                 Margins = new MarginSettings { Top = 10 },
-                DocumentTitle = $"Reporte de {volunteer.Users.Persons.FirstName} {volunteer.Users.Persons.LastName}",
+                DocumentTitle = $"Reporte de voluntario",
             };
 
             var objectSettings = new ObjectSettings
@@ -75,7 +76,7 @@ namespace Back_End.Controllers
                 HtmlContent = VolunteerPdf.GetHTMLString(volunteer),
                 // Page = "https://code-maze.com/", //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE
                 WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "styles.css") },
-                FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+                FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
                 //FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
             };
 

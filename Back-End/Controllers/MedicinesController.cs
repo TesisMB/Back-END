@@ -47,13 +47,12 @@ namespace Back_End.Controllers
                     {
                         item.Picture = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{item.Picture}";
 
+                        //DateTime date = Convert.ToDateTime(item.Medicines.MedicineExpirationDate);
 
-                        DateTime date = Convert.ToDateTime(item.Medicines.MedicineExpirationDate);
-
-                        if (date > DateTime.Now)
-                        {
-                            item.Availability = false;
-                        }
+                        //if (date > DateTime.Now)
+                        //{
+                        //    item.Availability = false;
+                        //}
                     }
                 }
 

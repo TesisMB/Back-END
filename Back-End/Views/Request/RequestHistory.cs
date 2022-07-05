@@ -108,6 +108,7 @@ namespace PDF_Generator.Utility
                                                                    </tr>   
                                                              </tbody>
                                                           </table>
+                                <p style='margin-left: 40%; margin-top: 40%;'>Firma y aclaración<p>
                                                         </div>
 
 
@@ -125,8 +126,8 @@ namespace PDF_Generator.Utility
                                                                  <thead>
                                                                                 <tr>
                                                                                     <th class='logo' colspan='2'><img src='https://1.bp.blogspot.com/-6cW-1Sw9Hno/YRV4NpAW-fI/AAAAAAAAB28/W0fMEIj41C4NNq2v4xo9JOHbo4otpKKZQCLcBGAsYHQ/s0/Logo.png'></th>
-                                                                                    <th colspan= '2' class='titulo'><h2 class='text-center font-weight-bold'>Reporte de solicitudes</h2></th>
-                                                                                    <th colspan= '2' class='fecha'>
+                                                                                    <th colspan= '1' class='titulo'><h2 class='text-center font-weight-bold'>Reporte de solicitudes</h2></th>
+                                                                                    <th colspan= '1' class='fecha'>
                                                                                         <p>Versión: <span>01</span></p>
                                                                                         <p>Aprobado: <span>Gerencia Gral</span></p>
                                                                                    
@@ -151,7 +152,7 @@ namespace PDF_Generator.Utility
             sb.Append($@"
 
                                                                              <tr class='fondo'>
-                                                                                 <th colspan='6'>MATERIALES</th>
+                                                                                 <th colspan='4'>MATERIALES</th>
                                                                             </tr>
                                                                             <tr>
                                                                               <th>#Codigo</th>
@@ -179,29 +180,33 @@ namespace PDF_Generator.Utility
                                       ");
             }
 
+            if (matList.Count() != 0)
+            {
 
-            sb.Append($@"
+                sb.Append($@"
                               </tbody>
                                     </table>
+                                <p style='margin-left: 40%; margin-top: 40%;'>Firma y aclaración<p>
+
                                 </div> 
 ");
+            }
 
 
 
             if (medList.Count() != 0)
             {
                 sb.Append($@"  
+                                                     
                                                             <div class='imagen-fondo'>
-
-                                                       <table class='table'>
-                                                                 <thead>
+                                                                        <table class='table'>
+                                                                        <thead>
                                                                                 <tr>
-                                                                                    <th class='logo' colspan='2'><img src='https://1.bp.blogspot.com/-6cW-1Sw9Hno/YRV4NpAW-fI/AAAAAAAAB28/W0fMEIj41C4NNq2v4xo9JOHbo4otpKKZQCLcBGAsYHQ/s0/Logo.png'></th>
-                                                                                    <th colspan= '2' class='titulo'><h2 class='text-center font-weight-bold'>Reporte de solicitudes</h2></th>
-                                                                                    <th colspan= '2' class='fecha'>
+                                                                                    <th class='logo' colspan='1'><img src='https://1.bp.blogspot.com/-6cW-1Sw9Hno/YRV4NpAW-fI/AAAAAAAAB28/W0fMEIj41C4NNq2v4xo9JOHbo4otpKKZQCLcBGAsYHQ/s0/Logo.png'></th>
+                                                                                    <th colspan= '1' class='titulo'><h2 class='text-center font-weight-bold'>Reporte de recursos</h2></th>
+                                                                                    <th colspan= '3' class='fecha'>
                                                                                         <p>Versión: <span>01</span></p>
                                                                                         <p>Aprobado: <span>Gerencia Gral</span></p>
-                                                                                   
 
                                                                         ");
             }
@@ -224,19 +229,20 @@ namespace PDF_Generator.Utility
 
                 sb.Append($@"
 
-                                                                             <tr class='fondo'>
-                                                                                 <th colspan='6'>FARMACIA</th>
+                                                              </th>
+                                                              </tr>
+                                                                      <tr class='fondo'>
+                                                                            <th colspan='5'>FARMACIA</th>
                                                                             </tr>
                                                                             <tr>
                                                                               <th>#Codigo</th>
                                                                               <th>Nombre</th>
-                                                                              <th>Laboratorio</th>
+                                                                              <th>Marca</th>
                                                                               <th>Peso/Volumen</th>
                                                                               <th>Cantidad</th>
                                                                             </tr>
                                                                           </thead>
-                                                                        <tbody>
-                                                                        ");
+                                                                        <tbody>");
             }
             sb.Append($@"  <tr> ");
 
@@ -254,12 +260,17 @@ namespace PDF_Generator.Utility
                                       ");
             }
 
+            if (medList.Count() != 0)
+            {
 
-            sb.Append($@"
+                sb.Append($@"
                               </tbody>
                                     </table>
+                                <p style='margin-left: 40%; margin-top: 40%;'>Firma y aclaración<p>
+
                                 </div> 
 ");
+            }
 
 
             if (vehList.Count() != 0)
@@ -271,7 +282,7 @@ namespace PDF_Generator.Utility
                                                                  <thead>
                                                                                 <tr>
                                                                                     <th class='logo' colspan='2'><img src='https://1.bp.blogspot.com/-6cW-1Sw9Hno/YRV4NpAW-fI/AAAAAAAAB28/W0fMEIj41C4NNq2v4xo9JOHbo4otpKKZQCLcBGAsYHQ/s0/Logo.png'></th>
-                                                                                    <th colspan= '2' class='titulo'><h2 class='text-center font-weight-bold'>Reporte de solicitudes</h2></th>
+                                                                                    <th colspan= '1' class='titulo'><h2 class='text-center font-weight-bold'>Reporte de solicitudes</h2></th>
                                                                                     <th colspan= '2' class='fecha'>
                                                                                         <p>Versión: <span>01</span></p>
                                                                                         <p>Aprobado: <span>Gerencia Gral</span></p>
@@ -297,7 +308,7 @@ namespace PDF_Generator.Utility
 
                 sb.Append($@"
                                                                              <tr class='fondo'>
-                                                                                 <th colspan='6'>VEHICULOS</th>
+                                                                                 <th colspan='5'>VEHICULOS</th>
                                                                             </tr>
                                                                             <tr>
                                                                               <th>#Codigo</th>
@@ -325,13 +336,18 @@ namespace PDF_Generator.Utility
                                       ");
             }
 
+            if (vehList.Count() != 0)
+            {
 
-            sb.Append($@"
+                sb.Append($@"
                               </tbody>
                                     </table>
+                                <p style='margin-left: 40%; margin-top: 40%;'>Firma y aclaración<p>
+
                                 </div> 
 ");
 
+            }
 
 
 

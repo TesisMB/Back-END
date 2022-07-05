@@ -107,6 +107,7 @@ namespace Repository
         public async Task<PDF> GetPdf(int pdfId)
         {
             return await FindByCondition(med => med.ID.Equals(pdfId))
+
                 .FirstOrDefaultAsync();
         }
 

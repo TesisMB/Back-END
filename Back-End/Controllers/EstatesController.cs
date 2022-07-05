@@ -59,8 +59,8 @@ namespace Back_End.Controllers
         }
 
 
-        [HttpGet("PDF/{estateId}")]
-        public IActionResult CreatePDF(int estateId, [FromQuery] string dateStart, [FromQuery] string? dateEnd, [FromQuery] string? getall)
+        [HttpGet("PDF")]
+        public IActionResult CreatePDF([FromQuery] string dateStart, [FromQuery] string dateEnd, [FromQuery] int userId, [FromQuery] string getall)
         {
             //quien es el actual usuario
             Users user = null;
@@ -98,17 +98,17 @@ namespace Back_End.Controllers
 
 
             user = cruzRojaContext.Users
-                    .Where(x => x.UserID == estateId)
+                    .Where(x => x.UserID == userId)
                     .AsNoTracking()
                     .FirstOrDefault();
 
             if (getall == null)
             {
-                var estates = _repository.Estates.GetAllEstateByPdf(estateId);
+                var estates = _repository.Estates.GetAllEstateByPdf(userId);
 
-                var materiales = _repository.Materials.GetAllMaterials(dateConvert, dateConvertEnd, estateId);
-                var medicamentos = _repository.Medicines.GetAllMedicines(dateConvert, dateConvertEnd, estateId);
-                var vehiculos = _repository.Vehicles.GetAllVehicles(dateConvert, dateConvertEnd, estateId);
+                var materiales = _repository.Materials.GetAllMaterials(dateConvert, dateConvertEnd, userId);
+                var medicamentos = _repository.Medicines.GetAllMedicines(dateConvert, dateConvertEnd, userId);
+                var vehiculos = _repository.Vehicles.GetAllVehicles(dateConvert, dateConvertEnd, userId);
 
 
                 List<bool> matList = new List<bool>();

@@ -74,8 +74,10 @@ namespace Back_End.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<PDF>> PDF([FromBody] PDFForCreationDto pdf)
+        public async Task<ActionResult<PDF>> PDF([FromBody] PDFForCreationDto pdf, [FromQuery] int userId)
         {
+            pdf.CreatedBy = userId;
+
             try
             {
                 if (pdf == null)
@@ -147,7 +149,8 @@ namespace Back_End.Controllers
 
 
         [HttpPatch("{pdfId}")]
-        public async Task<ActionResult> UpdatePartialUser(int pdfId, JsonPatchDocument<PDFForUpdateDto> _pdf)
+        public async Task<ActionResult> UpdatePartialUser(int pdfId, JsonPatchDocument<PDFForUpdateDto> _pdf,
+                                                            [FromQuery] int userId)
         {
 
             try
@@ -165,6 +168,7 @@ namespace Back_End.Controllers
                 var pdfToPatch = _mapper.Map<PDFForUpdateDto>(pdfEntity);
 
                  pdfToPatch.PDFDateModified = DateTime.Now;
+                 pdfToPatch.ModifiedBy = userId;
 
                 //se aplican los cambios recien aca
                 _pdf.ApplyTo(pdfToPatch, ModelState);

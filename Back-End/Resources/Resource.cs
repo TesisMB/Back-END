@@ -411,6 +411,7 @@ namespace PDF_Generator.Utility
                                           <th>Patente</th>
                                           <th>Tipo</th>
                                           <th>Año</th>
+                                          <th>Reservado por</th>
                                         </tr>
                                       </thead>
                                     <tbody>");
@@ -425,6 +426,7 @@ namespace PDF_Generator.Utility
                                               <td> {emp.VehiclePatent} </td>
                                               <td> {emp.TypeVehicles.Type} </td>
                                               <td> {emp.VehicleYear} </td>
+                                              <td> {emp.Employees.Users.Persons.FirstName} {emp.Employees.Users.Persons.LastName}</td>
                                         </tr> ");
             }
 

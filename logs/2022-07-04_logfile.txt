@@ -165,3 +165,34 @@
 2022-07-04 19:36:21.8365 INFO Returned all emergenciesDisasters from database.
 2022-07-04 19:36:22.0571 INFO Returned all TypesEmergenciesDisasters from database.
 2022-07-04 19:52:30.7250 INFO Returned all Resources_Request from database.
+2022-07-04 22:06:08.1489 INFO Returned all emergenciesDisasters from database.
+2022-07-04 22:06:08.3983 INFO Returned all Resources_Request from database.
+2022-07-04 22:06:08.5213 INFO Returned all PDF from database.
+2022-07-04 22:06:25.6474 INFO Returned all Resources_Request from database.
+2022-07-04 22:06:27.6369 INFO Returned all Resources_Request from database.
+2022-07-04 22:06:38.7583 INFO Returned all Materials from database.
+2022-07-04 22:06:40.3255 INFO Returned Material with id: MA0009
+2022-07-04 22:06:46.2153 INFO Returned all vehicles from database.
+2022-07-04 22:06:49.4035 INFO Returned all Materials from database.
+2022-07-04 22:06:53.2257 INFO Returned medicine with details for id: ME0015
+2022-07-04 22:07:01.9684 INFO Returned all Materials from database.
+2022-07-04 22:07:04.4818 INFO Returned medicine with details for id: ME0020
+2022-07-04 22:07:08.2786 INFO Returned all emergenciesDisasters from database.
+2022-07-04 22:07:19.9005 INFO Returned all Resources_Request from database.
+2022-07-04 22:12:08.5400 INFO Returned all Resources_Request from database.
+2022-07-04 22:12:08.6501 INFO Returned all Resources_Request from database.
+2022-07-04 22:12:19.0442 INFO Returned all Resources_Request from database.
+2022-07-04 22:12:27.1723 INFO Returned all Resources_Request from database.
+2022-07-04 22:14:49.3511 INFO Returned User.
+2022-07-04 22:14:49.7542 INFO Returned all emergenciesDisasters from database.
+2022-07-04 22:14:50.2339 INFO Returned all PDF from database.
+2022-07-04 22:14:50.2439 INFO Returned all Resources_Request from database.
+2022-07-04 22:14:59.1452 INFO Returned all Resources_Request from database.
+2022-07-04 22:15:00.3342 INFO Returned all Resources_Request from database.
+2022-07-04 22:31:15.3529 INFO Returned all emergenciesDisasters from database.
+2022-07-04 22:31:15.6585 INFO Returned all PDF from database.
+2022-07-04 22:31:15.7316 INFO Returned all Resources_Request from database.
+2022-07-04 22:31:49.7572 INFO Returned all Resources_Request from database.
+2022-07-04 22:31:52.5092 INFO Returned all Resources_Request from database.
+2022-07-04 22:31:52.9703 INFO Returned all Resources_Request from database.
+2022-07-04 22:34:27.8076 INFO Returned all Resources_Request from database.

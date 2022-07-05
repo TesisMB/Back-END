@@ -8,9 +8,11 @@ namespace PDF_Generator.Utility
 {
     public static class RequestHistory
     {
-        public static string GetHTMLString(IEnumerable<ResourcesRequest> request, string condition)
+        public static string GetHTMLString(IEnumerable<ResourcesRequest> request, string condition, DateTime dateStart, DateTime dateEnd)
         {
-            string date = DateTime.Now.ToString("dd/MM/yyyy");
+            string date = dateStart.ToString("dd/MM/yyyy");
+            string date2 = dateEnd.ToString("dd/MM/yyyy");
+
             List<Materials> matList = new List<Materials>();
             List<Medicines> medList = new List<Medicines>();
             List<Vehicles> vehList = new List<Vehicles>();
@@ -22,8 +24,11 @@ namespace PDF_Generator.Utility
                     if (item.Materials != null)
                        matList.Add(item.Materials);
 
-                    //medList.Add(item.Medicines);
-                    //vehList.Add(item.Vehicles);
+                    if (item.Medicines != null)
+                        medList.Add(item.Medicines);
+
+                    if (item.Vehicles != null)
+                        vehList.Add(item.Vehicles);
                 }
             }
 
@@ -44,6 +49,8 @@ namespace PDF_Generator.Utility
             //if (mat)
             //{
                 sb.Append($@"  
+                                                            <div class='imagen-fondo'>
+
                                                        <table class='table'>
                                                                  <thead>
                                                                                 <tr>
@@ -52,8 +59,23 @@ namespace PDF_Generator.Utility
                                                                                     <th colspan= '2' class='fecha'>
                                                                                         <p>Versión: <span>01</span></p>
                                                                                         <p>Aprobado: <span>Gerencia Gral</span></p>
-                                                                                        <p>Fecha: <span>{date}</span></p>                                        
-                                                                                    </th>
+                                                                                   
+
+                                                                        ");
+            //}
+
+
+            if (date2 != "01/01/0001")
+            {
+                sb.Append(@$"<p>Periodo: <span>{date} - {date2}</span></p>");
+            }
+            else
+            {
+                sb.Append(@$"<p>Periodo: <span>{date}</span></p>");
+            }
+
+
+            sb.Append(@$" </th>
                                                                                 </tr>
                                                                              <tr class='fondo'>
                                                                             <th colspan='6' style='text-transform: uppercase;'>{condition}s </th>
@@ -67,12 +89,7 @@ namespace PDF_Generator.Utility
                                                                               <th>Fecha de creación</th>
                                                                             </tr>
                                                                           </thead>
-                                                                        <tbody>
-
-                                                                        ");
-            //}
-
-
+                                                                        <tbody>");
 
             //SOLICITUD
             foreach (var item in request)
@@ -91,10 +108,50 @@ namespace PDF_Generator.Utility
                                                                    </tr>   
                                                              </tbody>
                                                           </table>
-                                                                    <table class='table'>
-                                                                          <thead>
+                                                        </div>
+
+
+");
+
+
+
+
+            if (matList.Count() != 0)
+            {
+                sb.Append($@"  
+                                                            <div class='imagen-fondo'>
+
+                                                       <table class='table'>
+                                                                 <thead>
+                                                                                <tr>
+                                                                                    <th class='logo' colspan='2'><img src='https://1.bp.blogspot.com/-6cW-1Sw9Hno/YRV4NpAW-fI/AAAAAAAAB28/W0fMEIj41C4NNq2v4xo9JOHbo4otpKKZQCLcBGAsYHQ/s0/Logo.png'></th>
+                                                                                    <th colspan= '2' class='titulo'><h2 class='text-center font-weight-bold'>Reporte de solicitudes</h2></th>
+                                                                                    <th colspan= '2' class='fecha'>
+                                                                                        <p>Versión: <span>01</span></p>
+                                                                                        <p>Aprobado: <span>Gerencia Gral</span></p>
+                                                                                   
+
+                                                                        ");
+            }
+
+            if (matList.Count() != 0)
+            {
+
+            if (date2 != "01/01/0001")
+            {
+                sb.Append(@$"<p>Periodo: <span>{date} - {date2}</span></p>");
+            }
+            else
+            {
+                sb.Append(@$"<p>Periodo: <span>{date}</span></p>");
+            }
+
+
+
+            sb.Append($@"
+
                                                                              <tr class='fondo'>
-                                                                                 <th colspan='6'>PEDIDO</th>
+                                                                                 <th colspan='6'>MATERIALES</th>
                                                                             </tr>
                                                                             <tr>
                                                                               <th>#Codigo</th>
@@ -104,13 +161,16 @@ namespace PDF_Generator.Utility
                                                                             </tr>
                                                                           </thead>
                                                                         <tbody>
-
                                                                         ");
+            }
+
+            sb.Append($@"  <tr> ");
+
 
 
             foreach (var emp in matList)
             {
-                    sb.Append($@"  <tr>
+                    sb.Append($@"  
                                                   <td> {emp.ID} </td>
                                                   <td> {emp.MaterialName} </td>
                                                   <td> {emp.MaterialBrand} </td>
@@ -118,6 +178,163 @@ namespace PDF_Generator.Utility
                                             </tr> 
                                       ");
             }
+
+
+            sb.Append($@"
+                              </tbody>
+                                    </table>
+                                </div> 
+");
+
+
+
+            if (medList.Count() != 0)
+            {
+                sb.Append($@"  
+                                                            <div class='imagen-fondo'>
+
+                                                       <table class='table'>
+                                                                 <thead>
+                                                                                <tr>
+                                                                                    <th class='logo' colspan='2'><img src='https://1.bp.blogspot.com/-6cW-1Sw9Hno/YRV4NpAW-fI/AAAAAAAAB28/W0fMEIj41C4NNq2v4xo9JOHbo4otpKKZQCLcBGAsYHQ/s0/Logo.png'></th>
+                                                                                    <th colspan= '2' class='titulo'><h2 class='text-center font-weight-bold'>Reporte de solicitudes</h2></th>
+                                                                                    <th colspan= '2' class='fecha'>
+                                                                                        <p>Versión: <span>01</span></p>
+                                                                                        <p>Aprobado: <span>Gerencia Gral</span></p>
+                                                                                   
+
+                                                                        ");
+            }
+
+
+            if (medList.Count() != 0)
+            {
+
+            if (date2 != "01/01/0001")
+            {
+                sb.Append(@$"<p>Periodo: <span>{date} - {date2}</span></p>");
+            }
+            else
+            {
+                sb.Append(@$"<p>Periodo: <span>{date}</span></p>");
+            }
+
+
+
+
+                sb.Append($@"
+
+                                                                             <tr class='fondo'>
+                                                                                 <th colspan='6'>FARMACIA</th>
+                                                                            </tr>
+                                                                            <tr>
+                                                                              <th>#Codigo</th>
+                                                                              <th>Nombre</th>
+                                                                              <th>Laboratorio</th>
+                                                                              <th>Peso/Volumen</th>
+                                                                              <th>Cantidad</th>
+                                                                            </tr>
+                                                                          </thead>
+                                                                        <tbody>
+                                                                        ");
+            }
+            sb.Append($@"  <tr> ");
+
+
+
+            foreach (var emp in medList)
+            {
+                sb.Append($@"  
+                                                  <td> {emp.ID} </td>
+                                                  <td> {emp.MedicineLab} </td>
+                                                  <td> {emp.MedicineDrug} </td>
+                                                  <td> {emp.MedicineWeight} {emp.MedicineUnits} </td>
+                                                  <td> {emp.MedicineQuantity}</td>
+                                            </tr> 
+                                      ");
+            }
+
+
+            sb.Append($@"
+                              </tbody>
+                                    </table>
+                                </div> 
+");
+
+
+            if (vehList.Count() != 0)
+            {
+                sb.Append($@"  
+                                                            <div class='imagen-fondo'>
+
+                                                       <table class='table'>
+                                                                 <thead>
+                                                                                <tr>
+                                                                                    <th class='logo' colspan='2'><img src='https://1.bp.blogspot.com/-6cW-1Sw9Hno/YRV4NpAW-fI/AAAAAAAAB28/W0fMEIj41C4NNq2v4xo9JOHbo4otpKKZQCLcBGAsYHQ/s0/Logo.png'></th>
+                                                                                    <th colspan= '2' class='titulo'><h2 class='text-center font-weight-bold'>Reporte de solicitudes</h2></th>
+                                                                                    <th colspan= '2' class='fecha'>
+                                                                                        <p>Versión: <span>01</span></p>
+                                                                                        <p>Aprobado: <span>Gerencia Gral</span></p>
+                                                                                   
+
+                                                                        ");
+            }
+
+            if (vehList.Count() != 0)
+            {
+
+            if (date2 != "01/01/0001")
+            {
+                sb.Append(@$"<p>Periodo: <span>{date} - {date2}</span></p>");
+            }
+            else
+            {
+                sb.Append(@$"<p>Periodo: <span>{date}</span></p>");
+            }
+
+
+
+
+                sb.Append($@"
+                                                                             <tr class='fondo'>
+                                                                                 <th colspan='6'>VEHICULOS</th>
+                                                                            </tr>
+                                                                            <tr>
+                                                                              <th>#Codigo</th>
+                                                                              <th>Patente</th>
+                                                                              <th>Nombre</th>
+                                                                              <th>Tipo</th>
+                                                                              <th>Año</th>
+                                                                            </tr>
+                                                                          </thead>
+                                                                        <tbody>
+                                                                        ");
+            }
+            sb.Append($@"  <tr> ");
+
+
+            foreach (var emp in vehList)
+            {
+                sb.Append($@" 
+                                                  <td> {emp.ID} </td>
+                                                  <td> {emp.VehiclePatent} </td>
+                                                  <td> {emp.Brands.BrandName} {emp.Model.ModelName} </td>
+                                                  <td> {emp.TypeVehicles.Type} </td>
+                                                  <td> {emp.VehicleYear}</td>
+                                            </tr> 
+                                      ");
+            }
+
+
+            sb.Append($@"
+                              </tbody>
+                                    </table>
+                                </div> 
+");
+
+
+
+
 
 
             sb.Append($@"

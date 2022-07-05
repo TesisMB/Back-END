@@ -113,8 +113,11 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpPost()]
-        public async Task<ActionResult<Materials>> CreateMaterial([FromBody] Resources_ForCreationDto material)
+        public async Task<ActionResult<Materials>> CreateMaterial([FromBody] Resources_ForCreationDto material, [FromQuery] int userId)
         {
+
+            material.CreatedBy = userId;
+
             try
             {
                 if (!ModelState.IsValid)
@@ -159,7 +162,8 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpPatch("{materialId}")]
-        public async Task<ActionResult> UpdatePartialUser(string materialId, JsonPatchDocument<MaterialsForUpdateDto> _materials)
+        public async Task<ActionResult> UpdatePartialUser(string materialId, JsonPatchDocument<MaterialsForUpdateDto> _materials, 
+                                                          [FromQuery] int userId)
         {
 
             try
@@ -177,6 +181,7 @@ namespace Back_End.Controllers
                 var materialToPatch = _mapper.Map<MaterialsForUpdateDto>(materialEntity);
 
                 materialToPatch.DateModified = DateTime.Now;
+                materialToPatch.ModifiedBy = userId;
 
                 //se aplican los cambios recien aca
                 _materials.ApplyTo(materialToPatch, ModelState);

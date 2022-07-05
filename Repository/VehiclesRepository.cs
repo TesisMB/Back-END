@@ -179,7 +179,9 @@ namespace Repository
 
             var collection = _cruzRojaContext.Vehicles as IQueryable<Vehicles>;
 
-            if(dateEnd == null)
+            var date = Convert.ToDateTime("01/01/0001");
+
+            if (dateEnd == date)
             {
             collection = collection.Where(
                                          a => a.VehicleDateCreated >= dateStart && a.VehicleAvailability == false);

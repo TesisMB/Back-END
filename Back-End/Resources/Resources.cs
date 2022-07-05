@@ -75,18 +75,17 @@ namespace PDF_Generator.Utility
                                                                                         <p>Versión: <span>01</span></p>
                                                                                         <p>Aprobado: <span>Gerencia Gral</span></p>
                                                                         ");
-            }
 
-            if (date2 != "01/01/0001")
-            {
-                sb.Append(@$"<p>Periodo: <span>{date} - {date2}</span></p>");
-            }
-            else
-            {
-                sb.Append(@$"<p>Periodo: <span>{date}</span></p>");
-            }
+                if (date2 != "01/01/0001")
+                {
+                    sb.Append(@$"<p>Periodo: <span>{date} - {date2}</span></p>");
+                }
+                else
+                {
+                    sb.Append(@$"<p>Periodo: <span>{date}</span></p>");
+                }
 
-            sb.Append(@$"
+                 sb.Append(@$"
                                                         </th>
                                                               </tr>
                                                                       <tr class='fondo'>
@@ -103,6 +102,7 @@ namespace PDF_Generator.Utility
                                                                           </thead>
                                                                         <tbody>");
 
+            }
 
             foreach (var item in estates)
                 foreach(var emp in item.Materials)
@@ -122,6 +122,7 @@ namespace PDF_Generator.Utility
                 sb.Append($@"
                              </tbody>
                                     </table>
+                                                            <p style='margin-left: 40%; margin-top: 40%;'>Firma y aclaración<p>
                                 </div>
 
                                   <div class='imagen-fondo'>
@@ -134,17 +135,16 @@ namespace PDF_Generator.Utility
                                                 <p>Versión: <span>01</span></p>
                                                 <p>Aprobado: <span>Gerencia Gral</span></p>
                                        ");
-            }
 
 
-            if (date2 != "01/01/0001")
-            {
-                sb.Append(@$"<p>Periodo: <span>{date} - {date2}</span></p>");
-            }
-            else
-            {
-                sb.Append(@$"<p>Periodo: <span>{date}</span></p>");
-            }
+                if (date2 != "01/01/0001")
+                {
+                    sb.Append(@$"<p>Periodo: <span>{date} - {date2}</span></p>");
+                }
+                else
+                {
+                    sb.Append(@$"<p>Periodo: <span>{date}</span></p>");
+                }
 
             sb.Append(@$"
                                                         </th>
@@ -166,6 +166,7 @@ namespace PDF_Generator.Utility
                                                                           </thead>
                                                                         <tbody> ");
 
+            }
 
 
             foreach (var item in estates)
@@ -190,6 +191,7 @@ namespace PDF_Generator.Utility
                 sb.Append($@"
                               </tbody>
                                     </table>
+                                                            <p style='margin-left: 40%; margin-top: 40%;'>Firma y aclaración<p>
                                     </div>
 
                                   <div class='imagen-fondo'>
@@ -202,17 +204,16 @@ namespace PDF_Generator.Utility
                                                 <p>Versión: <span>01</span></p>
                                                 <p>Aprobado: <span>Gerencia Gral</span></p>
                                          ");
-            }
 
 
-            if (date2 != "01/01/0001")
-            {
-                sb.Append(@$"<p>Periodo: <span>{date} - {date2}</span></p>");
-            }
-            else
-            {
-                sb.Append(@$"<p>Periodo: <span>{date}</span></p>");
-            }
+                if (date2 != "01/01/0001")
+                {
+                    sb.Append(@$"<p>Periodo: <span>{date} - {date2}</span></p>");
+                }
+                else
+                {
+                    sb.Append(@$"<p>Periodo: <span>{date}</span></p>");
+                }
 
             sb.Append(@$"
                                    </th>
@@ -232,6 +233,7 @@ namespace PDF_Generator.Utility
                                     <tbody>");
 
 
+            }
 
 
 
@@ -257,6 +259,7 @@ namespace PDF_Generator.Utility
             sb.Append(@"
                                  </tbody>
                                         </table>
+                                                            <p style='margin-left: 40%; margin-top: 40%;'>Firma y aclaración<p>
                                     </div>
 
                 ");
@@ -275,14 +278,14 @@ namespace PDF_Generator.Utility
                                                                                         <p>Aprobado: <span>Gerencia Gral</span></p>
                                                                             ");
 
-            if (date2 != "01/01/0001")
-            {
-                sb.Append(@$"<p>Periodo: <span>{date} - {date2}</span></p>");
-            }
-            else
-            {
-                sb.Append(@$"<p>Periodo: <span>{date}</span></p>");
-            }
+                    if (date2 != "01/01/0001")
+                    {
+                        sb.Append(@$"<p>Periodo: <span>{date} - {date2}</span></p>");
+                    }
+                    else
+                    {
+                        sb.Append(@$"<p>Periodo: <span>{date}</span></p>");
+                    }
 
          
 
@@ -319,12 +322,16 @@ namespace PDF_Generator.Utility
                                                   ");
                 }
 
+
+            if (matList2.Contains(true))
+            {
                 sb.Append($@"
                                                          </tbody>
                                                     </table>
+                                                            <p style='margin-left: 40%; margin-top: 40%;'>Firma y aclaración<p>
                                               </div>
                        ");
-
+            }
             if (medList2.Contains(true))
             {
                 sb.Append(@$"  
@@ -340,14 +347,14 @@ namespace PDF_Generator.Utility
                                             ");
 
 
-            if (date2 != "01/01/0001")
-            {
-                sb.Append(@$"<p>Periodo: <span>{date} - {date2}</span></p>");
-            }
-            else
-            {
-                sb.Append(@$"<p>Periodo: <span>{date}</span></p>");
-            }
+                    if (date2 != "01/01/0001")
+                    {
+                        sb.Append(@$"<p>Periodo: <span>{date} - {date2}</span></p>");
+                    }
+                    else
+                    {
+                        sb.Append(@$"<p>Periodo: <span>{date}</span></p>");
+                    }
 
           
 
@@ -376,7 +383,6 @@ namespace PDF_Generator.Utility
 
             foreach (var emp in medicamentos)
                 {
-                    {
                         sb.Append($@"  <tr>
                                                               <td>{emp.ID} </td>
                                                               <td>{emp.MedicineName}</td>
@@ -388,13 +394,19 @@ namespace PDF_Generator.Utility
                                                               <td>{emp.Estates.Locations.LocationCityName}</td>
                                                               <td>{emp.Estates.LocationAddress.Address} {emp.Estates.LocationAddress.NumberAddress} ({emp.Estates.EstateTypes})</td> 
                                                   </tr> ");
-                    }
                 }
 
-
             sb.Append(@"                         </tbody>
-                                             </table>
+                                                         </table>");
+
+            sb.Append(@"
+                                                            <p style='margin-left: 40%; margin-top: 40%;'>Firma y aclaración<p>
+
+                                                      </div>
+                                                    
                                     </div>");
+
+
 
             if (vehList2.Contains(true))
             {
@@ -411,14 +423,14 @@ namespace PDF_Generator.Utility
                                                 <p>Aprobado: <span>Gerencia Gral</span></p>
                                     ");
 
-            if (date2 != "01/01/0001")
-            {
-                sb.Append(@$"<p>Periodo: <span>{date} - {date2}</span></p>");
-            }
-            else
-            {
-                sb.Append(@$"<p>Periodo: <span>{date}</span></p>");
-            }
+                if (date2 != "01/01/0001")
+                {
+                    sb.Append(@$"<p>Periodo: <span>{date} - {date2}</span></p>");
+                }
+                else
+                {
+                    sb.Append(@$"<p>Periodo: <span>{date}</span></p>");
+                }
 
           
 
@@ -426,7 +438,7 @@ namespace PDF_Generator.Utility
                                    </th>
                                         </tr>
                                         <tr class='fondo'>
-                                        <th colspan='8'>VEHICULOS</th>
+                                        <th colspan='8'>VEHICULOS (SIN STOCK)</th>
                                         <tr>
                                           <th>#Codigo</th>
                                           <th>Nombre</th>
@@ -435,6 +447,7 @@ namespace PDF_Generator.Utility
                                           <th>Año</th>
                                           <th width='15%'>Cuidad</th>
                                           <th>Dirección</th>
+                                          <th>Reservado por</th>
                                         </tr>
                                       </thead>
                                     <tbody>");
@@ -452,7 +465,8 @@ namespace PDF_Generator.Utility
                                                       <td> {emp.VehicleYear} </td>
                                                       <td> {emp.Estates.Locations.LocationCityName} </td>
                                                       <td> {emp.Estates.LocationAddress.Address} {emp.Estates.LocationAddress.NumberAddress} ({emp.Estates.EstateTypes})</td>                    
-                                                 </tr> ");
+                                                      <td> {emp.Employees.Users.Persons.FirstName} {emp.Employees.Users.Persons.LastName}</td>
+                                    </tr> ");
                 }
 
 
@@ -463,13 +477,12 @@ namespace PDF_Generator.Utility
 
 
             sb.Append($@"
+                                                            <p style='margin-left: 40%; margin-top: 40%;'>Firma y aclaración<p>
 
                                                 </div>
 
-                                                <div style='margin-top: 80%; margin-left: 60%;'>
-                                                    <hr width=400>
-                                                        <p>Firma y aclaración<p>
                                                 </div>
+
                                                </section>
 
                                         </body>

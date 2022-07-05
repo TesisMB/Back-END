@@ -64,9 +64,11 @@ namespace Repository
 
             var collection = _cruzRojaContext.Medicines as IQueryable<Medicines>;
 
-            if(dateEnd == null)
+            var date = Convert.ToDateTime("01/01/0001");
+
+            if (dateEnd == date)
             {
-            collection = collection.Where(
+                collection = collection.Where(
                                             a => a.MedicineDateCreated >= dateStart ||
                                             a.MedicineAvailability == false && a.MedicineExpirationDate < DateTime.Now
                                            );

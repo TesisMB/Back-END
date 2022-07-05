@@ -62,7 +62,9 @@ namespace Repository
 
             var collection = _cruzRojaContext.Materials as IQueryable<Materials>;
 
-            if (dateEnd == null)
+            var date = Convert.ToDateTime("01/01/0001");
+
+            if (dateEnd == date)
             {
                 collection = collection.Where(
                     a => a.MaterialDateCreated >= dateStart && a.MaterialQuantity == 0);

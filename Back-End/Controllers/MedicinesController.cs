@@ -124,8 +124,9 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpPost]
-        public async Task<ActionResult<Medicines>> CreateMedicine([FromBody] Resources_ForCreationDto medicine)
+        public async Task<ActionResult<Medicines>> CreateMedicine([FromBody] Resources_ForCreationDto medicine, [FromQuery] int userId)
         {
+            medicine.CreatedBy = userId;
 
             //if (medicine.ImageFile != null)
             //{
@@ -173,7 +174,8 @@ namespace Back_End.Controllers
         
         //********************************* FUNCIONANDO *********************************
         [HttpPatch("{medicineId}")]
-        public async Task<ActionResult> UpdateMedicine(string medicineId, JsonPatchDocument<MedicineForUpdateDto> patchDocument)
+        public async Task<ActionResult> UpdateMedicine(string medicineId, [FromQuery] int userId,
+            JsonPatchDocument<MedicineForUpdateDto> patchDocument)
         {
             try
             {
@@ -187,6 +189,7 @@ namespace Back_End.Controllers
 
                 var medicineToPatch = _mapper.Map<MedicineForUpdateDto>(medicineEntity);
                 medicineToPatch.DateModified = DateTime.Now;
+                medicineToPatch.ModifiedBy = userId;
 
 
                 patchDocument.ApplyTo(medicineToPatch, ModelState);

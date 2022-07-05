@@ -132,7 +132,8 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpPost]
-        public ActionResult<EmergenciesDisasters> CreateEmergencyDisaster([FromBody] EmergenciesDisastersForCreationDto emergenciesDisasters, [FromQuery] int userId)
+        public ActionResult<EmergenciesDisasters> CreateEmergencyDisaster([FromBody] EmergenciesDisastersForCreationDto emergenciesDisasters,
+            [FromQuery] int userId)
         {
             emergenciesDisasters.CreatedBy = userId;
 
@@ -173,8 +174,10 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpPatch("{emegencyDisasterID}")]
-        public async Task<ActionResult> UpdatePartialEmegencyDisaster(int emegencyDisasterID, JsonPatchDocument<EmergenciesDisastersForUpdateDto> _emergencyDisaster)
+        public async Task<ActionResult> UpdatePartialEmegencyDisaster(int emegencyDisasterID, [FromQuery] int userId,
+            JsonPatchDocument<EmergenciesDisastersForUpdateDto> _emergencyDisaster)
         {
+
             try
             {
                 var emergencyDisaster = await _repository.EmergenciesDisasters.GetEmergencyDisasterById(emegencyDisasterID);
@@ -195,6 +198,8 @@ namespace Back_End.Controllers
                 {
                     emergencyDisasterToPatch.EmergencyDisasterEndDate = DateTime.Now;
                 }
+
+                emergencyDisasterToPatch.ModifiedBy = userId;
 
                 if (!TryValidateModel(emergencyDisasterToPatch))
                 {

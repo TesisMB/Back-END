@@ -1,0 +1,148 @@
+2022-07-05 08:07:26.1951 INFO Returned User.
+2022-07-05 08:07:27.7390 INFO Returned all Resources_Request from database.
+2022-07-05 08:07:27.8162 INFO Returned all PDF from database.
+2022-07-05 08:07:28.1132 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:07:34.7698 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:08:36.1194 INFO Returned all PDF from database.
+2022-07-05 08:08:36.1194 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:08:36.1194 INFO Returned all Resources_Request from database.
+2022-07-05 08:08:39.3476 INFO Returned emegencyDisaster with details for id: 235
+2022-07-05 08:08:39.3511 ERROR Something went wrong inside GetEmegencyDisasterIDWithDetails action: Object reference not set to an instance of an object.
+2022-07-05 08:09:34.5989 INFO Returned emegencyDisaster with details for id: 235
+2022-07-05 08:09:34.6288 ERROR Something went wrong inside GetEmegencyDisasterIDWithDetails action: Object reference not set to an instance of an object.
+2022-07-05 08:09:54.9372 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-05 08:09:55.0370 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:09:57.6498 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:10:09.6652 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:11:48.3741 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:12:10.8452 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:13:15.5727 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:14:07.9144 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:15:00.4377 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:15:09.8911 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:15:12.4685 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:16:01.2704 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:19:23.9440 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:20:29.1480 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:21:12.3822 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:21:17.1813 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:22:03.1757 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:22:13.4478 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:22:24.4182 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:24:18.5733 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:24:20.8590 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:24:25.7105 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:24:30.9204 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:25:17.2342 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:25:42.5783 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:26:03.7303 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:26:36.8340 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:26:52.0868 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:27:01.3691 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:27:04.9225 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:27:10.8047 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:27:41.6028 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:28:03.8635 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:28:07.4478 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:28:18.8045 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:28:23.7643 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:28:33.1941 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:28:38.1953 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:28:41.4483 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:28:45.7386 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:28:48.9227 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:28:52.8067 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:28:55.8863 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:29:00.2387 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:29:04.8954 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:29:07.8063 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:29:13.0733 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:29:55.5654 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:30:33.0660 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:30:40.0333 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:30:56.8327 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:31:00.4752 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:31:04.7607 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:31:21.0969 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:31:27.6569 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:31:39.0296 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:32:08.5991 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:32:34.9398 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:32:42.2317 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:32:50.2790 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:32:54.6689 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:32:58.4944 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:33:02.9350 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:33:07.3686 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:33:11.6526 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:33:14.7330 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:33:27.4116 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:33:35.3454 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:33:43.7330 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:33:45.5365 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:34:14.9885 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-05 08:34:15.8921 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:34:22.7682 INFO Returned all employees from database.
+2022-07-05 08:35:01.8396 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-05 08:35:01.8992 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:35:05.2876 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-05 08:35:05.3474 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:35:08.5048 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-05 08:35:08.5596 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:35:14.9221 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-05 08:35:14.9820 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:40:00.8506 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:41:40.4796 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:43:59.0050 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-05 08:43:59.0050 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:44:15.4632 INFO Returned all employees from database.
+2022-07-05 08:45:59.8486 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-05 08:46:01.0353 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:46:05.5115 INFO Returned all employees from database.
+2022-07-05 08:47:37.8242 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-05 08:47:37.9584 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:47:41.1364 INFO Returned all employees from database.
+2022-07-05 08:50:11.3202 ERROR Something went wrong inside GetAllEmegenciesDisasters action: A second operation started on this context before a previous operation completed. This is usually caused by different threads using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+2022-07-05 08:50:12.2881 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-05 08:50:12.5315 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:50:12.6658 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-05 08:50:19.9463 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-05 08:50:20.0496 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:50:23.2823 INFO Returned all employees from database.
+2022-07-05 08:51:05.1542 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-05 08:51:05.3451 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:51:08.7369 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-05 08:51:08.8476 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:51:24.4305 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-05 08:51:24.5392 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:51:28.7406 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-05 08:51:28.8633 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:51:33.9511 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-05 08:51:34.0313 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:51:39.3189 INFO Returned all employees from database.
+2022-07-05 08:52:18.4842 INFO Returned all employees from database.
+2022-07-05 08:52:32.9059 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-05 08:52:32.9909 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:53:53.0676 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-05 08:53:53.0676 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:53:54.1520 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-05 08:53:54.3709 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:53:59.2053 INFO Returned all employees from database.
+2022-07-05 08:54:07.5155 ERROR Something went wrong inside UpdatePartialEmegencyDisaster action: An error occurred while updating the entries. See the inner exception for details.
+2022-07-05 08:56:31.6163 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-05 08:56:32.7969 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:56:33.8166 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-05 08:56:34.0256 INFO Returned all emergenciesDisasters from database.
+2022-07-05 08:56:38.3585 INFO Returned all employees from database.
+2022-07-05 08:57:13.3997 INFO Returned all employees from database.
+2022-07-05 08:57:25.2677 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 08:57:56.9028 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 09:09:03.3520 INFO Returned emegencyDisaster with details for id: 237
+2022-07-05 09:09:13.3763 INFO Returned all Materials from database.
+2022-07-05 09:09:26.0766 INFO Returned all Materials from database.
+2022-07-05 09:09:28.6547 INFO Returned all Materials from database.
+2022-07-05 09:09:34.2690 INFO Returned all Materials from database.
+2022-07-05 09:09:42.5741 INFO Returned all Materials from database.
+2022-07-05 09:09:45.8190 INFO Returned all vehicles from database.
+2022-07-05 09:09:52.1256 INFO Returned all vehicles from database.
+2022-07-05 09:10:05.5628 INFO Returned all PDF from database.

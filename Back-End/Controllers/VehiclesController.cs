@@ -106,8 +106,11 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpPost]
-        public async Task<ActionResult<Vehicles>> CreateVehicle([FromBody] Resources_ForCreationDto vehicle)
+        public async Task<ActionResult<Vehicles>> CreateVehicle([FromBody] Resources_ForCreationDto vehicle, [FromQuery] int userId)
         {
+
+            vehicle.CreatedBy = userId;
+
             try
             {
 
@@ -150,7 +153,8 @@ namespace Back_End.Controllers
       
         //********************************* FUNCIONANDO *********************************
         [HttpPatch("{vehicleId}")]
-        public async Task<ActionResult> UpdateVehicle(string vehicleId, JsonPatchDocument<VehiclesForUpdateDto> patchDocument)
+        public async Task<ActionResult> UpdateVehicle(string vehicleId, [FromQuery] int userId,
+                                                      JsonPatchDocument<VehiclesForUpdateDto> patchDocument)
         {
             try
             {
@@ -165,6 +169,7 @@ namespace Back_End.Controllers
                 var vehicleToPatch = _mapper.Map<VehiclesForUpdateDto>(vehicleEntity);
 
                 vehicleToPatch.DateModified = DateTime.Now;
+                vehicleToPatch.ModifiedBy = userId;
 
                 patchDocument.ApplyTo(vehicleToPatch, ModelState);
 

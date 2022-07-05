@@ -117,8 +117,13 @@ namespace Back_End.Controllers
         //********************************* FUNCIONANDO *********************************
 
         [HttpPost]
-        public ActionResult<ResourcesRequest> CreateResource_Request([FromBody] ResourcesRequestForCreationDto resources_Request)
+        public ActionResult<ResourcesRequest> CreateResource_Request([FromBody] ResourcesRequestForCreationDto resources_Request,
+                                                                      [FromQuery] int userId)
         {
+
+            resources_Request.CreatedBy = userId;
+            resources_Request.ModifiedBy = userId;
+
             try
             {
 
@@ -185,8 +190,11 @@ namespace Back_End.Controllers
         //********************************* FUNCIONANDO *********************************
 
         [HttpPost("{acceptRejectRequest}")]
-        public ActionResult<ResourcesRequest> AcceptRejectRequest([FromBody] AcceptRejectRequestDto acceptRejectRequest)
+        public ActionResult<ResourcesRequest> AcceptRejectRequest([FromBody] AcceptRejectRequestDto acceptRejectRequest, [FromQuery] int userId)
         {
+
+            acceptRejectRequest.AnsweredBy = userId;
+
             try
             {
                 if (acceptRejectRequest == null)
@@ -247,10 +255,15 @@ namespace Back_End.Controllers
             var requests = await _repository.Resources_Requests.GetAllResourcesRequestPDF(userId, condition, emergency, dateConvert, dateConvertEnd);
 
 
+            if(requests.Count() == 0)
+            {
+                return BadRequest(ErrorHelper.Response(400, $"No hay ningun historial de solicitudes {condition}s en la fecha establecida."));
+            }
+
             var objectSettings = new ObjectSettings
             {
                 PagesCount = true,
-                HtmlContent =  RequestHistory.GetHTMLString(requests, condition),
+                HtmlContent =  RequestHistory.GetHTMLString(requests, condition, dateConvert, dateConvertEnd),
                 WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "stylesForRequest.css") },
                 FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
             };

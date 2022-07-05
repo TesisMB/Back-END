@@ -73,14 +73,82 @@ namespace Repository
             //Falta filtrar unicamente los recursos solamente aceptados
 
             return await collection
-                .Include(i => i.TypesEmergenciesDisasters)
+        .Include(i => i.TypesEmergenciesDisasters)
                 .Include(i => i.Alerts)
                 .Include(i => i.LocationsEmergenciesDisasters)
                 .Include(i => i.EmployeeIncharge)
                 .ThenInclude(i => i.Users)
                 .ThenInclude(i => i.Persons)
                 .Include(i => i.EmployeeIncharge.Users.Roles)
-                 .OrderBy(i => i.EmergencyDisasterStartDate)
+
+                .Include(i => i.Resources_Requests)
+                .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .ThenInclude(i => i.Materials)
+
+                 .Include(i => i.Resources_Requests)
+                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                 .ThenInclude(i => i.Vehicles)
+
+                 .ThenInclude(a => a.Model)
+
+                  .Include(i => i.Resources_Requests)
+                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                 .ThenInclude(i => i.Vehicles)
+
+
+                 .ThenInclude(a => a.Brands)
+
+                     .Include(i => i.Resources_Requests)
+                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                 .ThenInclude(i => i.Vehicles.TypeVehicles)
+
+
+                 .Include(i => i.Resources_Requests)
+                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                 .ThenInclude(i => i.Medicines)
+
+                 .Include(a => a.ChatRooms)
+                 .ThenInclude(a => a.UsersChatRooms)
+                 .ThenInclude(a => a.Users)
+                 .ThenInclude(a => a.Persons)
+
+                 .Include(a => a.ChatRooms)
+                 .ThenInclude(a => a.UsersChatRooms)
+                 .ThenInclude(a => a.Users)
+                 .ThenInclude(a => a.Roles)
+
+                 .Include(a => a.ChatRooms)
+                 .ThenInclude(a => a.UsersChatRooms)
+                 .ThenInclude(a => a.Users.Volunteers)
+
+                 .Include(a => a.ChatRooms)
+                 .ThenInclude(a => a.Messages)
+
+                 .Include(a => a.Victims)
+
+                 .Include(a => a.VolunteersLocationVolunteersEmergenciesDisasters)
+
+                  .Include(i => i.EmployeeModified)
+                 .ThenInclude(i => i.Users)
+                 .ThenInclude(i => i.Persons)
+                 .Include(i => i.EmployeeModified.Users.Roles)
+
+                 .Include(i => i.EmployeeCreated)
+                 .ThenInclude(i => i.Users)
+                 .ThenInclude(i => i.Persons)
+                 .Include(i => i.EmployeeCreated.Users.Roles)
+
+                 .Include(i => i.Resources_Requests)
+                 .ThenInclude(i => i.EmployeeCreated)
+                 .ThenInclude(i => i.Users)
+                 .ThenInclude(i => i.Persons)
+                 .Include(i => i.EmployeeCreated.Users.Roles)
+
+                 .Include(i => i.Resources_Requests)
+                 .ThenInclude(i => i.EmployeeModified)
+                 .ThenInclude(i => i.Users)
+                 .ThenInclude(i => i.Persons)
+                 .Include(i => i.EmployeeModified.Users.Roles)
                 .ToListAsync();
 
         }

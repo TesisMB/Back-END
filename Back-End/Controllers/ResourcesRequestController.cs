@@ -218,7 +218,7 @@ namespace Back_End.Controllers
         }
 
         [HttpGet("PDF")]
-        public async Task<IActionResult> CreatePDF([FromQuery] int userId, [FromQuery] string condition, [FromQuery] int emergency,
+        public async Task<IActionResult> CreatePDF([FromQuery] int id, [FromQuery] string condition, [FromQuery] int emergency,
                                                    [FromQuery] string dateStart, [FromQuery] string dateEnd)
         {
 
@@ -252,7 +252,7 @@ namespace Back_End.Controllers
 
 
 
-            var requests = await _repository.Resources_Requests.GetAllResourcesRequestPDF(userId, condition, emergency, dateConvert, dateConvertEnd);
+            var requests = await _repository.Resources_Requests.GetAllResourcesRequestPDF(id, condition, emergency, dateConvert, dateConvertEnd);
 
 
             if(requests.Count() == 0)

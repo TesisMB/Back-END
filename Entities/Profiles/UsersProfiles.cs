@@ -7,6 +7,7 @@ using Entities.DataTransferObjects.Employees___Dto;
 using Entities.DataTransferObjects.Estates___Dto;
 using Entities.DataTransferObjects.Models.Vehicles___Dto;
 using Entities.DataTransferObjects.Volunteers__Dto;
+using Entities.Helpers;
 
 namespace Back_End.Profiles
 {
@@ -38,6 +39,9 @@ namespace Back_End.Profiles
            .ForMember(dest => dest.token,
                               opt => opt.MapFrom(src => UserSecurity.GenerateAccessToken(src.UserID, src.Roles.RoleName)))
 
+
+              .ForMember(dest => dest.EmployeeCreatedate,
+                              opt => opt.MapFrom(src => src.Employees.EmployeeCreatedate))
 
            .ForMember(dest => dest.RoleName,
                               opt => opt.MapFrom(src => src.Roles.RoleName))

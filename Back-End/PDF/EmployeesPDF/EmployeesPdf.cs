@@ -49,6 +49,8 @@ namespace Back_End.EmployeesPDF
                                             <tr>
                                                <th>Dni</th>
                                                <th>Nombre completo</th>
+                                               <th>Cargo</th>
+                                               <th>Dirección de trabajo</th>
                                                <th>Disponibilidad</th>
                                             </tr>
                                          </thead>
@@ -63,6 +65,9 @@ namespace Back_End.EmployeesPDF
             sb.Append(@$"               <tr>
                                               <td> {emp.Users.UserDni} </td>
                                               <td> {emp.Users.Persons.FirstName} {emp.Users.Persons.LastName}</td>
+                                              <td> {emp.Users.Roles.RoleName} </td>
+                                              <td> {emp.Users.Estates.LocationAddress.Address} {emp.Users.Estates.LocationAddress.NumberAddress} </td>
+
                                  ");
                         if (emp.Users.UserAvailability)
                         {

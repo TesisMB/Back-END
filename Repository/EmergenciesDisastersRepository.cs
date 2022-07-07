@@ -47,7 +47,6 @@ namespace Repository
         }
 
 
-
         public async Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisastersWithourFilter(int userId, string limit)
         {
             //var user = UsersRepository.authUser;
@@ -62,7 +61,7 @@ namespace Repository
             }
             else {
 
-                collection = collection.Where(a => a.FK_EstateID == user.FK_EstateID)
+                collection = collection.Where(a => a.CreatedBy == userId)
                     .OrderByDescending(a => a.EmergencyDisasterID)
                     .Take(2)
                     .AsNoTracking();

@@ -102,7 +102,7 @@ namespace Back_End.VolunteersPDF
             {
                 sb.Append($@"
                          <div class='datosPersonales'>
-                                       <h5 style='margin-bottom: 2%;'>Especialidades</h5> ");
+                                       <h5 style='margin-bottom: 2%;'>Preferencias</h5> ");
 
                 foreach (var item in employee.Users.Volunteers.VolunteersSkills)
                 {
@@ -110,7 +110,7 @@ namespace Back_End.VolunteersPDF
                     {
 
                     sb.Append($@"
-                                       <p> - <span>{item.Skills.SkillName} ({item2.FormationsEstates.FormationEstateName})</span></p> 
+                                       <p> - <span>{item.Skills.SkillName}</span></p> 
                                 ");
                     }
                 }

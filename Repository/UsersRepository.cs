@@ -167,6 +167,7 @@ namespace Repository
                                .ThenInclude(u => u.Schedules)
                                .Include(u => u.Estates.Locations)
                                .Include(u => u.Volunteers)
+                               .Include(u => u.Employees)
                                 .Where(u => u.UserDni == user.UserDni
                                    && u.UserPassword == ePass)
                                 .AsNoTracking()

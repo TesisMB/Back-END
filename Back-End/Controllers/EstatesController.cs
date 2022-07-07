@@ -124,7 +124,7 @@ namespace Back_End.Controllers
                 {
                     estates.Materials =
                                 from x in estates.Materials
-                                where x.MaterialDateCreated >= dateConvert && x.MaterialAvailability != false
+                                where x.MaterialDateCreated >= dateConvert && x.MaterialAvailability == true
                                 && x.FK_EstateID == estates.EstateID
                                 select x;
 
@@ -134,7 +134,7 @@ namespace Back_End.Controllers
                     estates.Medicines =
                               from x in estates.Medicines
                               where x.MedicineDateCreated >= dateConvert
-                              && x.MedicineAvailability != false
+                              && x.MedicineAvailability == true
                               && x.FK_EstateID == estates.EstateID
                               select x;
 
@@ -145,7 +145,7 @@ namespace Back_End.Controllers
                     estates.Vehicles =
                            from x in estates.Vehicles
                            where x.VehicleDateCreated >= dateConvert 
-                           && x.VehicleAvailability != false
+                           && x.VehicleAvailability == true
                            && x.FK_EstateID == estates.EstateID
                            select x;
 

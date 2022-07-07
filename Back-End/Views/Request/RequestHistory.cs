@@ -126,7 +126,7 @@ namespace PDF_Generator.Utility
                                                                  <thead>
                                                                                 <tr>
                                                                                     <th class='logo' colspan='2'><img src='https://1.bp.blogspot.com/-6cW-1Sw9Hno/YRV4NpAW-fI/AAAAAAAAB28/W0fMEIj41C4NNq2v4xo9JOHbo4otpKKZQCLcBGAsYHQ/s0/Logo.png'></th>
-                                                                                    <th colspan= '1' class='titulo'><h2 class='text-center font-weight-bold'>Reporte de solicitudes</h2></th>
+                                                                                    <th colspan= '1' class='titulo'><h2 class='text-center font-weight-bold'>Recursos solicitados</h2></th>
                                                                                     <th colspan= '1' class='fecha'>
                                                                                         <p>Versión: <span>01</span></p>
                                                                                         <p>Aprobado: <span>Gerencia Gral</span></p>
@@ -203,7 +203,7 @@ namespace PDF_Generator.Utility
                                                                         <thead>
                                                                                 <tr>
                                                                                     <th class='logo' colspan='1'><img src='https://1.bp.blogspot.com/-6cW-1Sw9Hno/YRV4NpAW-fI/AAAAAAAAB28/W0fMEIj41C4NNq2v4xo9JOHbo4otpKKZQCLcBGAsYHQ/s0/Logo.png'></th>
-                                                                                    <th colspan= '1' class='titulo'><h2 class='text-center font-weight-bold'>Reporte de recursos</h2></th>
+                                                                                    <th colspan= '1' class='titulo'><h2 class='text-center font-weight-bold'>Recursos solicitados</h2></th>
                                                                                     <th colspan= '3' class='fecha'>
                                                                                         <p>Versión: <span>01</span></p>
                                                                                         <p>Aprobado: <span>Gerencia Gral</span></p>
@@ -282,7 +282,7 @@ namespace PDF_Generator.Utility
                                                                  <thead>
                                                                                 <tr>
                                                                                     <th class='logo' colspan='2'><img src='https://1.bp.blogspot.com/-6cW-1Sw9Hno/YRV4NpAW-fI/AAAAAAAAB28/W0fMEIj41C4NNq2v4xo9JOHbo4otpKKZQCLcBGAsYHQ/s0/Logo.png'></th>
-                                                                                    <th colspan= '1' class='titulo'><h2 class='text-center font-weight-bold'>Reporte de solicitudes</h2></th>
+                                                                                    <th colspan= '1' class='titulo'><h2 class='text-center font-weight-bold'>Recursos solicitados</h2></th>
                                                                                     <th colspan= '2' class='fecha'>
                                                                                         <p>Versión: <span>01</span></p>
                                                                                         <p>Aprobado: <span>Gerencia Gral</span></p>

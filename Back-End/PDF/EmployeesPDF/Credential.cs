@@ -9,7 +9,8 @@ namespace Back_End.EmployeesPDF
         public static string GetHTMLString(Employees employee)
         {
             string date = DateTime.Now.ToString("dd/MM/yyyy");
-            string createdate = employee.Users.Employees.EmployeeCreatedate.ToString("MM/yyyy");
+            string createdate = employee.Users.Employees.EmployeeCreatedate.ToString("MM/yy");
+            string createdate2 = employee.Users.Employees.EmployeeCreatedate.ToString("MM");
             string status = string.Empty;
             string statusEmer = string.Empty;
 
@@ -52,7 +53,7 @@ namespace Back_End.EmployeesPDF
                                                  <div style='margin-top: 7%;'>
                                                      <h5 class='card-title' style='margin-right: 15%; text-transform: uppercase;'>{employee.Users.Persons.LastName}, {employee.Users.Persons.FirstName}</h5>
                                                      <p>{employee.Users.UserDni}</p>
-                                                     <p>Sede: {employee.Users.Estates.Locations.LocationCityName}</p>
+                                                     <p>Cruz Roja Argentina</p>
                                                  </div>
                                             </div>
                                           <div class='datos' style='margin-top: 5%;'>
@@ -61,16 +62,17 @@ namespace Back_End.EmployeesPDF
                                                 </div>
 
                                                 <div>
-                                                    <p>Válido desde: {createdate}</p>
-                                                </div>
+                                                       <p>Filial:  {employee.Users.Estates.Locations.LocationCityName}</p>
+                                                  </div>
                                             </div>
                                               <div class='datos' style='margin-top: 5%;'>
                                                 <div style='margin-left: 22%;'>
                                                        <p>Fecha de Ing:  {createdate}</p>
                                                   </div>
+
                                                 <div style='margin-right: 8%;'>
-                                                       <p>Sucursal:  {employee.Users.Estates.Locations.LocationCityName}</p>
-                                                  </div>
+                                                    <p>Válido hasta: {createdate2}/{21 + 4}</p>
+                                                </div>
                                               </div>
                                     </div>
                                          </section>

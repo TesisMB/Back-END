@@ -42,14 +42,15 @@ namespace Repository
                     collection = collection.Where(a => a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID);
             else
             {
-                collection = collection.Where(a => a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID)
+                collection = collection.Where(a => 
+                                     a.CreatedBy == userId)
                                     .OrderByDescending(a => a.ID)
                                     .Take(2)
                                     .AsNoTracking();
             }
 
 
-            return await FindAll()
+            return await collection
                 .Include(a=> a.EmergenciesDisasters)
                 .ThenInclude(a=> a.TypesEmergenciesDisasters)
 

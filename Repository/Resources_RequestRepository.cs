@@ -129,21 +129,21 @@ namespace Repository
                 .ToList();
         }
 
-        public async Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequestPDF(int userId, string Condition, int emergency,
+        public async Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequestPDF(int id, string Condition, int emergency,
                                                                                    DateTime dateConvert,
                                                                                    DateTime dateConvertEnd)
         {
 
-            user = EmployeesRepository.GetAllEmployeesById(userId);
+            user = EmployeesRepository.GetAllEmployeesById(id);
 
 
             var collection = _cruzRojaContext.Resources_Requests as IQueryable<ResourcesRequest>;
 
             var dateEnd = Convert.ToDateTime("01/01/0001");
 
-           user = EmployeesRepository.GetAllEmployeesById(userId);
+           user = EmployeesRepository.GetAllEmployeesById(id);
 
-            if (userId != 0 && emergency == 0 && dateConvertEnd == dateEnd)
+            if (id != 0 && emergency == 0 && dateConvertEnd == dateEnd)
             {
 
                     collection = collection.Where(
@@ -153,7 +153,7 @@ namespace Repository
                                                      .AsNoTracking();
 
             }
-            else if (userId == 0 && emergency != 0 && dateConvertEnd == dateEnd)
+            else if (id == 0 && emergency != 0 && dateConvertEnd == dateEnd)
             {
                 collection = collection.Where(
                                                       a => a.Condition == Condition
@@ -162,19 +162,19 @@ namespace Repository
                                                      .AsNoTracking();
             }
 
-            else if(userId != 0 && emergency != 0 && dateConvertEnd == dateEnd)
+            else if(id != 0 && emergency != 0 && dateConvertEnd == dateEnd)
             {
                 collection = collection.Where(
                                                       a => a.Condition == Condition
-                                                              && a.CreatedBy == userId
+                                                              && a.CreatedBy == id
                                                               && a.EmergenciesDisasters.EmergencyDisasterID == emergency
                                                               && a.RequestDate >= dateConvert)
                                                      .AsNoTracking();
             }
 
-            else if (userId != 0 && emergency == 0 && dateConvertEnd != dateEnd)
+            else if (id != 0 && emergency == 0 && dateConvertEnd != dateEnd)
             {
-                user = EmployeesRepository.GetAllEmployeesById(userId);
+                user = EmployeesRepository.GetAllEmployeesById(id);
 
                 collection = collection.Where(
                                                   a => a.Condition == Condition
@@ -184,7 +184,7 @@ namespace Repository
                                                  .AsNoTracking();
 
             }
-            else if (userId == 0 && emergency != 0 && dateConvertEnd != dateEnd)
+            else if (id == 0 && emergency != 0 && dateConvertEnd != dateEnd)
             {
                 collection = collection.Where(
                                                       a => a.Condition == Condition
@@ -194,11 +194,11 @@ namespace Repository
                                                      .AsNoTracking();
             }
 
-            else if (userId != 0 && emergency != 0 && dateConvertEnd != dateEnd)
+            else if (id != 0 && emergency != 0 && dateConvertEnd != dateEnd)
             {
                 collection = collection.Where(
                                                       a => a.Condition == Condition
-                                                              && a.CreatedBy == userId
+                                                              && a.CreatedBy == id
                                                               && a.EmergenciesDisasters.EmergencyDisasterID == emergency
                                                               && a.RequestDate >= dateConvert
                                                               && a.RequestDate <= dateConvertEnd)

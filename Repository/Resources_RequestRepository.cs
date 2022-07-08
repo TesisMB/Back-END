@@ -166,7 +166,9 @@ namespace Repository
             {
                 collection = collection.Where(
                                                       a => a.Condition == Condition
-                                                              && a.CreatedBy == id
+                                                               && a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID
+
+                                                              //&& a.CreatedBy == id
                                                               && a.EmergenciesDisasters.EmergencyDisasterID == emergency
                                                               && a.RequestDate >= dateConvert)
                                                      .AsNoTracking();
@@ -178,7 +180,9 @@ namespace Repository
 
                 collection = collection.Where(
                                                   a => a.Condition == Condition
-                                                 && a.CreatedBy == user.UserID
+                                               && a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID
+
+                                                  //  && a.CreatedBy == user.UserID
                                                  && a.RequestDate >= dateConvert
                                                  && a.RequestDate <= dateConvertEnd)
                                                  .AsNoTracking();
@@ -198,7 +202,9 @@ namespace Repository
             {
                 collection = collection.Where(
                                                       a => a.Condition == Condition
-                                                              && a.CreatedBy == id
+                                                               && a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID
+
+                                                              // && a.CreatedBy == id
                                                               && a.EmergenciesDisasters.EmergencyDisasterID == emergency
                                                               && a.RequestDate >= dateConvert
                                                               && a.RequestDate <= dateConvertEnd)

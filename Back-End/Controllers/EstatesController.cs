@@ -63,8 +63,7 @@ namespace Back_End.Controllers
         public IActionResult CreatePDF([FromQuery] string dateStart, [FromQuery] string dateEnd, [FromQuery] int userId, [FromQuery] string getall)
         {
             //quien es el actual usuario
-            Users user = null;
-            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+   
             DateTime dateConvert, dateConvertEnd;
             dateConvertEnd = Convert.ToDateTime("01/01/0001");
 
@@ -97,10 +96,6 @@ namespace Back_End.Controllers
                          Console.WriteLine("Fecha" + dateConvertEnd);
 
 
-            user = cruzRojaContext.Users
-                    .Where(x => x.UserID == userId)
-                    .AsNoTracking()
-                    .FirstOrDefault();
 
             if (getall == null)
             {
@@ -210,7 +205,7 @@ namespace Back_End.Controllers
                     PagesCount = true,
                     HtmlContent = Resource.GetHTMLString(estates, materiales, medicamentos, vehiculos, dateConvert, dateConvertEnd),
                     WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "stylesForResource.css") },
-                    FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+                    FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
                 };
 
             }
@@ -314,7 +309,7 @@ namespace Back_End.Controllers
                     PagesCount = true,
                     HtmlContent = Resources.GetHTMLString(estates, materiales, medicamentos, vehiculos, dateConvert, dateConvertEnd),
                     WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "stylesForResource.css") },
-                    FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+                    FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
                 };
 
             }

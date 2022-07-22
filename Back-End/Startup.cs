@@ -246,6 +246,9 @@ using DinkToPdf.Contracts;
 using DinkToPdf;
 using PDF_Generator.Utility;
 using Azure.Storage.Blobs;
+using CorePush.Google;
+using CorePush.Apple;
+using Repository;
 
 public class Startup
 {
@@ -269,7 +272,14 @@ public class Startup
         services.ConfigureRepositoryWrapper();
         services.Fluent();
         //services.AddWkhtmltopdf("WkhtmltoPdf");
+        //services.AddTransient<INotificationService, NotificationService>();
 
+        services.AddHttpClient<FcmSender>();
+        services.AddHttpClient<ApnSender>();
+
+
+        // Configure strongly typed settings objects
+        var appSettingsSection = Configuration.GetSection("FcmNotification");
 
         services.AddScoped(_ =>
         {

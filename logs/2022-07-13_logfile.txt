@@ -1,0 +1,31 @@
+2022-07-13 20:50:35.5126 ERROR Something went wrong inside UpdateUser action: Value cannot be null. (Parameter 'patchDoc')
+2022-07-13 20:51:35.8555 ERROR Something went wrong inside UpdateUser action: Value cannot be null. (Parameter 'patchDoc')
+2022-07-13 22:53:14.5721 INFO Returned User.
+2022-07-13 22:53:16.9405 INFO Returned all PDF from database.
+2022-07-13 22:53:18.4541 INFO Returned all Resources_Request from database.
+2022-07-13 22:53:18.7893 INFO Returned all emergenciesDisasters from database.
+2022-07-13 22:53:22.7493 INFO Returned all Resources_Request from database.
+2022-07-13 22:53:23.9024 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-13 22:53:24.2415 INFO Returned all emergenciesDisasters from database.
+2022-07-13 22:53:26.8264 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-13 22:53:26.9914 INFO Returned all employees from database.
+2022-07-13 22:57:30.7230 ERROR Something went wrong inside CreateEmergenciesDisaster action: Object reference not set to an instance of an object.
+2022-07-13 23:01:12.7597 ERROR Something went wrong inside CreateEmergenciesDisaster action: Object reference not set to an instance of an object.
+2022-07-13 23:01:32.6245 INFO Returned all emergenciesDisasters from database.
+2022-07-13 23:06:35.7446 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-13 23:06:35.7446 INFO Returned all employees from database.
+2022-07-13 23:07:37.0367 ERROR Something went wrong inside CreateEmergenciesDisaster action: Object reference not set to an instance of an object.
+2022-07-13 23:34:54.5742 ERROR Something went wrong inside CreateEmergenciesDisaster action: An attempt was made to use the context while it is being configured. A DbContext instance cannot be used inside OnConfiguring since it is still being configured at this point. This can happen if a second operation is started on this context before a previous operation completed. Any instance members are not guaranteed to be thread safe.
+2022-07-13 23:41:07.7915 INFO Returned User.
+2022-07-13 23:41:08.3507 INFO Returned all emergenciesDisasters from database.
+2022-07-13 23:41:37.4633 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-13 23:41:38.0492 INFO Returned all emergenciesDisasters from database.
+2022-07-13 23:41:40.0594 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-13 23:41:40.2264 INFO Returned all employees from database.
+2022-07-13 23:42:14.2753 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-13 23:42:14.4717 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-13 23:42:14.6852 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-13 23:48:49.8135 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-13 23:48:51.7814 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-13 23:48:52.0845 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-13 23:49:31.3551 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.

@@ -1,4 +1,6 @@
-﻿namespace Entities.DataTransferObjects.CharRooms___Dto
+﻿using Entities.DataTransferObjects.Messages___Dto;
+
+namespace Entities.DataTransferObjects.CharRooms___Dto
 {
     public class UsersChatRoomsDto
     {
@@ -6,7 +8,7 @@
         public string Name { get; set; }
 
         public string UserDni { get; set; }
-        public string RoleName { get; set; }
-        public string Picture { get; set; }
+      //  public string RoleName { get; set; }
+        //public string Picture { get; set; }
     }
 }

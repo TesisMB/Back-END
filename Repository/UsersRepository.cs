@@ -181,5 +181,21 @@ namespace Repository
 
             return ret; //retornamos el valor de este objeto       
         }
+
+        public async Task<Users> GetUsers(int userId)
+        {
+            return await FindByCondition(emp => emp.UserID.Equals(userId))
+                                .Include(u => u.Persons)
+                               .Include(u => u.Roles)
+                               .Include(u => u.Estates)
+                               .ThenInclude(u => u.LocationAddress)
+                               .Include(u => u.Estates.EstatesTimes)
+                               .ThenInclude(u => u.Times)
+                               .ThenInclude(u => u.Schedules)
+                               .Include(u => u.Estates.Locations)
+                               .Include(u => u.Volunteers)
+                               .Include(u => u.Employees)
+                               .FirstOrDefaultAsync();
+          }
     }
 }

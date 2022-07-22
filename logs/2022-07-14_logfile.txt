@@ -1,0 +1,121 @@
+2022-07-14 11:37:03.4270 INFO Returned User.
+2022-07-14 11:37:04.2250 INFO Returned all emergenciesDisasters from database.
+2022-07-14 11:37:04.6130 INFO Returned all PDF from database.
+2022-07-14 11:37:04.6418 INFO Returned all Resources_Request from database.
+2022-07-14 11:37:07.7855 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-14 11:37:08.2410 INFO Returned all emergenciesDisasters from database.
+2022-07-14 11:37:11.9741 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-14 11:37:12.0900 INFO Returned all employees from database.
+2022-07-14 11:37:56.9223 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 11:41:50.3967 INFO Returned all employees from database.
+2022-07-14 11:41:50.3967 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-14 11:44:35.5545 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-14 11:44:35.9911 INFO Returned all emergenciesDisasters from database.
+2022-07-14 11:46:49.6308 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-14 11:46:49.6308 INFO Returned all employees from database.
+2022-07-14 11:48:39.2939 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 11:48:43.5666 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 11:48:50.9626 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 11:49:05.1951 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-14 11:49:05.2728 INFO Returned all employees from database.
+2022-07-14 11:49:26.9798 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 11:49:37.1478 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 11:50:00.6191 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 11:50:05.0356 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 11:50:05.2483 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 11:50:05.4246 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 11:50:05.6126 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 11:50:05.7887 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 11:50:05.9857 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 11:50:06.1647 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 11:50:08.0249 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 11:50:08.1886 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 11:50:08.3822 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 11:50:08.5480 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 11:50:08.7449 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 11:50:08.9351 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 11:50:12.3876 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-14 11:50:12.4525 INFO Returned all employees from database.
+2022-07-14 11:50:26.4190 INFO Returned User.
+2022-07-14 11:50:26.8751 INFO Returned all Resources_Request from database.
+2022-07-14 11:50:26.8751 INFO Returned all emergenciesDisasters from database.
+2022-07-14 11:50:27.4866 INFO Returned all PDF from database.
+2022-07-14 11:50:33.8854 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-14 11:50:34.1845 INFO Returned all emergenciesDisasters from database.
+2022-07-14 11:50:37.5122 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-14 11:50:37.5785 INFO Returned all employees from database.
+2022-07-14 11:50:52.3925 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 11:53:13.0214 INFO Returned all PDF from database.
+2022-07-14 11:54:06.1142 INFO Returned all emergenciesDisasters from database.
+2022-07-14 11:54:06.2885 INFO Returned all PDF from database.
+2022-07-14 11:54:06.5253 INFO Returned all Resources_Request from database.
+2022-07-14 11:54:10.4208 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-14 11:54:10.8680 INFO Returned all emergenciesDisasters from database.
+2022-07-14 11:54:40.6407 INFO Returned all PDF from database.
+2022-07-14 11:54:40.7084 INFO Returned all Resources_Request from database.
+2022-07-14 11:54:40.9232 INFO Returned all emergenciesDisasters from database.
+2022-07-14 11:59:11.9595 ERROR Something went wrong inside GetAllEmegenciesDisasters action: A second operation started on this context before a previous operation completed. This is usually caused by different threads using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+2022-07-14 11:59:14.8045 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-14 11:59:15.0222 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-14 11:59:15.0463 INFO Returned all employees from database.
+2022-07-14 12:19:51.6768 INFO Returned User.
+2022-07-14 12:19:52.4319 INFO Returned all emergenciesDisasters from database.
+2022-07-14 12:19:52.6221 INFO Returned all PDF from database.
+2022-07-14 12:19:52.8205 INFO Returned all Resources_Request from database.
+2022-07-14 12:19:54.6744 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-14 12:19:55.3396 INFO Returned all emergenciesDisasters from database.
+2022-07-14 12:19:58.5097 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-14 12:19:58.6639 INFO Returned all employees from database.
+2022-07-14 20:42:17.6316 INFO Returned User.
+2022-07-14 20:42:20.3047 INFO Returned all PDF from database.
+2022-07-14 20:42:47.0368 INFO Returned all employees from database.
+2022-07-14 20:44:02.5839 INFO Returned all employees from database.
+2022-07-14 20:44:02.6237 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-14 21:23:42.2552 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-14 21:23:42.7425 INFO Returned all emergenciesDisasters from database.
+2022-07-14 21:24:29.6459 INFO Returned User.
+2022-07-14 21:24:31.0753 INFO Returned all emergenciesDisasters from database.
+2022-07-14 21:24:46.4719 INFO Returned all PDF from database.
+2022-07-14 21:24:46.4774 INFO Returned all Resources_Request from database.
+2022-07-14 21:25:06.4157 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-14 21:25:07.5084 INFO Returned all emergenciesDisasters from database.
+2022-07-14 21:25:44.3740 INFO Returned emegencyDisaster with details for id: 246
+2022-07-14 21:28:15.0889 INFO Returned User.
+2022-07-14 21:28:16.1060 INFO Returned all emergenciesDisasters from database.
+2022-07-14 21:28:24.6394 INFO Returned all PDF from database.
+2022-07-14 21:29:04.4514 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-14 21:29:05.0854 INFO Returned all emergenciesDisasters from database.
+2022-07-14 21:29:21.0835 INFO Returned all employees from database.
+2022-07-14 21:29:21.0835 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-14 21:37:18.1487 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 21:37:24.0397 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 21:39:25.3210 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 21:39:57.3513 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 21:40:05.6928 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 21:40:07.9137 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 21:40:08.6067 ERROR Something went wrong inside CreateEmergenciesDisaster action: A second operation started on this context before a previous operation completed. This is usually caused by different threads using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+2022-07-14 21:40:08.7232 ERROR Something went wrong inside CreateEmergenciesDisaster action: A second operation started on this context before a previous operation completed. This is usually caused by different threads using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+2022-07-14 21:40:08.7795 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 21:48:44.1311 INFO Returned all emergenciesDisasters from database.
+2022-07-14 22:23:21.8731 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 22:23:37.2174 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 22:23:37.4444 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 22:23:37.5552 ERROR Something went wrong inside CreateEmergenciesDisaster action: A second operation started on this context before a previous operation completed. This is usually caused by different threads using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+2022-07-14 22:23:37.8164 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 22:34:34.7390 ERROR Something went wrong inside CreateEmergenciesDisaster action: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure()' to the 'UseSqlServer' call.
+2022-07-14 22:49:58.2398 INFO Returned User.
+2022-07-14 22:49:59.0023 INFO Returned all emergenciesDisasters from database.
+2022-07-14 22:50:02.0681 INFO Returned all PDF from database.
+2022-07-14 22:50:02.1089 INFO Returned all Resources_Request from database.
+2022-07-14 22:50:08.9076 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-14 22:50:09.4812 INFO Returned all emergenciesDisasters from database.
+2022-07-14 22:50:19.2401 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-14 22:50:19.3723 INFO Returned all employees from database.
+2022-07-14 22:50:37.5568 ERROR Something went wrong inside CreateEmergenciesDisaster action: One or more errors occurred. (Exactly one of Token, Topic or Condition is required.)
+2022-07-14 22:50:39.4084 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 22:51:21.6933 ERROR Something went wrong inside CreateEmergenciesDisaster action: One or more errors occurred. (Exactly one of Token, Topic or Condition is required.)
+2022-07-14 22:51:22.0715 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 22:51:23.9343 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 22:51:24.3282 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 22:51:24.4350 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-14 22:51:24.8623 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.

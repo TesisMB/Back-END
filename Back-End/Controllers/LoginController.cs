@@ -42,6 +42,10 @@ namespace Back_End.Controllers
                         auth.VolunteerAvatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{auth.VolunteerAvatar}";
 
                     }
+                    else
+                    {
+                        auth.VolunteerAvatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/8AACVdK.jpg";
+                    }
 
 
 

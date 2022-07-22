@@ -7,6 +7,7 @@ namespace Contracts.Interfaces
     {
 
         Task<Users> GetUserEmployeeById(int userId);
+        Task<Users> GetUsers(int userId);
 
         Task<Users> GetUserVolunteerById(int userId);
 

@@ -138,8 +138,10 @@ namespace Repository
 
             // send email
             using var smtp = new SmtpClient();
-            smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate("tesis.unc.mb@gmail.com", "laRioja1450");
+            smtp.Connect("smtp.sendgrid.net", 587, SecureSocketOptions.StartTls);
+            smtp.Authenticate(
+                userName: "apikey", 
+                password: "JrGnw5aOTYOMysaEbO8mtQ");
             smtp.Send(email);
             smtp.Disconnect(true);
         }

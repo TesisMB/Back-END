@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Back_End.Entities;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.CharRooms___Dto;
 using Entities.DataTransferObjects.Messages___Dto;
@@ -6,6 +7,8 @@ using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Back_End.Controllers
@@ -29,14 +32,32 @@ namespace Back_End.Controllers
 
         //TODO Cambia modelo 
         [HttpGet]
-        public async Task<ActionResult<ChatRooms>> GetAllChatRooms()
+        public async Task<ActionResult<ChatRooms>> GetAllChatRooms([FromQuery] int userId)
         {
             try
             {
-                var chatRooms = await _repository.ChatRooms.GetChatRooms();
+                var chatRooms = await _repository.ChatRooms.GetChatRooms(userId);
                 _logger.LogInfo($"Returned all ChatRooms from database. ");
 
                 var chatRoomsToResult = _mapper.Map<IEnumerable<ChatRoomsDto>>(chatRooms);
+
+                CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+                foreach (var item in chatRoomsToResult)
+                {
+                    foreach (var item2 in item.DateMessage)
+                    {
+                        foreach (var item3 in item2.Messages)
+                        {
+                            var person = cruzRojaContext.Persons
+                                          .Where(a => a.ID == item3.FK_UserID)
+                                          .AsNoTracking()
+                                          .FirstOrDefault();
+
+                            item3.Name = person.FirstName + " " + person.LastName;
+                        }
+                    }
+                }
 
                 return Ok(chatRoomsToResult);
 
@@ -63,17 +84,32 @@ namespace Back_End.Controllers
                     return NotFound();
                 }
 
-
-                foreach (var item in chatRooms.UsersChatRooms)
-                {
-                    if (item.Users.Volunteers != null && item.Users.Volunteers.VolunteerAvatar != "https://i.imgur.com/8AACVdK.png")
-                    {
-                        item.Users.Volunteers.VolunteerAvatar = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
-                                        Request.Scheme, Request.Host, Request.PathBase, item.Users.Volunteers.VolunteerAvatar);
-                    }
-                }
+                //foreach (var item in chatRooms.UsersChatRooms)
+                //{
+                //    if (item.Users.Volunteers != null && item.Users.Volunteers.VolunteerAvatar != "https://i.imgur.com/8AACVdK.png")
+                //    {
+                //        item.Users.Volunteers.VolunteerAvatar = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
+                //                        Request.Scheme, Request.Host, Request.PathBase, item.Users.Volunteers.VolunteerAvatar);
+                //    }
+                //}
 
                 var chatRoomsToResult = _mapper.Map<ChatRoomsDto>(chatRooms);
+
+                CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+
+                foreach (var item in chatRoomsToResult.DateMessage)
+                {
+                    foreach (var item3 in item.Messages)
+                    {
+                        var person = cruzRojaContext.Persons
+                                      .Where(a => a.ID == item3.FK_UserID)
+                                      .AsNoTracking()
+                                      .FirstOrDefault();
+
+                        item3.Name = person.FirstName + " " + person.LastName;
+                    }
+                }
 
                 return Ok(chatRoomsToResult);
             }

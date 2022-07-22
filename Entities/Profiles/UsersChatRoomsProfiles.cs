@@ -14,9 +14,9 @@ namespace Entities.Profiles
 
                      .ForMember(resp => resp.UserDni, opt => opt.MapFrom(a => a.Users.UserDni))
 
-                     .ForMember(resp => resp.RoleName, opt => opt.MapFrom(a => a.Users.Roles.RoleName))
+                     //.ForMember(resp => resp.RoleName, opt => opt.MapFrom(a => a.Users.Roles.RoleName))
 
-                     .ForMember(resp => resp.Picture, opt => opt.MapFrom(a => a.Users.Volunteers.VolunteerAvatar))
+                   //  .ForMember(resp => resp.Picture, opt => opt.MapFrom(a => a.Users.Volunteers.VolunteerAvatar))
 
                     .ForMember(resp => resp.Name, opt => opt.MapFrom(a => a.Users.Persons.FirstName + " " + a.Users.Persons.LastName));
 

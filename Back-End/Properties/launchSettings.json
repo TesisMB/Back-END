@@ -1,48 +1,11 @@
-//{
-//  "iisSettings": {
-//    "windowsAuthentication": false,
-//    "anonymousAuthentication": true,
-//    "iisExpress": {
-//      "applicationUrl": "http://localhost:50409",
-//      "sslPort": 5001
-//    }
-//  },
-//  "profiles": {
-//    "IIS Express": {
-//      "commandName": "IISExpress",
-//      "launchBrowser": true,
-//      "environmentVariables": {
-//        "ASPNETCORE_ENVIRONMENT": "Development"
-//      }
-//    },
-//    "SICREYD": {
-//      "commandName": "Project",
-//      "launchBrowser": true,
-//      "environmentVariables": {
-//        "ASPNETCORE_ENVIRONMENT": "Development"
-//      },
-//      "applicationUrl": "http://localhost:5001"
-//    },
-//    "WSL": {
-//      "commandName": "WSL2",
-//      "launchBrowser": true,
-//      "launchUrl": "http://localhost:5001",
-//      "environmentVariables": {
-//        "ASPNETCORE_ENVIRONMENT": "Development",
-//        "ASPNETCORE_URLS": "http://localhost:5001"
-//      },
-//      "distributionName": ""
-//    }
-//  }
-//}
-
-
-
-
 {
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/Back-End",
+      "sslPort": 0
+    },
     "iisExpress": {
       "applicationUrl": "http://localhost:5001",
       "sslPort": 5001
@@ -52,7 +15,6 @@
   "profiles": {
     "IIS Express": {
       "commandName": "Project",
-      "launchBrowser": false,
       "launchUrl": "api/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
@@ -60,12 +22,18 @@
     },
     "SICREYD": {
       "commandName": "Project",
-      "launchBrowser": false,
       "launchUrl": "api/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:5001"
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "distributionName": ""
     }
   }
 }

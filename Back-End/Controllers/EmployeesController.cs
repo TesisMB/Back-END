@@ -7,6 +7,7 @@ using Back_End.Models.Employees___Dto;
 using Contracts.Interfaces;
 using DinkToPdf;
 using DinkToPdf.Contracts;
+using Entities.DataTransferObjects;
 using Entities.DataTransferObjects.Employees___Dto;
 using Entities.Helpers;
 using Microsoft.AspNetCore.JsonPatch;
@@ -22,7 +23,7 @@ using System.Threading.Tasks;
 
 namespace Back_End.Controllers
 {
-    [Route("api/Employees")]
+    [Route("api/")]
     [ApiController]
     public class EmployeesController : ControllerBase
     {
@@ -40,7 +41,7 @@ namespace Back_End.Controllers
             _converter = converter;
         }
 
-        [HttpGet("PDF/{employeeId}")]
+        [HttpGet("Employees/PDF/{employeeId}")]
         public IActionResult CreatePDF(int employeeId)
         {
 
@@ -87,7 +88,7 @@ namespace Back_End.Controllers
         }
 
 
-        [HttpGet("GetAll/PDF/{employeeId}")]
+        [HttpGet("Employees/GetAll/PDF/{employeeId}")]
         public async Task<IActionResult> CreatePDFEmployees(int employeeId)
         {
 
@@ -138,7 +139,7 @@ namespace Back_End.Controllers
             return File(file, "application/pdf");
         }
 
-        [HttpGet("Credential/{employeeId}")]
+        [HttpGet("Employees/Credential/{employeeId}")]
         public IActionResult CredentialPDF(int employeeId)
         {
 
@@ -187,7 +188,7 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
 
-        [HttpGet]
+        [HttpGet("Employees")]
         public async Task<ActionResult<Employees>> GetAllEmployees([FromQuery] int userId)
         {
             try
@@ -209,7 +210,7 @@ namespace Back_End.Controllers
         }
 
         //********************************* FUNCIONANDO *********************************
-        [HttpGet("{employeeId}")]
+        [HttpGet("Employees/{employeeId}")]
         public async Task<ActionResult<Employees>> GetEmployeeWithDetails(int employeeId)
         {
             try
@@ -239,8 +240,8 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
 
-        [HttpPost]
-        public async Task<ActionResult<Users>> CreateEmployee([FromBody] UsersEmployeesForCreationDto employee)
+        [HttpPost("Employees")]
+        public async Task<ActionResult<Users>> CreateEmployee([FromBody] UsersEmployeesForCreationDto employee, [FromQuery] int userId)
         {
             try
             {
@@ -310,7 +311,8 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
 
-        [HttpPatch("{employeeId}")]
+        //TO-DO Falta ver alertId
+        [HttpPatch("Employees/{employeeId}")]
         public async Task<ActionResult> UpdatePartialUser(int employeeId, JsonPatchDocument<EmployeeForUpdateDto> _Employees)
         {
             try
@@ -383,8 +385,53 @@ namespace Back_End.Controllers
         }
 
 
+        [HttpPut("SendDevice")]
+        public async Task<ActionResult> UpdateDevice(DeviceForUpdateDto users, [FromQuery] int userId, [FromQuery] string deviceToken)
+        {
+            try
+            {
+                var userEntity = await _repository.Users.GetUserEmployeeById(userId) ;
+
+                if (userEntity == null)
+                {
+                    _logger.LogError($"User with id: {userId}, hasn't been found in db.");
+                    return NotFound();
+                }
+
+                var userToPatch = _mapper.Map<DeviceForUpdateDto>(userEntity);
+
+                userToPatch.DeviceToken = users.DeviceToken;
+                //users.ApplyTo(userToPatch, ModelState);
+
+
+                if (!TryValidateModel(userToPatch))
+                {
+                    return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
+                }
+
+                var userResult = _mapper.Map(userToPatch, userEntity);
+
+                if (!String.IsNullOrEmpty(deviceToken))
+                    userResult.DeviceToken = string.Empty;
+
+                _repository.Users.Update(userResult);
+
+                _repository.Users.SaveAsync();
+
+                return NoContent();
+            }
+
+
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside UpdateUser action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+
+            }
+        }
+
         //********************************* FUNCIONANDO *********************************
-        [HttpDelete("{employeeId}")]
+        [HttpDelete("Employees/{employeeId}")]
         public async Task<ActionResult> DeleteEmployee(int employeeId)
         {
             try

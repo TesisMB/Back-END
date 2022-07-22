@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Back_End.Entities;
+using Back_End.Models;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.EmergenciesDisasters___Dto;
 using Entities.Helpers;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -70,6 +72,24 @@ namespace Back_End.Controllers
 
                 var emergenciesDisastersResult = _mapper.Map<IEnumerable<EmergenciesDisastersAppDto>>(emergenciesDisasters);
 
+                CruzRojaContext cruzRojaContext = new CruzRojaContext();
+   
+
+                foreach (var item in emergenciesDisastersResult)
+                {
+                    foreach (var item2 in item.ChatRooms.DateMessage)
+                    {
+                        foreach (var item3 in item2.Messages)
+                        {
+                             var person = cruzRojaContext.Persons
+                                           .Where(a => a.ID == item3.FK_UserID)
+                                           .AsNoTracking()
+                                           .FirstOrDefault();
+
+                            item3.Name = person.FirstName + " " + person.LastName;
+                         }
+                    }
+                }
 
                 return Ok(emergenciesDisastersResult);
 
@@ -104,20 +124,21 @@ namespace Back_End.Controllers
 
                 var emergencyDisasterResult = _mapper.Map<EmergenciesDisastersDto>(emegencyDisaster);
 
-                if (emergencyDisasterResult.ChatRooms.UsersChatRooms != null)
-                {
+                CruzRojaContext cruzRojaContext = new CruzRojaContext();
 
-                    foreach (var item in emergencyDisasterResult.ChatRooms.UsersChatRooms)
+
+                    foreach (var item in emergencyDisasterResult.ChatRooms.DateMessage)
                     {
-                        if (item.Picture != null)
+                        foreach (var item3 in item.Messages)
                         {
-                            item.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
-                                                         Request.Scheme, Request.Host, Request.PathBase, item.Picture);
+                            var person = cruzRojaContext.Persons
+                                          .Where(a => a.ID == item3.FK_UserID)
+                                          .AsNoTracking()
+                                          .FirstOrDefault();
 
+                            item3.Name = person.FirstName + " " + person.LastName;
                         }
                     }
-                }
-
 
                 return Ok(emergencyDisasterResult);
 
@@ -132,7 +153,7 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpPost]
-        public ActionResult<EmergenciesDisasters> CreateEmergencyDisaster([FromBody] EmergenciesDisastersForCreationDto emergenciesDisasters,
+        public async Task<ActionResult<EmergenciesDisasters>> CreateEmergencyDisaster([FromBody] EmergenciesDisastersForCreationDto emergenciesDisasters,
             [FromQuery] int userId)
         {
             emergenciesDisasters.CreatedBy = userId;
@@ -162,7 +183,10 @@ namespace Back_End.Controllers
 
                 _repository.EmergenciesDisasters.SaveAsync();
 
-                return Ok();
+                var response = await SendController.SendNotification(emergenciesDisasters.LocationsEmergenciesDisasters.LocationCityName);
+
+
+                return Ok(response);
             }
             catch (Exception ex)
             {

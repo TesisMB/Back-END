@@ -4,6 +4,7 @@ using Entities.DataTransferObjects.LocationsEmergenciesDisasters___Dto;
 using Entities.DataTransferObjects.TypesEmergenciesDisasters___Dto;
 using Entities.DataTransferObjects.Victims___Dto;
 using System;
+using System.Collections.Generic;
 
 namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
 {
@@ -32,9 +33,12 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
 
         public AlertsDto Alerts { get; set; }
 
-        public ChatRoomsDto ChatRooms { get; set; }
+       public ChatRoomsDto ChatRooms { get; set; }
 
         public VictimsDto Victims { get; set; }
+
+        public ICollection<UsersChatRoomsDto> UsersChatRooms { get; set; }
+
 
     }
 }

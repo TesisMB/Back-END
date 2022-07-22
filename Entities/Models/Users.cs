@@ -47,14 +47,14 @@ namespace Back_End.Models
         [Required]
         public int FK_EstateID { get; set; }
 
-       
+        public string DeviceToken { get; set; }
+
         [ForeignKey("FK_UserID")]
         public ICollection<UsersNotifications> UsersNotifications { get; set; }
 
         [ForeignKey("FK_UserID")]
         public ICollection<UsersChat> UsersChat { get; set; }
 
-        [ForeignKey("FK_UserID")]
         public ICollection<UsersChatRooms> UsersChatRooms { get; set; }
         public Messages Messages { get; set; }
 

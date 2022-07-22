@@ -3,6 +3,7 @@ using Back_End.Entities;
 using Back_End.Models;
 using Back_End.Models.Users___Dto;
 using Back_End.Models.Users___Dto.Users___Persons;
+using Entities.DataTransferObjects;
 using Entities.DataTransferObjects.Employees___Dto;
 using Entities.DataTransferObjects.Estates___Dto;
 using Entities.DataTransferObjects.Models.Vehicles___Dto;
@@ -60,7 +61,8 @@ namespace Back_End.Profiles
 
 
             CreateMap<UsersEmployeesForCreationDto, Users>();
-               
+            CreateMap<Users, UsersEmployeesForCreationDto>();
+
 
 
             CreateMap<UsersVolunteersForCreationDto, Users>();
@@ -68,6 +70,10 @@ namespace Back_End.Profiles
 
             CreateMap<UsersForUpdateDto, Users>();
             CreateMap<Users, UsersForUpdateDto>();
+
+
+            CreateMap<DeviceForUpdateDto, Users>();
+            CreateMap<Users, DeviceForUpdateDto>();
         }
     }
 }

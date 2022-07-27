@@ -1,0 +1,104 @@
+2022-07-26 21:01:54.6908 ERROR Something went wrong inside GetAllEmployees action: Invalid column name 'CretedDate'.
+2022-07-26 21:02:49.5964 INFO Returned all employees from database.
+2022-07-26 21:06:39.7212 INFO Returned all employees from database.
+2022-07-26 21:07:50.5847 INFO Returned all employees from database.
+2022-07-26 21:10:40.5527 INFO Returned all employees from database.
+2022-07-26 21:15:12.4427 INFO Returned User.
+2022-07-26 21:15:29.8725 INFO Returned User.
+2022-07-26 21:15:36.6238 INFO Returned User.
+2022-07-26 21:16:04.2285 INFO Returned all employees from database.
+2022-07-26 21:16:54.5345 INFO Returned all employees from database.
+2022-07-26 21:17:08.5398 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-07-26 21:17:12.6909 INFO Returned all employees from database.
+2022-07-26 21:17:23.1456 INFO Returned employe with details for id: 8
+2022-07-26 21:17:46.0050 INFO Returned User.
+2022-07-26 21:18:19.2679 INFO Returned User.
+2022-07-26 21:18:37.9580 INFO Returned User.
+2022-07-26 21:19:25.4357 INFO Returned volunteer with id: 19
+2022-07-26 21:19:52.6235 INFO Returned all Volunteers from database.
+2022-07-26 21:24:37.4580 INFO Returned all Volunteers from database.
+2022-07-26 21:26:17.8154 INFO Returned all Volunteers from database.
+2022-07-26 21:26:30.5451 INFO Returned volunteer with id: 15
+2022-07-26 21:31:19.1124 INFO Returned all ChatRooms from database. 
+2022-07-26 21:31:37.6105 INFO Returned all ChatRooms from database. 
+2022-07-26 21:32:06.5328 INFO Returned emegencyDisaster with details for id: 321
+2022-07-26 22:10:44.2535 INFO Returned all ChatRooms from database. 
+2022-07-26 22:12:40.0199 INFO Returned all ChatRooms from database. 
+2022-07-26 22:13:07.3085 INFO Returned all ChatRooms from database. 
+2022-07-26 22:13:50.7836 INFO Returned all ChatRooms from database. 
+2022-07-26 22:17:42.9726 INFO Returned all ChatRooms from database. 
+2022-07-26 22:18:36.4294 INFO Returned all ChatRooms from database. 
+2022-07-26 22:28:46.1452 ERROR Something went wrong inside SendMessage aciton: Error mapping types.
+
+Mapping types:
+MessagesForCreationDto -> Messages
+Entities.DataTransferObjects.Messages___Dto.MessagesForCreationDto -> Entities.Models.Messages
+
+Type Map configuration:
+MessagesForCreationDto -> Messages
+Entities.DataTransferObjects.Messages___Dto.MessagesForCreationDto -> Entities.Models.Messages
+
+Destination Member:
+CreatedDate
+
+2022-07-26 22:30:02.3180 ERROR Something went wrong inside SendMessage aciton: Error mapping types.
+
+Mapping types:
+MessagesForCreationDto -> Messages
+Entities.DataTransferObjects.Messages___Dto.MessagesForCreationDto -> Entities.Models.Messages
+
+Type Map configuration:
+MessagesForCreationDto -> Messages
+Entities.DataTransferObjects.Messages___Dto.MessagesForCreationDto -> Entities.Models.Messages
+
+Destination Member:
+CreatedDate
+
+2022-07-26 22:34:36.9433 ERROR Something went wrong inside SendMessage aciton: Error mapping types.
+
+Mapping types:
+MessagesForCreationDto -> Messages
+Entities.DataTransferObjects.Messages___Dto.MessagesForCreationDto -> Entities.Models.Messages
+
+Type Map configuration:
+MessagesForCreationDto -> Messages
+Entities.DataTransferObjects.Messages___Dto.MessagesForCreationDto -> Entities.Models.Messages
+
+Destination Member:
+CreatedDate
+
+2022-07-26 22:36:58.7535 ERROR Something went wrong inside SendMessage aciton: Error mapping types.
+
+Mapping types:
+MessagesForCreationDto -> Messages
+Entities.DataTransferObjects.Messages___Dto.MessagesForCreationDto -> Entities.Models.Messages
+
+Type Map configuration:
+MessagesForCreationDto -> Messages
+Entities.DataTransferObjects.Messages___Dto.MessagesForCreationDto -> Entities.Models.Messages
+
+Destination Member:
+CreatedDate
+
+2022-07-26 22:39:36.6118 ERROR Something went wrong inside SendMessage aciton: Error mapping types.
+
+Mapping types:
+MessagesForCreationDto -> Messages
+Entities.DataTransferObjects.Messages___Dto.MessagesForCreationDto -> Entities.Models.Messages
+
+Type Map configuration:
+MessagesForCreationDto -> Messages
+Entities.DataTransferObjects.Messages___Dto.MessagesForCreationDto -> Entities.Models.Messages
+
+Destination Member:
+CreatedDate
+
+2022-07-26 22:42:23.8906 INFO Returned all ChatRooms from database. 
+2022-07-26 22:43:33.9093 INFO Returned all ChatRooms from database. 
+2022-07-26 22:48:01.2072 INFO Returned all ChatRooms from database. 
+2022-07-26 22:53:18.0819 INFO Returned all ChatRooms from database. 
+2022-07-26 22:57:24.0086 INFO Returned all ChatRooms from database. 
+2022-07-26 22:59:34.3945 INFO Returned all ChatRooms from database. 
+2022-07-26 23:00:21.6278 INFO Returned all ChatRooms from database. 
+2022-07-26 23:01:02.1599 INFO Returned all ChatRooms from database. 
+2022-07-26 23:02:11.7686 INFO Returned all ChatRooms from database. 

@@ -606,3 +606,13 @@
 2022-07-21 21:19:02.0226 INFO Returned all employees from database.
 2022-07-21 21:21:58.5582 INFO Returned all Materials from database.
 2022-07-21 21:52:10.2623 ERROR Something went wrong inside GetAllMaterials action:  An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure()' to the 'UseSqlServer' call.
+2022-07-21 21:57:00.2874 INFO Returned User.
+2022-07-21 21:57:02.0461 INFO Returned all PDF from database.
+2022-07-21 21:57:02.7308 INFO Returned all Resources_Request from database.
+2022-07-21 21:57:02.8394 INFO Returned all emergenciesDisasters from database.
+2022-07-21 21:59:00.1897 INFO Returned all Resources_Request from database.
+2022-07-21 21:59:00.1897 INFO Returned all PDF from database.
+2022-07-21 21:59:01.7310 INFO Returned all emergenciesDisasters from database.
+2022-07-21 21:59:46.3993 INFO Returned all PDF from database.
+2022-07-21 21:59:46.4154 INFO Returned all Resources_Request from database.
+2022-07-21 21:59:46.4154 INFO Returned all emergenciesDisasters from database.

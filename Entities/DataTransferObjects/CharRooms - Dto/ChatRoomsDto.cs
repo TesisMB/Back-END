@@ -11,15 +11,18 @@ namespace Entities.DataTransferObjects.CharRooms___Dto
 
         //public DateTime CreationDate { get; set; }
 
-        //public EmergenciesDisastersDto EmergenciesDisasters { get; set; }
+        public EmergenciesDisastersDto EmergenciesDisasters { get; set; }
 
         public ICollection<DateMessageDto> DateMessage { get; set; }
 
 
-        //public ICollection<UsersChatRoomsDto> UsersChatRooms { get; set; }
+        public ICollection<UsersChatRoomsDto> UsersChatRooms { get; set; }
 
         //public ICollection<MessagesDto> Messages { get; set; }
 
+        public int Quantity { get; set; }
+
+        public string LastMessage { get; set; }
 
     }
 }

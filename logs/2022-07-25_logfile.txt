@@ -1,0 +1,31 @@
+2022-07-25 19:25:26.3024 INFO Returned User.
+2022-07-25 19:25:28.5767 INFO Returned all Resources_Request from database.
+2022-07-25 19:25:29.3160 INFO Returned all PDF from database.
+2022-07-25 19:25:29.4352 INFO Returned all emergenciesDisasters from database.
+2022-07-25 19:25:38.2453 INFO Returned all Resources_Request from database.
+2022-07-25 19:25:39.8689 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-25 19:25:40.3694 INFO Returned all emergenciesDisasters from database.
+2022-07-25 19:25:41.8398 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-25 19:25:42.9002 INFO Returned all employees from database.
+2022-07-25 19:26:31.6231 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-25 19:26:32.1339 INFO Returned all emergenciesDisasters from database.
+2022-07-25 19:26:34.5867 INFO Returned emegencyDisaster with details for id: 321
+2022-07-25 20:25:07.6633 INFO Returned all ChatRooms from database. 
+2022-07-25 20:33:20.1157 INFO Returned all ChatRooms from database. 
+2022-07-25 20:39:27.2725 INFO Returned all ChatRooms from database. 
+2022-07-25 20:40:03.8425 INFO Returned all ChatRooms from database. 
+2022-07-25 20:40:13.7892 INFO Returned all ChatRooms from database. 
+2022-07-25 20:40:27.5900 INFO Returned all ChatRooms from database. 
+2022-07-25 20:40:41.5006 INFO Returned all ChatRooms from database. 
+2022-07-25 20:40:55.8867 INFO Returned all ChatRooms from database. 
+2022-07-25 20:41:08.4349 INFO Returned all ChatRooms from database. 
+2022-07-25 20:41:17.4447 INFO Returned all ChatRooms from database. 
+2022-07-25 20:43:25.3337 INFO Returned all ChatRooms from database. 
+2022-07-25 20:47:22.7894 INFO Returned all ChatRooms from database. 
+2022-07-25 20:48:04.9590 INFO Returned all ChatRooms from database. 
+2022-07-25 20:54:58.0526 INFO Returned all ChatRooms from database. 
+2022-07-25 20:55:05.2749 INFO Returned all ChatRooms from database. 
+2022-07-25 22:03:25.3495 INFO Returned all ChatRooms from database. 
+2022-07-25 22:07:50.0217 INFO Returned all ChatRooms from database. 
+2022-07-25 22:08:45.2726 INFO Returned all ChatRooms from database. 
+2022-07-25 22:08:50.3598 ERROR Something went wrong inside GetAllChatRooms aciton: Input string was not in a correct format.

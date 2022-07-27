@@ -20,7 +20,6 @@ namespace Entities.Models
 
         //public Date Date { get; set; }
 
-
         public ICollection<Messages> Messages { get; set; }
 
 

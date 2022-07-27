@@ -36,18 +36,7 @@ namespace Back_End.Controllers
                 if (auth.UserAvailability)
                 {
 
-                    if (auth.VolunteerAvatar != null)
-                    {
-
-                        auth.VolunteerAvatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{auth.VolunteerAvatar}";
-
-                    }
-                    else
-                    {
-                        auth.VolunteerAvatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/8AACVdK.jpg";
-                    }
-
-
+                    auth.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{auth.Avatar}";
 
 
                     ret = StatusCode(200, auth);
@@ -78,6 +67,9 @@ namespace Back_End.Controllers
                 
                 if (auth.UserAvailability && auth.RoleName != "Voluntario")
                 {
+
+                    auth.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{auth.Avatar}";
+
                     ret = StatusCode(200, auth);
                     _logger.LogInfo($"Returned User.");
                 }

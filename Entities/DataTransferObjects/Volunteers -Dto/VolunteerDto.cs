@@ -11,6 +11,8 @@ namespace Entities.DataTransferObjects.Volunteers__Dto
         public string Email { get; set; }
         public DateTime? Birthdate { get; set; }
         public string Address { get; set; }
+
+        public string CreatedDate { get; set; }
         public ICollection<VolunteersSkillsDto> VolunteersSkills { get; set; }
 
     }

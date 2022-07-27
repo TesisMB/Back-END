@@ -61,7 +61,7 @@ namespace Back_End.VolunteersPDF
 
                                         <div class='datos'> 
                                           <div>
-                                            <img src= 'https://almacenamientotesis.blob.core.windows.net/publicuploads/{employee.VolunteerAvatar}'>
+                                            <img src= 'https://almacenamientotesis.blob.core.windows.net/publicuploads/{employee.Users.Avatar}'>
                                            </div>
 
                                             <div class='dataP' style='margin-left: 9.5%;'>

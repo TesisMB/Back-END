@@ -28,6 +28,7 @@ namespace Back_End.Profiles
                                  opt => opt.MapFrom(src => src.Persons.FirstName + " " + src.Persons.LastName))
 
 
+
                        .ForMember(dest => dest.Status,
                                  opt => opt.MapFrom(src => src.Persons.Status));
 
@@ -41,19 +42,19 @@ namespace Back_End.Profiles
                               opt => opt.MapFrom(src => UserSecurity.GenerateAccessToken(src.UserID, src.Roles.RoleName)))
 
 
-              .ForMember(dest => dest.EmployeeCreatedate,
-                              opt => opt.MapFrom(src => src.Employees.EmployeeCreatedate))
 
            .ForMember(dest => dest.RoleName,
-                              opt => opt.MapFrom(src => src.Roles.RoleName))
+                              opt => opt.MapFrom(src => src.Roles.RoleName));
 
 
-            .ForMember(dest => dest.VolunteerAvatar,
-                              opt => opt.MapFrom(src => src.Volunteers.VolunteerAvatar));
+
 
             CreateMap<Users, UsersVehiclesDto>();
 
             CreateMap<Users, EmployeeUserDto>()
+
+                 .ForMember(i => i.Createdate, opt => opt.MapFrom(src => DateTimeOffsetExtensions.GetDateTime(src.CreatedDate)))
+
                  .ForMember(dest => dest.RoleName,
                               opt => opt.MapFrom(src => src.Roles.RoleName));
 

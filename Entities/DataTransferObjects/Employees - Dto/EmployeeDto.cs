@@ -7,8 +7,6 @@ namespace Entities.DataTransferObjects.Employees___Dto
 
         public int EmployeeID { get; set; }
 
-        public string EmployeeCreatedate { get; set; }
-
         public EmployeeUserDto Users { get; set; }
     }
 }

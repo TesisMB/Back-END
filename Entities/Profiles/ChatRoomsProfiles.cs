@@ -11,6 +11,9 @@ namespace Entities.Profiles
         public ChatRoomsProfiles()
         {
             CreateMap<ChatRoomsForCreationDto, ChatRooms>();
+
+
+
             CreateMap<ChatRooms, ChatRoomsDto>();
         }
     }

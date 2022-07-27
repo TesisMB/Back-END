@@ -8,7 +8,7 @@ namespace Entities.DataTransferObjects.CharRooms___Dto
         public string Name { get; set; }
 
         public string UserDni { get; set; }
-      //  public string RoleName { get; set; }
-        //public string Picture { get; set; }
+        public string RoleName { get; set; }
+        public string Avatar { get; set; }
     }
 }

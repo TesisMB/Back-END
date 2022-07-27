@@ -163,7 +163,7 @@ namespace Back_End.Entities
         //             "Server=tcp:cruzrojadb.database.windows.net,1433;Initial Catalog=CruzRojaDB;Persist Security Info=False;User ID=usuarioazure;Password=Larioja1450;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
         private const string Connection =
-                    "Server=CruzRojaDB1.mssql.somee.com;packet size=4096;user id=Yoel23_SQLLogin_1;pwd=a84wrsx7sn;;";
+                    "Server=CruzRojaDB1.mssql.somee.com;packet size=4096;user id=Yoel23_SQLLogin_1;pwd=a84wrsx7sn;";
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

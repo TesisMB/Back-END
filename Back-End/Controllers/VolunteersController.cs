@@ -167,11 +167,8 @@ namespace Back_End.Controllers
                     item.Volunteers.Birthdate = user.Persons.Birthdate;
                     item.Availability = user.Persons.Status;
 
-                    if (item.Picture != "https://i.imgur.com/8AACVdK.png")
-                    {
-                        item.Picture = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{item.Picture}";
+                    item.Picture = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{item.Picture}";
 
-                    }
                 }
 
 

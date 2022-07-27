@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Back_End.Entities;
 using Contracts.Interfaces;
+using Entities.DataTransferObjects;
 using Entities.DataTransferObjects.CharRooms___Dto;
 using Entities.DataTransferObjects.Messages___Dto;
 using Entities.Models;
@@ -43,21 +44,60 @@ namespace Back_End.Controllers
 
                 CruzRojaContext cruzRojaContext = new CruzRojaContext();
 
+                List<int> messageFalse = new List<int>();
+
+                int cant = 0;
+
+                foreach (var item in chatRoomsToResult)
+                {
+                    foreach (var item2 in item.UsersChatRooms)
+                    {
+                        var person = cruzRojaContext.Persons
+                                       .Where(a => a.ID == item2.UserID)
+                                       .AsNoTracking()
+                                       .FirstOrDefault();
+
+                        var user = cruzRojaContext.Users
+                                       .Where(a => a.UserID == item2.UserID)
+                                      .AsNoTracking()
+                                      .FirstOrDefault();
+
+                        item2.Name = person.FirstName + " " + person.LastName;
+                        item2.UserDni = user.UserDni;
+                    }
+                }
+
+
                 foreach (var item in chatRoomsToResult)
                 {
                     foreach (var item2 in item.DateMessage)
                     {
                         foreach (var item3 in item2.Messages)
                         {
+                            if(item3.MessageState == false)
+                            {
+                                cant += 1;
+
+                                messageFalse.Add(cant);
+                            }
+
                             var person = cruzRojaContext.Persons
                                           .Where(a => a.ID == item3.FK_UserID)
                                           .AsNoTracking()
                                           .FirstOrDefault();
 
+                            var user = cruzRojaContext.Users
+                                          .Where(a => a.UserID == item3.FK_UserID)
+                                          .AsNoTracking()
+                                          .FirstOrDefault();
+
                             item3.Name = person.FirstName + " " + person.LastName;
+                            item3.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{user.Avatar}";
                         }
                     }
+                    item.Quantity = messageFalse.Count();
                 }
+
 
                 return Ok(chatRoomsToResult);
 
@@ -98,6 +138,33 @@ namespace Back_End.Controllers
                 CruzRojaContext cruzRojaContext = new CruzRojaContext();
 
 
+                foreach (var item in chatRoomsToResult.UsersChatRooms)
+                {
+                    var person = cruzRojaContext.Persons
+                                     .Where(a => a.ID == item.UserID)
+                                     .Include(a => a.Users)
+                                     .AsNoTracking()
+                                     .FirstOrDefault();
+
+                    var user = cruzRojaContext.Users
+                                             .Where(a => a.UserID == item.UserID)
+                                             .AsNoTracking()
+                                             .FirstOrDefault();
+
+                    item.Name = person.FirstName + " " + person.LastName;
+                    item.UserDni = user.UserDni;
+
+                 
+
+                    var roles = cruzRojaContext.Roles
+                                  .Where(a => a.RoleID == user.FK_RoleID)
+                                  .AsNoTracking()
+                                  .FirstOrDefault();
+
+                    item.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{user.Avatar}";
+                    item.RoleName = roles.RoleName;
+                }
+
                 foreach (var item in chatRoomsToResult.DateMessage)
                 {
                     foreach (var item3 in item.Messages)
@@ -107,7 +174,21 @@ namespace Back_End.Controllers
                                       .AsNoTracking()
                                       .FirstOrDefault();
 
+                        var user = cruzRojaContext.Users
+                                      .Where(a => a.UserID == item3.FK_UserID)
+                                      .AsNoTracking()
+                                      .FirstOrDefault();
+
+                        var roles = cruzRojaContext.Roles
+                                      .Where(a => a.RoleID == user.FK_RoleID)
+                                      .AsNoTracking()
+                                      .FirstOrDefault();
+
                         item3.Name = person.FirstName + " " + person.LastName;
+                        item3.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{user.Avatar}";
+                        item3.RoleName = roles.RoleName;
+
+
                     }
                 }
 
@@ -125,8 +206,24 @@ namespace Back_End.Controllers
         //********************************* FUNCIONANDO *********************************
         //Revisar con APP
         [HttpPost]
-        public IActionResult SendMessage([FromBody] MessagesForCreationDto message)
+        public IActionResult SendMessage([FromBody] MessagesForCreationDto message, [FromQuery] int userId)
         {
+
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            var person = cruzRojaContext.Persons
+                        .Where(a => a.ID == userId)
+                        .AsNoTracking()
+                        .FirstOrDefault();
+
+            message.FK_UserID = userId;
+            message.Name = person.FirstName + " " + person.LastName;
+
+            message.DateMessage = new DateMessageForCreationDto();
+
+            message.DateMessage.CreatedDate = DateTime.Now;
+            message.DateMessage.FK_ChatRoomID = message.FK_ChatRoomID;
+
             try
             {
                 if (message == null)
@@ -136,13 +233,17 @@ namespace Back_End.Controllers
                     return BadRequest("Message object is null");
                 }
 
+
+
                 var messages = _mapper.Map<Messages>(message);
+
+
 
                 _repository.Messages.CreateMessage(messages);
 
                 _repository.Messages.SaveAsync();
 
-                return StatusCode(200, message);
+                return StatusCode(200);
 
             }
             catch (Exception ex)

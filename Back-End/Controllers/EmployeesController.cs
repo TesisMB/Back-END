@@ -199,6 +199,11 @@ namespace Back_End.Controllers
 
                 var employeesResult = _mapper.Map<IEnumerable<EmployeeDto>>(employees);
 
+                foreach (var item in employeesResult)
+                {
+                    item.Users.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{item.Users.Avatar}";
+                }
+
                 return Ok(employeesResult);
             }
 
@@ -227,6 +232,9 @@ namespace Back_End.Controllers
                     _logger.LogInfo($"Returned employe with details for id: {employeeId}");
 
                     var employeeResult = _mapper.Map<EmployeeDto>(employee);
+
+                    employeeResult.Users.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{employeeResult.Users.Avatar}";
+
                     return Ok(employeeResult);
                 }
             }
@@ -284,9 +292,9 @@ namespace Back_End.Controllers
                     employee.Volunteers = new VolunteersForCreationDto();
                     employeeEntity.Volunteers = new Volunteers();
 
-                    if (employee.Volunteers.VolunteerAvatar == null)
+                    if (employee.Avatar == null)
                     {
-                        employeeEntity.Volunteers.VolunteerAvatar = "https://i.imgur.com/8AACVdK.png";
+                        employeeEntity.Avatar = "avatar-user.png";
                     }
                     //else
                     //{

@@ -12,7 +12,7 @@ namespace Back_End.Models
         [Key, ForeignKey("Users")]
         public int ID { get; set; }
 
-        public string VolunteerAvatar { get; set; }
+       // public string VolunteerAvatar { get; set; }
 
         public string VolunteerDescription { get; set; }
         public Users Users { get; set; }

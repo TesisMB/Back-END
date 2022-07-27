@@ -1038,7 +1038,6 @@ namespace Repository
             user = db.Users
                 .Where(a => a.UserID == userRequestID)
                 .Include(a => a.Persons)
-                .Include(a => a.Employees)
                 .FirstOrDefault();
 
 

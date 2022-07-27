@@ -13,13 +13,11 @@ namespace Back_End.Models
         public Boolean UserAvailability { get; set; }
         public string RoleName { get; set; }
 
-        public DateTime EmployeeCreatedate { get; set; }
-
-
         public EmployeePersonDto Persons { get; set; }
         public EstatesDto Estates { get; set; }
 
-        public string VolunteerAvatar { get; set; }
+        public string Avatar { get; set; }
+        public string CreatedDate { get; set; }
         public string token { get; set; }
 
         //El token surgue de realizar el llamada a la funcion GenerateAccessToken usando automapper

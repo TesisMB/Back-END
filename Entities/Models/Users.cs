@@ -39,7 +39,12 @@ namespace Back_End.Models
 
         public Volunteers Volunteers { get; set; }
 
-        public Employees Employees { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+
+        public string Avatar { get; set; }
+
+         public Employees Employees { get; set; }
 
         [ForeignKey("FK_EstateID")]
         public Estates Estates { get; set; }

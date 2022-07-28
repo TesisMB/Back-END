@@ -246,13 +246,13 @@ namespace Back_End.Controllers
 
                 var messages = _mapper.Map<Messages>(message);
 
+              var dateTime = DateTime.Now;
+               messages.CreatedDate = dateTime.ToString(@"hh\:mm");
 
                 if (date != null)
                 {
                     messages.DateMessage = null;
-                    var dateTime = DateTime.Now;
                     messages.FK_DataMessageID = date.ID;
-                    messages.CreatedDate = dateTime.ToString(@"hh\:mm");
                     _repository.Messages.CreateMessage(messages);
 
                     _repository.Messages.SaveAsync();

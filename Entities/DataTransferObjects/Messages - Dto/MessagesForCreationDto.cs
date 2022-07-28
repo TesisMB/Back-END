@@ -28,9 +28,13 @@ namespace Entities.DataTransferObjects.Messages___Dto
     public class SendMessage
     {
         public string message { get; set; }
+        public Boolean MessageState { get; set; } = false;
 
+        public string CreationDate { get; set; }
         public int userID { get; set; }
         public string chatRoomID { get; set; }
 
+        public string Avatar { get; set; }
+        public string Name { get; set; }
     }
 }

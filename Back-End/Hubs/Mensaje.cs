@@ -12,10 +12,14 @@ namespace Back_End.Hubs
 {
     public class Mensaje : Hub
     {
-        public async Task NewMessage(MessagesForCreationDto msg)
+        public async Task NewMessage(SendMessage msg)
         {
 
             CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            var date = DateTime.Now;
+
+            msg.CreationDate = date.ToString(@"hh\:mm");
 
             var person = cruzRojaContext.Persons
                    .Where(a => a.ID == msg.userID)

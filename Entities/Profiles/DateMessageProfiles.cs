@@ -13,7 +13,6 @@ namespace Entities.Profiles
         public DateMessageProfiles()
         {
             CreateMap<DateMessage, DateMessageDto>()
-                                    .ForMember(i => i.CreatedDate, opt => opt.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.CreatedDate)));
             ;
 
             CreateMap<DateMessage, DateMessageForCreationDto>();

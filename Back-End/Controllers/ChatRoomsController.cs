@@ -53,12 +53,12 @@ namespace Back_End.Controllers
                     foreach (var item2 in item.UsersChatRooms)
                     {
                         var person = cruzRojaContext.Persons
-                                       .Where(a => a.ID == item2.UserID)
+                                       .Where(a => a.ID == userId)
                                        .AsNoTracking()
                                        .FirstOrDefault();
 
                         var user = cruzRojaContext.Users
-                                       .Where(a => a.UserID == item2.UserID)
+                                       .Where(a => a.UserID == userId)
                                       .AsNoTracking()
                                       .FirstOrDefault();
 
@@ -82,12 +82,12 @@ namespace Back_End.Controllers
                             }
 
                             var person = cruzRojaContext.Persons
-                                          .Where(a => a.ID == item3.FK_UserID)
+                                          .Where(a => a.ID == userId)
                                           .AsNoTracking()
                                           .FirstOrDefault();
 
                             var user = cruzRojaContext.Users
-                                          .Where(a => a.UserID == item3.FK_UserID)
+                                          .Where(a => a.UserID == userId)
                                           .AsNoTracking()
                                           .FirstOrDefault();
 
@@ -112,7 +112,7 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpGet("{chatRoomID}")]
-        public async Task<ActionResult<ChatRooms>> GetChatRoom(int chatRoomID)
+        public async Task<ActionResult<ChatRooms>> GetChatRoom(int chatRoomID, [FromQuery] int userId)
         {
             try
             {
@@ -140,16 +140,17 @@ namespace Back_End.Controllers
 
                 foreach (var item in chatRoomsToResult.UsersChatRooms)
                 {
+                    var user = cruzRojaContext.Users
+                                             .Where(a => a.UserID == item.UserID)
+                                             .AsNoTracking()
+                                             .FirstOrDefault();
+
                     var person = cruzRojaContext.Persons
                                      .Where(a => a.ID == item.UserID)
                                      .Include(a => a.Users)
                                      .AsNoTracking()
                                      .FirstOrDefault();
 
-                    var user = cruzRojaContext.Users
-                                             .Where(a => a.UserID == item.UserID)
-                                             .AsNoTracking()
-                                             .FirstOrDefault();
 
                     item.Name = person.FirstName + " " + person.LastName;
                     item.UserDni = user.UserDni;
@@ -170,12 +171,12 @@ namespace Back_End.Controllers
                     foreach (var item3 in item.Messages)
                     {
                         var person = cruzRojaContext.Persons
-                                      .Where(a => a.ID == item3.FK_UserID)
+                                      .Where(a => a.ID == item3.userID)
                                       .AsNoTracking()
                                       .FirstOrDefault();
 
                         var user = cruzRojaContext.Users
-                                      .Where(a => a.UserID == item3.FK_UserID)
+                                      .Where(a => a.UserID == item3.userID)
                                       .AsNoTracking()
                                       .FirstOrDefault();
 
@@ -187,8 +188,6 @@ namespace Back_End.Controllers
                         item3.Name = person.FirstName + " " + person.LastName;
                         item3.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{user.Avatar}";
                         item3.RoleName = roles.RoleName;
-
-
                     }
                 }
 
@@ -208,7 +207,6 @@ namespace Back_End.Controllers
         [HttpPost]
         public IActionResult SendMessage([FromBody] MessagesForCreationDto message, [FromQuery] int userId)
         {
-
             CruzRojaContext cruzRojaContext = new CruzRojaContext();
 
             var person = cruzRojaContext.Persons
@@ -216,13 +214,24 @@ namespace Back_End.Controllers
                         .AsNoTracking()
                         .FirstOrDefault();
 
-            message.FK_UserID = userId;
-            message.Name = person.FirstName + " " + person.LastName;
-
             message.DateMessage = new DateMessageForCreationDto();
 
-            message.DateMessage.CreatedDate = DateTime.Now;
-            message.DateMessage.FK_ChatRoomID = message.FK_ChatRoomID;
+            message.DateMessage.CreatedDate = message.DateMessage.Date.ToString("dd/MM/yyyy");
+
+            message.DateMessage.FK_ChatRoomID = Convert.ToInt32(message.chatRoomID);
+
+            var date = cruzRojaContext.DateMessage
+                        .Where(a => a.CreatedDate.Equals(message.DateMessage.CreatedDate)
+                              && a.FK_ChatRoomID == Convert.ToInt32(message.chatRoomID))
+                        .AsNoTracking()
+                       .FirstOrDefault();
+
+        
+
+
+            message.userID = userId;
+            message.Name = person.FirstName + " " + person.LastName;
+
 
             try
             {
@@ -238,10 +247,24 @@ namespace Back_End.Controllers
                 var messages = _mapper.Map<Messages>(message);
 
 
+                if (date != null)
+                {
+                    messages.DateMessage = null;
+                    var dateTime = DateTime.Now;
+                    messages.FK_DataMessageID = date.ID;
+                    messages.CreatedDate = dateTime.ToString(@"hh\:mm");
+                    _repository.Messages.CreateMessage(messages);
 
-                _repository.Messages.CreateMessage(messages);
+                    _repository.Messages.SaveAsync();
+                }
+                else
+                {
+                    _repository.Messages.CreateMessage(messages);
 
-                _repository.Messages.SaveAsync();
+                    _repository.Messages.SaveAsync();
+                }
+
+
 
                 return StatusCode(200);
 

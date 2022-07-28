@@ -6,23 +6,31 @@ namespace Entities.DataTransferObjects.Messages___Dto
 {
     public class MessagesForCreationDto
     {
-        public String Message { get; set; }
+        public String message { get; set; }
 
-        public Boolean MessageState { get; set; } = false;
+        public Boolean? MessageState { get; set; } = false;
 
         public DateTime CreationDate { get; set; } = DateTime.Now;
 
-        public int FK_ChatRoomID { get; set; } 
+        public string chatRoomID { get; set; } 
 
         //public int? fK_LocationVolunteerID { get; set; }
 
-        public int FK_UserID { get; set; }
+        public int userID { get; set; }
 
-        public string Avatar { get; set; }
-        public string Name { get; set; }
+        public string? Avatar { get; set; }
+        public string? Name { get; set; }
 
-        public DateMessageForCreationDto DateMessage { get; set; }
+        public DateMessageForCreationDto? DateMessage { get; set; }
 
+    }
+
+    public class SendMessage
+    {
+        public string message { get; set; }
+
+        public int userID { get; set; }
+        public string chatRoomID { get; set; }
 
     }
 }

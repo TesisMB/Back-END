@@ -12,7 +12,7 @@ namespace Entities.Models
         public int ID { get; set; }
 
         public int FK_ChatRoomID { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public string CreatedDate { get; set; }
 
         //public int FK_DateID { get; set; }
 

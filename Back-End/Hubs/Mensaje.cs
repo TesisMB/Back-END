@@ -18,19 +18,19 @@ namespace Back_End.Hubs
             CruzRojaContext cruzRojaContext = new CruzRojaContext();
 
             var person = cruzRojaContext.Persons
-                   .Where(a => a.ID == msg.FK_UserID)
+                   .Where(a => a.ID == msg.userID)
                    .AsNoTracking()
                    .FirstOrDefault();
 
             var user = cruzRojaContext.Users
-                          .Where(a => a.UserID == msg.FK_UserID)
+                          .Where(a => a.UserID == msg.userID)
                           .AsNoTracking()
                           .FirstOrDefault();
 
             msg.Name = person.FirstName + " " + person.LastName;
             msg.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{user.Avatar}";
 
-            var sala = Convert.ToString(msg.FK_ChatRoomID);
+            var sala = Convert.ToString(msg.chatRoomID);
 
             await Clients.Group(sala).SendAsync("ReceiveMessage",  msg);
         }

@@ -10,8 +10,10 @@ namespace Entities.Profiles
         public MessagesProfiles()
         {
             CreateMap<Messages, MessagesDto>()
-                .ForPath(i => i.Name, opt => opt.MapFrom(src => src.Users.Persons.FirstName))
-                .ForMember(i => i.CreatedDate, opt => opt.MapFrom(src => DateTimeOffsetExtensions.GetTime(src.CreatedDate)));
+                  .ForMember(dest => dest.userID,
+                                opt => opt.MapFrom(src => src.FK_UserID))
+
+                .ForPath(i => i.Name, opt => opt.MapFrom(src => src.Users.Persons.FirstName));
 
             CreateMap<Messages, MessagesForCreationDto>();
             

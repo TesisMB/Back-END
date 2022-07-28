@@ -8,7 +8,9 @@ namespace Entities.DataTransferObjects
     {
         public int FK_ChatRoomID { get; set; }
 
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime Date { get; set; } = DateTime.Now;
+
+        public string CreatedDate { get; set; }
 
     }
 }

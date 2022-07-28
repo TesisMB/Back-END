@@ -19,7 +19,7 @@ namespace Entities.Models
         public Boolean MessageState { get; set; }
 
         [Required]
-        public TimeSpan CreatedDate { get; set; }
+        public string CreatedDate { get; set; }
 
         [Required]
         [ForeignKey("FK_DataMessageID")]

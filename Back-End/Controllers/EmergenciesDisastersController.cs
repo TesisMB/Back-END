@@ -82,7 +82,7 @@ namespace Back_End.Controllers
                         foreach (var item3 in item2.Messages)
                         {
                              var person = cruzRojaContext.Persons
-                                           .Where(a => a.ID == item3.FK_UserID)
+                                           .Where(a => a.ID == item3.userID)
                                            .AsNoTracking()
                                            .FirstOrDefault();
 
@@ -132,7 +132,7 @@ namespace Back_End.Controllers
                         foreach (var item3 in item.Messages)
                         {
                             var person = cruzRojaContext.Persons
-                                          .Where(a => a.ID == item3.FK_UserID)
+                                          .Where(a => a.ID == item3.userID)
                                           .AsNoTracking()
                                           .FirstOrDefault();
 
@@ -175,7 +175,7 @@ namespace Back_End.Controllers
                 var emergencyDisaster = _mapper.Map<EmergenciesDisasters>(emergenciesDisasters);
 
                 emergencyDisaster.ChatRooms = new ChatRooms();
-                emergencyDisaster.ChatRooms.CreationDate = emergenciesDisasters.CreationDate;
+                emergencyDisaster.ChatRooms.CreationDate = DateTime.Now;
                 emergencyDisaster.ChatRooms.FK_TypeChatRoomID = emergenciesDisasters.FK_TypeChatRoomID;
 
 

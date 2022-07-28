@@ -67,3 +67,30 @@
 2022-07-28 20:27:25.9062 INFO Returned all ChatRooms from database. 
 2022-07-28 20:27:42.4423 INFO Returned all ChatRooms from database. 
 2022-07-28 20:27:53.7910 INFO Returned all ChatRooms from database. 
+2022-07-28 20:30:48.5659 INFO Returned User.
+2022-07-28 20:30:51.3789 ERROR Something went wrong inside UpdateUser action: An error occurred while updating the entries. See the inner exception for details.
+2022-07-28 20:32:22.0420 INFO Returned all ChatRooms from database. 
+2022-07-28 20:32:48.2196 INFO Returned all ChatRooms from database. 
+2022-07-28 20:34:33.0115 INFO Returned all employees from database.
+2022-07-28 20:35:00.0382 INFO Returned all employees from database.
+2022-07-28 20:35:07.5157 INFO Returned emegencyDisaster with details for id: 244
+2022-07-28 20:35:29.0600 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-28 20:35:29.7715 INFO Returned all emergenciesDisasters from database.
+2022-07-28 20:35:33.3237 INFO Returned all employees from database.
+2022-07-28 20:36:32.8234 INFO Returned emegencyDisaster with details for id: 244
+2022-07-28 20:36:55.5296 INFO Returned all employees from database.
+2022-07-28 20:39:30.4085 INFO Returned all employees from database.
+2022-07-28 20:42:54.1859 INFO Returned all ChatRooms from database. 
+2022-07-28 20:47:50.2230 INFO Returned all employees from database.
+2022-07-28 20:48:32.1389 INFO Returned all employees from database.
+2022-07-28 20:50:07.0153 INFO Returned all Resources_Request from database.
+2022-07-28 20:50:07.7886 INFO Returned all PDF from database.
+2022-07-28 20:50:07.8906 INFO Returned all emergenciesDisasters from database.
+2022-07-28 20:50:09.5940 INFO Returned all employees from database.
+2022-07-28 20:50:15.5744 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-28 20:50:16.0904 INFO Returned all emergenciesDisasters from database.
+2022-07-28 20:50:18.7346 INFO Returned all employees from database.
+2022-07-28 20:51:37.4230 INFO Returned emegencyDisaster with details for id: 244
+2022-07-28 20:52:40.9489 INFO Returned all ChatRooms from database. 
+2022-07-28 20:55:54.7519 INFO Returned all ChatRooms from database. 
+2022-07-28 20:58:13.4081 INFO Returned all ChatRooms from database. 

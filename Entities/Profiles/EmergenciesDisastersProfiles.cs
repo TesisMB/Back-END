@@ -21,12 +21,11 @@ namespace Entities.Profiles
 
                     .ForMember(dest => dest.ModifiedByEmployee,
                                 opt => opt.MapFrom(src => src.EmployeeModified.Users.Persons.FirstName + " " + src.EmployeeModified.Users.Persons.LastName))
-                    ;
                     //TO-DO CORREGIR MODELO
                   //.ForPath(dest => dest.UsersChatRooms, opt => opt.MapFrom(src => src.ChatRooms.UsersChatRooms));
 
-            //.ForPath(dest => dest.UsersChatRooms,
-            //                    opt => opt.MapFrom(src => src.ChatRooms.UsersChatRooms));
+            .ForPath(dest => dest.UsersChatRooms,
+                                opt => opt.MapFrom(src => src.ChatRooms.UsersChatRooms));
 
 
             CreateMap<EmergenciesDisasters, EmergenciesDisastersSelectDto>();

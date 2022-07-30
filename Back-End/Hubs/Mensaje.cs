@@ -17,9 +17,9 @@ namespace Back_End.Hubs
 
             CruzRojaContext cruzRojaContext = new CruzRojaContext();
 
-            var date = DateTime.Now;
+            msg.CreatedDate = DateTime.Now;
 
-            msg.CreatedDate = date.ToString(@"hh\:mm");
+            //msg.CreatedDate = date.ToString(@"hh\:mm");
 
             var person = cruzRojaContext.Persons
                    .Where(a => a.ID == msg.userID)

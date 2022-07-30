@@ -11,7 +11,7 @@ namespace Entities.DataTransferObjects.Messages___Dto
         public string Avatar { get; set; }
         public Boolean MessageState { get; set; }
 
-        public string CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         public int userID { get; set; }
 

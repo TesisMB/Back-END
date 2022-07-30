@@ -30,7 +30,7 @@ namespace Entities.DataTransferObjects.Messages___Dto
         public string message { get; set; }
         public Boolean MessageState { get; set; } = false;
 
-        public string CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
         public int userID { get; set; }
         public string chatRoomID { get; set; }
 

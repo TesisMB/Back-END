@@ -279,9 +279,9 @@ namespace Back_End.Controllers
 
        
         //********************************* FUNCIONANDO *********************************
-        [Route("api/app/Volunteers/{volunteerId}")]
+        [Route("api/app/Volunteer")]
         [HttpGet]
-        public async Task<ActionResult<Volunteers>> GetAllVolunteerApp(int volunteerId)
+        public async Task<ActionResult<Volunteers>> GetAllVolunteerApp([FromQuery] int volunteerId, [FromQuery] int userId)
         {
             try
             {

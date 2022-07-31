@@ -91,8 +91,9 @@ namespace Back_End.Controllers
         [HttpGet("Employees/GetAll/PDF/{employeeId}")]
         public async Task<IActionResult> CreatePDFEmployees(int employeeId)
         {
+            var employees = await _repository.Users.GetEmployeesVolunteers(employeeId);
 
-            var employees = await _repository.Employees.GetAllEmployees(employeeId);
+           // var employees = await _repository.Employees.GetAllEmployees(employeeId);
 
             //quien es el actual usuario
             Users user = null;
@@ -101,7 +102,7 @@ namespace Back_End.Controllers
             string title = string.Empty;
             foreach (var emp in employees)
             {
-                title = emp.Users.Estates.Locations.LocationCityName;
+                title = emp.Estates.Locations.LocationCityName;
             }
 
             user = cruzRojaContext.Users
@@ -189,19 +190,19 @@ namespace Back_End.Controllers
         //********************************* FUNCIONANDO *********************************
 
         [HttpGet("Employees")]
-        public async Task<ActionResult<Employees>> GetAllEmployees([FromQuery] int userId)
+        public async Task<ActionResult<Users>> GetAllEmployees([FromQuery] int userId)
         {
             try
             {
-                var employees = await _repository.Employees.GetAllEmployees(userId);
+                var employees = await _repository.Users.GetEmployeesVolunteers(userId);
 
                 _logger.LogInfo($"Returned all employees from database.");
 
-                var employeesResult = _mapper.Map<IEnumerable<EmployeeDto>>(employees);
+                var employeesResult = _mapper.Map<IEnumerable<EmployeeUserDto>>(employees);
 
                 foreach (var item in employeesResult)
                 {
-                    item.Users.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{item.Users.Avatar}";
+                    item.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{item.Avatar}";
                 }
 
                 return Ok(employeesResult);
@@ -216,11 +217,13 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpGet("Employees/{employeeId}")]
-        public async Task<ActionResult<Employees>> GetEmployeeWithDetails(int employeeId)
+        public async Task<ActionResult<Users>> GetEmployeeWithDetails(int employeeId)
         {
             try
             {
-                var employee = _repository.Employees.GetEmployeeWithDetails(employeeId);
+                var employee = await _repository.Users.GetEmployeeVolunteerById(employeeId);
+
+                //var employee = _repository.Employees.GetEmployeeWithDetails(employeeId);
 
                 if (employee == null)
                 {
@@ -231,9 +234,9 @@ namespace Back_End.Controllers
                 {
                     _logger.LogInfo($"Returned employe with details for id: {employeeId}");
 
-                    var employeeResult = _mapper.Map<EmployeeDto>(employee);
+                    var employeeResult = _mapper.Map<EmployeeUserDto>(employee);
 
-                    employeeResult.Users.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{employeeResult.Users.Avatar}";
+                    employeeResult.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{employeeResult.Avatar}";
 
                     return Ok(employeeResult);
                 }
@@ -278,6 +281,8 @@ namespace Back_End.Controllers
 
 
                 var employeeEntity = _mapper.Map<Users>(employee);
+               employeeEntity.CreatedDate = DateTime.Now;
+               employeeEntity.Avatar = "avatar-user.png";
 
                 if (roles.RoleName != "Voluntario")
                 {
@@ -285,6 +290,8 @@ namespace Back_End.Controllers
                     {
                         EmployeeCreatedate = DateTime.Now
                     };
+
+
                 }
                 else
                 {
@@ -321,11 +328,11 @@ namespace Back_End.Controllers
 
         //TO-DO Falta ver alertId
         [HttpPatch("Employees/{employeeId}")]
-        public async Task<ActionResult> UpdatePartialUser(int employeeId, JsonPatchDocument<EmployeeForUpdateDto> _Employees)
+        public async Task<ActionResult> UpdatePartialUser(int employeeId, JsonPatchDocument<UsersForUpdateDto> _Employees)
         {
             try
             {
-                var employeeEntity = await _repository.Employees.GetEmployeeById(employeeId);
+                var employeeEntity = await _repository.Users.GetEmployeeVolunteerById(employeeId);
 
                 if (employeeEntity == null)
                 {
@@ -333,11 +340,12 @@ namespace Back_End.Controllers
                     return NotFound();
                 }
 
-                var employeeToPatch = _mapper.Map<EmployeeForUpdateDto>(employeeEntity);
+                var employeeToPatch = _mapper.Map<UsersForUpdateDto>(employeeEntity);
 
                 _Employees.ApplyTo(employeeToPatch, ModelState);
 
 
+              
                 if (!TryValidateModel(employeeToPatch))
                 {
                     return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
@@ -345,15 +353,15 @@ namespace Back_End.Controllers
 
 
                 Users authUser = new Users();
-                if (!string.IsNullOrEmpty(employeeToPatch.Users.UserNewPassword))
+                if (!string.IsNullOrEmpty(employeeToPatch.UserNewPassword))
                 {
                     // AGREGARLOS EN EL REPOSITORIO
-                    var userPass = employeeToPatch.Users.UserPassword;
-                    employeeToPatch.Users.UserPassword = Encrypt.GetSHA256(userPass);
+                    var userPass = employeeToPatch.UserPassword;
+                    employeeToPatch.UserPassword = Encrypt.GetSHA256(userPass);
 
                     using (var db = new CruzRojaContext())
-                        authUser = db.Users.Where(u => u.UserID == employeeEntity.Users.UserID
-                               && u.UserPassword == employeeToPatch.Users.UserPassword)
+                        authUser = db.Users.Where(u => u.UserID == employeeEntity.UserID
+                               && u.UserPassword == employeeToPatch.UserPassword)
                                 .FirstOrDefault();
 
 
@@ -364,19 +372,19 @@ namespace Back_End.Controllers
 
                     else
                     {
-                        employeeToPatch.Users.UserNewPassword = employeeToPatch.Users.UserNewPassword.Trim();
+                        employeeToPatch.UserNewPassword = employeeToPatch.UserNewPassword.Trim();
 
-                        var userNewPass = employeeToPatch.Users.UserNewPassword;
-                        employeeToPatch.Users.UserNewPassword = Encrypt.GetSHA256(userNewPass);
+                        var userNewPass = employeeToPatch.UserNewPassword;
+                        employeeToPatch.UserNewPassword = Encrypt.GetSHA256(userNewPass);
 
-                        employeeToPatch.Users.UserPassword = employeeToPatch.Users.UserNewPassword;
+                        employeeToPatch.UserPassword = employeeToPatch.UserNewPassword;
                     }
 
                 }
 
                 var employeeResult = _mapper.Map(employeeToPatch, employeeEntity);
 
-                _repository.Employees.Update(employeeResult);
+                _repository.Users.Update(employeeResult);
 
                 _repository.Employees.SaveAsync();
 

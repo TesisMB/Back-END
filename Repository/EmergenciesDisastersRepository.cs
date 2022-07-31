@@ -240,10 +240,10 @@ namespace Repository
                 .ThenInclude(a => a.Users)
                  .ThenInclude(a => a.Persons)
 
-                 //.Include(a => a.ChatRooms)
-                 //.ThenInclude(a => a.UsersChatRooms)
-                 //.ThenInclude(a => a.Users)
-                 //.ThenInclude(a => a.Roles )
+                 .Include(a => a.ChatRooms)
+                 .ThenInclude(a => a.UsersChatRooms)
+                 .ThenInclude(a => a.Users)
+                 .ThenInclude(a => a.Roles)
 
                  //.Include(a => a.ChatRooms)
                  //.ThenInclude(a => a.UsersChatRooms)

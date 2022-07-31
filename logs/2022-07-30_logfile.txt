@@ -212,3 +212,239 @@
 2022-07-30 18:17:21.7346 INFO Returned all ChatRooms from database. 
 2022-07-30 18:17:24.9515 INFO Returned all ChatRooms from database. 
 2022-07-30 18:18:15.5868 INFO Returned all ChatRooms from database. 
+2022-07-30 18:24:28.6155 INFO Returned User.
+2022-07-30 18:24:30.8547 INFO Returned all Resources_Request from database.
+2022-07-30 18:24:31.3471 INFO Returned all PDF from database.
+2022-07-30 18:24:32.5331 INFO Returned all emergenciesDisasters from database.
+2022-07-30 18:25:21.6114 INFO Returned all vehicles from database.
+2022-07-30 18:25:25.8190 INFO Returned all employees from database.
+2022-07-30 18:27:43.5873 INFO Returned all estates from database.
+2022-07-30 18:28:17.8956 ERROR Something went wrong inside CreateEmployee action: An error occurred while updating the entries. See the inner exception for details.
+2022-07-30 18:33:04.5036 INFO Returned all PDF from database.
+2022-07-30 18:33:05.2467 INFO Returned all Resources_Request from database.
+2022-07-30 18:33:05.3891 INFO Returned all emergenciesDisasters from database.
+2022-07-30 18:33:11.8511 INFO Returned all employees from database.
+2022-07-30 18:33:19.4090 INFO Returned all estates from database.
+2022-07-30 18:34:52.1319 INFO Returned all employees from database.
+2022-07-30 18:35:15.9632 INFO Returned all employees from database.
+2022-07-30 18:35:30.2922 INFO Returned all employees from database.
+2022-07-30 18:35:43.2154 INFO Returned all employees from database.
+2022-07-30 18:35:44.3697 INFO Returned all estates from database.
+2022-07-30 18:37:11.5735 INFO Returned all employees from database.
+2022-07-30 18:37:16.6863 INFO Returned all employees from database.
+2022-07-30 18:37:45.3219 INFO Returned all employees from database.
+2022-07-30 18:38:00.1568 INFO Returned all employees from database.
+2022-07-30 18:38:04.7724 INFO Returned all estates from database.
+2022-07-30 18:38:10.3003 INFO Returned all employees from database.
+2022-07-30 18:38:11.5507 INFO Returned all estates from database.
+2022-07-30 18:38:49.8131 INFO Returned all employees from database.
+2022-07-30 18:38:57.9991 INFO Returned all estates from database.
+2022-07-30 18:39:15.7681 INFO Returned all employees from database.
+2022-07-30 18:39:19.9851 INFO Returned all estates from database.
+2022-07-30 18:40:37.4564 INFO Returned all employees from database.
+2022-07-30 18:40:37.6256 ERROR Something went wrong inside GetAllEmployees action: Error mapping types.
+
+Mapping types:
+Object -> IEnumerable`1
+System.Object -> System.Collections.Generic.IEnumerable`1[[Entities.DataTransferObjects.Employees___Dto.EmployeeDto, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2022-07-30 18:40:40.8973 INFO Returned all employees from database.
+2022-07-30 18:40:40.9204 ERROR Something went wrong inside GetAllEmployees action: Error mapping types.
+
+Mapping types:
+Object -> IEnumerable`1
+System.Object -> System.Collections.Generic.IEnumerable`1[[Entities.DataTransferObjects.Employees___Dto.EmployeeDto, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2022-07-30 18:40:44.5092 INFO Returned all employees from database.
+2022-07-30 18:40:44.5331 ERROR Something went wrong inside GetAllEmployees action: Error mapping types.
+
+Mapping types:
+Object -> IEnumerable`1
+System.Object -> System.Collections.Generic.IEnumerable`1[[Entities.DataTransferObjects.Employees___Dto.EmployeeDto, Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2022-07-30 18:41:21.0971 INFO Returned all employees from database.
+2022-07-30 18:41:24.0460 INFO Returned all estates from database.
+2022-07-30 18:41:56.1606 INFO Returned all employees from database.
+2022-07-30 18:42:03.4524 INFO Returned all employees from database.
+2022-07-30 18:42:06.7839 INFO Returned all estates from database.
+2022-07-30 18:42:21.2275 INFO Returned all employees from database.
+2022-07-30 18:42:22.8612 INFO Returned all estates from database.
+2022-07-30 18:42:34.5034 INFO Returned all employees from database.
+2022-07-30 18:42:37.6699 INFO Returned all Resources_Request from database.
+2022-07-30 18:42:40.4919 INFO Returned all Resources_Request from database.
+2022-07-30 18:42:42.5826 INFO Returned employe with details for id: 8
+2022-07-30 18:42:42.8243 INFO Returned all estates from database.
+2022-07-30 18:42:44.4740 INFO Returned employe with details for id: 12
+2022-07-30 18:42:44.6922 INFO Returned all estates from database.
+2022-07-30 18:42:52.6201 INFO Returned all employees from database.
+2022-07-30 18:42:54.8536 INFO Returned all estates from database.
+2022-07-30 18:43:45.8744 INFO Returned all employees from database.
+2022-07-30 18:43:47.3007 INFO Returned all estates from database.
+2022-07-30 18:44:57.8735 INFO Returned all estates from database.
+2022-07-30 18:45:40.5551 INFO Returned all employees from database.
+2022-07-30 18:45:55.1891 INFO Returned all employees from database.
+2022-07-30 18:45:55.9649 INFO Returned all estates from database.
+2022-07-30 18:46:12.6268 INFO Returned all employees from database.
+2022-07-30 18:46:13.7826 INFO Returned all estates from database.
+2022-07-30 18:46:44.4966 INFO Returned all Materials from database.
+2022-07-30 18:46:52.9892 INFO Returned all vehicles from database.
+2022-07-30 18:46:56.9136 INFO Returned all Materials from database.
+2022-07-30 18:47:00.2784 INFO Returned all vehicles from database.
+2022-07-30 18:47:18.0660 INFO Returned User.
+2022-07-30 18:47:18.6498 INFO Returned all PDF from database.
+2022-07-30 18:47:19.9705 INFO Returned all emergenciesDisasters from database.
+2022-07-30 18:47:26.2961 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-30 18:47:26.7829 INFO Returned all emergenciesDisasters from database.
+2022-07-30 18:47:58.8824 INFO Returned User.
+2022-07-30 18:47:59.3729 INFO Returned all PDF from database.
+2022-07-30 18:47:59.3947 INFO Returned all emergenciesDisasters from database.
+2022-07-30 18:48:00.4239 INFO Returned all Resources_Request from database.
+2022-07-30 18:48:04.8789 INFO Returned all employees from database.
+2022-07-30 18:48:06.5971 INFO Returned all estates from database.
+2022-07-30 18:48:10.7640 INFO Returned all estates from database.
+2022-07-30 18:48:23.4369 INFO Returned User.
+2022-07-30 18:48:23.9193 INFO Returned all PDF from database.
+2022-07-30 18:48:23.9755 INFO Returned all emergenciesDisasters from database.
+2022-07-30 18:49:36.7561 INFO Returned User.
+2022-07-30 18:49:37.2476 INFO Returned all PDF from database.
+2022-07-30 18:49:37.2687 INFO Returned all Resources_Request from database.
+2022-07-30 18:49:37.3111 INFO Returned all emergenciesDisasters from database.
+2022-07-30 18:49:41.8682 INFO Returned all Materials from database.
+2022-07-30 18:49:50.3467 INFO Returned all estates from database.
+2022-07-30 18:49:50.7509 INFO Returned all employees from database.
+2022-07-30 18:51:02.7301 INFO Returned all estates from database.
+2022-07-30 18:51:02.9223 INFO Returned all employees from database.
+2022-07-30 18:51:13.4166 INFO Returned all estates from database.
+2022-07-30 18:51:13.6352 INFO Returned all employees from database.
+2022-07-30 18:51:17.3941 INFO Returned all estates from database.
+2022-07-30 18:51:17.6110 INFO Returned all employees from database.
+2022-07-30 18:51:26.1831 INFO Returned all estates from database.
+2022-07-30 18:51:26.3938 INFO Returned all employees from database.
+2022-07-30 18:51:37.1467 INFO Returned all estates from database.
+2022-07-30 18:51:37.3648 INFO Returned all employees from database.
+2022-07-30 18:51:39.6660 INFO Returned all estates from database.
+2022-07-30 18:51:39.8832 INFO Returned all employees from database.
+2022-07-30 18:51:51.3790 INFO Returned all estates from database.
+2022-07-30 18:51:51.5966 INFO Returned all employees from database.
+2022-07-30 18:51:56.9102 INFO Returned all estates from database.
+2022-07-30 18:51:57.1422 INFO Returned all employees from database.
+2022-07-30 18:53:10.4743 INFO Returned all estates from database.
+2022-07-30 18:53:10.7054 INFO Returned all employees from database.
+2022-07-30 18:54:49.0809 INFO Returned all Materials from database.
+2022-07-30 18:55:57.4187 INFO Returned all Resources_Request from database.
+2022-07-30 18:55:58.6476 INFO Returned all PDF from database.
+2022-07-30 18:55:58.6798 INFO Returned all Resources_Request from database.
+2022-07-30 18:55:58.7230 INFO Returned all emergenciesDisasters from database.
+2022-07-30 18:56:00.0538 INFO Returned all Resources_Request from database.
+2022-07-30 18:56:03.1451 INFO Returned all Resources_Request from database.
+2022-07-30 18:56:06.6472 INFO Returned all Resources_Request from database.
+2022-07-30 18:56:27.1029 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-30 18:56:27.5038 INFO Returned all emergenciesDisasters from database.
+2022-07-30 18:56:29.4001 INFO Returned all Materials from database.
+2022-07-30 18:56:43.6931 INFO Returned all Resources_Request from database.
+2022-07-30 18:57:00.0426 INFO Returned all Resources_Request from database.
+2022-07-30 18:57:03.0663 INFO Returned all Resources_Request from database.
+2022-07-30 18:57:06.6587 INFO Returned all Resources_Request from database.
+2022-07-30 18:57:09.0544 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-30 18:57:09.3001 INFO Returned all emergenciesDisasters from database.
+2022-07-30 18:57:17.7360 INFO Returned all Resources_Request from database.
+2022-07-30 18:57:18.3500 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-30 18:57:18.6025 INFO Returned all emergenciesDisasters from database.
+2022-07-30 18:57:22.3200 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-30 18:57:22.5680 INFO Returned all emergenciesDisasters from database.
+2022-07-30 18:57:25.4318 INFO Returned all Materials from database.
+2022-07-30 18:57:26.1399 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-30 18:57:26.3888 INFO Returned all emergenciesDisasters from database.
+2022-07-30 18:57:28.5518 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-30 18:57:28.9299 INFO Returned all employees from database.
+2022-07-30 21:37:30.6626 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-30 21:37:32.2346 INFO Returned all emergenciesDisasters from database.
+2022-07-30 21:41:14.7065 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 22:04:01.8792 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 22:28:03.5198 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-30 22:28:04.9817 INFO Returned all emergenciesDisasters from database.
+2022-07-30 22:28:07.4422 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:10:02.9254 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:37:47.6286 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-30 23:37:49.2283 INFO Returned all emergenciesDisasters from database.
+2022-07-30 23:37:52.1242 INFO Returned all employees from database.
+2022-07-30 23:40:16.9097 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:41:19.9533 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:42:32.7384 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:43:05.4059 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:44:21.4272 INFO Returned all employees from database.
+2022-07-30 23:44:25.7700 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:46:04.8790 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:46:19.8636 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:46:30.9899 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:47:25.7906 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:47:34.6867 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:48:07.1338 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:48:21.1707 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:48:26.8255 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:49:01.2412 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:49:26.4892 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:49:44.4227 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:49:52.3235 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:49:59.4825 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:50:16.5001 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:50:37.0982 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:50:42.8258 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:50:50.2920 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:51:09.7704 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:51:12.4416 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:51:15.6850 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:51:18.2428 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:51:41.8817 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:52:17.4098 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:52:38.4639 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:52:45.1742 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:52:56.3534 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:53:16.4618 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:53:20.8281 INFO Returned all Materials from database.
+2022-07-30 23:53:23.3003 INFO Returned all estates from database.
+2022-07-30 23:53:23.4629 INFO Returned all employees from database.
+2022-07-30 23:53:29.1743 INFO Returned all Materials from database.
+2022-07-30 23:53:34.2949 INFO Returned all Materials from database.
+2022-07-30 23:53:35.8229 INFO Returned medicine with details for id: ME0015
+2022-07-30 23:53:45.9695 INFO Returned medicine with details for id: ME0015
+2022-07-30 23:54:30.0097 INFO Returned medicine with details for id: ME0015
+2022-07-30 23:54:33.5683 INFO Returned medicine with details for id: ME0015
+2022-07-30 23:54:35.9812 INFO Returned medicine with details for id: ME0015
+2022-07-30 23:54:57.7282 INFO Returned medicine with details for id: ME0015
+2022-07-30 23:55:35.4984 INFO Returned medicine with details for id: ME0015
+2022-07-30 23:55:50.3925 INFO Returned medicine with details for id: ME0015
+2022-07-30 23:55:56.9738 INFO Returned medicine with details for id: ME0015
+2022-07-30 23:57:00.1749 INFO Returned medicine with details for id: ME0015
+2022-07-30 23:57:05.7130 INFO Returned medicine with details for id: ME0015
+2022-07-30 23:57:07.4347 INFO Returned all Materials from database.
+2022-07-30 23:57:09.6113 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-30 23:57:10.0969 INFO Returned all emergenciesDisasters from database.
+2022-07-30 23:57:11.3019 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-30 23:57:11.7219 INFO Returned all employees from database.
+2022-07-30 23:57:14.2733 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-30 23:57:14.5029 INFO Returned all emergenciesDisasters from database.
+2022-07-30 23:57:15.8390 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:57:17.0375 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-30 23:57:17.2657 INFO Returned all emergenciesDisasters from database.
+2022-07-30 23:57:19.4889 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:57:47.9959 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:57:52.1477 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:57:57.3128 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:58:10.1533 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:58:21.9017 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:58:25.3595 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:58:33.0366 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:58:37.2485 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:58:39.1533 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:58:43.9604 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:58:58.4320 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:59:00.3889 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:59:11.3089 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:59:16.5852 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:59:17.5495 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:59:20.1764 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:59:22.4769 INFO Returned emegencyDisaster with details for id: 321
+2022-07-30 23:59:27.1703 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-30 23:59:27.4094 INFO Returned all emergenciesDisasters from database.
+2022-07-30 23:59:28.5469 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-30 23:59:28.7741 INFO Returned all employees from database.
+2022-07-30 23:59:37.8870 INFO Returned all employees from database.
+2022-07-30 23:59:39.9758 INFO Returned all estates from database.

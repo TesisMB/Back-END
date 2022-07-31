@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using Back_End.EmergencyDisasterPDF;
 using Back_End.Entities;
 using Back_End.Models;
 using Contracts.Interfaces;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 using Entities.DataTransferObjects.EmergenciesDisasters___Dto;
 using Entities.Helpers;
 using Entities.Models;
@@ -10,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,11 +28,63 @@ namespace Back_End.Controllers
         private readonly IRepositorWrapper _repository;
         public readonly CruzRojaContext db = new CruzRojaContext();
         public ResourcesRequestMaterialsMedicinesVehicles resources = null;
-        public EmergenciesDisastersController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper)
+        public byte[] pdf;
+        private IConverter _converter;
+
+        public EmergenciesDisastersController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper, IConverter converter)
         {
             _logger = logger;
             _repository = repository;
             _mapper = mapper;
+            _converter = converter;
+        }
+
+
+
+        [HttpGet("PDF/{emegencyDisasterID}")]
+        public async Task<IActionResult> CreatePDF(int emegencyDisasterID)
+        {
+
+            var employees = await _repository.EmergenciesDisasters.GetEmergencyDisasterWithDetails(emegencyDisasterID);
+
+            //quien es el actual usuario
+            Users user = new Users();
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            //user = cruzRojaContext.Users
+            //        .Where(x => x.UserID == employeeId)
+            //        .Include(a => a.Estates)
+            //        .AsNoTracking()
+            //        .FirstOrDefault();
+
+            var globalSettings = new GlobalSettings
+            {
+                ColorMode = ColorMode.Color,
+                Orientation = Orientation.Portrait,
+                PaperSize = PaperKind.A4,
+                Margins = new MarginSettings { Top = 10 },
+                DocumentTitle = $"Reporte de emergencia",
+            };
+
+            var objectSettings = new ObjectSettings
+            {
+                PagesCount = true,
+                HtmlContent = EmergencyDisasterPdf.GetHTMLString(employees),
+                // Page = "https://code-maze.com/", //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE
+                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "styles.css") },
+                FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+                //FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+            };
+
+            var pdf = new HtmlToPdfDocument()
+            {
+                GlobalSettings = globalSettings,
+                Objects = { objectSettings }
+            };
+
+            var file = _converter.Convert(pdf);
+
+            return File(file, "application/pdf");
         }
 
 
@@ -135,6 +191,7 @@ namespace Back_End.Controllers
                                           .Where(a => a.ID == item3.userID)
                                           .AsNoTracking()
                                           .FirstOrDefault();
+
 
                             item3.Name = person.FirstName + " " + person.LastName;
                         }

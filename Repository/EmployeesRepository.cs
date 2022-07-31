@@ -96,11 +96,11 @@ namespace Repository
         public void CreateEmployee(Users employee)
         {
 
-            Email.generatePassword(employee);
+            //Email.generatePassword(employee);
 
             //TO DO Falta hacer funcionar email (Facultad)
 
-            Email.sendVerificationEmail(employee);
+            //Email.sendVerificationEmail(employee);
             //spaceCamelCase(employee);
 
             employee.UserPassword = Encrypt.GetSHA256(employee.UserPassword);

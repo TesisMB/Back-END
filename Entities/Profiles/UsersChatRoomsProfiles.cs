@@ -12,7 +12,10 @@ namespace Entities.Profiles
             CreateMap<UsersChatRooms, UsersChatRoomsDto>()
                      .ForMember(resp => resp.UserID, opt => opt.MapFrom(a => a.FK_UserID))
 
+
                      .ForMember(resp => resp.UserDni, opt => opt.MapFrom(a => a.Users.UserDni))
+
+                     .ForMember(resp => resp.RoleName, opt => opt.MapFrom(a => a.Users.Roles.RoleName))
 
                     .ForMember(resp => resp.Name, opt => opt.MapFrom(a => a.Users.Persons.FirstName + " " + a.Users.Persons.LastName));
 

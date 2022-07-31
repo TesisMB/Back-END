@@ -13,6 +13,9 @@ namespace Entities.DataTransferObjects.Employees___Dto
         public string Createdate { get; set; }
         public string Avatar { get; set; }
 
+        public int FK_EstateID { get; set; }
+        public int FK_RoleID { get; set; }
+
         public string RoleName { get; set; }
         public EmployeePersonDto Persons { get; set; }
 

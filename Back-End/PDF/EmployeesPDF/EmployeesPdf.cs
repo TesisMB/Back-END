@@ -7,7 +7,7 @@ namespace Back_End.EmployeesPDF
 {
     public static class EmployeesPdf
     {
-        public static string GetHTMLString(IEnumerable<Employees> employee)
+        public static string GetHTMLString(IEnumerable<Users> employee)
         {
             string date = DateTime.Now.ToString("dd/MM/yyyy");
             string status = string.Empty;
@@ -63,13 +63,13 @@ namespace Back_End.EmployeesPDF
 
 
             sb.Append(@$"               <tr>
-                                              <td> {emp.Users.UserDni} </td>
-                                              <td> {emp.Users.Persons.FirstName} {emp.Users.Persons.LastName}</td>
-                                              <td> {emp.Users.Roles.RoleName} </td>
-                                              <td> {emp.Users.Estates.LocationAddress.Address} {emp.Users.Estates.LocationAddress.NumberAddress} </td>
+                                              <td> {emp.UserDni} </td>
+                                              <td> {emp.Persons.FirstName} {emp.Persons.LastName}</td>
+                                              <td> {emp.Roles.RoleName} </td>
+                                              <td> {emp.Estates.LocationAddress.Address} {emp.Estates.LocationAddress.NumberAddress} </td>
 
                                  ");
-                        if (emp.Users.UserAvailability)
+                        if (emp.UserAvailability)
                         {
 
                             status = "Disponible";

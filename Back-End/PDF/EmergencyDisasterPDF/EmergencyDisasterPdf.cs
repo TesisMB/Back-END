@@ -104,6 +104,8 @@ namespace Back_End.EmergencyDisasterPDF
 
 
 
+
+
             sb.Append($@"
 
                                 <div style='border: 1px solid #ccc;'>
@@ -120,6 +122,18 @@ namespace Back_End.EmergencyDisasterPDF
                             </div>
                ");
 
+            if (emergency.Resources_Requests.Count == 0)
+            {
+                sb.Append($@"
+                                  <div class='datos'> 
+                                         <div style=text-align:center;>
+                                             <p style='border: 1px solid #ccc; margin: 0 !important;'>No hay recursos solicitados para esta emergencia.</p>
+                                         </div>
+                                  </div>
+
+                          ");
+            }
+
 
             foreach (var item in emergency.Resources_Requests)
             {
@@ -131,8 +145,10 @@ namespace Back_End.EmergencyDisasterPDF
                     {
 
 
+
+
                         if (item2.Materials != null)
-                            sb.Append($@"
+                        sb.Append($@"
                                   <div class='datos'> 
                                      <div>
                                          <p style='border: 1px solid #ccc; margin: 0 !important;'>{item2.Materials.MaterialName}</p>
@@ -168,11 +184,13 @@ namespace Back_End.EmergencyDisasterPDF
                                      </div>
                     ");
                     }
+
+
+                    }
                 }
-            }
 
 
-            sb.Append($@"
+                sb.Append($@"
                                 <div style='border: 1px solid #ccc;'>
                                         <p style='text-align: center; margin: 0 !important;'>PERSONAS INVOLUCRADAS</p>
                                 </div>
@@ -193,15 +211,23 @@ namespace Back_End.EmergencyDisasterPDF
 
                             ");
 
+                if (emergency.ChatRooms.UsersChatRooms.Count == 0)
+                {
+                    sb.Append($@"
+                                  <div class='datos'> 
+                                     <div style=text-align:center;>
+                                         <p style='border: 1px solid #ccc; margin: 0 !important;'>No hay usuarios en esta emergencia.</p>
+                                     </div>
+                            </div>
+
+                    ");
+                }
 
             foreach (var item in emergency.ChatRooms.UsersChatRooms)
             {
 
                 if (item != null)
                 {
-
-
-
                     sb.Append($@"
                                   <div class='datos'> 
                                      <div>
@@ -217,6 +243,8 @@ namespace Back_End.EmergencyDisasterPDF
 
                     ");
                 }
+
+             
             }
 
 

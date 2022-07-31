@@ -240,7 +240,7 @@ namespace Back_End.Controllers
 
                 _repository.EmergenciesDisasters.SaveAsync();
 
-                var response = await SendController.SendNotification(emergenciesDisasters.LocationsEmergenciesDisasters.LocationCityName);
+                var response = await SendController.SendNotification(userId, emergenciesDisasters.LocationsEmergenciesDisasters.LocationCityName);
 
 
                 return Ok(response);

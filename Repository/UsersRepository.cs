@@ -41,6 +41,12 @@ namespace Repository
                     .FirstOrDefaultAsync();
         }
 
+        public async Task<Users> SendDeviceById(int userId)
+        {
+            return await FindByCondition(emp => emp.UserID.Equals(userId))
+                    .FirstOrDefaultAsync();
+        }
+
         public async Task<Users> GetUserVolunteerById(int userId)
         {
             return await FindByCondition(emp => emp.UserID.Equals(userId))

@@ -926,3 +926,220 @@ System.Object -> System.Collections.Generic.IEnumerable`1[[Entities.DataTransfer
 2022-07-31 17:17:58.4764 INFO Returned all employees from database.
 2022-07-31 17:18:14.1242 INFO Returned all Materials from database.
 2022-07-31 17:18:16.0774 INFO Returned employe with details for id: 2
+2022-07-31 17:23:40.6975 INFO Returned all Volunteers from database.
+2022-07-31 17:23:58.3517 INFO Returned volunteer with id: 56
+2022-07-31 17:25:17.0240 INFO Returned employe with details for id: 2
+2022-07-31 17:25:48.4262 INFO Returned employe with details for id: 2
+2022-07-31 17:26:41.7700 INFO Returned employe with details for id: 2
+2022-07-31 17:26:55.7499 INFO Returned employe with details for id: 2
+2022-07-31 17:27:50.9164 INFO Returned employe with details for id: 2
+2022-07-31 17:28:06.5670 INFO Returned employe with details for id: 2
+2022-07-31 17:28:21.9537 INFO Returned employe with details for id: 2
+2022-07-31 17:29:32.3396 INFO Returned employe with details for id: 2
+2022-07-31 17:30:57.5178 INFO Returned employe with details for id: 2
+2022-07-31 17:32:04.1684 INFO Returned employe with details for id: 2
+2022-07-31 17:32:18.0850 INFO Returned employe with details for id: 2
+2022-07-31 17:35:16.2836 INFO Returned employe with details for id: 2
+2022-07-31 17:37:23.8694 INFO Returned User.
+2022-07-31 17:37:25.5930 INFO Returned all PDF from database.
+2022-07-31 17:37:26.2685 INFO Returned all Resources_Request from database.
+2022-07-31 17:37:26.4069 INFO Returned all emergenciesDisasters from database.
+2022-07-31 17:37:28.0013 INFO Returned employe with details for id: 2
+2022-07-31 17:37:52.6624 INFO Returned User.
+2022-07-31 17:37:53.0776 INFO Returned all PDF from database.
+2022-07-31 17:37:53.1027 INFO Returned all Resources_Request from database.
+2022-07-31 17:37:54.2937 INFO Returned all emergenciesDisasters from database.
+2022-07-31 17:37:54.9563 INFO Returned employe with details for id: 2
+2022-07-31 17:38:06.4657 INFO Returned all Resources_Request from database.
+2022-07-31 17:38:06.4657 INFO Returned all PDF from database.
+2022-07-31 17:38:06.6606 INFO Returned all emergenciesDisasters from database.
+2022-07-31 17:38:08.3323 INFO Returned employe with details for id: 2
+2022-07-31 17:38:54.0098 INFO Returned employe with details for id: 2
+2022-07-31 17:39:26.0437 INFO Returned employe with details for id: 2
+2022-07-31 17:39:58.5162 INFO Returned employe with details for id: 2
+2022-07-31 17:40:04.1865 INFO Returned employe with details for id: 2
+2022-07-31 17:44:19.1118 INFO Returned employe with details for id: 2
+2022-07-31 17:44:59.1859 INFO Returned employe with details for id: 2
+2022-07-31 17:45:58.4967 INFO Returned employe with details for id: 2
+2022-07-31 17:47:00.0545 INFO Returned employe with details for id: 2
+2022-07-31 17:47:35.8195 INFO Returned employe with details for id: 2
+2022-07-31 17:48:04.1559 INFO Returned employe with details for id: 2
+2022-07-31 17:48:19.3865 INFO Returned employe with details for id: 2
+2022-07-31 17:48:55.2857 INFO Returned employe with details for id: 2
+2022-07-31 17:49:07.5529 INFO Returned employe with details for id: 2
+2022-07-31 17:49:31.3966 INFO Returned employe with details for id: 2
+2022-07-31 17:51:11.5476 INFO Returned User.
+2022-07-31 17:51:11.9994 INFO Returned all PDF from database.
+2022-07-31 17:51:12.6095 INFO Returned all emergenciesDisasters from database.
+2022-07-31 17:51:12.7545 INFO Returned all Resources_Request from database.
+2022-07-31 17:51:16.5187 INFO Returned all Resources_Request from database.
+2022-07-31 17:51:19.5598 INFO Returned employe with details for id: 2
+2022-07-31 17:53:00.7474 INFO Returned employe with details for id: 2
+2022-07-31 17:53:18.8234 INFO Returned employe with details for id: 2
+2022-07-31 17:53:43.2072 INFO Returned employe with details for id: 2
+2022-07-31 17:54:08.6917 INFO Returned employe with details for id: 2
+2022-07-31 17:57:01.3576 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-07-31 17:57:05.4449 INFO Returned all PDF from database.
+2022-07-31 17:57:06.0882 INFO Returned all emergenciesDisasters from database.
+2022-07-31 17:57:19.7185 INFO Returned User.
+2022-07-31 17:57:20.4207 INFO Returned all PDF from database.
+2022-07-31 17:57:20.4207 INFO Returned all Resources_Request from database.
+2022-07-31 17:57:21.5957 INFO Returned all emergenciesDisasters from database.
+2022-07-31 17:57:24.1234 INFO Returned all employees from database.
+2022-07-31 17:57:27.2525 INFO Returned all estates from database.
+2022-07-31 17:59:23.7357 INFO Returned employe with details for id: 2
+2022-07-31 17:59:49.3834 INFO Returned User.
+2022-07-31 17:59:49.8585 INFO Returned all emergenciesDisasters from database.
+2022-07-31 17:59:49.8585 INFO Returned all PDF from database.
+2022-07-31 17:59:49.8692 INFO Returned all Resources_Request from database.
+2022-07-31 17:59:52.9389 INFO Returned all Resources_Request from database.
+2022-07-31 17:59:54.6389 INFO Returned all Resources_Request from database.
+2022-07-31 17:59:55.5154 INFO Returned all Resources_Request from database.
+2022-07-31 18:00:01.1898 INFO Returned employe with details for id: 2
+2022-07-31 18:00:04.7461 INFO Returned all employees from database.
+2022-07-31 18:00:06.8033 INFO Returned all Volunteers from database.
+2022-07-31 18:00:13.5382 INFO Returned all Resources_Request from database.
+2022-07-31 18:00:17.9554 INFO Returned all Resources_Request from database.
+2022-07-31 18:00:20.3969 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 18:00:20.9346 INFO Returned all emergenciesDisasters from database.
+2022-07-31 18:00:22.6070 INFO Returned all Resources_Request from database.
+2022-07-31 18:00:23.8730 INFO Returned all Resources_Request from database.
+2022-07-31 18:00:25.5436 INFO Returned all Resources_Request from database.
+2022-07-31 18:00:26.9702 INFO Returned all PDF from database.
+2022-07-31 18:00:30.2432 INFO Returned all Resources_Request from database.
+2022-07-31 18:00:31.4811 INFO Returned all Volunteers from database.
+2022-07-31 18:00:36.4893 INFO Returned all Resources_Request from database.
+2022-07-31 18:00:39.0272 INFO Returned all Resources_Request from database.
+2022-07-31 18:00:39.6068 INFO Returned all Resources_Request from database.
+2022-07-31 18:00:41.1037 INFO Returned employe with details for id: 2
+2022-07-31 18:00:48.2523 INFO Returned all Resources_Request from database.
+2022-07-31 18:00:50.2370 INFO Returned all Resources_Request from database.
+2022-07-31 18:00:53.0585 INFO Returned all Resources_Request from database.
+2022-07-31 18:00:56.1523 INFO Returned employe with details for id: 2
+2022-07-31 18:01:25.6449 INFO Returned employe with details for id: 2
+2022-07-31 18:03:01.4327 INFO Returned employe with details for id: 2
+2022-07-31 18:03:14.1259 INFO Returned employe with details for id: 2
+2022-07-31 18:03:19.2591 INFO Returned all Resources_Request from database.
+2022-07-31 18:03:21.3842 INFO Returned all Resources_Request from database.
+2022-07-31 18:03:23.0332 INFO Returned all Resources_Request from database.
+2022-07-31 18:03:24.6243 INFO Returned all Resources_Request from database.
+2022-07-31 18:03:28.8949 INFO Returned employe with details for id: 2
+2022-07-31 18:05:49.7721 INFO Returned employe with details for id: 2
+2022-07-31 18:06:01.6653 INFO Returned employe with details for id: 2
+2022-07-31 18:06:33.7017 INFO Returned all PDF from database.
+2022-07-31 18:06:34.8313 INFO Returned all emergenciesDisasters from database.
+2022-07-31 18:06:49.4052 INFO Returned employe with details for id: 2
+2022-07-31 18:07:11.1246 INFO Returned User.
+2022-07-31 18:07:11.5379 INFO Returned all PDF from database.
+2022-07-31 18:07:12.4829 INFO Returned all Resources_Request from database.
+2022-07-31 18:07:12.8714 INFO Returned all emergenciesDisasters from database.
+2022-07-31 18:07:15.0278 INFO Returned employe with details for id: 2
+2022-07-31 18:07:43.0502 INFO Returned employe with details for id: 2
+2022-07-31 18:07:58.2626 INFO Returned employe with details for id: 2
+2022-07-31 18:08:28.1746 INFO Returned employe with details for id: 2
+2022-07-31 18:08:41.4795 INFO Returned employe with details for id: 2
+2022-07-31 18:08:55.6861 INFO Returned employe with details for id: 2
+2022-07-31 18:09:17.2019 INFO Returned employe with details for id: 2
+2022-07-31 18:09:27.5633 INFO Returned all Resources_Request from database.
+2022-07-31 18:09:29.2478 INFO Returned all Resources_Request from database.
+2022-07-31 18:09:30.8721 INFO Returned all Resources_Request from database.
+2022-07-31 18:09:34.5920 INFO Returned all employees from database.
+2022-07-31 18:09:36.4597 INFO Returned all estates from database.
+2022-07-31 18:09:37.5836 INFO Returned all estates from database.
+2022-07-31 18:09:38.3543 INFO Returned all estates from database.
+2022-07-31 18:09:39.0420 INFO Returned all estates from database.
+2022-07-31 18:09:40.9609 INFO Returned employe with details for id: 2
+2022-07-31 18:09:42.8210 INFO Returned all Resources_Request from database.
+2022-07-31 18:09:50.1199 INFO Returned all Resources_Request from database.
+2022-07-31 18:09:54.7481 INFO Returned all Resources_Request from database.
+2022-07-31 18:10:02.2188 INFO Returned employe with details for id: 2
+2022-07-31 18:10:05.2684 INFO Returned all PDF from database.
+2022-07-31 18:10:05.3183 INFO Returned all Resources_Request from database.
+2022-07-31 18:10:06.1207 INFO Returned all emergenciesDisasters from database.
+2022-07-31 18:10:48.4636 INFO Returned all Resources_Request from database.
+2022-07-31 18:10:48.4636 INFO Returned all PDF from database.
+2022-07-31 18:10:49.0713 INFO Returned all emergenciesDisasters from database.
+2022-07-31 18:11:22.7511 INFO Returned all emergenciesDisasters from database.
+2022-07-31 18:11:22.7511 INFO Returned all PDF from database.
+2022-07-31 18:11:23.0931 INFO Returned all Resources_Request from database.
+2022-07-31 18:11:56.3784 INFO Returned employe with details for id: 2
+2022-07-31 18:12:30.4882 INFO Returned all employees from database.
+2022-07-31 18:14:19.6402 INFO Returned all employees from database.
+2022-07-31 18:14:36.4370 INFO Returned all Materials from database.
+2022-07-31 18:14:43.0516 INFO Returned all employees from database.
+2022-07-31 18:14:45.2979 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 18:14:45.5410 INFO Returned all emergenciesDisasters from database.
+2022-07-31 18:14:49.5261 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 18:14:50.0479 INFO Returned all employees from database.
+2022-07-31 18:15:24.5196 ERROR Something went wrong inside CreateEmergenciesDisaster action: An error occurred while updating the entries. See the inner exception for details.
+2022-07-31 18:15:50.8616 ERROR Something went wrong inside CreateEmergenciesDisaster action: An error occurred while updating the entries. See the inner exception for details.
+2022-07-31 18:16:54.1074 ERROR Something went wrong inside CreateEmergenciesDisaster action: An error occurred while updating the entries. See the inner exception for details.
+2022-07-31 18:17:27.9958 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 18:17:28.4390 INFO Returned all employees from database.
+2022-07-31 18:17:57.7872 ERROR Something went wrong inside CreateEmergenciesDisaster action: An error occurred while updating the entries. See the inner exception for details.
+2022-07-31 18:18:38.5722 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 18:18:38.7975 INFO Returned all employees from database.
+2022-07-31 18:19:41.8727 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 18:19:42.0941 INFO Returned all employees from database.
+2022-07-31 18:20:52.3781 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 18:20:52.6149 INFO Returned all employees from database.
+2022-07-31 18:21:25.6689 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 18:21:26.1980 INFO Returned all emergenciesDisasters from database.
+2022-07-31 18:21:32.9388 INFO Returned all employees from database.
+2022-07-31 18:21:46.2389 INFO Returned all employees from database.
+2022-07-31 18:23:08.3585 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 18:23:08.6192 INFO Returned all emergenciesDisasters from database.
+2022-07-31 18:23:11.3975 INFO Returned all employees from database.
+2022-07-31 18:23:37.7361 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 18:23:37.9719 INFO Returned all emergenciesDisasters from database.
+2022-07-31 18:23:40.9130 INFO Returned all employees from database.
+2022-07-31 18:24:00.5942 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 18:24:00.8307 INFO Returned all emergenciesDisasters from database.
+2022-07-31 18:24:09.2674 INFO Returned all employees from database.
+2022-07-31 18:24:14.8605 INFO Returned all employees from database.
+2022-07-31 18:24:16.3289 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 18:24:16.5492 INFO Returned all employees from database.
+2022-07-31 18:24:18.0254 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 18:24:18.2461 INFO Returned all employees from database.
+2022-07-31 18:24:18.5972 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 18:24:18.8405 INFO Returned all emergenciesDisasters from database.
+2022-07-31 18:24:22.4269 INFO Returned all employees from database.
+2022-07-31 18:24:24.5654 INFO Returned emegencyDisaster with details for id: 327
+2022-07-31 18:24:55.5991 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 18:24:55.8365 INFO Returned all emergenciesDisasters from database.
+2022-07-31 18:25:10.7238 INFO Returned employe with details for id: 2
+2022-07-31 18:25:17.1974 INFO Returned all employees from database.
+2022-07-31 18:27:45.1191 INFO Returned all estates from database.
+2022-07-31 18:29:15.2298 INFO Returned all estates from database.
+2022-07-31 18:29:15.9171 INFO Returned all estates from database.
+2022-07-31 18:29:51.8912 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 18:29:53.3212 INFO Returned all emergenciesDisasters from database.
+2022-07-31 18:29:56.1001 INFO Returned emegencyDisaster with details for id: 327
+2022-07-31 18:37:19.3702 INFO Returned emegencyDisaster with details for id: 327
+2022-07-31 18:39:45.3853 INFO Returned emegencyDisaster with details for id: 327
+2022-07-31 18:44:25.9329 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 18:44:27.3995 INFO Returned all emergenciesDisasters from database.
+2022-07-31 18:44:29.8316 INFO Returned all employees from database.
+2022-07-31 18:44:31.8610 INFO Returned emegencyDisaster with details for id: 321
+2022-07-31 18:45:24.4961 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 18:45:25.2432 INFO Returned all emergenciesDisasters from database.
+2022-07-31 18:45:25.5793 INFO Returned emegencyDisaster with details for id: 321
+2022-07-31 18:45:48.2292 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 18:45:48.5512 INFO Returned all emergenciesDisasters from database.
+2022-07-31 18:45:51.5883 INFO Returned all employees from database.
+2022-07-31 18:46:05.3399 INFO Returned emegencyDisaster with details for id: 327
+2022-07-31 18:46:36.2347 INFO Returned emegencyDisaster with details for id: 327
+2022-07-31 18:46:39.5064 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 18:46:39.7563 INFO Returned all emergenciesDisasters from database.
+2022-07-31 18:46:42.7363 INFO Returned all employees from database.
+2022-07-31 18:49:32.9168 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 18:49:33.1492 INFO Returned all emergenciesDisasters from database.
+2022-07-31 18:49:45.4708 INFO Returned all employees from database.
+2022-07-31 18:50:01.1956 INFO Returned employe with details for id: 2
+2022-07-31 18:50:17.6159 INFO Returned all Resources_Request from database.
+2022-07-31 18:50:18.9138 INFO Returned all Resources_Request from database.
+2022-07-31 18:50:19.8044 INFO Returned all Resources_Request from database.
+2022-07-31 19:31:43.3708 ERROR Something went wrong inside UpdateUser action: An error occurred while updating the entries. See the inner exception for details.
+2022-07-31 19:41:28.7127 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 19:41:28.9303 INFO Returned all employees from database.
+2022-07-31 19:42:10.7009 ERROR Something went wrong inside CreateEmergenciesDisaster action: One or more errors occurred. (Exactly one of Token, Topic or Condition is required.)

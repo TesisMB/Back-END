@@ -61,7 +61,7 @@ namespace Back_End.EmployeesPDF
 
                                         <div class='datos'> 
                                           <div>
-                                            <img src= 'https://blogger.googleusercontent.com/img/a/AVvXsEhUOA8HwyYFBnh7VnZxQwveTFGUwt6_dXazOIPRBmZuKrbMiPMC_cImvxRqYZepbi2npcWouLyiXG9IVarImm1NlgL8OX6PTg9qd8KmGjryq_ckdZJq3MmJudBFp6iB-drHF36baZa8UDMZJGgkusq90G79JNBdAAwvBfh0xhfKRchan_L30yQJZ70i'>
+                                            <img src= 'https://almacenamientotesis.blob.core.windows.net/publicuploads/{employee.Users.Avatar}'>
                                            </div>
 
                                             <div class='dataP' style='margin-left: 9.5%;'>

@@ -406,7 +406,7 @@ namespace Back_End.Controllers
         {
             try
             {
-                var userEntity = await _repository.Users.GetUserEmployeeById(userId) ;
+                var userEntity = await _repository.Users.SendDeviceById(userId) ;
 
                 if (userEntity == null)
                 {

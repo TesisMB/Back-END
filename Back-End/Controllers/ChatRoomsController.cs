@@ -205,7 +205,7 @@ namespace Back_End.Controllers
         //********************************* FUNCIONANDO *********************************
         //Revisar con APP
         [HttpPost]
-        public IActionResult SendMessage([FromBody] MessagesForCreationDto message, [FromQuery] int userId)
+        public async Task<IActionResult> SendMessage([FromBody] MessagesForCreationDto message, [FromQuery] int userId)
         {
             CruzRojaContext cruzRojaContext = new CruzRojaContext();
 
@@ -264,6 +264,9 @@ namespace Back_End.Controllers
                     _repository.Messages.SaveAsync();
                 }
 
+
+
+                var response = await SendController.SendNotification(userId, messages.Message, "Mensaje");
 
 
                 return StatusCode(200);

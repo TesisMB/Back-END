@@ -25,7 +25,8 @@ namespace Repository
     public class NotificationService //: INotificationService
     {
         private readonly FcmNotificationSetting _fcmNotificationSetting;
-        public static Users users;
+        public static IList<Users> users;
+        public static Message message = new Message();
 
         private static CruzRojaContext _cruzRojaContext = new CruzRojaContext();
 
@@ -34,49 +35,152 @@ namespace Repository
             _fcmNotificationSetting = settings.Value;
         }
 
-        public static async Task<Message> SendNotification(string body)
+        public static async Task<Message> SendNotification(int userId, string body, string type = "")
         {
             string response = string.Empty;
 
-            users = _cruzRojaContext.Users
-                            .Where(a => a.UserID == 25)
-                           .Include(a => a.Persons)
-                           .Include(a => a.Roles)
-                           .Include(a => a.Estates)
-                           .ThenInclude(a => a.Locations)
-                           .Include(a => a.Volunteers)
-                           .AsNoTracking()
-                           .FirstOrDefault();
+            var user = EmployeesRepository.GetAllEmployeesById(userId);
 
             FirebaseApp.Create(new AppOptions()
             {
                 Credential = GoogleCredential.FromFile("private_key.json")
             });
 
+             var registrationToken = "dVPHPzBoRgGvMOgInBXbqL:APA91bGV8Au2acf1Kk_KbLM-mqQVaQ5nPD7cmNB79Fl5cqsEpPkjPPjKMcSxqN4crpNy70-4KYpLJuozR8EmIOI5brifTiVSX-FT_cHTjhoDNcQzbdXsWMWACApjZ80MEWzmxcAZt0tk";
 
-            var registrationToken = "dVPHPzBoRgGvMOgInBXbqL:APA91bGV8Au2acf1Kk_KbLM-mqQVaQ5nPD7cmNB79Fl5cqsEpPkjPPjKMcSxqN4crpNy70-4KYpLJuozR8EmIOI5brifTiVSX-FT_cHTjhoDNcQzbdXsWMWACApjZ80MEWzmxcAZt0tk";
-
-            var message = new Message()
+            if(type != "Mensaje")
             {
-                Data = new Dictionary<string, string>()
+
+            users = _cruzRojaContext.Users
+                            .Where(a => a.FK_EstateID == user.FK_EstateID
+                                    && a.DeviceToken != null)
+                           .Include(a => a.Persons)
+                           .Include(a => a.Roles)
+                           .Include(a => a.Estates)
+                           .ThenInclude(a => a.Locations)
+                           .Include(a => a.Volunteers)
+                           .AsNoTracking()
+                           .ToList();
+
+
+                    if (users != null)
+                    {
+                        foreach (var item in users)
+                        {
+
+                            message = new Message()
+                            {
+                                Data = new Dictionary<string, string>()
+                            {
+                                { "alertId", "242" },
+                            },
+
+                                Token = item.DeviceToken,
+                                //Topic = "all",
+
+                                Notification = new Notification()
+                                {
+                                    Title = "Nueva emergencia",
+                                    Body = body
+
+                                }
+                            };
+
+                            response = FirebaseMessaging.DefaultInstance.SendAsync(message).Result;
+
+                        }
+                    }
+                    else
+                    {
+                        message = new Message()
+                        {
+                            Data = new Dictionary<string, string>()
+                            {
+                                { "alertId", "242" },
+                            },
+
+                            Token = registrationToken,
+                            //Topic = "all",
+
+                            Notification = new Notification()
+                            {
+                                Title = "Nueva emergencia",
+                                Body = body
+
+                            }
+                        };
+
+                     response = FirebaseMessaging.DefaultInstance.SendAsync(message).Result;
+                    }
+
+            }
+            else
+            {
+                users = _cruzRojaContext.Users
+                          .Where(a => a.FK_EstateID == user.FK_EstateID
+                                  && a.DeviceToken != null
+                                  && a.UserID == userId)
+                         .Include(a => a.Persons)
+                         .Include(a => a.Roles)
+                         .Include(a => a.Estates)
+                         .ThenInclude(a => a.Locations)
+                         .Include(a => a.Volunteers)
+                         .AsNoTracking()
+                         .ToList();
+
+
+                if (users != null)
                 {
-                    { "alertId", "242" },
-                },
+                    foreach (var item in users)
+                    {
 
+                        message = new Message()
+                        {
+                            Data = new Dictionary<string, string>()
+                            {
+                                { "alertId", "242" },
+                            },
 
-                Token = registrationToken,
-                //Topic = "all",
+                            Token = item.DeviceToken,
+                            //Topic = "all",
 
-                Notification = new Notification()
-                {
-                    Title = "Prueba desde el Back",
-                    Body = body
-                    
+                            Notification = new Notification()
+                            {
+                                Title = "Mensaje nuevo",
+                                Body = body
+
+                            }
+                        };
+
+                        response = FirebaseMessaging.DefaultInstance.SendAsync(message).Result;
+
+                    }
                 }
-            };
+                else
+                {
+                    message = new Message()
+                    {
+                        Data = new Dictionary<string, string>()
+                            {
+                                { "alertId", "242" },
+                            },
+
+                        Token = registrationToken,
+                        //Topic = "all",
+
+                        Notification = new Notification()
+                        {
+                            Title = "Mensaje nuevo",
+                            Body = body
+
+                        }
+                    };
+
+                    response = FirebaseMessaging.DefaultInstance.SendAsync(message).Result;
+                }
+            }
 
 
-             response = FirebaseMessaging.DefaultInstance.SendAsync(message).Result;
 
 
             foreach (var kvp in message.Data)

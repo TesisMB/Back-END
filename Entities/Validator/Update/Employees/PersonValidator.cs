@@ -26,21 +26,21 @@ namespace Entities.Validator.Update
            .Must(IsValidNumber).WithMessage("{PropertyName} must not have spaces and should be all numbers.")
            .MaximumLength(12).WithMessage("The {PropertyName} cannot be more than {MaxLength} characters.");
 
-            RuleFor(x => new { x.ID, x.Email }).Custom((id, context) =>
-             {
+            //RuleFor(x => new { x.ID, x.Email }).Custom((id, context) =>
+            // {
 
-                 employees = db.Employees.Where(a => a.EmployeeID == id.ID
-                                                && a.Users.Persons.Email == id.Email)
-                                              .AsNoTracking()
-                                              .FirstOrDefault();
+            //     employees = db.Employees.Where(a => a.EmployeeID == id.ID
+            //                                    && a.Users.Persons.Email == id.Email)
+            //                                  .AsNoTracking()
+            //                                  .FirstOrDefault();
 
-                   var result =  BeUniqueEmail(employees, id.Email);
+            //       var result =  BeUniqueEmail(employees, id.Email);
                     
-                 if(result == false)
-                 {
-                     context.AddFailure("El email ingresado ya existe en el sistema");
-                 }
-             });
+            //     if(result == false)
+            //     {
+            //         context.AddFailure("El email ingresado ya existe en el sistema");
+            //     }
+            // });
 
             RuleFor(x => x.Email)
             .NotEmpty().WithMessage("{PropertyName} is required")

@@ -342,8 +342,8 @@ namespace Back_End.Controllers
 
                 var employeeToPatch = _mapper.Map<UsersForUpdateDto>(employeeEntity);
 
-                _Employees.ApplyTo(employeeToPatch, ModelState);
 
+                _Employees.ApplyTo(employeeToPatch, ModelState);
 
               
                 if (!TryValidateModel(employeeToPatch))
@@ -382,6 +382,7 @@ namespace Back_End.Controllers
 
                 }
 
+
                 var employeeResult = _mapper.Map(employeeToPatch, employeeEntity);
 
                 _repository.Users.Update(employeeResult);
@@ -399,6 +400,7 @@ namespace Back_End.Controllers
 
             }
         }
+
 
 
         [HttpPut("SendDevice")]

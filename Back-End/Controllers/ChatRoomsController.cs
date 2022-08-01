@@ -246,8 +246,9 @@ namespace Back_End.Controllers
 
                 var messages = _mapper.Map<Messages>(message);
 
-               messages.CreatedDate = DateTime.Now;
+               //messages.CreatedDate = DateTime.Now;
               // messages.CreatedDate = dateTime.ToString(@"hh\:mm");
+                    messages.CreatedDate = message.CreationDate;
 
                 if (date != null)
                 {

@@ -15,21 +15,21 @@ namespace Entities.Validator.Update
             //************USERS - VALIDATIONS************z
 
 
-            RuleFor(x => new { x.userID, x.UserDni }).Custom((id, context) =>
-            {
+            //RuleFor(x => new { x.userID, x.UserDni }).Custom((id, context) =>
+            //{
 
-                employees = db.Employees.Where(a => a.EmployeeID == id.userID
-                                               && a.Users.UserDni == id.UserDni)
-                                             .AsNoTracking()
-                                             .FirstOrDefault();
+            //    employees = db.Employees.Where(a => a.EmployeeID == id.userID
+            //                                   && a.Users.UserDni == id.UserDni)
+            //                                 .AsNoTracking()
+            //                                 .FirstOrDefault();
 
-                var result = BeUniqueDni(employees, id.UserDni);
+            //    var result = BeUniqueDni(employees, id.UserDni);
 
-                if (result == false)
-                {
-                    context.AddFailure("El Dni ingresado ya existe en el sistema");
-                }
-            });
+            //    if (result == false)
+            //    {
+            //        context.AddFailure("El Dni ingresado ya existe en el sistema");
+            //    }
+            //});
 
 
             RuleFor(x => x.UserDni)

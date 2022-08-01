@@ -240,7 +240,16 @@ namespace Back_End.Controllers
                        .OrderByDescending(a => a.EmergencyDisasterID)
                        .FirstOrDefault();
 
-                emergencyDisaster.EmergencyDisasterID = emergency.EmergencyDisasterID + 1;
+                if(emergency == null)
+                {
+                    emergencyDisaster.EmergencyDisasterID = 1;
+
+                }
+                else
+                {
+                  emergencyDisaster.EmergencyDisasterID = emergency.EmergencyDisasterID + 1;
+                }
+
 
                 emergencyDisaster.ChatRooms = new ChatRooms();
                 emergencyDisaster.ChatRooms.CreationDate = DateTime.Now;

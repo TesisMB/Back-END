@@ -388,7 +388,7 @@ namespace Back_End.Controllers
 
                 _repository.Employees.SaveAsync();
 
-                return NoContent();
+                return Ok(employeeResult);
             }
 
 

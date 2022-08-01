@@ -182,6 +182,9 @@ namespace Back_End.Controllers
 
                 CruzRojaContext cruzRojaContext = new CruzRojaContext();
 
+                var emergency = cruzRojaContext.EmergenciesDisasters
+                                .OrderByDescending(a => a.EmergencyDisasterID)
+                                .FirstOrDefault();
 
                     foreach (var item in emergencyDisasterResult.ChatRooms.DateMessage)
                     {
@@ -231,6 +234,14 @@ namespace Back_End.Controllers
 
                 var emergencyDisaster = _mapper.Map<EmergenciesDisasters>(emergenciesDisasters);
 
+                CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+                var emergency = cruzRojaContext.EmergenciesDisasters
+                       .OrderByDescending(a => a.EmergencyDisasterID)
+                       .FirstOrDefault();
+
+                emergencyDisaster.EmergencyDisasterID = emergency.EmergencyDisasterID + 1;
+
                 emergencyDisaster.ChatRooms = new ChatRooms();
                 emergencyDisaster.ChatRooms.CreationDate = DateTime.Now;
                 emergencyDisaster.ChatRooms.FK_TypeChatRoomID = emergenciesDisasters.FK_TypeChatRoomID;
@@ -240,7 +251,7 @@ namespace Back_End.Controllers
 
                 _repository.EmergenciesDisasters.SaveAsync();
 
-                var response = await SendController.SendNotification(userId, emergenciesDisasters.LocationsEmergenciesDisasters.LocationCityName);
+                var response = await SendController.SendNotification(userId, emergenciesDisasters.LocationsEmergenciesDisasters.LocationCityName, emergencyDisaster.EmergencyDisasterID);
 
 
                 return Ok(response);

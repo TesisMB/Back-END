@@ -21,9 +21,9 @@ namespace Back_End.Controllers
             _notificationService = notificationService;
         }
 
-        public static async Task<Message> SendNotification(int userId, string body, string Mensaje = "")
+        public static async Task<Message> SendNotification(int userId, string body, int emergency)
         {
-             var result = await NotificationService.SendNotification(userId,body, Mensaje);
+             var result = await NotificationService.SendNotification(userId,body, emergency);
 
             return result;
         }

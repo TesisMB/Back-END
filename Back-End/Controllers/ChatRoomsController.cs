@@ -264,11 +264,6 @@ namespace Back_End.Controllers
                     _repository.Messages.SaveAsync();
                 }
 
-
-
-                var response = await SendController.SendNotification(userId, messages.Message, "Mensaje");
-
-
                 return StatusCode(200);
 
             }
@@ -284,8 +279,11 @@ namespace Back_End.Controllers
 
         //TODO Revisar con APP
         [HttpPost("JoinGroup")]
-        public IActionResult JoinGroup([FromBody] UsersChatRoomsJoin_LeaveGroupDto usersChat)
+        public IActionResult JoinGroup([FromBody] UsersChatRoomsJoin_LeaveGroupDto usersChat, [FromQuery] int userId)
         {
+
+            usersChat.FK_UserID = userId;
+
             try
             {
                 if (usersChat == null)
@@ -297,9 +295,18 @@ namespace Back_End.Controllers
 
                 var userChatRoom = _mapper.Map<UsersChatRooms>(usersChat);
 
-                _repository.UsersChatRooms.JoinGroup(userChatRoom, usersChat.Coords.Latitude, usersChat.Coords.Longitude);
+                //_repository.UsersChatRooms.JoinGroup(userChatRoom, usersChat.Coords.Latitude, usersChat.Coords.Longitude);
 
-                _repository.Messages.SaveAsync();
+                CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+                var userChatRooms = cruzRojaContext.UsersChatRooms
+                                    .OrderByDescending(a => a.ID)
+                                    .FirstOrDefault();
+
+                userChatRoom.ID = userChatRooms.ID + 1;
+
+                _repository.UsersChatRooms.Create(userChatRoom);
+                _repository.UsersChatRooms.SaveAsync();
 
                 return Ok();
 

@@ -1,0 +1,13 @@
+2022-09-02 11:58:30.3439 INFO Returned all employees from database.
+2022-09-02 12:11:51.0449 INFO Returned all employees from database.
+2022-09-02 12:15:46.0291 INFO Returned all employees from database.
+2022-09-02 12:21:44.8112 INFO Returned all employees from database.
+2022-09-02 12:39:27.0922 INFO Returned all employees from database.
+2022-09-02 12:42:53.1547 INFO Returned all employees from database.
+2022-09-02 13:05:39.7923 INFO Returned all employees from database.
+2022-09-02 13:11:39.1551 INFO Returned all employees from database.
+2022-09-02 15:45:59.8109 INFO Returned all employees from database.
+2022-09-02 16:14:07.9529 INFO Returned all employees from database.
+2022-09-02 16:18:41.3132 INFO Returned all employees from database.
+2022-09-02 16:19:07.8026 INFO Returned all employees from database.
+2022-09-02 16:20:07.6854 INFO Returned all employees from database.

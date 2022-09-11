@@ -10,16 +10,16 @@ using DinkToPdf.Contracts;
 using Entities.DataTransferObjects;
 using Entities.DataTransferObjects.Employees___Dto;
 using Entities.Helpers;
+using Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
-//using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-//using Wkhtmltopdf.NetCore;
+
 
 namespace Back_End.Controllers
 {
@@ -93,7 +93,7 @@ namespace Back_End.Controllers
         {
             var employees = await _repository.Users.GetEmployeesVolunteers(employeeId);
 
-           // var employees = await _repository.Employees.GetAllEmployees(employeeId);
+            // var employees = await _repository.Employees.GetAllEmployees(employeeId);
 
             //quien es el actual usuario
             Users user = null;
@@ -107,7 +107,6 @@ namespace Back_End.Controllers
 
             user = cruzRojaContext.Users
                     .Where(x => x.UserID == employeeId)
-                    .AsNoTracking()
                     .FirstOrDefault();
 
             var globalSettings = new GlobalSettings
@@ -151,9 +150,8 @@ namespace Back_End.Controllers
             CruzRojaContext cruzRojaContext = new CruzRojaContext();
 
             user = cruzRojaContext.Users
+                    //.Include(a => a.Estates)
                     .Where(x => x.UserID == employeeId)
-                    .Include(a => a.Estates)
-                    .AsNoTracking()
                     .FirstOrDefault();
 
             var globalSettings = new GlobalSettings
@@ -205,6 +203,51 @@ namespace Back_End.Controllers
                     item.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{item.Avatar}";
                 }
 
+                CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+
+                foreach (var item in employeesResult)
+                {
+                    var userByChat = cruzRojaContext.UsersChatRooms.
+                                            Where(a => a.FK_UserID.Equals(item.UserID))
+                                            .AsNoTracking()
+                                            .ToList();
+
+                    foreach (var item2 in userByChat)
+                    {
+                        var userByEmergency = cruzRojaContext.EmergenciesDisasters
+                                               .Where(a => a.EmergencyDisasterID.Equals(item2.FK_ChatRoomID))
+                                               .ToList();
+
+                        foreach (var item5 in userByEmergency)
+                        {
+                            var userByAlert = cruzRojaContext.Alerts
+                                              .Where(a => a.AlertID.Equals(item5.FK_AlertID))
+                                              .FirstOrDefault();
+
+                            var userByTypeEmergency = cruzRojaContext.TypesEmergenciesDisasters
+                                             .Where(a => a.TypeEmergencyDisasterID.Equals(item5.FK_TypeEmergencyID))
+                                             .FirstOrDefault();
+
+                            var userByLocation = cruzRojaContext.LocationsEmergenciesDisasters
+                                         .Where(a => a.ID.Equals(item5.EmergencyDisasterID))
+                                         .FirstOrDefault();
+
+                            if (item.EmergencyDisastersReports == null)
+                            {
+                                item.EmergencyDisastersReports = new List<EmergenciesDisasterByUser>();
+
+                                returnList(item.EmergencyDisastersReports, item5, userByAlert, userByTypeEmergency, userByLocation);
+                            }
+                            else
+                            {
+                                returnList(item.EmergencyDisastersReports, item5, userByAlert, userByTypeEmergency, userByLocation);
+
+                            }
+                        }
+                    }
+                }
+
                 return Ok(employeesResult);
             }
 
@@ -213,6 +256,24 @@ namespace Back_End.Controllers
                 _logger.LogError($"Something went wrong inside GetAllEmployees action: {ex.Message}");
                 return StatusCode(500, "Internal Server error");
             }
+        }
+
+        [NonAction]
+        public List<EmergenciesDisasterByUser> returnList(List<EmergenciesDisasterByUser> emergenciesDisasterByUsers,
+                                                          EmergenciesDisasters emergenciesDisasters, Alerts alerets,
+                                                          TypesEmergenciesDisasters typesEmergenciesDisasters, LocationsEmergenciesDisasters location)
+        {
+
+            emergenciesDisasterByUsers.Add(new EmergenciesDisasterByUser
+            {
+                ID = emergenciesDisasters.EmergencyDisasterID,
+                Type = typesEmergenciesDisasters.TypeEmergencyDisasterName,
+                Degree = alerets.AlertDegree,
+                City = location.LocationCityName,
+                State = (emergenciesDisasters.EmergencyDisasterEndDate == null) ? "Activa" : "Inactiva"
+            });
+
+            return emergenciesDisasterByUsers;
         }
 
         //********************************* FUNCIONANDO *********************************

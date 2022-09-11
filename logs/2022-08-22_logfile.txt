@@ -1,0 +1,7 @@
+2022-08-22 20:03:42.9714 INFO Returned User.
+2022-08-22 20:03:44.9740 INFO Returned all Resources_Request from database.
+2022-08-22 20:03:45.3615 INFO Returned all PDF from database.
+2022-08-22 20:03:46.4294 INFO Returned all emergenciesDisasters from database.
+2022-08-22 20:03:53.3118 INFO Returned all Resources_Request from database.
+2022-08-22 20:03:54.9061 INFO Returned all TypesEmergenciesDisasters from database.
+2022-08-22 20:03:55.8908 INFO Returned all emergenciesDisasters from database.

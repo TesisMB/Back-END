@@ -1,0 +1,7 @@
+2022-09-01 19:30:03.2021 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-09-01 19:30:28.0612 INFO Returned all employees from database.
+2022-09-01 20:07:17.8421 INFO Returned all employees from database.
+2022-09-01 20:11:00.2173 INFO Returned all employees from database.
+2022-09-01 20:14:26.6708 INFO Returned all employees from database.
+2022-09-01 20:31:26.9061 INFO Returned all employees from database.
+2022-09-01 21:15:41.9044 INFO Returned all employees from database.

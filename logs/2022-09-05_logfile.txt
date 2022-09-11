@@ -1,0 +1,3 @@
+2022-09-05 21:53:31.7610 INFO Returned User.
+2022-09-05 21:55:47.8756 ERROR Something went wrong inside GetAllChatRooms aciton: A second operation started on this context before a previous operation completed. This is usually caused by different threads using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+2022-09-05 21:55:52.9215 INFO Returned all emergenciesDisasters from database.

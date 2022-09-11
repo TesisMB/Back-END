@@ -1,5 +1,9 @@
 ﻿using Back_End.Models.Employees___Dto;
+using Entities.DataTransferObjects.CharRooms___Dto;
+using Entities.DataTransferObjects.EmergenciesDisasters___Dto;
+using Entities.DataTransferObjects.TypesEmergenciesDisasters___Dto;
 using System;
+using System.Collections.Generic;
 
 namespace Entities.DataTransferObjects.Employees___Dto
 {
@@ -20,5 +24,22 @@ namespace Entities.DataTransferObjects.Employees___Dto
         public EmployeePersonDto Persons { get; set; }
 
         public EstatesDto Estates { get; set; }
+
+        public List<EmergenciesDisasterByUser> EmergencyDisastersReports { get; set; }
+    }
+
+
+    public class EmergenciesDisasterByUser
+    {
+        public int ID { get; set; }
+
+        public string State { get; set; }
+
+        public string Type{ get; set; }
+
+
+        public string Degree { get; set; }
+        public string City { get; set; }
+
     }
 }

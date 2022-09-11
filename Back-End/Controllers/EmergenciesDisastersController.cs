@@ -263,7 +263,7 @@ namespace Back_End.Controllers
                 var response = await SendController.SendNotification(userId, emergenciesDisasters.LocationsEmergenciesDisasters.LocationCityName, emergencyDisaster.EmergencyDisasterID);
 
 
-                return Ok(response);
+                return Ok();
             }
             catch (Exception ex)
             {

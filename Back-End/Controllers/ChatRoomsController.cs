@@ -304,7 +304,15 @@ namespace Back_End.Controllers
                                     .OrderByDescending(a => a.ID)
                                     .FirstOrDefault();
 
+                if(userChatRooms == null)
+                {
+                    userChatRoom.ID = 1;
+
+                }
+                else
+                {
                 userChatRoom.ID = userChatRooms.ID + 1;
+                }
 
                 _repository.UsersChatRooms.Create(userChatRoom);
                 _repository.UsersChatRooms.SaveAsync();

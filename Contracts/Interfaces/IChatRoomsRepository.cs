@@ -6,6 +6,6 @@ namespace Contracts.Interfaces
 {
     public interface IChatRoomsRepository : IRepositoryBase<ChatRooms>
     {
-        Task<IEnumerable<ChatRooms>> GetChatRooms();
+        Task<IEnumerable<ChatRooms>> GetChatRooms(int userId);
     }
 }

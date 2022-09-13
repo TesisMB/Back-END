@@ -34,7 +34,7 @@ namespace Back_End.Controllers
         {
             try
             {
-                var medicines  = await _repository.Medicines.GetAllMedicines(userId);
+                var medicines = await _repository.Medicines.GetAllMedicines(userId);
 
                 _logger.LogInfo($"Returned all Materials from database.");
 
@@ -45,22 +45,18 @@ namespace Back_End.Controllers
 
                     if (item.Picture != "https://i.imgur.com/S9HJEwF.png")
                     {
-                        item.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
-                                        Request.Scheme, Request.Host, Request.PathBase, item.Picture);
+                        item.Picture = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{item.Picture}";
 
+                        //DateTime date = Convert.ToDateTime(item.Medicines.MedicineExpirationDate);
 
-                        DateTime date = Convert.ToDateTime(item.Medicines.MedicineExpirationDate);
-
-                        if (date > DateTime.Now)
-                        {
-                            item.Availability = false;
-                        }
+                        //if (date > DateTime.Now)
+                        //{
+                        //    item.Availability = false;
+                        //}
                     }
-
                 }
 
                 return Ok(medicinesResult);
-
             }
             catch (Exception ex)
             {
@@ -71,7 +67,18 @@ namespace Back_End.Controllers
             }
         }
 
-      
+        //[Route("download")]
+        //[HttpGet]
+        //public async Task<IActionResult> Download(string fileName)
+        //{
+        //    var imagBytes = await _repository.Medicines.Get(fileName);
+        //    return new FileContentResult(imagBytes, "application/octet-stream")
+        //    {
+        //        FileDownloadName = Guid.NewGuid().ToString() + ".webp",
+        //    };
+        //}
+
+
         //********************************* FUNCIONANDO *********************************
         [HttpGet("{medicineId}")]
         public async Task<ActionResult<Medicines>> GetMedicineWithDetails(string medicineId)
@@ -93,17 +100,14 @@ namespace Back_End.Controllers
 
                     if (employeeResult.Picture != "https://i.imgur.com/S9HJEwF.png")
                     {
-                        employeeResult.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
-                                        Request.Scheme, Request.Host, Request.PathBase, employeeResult.Picture);
+                        employeeResult.Picture = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{employeeResult.Picture}";
+                    }
 
+                    DateTime date = Convert.ToDateTime(employeeResult.Medicines.MedicineExpirationDate);
 
-                        DateTime date = Convert.ToDateTime(employeeResult.Medicines.MedicineExpirationDate);
-
-                        if (date < DateTime.Now)
-                        {
-                            employeeResult.Availability = false;
-                        }
-
+                    if (date < DateTime.Now)
+                    {
+                        employeeResult.Availability = false;
                     }
 
                     return Ok(employeeResult);
@@ -119,8 +123,16 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpPost]
-        public async Task<ActionResult<Medicines>> CreateMedicine([FromBody] Resources_ForCreationDto medicine)
+        public async Task<ActionResult<Medicines>> CreateMedicine([FromBody] Resources_ForCreationDto medicine, [FromQuery] int userId)
         {
+            medicine.CreatedBy = userId;
+
+            //if (medicine.ImageFile != null)
+            //{
+            //    await _repository.Medicines.Upload(medicine);
+            //}
+            //return Ok();
+
             try
             {
                 if (!ModelState.IsValid)
@@ -136,11 +148,11 @@ namespace Back_End.Controllers
 
                 var medicineEntity = _mapper.Map<Medicines>(medicine);
 
-                if (medicine.Picture == null) 
+                if (medicine.Picture == null)
                     medicineEntity.MedicinePicture = "https://i.imgur.com/S9HJEwF.png";
                 else
                     medicineEntity.MedicinePicture = medicine.Picture;
-                
+
 
                 _repository.Medicines.CreateMedicine(medicineEntity);
 
@@ -161,7 +173,8 @@ namespace Back_End.Controllers
         
         //********************************* FUNCIONANDO *********************************
         [HttpPatch("{medicineId}")]
-        public async Task<ActionResult> UpdateMedicine(string medicineId, JsonPatchDocument<MedicineForUpdateDto> patchDocument)
+        public async Task<ActionResult> UpdateMedicine(string medicineId, [FromQuery] int userId,
+            JsonPatchDocument<MedicineForUpdateDto> patchDocument)
         {
             try
             {
@@ -175,6 +188,7 @@ namespace Back_End.Controllers
 
                 var medicineToPatch = _mapper.Map<MedicineForUpdateDto>(medicineEntity);
                 medicineToPatch.DateModified = DateTime.Now;
+                medicineToPatch.ModifiedBy = userId;
 
 
                 patchDocument.ApplyTo(medicineToPatch, ModelState);

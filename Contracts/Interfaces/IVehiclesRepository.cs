@@ -12,7 +12,8 @@ namespace Contracts.Interfaces
     {
         Task<IEnumerable<Vehicles>> GetAllVehiclesFilters(int userId);
 
-        IEnumerable<Vehicles> GetAllVehicles();
+        IEnumerable<Vehicles> GetAllVehicles(int userId);
+        IEnumerable<Vehicles> GetAllVehicles(DateTime dateStart, DateTime dateEnd);
 
         Task<Vehicles> GetVehicleById(string vehicleId);
         Task<Vehicles> GetVehicleWithDetails(string vehicleId);
@@ -22,5 +23,6 @@ namespace Contracts.Interfaces
         void UpdateVehicle(Vehicles vehicles);
 
         void DeleteVehicle(Vehicles vehicles);
+        IEnumerable<Vehicles> GetAllVehicles(DateTime dateConvert, DateTime dateConvertEnd, int estateId);
     }
 }

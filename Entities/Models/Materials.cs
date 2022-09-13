@@ -66,7 +66,6 @@ namespace Entities.Models
 
 
 
-
         [ForeignKey("FK_MaterialID")]
         public ICollection<ResourcesRequestMaterialsMedicinesVehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }
 

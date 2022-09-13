@@ -1,4 +1,5 @@
 ﻿using Entities.DataTransferObjects.CharRooms___Dto;
+using Entities.Models;
 using System;
 
 namespace Entities.DataTransferObjects.Messages___Dto
@@ -7,17 +8,33 @@ namespace Entities.DataTransferObjects.Messages___Dto
     {
         public String message { get; set; }
 
-        public Boolean messageState { get; set; }
+        public Boolean? MessageState { get; set; } = false;
 
-        public DateTime createdDate { get; set; } = DateTime.Now;
+        public DateTime CreationDate { get; set; } = DateTime.Now;
 
-        public int fK_ChatRoomID { get; set; } 
+        public string chatRoomID { get; set; } 
 
-        public int? fK_LocationVolunteerID { get; set; }
+        //public int? fK_LocationVolunteerID { get; set; }
 
-        public int fK_UserID { get; set; }
+        public int userID { get; set; }
 
-        public string name { get; set; }
+        public string? Avatar { get; set; }
+        public string? Name { get; set; }
 
+        public DateMessageForCreationDto? DateMessage { get; set; }
+
+    }
+
+    public class SendMessage
+    {
+        public string message { get; set; }
+        public Boolean MessageState { get; set; } = false;
+
+        public DateTime CreatedDate { get; set; }
+        public int userID { get; set; }
+        public string chatRoomID { get; set; }
+
+        public string Avatar { get; set; }
+        public string Name { get; set; }
     }
 }

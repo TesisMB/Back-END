@@ -20,8 +20,8 @@ namespace Back_End.Profiles
                                 .ForMember(i => i.Status, opt => opt.MapFrom(src => src.Users.Persons.Status));
 
 
-            CreateMap<Employees, EmployeeDto>()
-                .ForMember(i => i.EmployeeCreatedate, opt => opt.MapFrom(src => DateTimeOffsetExtensions.GetDateTime(src.EmployeeCreatedate)));
+            CreateMap<Employees, EmployeeDto>();
+               // .ForPath(i => i.Users.Createdate, opt => opt.MapFrom(src => DateTimeOffsetExtensions.GetDateTime(src.Users.CreatedDate)));
 
             CreateMap<Employees, EmployeesVehiclesDto>();
 

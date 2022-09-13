@@ -19,11 +19,12 @@ namespace Entities.Models
         public TypesChatRooms TypesChatRooms { get; set; }
         public int FK_TypeChatRoomID { get; set; }
 
-        [ForeignKey("FK_ChatRoomID")]
+        public ICollection<DateMessage> DateMessage { get; set; }
+
         public ICollection<UsersChatRooms> UsersChatRooms { get; set; }
 
         public EmergenciesDisasters EmergenciesDisasters { get; set; }
-        public ICollection<Messages> Messages { get; set; }
+        //public ICollection<Messages> Messages { get; set; }
 
     }
 }

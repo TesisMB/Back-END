@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Azure.Storage.Blobs;
 using Back_End.Entities;
 using Contracts.Interfaces;
 
@@ -23,11 +24,15 @@ namespace Repository
         private IUsersChatRoomsRepository _userChatRooms;
         private ITypesVehicles _typesVehicles;
         private IMapper _mapper;
+        private IPDFRepository _pdf;
+        private readonly BlobServiceClient _blobServiceClient;
 
-        public RepositoryWrapper(CruzRojaContext cruzRojaContext, IMapper mapper)
+        public RepositoryWrapper(CruzRojaContext cruzRojaContext, IMapper mapper, BlobServiceClient blobServiceClient)
         {
             _cruzRojaContext = cruzRojaContext;
             _mapper = mapper;
+            _blobServiceClient = blobServiceClient;
+
         }
 
         public IEmployeesRepository Employees
@@ -96,7 +101,7 @@ namespace Repository
             {
                 if (_medicines == null)
                 {
-                    _medicines = new MedicinesRepository(_cruzRojaContext);
+                    _medicines = new MedicinesRepository(_cruzRojaContext, _blobServiceClient);
                 }
                 return _medicines;
             }
@@ -211,6 +216,19 @@ namespace Repository
                 return _typesVehicles;
             }
         }
+
+        public IPDFRepository PDF
+        {
+            get
+            {
+                if (_pdf == null)
+                {
+                    _pdf = new PDFRepository(_cruzRojaContext, _blobServiceClient);
+                }
+                return _pdf;
+            }
+        }
+
 
 
         /*public void Save()

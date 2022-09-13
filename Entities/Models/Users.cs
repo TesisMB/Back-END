@@ -39,7 +39,12 @@ namespace Back_End.Models
 
         public Volunteers Volunteers { get; set; }
 
-        public Employees Employees { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+
+        public string Avatar { get; set; }
+
+         public Employees Employees { get; set; }
 
         [ForeignKey("FK_EstateID")]
         public Estates Estates { get; set; }
@@ -47,14 +52,14 @@ namespace Back_End.Models
         [Required]
         public int FK_EstateID { get; set; }
 
-       
+        public string DeviceToken { get; set; }
+
         [ForeignKey("FK_UserID")]
         public ICollection<UsersNotifications> UsersNotifications { get; set; }
 
         [ForeignKey("FK_UserID")]
         public ICollection<UsersChat> UsersChat { get; set; }
 
-        [ForeignKey("FK_UserID")]
         public ICollection<UsersChatRooms> UsersChatRooms { get; set; }
         public Messages Messages { get; set; }
 

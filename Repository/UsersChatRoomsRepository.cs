@@ -33,11 +33,14 @@ namespace Repository
 
         public void JoinGroup(UsersChatRooms usersChat, decimal longitude, decimal latitude)
         {
-            usersChat.FK_UserID = UsersRepository.authUser.UserID;
-            var rol = UsersRepository.authUser.Roles.RoleName;
+            //usersChat.FK_UserID = UsersRepository.authUser.UserID;
+            //var rol = UsersRepository.authUser.Roles.RoleName;
+
+            var user = EmployeesRepository.GetAllEmployeesById(usersChat.FK_UserID);
+
             usersChat.Users = null;
 
-            if (rol == "Voluntario")
+            if (user.Roles.RoleName == "Voluntario")
             {
                 LocationVolunteers locations = new LocationVolunteers()
                 {

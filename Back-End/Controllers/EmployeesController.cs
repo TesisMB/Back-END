@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Back_End.EmployeesPDF;
 using Back_End.Entities;
 using Back_End.Helpers;
 using Back_End.Models;
@@ -6,51 +7,55 @@ using Back_End.Models.Employees___Dto;
 using Contracts.Interfaces;
 using DinkToPdf;
 using DinkToPdf.Contracts;
+using Entities.DataTransferObjects;
 using Entities.DataTransferObjects.Employees___Dto;
-using Entities.DataTransferObjects.Locations___Dto;
 using Entities.Helpers;
 using Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using PDF_Generator.Utility;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Wkhtmltopdf.NetCore;
+
 
 namespace Back_End.Controllers
 {
-    [Route("api/Employees")]
+    [Route("api/")]
     [ApiController]
     public class EmployeesController : ControllerBase
     {
         private readonly ILoggerManager _logger;
         private readonly IRepositorWrapper _repository;
         private readonly IMapper _mapper;
-        public readonly IGeneratePdf _generatePdf;
         public byte[] pdf;
         private IConverter _converter;
 
-        public EmployeesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper, IGeneratePdf generatePdf, IConverter converter)
+        public EmployeesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper, IConverter converter)
         {
             _logger = logger;
             _repository = repository;
             _mapper = mapper;
-            _generatePdf = generatePdf;
             _converter = converter;
         }
 
-
-
-        [HttpGet("PDF/{employeeId}")]
+        [HttpGet("Employees/PDF/{employeeId}")]
         public IActionResult CreatePDF(int employeeId)
         {
 
-            var employees =  _repository.Employees.GetEmployeeWithDetails(employeeId);
+            var employees = _repository.Employees.GetEmployeeWithDetails(employeeId);
 
-            //ar employees = DataStorage.GetAllEmployees();
+            //quien es el actual usuario
+            Users user = new Users();
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            //user = cruzRojaContext.Users
+            //        .Where(x => x.UserID == employeeId)
+            //        .Include(a => a.Estates)
+            //        .AsNoTracking()
+            //        .FirstOrDefault();
 
             var globalSettings = new GlobalSettings
             {
@@ -58,16 +63,16 @@ namespace Back_End.Controllers
                 Orientation = Orientation.Portrait,
                 PaperSize = PaperKind.A4,
                 Margins = new MarginSettings { Top = 10 },
-                DocumentTitle = $"Reporte de {employees.Users.Persons.FirstName} {employees.Users.Persons.LastName}",
+                DocumentTitle = $"Reporte de empleado",
             };
 
             var objectSettings = new ObjectSettings
             {
                 PagesCount = true,
-                HtmlContent = TemplateGenerator.GetHTMLString(employees),
-                //Page = "https://code-maze.com/", //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE
+                HtmlContent = EmployeePdf.GetHTMLString(employees),
+                // Page = "https://code-maze.com/", //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE
                 WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "styles.css") },
-                FooterSettings = { FontName = "Arial", FontSize = 9, Right = "[page]", Line = true,},
+                FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
                 //FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
             };
 
@@ -82,18 +87,166 @@ namespace Back_End.Controllers
             return File(file, "application/pdf");
         }
 
+
+        [HttpGet("Employees/GetAll/PDF/{employeeId}")]
+        public async Task<IActionResult> CreatePDFEmployees(int employeeId)
+        {
+            var employees = await _repository.Users.GetEmployeesVolunteers(employeeId);
+
+            // var employees = await _repository.Employees.GetAllEmployees(employeeId);
+
+            //quien es el actual usuario
+            Users user = null;
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            string title = string.Empty;
+            foreach (var emp in employees)
+            {
+                title = emp.Estates.Locations.LocationCityName;
+            }
+
+            user = cruzRojaContext.Users
+                    .Where(x => x.UserID == employeeId)
+                    .FirstOrDefault();
+
+            var globalSettings = new GlobalSettings
+            {
+                ColorMode = ColorMode.Color,
+                Orientation = Orientation.Portrait,
+                PaperSize = PaperKind.A4,
+                Margins = new MarginSettings { Top = 10 },
+                DocumentTitle = $"Reporte de empleados - {title}",
+            };
+
+            var objectSettings = new ObjectSettings
+            {
+                PagesCount = true,
+                HtmlContent = EmployeesPdf.GetHTMLString(employees),
+                // Page = "https://code-maze.com/", //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE
+                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "StylesForEmployeescss.css") },
+                FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+                //FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+            };
+
+            var pdf = new HtmlToPdfDocument()
+            {
+                GlobalSettings = globalSettings,
+                Objects = { objectSettings }
+            };
+
+            var file = _converter.Convert(pdf);
+
+            return File(file, "application/pdf");
+        }
+
+        [HttpGet("Employees/Credential/{employeeId}")]
+        public IActionResult CredentialPDF(int employeeId)
+        {
+
+            var employees = _repository.Employees.GetEmployeeWithDetails(employeeId);
+
+            //quien es el actual usuario
+            Users user = new Users();
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            user = cruzRojaContext.Users
+                    //.Include(a => a.Estates)
+                    .Where(x => x.UserID == employeeId)
+                    .FirstOrDefault();
+
+            var globalSettings = new GlobalSettings
+            {
+                ColorMode = ColorMode.Color,
+                Orientation = Orientation.Portrait,
+                PaperSize = PaperKind.A4,
+                Margins = new MarginSettings { Top = 10 },
+                DocumentTitle = $"Credencial",
+            };
+
+            var objectSettings = new ObjectSettings
+            {
+                PagesCount = true,
+                HtmlContent = Credential.GetHTMLString(employees),
+                // Page = "https://code-maze.com/", //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE
+                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "Credential.css") },
+                FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+                //FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+            };
+
+            var pdf = new HtmlToPdfDocument()
+            {
+                GlobalSettings = globalSettings,
+                Objects = { objectSettings }
+            };
+
+            var file = _converter.Convert(pdf);
+
+            return File(file, "application/pdf");
+        }
+
+
         //********************************* FUNCIONANDO *********************************
 
-        [HttpGet]
-        public async Task<ActionResult<Employees>> GetAllEmployees([FromQuery] int userId)
+        [HttpGet("Employees")]
+        public async Task<ActionResult<Users>> GetAllEmployees([FromQuery] int userId)
         {
             try
             {
-                var employees = await _repository.Employees.GetAllEmployees(userId);
+                var employees = await _repository.Users.GetEmployeesVolunteers(userId);
 
                 _logger.LogInfo($"Returned all employees from database.");
 
-                var employeesResult = _mapper.Map<IEnumerable<EmployeeDto>>(employees);
+                var employeesResult = _mapper.Map<IEnumerable<EmployeeUserDto>>(employees);
+
+                foreach (var item in employeesResult)
+                {
+                    item.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{item.Avatar}";
+                }
+
+                CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+
+                foreach (var item in employeesResult)
+                {
+                    var userByChat = cruzRojaContext.UsersChatRooms.
+                                            Where(a => a.FK_UserID.Equals(item.UserID))
+                                            .AsNoTracking()
+                                            .ToList();
+
+                    foreach (var item2 in userByChat)
+                    {
+                        var userByEmergency = cruzRojaContext.EmergenciesDisasters
+                                               .Where(a => a.EmergencyDisasterID.Equals(item2.FK_ChatRoomID))
+                                               .ToList();
+
+                        foreach (var item5 in userByEmergency)
+                        {
+                            var userByAlert = cruzRojaContext.Alerts
+                                              .Where(a => a.AlertID.Equals(item5.FK_AlertID))
+                                              .FirstOrDefault();
+
+                            var userByTypeEmergency = cruzRojaContext.TypesEmergenciesDisasters
+                                             .Where(a => a.TypeEmergencyDisasterID.Equals(item5.FK_TypeEmergencyID))
+                                             .FirstOrDefault();
+
+                            var userByLocation = cruzRojaContext.LocationsEmergenciesDisasters
+                                         .Where(a => a.ID.Equals(item5.EmergencyDisasterID))
+                                         .FirstOrDefault();
+
+                            if (item.EmergencyDisastersReports == null)
+                            {
+                                item.EmergencyDisastersReports = new List<EmergenciesDisasterByUser>();
+
+                                returnList(item.EmergencyDisastersReports, item5, userByAlert, userByTypeEmergency, userByLocation);
+                            }
+                            else
+                            {
+                                returnList(item.EmergencyDisastersReports, item5, userByAlert, userByTypeEmergency, userByLocation);
+
+                            }
+                        }
+                    }
+                }
 
                 return Ok(employeesResult);
             }
@@ -105,13 +258,33 @@ namespace Back_End.Controllers
             }
         }
 
+        [NonAction]
+        public List<EmergenciesDisasterByUser> returnList(List<EmergenciesDisasterByUser> emergenciesDisasterByUsers,
+                                                          EmergenciesDisasters emergenciesDisasters, Alerts alerets,
+                                                          TypesEmergenciesDisasters typesEmergenciesDisasters, LocationsEmergenciesDisasters location)
+        {
+
+            emergenciesDisasterByUsers.Add(new EmergenciesDisasterByUser
+            {
+                ID = emergenciesDisasters.EmergencyDisasterID,
+                Type = typesEmergenciesDisasters.TypeEmergencyDisasterName,
+                Degree = alerets.AlertDegree,
+                City = location.LocationCityName,
+                State = (emergenciesDisasters.EmergencyDisasterEndDate == null) ? "Activa" : "Inactiva"
+            });
+
+            return emergenciesDisasterByUsers;
+        }
+
         //********************************* FUNCIONANDO *********************************
-        [HttpGet("{employeeId}")]
-        public async Task<ActionResult<Employees>> GetEmployeeWithDetails(int employeeId)
+        [HttpGet("Employees/{employeeId}")]
+        public async Task<ActionResult<Users>> GetEmployeeWithDetails(int employeeId)
         {
             try
             {
-                var employee =  _repository.Employees.GetEmployeeWithDetails(employeeId);
+                var employee = await _repository.Users.GetEmployeeVolunteerById(employeeId);
+
+                //var employee = _repository.Employees.GetEmployeeWithDetails(employeeId);
 
                 if (employee == null)
                 {
@@ -122,7 +295,10 @@ namespace Back_End.Controllers
                 {
                     _logger.LogInfo($"Returned employe with details for id: {employeeId}");
 
-                    var employeeResult = _mapper.Map<EmployeeDto>(employee);
+                    var employeeResult = _mapper.Map<EmployeeUserDto>(employee);
+
+                    employeeResult.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{employeeResult.Avatar}";
+
                     return Ok(employeeResult);
                 }
             }
@@ -136,8 +312,8 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
 
-        [HttpPost]
-        public async Task<ActionResult<Users>> CreateEmployee([FromBody] UsersEmployeesForCreationDto employee)
+        [HttpPost("Employees")]
+        public async Task<ActionResult<Users>> CreateEmployee([FromBody] UsersEmployeesForCreationDto employee, [FromQuery] int userId)
         {
             try
             {
@@ -166,6 +342,8 @@ namespace Back_End.Controllers
 
 
                 var employeeEntity = _mapper.Map<Users>(employee);
+               employeeEntity.CreatedDate = DateTime.Now;
+               employeeEntity.Avatar = "avatar-user.png";
 
                 if (roles.RoleName != "Voluntario")
                 {
@@ -173,6 +351,8 @@ namespace Back_End.Controllers
                     {
                         EmployeeCreatedate = DateTime.Now
                     };
+
+
                 }
                 else
                 {
@@ -180,14 +360,14 @@ namespace Back_End.Controllers
                     employee.Volunteers = new VolunteersForCreationDto();
                     employeeEntity.Volunteers = new Volunteers();
 
-                    if (employee.Volunteers.VolunteerAvatar == null)
+                    if (employee.Avatar == null)
                     {
-                        employeeEntity.Volunteers.VolunteerAvatar = "https://i.imgur.com/8AACVdK.png";
+                        employeeEntity.Avatar = "avatar-user.png";
                     }
-                    else
-                    {
-                        employeeEntity.Volunteers.VolunteerAvatar = await UploadController.SaveImage(employee.Volunteers.ImageFile, "Resources");
-                    }
+                    //else
+                    //{
+                    //    employeeEntity.Volunteers.VolunteerAvatar =  UploadController.SaveImage(employee.Volunteers.ImageFile);
+                    //}
 
                 }
 
@@ -206,13 +386,14 @@ namespace Back_End.Controllers
 
 
         //********************************* FUNCIONANDO *********************************
-    
-        [HttpPatch("{employeeId}")]
-        public async Task<ActionResult> UpdatePartialUser(int employeeId, JsonPatchDocument<EmployeeForUpdateDto> _Employees)
+
+        //TO-DO Falta ver alertId
+        [HttpPatch("Employees/{employeeId}")]
+        public async Task<ActionResult> UpdatePartialUser(int employeeId, JsonPatchDocument<UsersForUpdateDto> _Employees)
         {
             try
             {
-                var employeeEntity = await _repository.Employees.GetEmployeeById(employeeId);
+                var employeeEntity = await _repository.Users.GetEmployeeVolunteerById(employeeId);
 
                 if (employeeEntity == null)
                 {
@@ -220,11 +401,12 @@ namespace Back_End.Controllers
                     return NotFound();
                 }
 
-                var employeeToPatch = _mapper.Map<EmployeeForUpdateDto>(employeeEntity);
+                var employeeToPatch = _mapper.Map<UsersForUpdateDto>(employeeEntity);
+
 
                 _Employees.ApplyTo(employeeToPatch, ModelState);
 
-
+              
                 if (!TryValidateModel(employeeToPatch))
                 {
                     return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
@@ -232,15 +414,15 @@ namespace Back_End.Controllers
 
 
                 Users authUser = new Users();
-                if (!string.IsNullOrEmpty(employeeToPatch.Users.UserNewPassword))
+                if (!string.IsNullOrEmpty(employeeToPatch.UserNewPassword))
                 {
                     // AGREGARLOS EN EL REPOSITORIO
-                    var userPass = employeeToPatch.Users.UserPassword;
-                    employeeToPatch.Users.UserPassword = Encrypt.GetSHA256(userPass);
+                    var userPass = employeeToPatch.UserPassword;
+                    employeeToPatch.UserPassword = Encrypt.GetSHA256(userPass);
 
                     using (var db = new CruzRojaContext())
-                        authUser = db.Users.Where(u => u.UserID == employeeEntity.Users.UserID
-                               && u.UserPassword == employeeToPatch.Users.UserPassword)
+                        authUser = db.Users.Where(u => u.UserID == employeeEntity.UserID
+                               && u.UserPassword == employeeToPatch.UserPassword)
                                 .FirstOrDefault();
 
 
@@ -251,23 +433,24 @@ namespace Back_End.Controllers
 
                     else
                     {
-                        employeeToPatch.Users.UserNewPassword = employeeToPatch.Users.UserNewPassword.Trim();
+                        employeeToPatch.UserNewPassword = employeeToPatch.UserNewPassword.Trim();
 
-                        var userNewPass = employeeToPatch.Users.UserNewPassword;
-                        employeeToPatch.Users.UserNewPassword = Encrypt.GetSHA256(userNewPass);
+                        var userNewPass = employeeToPatch.UserNewPassword;
+                        employeeToPatch.UserNewPassword = Encrypt.GetSHA256(userNewPass);
 
-                        employeeToPatch.Users.UserPassword = employeeToPatch.Users.UserNewPassword;
+                        employeeToPatch.UserPassword = employeeToPatch.UserNewPassword;
                     }
 
                 }
 
+
                 var employeeResult = _mapper.Map(employeeToPatch, employeeEntity);
 
-                _repository.Employees.Update(employeeResult);
+                _repository.Users.Update(employeeResult);
 
                 _repository.Employees.SaveAsync();
 
-                return NoContent();
+                return Ok(employeeResult);
             }
 
 
@@ -280,8 +463,54 @@ namespace Back_End.Controllers
         }
 
 
+
+        [HttpPut("SendDevice")]
+        public async Task<ActionResult> UpdateDevice(DeviceForUpdateDto users, [FromQuery] int userId, [FromQuery] string deviceToken)
+        {
+            try
+            {
+                var userEntity = await _repository.Users.SendDeviceById(userId) ;
+
+                if (userEntity == null)
+                {
+                    _logger.LogError($"User with id: {userId}, hasn't been found in db.");
+                    return NotFound();
+                }
+
+                var userToPatch = _mapper.Map<DeviceForUpdateDto>(userEntity);
+
+                userToPatch.DeviceToken = users.DeviceToken;
+                //users.ApplyTo(userToPatch, ModelState);
+
+
+                if (!TryValidateModel(userToPatch))
+                {
+                    return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
+                }
+
+                var userResult = _mapper.Map(userToPatch, userEntity);
+
+                if (!String.IsNullOrEmpty(deviceToken))
+                    userResult.DeviceToken = string.Empty;
+
+                _repository.Users.Update(userResult);
+
+                _repository.Users.SaveAsync();
+
+                return NoContent();
+            }
+
+
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside UpdateUser action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+
+            }
+        }
+
         //********************************* FUNCIONANDO *********************************
-        [HttpDelete("{employeeId}")]
+        [HttpDelete("Employees/{employeeId}")]
         public async Task<ActionResult> DeleteEmployee(int employeeId)
         {
             try
@@ -314,8 +543,8 @@ namespace Back_End.Controllers
         }
 
     }
-      
-   
+
+
 
 
 

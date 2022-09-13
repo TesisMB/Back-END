@@ -46,6 +46,9 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
 
         public ICollection<ResourcesRequestDto> Resources_Requests { get; set; }
 
+        //TO-DO CORREGIR MODELO
+        public ICollection<UsersChatRoomsDto> UsersChatRooms { get; set; }
+
 
     }
 }

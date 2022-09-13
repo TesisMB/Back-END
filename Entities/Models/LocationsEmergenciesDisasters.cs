@@ -11,16 +11,13 @@ namespace Entities.Models
         
         public int ID { get; set; }
 
-        [Required]
         [MaxLength(25)]
         public string LocationDepartmentName { get; set; }
 
-        [Required]
         [MaxLength(25)]
         public string LocationMunicipalityName { get; set; }
 
         [Required]
-        [MaxLength(25)]
         public string LocationCityName { get; set; }
 
         [Column(TypeName = "decimal(8, 6)")]

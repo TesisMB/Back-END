@@ -25,7 +25,7 @@ namespace Repository
         }
 
 
-        public async Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequest(int userId, string Condition)
+        public async Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequest(int userId, string Condition, string state)
         {
 
             //var user = UsersRepository.authUser;
@@ -33,16 +33,16 @@ namespace Repository
             //user = await EmployeesRepository.GetAllEmployeesById(userId);
 
             user = await _cruzRojaContext.Users
-               .Where(a => a.UserID.Equals(userId))
-               .Include(a => a.Roles)
-               .Include(a => a.Estates)
-               .ThenInclude(a => a.Locations)
-               .FirstOrDefaultAsync();
+                .Where(a => a.UserID.Equals(userId))
+                .Include(a => a.Roles)
+                .Include(a => a.Estates)
+                .ThenInclude(a => a.Locations)
+                .FirstOrDefaultAsync();
 
             var collection = _cruzRojaContext.Resources_Requests as IQueryable<ResourcesRequest>;
 
             //Admin y C.General -> tiene acceso a todo en funcion del departamento
-            if (!String.IsNullOrEmpty(Condition))
+            if (!String.IsNullOrEmpty(Condition) && state == "solicitud")
             {
                 collection = collection.Where(
                             a => a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID
@@ -101,6 +101,218 @@ namespace Repository
                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
                 .ThenInclude(i => i.Vehicles)
             
+                 .ThenInclude(i => i.TypeVehicles)
+
+                .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .ThenInclude(i => i.Vehicles)
+                .ThenInclude(i => i.Brands)
+
+                .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .ThenInclude(i => i.Vehicles)
+                .ThenInclude(i => i.Model)
+
+
+                .Include(i => i.EmployeeCreated)
+                .Include(i => i.EmployeeCreated.Users.Persons)
+                .Include(i => i.EmployeeCreated.Users.Roles)
+                .Include(i => i.EmployeeCreated.Users.Estates)
+                .Include(i => i.EmployeeCreated.Users.Estates.LocationAddress)
+                .Include(i => i.EmployeeCreated.Users.Estates.Locations)
+
+
+                .Include(i => i.EmployeeResponse)
+                .Include(i => i.EmployeeResponse.Users.Persons)
+                .Include(i => i.EmployeeResponse.Users.Roles)
+                .Include(i => i.EmployeeResponse.Users.Estates)
+                .Include(i => i.EmployeeResponse.Users.Estates.LocationAddress)
+                .Include(i => i.EmployeeResponse.Users.Estates.Locations)
+                .ToList();
+        }
+
+        public async Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequestPDF(int id, string Condition, int emergency,
+                                                                                   DateTime dateConvert,
+                                                                                   DateTime dateConvertEnd)
+        {
+
+            user = EmployeesRepository.GetAllEmployeesById(id);
+
+
+            var collection = _cruzRojaContext.Resources_Requests as IQueryable<ResourcesRequest>;
+
+            var dateEnd = Convert.ToDateTime("01/01/0001");
+
+           user = EmployeesRepository.GetAllEmployeesById(id);
+
+            if (id != 0 && emergency == 0 && dateConvertEnd == dateEnd)
+            {
+
+                    collection = collection.Where(
+                                                      a => a.Condition == Condition
+                                                     && a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID
+                                                     && a.RequestDate >= dateConvert)
+                                                     .AsNoTracking();
+
+            }
+            else if (id == 0 && emergency != 0 && dateConvertEnd == dateEnd)
+            {
+                collection = collection.Where(
+                                                      a => a.Condition == Condition
+                                                     && a.EmergenciesDisasters.EmergencyDisasterID == emergency
+                                                      && a.RequestDate >= dateConvert)
+                                                     .AsNoTracking();
+            }
+
+            else if(id != 0 && emergency != 0 && dateConvertEnd == dateEnd)
+            {
+                collection = collection.Where(
+                                                      a => a.Condition == Condition
+                                                               && a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID
+
+                                                              //&& a.CreatedBy == id
+                                                              && a.EmergenciesDisasters.EmergencyDisasterID == emergency
+                                                              && a.RequestDate >= dateConvert)
+                                                     .AsNoTracking();
+            }
+
+            else if (id != 0 && emergency == 0 && dateConvertEnd != dateEnd)
+            {
+                user = EmployeesRepository.GetAllEmployeesById(id);
+
+                collection = collection.Where(
+                                                  a => a.Condition == Condition
+                                               && a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID
+
+                                                  //  && a.CreatedBy == user.UserID
+                                                 && a.RequestDate >= dateConvert
+                                                 && a.RequestDate <= dateConvertEnd)
+                                                 .AsNoTracking();
+
+            }
+            else if (id == 0 && emergency != 0 && dateConvertEnd != dateEnd)
+            {
+                collection = collection.Where(
+                                                      a => a.Condition == Condition
+                                                      && a.EmergenciesDisasters.EmergencyDisasterID == emergency
+                                                      && a.RequestDate >= dateConvert
+                                                      && a.RequestDate <= dateConvertEnd)
+                                                     .AsNoTracking();
+            }
+
+            else if (id != 0 && emergency != 0 && dateConvertEnd != dateEnd)
+            {
+                collection = collection.Where(
+                                                      a => a.Condition == Condition
+                                                               && a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID
+
+                                                              // && a.CreatedBy == id
+                                                              && a.EmergenciesDisasters.EmergencyDisasterID == emergency
+                                                              && a.RequestDate >= dateConvert
+                                                              && a.RequestDate <= dateConvertEnd)
+                                                     .AsNoTracking();
+            }
+
+
+
+            return await collection
+                          .Include(i => i.EmergenciesDisasters)
+                          .ThenInclude(i => i.TypesEmergenciesDisasters)
+                          .Include(i => i.EmergenciesDisasters.LocationsEmergenciesDisasters)
+
+                          .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                          .ThenInclude(i => i.Materials)
+
+                           .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                          .ThenInclude(i => i.Medicines)
+
+                          .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                          .ThenInclude(i => i.Vehicles)
+
+                           .ThenInclude(i => i.TypeVehicles)
+
+                          .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                          .ThenInclude(i => i.Vehicles)
+                          .ThenInclude(i => i.Brands)
+
+                          .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                          .ThenInclude(i => i.Vehicles)
+                          .ThenInclude(i => i.Model)
+
+
+                          .Include(i => i.EmployeeCreated)
+                          .Include(i => i.EmployeeCreated.Users.Persons)
+                          .Include(i => i.EmployeeCreated.Users.Roles)
+                          .Include(i => i.EmployeeCreated.Users.Estates)
+                          .Include(i => i.EmployeeCreated.Users.Estates.LocationAddress)
+                          .Include(i => i.EmployeeCreated.Users.Estates.Locations)
+
+
+                          .Include(i => i.EmployeeResponse)
+                          .Include(i => i.EmployeeResponse.Users.Persons)
+                          .Include(i => i.EmployeeResponse.Users.Roles)
+                          .Include(i => i.EmployeeResponse.Users.Estates)
+                          .Include(i => i.EmployeeResponse.Users.Estates.LocationAddress)
+                          .Include(i => i.EmployeeResponse.Users.Estates.Locations)
+                          .ToListAsync();
+        }
+        public async Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequest(int userId, string Condition)
+        {
+
+            //var user = UsersRepository.authUser;
+            user =  EmployeesRepository.GetAllEmployeesById(userId);
+
+          
+
+            var collection = _cruzRojaContext.Resources_Requests as IQueryable<ResourcesRequest>;
+
+            //Admin y C.General -> tiene acceso a todo en funcion del departamento
+           
+            if (user.Roles.RoleName == "Admin")
+                {
+                    return GetAllResourcesRequests(user.FK_EstateID, Condition);
+                }
+
+                else if (user.Roles.RoleName == "Coordinador General")
+                {
+                    return GetAllResourcesRequests(user.FK_EstateID, Condition);
+                }
+
+
+                //Encargado de logistica tiene acceso a las solicitudes pendientes nomas    
+
+                else if (user.Roles.RoleName == "Encargado de Logistica")
+                {
+
+                    collection = collection.Where(
+                                                  a => a.Condition == Condition
+                                                 && a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID)
+                                                 .AsNoTracking();
+                }
+
+                //C.Emergencias tiene acceso a solamente el historial de solicitudes
+                else
+                {
+                    collection = collection.Where(
+                                                a => a.Condition == Condition
+                                                && a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID
+                                                && a.CreatedBy == user.UserID)
+                                                .AsNoTracking();
+                 }
+
+
+            return collection
+                .Include(i => i.EmergenciesDisasters)
+                .ThenInclude(i => i.TypesEmergenciesDisasters)
+                .Include(i => i.EmergenciesDisasters.LocationsEmergenciesDisasters)
+
+                .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .ThenInclude(i => i.Materials)
+
+                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .ThenInclude(i => i.Medicines)
+
+                .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .ThenInclude(i => i.Vehicles)
+
                  .ThenInclude(i => i.TypeVehicles)
 
                 .Include(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
@@ -826,7 +1038,6 @@ namespace Repository
             user = db.Users
                 .Where(a => a.UserID == userRequestID)
                 .Include(a => a.Persons)
-                .Include(a => a.Employees)
                 .FirstOrDefault();
 
 

@@ -14,15 +14,22 @@ namespace Back_End.Profiles
         public VolunteersProfiles()
         {
             CreateMap<Volunteers, Resources_Dto>()
-              .ForMember(dest => dest.Description,
+
+                .ForPath(dest => dest.Volunteers.ID,
+                            opt => opt.MapFrom(src => src.ID))
+
+                .ForMember(dest => dest.Description,
                             opt => opt.MapFrom(src => src.VolunteerDescription))
+
+                  .ForPath(dest => dest.Volunteers.CreatedDate,
+                            opt => opt.MapFrom(src => DateTimeOffsetExtensions.GetDateTime(src.Users.CreatedDate)))
 
 
                .ForMember(dest => dest.Name,
                             opt => opt.MapFrom(src => $"{src.Users.Persons.FirstName} {src.Users.Persons.LastName}"))
 
               .ForMember(dest => dest.Picture,
-                            opt => opt.MapFrom(src => src.VolunteerAvatar))
+                            opt => opt.MapFrom(src => src.Users.Avatar))
 
               //.ForPath(dest => dest.Volunteers.Users, opts => opts.MapFrom(src => src.Users))
 
@@ -50,6 +57,8 @@ namespace Back_End.Profiles
 
                .ForPath(dest => dest.Volunteers.Dni, opts => opts.MapFrom(src => src.Users.UserDni))
 
+
+
             .ForPath(dest => dest.Volunteers.Birthdate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.Users.Persons.Birthdate)))
 
            .ForPath(dest => dest.Volunteers.Address, opts => opts.MapFrom(src => src.Users.Persons.Address));
@@ -59,12 +68,14 @@ namespace Back_End.Profiles
              .ForMember(dest => dest.Description,
                         opt => opt.MapFrom(src => src.VolunteerDescription))
 
+             .ForPath(dest => dest.Volunteers.CreatedDate,
+                            opt => opt.MapFrom(src => DateTimeOffsetExtensions.GetDateTime(src.Users.CreatedDate)))
 
            .ForMember(dest => dest.Name,
                         opt => opt.MapFrom(src => $"{src.Users.Persons.FirstName} {src.Users.Persons.LastName}"))
 
-          .ForMember(dest => dest.Picture,
-                        opt => opt.MapFrom(src => src.VolunteerAvatar))
+            .ForMember(dest => dest.Picture,
+                            opt => opt.MapFrom(src => src.Users.Avatar))
 
            .ForPath(dest => dest.Volunteers.Email, opts => opts.MapFrom(src => src.Users.Persons.Email))
 

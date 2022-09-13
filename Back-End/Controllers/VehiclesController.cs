@@ -47,8 +47,8 @@ namespace Back_End.Controllers
                 {
                     if (item.Picture != "https://i.imgur.com/S9HJEwF.png")
                     {
-                        item.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
-                                        Request.Scheme, Request.Host, Request.PathBase, item.Picture);
+                        item.Picture = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{item.Picture}";
+
                     }
 
                 }
@@ -88,8 +88,8 @@ namespace Back_End.Controllers
 
                     if (vehicleResult.Picture != "https://i.imgur.com/S9HJEwF.png")
                     {
-                        vehicleResult.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
-                                        Request.Scheme, Request.Host, Request.PathBase, vehicleResult.Picture);
+                        vehicleResult.Picture = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{vehicleResult.Picture}";
+
                     }
 
                     return Ok(vehicleResult);
@@ -106,8 +106,11 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpPost]
-        public async Task<ActionResult<Vehicles>> CreateVehicle([FromBody] Resources_ForCreationDto vehicle)
+        public async Task<ActionResult<Vehicles>> CreateVehicle([FromBody] Resources_ForCreationDto vehicle, [FromQuery] int userId)
         {
+
+            vehicle.CreatedBy = userId;
+
             try
             {
 
@@ -123,6 +126,8 @@ namespace Back_End.Controllers
                 }
                 
                 var vehicleEntity = _mapper.Map<Vehicles>(vehicle);
+
+                vehicleEntity.VehicleDescription = vehicle.Description;
 
                 if (vehicle.Picture == null)
                     vehicleEntity.VehiclePicture = "https://i.imgur.com/S9HJEwF.png";
@@ -148,7 +153,8 @@ namespace Back_End.Controllers
       
         //********************************* FUNCIONANDO *********************************
         [HttpPatch("{vehicleId}")]
-        public async Task<ActionResult> UpdateVehicle(string vehicleId, JsonPatchDocument<VehiclesForUpdateDto> patchDocument)
+        public async Task<ActionResult> UpdateVehicle(string vehicleId, [FromQuery] int userId,
+                                                      JsonPatchDocument<VehiclesForUpdateDto> patchDocument)
         {
             try
             {
@@ -163,6 +169,7 @@ namespace Back_End.Controllers
                 var vehicleToPatch = _mapper.Map<VehiclesForUpdateDto>(vehicleEntity);
 
                 vehicleToPatch.DateModified = DateTime.Now;
+                vehicleToPatch.ModifiedBy = userId;
 
                 patchDocument.ApplyTo(vehicleToPatch, ModelState);
 

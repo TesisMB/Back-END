@@ -1,0 +1,191 @@
+2022-08-01 12:32:49.4255 INFO Returned User.
+2022-08-01 12:32:51.6918 INFO Returned all Resources_Request from database.
+2022-08-01 12:32:51.9399 INFO Returned all emergenciesDisasters from database.
+2022-08-01 12:32:52.1528 INFO Returned all PDF from database.
+2022-08-01 12:32:55.3425 INFO Returned all TypesEmergenciesDisasters from database.
+2022-08-01 12:32:56.1383 INFO Returned all emergenciesDisasters from database.
+2022-08-01 12:32:58.6072 INFO Returned all TypesEmergenciesDisasters from database.
+2022-08-01 12:32:58.9216 INFO Returned all employees from database.
+2022-08-01 13:29:59.6119 INFO Returned User.
+2022-08-01 13:32:08.0626 INFO Returned User.
+2022-08-01 13:40:13.8620 INFO Returned User.
+2022-08-01 15:51:55.5966 INFO Returned all ChatRooms from database. 
+2022-08-01 15:53:45.1447 INFO Returned all ChatRooms from database. 
+2022-08-01 15:53:53.2749 INFO Returned all ChatRooms from database. 
+2022-08-01 15:54:24.0315 INFO Returned all ChatRooms from database. 
+2022-08-01 15:54:55.0445 INFO Returned all ChatRooms from database. 
+2022-08-01 15:55:06.2797 INFO Returned all ChatRooms from database. 
+2022-08-01 15:57:00.9411 INFO Returned all ChatRooms from database. 
+2022-08-01 15:57:05.9866 INFO Returned all emergenciesDisasters from database.
+2022-08-01 15:57:20.6867 INFO Returned emegencyDisaster with details for id: 321
+2022-08-01 15:57:26.2210 INFO Returned all emergenciesDisasters from database.
+2022-08-01 15:57:29.3355 INFO Returned emegencyDisaster with details for id: 334
+2022-08-01 15:57:33.1947 INFO Returned emegencyDisaster with details for id: 329
+2022-08-01 15:57:48.9697 INFO Returned all ChatRooms from database. 
+2022-08-01 15:58:21.4281 INFO Returned all emergenciesDisasters from database.
+2022-08-01 16:01:17.9962 INFO Returned all ChatRooms from database. 
+2022-08-01 16:01:27.0102 INFO Returned employe with details for id: 2
+2022-08-01 16:03:03.1435 INFO Returned all ChatRooms from database. 
+2022-08-01 16:03:14.0422 INFO Returned all ChatRooms from database. 
+2022-08-01 16:04:04.1972 INFO Returned all ChatRooms from database. 
+2022-08-01 16:05:25.3935 INFO Returned all TypesEmergenciesDisasters from database.
+2022-08-01 16:05:27.3652 INFO Returned all emergenciesDisasters from database.
+2022-08-01 16:08:32.9556 INFO Returned all TypesEmergenciesDisasters from database.
+2022-08-01 16:08:34.8221 INFO Returned all emergenciesDisasters from database.
+2022-08-01 16:08:43.4603 INFO Returned all TypesEmergenciesDisasters from database.
+2022-08-01 16:08:44.0715 INFO Returned all emergenciesDisasters from database.
+2022-08-01 16:08:52.3267 ERROR Something went wrong inside DeletemegencyDisaster action: The instance of entity type 'Roles' cannot be tracked because another instance with the same key value for {'RoleID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-08-01 16:11:12.3414 INFO Returned all employees from database.
+2022-08-01 16:12:14.5150 ERROR Something went wrong inside DeletemegencyDisaster action: The instance of entity type 'Roles' cannot be tracked because another instance with the same key value for {'RoleID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-08-01 16:12:46.8655 ERROR Something went wrong inside DeletemegencyDisaster action: The instance of entity type 'Roles' cannot be tracked because another instance with the same key value for {'RoleID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-08-01 16:13:35.0220 INFO Returned all TypesEmergenciesDisasters from database.
+2022-08-01 16:13:35.5396 INFO Returned all emergenciesDisasters from database.
+2022-08-01 16:17:09.1392 ERROR Something went wrong inside DeletemegencyDisaster action: The instance of entity type 'Roles' cannot be tracked because another instance with the same key value for {'RoleID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-08-01 16:19:31.9188 ERROR Something went wrong inside DeletemegencyDisaster action: The instance of entity type 'Roles' cannot be tracked because another instance with the same key value for {'RoleID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-08-01 16:21:37.4078 ERROR Something went wrong inside DeletemegencyDisaster action: The instance of entity type 'Medicines' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+2022-08-01 16:24:35.6224 INFO Returned all TypesEmergenciesDisasters from database.
+2022-08-01 16:24:36.6270 INFO Returned all emergenciesDisasters from database.
+2022-08-01 16:24:41.6694 INFO Returned all TypesEmergenciesDisasters from database.
+2022-08-01 16:24:41.9362 INFO Returned all employees from database.
+2022-08-01 16:25:01.0679 ERROR Something went wrong inside CreateEmergenciesDisaster action: Object reference not set to an instance of an object.
+2022-08-01 16:28:44.3319 INFO Returned all TypesEmergenciesDisasters from database.
+2022-08-01 16:28:44.6463 INFO Returned all emergenciesDisasters from database.
+2022-08-01 16:28:50.2382 INFO Returned all Materials from database.
+2022-08-01 16:29:59.2728 INFO Returned all Materials from database.
+2022-08-01 16:30:14.3279 INFO Returned all TypesEmergenciesDisasters from database.
+2022-08-01 16:30:14.5717 INFO Returned all emergenciesDisasters from database.
+2022-08-01 16:30:18.8068 INFO Returned all vehicles from database.
+2022-08-01 16:30:19.7154 INFO Returned all vehicles from database.
+2022-08-01 16:30:23.3769 INFO Returned vehicle with id: VE0015
+2022-08-01 16:30:25.9773 INFO Returned all vehicles from database.
+2022-08-01 16:30:28.1518 INFO Returned all TypesEmergenciesDisasters from database.
+2022-08-01 16:30:28.4572 INFO Returned all emergenciesDisasters from database.
+2022-08-01 16:30:33.4925 INFO Returned all employees from database.
+2022-08-01 16:30:46.9699 INFO Returned all estates from database.
+2022-08-01 16:30:57.3756 INFO Returned all estates from database.
+2022-08-01 16:33:30.5974 INFO Returned all estates from database.
+2022-08-01 16:33:44.8562 INFO Returned all estates from database.
+2022-08-01 16:33:58.8314 INFO Returned all estates from database.
+2022-08-01 16:34:06.7806 INFO Returned all estates from database.
+2022-08-01 16:34:38.9298 INFO Returned all estates from database.
+2022-08-01 16:34:58.1858 INFO Returned all estates from database.
+2022-08-01 16:35:20.7224 INFO Returned all TypesEmergenciesDisasters from database.
+2022-08-01 16:35:21.2542 INFO Returned all emergenciesDisasters from database.
+2022-08-01 16:35:22.2496 INFO Returned emegencyDisaster with details for id: 1
+2022-08-01 16:35:33.1542 INFO Returned all TypesEmergenciesDisasters from database.
+2022-08-01 16:35:33.3834 INFO Returned all emergenciesDisasters from database.
+2022-08-01 16:35:34.7610 INFO Returned emegencyDisaster with details for id: 2
+2022-08-01 16:35:40.6153 INFO Returned all Materials from database.
+2022-08-01 16:40:47.7215 INFO Returned all employees from database.
+2022-08-01 16:40:51.0357 INFO Returned all estates from database.
+2022-08-01 16:41:21.1248 INFO Returned all PDF from database.
+2022-08-01 16:41:21.1386 INFO Returned all Resources_Request from database.
+2022-08-01 16:41:21.6550 INFO Returned all emergenciesDisasters from database.
+2022-08-01 16:41:25.4033 INFO Returned all employees from database.
+2022-08-01 16:41:27.8100 INFO Returned all estates from database.
+2022-08-01 16:42:04.0215 INFO Returned all estates from database.
+2022-08-01 16:42:39.1628 INFO Returned all estates from database.
+2022-08-01 16:44:26.6164 INFO Returned all estates from database.
+2022-08-01 16:44:53.3112 INFO Returned all estates from database.
+2022-08-01 16:45:17.3470 INFO Returned all Resources_Request from database.
+2022-08-01 16:45:17.8658 INFO Returned all emergenciesDisasters from database.
+2022-08-01 16:45:18.0694 INFO Returned all PDF from database.
+2022-08-01 16:45:20.9049 INFO Returned all employees from database.
+2022-08-01 16:45:26.4433 INFO Returned all estates from database.
+2022-08-01 16:45:35.6356 INFO Returned all estates from database.
+2022-08-01 16:45:56.2361 INFO Returned all estates from database.
+2022-08-01 16:46:11.7576 INFO Returned all estates from database.
+2022-08-01 16:46:15.6965 INFO Returned employe with details for id: 2
+2022-08-01 16:46:23.6935 INFO Returned all PDF from database.
+2022-08-01 16:46:23.6935 INFO Returned all emergenciesDisasters from database.
+2022-08-01 16:46:25.0993 INFO Returned all Volunteers from database.
+2022-08-01 16:46:32.7090 INFO Returned volunteer with id: 19
+2022-08-01 16:46:39.4838 INFO Returned employe with details for id: 19
+2022-08-01 16:46:39.7410 INFO Returned all estates from database.
+2022-08-01 16:48:06.9360 INFO Returned volunteer with id: 19
+2022-08-01 16:48:20.1647 INFO Returned all Volunteers from database.
+2022-08-01 16:48:33.2093 INFO Returned all Materials from database.
+2022-08-01 16:48:34.4019 INFO Returned all estates from database.
+2022-08-01 16:48:34.5390 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-08-01 16:48:48.9936 INFO Returned all estates from database.
+2022-08-01 16:48:49.0243 ERROR Something went wrong inside GetAllEmployees action: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-08-01 16:49:03.3907 INFO Returned employe with details for id: 2
+2022-08-01 16:49:25.6455 INFO Returned User.
+2022-08-01 16:49:26.1270 INFO Returned all PDF from database.
+2022-08-01 16:49:26.1271 INFO Returned all Resources_Request from database.
+2022-08-01 16:49:27.1568 INFO Returned all emergenciesDisasters from database.
+2022-08-01 16:49:37.0584 INFO Returned all Resources_Request from database.
+2022-08-01 16:49:38.9491 INFO Returned all Resources_Request from database.
+2022-08-01 16:49:40.7309 INFO Returned all Materials from database.
+2022-08-01 16:49:41.8290 INFO Returned all estates from database.
+2022-08-01 16:49:42.0289 INFO Returned all employees from database.
+2022-08-01 16:50:10.5348 INFO Returned all Materials from database.
+2022-08-01 16:50:15.3072 INFO Returned all estates from database.
+2022-08-01 16:50:15.4221 INFO Returned Material with id: MA5435463546
+2022-08-01 16:50:15.5213 INFO Returned all employees from database.
+2022-08-01 16:50:22.2868 INFO Returned all Materials from database.
+2022-08-01 16:50:33.1048 INFO Returned all Materials from database.
+2022-08-01 16:50:33.9246 INFO Returned all Materials from database.
+2022-08-01 16:50:39.1760 INFO Returned all estates from database.
+2022-08-01 16:50:39.3886 INFO Returned all employees from database.
+2022-08-01 16:51:11.2349 INFO Returned all Materials from database.
+2022-08-01 16:51:15.5323 INFO Returned all Materials from database.
+2022-08-01 16:51:20.5201 INFO Returned all estates from database.
+2022-08-01 16:51:20.6332 INFO Returned medicine with details for id: ME565456
+2022-08-01 16:51:20.7425 INFO Returned all employees from database.
+2022-08-01 16:51:28.7235 INFO Returned all Materials from database.
+2022-08-01 16:51:30.8961 INFO Returned all Materials from database.
+2022-08-01 16:51:33.4740 INFO Returned all estates from database.
+2022-08-01 16:51:33.4930 INFO Returned medicine with details for id: ME565456
+2022-08-01 16:51:33.6906 INFO Returned all employees from database.
+2022-08-01 16:51:36.3352 INFO Returned all Materials from database.
+2022-08-01 16:51:38.1007 INFO Returned all Materials from database.
+2022-08-01 16:51:44.5715 INFO Returned all vehicles from database.
+2022-08-01 16:51:45.0060 INFO Returned all estates from database.
+2022-08-01 16:51:45.2273 INFO Returned all employees from database.
+2022-08-01 16:52:13.8635 INFO Returned all Materials from database.
+2022-08-01 16:52:19.0032 INFO Returned all vehicles from database.
+2022-08-01 16:52:31.5496 INFO Returned all PDF from database.
+2022-08-01 16:52:33.3315 INFO Returned all emergenciesDisasters from database.
+2022-08-01 16:52:39.6189 INFO Returned all PDF from database.
+2022-08-01 16:52:40.9750 INFO Returned all emergenciesDisasters from database.
+2022-08-01 16:53:04.7643 INFO Returned all emergenciesDisasters from database.
+2022-08-01 16:53:36.3541 INFO Returned all emergenciesDisasters from database.
+2022-08-01 16:53:51.9990 INFO Returned all Materials from database.
+2022-08-01 16:53:53.1360 INFO Returned medicine with details for id: ME0010
+2022-08-01 16:53:56.7259 INFO Returned all emergenciesDisasters from database.
+2022-08-01 16:54:02.5476 INFO Returned all Materials from database.
+2022-08-01 16:54:03.9293 INFO Returned all PDF from database.
+2022-08-01 16:54:07.0678 INFO Returned all vehicles from database.
+2022-08-01 16:54:07.8638 INFO Returned vehicle with id: VE0002
+2022-08-01 16:54:10.4865 INFO Returned all Materials from database.
+2022-08-01 16:54:11.2572 INFO Returned all Materials from database.
+2022-08-01 16:54:12.2091 INFO Returned Material with id: MA0007
+2022-08-01 16:54:15.9943 INFO Returned all emergenciesDisasters from database.
+2022-08-01 16:54:27.3860 INFO Returned all Materials from database.
+2022-08-01 16:54:33.2298 INFO Returned employe with details for id: 2
+2022-08-01 16:54:34.8328 INFO Returned all Resources_Request from database.
+2022-08-01 16:54:34.8624 INFO Returned all emergenciesDisasters from database.
+2022-08-01 16:54:35.8000 INFO Returned all PDF from database.
+2022-08-01 16:54:38.0004 INFO Returned all Resources_Request from database.
+2022-08-01 16:54:43.7532 ERROR Something went wrong inside DeleteResourceRequest action: Transaction (Process ID 54) was deadlocked on lock resources with another process and has been chosen as the deadlock victim. Rerun the transaction.
+2022-08-01 16:54:47.0052 INFO Returned all Resources_Request from database.
+2022-08-01 16:54:48.2526 INFO Returned all Resources_Request from database.
+2022-08-01 16:54:53.6241 INFO Returned all PDF from database.
+2022-08-01 16:55:01.2444 INFO Returned all emergenciesDisasters from database.
+2022-08-01 16:58:40.1906 INFO Returned all emergenciesDisasters from database.
+2022-08-01 17:02:04.7627 INFO Returned all TypesEmergenciesDisasters from database.
+2022-08-01 17:02:06.0634 INFO Returned all emergenciesDisasters from database.
+2022-08-01 17:02:08.2604 INFO Returned all employees from database.
+2022-08-01 17:02:15.5200 INFO Returned all employees from database.
+2022-08-01 17:09:03.5700 INFO Returned all TypesEmergenciesDisasters from database.
+2022-08-01 17:09:04.9173 INFO Returned all emergenciesDisasters from database.
+2022-08-01 17:09:11.4881 INFO Returned all PDF from database.
+2022-08-01 17:09:12.9020 INFO Returned all emergenciesDisasters from database.
+2022-08-01 17:09:52.1226 INFO Returned all PDF from database.
+2022-08-01 17:09:54.7342 INFO Returned all emergenciesDisasters from database.
+2022-08-01 17:09:59.0830 INFO Returned all emergenciesDisasters from database.
+2022-08-01 17:10:15.2338 INFO Returned all PDF from database.
+2022-08-01 17:10:18.7201 INFO Returned all PDF from database.
+2022-08-01 17:10:18.9582 INFO Returned all emergenciesDisasters from database.
+2022-08-01 17:10:19.6960 INFO Returned all Resources_Request from database.

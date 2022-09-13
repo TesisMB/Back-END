@@ -36,15 +36,8 @@ namespace Back_End.Controllers
                 if (auth.UserAvailability)
                 {
 
-                     if(auth.VolunteerAvatar != null)
-                    {
+                    auth.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{auth.Avatar}";
 
-                        auth.VolunteerAvatar = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
-                                            Request.Scheme, Request.Host, Request.PathBase, auth.VolunteerAvatar);
-                    }
-
-
-                    
 
                     ret = StatusCode(200, auth);
                     _logger.LogInfo($"Returned User.");
@@ -66,7 +59,7 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpPost("login")]
-        public async Task<ActionResult<UserEmployeeAuthDto>> LoginWeb([FromBody] UserLoginDto user)
+        public async Task<ActionResult<UserEmployeeAuthDto>> LoginWeb(UserLoginDto user)
         {
             try
             {
@@ -74,6 +67,9 @@ namespace Back_End.Controllers
                 
                 if (auth.UserAvailability && auth.RoleName != "Voluntario")
                 {
+
+                    auth.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{auth.Avatar}";
+
                     ret = StatusCode(200, auth);
                     _logger.LogInfo($"Returned User.");
                 }
@@ -90,7 +86,7 @@ namespace Back_End.Controllers
             } catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside User: {ex.Message}");
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, "Internal error, directo al catch error");
             }
             return ret;
         }

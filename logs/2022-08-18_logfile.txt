@@ -1,0 +1,11 @@
+2022-08-18 20:00:56.7701 INFO Returned User.
+2022-08-18 20:00:59.9416 INFO Returned all PDF from database.
+2022-08-18 20:01:00.4019 INFO Returned all Resources_Request from database.
+2022-08-18 20:01:01.8409 INFO Returned all emergenciesDisasters from database.
+2022-08-18 20:07:30.6979 INFO Returned all TypesEmergenciesDisasters from database.
+2022-08-18 20:07:32.9304 INFO Returned all emergenciesDisasters from database.
+2022-08-18 20:10:20.3940 INFO Returned all TypesEmergenciesDisasters from database.
+2022-08-18 20:10:20.8887 INFO Returned all emergenciesDisasters from database.
+2022-08-18 20:10:26.1984 ERROR Something went wrong inside DeletemegencyDisaster action: An error occurred while updating the entries. See the inner exception for details.
+2022-08-18 20:14:48.0971 INFO Returned all TypesEmergenciesDisasters from database.
+2022-08-18 20:14:48.6503 INFO Returned all employees from database.

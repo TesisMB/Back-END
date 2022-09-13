@@ -21,6 +21,10 @@ section {
 /*.table {
 }*/
 
+td {
+    text-align: center !important;
+}
+
 .fondo{
     background-color: #ccc;
 }

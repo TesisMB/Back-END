@@ -5,6 +5,8 @@ using Back_End.Models;
 using Contracts.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
@@ -15,22 +17,33 @@ namespace Repository
     {
         private IMapper _mapper;
         public static Users authUser;
+        public static CruzRojaContext _cruzRojaContext;
 
         public UsersRepository(CruzRojaContext cruzRojaContext, IMapper mapper)
             : base(cruzRojaContext)
         {
+            _cruzRojaContext = cruzRojaContext;
             _mapper = mapper;
         }
 
         public async Task<Users> GetUserEmployeeById(int userId)
         {
             return await FindByCondition(emp => emp.UserID.Equals(userId))
-                    .Include(a => a.Employees)
                     .Include(a => a.Persons)
                     .Include(a => a.Messages)
                     .Include(a => a.UsersChatRooms)
                     .Include(a => a.Employees.Vehicles)
-                    .Include(a => a.UsersChat)
+                    .Include(a => a.Volunteers)
+                   .Include(a => a.Volunteers.VolunteersSkills)
+                   .ThenInclude(a => a.Skills)
+                   .Include(a => a.Volunteers.VolunteersSkills)
+                   .ThenInclude(a => a.VolunteersSkillsFormationEstates)
+                    .FirstOrDefaultAsync();
+        }
+
+        public async Task<Users> SendDeviceById(int userId)
+        {
+            return await FindByCondition(emp => emp.UserID.Equals(userId))
                     .FirstOrDefaultAsync();
         }
 
@@ -167,6 +180,7 @@ namespace Repository
                                .ThenInclude(u => u.Schedules)
                                .Include(u => u.Estates.Locations)
                                .Include(u => u.Volunteers)
+                               .Include(u => u.Employees)
                                 .Where(u => u.UserDni == user.UserDni
                                    && u.UserPassword == ePass)
                                 .AsNoTracking()
@@ -180,5 +194,66 @@ namespace Repository
 
             return ret; //retornamos el valor de este objeto       
         }
+
+        public async Task<Users> GetUsers(int userId)
+        {
+            return await FindByCondition(emp => emp.UserID.Equals(userId))
+                                .Include(u => u.Persons)
+                               .Include(u => u.Roles)
+                               .Include(u => u.Estates)
+                               .ThenInclude(u => u.LocationAddress)
+                               .Include(u => u.Estates.EstatesTimes)
+                               .ThenInclude(u => u.Times)
+                               .ThenInclude(u => u.Schedules)
+                               .Include(u => u.Estates.Locations)
+                               .Include(u => u.Volunteers)
+                               .Include(u => u.Employees)
+                               .FirstOrDefaultAsync();
+          }
+
+
+        public async Task<IEnumerable<Users>> GetEmployeesVolunteers(int userId)
+        {
+
+            var user = EmployeesRepository.GetAllEmployeesById(userId);
+
+
+            var collection = _cruzRojaContext.Users as IQueryable<Users>;
+
+
+            collection = collection.Where(
+                a => a.Estates.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
+
+            return await collection
+                               .Include(u => u.Persons)
+                               .Include(u => u.Roles)
+                               .Include(u => u.Estates)
+                               .ThenInclude(u => u.LocationAddress)
+                               .Include(u => u.Estates.EstatesTimes)
+                               .ThenInclude(u => u.Times)
+                               .ThenInclude(u => u.Schedules)
+                               .Include(u => u.Estates.Locations)
+                               .Include(u => u.Volunteers)
+                               .Include(u => u.Employees)
+                               .OrderBy(a => a.Roles.RoleID)
+                               .ToListAsync();
+        }
+
+        public async Task<Users> GetEmployeeVolunteerById(int userId)
+        {
+            return await FindByCondition(emp => emp.UserID.Equals(userId))
+                           .Include(u => u.Persons)
+                           .Include(u => u.Roles)
+                           .Include(u => u.Estates)
+                           .ThenInclude(u => u.EstatesTimes)
+                           .ThenInclude(u => u.Times)
+                           .ThenInclude(u => u.Schedules)
+
+                           .Include(u => u.Estates)
+                           .ThenInclude(u => u.LocationAddress)
+                           .FirstOrDefaultAsync();
+        }   
+
+       
     }
 }

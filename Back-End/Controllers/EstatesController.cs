@@ -6,6 +6,7 @@ using Contracts.Interfaces;
 using DinkToPdf;
 using DinkToPdf.Contracts;
 using Entities.DataTransferObjects.Estates___Dto;
+using Entities.Helpers;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using PDF_Generator.Utility;
@@ -15,11 +16,11 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Wkhtmltopdf.NetCore;
+//using Wkhtmltopdf.NetCore;
 
 namespace Back_End.Controllers
 {
-    [Route("api/")]
+    [Route("api/Estates")]
     [ApiController]
     public class EstatesController : ControllerBase
     {
@@ -36,12 +37,9 @@ namespace Back_End.Controllers
             _repository = repository;
             _mapper = mapper;
             _converter = converter;
-
         }
 
-
-
-        [HttpGet("Estates")]
+        [HttpGet]
         public async Task<ActionResult<Estates>> GetAllEstatesType()
         {
             try
@@ -61,45 +59,137 @@ namespace Back_End.Controllers
         }
 
 
-        [HttpGet("PDF/{estateId}")]
-        public IActionResult CreatePDF(int estateId)
+        [HttpGet("PDF")]
+        public IActionResult CreatePDF([FromQuery] string dateStart, [FromQuery] string dateEnd, [FromQuery] int userId, [FromQuery] string getall)
         {
-
             //quien es el actual usuario
-            Users user = null;
-            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+   
+            DateTime dateConvert, dateConvertEnd;
+            dateConvertEnd = Convert.ToDateTime("01/01/0001");
 
-            user = cruzRojaContext.Users
-                    .Where(x => x.UserID == estateId)
-                    .AsNoTracking()
-                    .FirstOrDefault();
+                        //Fecha de comienzo
+                        dateStart = dateStart.Substring(4, 11);
+                        var monthStart = dateStart.Substring(0, 3);
+                        var dayStart = dateStart.Substring(3, 4);
+                        var yearStart = dateStart.Substring(6, 5);
 
-         if(estateId != 2)
+                        monthStart = _repository.Estates.Date(monthStart);
+
+                        var dateStartNew = dayStart + "/" + monthStart + "/" + yearStart;
+                        dateConvert = Convert.ToDateTime(dateStartNew);
+
+
+                    //Fecha de finalizacion Opcional
+                    if (dateEnd != null)
+                    {
+                        dateEnd = dateEnd.Substring(4, 11);
+                        var monthEnd= dateEnd.Substring(0, 3);
+                        var dayEnd = dateEnd.Substring(3, 4);
+                        var yearEnd = dateEnd.Substring(6, 5);
+
+                        monthEnd = _repository.Estates.Date(monthEnd);
+                        Console.WriteLine("Mes final " + monthEnd);
+                        var dateEndNew = dayEnd + "/" + monthEnd + "/" + yearEnd;
+                        dateConvertEnd = Convert.ToDateTime(dateEndNew);
+                    }
+
+                         Console.WriteLine("Fecha" + dateConvertEnd);
+
+
+
+            if (getall == null)
             {
-                var estates = _repository.Estates.GetAllEstateByPdf(estateId);
+                var estates = _repository.Estates.GetAllEstateByPdf(userId);
 
-                estates.Materials =
-                            from x in estates.Materials
-                            where x.MaterialQuantity != 0
-                            select x;
+                var materiales = _repository.Materials.GetAllMaterials(dateConvert, dateConvertEnd, userId);
+                var medicamentos = _repository.Medicines.GetAllMedicines(dateConvert, dateConvertEnd, userId);
+                var vehiculos = _repository.Vehicles.GetAllVehicles(dateConvert, dateConvertEnd, userId);
 
-                estates.Medicines =
-                          from x in estates.Medicines
-                          where x.MedicineExpirationDate > DateTime.Now && x.MedicineQuantity != 0
-                          select x;
 
-                estates.Vehicles =
-                       from x in estates.Vehicles
-                       where x.VehicleAvailability != false
-                       select x;
+                List<bool> matList = new List<bool>();
+                List<bool> medList = new List<bool>();
+                List<bool> vehList = new List<bool>();
+                bool med = false;
+                bool mat = false;
+                bool veh = false;
 
-                objectSettings = new ObjectSettings
+
+
+                if (String.IsNullOrEmpty(dateEnd))
                 {
-                    PagesCount = true,
-                    HtmlContent = Resource.GetHTMLString(estates),
-                    WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "stylesForResource.css") },
-                    FooterSettings = { FontName = "Arial", FontSize = 9, Right = "[page]", Line = true, },
-                };
+                    estates.Materials =
+                                from x in estates.Materials
+                                where x.MaterialDateCreated >= dateConvert && x.MaterialAvailability == true
+                                && x.FK_EstateID == estates.EstateID
+                                select x;
+
+                    mat = estates.Materials.GetEnumerator().MoveNext();
+                    matList.Add(mat);
+
+                    estates.Medicines =
+                              from x in estates.Medicines
+                              where x.MedicineDateCreated >= dateConvert
+                              && x.MedicineAvailability == true
+                              && x.FK_EstateID == estates.EstateID
+                              select x;
+
+                    med = estates.Medicines.GetEnumerator().MoveNext();
+                    medList.Add(med);
+
+
+                    estates.Vehicles =
+                           from x in estates.Vehicles
+                           where x.VehicleDateCreated >= dateConvert 
+                           && x.VehicleAvailability == true
+                           && x.FK_EstateID == estates.EstateID
+                           select x;
+
+                    veh = estates.Vehicles.GetEnumerator().MoveNext();
+                    vehList.Add(veh);
+                }
+                else
+                {
+                    estates.Materials =
+                             from x in estates.Materials
+                             where x.MaterialDateCreated >= dateConvert 
+                             && x.MaterialDateCreated <= dateConvertEnd
+                             && x.MaterialAvailability == true
+                             && x.FK_EstateID == estates.EstateID
+                             select x;
+
+                    mat = estates.Materials.GetEnumerator().MoveNext();
+                    matList.Add(mat);
+
+                    estates.Medicines =
+                              from x in estates.Medicines
+                              where x.MedicineDateCreated >= dateConvert
+                              && x.MedicineDateCreated <= dateConvertEnd
+                              && x.MedicineAvailability == true
+                              && x.FK_EstateID == estates.EstateID
+                              select x;
+
+
+                    med = estates.Medicines.GetEnumerator().MoveNext();
+                    medList.Add(med);
+
+                    estates.Vehicles =
+                           from x in estates.Vehicles
+                           where x.VehicleDateCreated >= dateConvert
+                           && x.VehicleDateCreated <= dateConvertEnd
+                           && x.VehicleAvailability == true
+                           && x.FK_EstateID == estates.EstateID
+                           select x;
+
+                    veh = estates.Vehicles.GetEnumerator().MoveNext();
+                    vehList.Add(veh);
+                }
+
+
+                if (matList.Contains(false) && medList.Contains(false) && vehList.Contains(false) && estates.Materials.Count() == 0 && estates.Medicines.Count() == 0
+                           &&  estates.Vehicles.Count() == 0)
+                {
+                    return BadRequest(ErrorHelper.Response(400, "No hay ningun recurso en la fecha establecida."));
+                }
 
                 var globalSettings = new GlobalSettings
                 {
@@ -107,42 +197,103 @@ namespace Back_End.Controllers
                     Orientation = Orientation.Portrait,
                     PaperSize = PaperKind.A4,
                     Margins = new MarginSettings { Top = 10 },
-                    DocumentTitle = $"Reporte de recursos - {estates.EstateTypes} {estates.Locations.LocationCityName}",
+                    DocumentTitle = "Reporte",
                 };
-
-            }else
-            {
-                var estates = _repository.Estates.GetAllEstatesByPdf();
-
-                foreach (var item in estates)
-                {
-                    item.Materials =
-                                from x in item.Materials
-                                where x.MaterialQuantity == 0
-                                select x;
-
-                    item.Medicines =
-                              from x in item.Medicines
-                              where x.MedicineQuantity == 0
-                              select x;
-
-                    item.Vehicles =
-                           from x in item.Vehicles
-                           where x.VehicleAvailability != true
-                           select x;
-                }
 
                 objectSettings = new ObjectSettings
                 {
                     PagesCount = true,
-                    HtmlContent = Resources.GetHTMLString(estates),
+                    HtmlContent = Resource.GetHTMLString(estates, materiales, medicamentos, vehiculos, dateConvert, dateConvertEnd),
                     WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "stylesForResource.css") },
-                    //HeaderSettings = { HtmUrl = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "ResourcesInfo.html") },
-                    //FooterSettings = { FontName = "Arial", FontSize = 9, Right = "[page]", Line = true}
-                     //HeaderSettings = { HtmUrl = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "ResourcesInfo.html"),Spacing= 1.8},
-                    //FooterSettings = { HtmUrl = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "ResourcesInfo.html") },  
-                    FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+                    FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
                 };
+
+            }
+            else
+            {
+                var estates = _repository.Estates.GetAllEstatesByPdf();
+
+                //Sin stock
+                var materiales = _repository.Materials.GetAllMaterials(dateConvert, dateConvertEnd);
+                var medicamentos = _repository.Medicines.GetAllMedicines(dateConvert, dateConvertEnd);
+                var vehiculos = _repository.Vehicles.GetAllVehicles(dateConvert, dateConvertEnd);
+
+
+                List<bool> matList2 = new List<bool>();
+                List<bool> medList2 = new List<bool>();
+                List<bool> vehList2 = new List<bool>();
+                bool med2 = false;
+                bool mat2 = false;
+                bool veh2 = false;
+
+
+                foreach (var item in estates)
+                {
+                    if (String.IsNullOrEmpty(dateEnd))
+                    {
+                        item.Materials =
+                                    from x in item.Materials
+                                    where x.MaterialDateCreated >= dateConvert && x.MaterialAvailability != false
+                                    select x;
+
+                        mat2 = item.Materials.GetEnumerator().MoveNext();
+                        matList2.Add(mat2);
+
+                        item.Medicines =
+                                  from x in item.Medicines
+                                  where x.MedicineDateCreated >= dateConvert && x.MedicineAvailability != false
+                                  select x;
+
+                        med2 = item.Medicines.GetEnumerator().MoveNext();
+                        medList2.Add(med2);
+
+
+                        item.Vehicles =
+                               from x in item.Vehicles
+                               where x.VehicleDateCreated >= dateConvert && x.VehicleAvailability != false
+                               select x;
+
+                        veh2 = item.Vehicles.GetEnumerator().MoveNext();
+                        vehList2.Add(veh2);
+                    }
+                    else
+                    {
+                        item.Materials =
+                                 from x in item.Materials
+                                 where x.MaterialDateCreated >= dateConvert && x.MaterialDateCreated <= dateConvertEnd && x.MaterialAvailability == true
+                                 select x;
+
+                        mat2 = item.Materials.GetEnumerator().MoveNext();
+                        matList2.Add(mat2);
+
+                        item.Medicines =
+                                  from x in item.Medicines
+                                  where x.MedicineDateCreated >= dateConvert && x.MedicineDateCreated<= dateConvertEnd && x.MedicineAvailability == true
+                                  select x;
+
+                        med2 = item.Medicines.GetEnumerator().MoveNext();
+                        medList2.Add(med2);
+
+                        item.Vehicles =
+                               from x in item.Vehicles
+                               where x.VehicleDateCreated >= dateConvert && x.VehicleDateCreated <= dateConvertEnd && x.VehicleAvailability == true
+                               select x;
+
+                        veh2 = item.Vehicles.GetEnumerator().MoveNext();
+                        vehList2.Add(veh2);
+                    }
+                }
+
+
+
+
+                        if (matList2.Contains(false)  && medList2.Contains(false) && vehList2.Contains(false) && materiales.Count() == 0 && medicamentos.Count() == 0
+                        && vehiculos.Count() == 0)
+                        {
+                            return BadRequest(ErrorHelper.Response(400, "No hay ningun recurso en la fecha establecida."));
+                        }
+
+
 
                 var globalSettings = new GlobalSettings
                 {
@@ -152,11 +303,16 @@ namespace Back_End.Controllers
                     Margins = new MarginSettings { Top = 10 },
                     DocumentTitle = "Reporte de recursos",
                 };
+
+                objectSettings = new ObjectSettings
+                {
+                    PagesCount = true,
+                    HtmlContent = Resources.GetHTMLString(estates, materiales, medicamentos, vehiculos, dateConvert, dateConvertEnd),
+                    WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "stylesForResource.css") },
+                    FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+                };
+
             }
-
-
-
-
 
             var pdf = new HtmlToPdfDocument()
             {
@@ -170,7 +326,12 @@ namespace Back_End.Controllers
         }
 
 
-        
+
+
+
+
+
+
     }
 }
 

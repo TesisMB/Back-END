@@ -1,0 +1,142 @@
+2022-07-31 21:04:08.5719 ERROR Something went wrong inside CreateEmergenciesDisaster action: One or more errors occurred. (Requested entity was not found.)
+2022-07-31 21:08:51.9316 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 21:08:52.9691 INFO Returned all emergenciesDisasters from database.
+2022-07-31 21:10:52.6207 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 21:10:53.0655 INFO Returned all employees from database.
+2022-07-31 21:11:17.5592 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 21:11:18.3997 INFO Returned all emergenciesDisasters from database.
+2022-07-31 21:11:30.6682 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 21:11:30.8947 INFO Returned all employees from database.
+2022-07-31 21:11:38.0029 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-31 21:11:46.4091 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-31 21:11:51.9152 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 21:11:52.1288 INFO Returned all employees from database.
+2022-07-31 21:12:07.1617 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-31 21:13:51.4631 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 21:13:52.4860 INFO Returned all emergenciesDisasters from database.
+2022-07-31 21:14:12.9688 INFO Returned emegencyDisaster with details for id: 329
+2022-07-31 21:14:20.2595 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 21:14:20.6674 INFO Returned all emergenciesDisasters from database.
+2022-07-31 21:14:22.7784 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 21:14:23.3535 INFO Returned all employees from database.
+2022-07-31 21:14:34.5988 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-31 21:19:11.3879 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 21:19:12.3352 INFO Returned all emergenciesDisasters from database.
+2022-07-31 21:19:20.6384 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 21:19:20.9266 INFO Returned all employees from database.
+2022-07-31 21:19:29.7245 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-31 21:25:18.0090 ERROR Something went wrong inside GetAllEmegenciesDisasters action: A second operation started on this context before a previous operation completed. This is usually caused by different threads using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+2022-07-31 21:25:18.2738 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 21:25:18.9934 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 21:25:19.2541 INFO Returned all emergenciesDisasters from database.
+2022-07-31 21:25:32.1313 INFO Returned User.
+2022-07-31 21:25:32.6630 INFO Returned all PDF from database.
+2022-07-31 21:25:32.6949 INFO Returned all Resources_Request from database.
+2022-07-31 21:25:33.6948 INFO Returned all emergenciesDisasters from database.
+2022-07-31 21:25:34.9679 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 21:25:35.3599 INFO Returned all emergenciesDisasters from database.
+2022-07-31 21:25:44.6315 INFO Returned emegencyDisaster with details for id: 321
+2022-07-31 21:27:47.0875 INFO Returned emegencyDisaster with details for id: 321
+2022-07-31 21:28:07.9316 ERROR Something went wrong inside GetAllEmegenciesDisasters action: A connection was successfully established with the server, but then an error occurred during the pre-login handshake. (provider: SSL Provider, error: 0 - Tiempo de espera de la operación de espera agotado.)
+2022-07-31 21:28:07.9316 ERROR Something went wrong inside GetEmegencyDisasterIDWithDetails action: A connection was successfully established with the server, but then an error occurred during the pre-login handshake. (provider: SSL Provider, error: 0 - Tiempo de espera de la operación de espera agotado.)
+2022-07-31 21:28:08.2993 ERROR Something went wrong inside GetAllTypesEmergenciesDisasters action: A connection was successfully established with the server, but then an error occurred during the pre-login handshake. (provider: SSL Provider, error: 0 - Tiempo de espera de la operación de espera agotado.)
+2022-07-31 21:28:18.0198 INFO Returned User.
+2022-07-31 21:28:18.6265 INFO Returned all emergenciesDisasters from database.
+2022-07-31 21:28:19.1041 INFO Returned all PDF from database.
+2022-07-31 21:28:19.4706 INFO Returned all Resources_Request from database.
+2022-07-31 21:28:20.8006 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 21:28:21.5624 INFO Returned all emergenciesDisasters from database.
+2022-07-31 21:28:25.0512 INFO Returned emegencyDisaster with details for id: 321
+2022-07-31 21:33:53.2908 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 21:33:53.8257 INFO Returned all employees from database.
+2022-07-31 21:37:53.5423 ERROR Something went wrong inside CreateEmergenciesDisaster action: The default FirebaseApp already exists.
+2022-07-31 22:06:09.3230 INFO Returned User.
+2022-07-31 22:06:10.9399 INFO Returned all PDF from database.
+2022-07-31 22:06:12.0005 INFO Returned all Resources_Request from database.
+2022-07-31 22:06:12.0806 INFO Returned all emergenciesDisasters from database.
+2022-07-31 22:06:13.5150 INFO Returned employe with details for id: 2
+2022-07-31 22:07:54.0503 INFO Returned all Resources_Request from database.
+2022-07-31 22:07:54.0581 INFO Returned all PDF from database.
+2022-07-31 22:07:55.0359 INFO Returned all emergenciesDisasters from database.
+2022-07-31 22:08:00.3900 INFO Returned employe with details for id: 2
+2022-07-31 22:27:26.9356 INFO Returned all emergenciesDisasters from database.
+2022-07-31 22:27:42.0225 INFO Returned all emergenciesDisasters from database.
+2022-07-31 22:28:28.0112 INFO Returned all emergenciesDisasters from database.
+2022-07-31 22:28:34.4072 INFO Returned all emergenciesDisasters from database.
+2022-07-31 22:28:44.2316 INFO Returned emegencyDisaster with details for id: 321
+2022-07-31 22:30:01.9455 ERROR Something went wrong inside JoinGroup aciton: An error occurred while updating the entries. See the inner exception for details.
+2022-07-31 22:30:03.4972 INFO Returned all emergenciesDisasters from database.
+2022-07-31 22:31:24.7126 INFO Returned all emergenciesDisasters from database.
+2022-07-31 22:31:27.4572 INFO Returned emegencyDisaster with details for id: 321
+2022-07-31 22:34:54.3263 ERROR Something went wrong inside JoinGroup aciton: An error occurred while updating the entries. See the inner exception for details.
+2022-07-31 22:35:07.6123 INFO Returned all emergenciesDisasters from database.
+2022-07-31 22:35:12.7556 INFO Returned all emergenciesDisasters from database.
+2022-07-31 22:36:08.1642 INFO Returned all emergenciesDisasters from database.
+2022-07-31 22:36:19.7620 INFO Returned all emergenciesDisasters from database.
+2022-07-31 22:36:23.0386 INFO Returned emegencyDisaster with details for id: 329
+2022-07-31 22:36:34.1738 ERROR Something went wrong inside JoinGroup aciton: An error occurred while updating the entries. See the inner exception for details.
+2022-07-31 22:37:04.3146 INFO Returned emegencyDisaster with details for id: 355
+2022-07-31 22:37:04.3731 INFO Returned emegencyDisaster with details for id: 351
+2022-07-31 22:37:22.7419 ERROR Something went wrong inside JoinGroup aciton: An error occurred while updating the entries. See the inner exception for details.
+2022-07-31 22:41:52.5113 ERROR Something went wrong inside JoinGroup aciton: An error occurred while updating the entries. See the inner exception for details.
+2022-07-31 22:41:52.5113 ERROR Something went wrong inside JoinGroup aciton: An error occurred while updating the entries. See the inner exception for details.
+2022-07-31 22:41:52.5113 ERROR Something went wrong inside JoinGroup aciton: An error occurred while updating the entries. See the inner exception for details.
+2022-07-31 22:45:19.6037 ERROR Something went wrong inside JoinGroup aciton: An error occurred while updating the entries. See the inner exception for details.
+2022-07-31 22:50:01.3227 INFO Returned all emergenciesDisasters from database.
+2022-07-31 22:50:32.1862 INFO Returned all emergenciesDisasters from database.
+2022-07-31 22:50:46.0128 INFO Returned all ChatRooms from database. 
+2022-07-31 22:50:47.8018 INFO Returned all emergenciesDisasters from database.
+2022-07-31 22:50:49.0955 INFO Returned all emergenciesDisasters from database.
+2022-07-31 22:50:51.2030 INFO Returned emegencyDisaster with details for id: 321
+2022-07-31 23:01:13.2727 INFO Returned User.
+2022-07-31 23:01:15.5876 INFO Returned all Resources_Request from database.
+2022-07-31 23:01:16.0633 INFO Returned all PDF from database.
+2022-07-31 23:01:17.0068 INFO Returned all emergenciesDisasters from database.
+2022-07-31 23:01:21.8620 INFO Returned all Resources_Request from database.
+2022-07-31 23:01:24.4362 INFO Returned all Resources_Request from database.
+2022-07-31 23:01:27.8785 INFO Returned all Resources_Request from database.
+2022-07-31 23:02:52.3664 INFO Returned all Resources_Request from database.
+2022-07-31 23:02:53.9718 INFO Returned all Resources_Request from database.
+2022-07-31 23:02:57.6052 INFO Returned all Resources_Request from database.
+2022-07-31 23:04:34.2581 INFO Returned all Resources_Request from database.
+2022-07-31 23:04:34.6415 INFO Returned all Resources_Request from database.
+2022-07-31 23:04:35.9626 INFO Returned all Resources_Request from database.
+2022-07-31 23:04:39.5903 INFO Returned all Resources_Request from database.
+2022-07-31 23:05:05.0619 INFO Returned all Resources_Request from database.
+2022-07-31 23:05:06.0162 INFO Returned all Resources_Request from database.
+2022-07-31 23:05:09.1954 INFO Returned all Resources_Request from database.
+2022-07-31 23:06:05.3427 INFO Returned all Resources_Request from database.
+2022-07-31 23:06:19.6498 INFO Returned all Resources_Request from database.
+2022-07-31 23:06:21.1827 INFO Returned all Resources_Request from database.
+2022-07-31 23:06:43.1758 INFO Returned all Resources_Request from database.
+2022-07-31 23:06:44.4674 INFO Returned all Resources_Request from database.
+2022-07-31 23:07:11.9561 INFO Returned all Resources_Request from database.
+2022-07-31 23:07:13.0290 INFO Returned all Resources_Request from database.
+2022-07-31 23:07:26.0090 INFO Returned all Resources_Request from database.
+2022-07-31 23:07:27.2866 INFO Returned all Resources_Request from database.
+2022-07-31 23:07:47.6513 INFO Returned all Resources_Request from database.
+2022-07-31 23:07:48.7946 INFO Returned all Resources_Request from database.
+2022-07-31 23:08:03.0266 INFO Returned all Resources_Request from database.
+2022-07-31 23:08:04.4893 INFO Returned all Resources_Request from database.
+2022-07-31 23:08:39.3157 INFO Returned all Resources_Request from database.
+2022-07-31 23:08:40.6315 INFO Returned all Resources_Request from database.
+2022-07-31 23:08:53.3294 INFO Returned all Resources_Request from database.
+2022-07-31 23:09:28.6200 INFO Returned all Resources_Request from database.
+2022-07-31 23:09:33.8166 INFO Returned all Resources_Request from database.
+2022-07-31 23:11:04.2851 INFO Returned all Resources_Request from database.
+2022-07-31 23:11:08.0951 INFO Returned all Resources_Request from database.
+2022-07-31 23:11:09.6648 INFO Returned all Resources_Request from database.
+2022-07-31 23:11:13.8385 INFO Returned all Resources_Request from database.
+2022-07-31 23:11:37.8388 INFO Returned all Resources_Request from database.
+2022-07-31 23:12:35.1599 INFO Returned all TypesEmergenciesDisasters from database.
+2022-07-31 23:12:35.8198 INFO Returned all emergenciesDisasters from database.
+2022-07-31 23:12:38.4283 INFO Returned all employees from database.
+2022-07-31 23:12:41.1578 INFO Returned all employees from database.
+2022-07-31 23:12:46.1445 INFO Returned all PDF from database.
+2022-07-31 23:12:48.1664 INFO Returned all emergenciesDisasters from database.
+2022-07-31 23:12:52.2862 INFO Returned all emergenciesDisasters from database.
+2022-07-31 23:12:55.8072 INFO Returned all emergenciesDisasters from database.
+2022-07-31 23:13:25.3734 INFO Returned all PDF from database.
+2022-07-31 23:13:28.9310 INFO Returned all Resources_Request from database.
+2022-07-31 23:13:29.6985 INFO Returned all emergenciesDisasters from database.
+2022-07-31 23:13:29.8974 INFO Returned all PDF from database.

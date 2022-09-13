@@ -1,4 +1,6 @@
-﻿using Entities.Models;
+﻿using Entities.DataTransferObjects.Medicines___Dto;
+using Entities.DataTransferObjects.ResourcesDto;
+using Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,6 +12,7 @@ namespace Contracts.Interfaces
     {
 
         Task<IEnumerable<Medicines>> GetAllMedicines(int userId);
+        IEnumerable<Medicines> GetAllMedicines(DateTime dateStart, DateTime dateEnd);
 
         Task<Medicines> GetMedicineById(string medicineId);
 
@@ -19,5 +22,11 @@ namespace Contracts.Interfaces
         void UpdateMedicine(Medicines medicine);
 
         void DeleteMedicine(Medicines medicine);
+
+        Task Upload(MedicineImg medicine);
+
+        Task<byte[]> Get(string imageName);
+        IEnumerable<Medicines> GetAllMedicines(DateTime dateConvert, DateTime dateConvertEnd, int estateId);
     }
 }
+

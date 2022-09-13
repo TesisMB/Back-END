@@ -1,0 +1,12 @@
+2022-09-04 20:33:31.1628 ERROR Something went wrong inside GetAllChatRooms aciton: Connection Timeout Expired.  The timeout period elapsed while attempting to consume the pre-login handshake acknowledgement.  This could be because the pre-login handshake failed or the server was unable to respond back in time.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=1525; handshake=13476; 
+2022-09-04 20:33:34.5252 ERROR Something went wrong inside GetAllEmegenciesDisasters action: Connection Timeout Expired.  The timeout period elapsed while attempting to consume the pre-login handshake acknowledgement.  This could be because the pre-login handshake failed or the server was unable to respond back in time.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=1525; handshake=13476; 
+2022-09-04 20:33:39.9991 INFO Returned all emergenciesDisasters from database.
+2022-09-04 20:34:09.7547 INFO Returned emegencyDisaster with details for id: 3
+2022-09-04 20:34:13.3304 INFO Returned all ChatRooms from database. 
+2022-09-04 20:34:27.7186 INFO Returned all ChatRooms from database. 
+2022-09-04 20:34:58.3267 INFO Returned all ChatRooms from database. 
+2022-09-04 20:35:05.0376 INFO Returned all ChatRooms from database. 
+2022-09-04 20:35:11.5296 INFO Returned all ChatRooms from database. 
+2022-09-04 20:35:17.0027 INFO Returned all ChatRooms from database. 
+2022-09-04 20:41:19.4335 INFO Returned User.
+2022-09-04 20:44:01.7100 INFO Returned User.

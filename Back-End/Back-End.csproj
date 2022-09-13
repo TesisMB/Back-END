@@ -1,9 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
+  
 	<PropertyGroup>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
 		<RootNamespace>Back_End</RootNamespace>
+		<UserSecretsId>9144cfa4-db37-48d2-8de2-7c93fa1958c9</UserSecretsId>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="wkhtmltoPdf\**" />
+	  <Content Remove="wkhtmltoPdf\**" />
+	  <EmbeddedResource Remove="wkhtmltoPdf\**" />
+	  <EntityDeploy Remove="wkhtmltoPdf\**" />
+	  <None Remove="wkhtmltoPdf\**" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<Compile Remove="ServiceExtension.cs" />
@@ -23,38 +33,49 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Autofac" Version="4.9.4" />
+		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="5.0.0" />
 		<PackageReference Include="AutoMapper" Version="10.1.1" />
 		<PackageReference Include="AutoMapper.Collection" Version="7.0.1" />
 		<PackageReference Include="AutoMapper.Collection.EntityFramework" Version="7.0.1" />
 		<PackageReference Include="AutoMapper.Collection.EntityFrameworkCore" Version="7.1.3" />
 		<PackageReference Include="AutoMapper.Collection.LinqToSQL" Version="7.0.1" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
-		<PackageReference Include="DinkToPdf" Version="1.0.8" />
+		<PackageReference Include="Azure.Storage.Blobs" Version="12.8.0" />
+		<PackageReference Include="Azure.Storage.Files.Shares" Version="12.1.0" />
+		<PackageReference Include="Azure.Storage.Queues" Version="12.2.0" />
+		<PackageReference Include="CorePush" Version="3.0.0" />
 		<PackageReference Include="FluentValidation" Version="10.3.6" />
 		<PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.3.6" />
+		<PackageReference Include="Google.Apis.Auth" Version="1.57.0" />
 		<PackageReference Include="jose-jwt" Version="3.1.1" />
 		<PackageReference Include="Microsoft.AspNet.WebApi.Cors" Version="5.2.7" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.5" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.Negotiate" Version="3.1.3" />
+		<PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="3.1.4" />
 		<PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="3.1.4" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.4" />
 		<PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
+		<PackageReference Include="Microsoft.Azure.SignalR" Version="1.4.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.4">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Azure" Version="1.0.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.4" />
 		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.6.0" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
-		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="NLog.Extensions.Logging" Version="1.7.3" />
+		<PackageReference Include="NReco.PdfGenerator" Version="1.2.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
 		<PackageReference Include="System.Linq.Queryable" Version="4.3.0" />
-		<PackageReference Include="Wkhtmltopdf.NetCore" Version="3.0.2" />
-	</ItemGroup>
+		<PackageReference Include="WkHtmlToPdf" Version="1.0.2" />
+  </ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Contracts\Contracts.csproj" />
@@ -63,14 +84,8 @@
 	  <ProjectReference Include="..\Repository\Repository.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="StaticFiles\images\PDF\" />
-	</ItemGroup>
-
 	<ProjectExtensions>
-		<VisualStudio>
-			<UserProperties appsettings_1json__JsonSchema="" />
-		</VisualStudio>
+		<VisualStudio><UserProperties appsettings_1json__JsonSchema="" properties_4launchsettings_1json__JsonSchema="" /></VisualStudio>
 	</ProjectExtensions>
 
 

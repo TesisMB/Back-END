@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using Back_End.EmergencyDisasterPDF;
 using Back_End.Entities;
 using Back_End.Models;
 using Contracts.Interfaces;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 using Entities.DataTransferObjects.EmergenciesDisasters___Dto;
 using Entities.Helpers;
 using Entities.Models;
@@ -10,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,11 +28,63 @@ namespace Back_End.Controllers
         private readonly IRepositorWrapper _repository;
         public readonly CruzRojaContext db = new CruzRojaContext();
         public ResourcesRequestMaterialsMedicinesVehicles resources = null;
-        public EmergenciesDisastersController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper)
+        public byte[] pdf;
+        private IConverter _converter;
+
+        public EmergenciesDisastersController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper, IConverter converter)
         {
             _logger = logger;
             _repository = repository;
             _mapper = mapper;
+            _converter = converter;
+        }
+
+
+
+        [HttpGet("PDF/{emegencyDisasterID}")]
+        public async Task<IActionResult> CreatePDF(int emegencyDisasterID)
+        {
+
+            var employees = await _repository.EmergenciesDisasters.GetEmergencyDisasterWithDetails(emegencyDisasterID);
+
+            //quien es el actual usuario
+            Users user = new Users();
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            //user = cruzRojaContext.Users
+            //        .Where(x => x.UserID == employeeId)
+            //        .Include(a => a.Estates)
+            //        .AsNoTracking()
+            //        .FirstOrDefault();
+
+            var globalSettings = new GlobalSettings
+            {
+                ColorMode = ColorMode.Color,
+                Orientation = Orientation.Portrait,
+                PaperSize = PaperKind.A4,
+                Margins = new MarginSettings { Top = 10 },
+                DocumentTitle = $"Reporte de emergencia",
+            };
+
+            var objectSettings = new ObjectSettings
+            {
+                PagesCount = true,
+                HtmlContent = EmergencyDisasterPdf.GetHTMLString(employees),
+                // Page = "https://code-maze.com/", //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE
+                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "styles.css") },
+                FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+                //FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+            };
+
+            var pdf = new HtmlToPdfDocument()
+            {
+                GlobalSettings = globalSettings,
+                Objects = { objectSettings }
+            };
+
+            var file = _converter.Convert(pdf);
+
+            return File(file, "application/pdf");
         }
 
 
@@ -54,7 +110,7 @@ namespace Back_End.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside GetAllEmegenciesDisasters action: {ex.Message}");
-                return StatusCode(500, "Internal Server error");
+                return StatusCode(500, ex.Message);
             }
         }
 
@@ -72,6 +128,24 @@ namespace Back_End.Controllers
 
                 var emergenciesDisastersResult = _mapper.Map<IEnumerable<EmergenciesDisastersAppDto>>(emergenciesDisasters);
 
+                CruzRojaContext cruzRojaContext = new CruzRojaContext();
+   
+
+                foreach (var item in emergenciesDisastersResult)
+                {
+                    foreach (var item2 in item.ChatRooms.DateMessage)
+                    {
+                        foreach (var item3 in item2.Messages)
+                        {
+                             var person = cruzRojaContext.Persons
+                                           .Where(a => a.ID == item3.userID)
+                                           .AsNoTracking()
+                                           .FirstOrDefault();
+
+                            item3.Name = person.FirstName + " " + person.LastName;
+                         }
+                    }
+                }
 
                 return Ok(emergenciesDisastersResult);
 
@@ -106,20 +180,25 @@ namespace Back_End.Controllers
 
                 var emergencyDisasterResult = _mapper.Map<EmergenciesDisastersDto>(emegencyDisaster);
 
-                if(emergencyDisasterResult.ChatRooms.UsersChatRooms != null)
-                {
+                CruzRojaContext cruzRojaContext = new CruzRojaContext();
 
-                    foreach (var item in emergencyDisasterResult.ChatRooms.UsersChatRooms)
+                var emergency = cruzRojaContext.EmergenciesDisasters
+                                .OrderByDescending(a => a.EmergencyDisasterID)
+                                .FirstOrDefault();
+
+                    foreach (var item in emergencyDisasterResult.ChatRooms.DateMessage)
                     {
-                        if (item.Picture != null)
+                        foreach (var item3 in item.Messages)
                         {
-                        item.Picture = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
-                                                     Request.Scheme, Request.Host, Request.PathBase, item.Picture);
+                            var person = cruzRojaContext.Persons
+                                          .Where(a => a.ID == item3.userID)
+                                          .AsNoTracking()
+                                          .FirstOrDefault();
 
+
+                            item3.Name = person.FirstName + " " + person.LastName;
                         }
                     }
-                }
-
 
                 return Ok(emergencyDisasterResult);
 
@@ -134,8 +213,11 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpPost]
-        public ActionResult<EmergenciesDisasters> CreateEmergencyDisaster([FromBody] EmergenciesDisastersForCreationDto emergenciesDisasters)
+        public async Task<ActionResult<EmergenciesDisasters>> CreateEmergencyDisaster([FromBody] EmergenciesDisastersForCreationDto emergenciesDisasters,
+            [FromQuery] int userId)
         {
+            emergenciesDisasters.CreatedBy = userId;
+
             try
             {
                 if (!ModelState.IsValid)
@@ -152,16 +234,34 @@ namespace Back_End.Controllers
 
                 var emergencyDisaster = _mapper.Map<EmergenciesDisasters>(emergenciesDisasters);
 
+                CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+                var emergency = cruzRojaContext.EmergenciesDisasters
+                       .OrderByDescending(a => a.EmergencyDisasterID)
+                       .FirstOrDefault();
+
+                if(emergency == null)
+                {
+                    emergencyDisaster.EmergencyDisasterID = 1;
+
+                }
+                else
+                {
+                  emergencyDisaster.EmergencyDisasterID = emergency.EmergencyDisasterID + 1;
+                }
+
+
                 emergencyDisaster.ChatRooms = new ChatRooms();
-                emergencyDisaster.ChatRooms.CreationDate = emergenciesDisasters.CreationDate;
+                emergencyDisaster.ChatRooms.CreationDate = DateTime.Now;
                 emergencyDisaster.ChatRooms.FK_TypeChatRoomID = emergenciesDisasters.FK_TypeChatRoomID;
-
-
 
 
                 _repository.EmergenciesDisasters.CreateEmergencyDisaster(emergencyDisaster);
 
                 _repository.EmergenciesDisasters.SaveAsync();
+
+                var response = await SendController.SendNotification(userId, emergenciesDisasters.LocationsEmergenciesDisasters.LocationCityName, emergencyDisaster.EmergencyDisasterID);
+
 
                 return Ok();
             }
@@ -175,8 +275,10 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpPatch("{emegencyDisasterID}")]
-        public async Task<ActionResult> UpdatePartialEmegencyDisaster(int emegencyDisasterID, JsonPatchDocument<EmergenciesDisastersForUpdateDto> _emergencyDisaster)
+        public async Task<ActionResult> UpdatePartialEmegencyDisaster(int emegencyDisasterID, [FromQuery] int userId,
+            JsonPatchDocument<EmergenciesDisastersForUpdateDto> _emergencyDisaster)
         {
+
             try
             {
                 var emergencyDisaster = await _repository.EmergenciesDisasters.GetEmergencyDisasterById(emegencyDisasterID);
@@ -197,6 +299,8 @@ namespace Back_End.Controllers
                 {
                     emergencyDisasterToPatch.EmergencyDisasterEndDate = DateTime.Now;
                 }
+
+                emergencyDisasterToPatch.ModifiedBy = userId;
 
                 if (!TryValidateModel(emergencyDisasterToPatch))
                 {
@@ -224,7 +328,7 @@ namespace Back_End.Controllers
         //********************************* FUNCIONANDO *********************************
 
         [HttpDelete("{emegencyDisasterID}")]
-        public async Task<ActionResult> DeletEmegencyDisaster(int emegencyDisasterID)
+        public async Task<ActionResult> DeletEmegencyDisaster(int emegencyDisasterID, [FromQuery] int userId)
         {
             try
             {

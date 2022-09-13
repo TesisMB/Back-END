@@ -17,7 +17,7 @@ namespace Back_End.Entities
               : base(options)
         {
         }
-     
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -108,6 +108,17 @@ namespace Back_End.Entities
                    .WithMany(x => x.ResourcesResponse)
                    .HasForeignKey(x => x.AnsweredBy);
 
+            modelBuilder.Entity<PDF>()
+               .HasOne(x => x.EmployeeCreated)
+               .WithMany(x => x.PDFCreated)
+               .HasForeignKey(x => x.CreatedBy);
+
+            modelBuilder.Entity<PDF>()
+                  .HasOne(x => x.EmployeeModified)
+                  .WithMany(x => x.PDFModified)
+                  .HasForeignKey(x => x.ModifiedBy);
+
+
         }
 
         //Defino cada una de las Models, que se usan durante el proyecto, donde cada una de ellas representa una tabla de la base de datos
@@ -148,12 +159,15 @@ namespace Back_End.Entities
         public DbSet<PDF> PDF { get; set; }
         public DbSet<LocationsEmergenciesDisasters> LocationsEmergenciesDisasters { get; set; }
         public DbSet<LocationVolunteers> locationVolunteers { get; set; }
+        public DbSet<DateMessage> DateMessage { get; set; }
+        public DbSet<Messages> Messages { get; set; }
+
+        //private const string Connection =
+        //             "Server=tcp:cruzrojadb.database.windows.net,1433;Initial Catalog=CruzRojaDB;Persist Security Info=False;User ID=usuarioazure;Password=Larioja1450;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
         private const string Connection =
-              @"Server=localhost;
-                    Database=CruzRojaDB - Testing;
-                    Trusted_Connection=True;
-                    MultipleActiveResultSets=true";
+                    "Server=CruzRojaDB1.mssql.somee.com;packet size=4096;user id=Yoel23_SQLLogin_1;pwd=a84wrsx7sn;";
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

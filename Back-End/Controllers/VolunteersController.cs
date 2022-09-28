@@ -6,8 +6,6 @@ using Back_End.Models.Employees___Dto;
 using Back_End.Models.Volunteers__Dto;
 using Back_End.VolunteersPDF;
 using Contracts.Interfaces;
-using DinkToPdf;
-using DinkToPdf.Contracts;
 using Entities.DataTransferObjects.ResourcesDto;
 using Entities.DataTransferObjects.Volunteers__Dto;
 using Entities.Helpers;

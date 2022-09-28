@@ -6,8 +6,6 @@ using Back_End.Models.Employees___Dto;
 using Back_End.Models.Volunteers__Dto;
 using Back_End.VolunteersPDF;
 using Contracts.Interfaces;
-using DinkToPdf;
-using DinkToPdf.Contracts;
 using Entities.DataTransferObjects.ResourcesDto;
 using Entities.DataTransferObjects.Volunteers__Dto;
 using Entities.Helpers;
@@ -31,116 +29,12 @@ namespace Back_End.Controllers
         private readonly ILoggerManager _logger;
         private readonly IRepositorWrapper _repository;
         private readonly IMapper _mapper;
-        public byte[] pdf;
-        private IConverter _converter;
-        public VolunteersController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper, IConverter converter)
+        public VolunteersController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper)
         {
             _logger = logger;
             _repository = repository;
             _mapper = mapper;
-            _converter = converter;
 
-        }
-
-        //********************************* FUNCIONANDO *********************************
-
-        [HttpGet("api/Voluntarios/PDF/{volunteerId}")]
-        public async Task<IActionResult> CreatePDF(int volunteerId)
-        {
-
-            var volunteer = await _repository.Volunteers.GetVolunteerWithDetails(volunteerId);
-
-            ////quien es el actual usuario
-            Users user = new Users();
-            CruzRojaContext cruzRojaContext = new CruzRojaContext();
-
-            user = cruzRojaContext.Users
-                    .Where(x => x.UserID == volunteerId)
-                    .Include(a => a.Estates)
-                    .Include(a => a.Persons)
-                    .AsNoTracking()
-                    .FirstOrDefault();
-
-            var globalSettings = new GlobalSettings
-            {
-                ColorMode = ColorMode.Color,
-                Orientation = Orientation.Portrait,
-                PaperSize = PaperKind.A4,
-                Margins = new MarginSettings { Top = 10 },
-                DocumentTitle = $"Reporte de voluntario",
-            };
-
-            var objectSettings = new ObjectSettings
-            {
-                PagesCount = true,
-                HtmlContent = VolunteerPdf.GetHTMLString(volunteer),
-                // Page = "https://code-maze.com/", //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE
-                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "styles.css") },
-                FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
-                //FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
-            };
-
-            var pdf = new HtmlToPdfDocument()
-            {
-                GlobalSettings = globalSettings,
-                Objects = { objectSettings }
-            };
-
-            var file = _converter.Convert(pdf);
-
-            return File(file, "application/pdf");
-        }
-
-        [HttpGet("api/Voluntarios/GetAll/PDF/{volunteerId}")]
-        public async Task<IActionResult> CreatePDFVolunteers(int volunteerId)
-        {
-
-            var volunteer = await _repository.Volunteers.GetAllVolunteers(volunteerId);
-
-            string title = string.Empty;
-            foreach (var emp in volunteer)
-            {
-                title = emp.Users.Estates.Locations.LocationCityName;
-            }
-
-            //quien es el actual usuario
-            Users user = new Users();
-            CruzRojaContext cruzRojaContext = new CruzRojaContext();
-
-            user = cruzRojaContext.Users
-                    .Where(x => x.UserID == volunteerId)
-                    .Include(a => a.Estates)
-                    .AsNoTracking()
-                    .FirstOrDefault();
-
-            var globalSettings = new GlobalSettings
-            {
-                ColorMode = ColorMode.Color,
-                Orientation = Orientation.Portrait,
-                PaperSize = PaperKind.A4,
-                Margins = new MarginSettings { Top = 10 },
-                DocumentTitle = $"Reporte de Voluntarios - {title}",
-            };
-
-            var objectSettings = new ObjectSettings
-            {
-                PagesCount = true,
-                HtmlContent = VolunteersPdf.GetHTMLString(volunteer),
-                // Page = "https://code-maze.com/", //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE
-                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "stylesForVolunteers.css") },
-                FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
-                //FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
-            };
-
-            var pdf = new HtmlToPdfDocument()
-            {
-                GlobalSettings = globalSettings,
-                Objects = { objectSettings }
-            };
-
-            var file = _converter.Convert(pdf);
-
-            return File(file, "application/pdf");
         }
 
         [Route("api/Voluntarios")]

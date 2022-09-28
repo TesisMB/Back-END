@@ -1,0 +1,47 @@
+2022-09-14 19:13:29.9851 INFO Returned all ChatRooms from database. 
+2022-09-14 19:13:37.5428 INFO Returned all ChatRooms from database. 
+2022-09-14 19:14:42.6794 INFO Returned all ChatRooms from database. 
+2022-09-14 19:14:52.6783 INFO Returned all ChatRooms from database. 
+2022-09-14 19:14:58.6830 INFO Returned all ChatRooms from database. 
+2022-09-14 19:15:10.6501 INFO Returned employe with details for id: 2
+2022-09-14 19:15:29.1442 INFO Returned all ChatRooms from database. 
+2022-09-14 19:15:42.1861 INFO Returned all ChatRooms from database. 
+2022-09-14 19:15:45.9270 INFO Returned all ChatRooms from database. 
+2022-09-14 19:15:49.2501 INFO Returned all ChatRooms from database. 
+2022-09-14 19:15:55.3582 INFO Returned all ChatRooms from database. 
+2022-09-14 19:16:05.0306 INFO Returned employe with details for id: 5
+2022-09-14 19:16:12.4192 INFO Returned all ChatRooms from database. 
+2022-09-14 19:28:00.9994 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:28:04.7921 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:28:08.0911 INFO Returned all ChatRooms from database. 
+2022-09-14 19:28:14.5892 INFO Returned all ChatRooms from database. 
+2022-09-14 19:37:17.4997 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:37:19.8610 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:37:21.7809 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:37:23.6586 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:37:25.5188 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:37:27.4937 INFO Returned emegencyDisaster with details for id: 1
+2022-09-14 19:37:38.9476 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:37:40.7060 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:37:42.5363 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:37:45.2633 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:37:47.2629 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:37:49.0734 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:37:51.1161 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:37:54.8903 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:37:56.8997 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:38:01.8625 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:38:03.6680 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:38:05.4548 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:38:10.5713 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:38:12.8504 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:38:14.6500 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:38:16.7171 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:38:18.4999 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:38:37.9434 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:39:03.8607 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:39:06.7812 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:39:09.7361 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:39:12.7845 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:39:16.0808 INFO Returned all emergenciesDisasters from database.
+2022-09-14 19:39:18.8117 INFO Returned all emergenciesDisasters from database.

@@ -5,8 +5,7 @@ using Back_End.Helpers;
 using Back_End.Models;
 using Back_End.Models.Employees___Dto;
 using Contracts.Interfaces;
-using DinkToPdf;
-using DinkToPdf.Contracts;
+
 using Entities.DataTransferObjects;
 using Entities.DataTransferObjects.Employees___Dto;
 using Entities.Helpers;
@@ -30,158 +29,12 @@ namespace Back_End.Controllers
         private readonly ILoggerManager _logger;
         private readonly IRepositorWrapper _repository;
         private readonly IMapper _mapper;
-        public byte[] pdf;
-        private IConverter _converter;
 
-        public EmployeesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper, IConverter converter)
+        public EmployeesController(ILoggerManager logger, IRepositorWrapper repository, IMapper mapper)
         {
             _logger = logger;
             _repository = repository;
             _mapper = mapper;
-            _converter = converter;
-        }
-
-        [HttpGet("Employees/PDF/{employeeId}")]
-        public IActionResult CreatePDF(int employeeId)
-        {
-
-            var employees = _repository.Employees.GetEmployeeWithDetails(employeeId);
-
-            //quien es el actual usuario
-            Users user = new Users();
-            CruzRojaContext cruzRojaContext = new CruzRojaContext();
-
-            //user = cruzRojaContext.Users
-            //        .Where(x => x.UserID == employeeId)
-            //        .Include(a => a.Estates)
-            //        .AsNoTracking()
-            //        .FirstOrDefault();
-
-            var globalSettings = new GlobalSettings
-            {
-                ColorMode = ColorMode.Color,
-                Orientation = Orientation.Portrait,
-                PaperSize = PaperKind.A4,
-                Margins = new MarginSettings { Top = 10 },
-                DocumentTitle = $"Reporte de empleado",
-            };
-
-            var objectSettings = new ObjectSettings
-            {
-                PagesCount = true,
-                HtmlContent = EmployeePdf.GetHTMLString(employees),
-                // Page = "https://code-maze.com/", //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE
-                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "styles.css") },
-                FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
-                //FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
-            };
-
-            var pdf = new HtmlToPdfDocument()
-            {
-                GlobalSettings = globalSettings,
-                Objects = { objectSettings }
-            };
-
-            var file = _converter.Convert(pdf);
-
-            return File(file, "application/pdf");
-        }
-
-
-        [HttpGet("Employees/GetAll/PDF/{employeeId}")]
-        public async Task<IActionResult> CreatePDFEmployees(int employeeId)
-        {
-            var employees = await _repository.Users.GetEmployeesVolunteers(employeeId);
-
-            // var employees = await _repository.Employees.GetAllEmployees(employeeId);
-
-            //quien es el actual usuario
-            Users user = null;
-            CruzRojaContext cruzRojaContext = new CruzRojaContext();
-
-            string title = string.Empty;
-            foreach (var emp in employees)
-            {
-                title = emp.Estates.Locations.LocationCityName;
-            }
-
-            user = cruzRojaContext.Users
-                    .Where(x => x.UserID == employeeId)
-                    .FirstOrDefault();
-
-            var globalSettings = new GlobalSettings
-            {
-                ColorMode = ColorMode.Color,
-                Orientation = Orientation.Portrait,
-                PaperSize = PaperKind.A4,
-                Margins = new MarginSettings { Top = 10 },
-                DocumentTitle = $"Reporte de empleados - {title}",
-            };
-
-            var objectSettings = new ObjectSettings
-            {
-                PagesCount = true,
-                HtmlContent = EmployeesPdf.GetHTMLString(employees),
-                // Page = "https://code-maze.com/", //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE
-                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "StylesForEmployeescss.css") },
-                FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
-                //FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
-            };
-
-            var pdf = new HtmlToPdfDocument()
-            {
-                GlobalSettings = globalSettings,
-                Objects = { objectSettings }
-            };
-
-            var file = _converter.Convert(pdf);
-
-            return File(file, "application/pdf");
-        }
-
-        [HttpGet("Employees/Credential/{employeeId}")]
-        public IActionResult CredentialPDF(int employeeId)
-        {
-
-            var employees = _repository.Employees.GetEmployeeWithDetails(employeeId);
-
-            //quien es el actual usuario
-            Users user = new Users();
-            CruzRojaContext cruzRojaContext = new CruzRojaContext();
-
-            user = cruzRojaContext.Users
-                    //.Include(a => a.Estates)
-                    .Where(x => x.UserID == employeeId)
-                    .FirstOrDefault();
-
-            var globalSettings = new GlobalSettings
-            {
-                ColorMode = ColorMode.Color,
-                Orientation = Orientation.Portrait,
-                PaperSize = PaperKind.A4,
-                Margins = new MarginSettings { Top = 10 },
-                DocumentTitle = $"Credencial",
-            };
-
-            var objectSettings = new ObjectSettings
-            {
-                PagesCount = true,
-                HtmlContent = Credential.GetHTMLString(employees),
-                // Page = "https://code-maze.com/", //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE
-                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "Credential.css") },
-                FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
-                //FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"USUARIO: {user.UserDni}          IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
-            };
-
-            var pdf = new HtmlToPdfDocument()
-            {
-                GlobalSettings = globalSettings,
-                Objects = { objectSettings }
-            };
-
-            var file = _converter.Convert(pdf);
-
-            return File(file, "application/pdf");
         }
 
 

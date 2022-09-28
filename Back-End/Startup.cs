@@ -242,8 +242,6 @@ using NLog;
 using System.IO;
 using Back_End.Hubs;
 using Microsoft.Extensions.FileProviders;
-using DinkToPdf.Contracts;
-using DinkToPdf;
 using PDF_Generator.Utility;
 using Azure.Storage.Blobs;
 using CorePush.Google;
@@ -261,9 +259,9 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        var context = new CustomAssemblyLoadContext();
-        context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "libwkhtmltox.dll"));
-        services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+        //var context = new CustomAssemblyLoadContext();
+        //context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "libwkhtmltox.dll"));
+        //services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 
         services.ConfigureCors();
         services.ConfigureIISIntegreation();

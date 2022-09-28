@@ -233,7 +233,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -250,7 +249,6 @@ using Azure.Storage.Blobs;
 using CorePush.Google;
 using CorePush.Apple;
 using Repository;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 
 public class Startup
 {
@@ -266,13 +264,6 @@ public class Startup
         //var context = new CustomAssemblyLoadContext();
         //context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "libwkhtmltox.dll"));
         //services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
-
-        services.AddControllersWithViews();
-        // In production, the Angular files will be served from this directory
-        services.AddSpaStaticFiles(configuration =>
-        {
-            configuration.RootPath = "ClientApp/dist";
-        });
 
         services.ConfigureCors();
         services.ConfigureIISIntegreation();
@@ -410,9 +401,7 @@ public class Startup
             ForwardedHeaders = ForwardedHeaders.All
         });
 
-        //app.UseCors("todos");
-        app.UseCors(builder =>
-        builder.WithOrigins("http://localhost:4200"));
+        app.UseCors("todos");
 
         app.UseRouting();
 
@@ -421,21 +410,8 @@ public class Startup
         app.UseAuthorization();
 
         app.UseHttpsRedirection();
-        app.UseStaticFiles();
-        if (!env.IsDevelopment())
-        {
-            app.UseSpaStaticFiles();
-        }
-        //app.UseMvc(routes =>
-        //{
-        //    routes.MapRoute(
-        //        name: "default",
-        //        template: "{controller}/{action=Index}/{id?}");
 
-        //    routes.MapSpaFallbackRoute(
-        //          name: "spa-fallback",
-        //          defaults: new { controller = "Home", action = "Index" });
-        //});
+        app.UseMvc();
 
         app.UseEndpoints(endpoints =>
         {
@@ -443,17 +419,6 @@ public class Startup
             //endpoints.MapHub<Mensaje>("Notifications");
             endpoints.MapHub<Mensaje>("/chat");
         });
-        app.UseSpa(spa =>
-        {
-            // To learn more about options for serving an Angular SPA from ASP.NET Core,
-            // see https://go.microsoft.com/fwlink/?linkid=864501
 
-            spa.Options.SourcePath = Path.Join(env.ContentRootPath, "ClientApp");
-
-        if (env.IsDevelopment())
-                spa.UseAngularCliServer(npmScript: "start");
-            {
-            }
-        });
     }
 }

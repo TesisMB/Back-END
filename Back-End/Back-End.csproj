@@ -3,7 +3,6 @@
   
 	<PropertyGroup>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
-		<FrontendRoot>ClientApp</FrontendRoot>
 		<RootNamespace>Back_End</RootNamespace>
 		<UserSecretsId>9144cfa4-db37-48d2-8de2-7c93fa1958c9</UserSecretsId>
 	</PropertyGroup>
@@ -21,7 +20,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="ClientApp\overrides\jest\index.d.ts" />
 	  <None Remove="Resources\ResourcesInfo.html" />
 	</ItemGroup>
 
@@ -60,7 +58,6 @@
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.4" />
 		<PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
-		<PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.0" />
 		<PackageReference Include="Microsoft.Azure.SignalR" Version="1.4.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
@@ -87,38 +84,9 @@
 	  <ProjectReference Include="..\Repository\Repository.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="ClientApp\dist\" />
-	  <Folder Include="wwwroot\" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <TypeScriptCompile Include="ClientApp\overrides\jest\index.d.ts" />
-	</ItemGroup>
-
 	<ProjectExtensions>
 		<VisualStudio><UserProperties appsettings_1json__JsonSchema="" properties_4launchsettings_1json__JsonSchema="" /></VisualStudio>
 	</ProjectExtensions>
 
-	<Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(FrontendRoot)node_modules') ">
-		<!-- Ensure Node.js is installed -->
-		<Exec Command="node --version" ContinueOnError="true">
-			<Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
-		</Exec>
-		<Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
-		<Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
-		<Exec WorkingDirectory="$(FrontendRoot)" Command="npm install" />
-	</Target>
 
-	<Target Name="PublishAngular" AfterTargets="ComputeFilesToPublish">
-		<Exec Command="npm install" WorkingDirectory="$(FrontendRoot)" />
-		<Exec Command="npm run build -- --prod" WorkingDirectory="$(FrontendRoot)" />
-		<ItemGroup>
-			<DistFiles Include="$(FrontendRoot)dist\**" />
-			<ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
-				<RelativePath>%(DistFiles.Identity)</RelativePath>
-				<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-			</ResolvedFileToPublish>
-		</ItemGroup>
-	</Target>
 </Project>

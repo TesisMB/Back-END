@@ -242,8 +242,6 @@ using NLog;
 using System.IO;
 using Back_End.Hubs;
 using Microsoft.Extensions.FileProviders;
-using DinkToPdf.Contracts;
-using DinkToPdf;
 using PDF_Generator.Utility;
 using Azure.Storage.Blobs;
 using CorePush.Google;

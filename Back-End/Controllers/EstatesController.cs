@@ -3,8 +3,7 @@ using Back_End.Entities;
 using Back_End.Models;
 using Back_End.Models.Employees___Dto;
 using Contracts.Interfaces;
-using DinkToPdf;
-using DinkToPdf.Contracts;
+
 using Entities.DataTransferObjects.Estates___Dto;
 using Entities.Helpers;
 using Entities.Models;

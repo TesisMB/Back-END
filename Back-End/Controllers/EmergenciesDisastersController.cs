@@ -3,8 +3,7 @@ using Back_End.EmergencyDisasterPDF;
 using Back_End.Entities;
 using Back_End.Models;
 using Contracts.Interfaces;
-using DinkToPdf;
-using DinkToPdf.Contracts;
+
 using Entities.DataTransferObjects.EmergenciesDisasters___Dto;
 using Entities.Helpers;
 using Entities.Models;

@@ -2,8 +2,7 @@
 using Back_End.Entities;
 using Back_End.Models;
 using Contracts.Interfaces;
-using DinkToPdf;
-using DinkToPdf.Contracts;
+
 using Entities.DataTransferObjects.Resources_Request___Dto;
 using Entities.DataTransferObjects.ResourcesRequest___Dto;
 using Entities.Helpers;
@@ -29,18 +28,16 @@ namespace Back_End.Controllers
         public static ResourcesRequest resources_Request;
         public static ResourcesRequest reourceRequest;
         CruzRojaContext db = new CruzRojaContext();
-        private IConverter _converter;
 
 
         ResourcesRequestMaterialsMedicinesVehicles resources = null;
 
 
-        public ResourcesRequestController(IMapper mapper, ILoggerManager logger, IRepositorWrapper repository, IConverter converter)
+        public ResourcesRequestController(IMapper mapper, ILoggerManager logger, IRepositorWrapper repository)
         {
             _mapper = mapper;
             _logger = logger;
             _repository = repository;
-            _converter = converter;
         }
 
         //********************************* FUNCIONANDO *********************************
@@ -217,85 +214,85 @@ namespace Back_End.Controllers
             }
         }
 
-        [HttpGet("PDF")]
-        public async Task<IActionResult> CreatePDF([FromQuery] int userid, [FromQuery] string condition, [FromQuery] int emergency,
-                                                   [FromQuery] string dateStart, [FromQuery] string dateEnd)
-        {
+        //[HttpGet("PDF")]
+        //public async Task<IActionResult> CreatePDF([FromQuery] int userid, [FromQuery] string condition, [FromQuery] int emergency,
+        //                                           [FromQuery] string dateStart, [FromQuery] string dateEnd)
+        //{
 
-            DateTime dateConvert, dateConvertEnd;
-            dateConvertEnd = Convert.ToDateTime("01/01/0001");
+        //    DateTime dateConvert, dateConvertEnd;
+        //    dateConvertEnd = Convert.ToDateTime("01/01/0001");
 
-            //Fecha de comienzo
-            dateStart = dateStart.Substring(4, 11);
-            var monthStart = dateStart.Substring(0, 3);
-            var dayStart = dateStart.Substring(3, 4);
-            var yearStart = dateStart.Substring(6, 5);
+        //    //Fecha de comienzo
+        //    dateStart = dateStart.Substring(4, 11);
+        //    var monthStart = dateStart.Substring(0, 3);
+        //    var dayStart = dateStart.Substring(3, 4);
+        //    var yearStart = dateStart.Substring(6, 5);
 
-            monthStart = _repository.Estates.Date(monthStart);
+        //    monthStart = _repository.Estates.Date(monthStart);
 
-            var dateStartNew = dayStart + "/" + monthStart + "/" + yearStart;
-            dateConvert = Convert.ToDateTime(dateStartNew);
+        //    var dateStartNew = dayStart + "/" + monthStart + "/" + yearStart;
+        //    dateConvert = Convert.ToDateTime(dateStartNew);
 
-            //Fecha de finalizacion Opcional
-            if (dateEnd != null)
-            {
-                dateEnd = dateEnd.Substring(4, 11);
-                var monthEnd = dateEnd.Substring(0, 3);
-                var dayEnd = dateEnd.Substring(3, 4);
-                var yearEnd = dateEnd.Substring(6, 5);
+        //    //Fecha de finalizacion Opcional
+        //    if (dateEnd != null)
+        //    {
+        //        dateEnd = dateEnd.Substring(4, 11);
+        //        var monthEnd = dateEnd.Substring(0, 3);
+        //        var dayEnd = dateEnd.Substring(3, 4);
+        //        var yearEnd = dateEnd.Substring(6, 5);
 
-                monthEnd = _repository.Estates.Date(monthEnd);
-                Console.WriteLine("Mes final " + monthEnd);
-                var dateEndNew = dayEnd + "/" + monthEnd + "/" + yearEnd;
-                dateConvertEnd = Convert.ToDateTime(dateEndNew);
-            }
-
-
-
-            var requests = await _repository.Resources_Requests.GetAllResourcesRequestPDF(userid, condition, emergency, dateConvert, dateConvertEnd);
+        //        monthEnd = _repository.Estates.Date(monthEnd);
+        //        Console.WriteLine("Mes final " + monthEnd);
+        //        var dateEndNew = dayEnd + "/" + monthEnd + "/" + yearEnd;
+        //        dateConvertEnd = Convert.ToDateTime(dateEndNew);
+        //    }
 
 
-            if(requests.Count() == 0)
-            {
-                return BadRequest(ErrorHelper.Response(400, $"No hay ningun historial de solicitudes {condition}s en la fecha establecida."));
-            }
 
-            var objectSettings = new ObjectSettings
-            {
-                PagesCount = true,
-                HtmlContent =  RequestHistory.GetHTMLString(requests, condition, dateConvert, dateConvertEnd),
-                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "stylesForRequest.css") },
-                FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
-            };
+        //    var requests = await _repository.Resources_Requests.GetAllResourcesRequestPDF(userid, condition, emergency, dateConvert, dateConvertEnd);
 
-            //var globalSettings = new GlobalSettings
-            //{
-            //    ColorMode = ColorMode.Color,
-            //    Orientation = Orientation.Landscape,
-            //    PaperSize = PaperKind.A4,
-            //    Margins = new MarginSettings { Top = 10 },
-            //    DocumentTitle = "Reporte de recursos",
-            //};
 
-            var globalSettings = new GlobalSettings
-            {
-                ColorMode = ColorMode.Color,
-                Orientation = Orientation.Portrait,
-                PaperSize = PaperKind.A4,
-                Margins = new MarginSettings { Top = 10 },
-                DocumentTitle = "Historial de solicitudes",
-            };
+        //    if(requests.Count() == 0)
+        //    {
+        //        return BadRequest(ErrorHelper.Response(400, $"No hay ningun historial de solicitudes {condition}s en la fecha establecida."));
+        //    }
 
-            var pdf = new HtmlToPdfDocument()
-            {
-                GlobalSettings = globalSettings,
-                Objects = { objectSettings }
-            };
+        //    var objectSettings = new ObjectSettings
+        //    {
+        //        PagesCount = true,
+        //        HtmlContent =  RequestHistory.GetHTMLString(requests, condition, dateConvert, dateConvertEnd),
+        //        WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "stylesForRequest.css") },
+        //        FooterSettings = { FontName = "Times New Roman", FontSize = 8, Right = $@"IMPRESIÓN: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}          [page]", Line = true, },
+        //    };
 
-            var file = _converter.Convert(pdf);
+        //    //var globalSettings = new GlobalSettings
+        //    //{
+        //    //    ColorMode = ColorMode.Color,
+        //    //    Orientation = Orientation.Landscape,
+        //    //    PaperSize = PaperKind.A4,
+        //    //    Margins = new MarginSettings { Top = 10 },
+        //    //    DocumentTitle = "Reporte de recursos",
+        //    //};
 
-            return File(file, "application/pdf");
-        }
+        //    var globalSettings = new GlobalSettings
+        //    {
+        //        ColorMode = ColorMode.Color,
+        //        Orientation = Orientation.Portrait,
+        //        PaperSize = PaperKind.A4,
+        //        Margins = new MarginSettings { Top = 10 },
+        //        DocumentTitle = "Historial de solicitudes",
+        //    };
+
+        //    var pdf = new HtmlToPdfDocument()
+        //    {
+        //        GlobalSettings = globalSettings,
+        //        Objects = { objectSettings }
+        //    };
+
+        //    var file = _converter.Convert(pdf);
+
+        //    return File(file, "application/pdf");
+        //}
 
 
 

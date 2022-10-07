@@ -64,6 +64,16 @@ namespace Back_End.Controllers
 
                         item2.Name = person.FirstName + " " + person.LastName;
                         item2.UserDni = user.UserDni;
+
+
+
+                        var roles = cruzRojaContext.Roles
+                                      .Where(a => a.RoleID == user.FK_RoleID)
+                                      .AsNoTracking()
+                                      .FirstOrDefault();
+
+                        item2.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{user.Avatar}";
+                        item2.RoleName = roles.RoleName;
                     }
                 }
 
@@ -189,6 +199,8 @@ namespace Back_End.Controllers
                         item3.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{user.Avatar}";
                         item3.RoleName = roles.RoleName;
                     }
+
+
                 }
 
                 return Ok(chatRoomsToResult);

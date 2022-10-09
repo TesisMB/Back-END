@@ -3,6 +3,7 @@ using Back_End.Entities;
 using Back_End.Helpers;
 using Back_End.Models;
 using Contracts.Interfaces;
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections;
@@ -119,24 +120,28 @@ namespace Repository
             string message;
             {
 
-                var resetUrl = $"http://localhost:4200/cliente/resetear-contrase%C3%B1a?token= {account.ResetToken}";
+                var resetUrl = $"http://localhost:4200/cliente/resetear-contrase%C3%B1a?token={account.ResetToken}";
 
                 resetUrl.Trim();
                 message = $@"
-                                <p>Sentimos que hayas tenido problemas para iniciar sesión en SYNAGIR. Podemos ayudar a recuperar tu cuenta.</p>
-                                <p>Please click the below link to reset your password, the link will be valid for 1 day:</p>
+                                <p>Sentimos que hayas tenido problemas para iniciar sesión en SICREYD. Podemos ayudar a recuperar tu cuenta.</p>
+                                <p>Por favor hace click en el siguiente enlace para restablecer tu contraseña, el siguiente link es valido por un dia:</p>
                                  <a style=""color: white; text-align: center; display: block; background:red; text-decoration: none;  border-radius: 0.4rem; margin: 4rem auto; width: 15%; padding: 10px;
                                     "" href=""{resetUrl}"">Reset your Password</a>";
 
             }
 
-            Email.Send
-                (
-                to: account.Persons.Email,
-                subject: "Sign-up Verification API - Reset Password",
-               html: $@"<h4>Reset Password Email</h4>
-                         {message}"
-            );
+            var msg = new Mail(new string[] { account.Persons.Email }, "Restablecer contraseña", $@"{message}");
+
+            EmailSender.SendEmail(msg);
+
+            //Email.Send
+            //    (
+            //    to: account.Persons.Email,
+            //    subject: "Sign-up Verification API - Reset Password",
+            //   html: $@"<h4>Reset Password Email</h4>
+            //             {message}"
+            //);
         }
 
         //Funcion para validar los campos: Token, contraseña nueva 

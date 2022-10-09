@@ -28,66 +28,68 @@ namespace Repository
 
         }
 
-        public static void sendVerificationEmail(Users user)
-        {
-            string message;
+        //public static void sendVerificationEmail(Users user)
+        //{
+        //    string message;
 
 
-             message = $@"
-              <div style='display: flex;
-                                          justify-content: center;
-                                          align-items: center;
-                                          height: 96vh;'>
+        //     message = $@"
+        //      <div style='display: flex;
+        //                                  justify-content: center;
+        //                                  align-items: center;
+        //                                  height: 96vh;'>
 
-                    <div style='border: 1px solid #ccc;
-                                max-width: 58%;
-                                border-radius: 6px;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                flex-direction: column;
-                                padding: 20px;'>
+        //            <div style='border: 1px solid #ccc;
+        //                        max-width: 58%;
+        //                        border-radius: 6px;
+        //                        display: flex;
+        //                        align-items: center;
+        //                        justify-content: center;
+        //                        flex-direction: column;
+        //                        padding: 20px;'>
 
-               <h2 style='font-weight: 400;
-                          line-height: 30px;
-                          font-size: 15px;
-                          margin: 0 0 1rem 0;'>
-                ¡Bienvenido a SINAGIR!</h2>
-
-
-               <h3 stlye='font-weight: normal;
-                    font-size: 13px;'>
-                Tu cuenta se creo exitosamente</h3>
+        //       <h2 style='font-weight: 400;
+        //                  line-height: 30px;
+        //                  font-size: 15px;
+        //                  margin: 0 0 1rem 0;'>
+        //        ¡Bienvenido a SINAGIR!</h2>
 
 
-               <p   stlye='font-weight: normal;
-                    font-size: 13px;'>
-                Te dejamos los datos para que puedas acceder a tu cuenta</p>
+        //       <h3 stlye='font-weight: normal;
+        //            font-size: 13px;'>
+        //        Tu cuenta se creo exitosamente</h3>
 
-                            <div class='datos' style='display: block;
-                                                      width: 100%;'>
 
-                                <p stlye='font-weight: normal;
-                                   font-size: 13px;
-                                   text-align: start;
-                                   padding: 1rem 0 0 0;'>Usuario:  {user.UserDni }</p>
+        //       <p   stlye='font-weight: normal;
+        //            font-size: 13px;'>
+        //        Te dejamos los datos para que puedas acceder a tu cuenta</p>
 
-                                <p stlye='font-weight: normal;
-                                   font-size: 13px;
-                                   text-align: start;
-                                   padding: 1rem 0 0 0;'>Contraseña: {user.UserPassword }</p>
-                             </div>
-                        </div>
-                    </div>
-             </div>";
+        //                    <div class='datos' style='display: block;
+        //                                              width: 100%;'>
 
-            Email.Send(
-                to: user.Persons.Email,
-                subject: "Sign-up Verification API",
-                html: $@"<p>Bienvenido a SICREYD!</p>
-                         {message}"
-            );
-        }
+        //                        <p stlye='font-weight: normal;
+        //                           font-size: 13px;
+        //                           text-align: start;
+        //                           padding: 1rem 0 0 0;'>Usuario:  {user.UserDni }</p>
+
+        //                        <p stlye='font-weight: normal;
+        //                           font-size: 13px;
+        //                           text-align: start;
+        //                           padding: 1rem 0 0 0;'>Contraseña: {user.UserPassword }</p>
+        //                     </div>
+        //                </div>
+        //            </div>
+        //     </div>";
+
+
+
+        //    Email.Send(
+        //        to: user.Persons.Email,
+        //        subject: "Sign-up Verification API",
+        //        html: $@"<p>Bienvenido a SICREYD!</p>
+        //                 {message}"
+        //    );
+        //}
 
 
         public static void sendResourcesRequest(Users user, Users user2)
@@ -110,20 +112,22 @@ namespace Repository
 
 
         //TODO Falta quien lo rechazo y email.
-        public static void sendAcceptRejectRequest(Users user, string condition)
-        {
-            string message;
+        //public static void sendAcceptRejectRequest(Users user, string condition)
+        //{
+        //    string message;
 
-            message = $@"<p>Estado de solicitud de recursos</p>
-                         <p>Su solicitud fue {condition}</p>
-                        ";
+        //    message = $@"<p>Estado de solicitud de recursos</p>
+        //                 <p>Su solicitud fue {condition}</p>
+        //                ";
 
-            Email.Send(
-                to: user.Persons.Email,
-                subject: "Estado de solicitud de recursos",
-                html: $@"{message}"
-                );
-        }
+
+
+        //    Email.Send(
+        //        to: user.Persons.Email,
+        //        subject: "Estado de solicitud de recursos",
+        //        html: $@"{message}"
+        //        );
+        //}
 
 
 

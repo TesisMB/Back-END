@@ -414,15 +414,15 @@ namespace Repository
             //Traigo todos los encargados de Logistica para enviarles un email
             //con la solicitudes nuevas o alguna actualizacion 
 
-            //List<Users> logsitica = new List<Users>();
+            List<Users> logsitica = new List<Users>();
 
-            //logsitica = db.Users
-            //    .Where(
-            //            a => a.Roles.RoleName == "Encargado de Logistica"
-            //            && a.Estates.Locations.LocationDepartmentName == UsersRepository.authUser.Estates.Locations.LocationDepartmentName)
-            //            .Include(a => a.Persons)
-            //            .Include(a => a.Employees)
-            //    .ToList();
+            logsitica = db.Users
+                .Where(
+                        a => a.Roles.RoleName == "Encargado de Logistica"
+                        && a.Estates.Locations.LocationDepartmentName == UsersRepository.authUser.Estates.Locations.LocationDepartmentName)
+                        .Include(a => a.Persons)
+                        .Include(a => a.Employees)
+                .ToList();
 
 
             //var userRequest = ResourcesRequestForCreationDto.UserRequest;
@@ -534,13 +534,35 @@ namespace Repository
 
                     DeleteResource(resources_Request);
 
-                    /*foreach (var item in logsitica)
-                    {
-                        Email.sendResourcesRequest(UsersRepository.authUser, item);
-                    }*/
+                foreach (var item in logsitica)
+                {
+                    sendResourcesRequest(UsersRepository.authUser, item);
+                }
 
-                    SaveAsync();
+                SaveAsync();
                  }
+        }
+
+
+        public static void sendResourcesRequest(Users user, Users user2)
+        {
+            string message;
+
+            // TODO Falta legajo - Dni
+            message = $@"<p>Nueva solicitud de recursos</p>
+                         <p>El Usuario: {user.Persons.FirstName} {user.Persons.LastName}
+                            hizo una nueva solicitud</p>";
+
+
+            var msg = new Mail(new string[] { user2.Persons.Email }, "Solicitud de recursos", $@"{message}");
+
+            EmailSender.SendEmail(msg);
+
+            //Email.Send(
+            //    to: user2.Persons.Email,
+            //    subject: "Solicitud de recursos",
+            //    html: $@"{message}"
+            //    );
         }
 
 
@@ -1051,14 +1073,14 @@ namespace Repository
 
                     userReq.Condition = "Rechazada";
                     userReq.Reason = resourcesRequest.Reason;
-                    //Email.sendAcceptRejectRequest(user, userReq.Condition);
+                    sendAcceptRejectRequest(user, userReq.Condition);
                 }
 
                 else
                 {
                     userReq.Condition = "Aceptada";
                     userReq.Reason = resourcesRequest.Reason;
-                    //Email.sendAcceptRejectRequest(user, userReq.Condition);
+                    sendAcceptRejectRequest(user, userReq.Condition);
                 }
 
                 //userReq.FK_InCharge = UsersRepository.authUser.UserID;
@@ -1067,6 +1089,28 @@ namespace Repository
                 SaveAsync();
             }
         }
+
+        public static void sendAcceptRejectRequest(Users user, string condition)
+        {
+            string message;
+
+            message = $@"<p>Estado de solicitud de recursos</p>
+                         <p>Su solicitud fue {condition}</p>
+                        ";
+
+            var msg = new Mail(new string[] { user.Persons.Email }, "Estado de solicitud de recursos", $@"{message}");
+
+            EmailSender.SendEmail(msg);
+
+            //Email.Send(
+            //    to: user.Persons.Email,
+            //    subject: "Estado de solicitud de recursos",
+            //    html: $@"{message}"
+            //    );
+        }
+
+
+
     }
 
 }

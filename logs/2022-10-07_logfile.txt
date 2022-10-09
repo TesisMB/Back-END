@@ -1,0 +1,261 @@
+2022-10-07 16:19:06.6415 INFO Returned User.
+2022-10-07 16:19:11.0575 INFO Returned all ChatRooms from database. 
+2022-10-07 16:19:13.8837 INFO Returned all ChatRooms from database. 
+2022-10-07 16:19:30.4934 INFO Returned employe with details for id: 2
+2022-10-07 16:21:58.9260 INFO Returned all ChatRooms from database. 
+2022-10-07 16:22:01.6356 INFO Returned all ChatRooms from database. 
+2022-10-07 16:22:05.9539 INFO Returned employe with details for id: 2
+2022-10-07 16:28:07.7381 INFO Returned all ChatRooms from database. 
+2022-10-07 16:28:11.0560 INFO Returned all ChatRooms from database. 
+2022-10-07 16:28:15.6713 INFO Returned employe with details for id: 2
+2022-10-07 16:28:25.3541 INFO Returned employe with details for id: 2
+2022-10-07 16:31:28.0868 INFO Returned employe with details for id: 2
+2022-10-07 16:32:45.1473 INFO Returned all ChatRooms from database. 
+2022-10-07 16:32:50.1216 INFO Returned all ChatRooms from database. 
+2022-10-07 16:32:54.0141 INFO Returned employe with details for id: 2
+2022-10-07 16:33:08.8993 INFO Returned employe with details for id: 2
+2022-10-07 16:35:57.1899 INFO Returned all ChatRooms from database. 
+2022-10-07 16:35:59.1542 INFO Returned all ChatRooms from database. 
+2022-10-07 16:36:02.6567 INFO Returned employe with details for id: 2
+2022-10-07 16:36:02.8641 INFO Returned employe with details for id: 2
+2022-10-07 16:36:26.0205 INFO Returned employe with details for id: 2
+2022-10-07 16:36:26.2915 INFO Returned employe with details for id: 2
+2022-10-07 16:36:36.1447 INFO Returned employe with details for id: 2
+2022-10-07 16:36:36.3625 INFO Returned employe with details for id: 2
+2022-10-07 16:37:15.1691 INFO Returned employe with details for id: 2
+2022-10-07 16:37:15.3815 INFO Returned employe with details for id: 2
+2022-10-07 16:37:18.7848 INFO Returned employe with details for id: 2
+2022-10-07 16:37:19.0534 INFO Returned employe with details for id: 2
+2022-10-07 16:37:28.5326 INFO Returned employe with details for id: 2
+2022-10-07 16:37:28.9934 INFO Returned employe with details for id: 2
+2022-10-07 16:37:31.7090 INFO Returned employe with details for id: 2
+2022-10-07 16:37:31.9166 INFO Returned employe with details for id: 2
+2022-10-07 16:37:51.2288 INFO Returned employe with details for id: 2
+2022-10-07 16:38:00.9478 INFO Returned employe with details for id: 2
+2022-10-07 16:38:10.3466 INFO Returned employe with details for id: 2
+2022-10-07 16:38:11.8887 INFO Returned employe with details for id: 2
+2022-10-07 16:38:18.5782 INFO Returned employe with details for id: 2
+2022-10-07 16:39:43.5220 INFO Returned employe with details for id: 2
+2022-10-07 16:39:59.8587 INFO Returned employe with details for id: 2
+2022-10-07 16:40:02.6209 INFO Returned employe with details for id: 2
+2022-10-07 16:40:09.2099 INFO Returned employe with details for id: 2
+2022-10-07 16:40:10.9701 INFO Returned employe with details for id: 2
+2022-10-07 16:40:41.3455 INFO Returned employe with details for id: 2
+2022-10-07 16:40:54.2619 INFO Returned employe with details for id: 2
+2022-10-07 16:41:07.4469 INFO Returned employe with details for id: 2
+2022-10-07 16:41:18.5185 INFO Returned employe with details for id: 2
+2022-10-07 16:41:22.8251 INFO Returned employe with details for id: 2
+2022-10-07 16:41:26.4881 INFO Returned employe with details for id: 2
+2022-10-07 16:41:28.7070 INFO Returned employe with details for id: 2
+2022-10-07 16:41:47.3656 INFO Returned employe with details for id: 2
+2022-10-07 16:42:45.4502 INFO Returned all ChatRooms from database. 
+2022-10-07 16:42:47.3365 INFO Returned all ChatRooms from database. 
+2022-10-07 16:42:50.4060 INFO Returned employe with details for id: 2
+2022-10-07 16:42:58.3316 INFO Returned employe with details for id: 2
+2022-10-07 16:43:06.4906 INFO Returned employe with details for id: 2
+2022-10-07 16:43:08.5935 INFO Returned employe with details for id: 2
+2022-10-07 16:43:51.1963 INFO Returned all ChatRooms from database. 
+2022-10-07 16:44:09.2443 INFO Returned all ChatRooms from database. 
+2022-10-07 16:44:32.0801 INFO Returned employe with details for id: 2
+2022-10-07 16:45:57.5241 INFO Returned employe with details for id: 2
+2022-10-07 16:46:26.4045 INFO Returned employe with details for id: 2
+2022-10-07 16:46:32.8015 INFO Returned employe with details for id: 2
+2022-10-07 16:46:35.8489 INFO Returned employe with details for id: 2
+2022-10-07 16:46:37.3081 INFO Returned employe with details for id: 2
+2022-10-07 16:47:38.0538 INFO Returned all ChatRooms from database. 
+2022-10-07 16:47:40.5970 INFO Returned all ChatRooms from database. 
+2022-10-07 16:48:26.8679 INFO Returned all ChatRooms from database. 
+2022-10-07 16:48:29.6214 INFO Returned all ChatRooms from database. 
+2022-10-07 16:48:35.1032 INFO Returned employe with details for id: 2
+2022-10-07 16:49:25.6199 INFO Returned all ChatRooms from database. 
+2022-10-07 16:53:57.8219 INFO Returned all ChatRooms from database. 
+2022-10-07 16:54:02.9005 INFO Returned employe with details for id: 2
+2022-10-07 16:54:07.8591 INFO Returned employe with details for id: 2
+2022-10-07 16:54:40.2348 INFO Returned employe with details for id: 2
+2022-10-07 16:56:15.9504 INFO Returned employe with details for id: 2
+2022-10-07 16:58:30.1518 INFO Returned employe with details for id: 2
+2022-10-07 16:58:32.5940 INFO Returned employe with details for id: 2
+2022-10-07 16:58:46.2294 INFO Returned all ChatRooms from database. 
+2022-10-07 16:58:48.5602 INFO Returned all ChatRooms from database. 
+2022-10-07 16:58:51.9563 INFO Returned employe with details for id: 2
+2022-10-07 16:59:07.3040 INFO Returned employe with details for id: 2
+2022-10-07 16:59:24.2337 INFO Returned employe with details for id: 2
+2022-10-07 17:02:12.4244 INFO Returned all ChatRooms from database. 
+2022-10-07 17:02:19.7496 INFO Returned employe with details for id: 2
+2022-10-07 17:02:43.8992 INFO Returned employe with details for id: 2
+2022-10-07 17:03:17.2816 INFO Returned all ChatRooms from database. 
+2022-10-07 17:03:22.4613 INFO Returned all emergenciesDisasters from database.
+2022-10-07 17:03:26.7625 INFO Returned all ChatRooms from database. 
+2022-10-07 17:03:30.2105 INFO Returned employe with details for id: 2
+2022-10-07 17:06:03.3471 INFO Returned employe with details for id: 2
+2022-10-07 17:10:06.5151 INFO Returned all ChatRooms from database. 
+2022-10-07 17:10:10.1765 INFO Returned all ChatRooms from database. 
+2022-10-07 17:10:15.5754 INFO Returned employe with details for id: 2
+2022-10-07 17:10:51.0256 INFO Returned employe with details for id: 2
+2022-10-07 17:10:52.3406 INFO Returned employe with details for id: 2
+2022-10-07 17:10:59.1580 INFO Returned employe with details for id: 2
+2022-10-07 17:11:06.1041 INFO Returned employe with details for id: 2
+2022-10-07 17:11:11.1821 INFO Returned employe with details for id: 2
+2022-10-07 17:11:14.8601 INFO Returned employe with details for id: 2
+2022-10-07 17:11:15.8055 INFO Returned employe with details for id: 2
+2022-10-07 17:11:21.2700 INFO Returned employe with details for id: 2
+2022-10-07 17:11:28.7657 INFO Returned employe with details for id: 2
+2022-10-07 17:11:44.3429 INFO Returned employe with details for id: 2
+2022-10-07 17:11:46.8098 INFO Returned employe with details for id: 2
+2022-10-07 17:12:14.3393 INFO Returned employe with details for id: 2
+2022-10-07 17:12:17.6233 INFO Returned employe with details for id: 2
+2022-10-07 17:13:35.6774 INFO Returned employe with details for id: 2
+2022-10-07 17:13:52.9477 INFO Returned employe with details for id: 2
+2022-10-07 17:14:10.7776 INFO Returned employe with details for id: 2
+2022-10-07 17:14:12.7666 INFO Returned employe with details for id: 2
+2022-10-07 17:14:17.3553 INFO Returned employe with details for id: 2
+2022-10-07 17:14:23.6324 INFO Returned employe with details for id: 2
+2022-10-07 17:14:27.6738 INFO Returned employe with details for id: 2
+2022-10-07 17:14:32.8309 INFO Returned employe with details for id: 2
+2022-10-07 17:14:40.6199 INFO Returned employe with details for id: 2
+2022-10-07 17:14:44.2616 INFO Returned employe with details for id: 2
+2022-10-07 17:14:50.0536 INFO Returned employe with details for id: 2
+2022-10-07 17:14:54.9682 INFO Returned employe with details for id: 2
+2022-10-07 17:15:02.0074 INFO Returned employe with details for id: 2
+2022-10-07 17:15:29.1929 INFO Returned employe with details for id: 2
+2022-10-07 17:17:40.1521 INFO Returned all ChatRooms from database. 
+2022-10-07 17:17:42.1303 INFO Returned all ChatRooms from database. 
+2022-10-07 17:17:45.1520 INFO Returned employe with details for id: 2
+2022-10-07 17:18:28.7375 INFO Returned employe with details for id: 2
+2022-10-07 17:18:30.7970 INFO Returned employe with details for id: 2
+2022-10-07 17:19:07.8066 INFO Returned employe with details for id: 2
+2022-10-07 17:19:30.2560 INFO Returned all ChatRooms from database. 
+2022-10-07 17:19:34.6527 INFO Returned all ChatRooms from database. 
+2022-10-07 17:21:52.1571 INFO Returned all ChatRooms from database. 
+2022-10-07 17:21:54.8328 INFO Returned all ChatRooms from database. 
+2022-10-07 17:23:20.6967 INFO Returned all ChatRooms from database. 
+2022-10-07 17:23:23.1869 INFO Returned all ChatRooms from database. 
+2022-10-07 17:24:00.7459 INFO Returned all ChatRooms from database. 
+2022-10-07 17:24:03.3933 INFO Returned all ChatRooms from database. 
+2022-10-07 17:25:17.5742 INFO Returned all ChatRooms from database. 
+2022-10-07 17:25:19.4900 INFO Returned all ChatRooms from database. 
+2022-10-07 17:25:44.3309 INFO Returned all ChatRooms from database. 
+2022-10-07 17:25:46.1668 INFO Returned all ChatRooms from database. 
+2022-10-07 17:26:24.7107 INFO Returned all ChatRooms from database. 
+2022-10-07 17:26:46.3320 INFO Returned all ChatRooms from database. 
+2022-10-07 17:28:05.3807 INFO Returned all ChatRooms from database. 
+2022-10-07 17:35:24.9771 INFO Returned all ChatRooms from database. 
+2022-10-07 17:35:31.5634 INFO Returned all ChatRooms from database. 
+2022-10-07 17:35:53.5490 INFO Returned all ChatRooms from database. 
+2022-10-07 17:35:55.1976 INFO Returned all ChatRooms from database. 
+2022-10-07 17:35:56.7468 INFO Returned all ChatRooms from database. 
+2022-10-07 17:36:43.2208 INFO Returned all ChatRooms from database. 
+2022-10-07 17:37:08.3626 INFO Returned all ChatRooms from database. 
+2022-10-07 17:37:10.2672 INFO Returned all ChatRooms from database. 
+2022-10-07 17:40:49.5452 INFO Returned all ChatRooms from database. 
+2022-10-07 17:41:44.2921 INFO Returned all ChatRooms from database. 
+2022-10-07 17:41:50.5246 INFO Returned all ChatRooms from database. 
+2022-10-07 17:43:29.4602 INFO Returned all ChatRooms from database. 
+2022-10-07 17:43:31.5803 INFO Returned all ChatRooms from database. 
+2022-10-07 17:44:51.0338 INFO Returned all ChatRooms from database. 
+2022-10-07 17:44:53.5713 INFO Returned all ChatRooms from database. 
+2022-10-07 17:51:49.9638 INFO Returned all ChatRooms from database. 
+2022-10-07 18:04:29.6205 INFO Returned all ChatRooms from database. 
+2022-10-07 18:04:32.4841 INFO Returned all ChatRooms from database. 
+2022-10-07 18:04:38.9673 INFO Returned employe with details for id: 2
+2022-10-07 18:05:41.3365 INFO Returned all ChatRooms from database. 
+2022-10-07 18:05:43.6396 INFO Returned all ChatRooms from database. 
+2022-10-07 18:06:09.3184 ERROR Something went wrong inside GetAllEmegenciesDisasters action: A second operation started on this context before a previous operation completed. This is usually caused by different threads using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+2022-10-07 18:06:09.4741 INFO Returned all ChatRooms from database. 
+2022-10-07 18:06:13.4297 INFO Returned all ChatRooms from database. 
+2022-10-07 18:07:46.2751 INFO Returned all ChatRooms from database. 
+2022-10-07 18:07:48.8928 INFO Returned all ChatRooms from database. 
+2022-10-07 18:08:08.4017 INFO Returned all ChatRooms from database. 
+2022-10-07 18:08:11.0696 INFO Returned all ChatRooms from database. 
+2022-10-07 18:09:15.9782 INFO Returned all ChatRooms from database. 
+2022-10-07 18:09:19.4997 INFO Returned all ChatRooms from database. 
+2022-10-07 18:09:23.5751 INFO Returned all ChatRooms from database. 
+2022-10-07 18:09:41.2604 INFO Returned all ChatRooms from database. 
+2022-10-07 18:10:40.3157 INFO Returned all ChatRooms from database. 
+2022-10-07 18:11:06.5620 INFO Returned all ChatRooms from database. 
+2022-10-07 18:13:37.6336 INFO Returned all ChatRooms from database. 
+2022-10-07 18:13:50.5721 INFO Returned all ChatRooms from database. 
+2022-10-07 18:13:59.2850 INFO Returned all ChatRooms from database. 
+2022-10-07 18:14:04.2488 INFO Returned all ChatRooms from database. 
+2022-10-07 18:14:51.1723 INFO Returned all ChatRooms from database. 
+2022-10-07 18:15:17.6182 INFO Returned all ChatRooms from database. 
+2022-10-07 18:15:25.8331 INFO Returned all ChatRooms from database. 
+2022-10-07 18:15:30.4385 INFO Returned all ChatRooms from database. 
+2022-10-07 18:15:56.4322 INFO Returned all ChatRooms from database. 
+2022-10-07 18:16:29.0696 INFO Returned all ChatRooms from database. 
+2022-10-07 18:16:35.9921 INFO Returned all ChatRooms from database. 
+2022-10-07 18:18:29.9808 INFO Returned all ChatRooms from database. 
+2022-10-07 18:18:38.9936 INFO Returned all ChatRooms from database. 
+2022-10-07 18:18:50.6737 INFO Returned all ChatRooms from database. 
+2022-10-07 18:19:19.1439 INFO Returned all ChatRooms from database. 
+2022-10-07 18:19:49.6289 INFO Returned all ChatRooms from database. 
+2022-10-07 18:19:55.3736 INFO Returned all ChatRooms from database. 
+2022-10-07 18:19:58.2976 INFO Returned all ChatRooms from database. 
+2022-10-07 18:19:58.4908 INFO Returned all ChatRooms from database. 
+2022-10-07 18:20:06.7830 INFO Returned all ChatRooms from database. 
+2022-10-07 18:20:15.6054 INFO Returned all ChatRooms from database. 
+2022-10-07 18:20:53.8764 INFO Returned all ChatRooms from database. 
+2022-10-07 18:21:05.4630 INFO Returned all ChatRooms from database. 
+2022-10-07 18:21:19.2005 INFO Returned all ChatRooms from database. 
+2022-10-07 18:21:25.7566 INFO Returned all ChatRooms from database. 
+2022-10-07 18:22:31.9396 INFO Returned all ChatRooms from database. 
+2022-10-07 18:22:53.2337 INFO Returned all ChatRooms from database. 
+2022-10-07 18:23:23.1969 INFO Returned all ChatRooms from database. 
+2022-10-07 18:23:35.8671 INFO Returned all ChatRooms from database. 
+2022-10-07 18:23:48.9843 INFO Returned all ChatRooms from database. 
+2022-10-07 18:45:25.1460 INFO Returned all ChatRooms from database. 
+2022-10-07 18:45:32.3329 INFO Returned all ChatRooms from database. 
+2022-10-07 18:57:37.4449 INFO Returned all ChatRooms from database. 
+2022-10-07 18:58:15.8111 INFO Returned all ChatRooms from database. 
+2022-10-07 18:58:33.4018 INFO Returned all ChatRooms from database. 
+2022-10-07 18:58:35.9566 INFO Returned all ChatRooms from database. 
+2022-10-07 18:58:42.6118 INFO Returned all ChatRooms from database. 
+2022-10-07 18:59:16.5361 INFO Returned all ChatRooms from database. 
+2022-10-07 18:59:37.1649 INFO Returned all ChatRooms from database. 
+2022-10-07 18:59:41.6205 INFO Returned all ChatRooms from database. 
+2022-10-07 18:59:44.3642 INFO Returned all ChatRooms from database. 
+2022-10-07 18:59:55.4425 INFO Returned all ChatRooms from database. 
+2022-10-07 19:00:14.5702 INFO Returned all ChatRooms from database. 
+2022-10-07 19:00:44.3894 INFO Returned all ChatRooms from database. 
+2022-10-07 19:00:56.0898 INFO Returned all ChatRooms from database. 
+2022-10-07 19:07:08.9070 INFO Returned all ChatRooms from database. 
+2022-10-07 19:07:10.3640 INFO Returned all ChatRooms from database. 
+2022-10-07 19:07:14.9903 INFO Returned all ChatRooms from database. 
+2022-10-07 19:07:19.2488 INFO Returned all ChatRooms from database. 
+2022-10-07 19:07:21.5159 INFO Returned all ChatRooms from database. 
+2022-10-07 19:07:22.6837 INFO Returned all ChatRooms from database. 
+2022-10-07 19:08:09.5799 ERROR Something went wrong inside GetAllChatRooms aciton: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure()' to the 'UseSqlServer' call.
+2022-10-07 19:08:19.0920 INFO Returned all ChatRooms from database. 
+2022-10-07 19:08:43.9398 INFO Returned all ChatRooms from database. 
+2022-10-07 19:08:52.5703 INFO Returned all ChatRooms from database. 
+2022-10-07 19:09:18.8963 INFO Returned all ChatRooms from database. 
+2022-10-07 19:09:28.9454 INFO Returned all ChatRooms from database. 
+2022-10-07 19:09:35.1720 INFO Returned all ChatRooms from database. 
+2022-10-07 19:10:11.8150 INFO Returned all ChatRooms from database. 
+2022-10-07 19:10:16.1192 INFO Returned all ChatRooms from database. 
+2022-10-07 19:10:22.8901 INFO Returned all ChatRooms from database. 
+2022-10-07 19:10:39.6211 INFO Returned all ChatRooms from database. 
+2022-10-07 19:10:58.4720 INFO Returned all ChatRooms from database. 
+2022-10-07 19:11:02.2638 INFO Returned all ChatRooms from database. 
+2022-10-07 19:11:13.2524 INFO Returned all ChatRooms from database. 
+2022-10-07 19:11:14.9529 INFO Returned all ChatRooms from database. 
+2022-10-07 19:11:25.3811 INFO Returned all ChatRooms from database. 
+2022-10-07 19:11:33.1229 INFO Returned all ChatRooms from database. 
+2022-10-07 19:11:54.5349 INFO Returned all ChatRooms from database. 
+2022-10-07 19:11:58.0616 INFO Returned all ChatRooms from database. 
+2022-10-07 19:12:53.0867 INFO Returned all ChatRooms from database. 
+2022-10-07 19:13:01.0415 INFO Returned all ChatRooms from database. 
+2022-10-07 19:13:41.1221 INFO Returned all ChatRooms from database. 
+2022-10-07 19:13:54.4581 INFO Returned all ChatRooms from database. 
+2022-10-07 19:16:53.5410 INFO Returned all ChatRooms from database. 
+2022-10-07 19:20:39.1746 INFO Returned all ChatRooms from database. 
+2022-10-07 19:21:14.1224 INFO Returned all ChatRooms from database. 
+2022-10-07 19:21:21.4690 INFO Returned all ChatRooms from database. 
+2022-10-07 19:21:32.0140 INFO Returned all ChatRooms from database. 
+2022-10-07 19:22:59.3738 INFO Returned all ChatRooms from database. 
+2022-10-07 19:23:26.6470 INFO Returned all emergenciesDisasters from database.
+2022-10-07 19:23:44.3394 INFO Returned all emergenciesDisasters from database.
+2022-10-07 19:24:07.8099 INFO Returned all ChatRooms from database. 
+2022-10-07 19:25:19.2925 INFO Returned all emergenciesDisasters from database.
+2022-10-07 19:25:22.8850 INFO Returned all ChatRooms from database. 
+2022-10-07 19:25:27.3021 INFO Returned all emergenciesDisasters from database.

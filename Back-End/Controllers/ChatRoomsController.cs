@@ -277,6 +277,10 @@ namespace Back_End.Controllers
                     _repository.Messages.SaveAsync();
                 }
 
+
+                var response = await SendController.SendNotificationByChat(userId, messages.Message, Convert.ToInt32(message.chatRoomID));
+
+
                 return StatusCode(200);
 
             }
@@ -340,7 +344,7 @@ namespace Back_End.Controllers
         }
 
 
-
+         
         [HttpDelete("LeaveGroup/{UserID}/{chatRoomID}")]
         public async Task<ActionResult> LeaveGroup(int UserID, int chatRoomID)
         {

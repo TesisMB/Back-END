@@ -13,7 +13,7 @@ namespace Entities.Models
         public int ID { get; set; }
 
         [Required]
-        public String Message { get; set; }
+        public string Message { get; set; }
 
         [Required]
         public Boolean MessageState { get; set; }

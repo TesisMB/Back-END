@@ -47,7 +47,7 @@ namespace Repository
                 {
                     client.Connect("smtp.gmail.com", 465, true);
                     client.AuthenticationMechanisms.Remove("XOAUTH2");
-                    client.Authenticate("yoelsolca5@gmail.com", "ttop caig bjiu tcwa");
+                    client.Authenticate("tesis.unc.mb@gmail.com", "acfm vbmz zbuo qnpt");
 
                     client.Send(mailMessage);
                 }

@@ -246,8 +246,9 @@ namespace Back_End.Controllers
                 {
                     FK_UserID = (int)emergencyDisaster.Fk_EmplooyeeID,
                     FK_ChatRoomID = emergencyDisaster.EmergencyDisasterID,
+                    Status = true,
                     ID = ID
-                });
+                }); ;
 
 
                 if(userCG != null)
@@ -260,7 +261,8 @@ namespace Back_End.Controllers
                         {
                            FK_UserID = item.UserID,
                            FK_ChatRoomID = emergencyDisaster.EmergencyDisasterID,
-                           ID = ID
+                           Status = true,
+                            ID = ID
                         });
                     }
                 }

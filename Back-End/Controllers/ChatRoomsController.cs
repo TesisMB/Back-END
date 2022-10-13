@@ -50,7 +50,9 @@ namespace Back_End.Controllers
 
                 foreach (var item in chatRoomsToResult)
                 {
-                    foreach (var item2 in item.UsersChatRooms)
+                    item.EmergenciesDisasters.UsersChatRooms.Clear();
+
+                    foreach (var item2 in item.UsersChatRooms.ToList())
                     {
                         var person = cruzRojaContext.Persons
                                        .Where(a => a.ID == userId)
@@ -74,6 +76,11 @@ namespace Back_End.Controllers
 
                         item2.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{user.Avatar}";
                         item2.RoleName = roles.RoleName;
+
+                        if (item2.Status == false)
+                        {
+                            item.UsersChatRooms.Remove(item2);
+                        }
                     }
                 }
 
@@ -134,22 +141,16 @@ namespace Back_End.Controllers
                     return NotFound();
                 }
 
-                //foreach (var item in chatRooms.UsersChatRooms)
-                //{
-                //    if (item.Users.Volunteers != null && item.Users.Volunteers.VolunteerAvatar != "https://i.imgur.com/8AACVdK.png")
-                //    {
-                //        item.Users.Volunteers.VolunteerAvatar = String.Format("{0}://{1}{2}/StaticFiles/Images/Resources/{3}",
-                //                        Request.Scheme, Request.Host, Request.PathBase, item.Users.Volunteers.VolunteerAvatar);
-                //    }
-                //}
 
                 var chatRoomsToResult = _mapper.Map<ChatRoomsDto>(chatRooms);
 
                 CruzRojaContext cruzRojaContext = new CruzRojaContext();
 
+                chatRoomsToResult.EmergenciesDisasters.UsersChatRooms.Clear();
 
-                foreach (var item in chatRoomsToResult.UsersChatRooms)
+                foreach (var item in chatRoomsToResult.UsersChatRooms.ToList())
                 {
+
                     var user = cruzRojaContext.Users
                                              .Where(a => a.UserID == item.UserID)
                                              .AsNoTracking()
@@ -174,6 +175,11 @@ namespace Back_End.Controllers
 
                     item.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{user.Avatar}";
                     item.RoleName = roles.RoleName;
+
+                    if (item.Status == false)
+                    {
+                        chatRoomsToResult.UsersChatRooms.Remove(item);
+                    }
                 }
 
                 foreach (var item in chatRoomsToResult.DateMessage)
@@ -344,7 +350,46 @@ namespace Back_End.Controllers
         }
 
 
-         
+
+        //TODO Revisar con APP
+        [HttpPost("AcceptRejectRequest")]
+        public async Task<ActionResult> AcceptRejectRequestChat([FromQuery] int UserID, [FromQuery] int chatRoomID, [FromQuery] bool status)
+        {
+
+            try
+            {
+                var usersChatRooms = await _repository.UsersChatRooms.GetUsersChatRooms(UserID, chatRoomID);
+
+                if (usersChatRooms == null)
+                {
+                    _logger.LogError($"User with id: {UserID} and ChatRoom with id: {chatRoomID}, hasn't ben found in db.");
+                    return NotFound();
+                }
+
+                if(status == false)
+                {
+                    _repository.UsersChatRooms.LeaveGroup(usersChatRooms);
+                }
+                else
+                {
+                    usersChatRooms.Status = true;
+                    _repository.UsersChatRooms.Update(usersChatRooms);
+                }
+
+
+                _repository.UsersChatRooms.SaveAsync();
+
+                return NoContent();
+            }
+
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside LeaveGroup action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+
         [HttpDelete("LeaveGroup/{UserID}/{chatRoomID}")]
         public async Task<ActionResult> LeaveGroup(int UserID, int chatRoomID)
         {

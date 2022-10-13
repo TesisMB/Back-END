@@ -4,6 +4,7 @@
     {
         public int FK_UserID { get; set; }
         public int FK_ChatRoomID { get; set; }
+        public bool Status { get; set; } = false;
         public Coords Coords { get; set; }
 
     }

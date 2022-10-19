@@ -33,7 +33,7 @@ namespace Back_End.Controllers
 
         //TODO Cambia modelo 
         [HttpGet]
-        public async Task<ActionResult<ChatRooms>> GetAllChatRooms([FromQuery] int userId)
+        public async Task<ActionResult<ChatRooms>> GetAllChatRooms([FromQuery] int userId, [FromQuery] bool? status)
         {
             try
             {
@@ -129,11 +129,11 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpGet("{chatRoomID}")]
-        public async Task<ActionResult<ChatRooms>> GetChatRoom(int chatRoomID, [FromQuery] int userId)
+        public async Task<ActionResult<ChatRooms>> GetChatRoom(int chatRoomID, [FromQuery] bool status)
         {
             try
             {
-                var chatRooms = await _repository.Chat.GetChat(chatRoomID);
+                var chatRooms = await _repository.Chat.GetChat(chatRoomID, status);
                 _logger.LogInfo($"Returned all ChatRooms from database. ");
 
                 if (chatRooms == null)
@@ -176,7 +176,7 @@ namespace Back_End.Controllers
                     item.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{user.Avatar}";
                     item.RoleName = roles.RoleName;
 
-                    if (item.Status == false)
+                    if (item.Status == true)
                     {
                         chatRoomsToResult.UsersChatRooms.Remove(item);
                     }
@@ -232,8 +232,8 @@ namespace Back_End.Controllers
                         .AsNoTracking()
                         .FirstOrDefault();
 
-            message.DateMessage = new DateMessageForCreationDto();
 
+            message.DateMessage = new DateMessageForCreationDto();
             message.DateMessage.CreatedDate = message.DateMessage.Date.ToString("dd/MM/yyyy");
 
             message.DateMessage.FK_ChatRoomID = Convert.ToInt32(message.chatRoomID);
@@ -243,8 +243,6 @@ namespace Back_End.Controllers
                               && a.FK_ChatRoomID == Convert.ToInt32(message.chatRoomID))
                         .AsNoTracking()
                        .FirstOrDefault();
-
-        
 
 
             message.userID = userId;
@@ -286,14 +284,13 @@ namespace Back_End.Controllers
 
                 var response = await SendController.SendNotificationByChat(userId, messages.Message, Convert.ToInt32(message.chatRoomID));
 
-
                 return StatusCode(200);
 
             }
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside SendMessage aciton: {ex.Message}");
-                return StatusCode(500, "interval Server Error");
+                return StatusCode(500, "internal Server Error");
             }
         }
 

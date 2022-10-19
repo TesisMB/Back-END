@@ -2,6 +2,7 @@
 using Contracts.Interfaces;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Repository
@@ -15,11 +16,25 @@ namespace Repository
 
         }
 
-        public async Task<ChatRooms> GetChat(int chatID)
+        public async Task<ChatRooms> GetChat(int chatID, bool status)
         {
 
-            return await FindByCondition(i => i.ID.Equals(chatID))
+            CruzRojaContext _cruzRojaContext = new CruzRojaContext();
+            var collection = _cruzRojaContext.ChatRooms as IQueryable<ChatRooms>;
 
+            if(status == true)
+            {
+                collection = collection.Where(x => x.ID.Equals(chatID));
+
+            }
+            else
+            {
+                collection = collection.Where(x => x.ID.Equals(chatID)
+                                              && x.UsersChatRooms.Any(a => a.Status.Equals(false)));
+            }
+
+
+            return collection
                    .Include(i => i.TypesChatRooms)
                    .Include(i => i.UsersChatRooms)
                    .Include(i => i.EmergenciesDisasters)
@@ -30,7 +45,7 @@ namespace Repository
                    .ThenInclude(a => a.Messages)
                    .ThenInclude(a => a.Users)
                    .ThenInclude(a => a.Persons)
-                   .FirstOrDefaultAsync();
+                   .FirstOrDefault();
         }
     }
 }

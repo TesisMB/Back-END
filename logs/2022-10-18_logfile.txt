@@ -1,0 +1,34 @@
+2022-10-18 19:24:37.3547 INFO Returned User.
+2022-10-18 19:24:39.2590 INFO Returned all Resources_Request from database.
+2022-10-18 19:24:39.7087 INFO Returned all emergenciesDisasters from database.
+2022-10-18 19:24:39.7271 INFO Returned all PDF from database.
+2022-10-18 19:26:23.0432 INFO Returned all employees from database.
+2022-10-18 19:27:46.1271 INFO Returned all employees from database.
+2022-10-18 20:02:19.7201 INFO Returned User.
+2022-10-18 20:04:15.4003 INFO Returned all Resources_Request from database.
+2022-10-18 20:04:15.7740 INFO Returned all PDF from database.
+2022-10-18 20:04:17.1049 INFO Returned all emergenciesDisasters from database.
+2022-10-18 20:04:22.1339 INFO Returned all Resources_Request from database.
+2022-10-18 20:04:23.7616 INFO Returned all Resources_Request from database.
+2022-10-18 20:04:24.2999 INFO Returned all Resources_Request from database.
+2022-10-18 20:04:26.9616 INFO Returned all Resources_Request from database.
+2022-10-18 20:04:26.9616 INFO Returned all PDF from database.
+2022-10-18 20:04:27.0022 INFO Returned all emergenciesDisasters from database.
+2022-10-18 20:04:28.8512 INFO Returned all PDF from database.
+2022-10-18 20:04:42.6941 INFO Returned User.
+2022-10-18 20:04:43.1785 INFO Returned all Resources_Request from database.
+2022-10-18 20:04:43.1786 INFO Returned all PDF from database.
+2022-10-18 20:04:43.2017 INFO Returned all emergenciesDisasters from database.
+2022-10-18 20:04:47.4144 INFO Returned all PDF from database.
+2022-10-18 20:06:38.7176 INFO Returned all PDF from database.
+2022-10-18 20:06:38.7517 INFO Returned all Resources_Request from database.
+2022-10-18 20:06:38.7734 INFO Returned all emergenciesDisasters from database.
+2022-10-18 21:55:21.2255 ERROR Something went wrong inside GetAllChatRooms aciton: An exception was thrown while attempting to evaluate a LINQ query parameter expression. To show additional information call EnableSensitiveDataLogging() when overriding DbContext.OnConfiguring.
+2022-10-18 21:56:06.9818 INFO Returned all ChatRooms from database. 
+2022-10-18 21:56:09.7314 INFO Returned all ChatRooms from database. 
+2022-10-18 21:56:25.3340 INFO Returned all ChatRooms from database. 
+2022-10-18 21:57:20.7664 INFO Returned all ChatRooms from database. 
+2022-10-18 21:58:16.7640 INFO Returned all ChatRooms from database. 
+2022-10-18 22:00:17.8551 INFO Returned all ChatRooms from database. 
+2022-10-18 22:01:22.0089 INFO Returned all ChatRooms from database. 
+2022-10-18 22:02:09.8358 INFO Returned all ChatRooms from database. 

@@ -1073,14 +1073,14 @@ namespace Repository
 
                     userReq.Condition = "Rechazada";
                     userReq.Reason = resourcesRequest.Reason;
-                    sendAcceptRejectRequest(user, userReq.Condition);
+                    sendAcceptRejectRequest(user, userReq.Condition, resourcesRequest);
                 }
 
                 else
                 {
                     userReq.Condition = "Aceptada";
                     userReq.Reason = resourcesRequest.Reason;
-                    sendAcceptRejectRequest(user, userReq.Condition);
+                    sendAcceptRejectRequest(user, userReq.Condition, resourcesRequest);
                 }
 
                 //userReq.FK_InCharge = UsersRepository.authUser.UserID;
@@ -1090,15 +1090,63 @@ namespace Repository
             }
         }
 
-        public static void sendAcceptRejectRequest(Users user, string condition)
+        public static void sendAcceptRejectRequest(Users user, string condition, ResourcesRequest resourcesRequest)
         {
             string message;
 
-            message = $@"<p>Estado de solicitud de recursos</p>
-                         <p>Su solicitud fue {condition}</p>
-                        ";
 
-            var msg = new Mail(new string[] { user.Persons.Email }, "Estado de solicitud de recursos", $@"{message}");
+            message = $@"
+            <div style='height: 100vh;
+                    border-width: 5px;'>
+                        <div style='margin-top: 1.7rem; text-align: center;
+                                         margin-right: 15rem'>
+                            <img src='https://www.cruzroja.org.ar/newDesign/wp-content/uploads/2019/01/favicon1.png' style='height: 37%;
+                            margin-left: 27%;
+                            width: 30px;
+                            border-radius: 50%;
+                            padding: 8px;
+                            border: 1px solid #000;'>
+
+                            <h1 style='font-size: 24px;
+                            font-weight: normal;
+                            font-size: 24px;
+                            font-weight: normal; margin: 0; margin-left: 16rem;
+                            margin-top: 5px;'>SICREYD</h1>
+
+                            <h2 style='font-size: 24px;
+                            font-weight: normal;
+                            font-size: 24px;
+                            font-weight: normal;
+                            position: relative;
+                            margin-left: 27%;
+                            right: 65px;'>Estado de la solicitud de recursos</h2>
+                        </div>
+                        <div style=' width: 512px;
+                        padding: 25px;
+                        border-radius: 8px;
+                        border: 1px solid #ccc;
+                        margin-left: 20rem;'>
+                            <p style='margin-left: 20px;'>La solicitud {resourcesRequest.ID} realizada para la emergencia {resourcesRequest.EmergenciesDisasters.LocationsEmergenciesDisasters.LocationCityName} - {resourcesRequest.EmergenciesDisasters.TypesEmergenciesDisasters.TypeEmergencyDisasterName} fue
+                                {condition}.
+                            </p>
+                            <p style='margin-left: 20px;'>Fecha: {DateTime.Now.ToString("dd/MM/yyyy")}</p>
+
+                            <p style='margin-top: 2rem; margin-left: 20px;'>
+                                Gracias,
+                            </p>
+                            <p style='margin-left: 20px;'>
+                                El equipo de SICREYD
+                            </p>
+                        </div>
+                    </div>
+                                        ";
+
+
+        //message = $@"<p>Estado de solicitud de recursos</p>
+        //             <p>Su solicitud fue {condition}</p>
+        //            ";
+
+        var msg = new Mail(new string[] { user.Persons.Email }, "Estado de la solicitud de recursos", $@"{message}");
 
             EmailSender.SendEmail(msg);
 

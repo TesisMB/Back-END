@@ -61,7 +61,7 @@ namespace Repository
             }
             else {
 
-                collection = collection.Where(a => a.CreatedBy == userId)
+                collection = collection
                     .OrderByDescending(a => a.EmergencyDisasterID)
                     .Take(2)
                     .AsNoTracking();

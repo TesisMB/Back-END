@@ -124,12 +124,71 @@ namespace Repository
 
                 resetUrl.Trim();
                 message = $@"
-                                <p>Sentimos que hayas tenido problemas para iniciar sesión en SICREYD. Podemos ayudar a recuperar tu cuenta.</p>
-                                <p>Por favor hace click en el siguiente enlace para restablecer tu contraseña, el siguiente link es valido por un dia:</p>
-                                 <a style=""color: white; text-align: center; display: block; background:red; text-decoration: none;  border-radius: 0.4rem; margin: 4rem auto; width: 15%; padding: 10px;
-                                    "" href=""{resetUrl}"">Reset your Password</a>";
+                                  <div style='height: 100vh;
+                                                border-width: 5px;'>
+                                        <div style='margin-top: 1.7rem; text-align: center;
+                                                                     margin-right: 15rem'>
+                                                        <img src = 'https://www.cruzroja.org.ar/newDesign/wp-content/uploads/2019/01/favicon1.png'
+                                                        style='height: 37%;
+                                                        margin-left: 27%;
+                                                        width: 30px;
+                                                        border-radius: 50%;
+                                                        padding: 8px;
+                                                        border: 1px solid #000;'>
 
-            }
+                                                        <h1 style='font-size: 24px;
+                                                        font-weight: normal;
+                                                        font-size: 24px;
+                                                        font-weight: normal; margin: 0; margin-left: 16rem;
+                                                        margin-top: 5px;'>SICREYD</h1>
+
+                                                        <h2 style='font-size: 24px;
+                                                        font-weight: normal;
+                                                        font-size: 24px;
+                                                        font-weight: normal;
+                                                        position: relative;
+                                                        margin-left: 27%;
+                                                        right: 65px;'>Restablecimiento de la contraseña</h2>
+                                        </div>
+                                        <div style=' width: 512px;
+                                                    padding: 25px;
+                                                    border-radius: 8px;
+                                                    border: 1px solid #ccc;
+                                                    margin-left: 20rem;'>
+                                            <p style='margin-left: 20px;'>Nos hemos enterado de que has perdido tu contraseña de SICREYD.Lo sentimos.
+                                            </p>
+                                            <p style='margin-left: 20px;'>Pero no te preocupes. Puedes utilizar el siguiente botón para restablecer tu contraseña: </p>
+
+                                            <a style = 'color: white;
+                                            text-align: center;
+                                        display: block;
+                                            background: rgb(189, 45, 45);
+                                        text-decoration: none;
+                                            border-radius: 0.4rem;
+                                             width: 33%;
+                                             margin-top: 2rem;
+                                            margin-bottom: 2rem;
+                                            padding: 15px; cursor: pointer; margin-left: 10rem;'  href='{resetUrl}'>Restablecer la contraseña</a>
+
+                                               <p style='margin-left: 20px;'>
+                                                    Si no utiliza este enlace en un plazo de 1 dia, caducará.Para obtener un nuevo enlace para
+                                                    restablecer la contraseña, visite: 
+                                                    <span>
+                                                        <a
+                                                            href = 'https://calm-dune-0fef6d210.2.azurestaticapps.net/' > https://calm-dune-0fef6d210.2.azurestaticapps.net/
+                                                        </a>
+                                                    </span>
+                                                </p>
+                                                <p style = 'margin-top: 2rem; margin-left: 20px;'>
+                                                    Gracias,
+                                                </p>
+                                            <p style='margin-left: 20px;'>
+                                                El equipo de SICREYD
+                                            </p>
+                                        </div>
+                                    </div>
+                                        ";
+                 }
 
             var msg = new Mail(new string[] { account.Persons.Email }, "Restablecer contraseña", $@"{message}");
 

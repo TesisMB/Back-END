@@ -116,14 +116,18 @@ namespace Back_End.Controllers
                                                           EmergenciesDisasters emergenciesDisasters, Alerts alerts,
                                                           TypesEmergenciesDisasters typesEmergenciesDisasters, LocationsEmergenciesDisasters location)
         {
-            string[] locations = location.LocationCityName.Split(',');
+            var locations = location.LocationCityName.Split(',');
             emergenciesDisasterByUsers.Add(new EmergenciesDisasterByUser
             {
                 ID = emergenciesDisasters.EmergencyDisasterID,
                 Type = typesEmergenciesDisasters.TypeEmergencyDisasterName,
                 Degree = alerts.AlertDegree,
                 City = locations[locations.Length - 3],
-                State = (emergenciesDisasters.EmergencyDisasterEndDate == null) ? "Activa" : "Inactiva"
+                State = (emergenciesDisasters.EmergencyDisasterEndDate == null) ? "Activa" : "Inactiva",
+                StartDate = emergenciesDisasters.EmergencyDisasterStartDate,
+                EndDate = emergenciesDisasters.EmergencyDisasterEndDate,
+                Icon = emergenciesDisasters.TypesEmergenciesDisasters.TypeEmergencyDisasterIcon
+
             });
 
             return emergenciesDisasterByUsers;

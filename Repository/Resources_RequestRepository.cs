@@ -407,8 +407,7 @@ namespace Repository
         {
 
             ResourcesRequest rec = null;
-            //resources_Request.CreatedBy = UsersRepository.authUser.UserID;
-            //var rol = UsersRepository.authUser.Roles.RoleName;
+            var user = EmployeesRepository.GetAllEmployeesById(resources_Request.CreatedBy);
 
 
             //Traigo todos los encargados de Logistica para enviarles un email
@@ -419,7 +418,7 @@ namespace Repository
             logsitica = db.Users
                 .Where(
                         a => a.Roles.RoleName == "Encargado de Logistica"
-                        && a.Estates.Locations.LocationDepartmentName == UsersRepository.authUser.Estates.Locations.LocationDepartmentName)
+                        && a.FK_EstateID == user.FK_EstateID)
                         .Include(a => a.Persons)
                         .Include(a => a.Employees)
                 .ToList();
@@ -536,7 +535,7 @@ namespace Repository
 
                 foreach (var item in logsitica)
                 {
-                    sendResourcesRequest(UsersRepository.authUser, item);
+                    sendResourcesRequest(resources_Request, item);
                 }
 
                 SaveAsync();
@@ -544,14 +543,79 @@ namespace Repository
         }
 
 
-        public static void sendResourcesRequest(Users user, Users user2)
+        public static void sendResourcesRequest(ResourcesRequest resourcesRequest, Users user2)
         {
             string message;
 
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            var emergency = cruzRojaContext.EmergenciesDisasters.Where(a => a.EmergencyDisasterID.Equals(resourcesRequest.FK_EmergencyDisasterID))
+                                            .Include(a => a.TypesEmergenciesDisasters) 
+                                            .Include(a => a.LocationsEmergenciesDisasters) 
+                                            .FirstOrDefault();
+
+
             // TODO Falta legajo - Dni
-            message = $@"<p>Nueva solicitud de recursos</p>
-                         <p>El Usuario: {user.Persons.FirstName} {user.Persons.LastName}
-                            hizo una nueva solicitud</p>";
+            message = $@"
+
+             <div style='margin-top: 1.7rem; text-align: center;
+                            margin-right: 15rem'>
+                                <img src='https://www.cruzroja.org.ar/newDesign/wp-content/uploads/2019/01/favicon1.png' style='height: 37%;
+                        margin-left: 27%;
+                        width: 30px;
+                        border-radius: 50%;
+                        padding: 8px;
+                        border: 1px solid #000;'>
+
+                                <h1 style='font-size: 24px;
+                        font-weight: normal;
+                        font-size: 24px;
+                        font-weight: normal; margin: 0; margin-left: 16rem;
+                        margin-top: 5px;'>SICREYD</h1>
+
+                                <h2 style='font-size: 24px;
+                        font-weight: normal;
+                        font-size: 24px;
+                        font-weight: normal;
+                        position: relative;
+                        margin-left: 27%;
+                        right: 65px;'>Nueva solicitud de recursos</h2>
+                            </div>
+                            <div style=' width: 512px;
+                        padding: 25px;
+                        border-radius: 8px;
+                        border: 1px solid #ccc;
+                        margin-left: 20rem;
+                        margin: 0 auto;'>
+                                <p style='margin-left: 20px;'>Se realizo una nueva solicitud para la emergencia
+                                    {emergency.LocationsEmergenciesDisasters.LocationCityName} -
+                                    {emergency.TypesEmergenciesDisasters.TypeEmergencyDisasterName}.
+                                </p>
+                                <p style='margin-left: 20px;'>Fecha: {DateTime.Now.ToString("dd/mm/yyyy hh:mm:ss")}</p>
+
+                                <p style='margin-left: 20px; margin-top: 2rem;'>
+                                   Para ver el detalle de la solicitud ingrese a SICREYD tocando en el siguiente botón.
+                                </p>
+
+                            <a style='color: white;
+                                text-align: center;
+                            display: block;
+                                background: rgb(189, 45, 45);
+                            text-decoration: none;
+                                border-radius: 0.4rem;
+                                 width: 33%;
+                                 margin-top: 2rem;
+                                margin-bottom: 2rem;
+                                padding: 15px; cursor: pointer; margin-left: 10rem;' href='https://calm-dune-0fef6d210.2.azurestaticapps.net/'>Ir a SICREYD</a>
+
+                                <p style='margin-top: 2rem; margin-left: 20px;'>
+                                 Gracias.
+                                </p>
+                                <p style='margin-left: 20px;'>
+                                    El equipo de SICREYD
+                                </p>
+                            </div>
+";
 
 
             var msg = new Mail(new string[] { user2.Persons.Email }, "Solicitud de recursos", $@"{message}");
@@ -1048,6 +1112,10 @@ namespace Repository
                           && a.CreatedBy == userRequestID
                           && a.Condition == "Pendiente")
                           .Include(a => a.Resources_RequestResources_Materials_Medicines_Vehicles)
+                          .Include(a => a.EmergenciesDisasters)
+                          .ThenInclude(a => a.TypesEmergenciesDisasters)
+                          .Include(a => a.EmergenciesDisasters)
+                          .ThenInclude(a => a.LocationsEmergenciesDisasters)
                           .AsNoTracking()
                          .FirstOrDefault();
 
@@ -1073,14 +1141,14 @@ namespace Repository
 
                     userReq.Condition = "Rechazada";
                     userReq.Reason = resourcesRequest.Reason;
-                    sendAcceptRejectRequest(user, userReq.Condition, resourcesRequest);
+                    sendAcceptRejectRequest(user, userReq.Condition, userReq);
                 }
 
                 else
                 {
                     userReq.Condition = "Aceptada";
                     userReq.Reason = resourcesRequest.Reason;
-                    sendAcceptRejectRequest(user, userReq.Condition, resourcesRequest);
+                    sendAcceptRejectRequest(user, userReq.Condition, userReq);
                 }
 
                 //userReq.FK_InCharge = UsersRepository.authUser.UserID;
@@ -1096,55 +1164,70 @@ namespace Repository
 
 
             message = $@"
-            <div style='height: 100vh;
-                    border-width: 5px;'>
-                        <div style='margin-top: 1.7rem; text-align: center;
-                                         margin-right: 15rem'>
-                            <img src='https://www.cruzroja.org.ar/newDesign/wp-content/uploads/2019/01/favicon1.png' style='height: 37%;
-                            margin-left: 27%;
-                            width: 30px;
-                            border-radius: 50%;
-                            padding: 8px;
-                            border: 1px solid #000;'>
+                                        <div style='margin-top: 1.7rem; text-align: center;
+                                                         margin-right: 15rem'>
+                                            <img src='https://www.cruzroja.org.ar/newDesign/wp-content/uploads/2019/01/favicon1.png' style='height: 37%;
+                                            margin-left: 27%;
+                                            width: 30px;
+                                            border-radius: 50%;
+                                            padding: 8px;
+                                            border: 1px solid #000;'>
 
-                            <h1 style='font-size: 24px;
-                            font-weight: normal;
-                            font-size: 24px;
-                            font-weight: normal; margin: 0; margin-left: 16rem;
-                            margin-top: 5px;'>SICREYD</h1>
+                                            <h1 style='font-size: 24px;
+                                            font-weight: normal;
+                                            font-size: 24px;
+                                            font-weight: normal; margin: 0; margin-left: 16rem;
+                                            margin-top: 5px;'>SICREYD</h1>
 
-                            <h2 style='font-size: 24px;
-                            font-weight: normal;
-                            font-size: 24px;
-                            font-weight: normal;
-                            position: relative;
-                            margin-left: 27%;
-                            right: 65px;'>Estado de la solicitud de recursos</h2>
-                        </div>
-                        <div style=' width: 512px;
-                        padding: 25px;
-                        border-radius: 8px;
-                        border: 1px solid #ccc;
-                        margin-left: 20rem;'>
-                            <p style='margin-left: 20px;'>La solicitud {resourcesRequest.ID} realizada para la emergencia {resourcesRequest.EmergenciesDisasters.LocationsEmergenciesDisasters.LocationCityName} - {resourcesRequest.EmergenciesDisasters.TypesEmergenciesDisasters.TypeEmergencyDisasterName} fue
-                                {condition}.
-                            </p>
-                            <p style='margin-left: 20px;'>Fecha: {DateTime.Now.ToString("dd/MM/yyyy")}</p>
+                                            <h2 style='font-size: 24px;
+                                            font-weight: normal;
+                                            font-size: 24px;
+                                            font-weight: normal;
+                                            position: relative;
+                                            margin-left: 27%;
+                                            right: 65px;'>Estado de la solicitud de recursos</h2>
+                                        </div>
+                                        <div style=' width: 512px;
+                                        padding: 25px;
+                                        border-radius: 8px;
+                                        border: 1px solid #ccc;
+                                        margin-left: 20rem;
+                                        margin: 0 auto;'>
+                                            <p style='margin-left: 20px;'>La solicitud {resourcesRequest.ID} realizada para la emergencia en {resourcesRequest.EmergenciesDisasters.LocationsEmergenciesDisasters.LocationCityName} - {resourcesRequest.EmergenciesDisasters.TypesEmergenciesDisasters.TypeEmergencyDisasterName}, fue
+                                                {condition}.
+                                            </p>
+                                            <p style='margin-left: 20px;'>Fecha: {DateTime.Now.ToString("dd/mm/yyyy hh:mm:ss")}</p>
+                                            
+                                               <p style='margin-left: 20px; margin-top: 2rem;'>
+                                                   Para ver el detalle de su solicitud ingrese a SICREYD tocando en el siguiente botón.
+                                                </p>
 
-                            <p style='margin-top: 2rem; margin-left: 20px;'>
-                                Gracias,
-                            </p>
-                            <p style='margin-left: 20px;'>
-                                El equipo de SICREYD
-                            </p>
-                        </div>
-                    </div>
+                                            <a style='color: white;
+                                                text-align: center;
+                                            display: block;
+                                                background: rgb(189, 45, 45);
+                                            text-decoration: none;
+                                                border-radius: 0.4rem;
+                                                 width: 33%;
+                                                 margin-top: 2rem;
+                                                margin-bottom: 2rem;
+                                                padding: 15px; cursor: pointer; margin-left: 10rem;' href='https://calm-dune-0fef6d210.2.azurestaticapps.net/'>Ir a SICREYD</a>
+
+
+                                            <p style='margin-top: 2rem; margin-left: 20px;'>
+                                                Gracias.
+                                            </p>
+                                            <p style='margin-left: 20px;'>
+                                                El equipo de SICREYD
+                                            </p>
+                                        </div>
                                         ";
 
 
-        //message = $@"<p>Estado de solicitud de recursos</p>
-        //             <p>Su solicitud fue {condition}</p>
-        //            ";
+            //message = $@"<p>Estado de solicitud de recursos</p>
+            //             <p>Su solicitud fue {condition}</p>
+            //            ";
+
 
         var msg = new Mail(new string[] { user.Persons.Email }, "Estado de la solicitud de recursos", $@"{message}");
 

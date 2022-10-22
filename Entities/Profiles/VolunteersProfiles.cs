@@ -15,85 +15,83 @@ namespace Back_End.Profiles
         {
             CreateMap<Volunteers, Resources_Dto>()
 
-                .ForPath(dest => dest.Volunteers.ID,
-                            opt => opt.MapFrom(src => src.ID))
+                 .ForPath(dest => dest.Volunteers.ID,
+                             opt => opt.MapFrom(src => src.ID))
 
-                .ForMember(dest => dest.Description,
-                            opt => opt.MapFrom(src => src.VolunteerDescription))
+                 .ForMember(dest => dest.Description,
+                             opt => opt.MapFrom(src => src.VolunteerDescription))
 
-                  .ForPath(dest => dest.Volunteers.CreatedDate,
-                            opt => opt.MapFrom(src => DateTimeOffsetExtensions.GetDateTime(src.Users.CreatedDate)))
-
-
-               .ForMember(dest => dest.Name,
-                            opt => opt.MapFrom(src => $"{src.Users.Persons.FirstName} {src.Users.Persons.LastName}"))
-
-              .ForMember(dest => dest.Picture,
-                            opt => opt.MapFrom(src => src.Users.Avatar))
-
-              //.ForPath(dest => dest.Volunteers.Users, opts => opts.MapFrom(src => src.Users))
-
-              .ForPath(d => d.Volunteers.VolunteersSkills, o => o.MapFrom(s => s.VolunteersSkills))
+                   .ForPath(dest => dest.Volunteers.CreatedDate,
+                             opt => opt.MapFrom(src => DateTimeOffsetExtensions.GetDateTime(src.Users.CreatedDate)))
 
 
-              .ForPath(dest => dest.Estates, opts => opts.MapFrom(src => src.Users.Estates))
+                .ForMember(dest => dest.Name,
+                             opt => opt.MapFrom(src => $"{src.Users.Persons.FirstName} {src.Users.Persons.LastName}"))
+
+               .ForMember(dest => dest.Picture,
+                             opt => opt.MapFrom(src => src.Users.Avatar))
 
 
-              .ForPath(dest => dest.LocationCityName, opts => opts.MapFrom(src => src.Users.Estates.Locations.LocationCityName))
+               .ForPath(d => d.Volunteers.VolunteersSkills, o => o.MapFrom(s => s.VolunteersSkills))
 
 
-              //FALTA DEVOLVER EL DATO DE ACCESO AL SISTEMA
+               .ForPath(dest => dest.Estates, opts => opts.MapFrom(src => src.Users.Estates))
 
-              .ForPath(dest => dest.Availability,
-                            opt => opt.MapFrom(src => src.Users.Persons.Status))
+               .ForPath(dest => dest.LocationCityName, opts => opts.MapFrom(src => src.Users.Estates.Locations.LocationCityName))
 
 
-                  .ForPath(dest => dest.Volunteers.UserAvailability,
-                            opt => opt.MapFrom(src => src.Users.UserAvailability))
+
+               .ForPath(dest => dest.Availability,
+                             opt => opt.MapFrom(src => src.Users.Persons.Status))
+
+
+            //       .ForPath(dest => dest.Volunteers.UserAvailability,
+            //                 opt => opt.MapFrom(src => src.Users.UserAvailability))
+
+            //    .ForPath(dest => dest.Volunteers.Phone, opts => opts.MapFrom(src => src.Users.Persons.Phone))
+
+
+            // .ForPath(dest => dest.Volunteers.Birthdate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.Users.Persons.Birthdate)))
+
+            //.ForPath(dest => dest.Volunteers.Address, opts => opts.MapFrom(src => src.Users.Persons.Address));
 
                .ForPath(dest => dest.Volunteers.Email, opts => opts.MapFrom(src => src.Users.Persons.Email))
 
-               .ForPath(dest => dest.Volunteers.Phone, opts => opts.MapFrom(src => src.Users.Persons.Phone))
 
-               .ForPath(dest => dest.Volunteers.Dni, opts => opts.MapFrom(src => src.Users.UserDni))
+                .ForPath(dest => dest.Volunteers.Dni, opts => opts.MapFrom(src => src.Users.UserDni));
 
-
-
-            .ForPath(dest => dest.Volunteers.Birthdate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.Users.Persons.Birthdate)))
-
-           .ForPath(dest => dest.Volunteers.Address, opts => opts.MapFrom(src => src.Users.Persons.Address));
 
 
             CreateMap<Volunteers, Resource_Dto>()
-             .ForMember(dest => dest.Description,
-                        opt => opt.MapFrom(src => src.VolunteerDescription))
+            .ForMember(dest => dest.Description,
+                     opt => opt.MapFrom(src => src.VolunteerDescription))
 
              .ForPath(dest => dest.Volunteers.CreatedDate,
                             opt => opt.MapFrom(src => DateTimeOffsetExtensions.GetDateTime(src.Users.CreatedDate)))
 
            .ForMember(dest => dest.Name,
-                        opt => opt.MapFrom(src => $"{src.Users.Persons.FirstName} {src.Users.Persons.LastName}"))
+                        opt => opt.MapFrom(src => $"{src.Users.Persons.FirstName} {src.Users.Persons.LastName}"));
 
-            .ForMember(dest => dest.Picture,
-                            opt => opt.MapFrom(src => src.Users.Avatar))
+          //  .ForMember(dest => dest.Picture,
+          //                  opt => opt.MapFrom(src => src.Users.Avatar))
 
-           .ForPath(dest => dest.Volunteers.Email, opts => opts.MapFrom(src => src.Users.Persons.Email))
+            // .ForPath(dest => dest.Volunteers.Email, opts => opts.MapFrom(src => src.Users.Persons.Email))
 
-           .ForPath(dest => dest.Volunteers.Phone, opts => opts.MapFrom(src => src.Users.Persons.Phone))
+            // .ForPath(dest => dest.Volunteers.Phone, opts => opts.MapFrom(src => src.Users.Persons.Phone))
 
-           .ForPath(dest => dest.Volunteers.Dni, opts => opts.MapFrom(src => src.Users.UserDni))
+            // .ForPath(dest => dest.Volunteers.Dni, opts => opts.MapFrom(src => src.Users.UserDni))
 
-            .ForPath(dest => dest.Volunteers.Birthdate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.Users.Persons.Birthdate)))
+            //  .ForPath(dest => dest.Volunteers.Birthdate, opts => opts.MapFrom(src => DateTimeOffsetExtensions.GetDate(src.Users.Persons.Birthdate)))
 
-           .ForPath(dest => dest.Volunteers.Address, opts => opts.MapFrom(src => src.Users.Persons.Address))
+            // .ForPath(dest => dest.Volunteers.Address, opts => opts.MapFrom(src => src.Users.Persons.Address))
 
 
-           .ForMember(dest => dest.Availability,
-                        opt => opt.MapFrom(src => src.Users.Persons.Status))
+            // .ForMember(dest => dest.Availability,
+            //              opt => opt.MapFrom(src => src.Users.Persons.Status))
 
-          .ForPath(d => d.Volunteers.VolunteersSkills, o => o.MapFrom(s => s.VolunteersSkills))
+            //.ForPath(d => d.Volunteers.VolunteersSkills, o => o.MapFrom(s => s.VolunteersSkills))
 
-          .ForPath(dest => dest.LocationCityName, opts => opts.MapFrom(src => src.Users.Estates.Locations.LocationCityName));
+            //.ForPath(dest => dest.LocationCityName, opts => opts.MapFrom(src => src.Users.Estates.Locations.LocationCityName));
 
 
             CreateMap<Volunteers, VolunteersAppDto>()

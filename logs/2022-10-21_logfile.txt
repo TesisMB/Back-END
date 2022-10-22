@@ -7,3 +7,7 @@
 2022-10-21 22:40:33.9970 INFO Returned all Resources_Request from database.
 2022-10-21 22:40:37.8672 INFO Returned all TypesEmergenciesDisasters from database.
 2022-10-21 22:40:38.6416 INFO Returned all emergenciesDisasters from database.
+2022-10-21 22:53:11.6780 INFO Returned all PDF from database.
+2022-10-21 22:53:12.2644 INFO Returned all emergenciesDisasters from database.
+2022-10-21 22:53:12.4949 INFO Returned all Resources_Request from database.
+2022-10-21 22:57:21.1056 INFO Returned all employees from database.

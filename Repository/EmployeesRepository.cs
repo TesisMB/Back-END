@@ -3,11 +3,9 @@ using Back_End.Entities;
 using Back_End.Helpers;
 using Back_End.Models;
 using Contracts.Interfaces;
-using Entities.DataTransferObjects.Locations___Dto;
 using Entities.Helpers;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -114,56 +112,134 @@ namespace Repository
         {
             string message;
 
-
+            if(user.FK_RoleID != 5)
+            {
             message = $@"
-              <div style='display: flex;
-                                          justify-content: center;
-                                          align-items: center;
-                                          height: 96vh;'>
+                                <div style='margin-top: 1.7rem; text-align: center;'>
+                                    <img src='https://www.cruzroja.org.ar/newDesign/wp-content/uploads/2019/01/favicon1.png' style='
+                                    width: 30px;
+                                    border-radius: 50%;
+                                    padding: 8px;
+                                    border: 1px solid #000;'>
 
-                    <div style='border: 1px solid #ccc;
-                                max-width: 58%;
-                                border-radius: 6px;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                flex-direction: column;
-                                padding: 20px;'>
+                                    <h1 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 24px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px;'>SICREYD</h1>
 
-               <h2 style='font-weight: 400;
-                          line-height: 30px;
-                          font-size: 15px;
-                          margin: 0 0 1rem 0;'>
-                ¡Bienvenido a SINAGIR!</h2>
+                                    <h2 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 24px;
+                                    font-weight: normal;
+                                    position: relative;
+                                    margin-bottom: 1rem;
+                                   '>¡Bienvenido!</h2>
+                                </div>
+                                     <div style=' width: 512px;
+                                    padding: 25px;
+                                    border-radius: 8px;
+                                    border: 1px solid #ccc;
+                                    margin: 0 auto;'>
+                                    <p style='margin-left: 20px;'>
+                                    Estimado {user.Persons.FirstName},
+                                    </p>
+
+                                    <p style='margin-left: 20px;'>
+                                        Te damos la bienvenida a tu cuenta. Los datos para acceder son
+                                        los siguientes:
+                                    </p>
+                                    <p style='margin-left: 20px;  margin-top: 1.5rem;  font-weight: normal;'>
+                                        Documento: {user.UserDni}
+                                    </p>
+                                    <p style='margin-left: 20px; margin-top: 1.5rem; font-weight: normal;'>
+                                        Contraseña: {user.UserPassword}
+                                    </p>
+                                    <a style='color: white;
+                                    text-align: center;
+                                display: block;
+                                    background: rgb(189, 45, 45);
+                                text-decoration: none;
+                                    border-radius: 0.4rem;
+                                     width: 33%;
+                                     margin-top: 2rem;
+                                    margin-bottom: 2rem;
+                                    padding: 15px; cursor: pointer; margin-left: 10rem;' href='https://calm-dune-0fef6d210.2.azurestaticapps.net/'>Ir a SICREYD</a>
+
+                                    <p style='margin-left: 20px; margin-top: 30px;'>
+                                        Recuerda que puedes cambiar tu contraseña todo el tiempo desde tu perfil.
+                                    </p>
+
+                                    <p style='margin-top: 2rem; margin-left: 20px;'>
+                                        Gracias.
+                                    </p>
+                                    <p style='margin-left: 20px;'>
+                                        El equipo de SICREYD.
+                                    </p>
+                            </div>
+
+             ";
+            }
+            else
+            {
+                message = $@"
+                                <div style='margin-top: 1.7rem; text-align: center;'>
+                                    <img src='https://www.cruzroja.org.ar/newDesign/wp-content/uploads/2019/01/favicon1.png' style='
+                                    width: 30px;
+                                    border-radius: 50%;
+                                    padding: 8px;
+                                    border: 1px solid #000;'>
+
+                                    <h1 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 24px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px;'>SICREYD</h1>
+
+                                    <h2 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 24px;
+                                    font-weight: normal;
+                                    position: relative;
+                                    margin-bottom: 1rem;
+                                   '>¡Bienvenido!</h2>
+                                </div>
+                                     <div style=' width: 512px;
+                                    padding: 25px;
+                                    border-radius: 8px;
+                                    border: 1px solid #ccc;
+                                    margin: 0 auto;'>
+                                    <p style='margin-left: 20px;'>
+                                    Estimado {user.Persons.FirstName},
+                                    </p>
+
+                                    <p style='margin-left: 20px;'>
+                                        Te damos la bienvenida a tu cuenta. Los datos para acceder son
+                                        los siguientes:
+                                    </p>
+                                    <p style='margin-left: 20px;  margin-top: 1.5rem;  font-weight: normal;'>
+                                        Documento: {user.UserDni}
+                                    </p>
+                                    <p style='margin-left: 20px; margin-top: 1.5rem; font-weight: normal;'>
+                                        Contraseña: {user.UserPassword}
+                                    </p>
+                                    <p style='margin-left: 20px;'>
+                                        Recuerda que puedes cambiar tu contraseña todo el tiempo desde tu perfil.
+                                    </p>
+
+                                    <p style='margin-top: 2rem; margin-left: 20px;'>
+                                        Gracias.
+                                    </p>
+                                    <p style='margin-left: 20px;'>
+                                        El equipo de SICREYD.
+                                    </p>
+                            </div>
+
+             ";
+            }
 
 
-               <h3 stlye='font-weight: normal;
-                    font-size: 13px;'>
-                Tu cuenta se creo exitosamente</h3>
-
-
-               <p   stlye='font-weight: normal;
-                    font-size: 13px;'>
-                Te dejamos los datos para que puedas acceder a tu cuenta</p>
-
-                            <div class='datos' style='display: block;
-                                                      width: 100%;'>
-
-                                <p stlye='font-weight: normal;
-                                   font-size: 13px;
-                                   text-align: start;
-                                   padding: 1rem 0 0 0;'>Usuario:  {user.UserDni }</p>
-
-                                <p stlye='font-weight: normal;
-                                   font-size: 13px;
-                                   text-align: start;
-                                   padding: 1rem 0 0 0;'>Contraseña: {user.UserPassword }</p>
-                             </div>
-                        </div>
-                    </div>
-             </div>";
-
-            var msg = new Mail(new string[] { user.Persons.Email }, "Registro exitoso", $@"<p>Bienvenido a SICREYD!</p> {message}");
+            var msg = new Mail(new string[] { user.Persons.Email }, "Registro exitoso", $@"{message}");
 
             EmailSender.SendEmail(msg);
 

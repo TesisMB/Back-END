@@ -50,19 +50,16 @@ namespace Back_End.Controllers
                 var volunteersResult = _mapper.Map<IEnumerable<Resources_Dto>>(volunteers);
 
 
-
                 foreach (var item in volunteersResult)
                 {
                     var user = EmployeesRepository.GetAllEmployeesById(item.Volunteers.ID);
-                    
+
                     item.Name = user.Persons.FirstName + " " + user.Persons.LastName;
                     item.Volunteers.Address = user.Persons.Address;
                     item.Volunteers.Phone = user.Persons.Phone;
                     item.Volunteers.Birthdate = user.Persons.Birthdate;
                     item.Availability = user.Persons.Status;
-
                     item.Picture = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{item.Picture}";
-
                 }
 
 

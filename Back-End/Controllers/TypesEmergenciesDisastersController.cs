@@ -24,7 +24,7 @@ namespace Back_End.Controllers
         private IRepositorWrapper _repository;
         private IMapper _mapper;
         public static List<BrandsModelsForSelectDto> Key = new List<BrandsModelsForSelectDto>();
-        public static List<BrandsSelect> Brands = new List<BrandsSelect>();
+        //public static List<BrandsSelect> Brands = new List<BrandsSelect>();
         public static List<TypesSelect> typesSelect = new List<TypesSelect>();
         public static List<ModelsSelect> modelSelect = new List<ModelsSelect>();
         public static IEnumerable<Vehicles> brands = null;

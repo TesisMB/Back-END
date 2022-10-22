@@ -145,7 +145,7 @@ namespace Repository
                  .ThenInclude(i => i.Persons)
                  .Include(i => i.EmployeeModified.Users.Roles)
                  .Include(a => a.ChatRooms.UsersChatRooms)
-                 //.OrderBy(a => a.ChatRooms.DateMessage)
+                 .OrderByDescending(a => a.EmergencyDisasterID)
                 .ToListAsync();
 
         }

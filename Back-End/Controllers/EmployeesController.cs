@@ -156,8 +156,49 @@ namespace Back_End.Controllers
 
                     employeeResult.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{employeeResult.Avatar}";
 
-                    return Ok(employeeResult);
-                }
+                    CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+                        var userByChat = cruzRojaContext.UsersChatRooms.
+                                                Where(a => a.FK_UserID.Equals(employeeResult.UserID))
+                                                .AsNoTracking()
+                                                .ToList();
+
+                        foreach (var item2 in userByChat)
+                        {
+                            var userByEmergency = cruzRojaContext.EmergenciesDisasters
+                                                   .Where(a => a.EmergencyDisasterID.Equals(item2.FK_ChatRoomID))
+                                                   .ToList();
+
+                            foreach (var item5 in userByEmergency)
+                            {
+                                var userByAlert = cruzRojaContext.Alerts
+                                                  .Where(a => a.AlertID.Equals(item5.FK_AlertID))
+                                                  .FirstOrDefault();
+
+                                var userByTypeEmergency = cruzRojaContext.TypesEmergenciesDisasters
+                                                 .Where(a => a.TypeEmergencyDisasterID.Equals(item5.FK_TypeEmergencyID))
+                                                 .FirstOrDefault();
+
+                                var userByLocation = cruzRojaContext.LocationsEmergenciesDisasters
+                                             .Where(a => a.ID.Equals(item5.EmergencyDisasterID))
+                                             .FirstOrDefault();
+
+                                if (employeeResult.EmergencyDisastersReports == null)
+                                {
+                                    employeeResult.EmergencyDisastersReports = new List<EmergenciesDisasterByUser>();
+
+                                    returnList(employeeResult.EmergencyDisastersReports, item5, userByAlert, userByTypeEmergency, userByLocation);
+                                }
+                                else
+                                {
+                                    returnList(employeeResult.EmergencyDisastersReports, item5, userByAlert, userByTypeEmergency, userByLocation);
+
+                                }
+                            }
+                        }
+                
+                return Ok(employeeResult);
+            }
             }
             catch (Exception ex)
             {

@@ -1,4 +1,6 @@
 ﻿using Entities.DataTransferObjects;
+using Entities.DataTransferObjects.CharRooms___Dto;
+using Entities.Models;
 using FirebaseAdmin.Messaging;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +26,14 @@ namespace Back_End.Controllers
         public static async Task<Message> SendNotification(int userId, string body, int emergency)
         {
              var result = await NotificationService.SendNotification(userId,body, emergency);
+
+            return result;
+        }
+
+
+        public static async Task<Message> SendNotificationByChat(int userId, string messages, int chatRoomID)
+        {
+            var result = await NotificationService.SendNotificationChat(userId, messages, chatRoomID);
 
             return result;
         }

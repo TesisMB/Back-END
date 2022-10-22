@@ -1,0 +1,9 @@
+2022-10-21 22:40:20.3635 INFO Returned all TypesEmergenciesDisasters from database.
+2022-10-21 22:40:22.2973 INFO Returned all emergenciesDisasters from database.
+2022-10-21 22:40:27.1487 INFO Returned all TypesEmergenciesDisasters from database.
+2022-10-21 22:40:28.7136 INFO Returned all emergenciesDisasters from database.
+2022-10-21 22:40:33.2548 INFO Returned all emergenciesDisasters from database.
+2022-10-21 22:40:33.5853 INFO Returned all PDF from database.
+2022-10-21 22:40:33.9970 INFO Returned all Resources_Request from database.
+2022-10-21 22:40:37.8672 INFO Returned all TypesEmergenciesDisasters from database.
+2022-10-21 22:40:38.6416 INFO Returned all emergenciesDisasters from database.

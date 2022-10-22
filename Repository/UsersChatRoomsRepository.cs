@@ -21,8 +21,8 @@ namespace Repository
 
             var collection = _cruzRojaContext.UsersChatRooms as IQueryable<UsersChatRooms>;
 
-            collection = collection.Where(a => a.FK_UserID.Equals(userChat)
-                                        && a.FK_ChatRoomID.Equals(ChatRoom));
+            collection = collection.Where(a => a.FK_UserID == userChat
+                                        && a.FK_ChatRoomID == ChatRoom);
 
 
             return await collection

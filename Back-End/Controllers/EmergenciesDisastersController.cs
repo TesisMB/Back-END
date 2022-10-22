@@ -188,6 +188,7 @@ namespace Back_End.Controllers
 
                 var emergency = cruzRojaContext.EmergenciesDisasters
                        .OrderByDescending(a => a.EmergencyDisasterID)
+                       .AsNoTracking()
                        .FirstOrDefault();
 
                 if(emergency == null)
@@ -206,11 +207,89 @@ namespace Back_End.Controllers
                 emergencyDisaster.ChatRooms.FK_TypeChatRoomID = emergenciesDisasters.FK_TypeChatRoomID;
 
 
+                var user = cruzRojaContext.Users
+                             .Where(a => a.UserID == userId)
+                              .AsNoTracking()
+                             .FirstOrDefault();
+
+                var userCG  = cruzRojaContext.Users
+                               .Where(a => a.FK_EstateID == user.FK_EstateID
+                                      && a.Roles.RoleName == "Coordinador General")
+                               .AsNoTracking()
+                               .ToList();
+
+                var userAdm = cruzRojaContext.Users
+                          .Where(a => a.FK_EstateID == user.FK_EstateID
+                                 && a.Roles.RoleName == "Admin")
+                          .AsNoTracking()
+                          .ToList();
+
+                emergencyDisaster.ChatRooms.UsersChatRooms = new List<UsersChatRooms>();
+
+                    var userChatRooms = cruzRojaContext.UsersChatRooms
+                                 .OrderByDescending(a => a.ID)
+                                 .FirstOrDefault();
+
+
+                int ID;
+                if (userChatRooms == null)
+                {
+                    ID = 1;
+                }
+                else
+                {
+                    ID = userChatRooms.ID + 1;
+                }
+
+                //Completo con el C.Emergencia Elejido para la emergencia
+                emergencyDisaster.ChatRooms.UsersChatRooms.Add(new UsersChatRooms()
+                {
+                    FK_UserID = (int)emergencyDisaster.Fk_EmplooyeeID,
+                    FK_ChatRoomID = emergencyDisaster.EmergencyDisasterID,
+                    Status = true,
+                    ID = ID
+                }); ;
+
+
+                if(userCG != null)
+                {
+                    ID += 1; 
+                //Completo con los C.General
+                    foreach (var item in userCG)
+                    {
+                        emergencyDisaster.ChatRooms.UsersChatRooms.Add(new UsersChatRooms()
+                        {
+                           FK_UserID = item.UserID,
+                           FK_ChatRoomID = emergencyDisaster.EmergencyDisasterID,
+                           Status = true,
+                            ID = ID
+                        });
+                    }
+                }
+
+                //***************** CONSULTAR *****************
+                //if (userAdm != null)
+                //{
+                //    ID += 1;
+                //    //Completo con los Admin
+                //    foreach (var item in userAdm)
+                //    {
+                //        emergencyDisaster.ChatRooms.UsersChatRooms.Add(new UsersChatRooms()
+                //        {
+                //            FK_UserID = item.UserID,
+                //            FK_ChatRoomID = emergencyDisaster.EmergencyDisasterID,
+                //            ID = ID
+                //        });
+                //    }
+                //}
+
+
+
                 _repository.EmergenciesDisasters.CreateEmergencyDisaster(emergencyDisaster);
 
                 _repository.EmergenciesDisasters.SaveAsync();
 
-                var response = await SendController.SendNotification(userId, emergenciesDisasters.LocationsEmergenciesDisasters.LocationCityName, emergencyDisaster.EmergencyDisasterID);
+                //var response = await SendController.SendNotification(userId, emergenciesDisasters.LocationsEmergenciesDisasters.LocationCityName, emergencyDisaster.EmergencyDisasterID);
 
 
                 return Ok();

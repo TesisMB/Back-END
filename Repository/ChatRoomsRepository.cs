@@ -29,6 +29,7 @@ namespace Repository
 
 
             collection = collection.Where(x => x.UsersChatRooms.Any(a => a.FK_UserID == user.UserID
+                                                                  && a.Status == true
                                                                   && x.EmergenciesDisasters.EmergencyDisasterEndDate == null));
 
             //collection = (from x in collection where userChatRooms.Any(a => a.FK_ChatRoomID == x.ID && x.EmergenciesDisasters.EmergencyDisasterEndDate == null) select x).ToList();

@@ -274,7 +274,8 @@ public class Startup
 
         services.AddHttpClient<FcmSender>();
         services.AddHttpClient<ApnSender>();
-
+        var emailConfig = Configuration.GetSection("EmailConfiguration")
+                                       .Get<EmailConfiguration>();
 
         // Configure strongly typed settings objects
         var appSettingsSection = Configuration.GetSection("FcmNotification");

@@ -1,0 +1,17 @@
+2022-10-12 20:26:39.8418 INFO Returned all ChatRooms from database. 
+2022-10-12 20:26:49.9832 INFO Returned all ChatRooms from database. 
+2022-10-12 20:27:02.6671 INFO Returned all ChatRooms from database. 
+2022-10-12 20:39:14.1846 INFO Returned all ChatRooms from database. 
+2022-10-12 20:39:38.0069 INFO Returned all ChatRooms from database. 
+2022-10-12 20:43:50.7323 INFO Returned all ChatRooms from database. 
+2022-10-12 20:46:43.9837 INFO Returned all ChatRooms from database. 
+2022-10-12 20:47:39.5146 INFO Returned all ChatRooms from database. 
+2022-10-12 20:47:41.3953 ERROR Something went wrong inside GetAllChatRooms aciton: Collection was modified; enumeration operation may not execute.
+2022-10-12 20:47:47.2509 INFO Returned all ChatRooms from database. 
+2022-10-12 20:49:13.2340 INFO Returned all ChatRooms from database. 
+2022-10-12 20:51:33.0758 INFO Returned all ChatRooms from database. 
+2022-10-12 21:02:36.3731 INFO Returned all ChatRooms from database. 
+2022-10-12 21:03:58.7164 INFO Returned all ChatRooms from database. 
+2022-10-12 21:06:12.9080 INFO Returned all ChatRooms from database. 
+2022-10-12 21:06:37.7294 INFO Returned all ChatRooms from database. 
+2022-10-12 21:06:58.8887 INFO Returned all ChatRooms from database. 

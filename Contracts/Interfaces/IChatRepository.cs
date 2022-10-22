@@ -8,6 +8,6 @@ namespace Contracts.Interfaces
 {
     public interface IChatRepository: IRepositoryBase<ChatRooms>
     {
-        Task<ChatRooms> GetChat(int chatID);
+        Task<ChatRooms> GetChat(int chatID, bool status);
     }
 }

@@ -10,5 +10,6 @@ namespace Entities.DataTransferObjects.CharRooms___Dto
         public string UserDni { get; set; }
         public string RoleName { get; set; }
         public string Avatar { get; set; }
+        public bool Status { get; set; }
     }
 }

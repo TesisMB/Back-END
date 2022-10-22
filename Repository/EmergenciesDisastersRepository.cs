@@ -61,7 +61,7 @@ namespace Repository
             }
             else {
 
-                collection = collection.Where(a => a.CreatedBy == userId)
+                collection = collection
                     .OrderByDescending(a => a.EmergencyDisasterID)
                     .Take(2)
                     .AsNoTracking();
@@ -145,7 +145,7 @@ namespace Repository
                  .ThenInclude(i => i.Persons)
                  .Include(i => i.EmployeeModified.Users.Roles)
                  .Include(a => a.ChatRooms.UsersChatRooms)
-                 //.OrderBy(a => a.ChatRooms.DateMessage)
+                 .OrderByDescending(a => a.EmergencyDisasterID)
                 .ToListAsync();
 
         }

@@ -27,7 +27,7 @@ namespace Repository
         }
         public async Task<IEnumerable<PDF>> GetAllPDF(int userId, string limit)
         {
-            //var user = EmployeesRepository.GetAllEmployeesById(userId);
+           //var user = EmployeesRepository.GetAllEmployeesById(userId);
 
            var user = await _cruzRojaContext.Users
                     .Where(a => a.UserID.Equals(userId))

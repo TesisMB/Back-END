@@ -113,17 +113,21 @@ namespace Back_End.Controllers
 
         [NonAction]
         public List<EmergenciesDisasterByUser> returnList(List<EmergenciesDisasterByUser> emergenciesDisasterByUsers,
-                                                          EmergenciesDisasters emergenciesDisasters, Alerts alerets,
+                                                          EmergenciesDisasters emergenciesDisasters, Alerts alerts,
                                                           TypesEmergenciesDisasters typesEmergenciesDisasters, LocationsEmergenciesDisasters location)
         {
-
+            var locations = location.LocationCityName.Split(',');
             emergenciesDisasterByUsers.Add(new EmergenciesDisasterByUser
             {
                 ID = emergenciesDisasters.EmergencyDisasterID,
                 Type = typesEmergenciesDisasters.TypeEmergencyDisasterName,
-                Degree = alerets.AlertDegree,
-                City = location.LocationCityName,
-                State = (emergenciesDisasters.EmergencyDisasterEndDate == null) ? "Activa" : "Inactiva"
+                Degree = alerts.AlertDegree,
+                City = locations[locations.Length - 3],
+                State = (emergenciesDisasters.EmergencyDisasterEndDate == null) ? "Activa" : "Inactiva",
+                StartDate = emergenciesDisasters.EmergencyDisasterStartDate,
+                EndDate = emergenciesDisasters.EmergencyDisasterEndDate,
+                Icon = emergenciesDisasters.TypesEmergenciesDisasters.TypeEmergencyDisasterIcon
+
             });
 
             return emergenciesDisasterByUsers;

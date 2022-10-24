@@ -253,10 +253,10 @@ namespace Back_End.Controllers
 
                 if(userCG != null)
                 {
-                    ID += 1; 
                 //Completo con los C.General
                     foreach (var item in userCG)
                     {
+                        ID += 1; 
                         emergencyDisaster.ChatRooms.UsersChatRooms.Add(new UsersChatRooms()
                         {
                            FK_UserID = item.UserID,

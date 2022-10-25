@@ -253,10 +253,10 @@ namespace Back_End.Controllers
 
                 if(userCG != null)
                 {
-                    ID += 1; 
                 //Completo con los C.General
                     foreach (var item in userCG)
                     {
+                        ID += 1; 
                         emergencyDisaster.ChatRooms.UsersChatRooms.Add(new UsersChatRooms()
                         {
                            FK_UserID = item.UserID,
@@ -310,6 +310,9 @@ namespace Back_End.Controllers
 
             try
             {
+                CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+
                 var emergencyDisaster = await _repository.EmergenciesDisasters.GetEmergencyDisasterById(emegencyDisasterID);
 
                 if (emergencyDisaster == null)
@@ -317,8 +320,12 @@ namespace Back_End.Controllers
                     return NotFound();
                 }
 
+                var CG = cruzRojaContext.UsersChatRooms.Where(a => a.FK_UserID.Equals(emergencyDisaster.Fk_EmplooyeeID))
+                                                                .FirstOrDefault();
+
 
                 var emergencyDisasterToPatch = _mapper.Map<EmergenciesDisastersForUpdateDto>(emergencyDisaster);
+
 
                 emergencyDisasterToPatch.EmergencyDisasterDateModified = DateTime.Now;
 
@@ -341,7 +348,27 @@ namespace Back_End.Controllers
 
                 _repository.EmergenciesDisasters.UpdateEmergencyDisaster(emergencyDisasterResult);
 
+
+                var userChatRooms = cruzRojaContext.UsersChatRooms
+                             .OrderByDescending(a => a.ID)
+                             .FirstOrDefault();
+
+
+                //Completo con el C.Emergencia Elejido para la emergencia
+               var usersChatRoomsCE = new UsersChatRooms()
+                {
+                    FK_UserID = (int)emergencyDisaster.Fk_EmplooyeeID,
+                    FK_ChatRoomID = emergencyDisaster.EmergencyDisasterID,
+                    Status = true,
+                    ID = userChatRooms.ID + 1
+                };
+
+                _repository.UsersChatRooms.Create(usersChatRoomsCE);
+                _repository.UsersChatRooms.LeaveGroup(CG);
+                _repository.UsersChatRooms.SaveAsync();
                 _repository.EmergenciesDisasters.SaveAsync();
+
+
 
                 return NoContent();
             }

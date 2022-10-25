@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace Repository
 {
@@ -120,15 +121,18 @@ namespace Repository
 
 
         //Funcion que permite enviar un email al usuario que se olvido la contraseña.
-        private void sendPasswordResetEmail(Users account)
+        public void sendPasswordResetEmail(Users account)
         {
             string message;
+            Mail msg;
             {
 
-                var resetUrl = $"http://localhost:4200/cliente/resetear-contrase%C3%B1a?token={account.ResetToken}";
 
-                resetUrl.Trim();
-                message = $@"
+                    var resetUrl = $"http://localhost:4200/cliente/resetear-contrase%C3%B1a?token={account.ResetToken}";
+
+                    resetUrl.Trim();
+
+                    message = $@"
                                         <div style='margin-top: 1.7rem; text-align: center;'>
                                         <img src='https://www.cruzroja.org.ar/newDesign/wp-content/uploads/2019/01/favicon1.png' style='
                                         width: 30px;
@@ -175,19 +179,18 @@ namespace Repository
                                         </p>
                                 </div>
                                         ";
-                 }
+                     msg = new Mail(new string[] { account.Persons.Email }, "Restablecer contraseña", $@"{message}");
 
-            var msg = new Mail(new string[] { account.Persons.Email }, "Restablecer contraseña", $@"{message}");
+                EmailSender.SendEmail(msg);
 
-            EmailSender.SendEmail(msg);
-
-            //Email.Send
-            //    (
-            //    to: account.Persons.Email,
-            //    subject: "Sign-up Verification API - Reset Password",
-            //   html: $@"<h4>Reset Password Email</h4>
-            //             {message}"
-            //);
+                //Email.Send
+                //    (
+                //    to: account.Persons.Email,
+                //    subject: "Sign-up Verification API - Reset Password",
+                //   html: $@"<h4>Reset Password Email</h4>
+                //             {message}"
+                //);
+            }
         }
 
         //Funcion para validar los campos: Token, contraseña nueva 
@@ -289,8 +292,8 @@ namespace Repository
                                .OrderBy(a => a.Roles.RoleID)
                                .ToListAsync();
         }
-
-        public async Task<Users> GetEmployeeVolunteerById(int userId)
+   
+            public async Task<Users> GetEmployeeVolunteerById(int userId)
         {
             return await FindByCondition(emp => emp.UserID.Equals(userId))
                            .Include(u => u.Persons)
@@ -303,8 +306,70 @@ namespace Repository
                            .Include(u => u.Estates)
                            .ThenInclude(u => u.LocationAddress)
                            .FirstOrDefaultAsync();
-        }   
+        }
+        public void sendLoginNotification(Users account)
+        {
+            string message;
+            DateTime localDate = DateTime.Now;
+            String cultureName = "es-AR";
 
-       
+           
+                var culture = new CultureInfo(cultureName);
+                Console.WriteLine("{0}:", culture.NativeName);
+                Console.WriteLine("Local date and time: {0}",localDate.ToString(culture));
+            
+                {
+                    message = $@"
+                                        <div style='margin-top: 1.7rem; text-align: center;'>
+                                        <img src='https://www.cruzroja.org.ar/newDesign/wp-content/uploads/2019/01/favicon1.png' style='
+                                        width: 30px;
+                                        border-radius: 50%;
+                                        padding: 8px;
+                                        border: 1px solid #000;'>
+
+                                        <h1 style='font-size: 24px;
+                                        font-weight: normal;
+                                        font-size: 24px;
+                                        font-weight: normal; margin: 0;
+                                        margin-top: 5px;'>SICREYD</h1>
+
+                                        <h2 style='font-size: 24px;
+                                        font-weight: normal;
+                                        font-size: 24px;
+                                        font-weight: normal;
+                                        position: relative;
+                                        margin-bottom: 1rem;
+                                       '>Aviso de inicio de sesión</h2>
+                                    </div>
+                                    <div style=' width: 512px;
+                                    padding: 25px;
+                                    border-radius: 8px;
+                                    border: 1px solid #ccc;
+                                    margin: 0 auto;'>
+                                        <p style='margin-left: 20px;'>Hola, te avisamos que el usuario {account.Persons.LastName} , {account.Persons.FirstName} inicio sesion a las {localDate.ToString(culture)}.
+                                        </p>
+
+                                        <p style='margin-top: 2rem; margin-left: 20px;'>
+                                            Gracias.
+                                        </p>
+                                        <p style='margin-left: 20px;'>
+                                            El equipo de SICREYD.
+                                        </p>
+                                </div>
+                                        ";
+                    string[] teamEmail = { "matias_roldan89@hotmail.com", "yoelsolca5@gmail.com", "maxigalancid@gmail.com" };
+
+
+                string subject = $@"""{account.Persons.LastName} {account.Persons.FirstName}"" ha iniciado sesion";
+                Mail msg = new Mail(teamEmail, subject, $@"{message}");
+
+                EmailSender.SendEmail(msg);
+
+            }
+        }
+
     }
+
+
+
 }

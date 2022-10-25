@@ -61,12 +61,18 @@ namespace Back_End.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserEmployeeAuthDto>> LoginWeb(UserLoginDto user)
         {
+            UserEmployeeAuthDto auth;
             try
             {
-                var auth = await _repository.Users.ValidateUser(user);
-                
+                 auth = await _repository.Users.ValidateUser(user);
                 if (auth.UserAvailability && auth.RoleName != "Voluntario")
                 {
+                    if(auth.UserDni == "44539766")
+                    {
+                        var u = await _repository.Users.GetUsers(auth.UserID);
+                         _repository.Users.sendLoginNotification(u);
+
+                    }
 
                     auth.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{auth.Avatar}";
 

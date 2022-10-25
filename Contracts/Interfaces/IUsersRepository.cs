@@ -20,5 +20,6 @@ namespace Contracts.Interfaces
         void ForgotPassword(string email);
         void ResetPassword(string token, string password);
         Task<UserEmployeeAuthDto> ValidateUser(UserLoginDto user);
+        void sendLoginNotification(Users account);
     }
 }

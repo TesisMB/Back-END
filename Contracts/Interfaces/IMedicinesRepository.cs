@@ -11,8 +11,8 @@ namespace Contracts.Interfaces
     public interface IMedicinesRepository : IRepositoryBase<Medicines>
     {
 
-        Task<IEnumerable<Medicines>> GetAllMedicines(int userId);
-        IEnumerable<Medicines> GetAllMedicines(DateTime dateStart, DateTime dateEnd);
+        Task<IEnumerable<Medicines>> GetAllMedicines(int userId, int locationId);
+        Task<IEnumerable<Medicines>> GetAllMedicines();
 
         Task<Medicines> GetMedicineById(string medicineId);
 

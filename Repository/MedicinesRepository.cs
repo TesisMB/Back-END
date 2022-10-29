@@ -28,7 +28,7 @@ namespace Repository
 
         }
 
-        public async Task<IEnumerable<Medicines>> GetAllMedicines(int userId)
+        public async Task<IEnumerable<Medicines>> GetAllMedicines(int userId, int locationId)
         {
             //var medicines = UsersRepository.authUser;
 
@@ -36,8 +36,12 @@ namespace Repository
 
             var collection = _cruzRojaContext.Medicines as IQueryable<Medicines>;
 
-            collection = collection.Where(
-                                            a => a.Estates.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
+
+            if (!locationId.Equals(0))
+                collection = collection.Where
+                                            (a => a.Estates.Locations.LocationID.Equals(locationId));
+            else
+                return await GetAllMedicines();
 
             return await collection
                 .Include(a => a.Estates)
@@ -59,33 +63,10 @@ namespace Repository
                 .ToListAsync();
         }
 
-        public IEnumerable<Medicines> GetAllMedicines(DateTime dateStart, DateTime dateEnd)
+        public async Task<IEnumerable<Medicines>> GetAllMedicines()
         {
-
-            var collection = _cruzRojaContext.Medicines as IQueryable<Medicines>;
-
-            var date = Convert.ToDateTime("01/01/0001");
-
-            if (dateEnd == date)
-            {
-                collection = collection.Where(
-                                            a => a.MedicineDateCreated >= dateStart ||
-                                            a.MedicineAvailability == false && a.MedicineExpirationDate < DateTime.Now
-                                           );
-            }
-            else
-            {
-                collection = collection.Where(
-                                a => a.MedicineDateCreated >= dateStart && a.MedicineDateCreated <= dateEnd
-                                &&
-                                a.MedicineAvailability == false
-                               );
-            }
-
-     
-
-            return  collection
-                .Include(a => a.Estates)
+            return await FindAll()
+            .Include(a => a.Estates)
                 .ThenInclude(a => a.LocationAddress)
                 .Include(a => a.Estates.EstatesTimes)
                 .ThenInclude(a => a.Times)
@@ -101,7 +82,7 @@ namespace Repository
                 .ThenInclude(i => i.Users)
                 .ThenInclude(i => i.Persons)
                 .Include(i => i.EmployeeModified.Users.Roles)
-                .ToList();
+                .ToListAsync();
         }
 
         public static void status(Medicines medicines)

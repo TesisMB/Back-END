@@ -19,14 +19,17 @@ namespace Repository
         {
             _cruzRojaContext = cruzRojaContext;
         }
-        public async Task<IEnumerable<Vehicles>> GetAllVehiclesFilters(int userId)
+        public async Task<IEnumerable<Vehicles>> GetAllVehiclesFilters(int userId, int locationId)
         {
             var user =  EmployeesRepository.GetAllEmployeesById(userId);
 
             var collection = _cruzRojaContext.Vehicles as IQueryable<Vehicles>;
 
-            collection = collection.Where(a=>  a.Estates.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
-            
+            if (!locationId.Equals(0))
+                collection = collection.Where
+                                            (a => a.Estates.Locations.LocationID.Equals(locationId));
+            else
+                return await GetAllVehicles();
 
             return await collection
                       .Include(a => a.Estates)
@@ -51,7 +54,7 @@ namespace Repository
                       .ThenInclude(i => i.Users)
                       .ThenInclude(i => i.Persons)
                       .Include(i => i.EmployeeModified.Users.Roles)
-                 .ToListAsync();
+                      .ToListAsync();
         }
 
         public async Task<Vehicles> GetVehicleById(string vehicleId)
@@ -174,46 +177,32 @@ namespace Repository
 
 
 
-        public IEnumerable<Vehicles> GetAllVehicles(DateTime dateStart, DateTime dateEnd)
+        public async Task<IEnumerable<Vehicles>> GetAllVehicles()
         {
+            return await FindAll()
+                       .Include(a => a.Estates)
+                      .Include(a => a.Estates.LocationAddress)
+                      .Include(a => a.Estates.EstatesTimes)
+                      .ThenInclude(a => a.Times)
+                      .ThenInclude(a => a.Schedules)
+                      .Include(a => a.Employees)
+                      .ThenInclude(a => a.Users)
+                      .ThenInclude(a => a.Persons)
+                      .Include(a => a.TypeVehicles)
+                      .Include(a => a.Estates.Locations)
+                      .Include(a => a.Brands)
+                      .Include(a => a.Model)
 
-            var collection = _cruzRojaContext.Vehicles as IQueryable<Vehicles>;
+                      .Include(a => a.EmployeeCreated)
+                      .ThenInclude(i => i.Users)
+                      .ThenInclude(i => i.Persons)
+                      .Include(i => i.EmployeeCreated.Users.Roles)
 
-            var date = Convert.ToDateTime("01/01/0001");
-
-            if (dateEnd == date)
-            {
-            collection = collection.Where(
-                                         a => a.VehicleDateCreated >= dateStart && a.VehicleAvailability == false);
-            }
-            else
-            {
-                collection = collection.Where(
-                                         a => a.VehicleDateCreated >= dateStart && a.VehicleDateCreated <= dateEnd && a.VehicleAvailability == false);
-            }
-
-            return collection
-                   .Include(a => a.Estates)
-                   .Include(a => a.Estates.LocationAddress)
-                   .Include(a => a.Estates.EstatesTimes)
-                   .ThenInclude(a => a.Times)
-                   .ThenInclude(a => a.Schedules)
-                   .Include(a => a.Employees)
-                   .ThenInclude(a => a.Users)
-                   .ThenInclude(a => a.Persons)
-                   .Include(a => a.TypeVehicles)
-                   .Include(a => a.Estates.Locations)
-                   .Include(a => a.Brands)
-                   .Include(a => a.Model)
-                   .Include(a => a.EmployeeCreated)
-                   .ThenInclude(i => i.Users)
-                   .ThenInclude(i => i.Persons)
-                   .Include(i => i.EmployeeCreated.Users.Roles)
-                   .Include(i => i.EmployeeModified)
-                   .ThenInclude(i => i.Users)
-                   .ThenInclude(i => i.Persons)
-                   .Include(i => i.EmployeeModified.Users.Roles)
-                   .ToList();
+                      .Include(i => i.EmployeeModified)
+                      .ThenInclude(i => i.Users)
+                      .ThenInclude(i => i.Persons)
+                      .Include(i => i.EmployeeModified.Users.Roles)
+                      .ToListAsync();
         }
 
         public IEnumerable<Vehicles> GetAllVehicles(DateTime dateStart, DateTime dateEnd, int estateId)

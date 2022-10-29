@@ -13,20 +13,39 @@ namespace Entities.Validator.Creation.Resources_Request
 {
     public class ResourcesValidator: AbstractValidator<Resources_ForCreationDto>
     {
+        public static CruzRojaContext db = new CruzRojaContext();
+
         public ResourcesValidator()
         {
 
-            RuleFor(x => x.ID)
-                  .Must(BeUniqueDni).WithMessage("Este codigo ya existe en el sistema");
+            RuleFor(m => new { m.ID, m.FK_EstateID }).Custom((id, context) =>
+            {
+               
+                var status = BeUniqueDni(id.ID, id.FK_EstateID);
+
+
+                if (!status)
+                {
+
+                    context.AddFailure("Este codigo ya existe en el sistema");
+                }
+            });
 
             RuleFor(x => x.Medicines).SetValidator(new MedicinesValidator());
             RuleFor(x => x.Vehicles).SetValidator(new VehiclesValidator());
         }
 
 
-        private bool BeUniqueDni(string codigo)
+        private bool BeUniqueDni(string codigo, int fk_EstateId)
         {
-            string codigoID = codigo.Substring(0, 2);
+            var location = db.LocationAddresses.Where(x => x.LocationAddressID.Equals(fk_EstateId))
+                                                                      .AsNoTracking()
+                                                                      .FirstOrDefault();
+
+            var codigoID = codigo.Substring(0, 2);
+            var numberCodigo = codigo.Substring(2);
+            codigo = codigoID + "-" + numberCodigo + "-" + location.PostalCode;
+
 
             if(codigoID == "MA")
                 return new CruzRojaContext().Materials

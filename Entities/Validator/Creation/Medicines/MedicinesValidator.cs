@@ -10,7 +10,7 @@ namespace Entities.Validator.Creation.Medicines
         {
 
             RuleFor(x => x.MedicineExpirationDate)
-        .NotEmpty().WithMessage("{PropertyName} is required.")
+            .NotEmpty().WithMessage("{PropertyName} is required.")
             //.GreaterThan(p => DateTime.Now.ToString()).WithMessage("the {PropertyName} has not passed yet")
             .Must(BeAValidDay).WithMessage("El mes ingresado no es valido")
             .Must(BeAValidMonth).WithMessage("El año ingresado no es valido");

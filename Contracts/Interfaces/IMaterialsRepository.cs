@@ -8,8 +8,8 @@ namespace Contracts.Interfaces
 {
     public interface IMaterialsRepository : IRepositoryBase<Materials>
     {
-        Task<IEnumerable<Materials>> GetAllMaterials(int userId);
-        IEnumerable<Materials> GetAllMaterials(DateTime dateStart, DateTime dateEnd);
+        Task<IEnumerable<Materials>> GetAllMaterials(int userId, int locationId);
+        Task<IEnumerable<Materials>> GetAllMaterials();
 
         Task<Materials> GetMaterialById(string materialId);
 

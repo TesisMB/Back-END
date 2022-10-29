@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Back_End.Entities;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.Materials___Dto;
 using Entities.DataTransferObjects.ResourcesDto;
@@ -9,6 +10,8 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 
 
@@ -36,11 +39,11 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpGet]
-        public async Task<ActionResult<Materials>> GetAllVolunteers([FromQuery] int userId)
+        public async Task<ActionResult<Materials>> GetAllVolunteers([FromQuery] int userId, [FromQuery] int locationId)
         {
             try
             {
-                var materials = await _repository.Materials.GetAllMaterials(userId);
+                var materials = await _repository.Materials.GetAllMaterials(userId, locationId);
 
                 _logger.LogInfo($"Returned all Materials from database.");
 
@@ -117,6 +120,14 @@ namespace Back_End.Controllers
         {
 
             material.CreatedBy = userId;
+            var cruzRojaContext = new CruzRojaContext();
+
+            var location = cruzRojaContext.LocationAddresses.Where(x => x.LocationAddressID.Equals(material.FK_EstateID))
+                                                                       .AsNoTracking()
+                                                                       .FirstOrDefault();
+            var codigo = material.ID.Substring(0, 2);
+            var numberCodigo = material.ID.Substring(2);
+            material.ID = codigo + "-" + numberCodigo + "-" + location.PostalCode;
 
             try
             {

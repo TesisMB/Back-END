@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Back_End.Entities;
 using Back_End.Models;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.ResourcesDto;
@@ -11,6 +12,8 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Back_End.Controllers
@@ -33,11 +36,11 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpGet]
-        public async Task<ActionResult<Vehicles>> GetAllVehicles([FromQuery] int userId)
+        public async Task<ActionResult<Vehicles>> GetAllVehicles([FromQuery] int userId, [FromQuery] int locationId)
         {
             try
             {
-                var vehicles = await _repository.Vehicles.GetAllVehiclesFilters(userId);
+                var vehicles = await _repository.Vehicles.GetAllVehiclesFilters(userId, locationId);
                 _logger.LogInfo($"Returned all vehicles from database.");
 
                 var vehiclesResult = _mapper.Map<IEnumerable<Resources_Dto>>(vehicles);
@@ -109,7 +112,15 @@ namespace Back_End.Controllers
         public async Task<ActionResult<Vehicles>> CreateVehicle([FromBody] Resources_ForCreationDto vehicle, [FromQuery] int userId)
         {
 
+            var cruzRojaContext = new CruzRojaContext();
+
+            var location = cruzRojaContext.LocationAddresses.Where(x => x.LocationAddressID.Equals(vehicle.FK_EstateID))
+                                                                       .AsNoTracking()
+                                                                       .FirstOrDefault();
             vehicle.CreatedBy = userId;
+            var codigo =  vehicle.ID.Substring(0, 2);
+            var numberCodigo = vehicle.ID.Substring(2);
+            vehicle.ID = codigo + "-" + numberCodigo + "-" + location.PostalCode;
 
             try
             {

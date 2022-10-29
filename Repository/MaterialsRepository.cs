@@ -19,20 +19,18 @@ namespace Repository
         {
             _cruzRojaContext = cruzRojaContext;
         }
-        public async Task<IEnumerable<Materials>> GetAllMaterials(int userId)
+        public async Task<IEnumerable<Materials>> GetAllMaterials(int userId, int locationId)
         {
-            //var material = UsersRepository.authUser;
 
-            var user =  EmployeesRepository.GetAllEmployeesById(userId);
-
+            //var user =  EmployeesRepository.GetAllEmployeesById(userId);
 
             var collection = _cruzRojaContext.Materials as IQueryable<Materials>;
 
-
-            collection = collection.Where(
-                a => a.Estates.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName);
-
-
+            if (!locationId.Equals(0))
+                collection = collection.Where
+                                            (a => a.Estates.Locations.LocationID.Equals(locationId));
+            else
+                return await GetAllMaterials();
 
             return await collection
                        .Include(a => a.Estates)
@@ -57,26 +55,11 @@ namespace Repository
 
 
 
-        public IEnumerable<Materials> GetAllMaterials(DateTime dateStart, DateTime dateEnd)
+        public async Task<IEnumerable<Materials>> GetAllMaterials()
         {
 
-            var collection = _cruzRojaContext.Materials as IQueryable<Materials>;
-
-            var date = Convert.ToDateTime("01/01/0001");
-
-            if (dateEnd == date)
-            {
-                collection = collection.Where(
-                    a => a.MaterialDateCreated >= dateStart && a.MaterialQuantity == 0);
-            }
-            else
-            {
-                collection = collection.Where(
-                    a => a.MaterialDateCreated >= dateStart && a.MaterialDateCreated<=dateEnd && a.MaterialAvailability == false);
-            }
-
-            return collection
-                       .Include(a => a.Estates)
+            return await FindAll()
+               .Include(a => a.Estates)
                        .Include(a => a.Estates.LocationAddress)
                        .Include(a => a.Estates.EstatesTimes)
                        .ThenInclude(a => a.Times)
@@ -92,8 +75,7 @@ namespace Repository
                         .ThenInclude(i => i.Users)
                         .ThenInclude(i => i.Persons)
                         .Include(i => i.EmployeeModified.Users.Roles)
-                       .ToList();
-
+                       .ToListAsync();
         }
 
 

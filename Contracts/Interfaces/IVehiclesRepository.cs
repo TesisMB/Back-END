@@ -10,10 +10,10 @@ namespace Contracts.Interfaces
 {
     public interface IVehiclesRepository : IRepositoryBase<Vehicles>
     {
-        Task<IEnumerable<Vehicles>> GetAllVehiclesFilters(int userId);
+        Task<IEnumerable<Vehicles>> GetAllVehiclesFilters(int userId, int locationId);
 
         IEnumerable<Vehicles> GetAllVehicles(int userId);
-        IEnumerable<Vehicles> GetAllVehicles(DateTime dateStart, DateTime dateEnd);
+        Task<IEnumerable<Vehicles>> GetAllVehicles();
 
         Task<Vehicles> GetVehicleById(string vehicleId);
         Task<Vehicles> GetVehicleWithDetails(string vehicleId);

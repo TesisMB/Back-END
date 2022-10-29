@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Back_End.Entities;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.Medicines___Dto;
 using Entities.DataTransferObjects.ResourcesDto;
@@ -8,6 +9,8 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Back_End.Controllers
@@ -30,11 +33,11 @@ namespace Back_End.Controllers
 
         //********************************* FUNCIONANDO *********************************
         [HttpGet]
-        public async Task<ActionResult<Medicines>> GetAllMedicines([FromQuery] int userId)
+        public async Task<ActionResult<Medicines>> GetAllMedicines([FromQuery] int userId, [FromQuery] int locationId)
         {
             try
             {
-                var medicines = await _repository.Medicines.GetAllMedicines(userId);
+                var medicines = await _repository.Medicines.GetAllMedicines(userId, locationId);
 
                 _logger.LogInfo($"Returned all Materials from database.");
 
@@ -127,11 +130,14 @@ namespace Back_End.Controllers
         {
             medicine.CreatedBy = userId;
 
-            //if (medicine.ImageFile != null)
-            //{
-            //    await _repository.Medicines.Upload(medicine);
-            //}
-            //return Ok();
+            var cruzRojaContext = new CruzRojaContext();
+
+            var location = cruzRojaContext.LocationAddresses.Where(x => x.LocationAddressID.Equals(medicine.FK_EstateID))
+                                                                       .AsNoTracking()
+                                                                       .FirstOrDefault();
+            var codigo = medicine.ID.Substring(0, 2);
+            var numberCodigo = medicine.ID.Substring(2);
+            medicine.ID = codigo + "-" + numberCodigo + "-" + location.PostalCode;
 
             try
             {

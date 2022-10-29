@@ -26,6 +26,7 @@ namespace Entities.DataTransferObjects.Employees___Dto
         public EstatesDto Estates { get; set; }
 
         public List<EmergenciesDisasterByUser> EmergencyDisastersReports { get; set; }
+        public List<ResourcesRequestReports> ResourcesRequestReports { get; set; }
     }
 
 
@@ -35,7 +36,7 @@ namespace Entities.DataTransferObjects.Employees___Dto
 
         public string State { get; set; }
 
-        public string Type{ get; set; }
+        public string Type { get; set; }
 
 
         public string Degree { get; set; }
@@ -44,6 +45,14 @@ namespace Entities.DataTransferObjects.Employees___Dto
         public DateTime? EndDate { get; set; }
         public DateTime StartDate { get; set; }
         public string Icon { get; set; }
+    }
+     
+    public class ResourcesRequestReports
+    {
+        public int ID { get; set; }
 
+        public string State { get; set; }
+
+        public string City { get; set; }
     }
 }

@@ -86,17 +86,22 @@ namespace Back_End.Controllers
                                          .Where(a => a.ID.Equals(item5.EmergencyDisasterID))
                                          .FirstOrDefault();
 
-                            if (item.EmergencyDisastersReports == null)
-                            {
-                                item.EmergencyDisastersReports = new List<EmergenciesDisasterByUser>();
+                            var resourcesRequest = cruzRojaContext.Resources_Requests
+                                   .Where(a => a.FK_EmergencyDisasterID.Equals(item5.EmergencyDisasterID)
+                                           && a.CreatedBy.Equals(item.UserID))
+                                   .ToList();
 
-                                returnList(item.EmergencyDisastersReports, item5, userByAlert, userByTypeEmergency, userByLocation);
-                            }
-                            else
-                            {
-                                returnList(item.EmergencyDisastersReports, item5, userByAlert, userByTypeEmergency, userByLocation);
+                            item.EmergencyDisastersReports = new List<EmergenciesDisasterByUser>();
 
+                            returnList(item.EmergencyDisastersReports, item5, userByAlert, userByTypeEmergency, userByLocation);
+
+                         if(resourcesRequest != null)
+                            foreach (var x in resourcesRequest)
+                            {
+                            item.ResourcesRequestReports = new List<ResourcesRequestReports>();
+                            returnList2(item.ResourcesRequestReports, x);
                             }
+
                         }
                     }
                 }
@@ -131,6 +136,23 @@ namespace Back_End.Controllers
             });
 
             return emergenciesDisasterByUsers;
+        }
+
+
+
+        [NonAction]
+        public List<ResourcesRequestReports> returnList2(List<ResourcesRequestReports> resourcesRequestReports,
+                                                      ResourcesRequest resourcesRequest)
+        {
+            var locations = resourcesRequest.EmergenciesDisasters.LocationsEmergenciesDisasters.LocationCityName.Split(',');
+            resourcesRequestReports.Add(new ResourcesRequestReports
+            {
+                ID = resourcesRequest.ID,
+                City = locations[locations.Length - 3],
+                State = resourcesRequest.Condition
+            });
+
+            return resourcesRequestReports;
         }
 
         //********************************* FUNCIONANDO *********************************

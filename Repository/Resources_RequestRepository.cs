@@ -42,6 +42,15 @@ namespace Repository
             var collection = _cruzRojaContext.Resources_Requests as IQueryable<ResourcesRequest>;
 
             //Admin y C.General -> tiene acceso a todo en funcion del departamento
+
+            if (Condition == "TODOS")
+            {
+                collection = collection.Where(
+                       a => a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID
+                       && a.CreatedBy == user.UserID)
+                       .AsNoTracking();
+            }
+
             if (!String.IsNullOrEmpty(Condition) && state == "solicitud")
             {
                 collection = collection.Where(
@@ -53,12 +62,12 @@ namespace Repository
             }
             else
             {
-                if (user.Roles.RoleName == "Admin")
+                if (user.Roles.RoleName == "Admin" && Condition == null)
             {
                 return  GetAllResourcesRequests(user.FK_EstateID, Condition);
             }
 
-            else if (user.Roles.RoleName == "Coordinador General")
+            else if (user.Roles.RoleName == "Coordinador General" && Condition == null)
             {
                 return  GetAllResourcesRequests(user.FK_EstateID, Condition);
             }
@@ -76,7 +85,10 @@ namespace Repository
             }
 
             //C.Emergencias tiene acceso a solamente el historial de solicitudes
-            else
+
+           
+
+            else if(Condition == "Aceptada" || Condition == "Pendiente" | Condition == "Rechazada")
             {
                 collection = collection.Where(
                                             a => a.Condition == Condition
@@ -84,6 +96,7 @@ namespace Repository
                                             && a.CreatedBy == user.UserID)
                                             .AsNoTracking();
             }
+            
             }
 
 

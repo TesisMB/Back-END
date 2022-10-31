@@ -27,8 +27,9 @@ namespace Entities.DataTransferObjects.Employees___Dto
 
         public List<EmergenciesDisasterByUser> EmergencyDisastersReports { get; set; }
         public List<ResourcesRequestReports> ResourcesRequestReports { get; set; }
+        //public List<ResourcesRequestReports> ResourcesRequestReportsPendiente{ get; set; }
+        //public List<ResourcesRequestReports> ResourcesRequestReportsRechazadas{ get; set; }
     }
-
 
     public class EmergenciesDisasterByUser
     {
@@ -47,12 +48,17 @@ namespace Entities.DataTransferObjects.Employees___Dto
         public string Icon { get; set; }
     }
      
+
     public class ResourcesRequestReports
     {
         public int ID { get; set; }
 
-        public string State { get; set; }
+        public string Condition { get; set; }
 
+        public DateTime RequestDate { get; set; }
         public string City { get; set; }
+        public int EmergencyDisasterID { get; set; }
+        public string Type { get; set; }
+
     }
 }

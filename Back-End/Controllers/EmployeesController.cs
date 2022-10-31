@@ -86,24 +86,42 @@ namespace Back_End.Controllers
                                          .Where(a => a.ID.Equals(item5.EmergencyDisasterID))
                                          .FirstOrDefault();
 
-                            var resourcesRequest = cruzRojaContext.Resources_Requests
-                                   .Where(a => a.FK_EmergencyDisasterID.Equals(item5.EmergencyDisasterID)
-                                           && a.CreatedBy.Equals(item.UserID))
-                                   .ToList();
 
-                            item.EmergencyDisastersReports = new List<EmergenciesDisasterByUser>();
-
-                            returnList(item.EmergencyDisastersReports, item5, userByAlert, userByTypeEmergency, userByLocation);
-
-                         if(resourcesRequest != null)
-                            foreach (var x in resourcesRequest)
+                            if (item.EmergencyDisastersReports == null)
                             {
-                            item.ResourcesRequestReports = new List<ResourcesRequestReports>();
-                            returnList2(item.ResourcesRequestReports, x);
-                            }
+                                item.EmergencyDisastersReports = new List<EmergenciesDisasterByUser>();
 
+                                returnList(item.EmergencyDisastersReports, item5, userByAlert, userByTypeEmergency, userByLocation);
+                            }
+                            else
+                            {
+                                returnList(item.EmergencyDisastersReports, item5, userByAlert, userByTypeEmergency, userByLocation);
+
+                            }
                         }
                     }
+                }
+
+                foreach (var item in employeesResult)
+                {
+                    var resourcesRequest = cruzRojaContext.Resources_Requests
+                              .Where(a => a.CreatedBy.Equals(item.UserID))
+                              .ToList();
+
+                    if (resourcesRequest != null)
+                        foreach (var x in resourcesRequest)
+                        {
+                            if (item.ResourcesRequestReports == null)
+                            {
+                                item.ResourcesRequestReports = new List<ResourcesRequestReports>();
+
+                                returnList2(item.ResourcesRequestReports, x);
+                            }
+                            else
+                            {
+                                returnList2(item.ResourcesRequestReports, x);
+                            }
+                        }
                 }
 
                 return Ok(employeesResult);
@@ -148,8 +166,11 @@ namespace Back_End.Controllers
             resourcesRequestReports.Add(new ResourcesRequestReports
             {
                 ID = resourcesRequest.ID,
+                Condition = resourcesRequest.Condition,
                 City = locations[locations.Length - 3],
-                State = resourcesRequest.Condition
+                RequestDate = resourcesRequest.RequestDate,
+                EmergencyDisasterID = resourcesRequest.EmergenciesDisasters.EmergencyDisasterID,
+                Type = resourcesRequest.EmergenciesDisasters.TypesEmergenciesDisasters.TypeEmergencyDisasterName
             });
 
             return resourcesRequestReports;
@@ -218,8 +239,28 @@ namespace Back_End.Controllers
                                 }
                             }
                         }
-                
-                return Ok(employeeResult);
+
+                   
+                        var resourcesRequest = cruzRojaContext.Resources_Requests
+                                  .Where(a => a.CreatedBy.Equals(employeeResult.UserID))
+                                  .ToList();
+
+                        if (resourcesRequest != null)
+                            foreach (var x in resourcesRequest)
+                            {
+                                if (employeeResult.ResourcesRequestReports == null)
+                                {
+                                employeeResult.ResourcesRequestReports = new List<ResourcesRequestReports>();
+
+                                    returnList2(employeeResult.ResourcesRequestReports, x);
+                                }
+                                else
+                                {
+                                    returnList2(employeeResult.ResourcesRequestReports, x);
+                                }
+                            }
+
+                    return Ok(employeeResult);
             }
             }
             catch (Exception ex)

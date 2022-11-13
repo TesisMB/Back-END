@@ -67,10 +67,12 @@ namespace Back_End.Profiles
 
 
             CreateMap<UsersVolunteersForCreationDto, Users>();
-                        
+
 
             CreateMap<UsersForUpdateDto, Users>();
+
             CreateMap<Users, UsersForUpdateDto>();
+        
 
 
             CreateMap<DeviceForUpdateDto, Users>();

@@ -364,14 +364,41 @@ namespace Back_End.Controllers
 
                 var employeeToPatch = _mapper.Map<UsersForUpdateDto>(employeeEntity);
 
-
                 _Employees.ApplyTo(employeeToPatch, ModelState);
 
-              
+
                 if (!TryValidateModel(employeeToPatch))
                 {
                     return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
                 }
+
+                List<UsersChatRooms> employeeEmg = new List<UsersChatRooms>();
+                List<EmergenciesDisasters> employeeEmg2 = new List<EmergenciesDisasters>();
+
+                using (var db = new CruzRojaContext())
+                {
+                    employeeEmg = db.UsersChatRooms.Where(a => a.FK_UserID.Equals(employeeId))
+                                                          .AsNoTracking()
+                                                          .ToList();
+
+                    if(employeeEmg != null)
+                    {
+                        foreach (var item in employeeEmg)
+                        {
+                            employeeEmg2 = db.EmergenciesDisasters.Where(a => a.EmergencyDisasterID.Equals(item.FK_ChatRoomID)
+                                                                     && a.EmergencyDisasterEndDate == null)
+                                                              .AsNoTracking()
+                                                              .ToList();
+                        }
+                    }
+
+                }
+
+                if(employeeToPatch.UserAvailability == false && employeeEmg2 != null)
+                {
+                    return BadRequest(ErrorHelper.Response(400, "Este usuario se encuentra en una Emergencia activa"));
+                }
+
 
 
                 Users authUser = new Users();

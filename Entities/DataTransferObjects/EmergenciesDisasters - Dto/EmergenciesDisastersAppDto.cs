@@ -1,6 +1,7 @@
 ﻿using Entities.DataTransferObjects.Alerts___Dto;
 using Entities.DataTransferObjects.CharRooms___Dto;
 using Entities.DataTransferObjects.LocationsEmergenciesDisasters___Dto;
+using Entities.DataTransferObjects.Resources_Request___Dto;
 using Entities.DataTransferObjects.TypesEmergenciesDisasters___Dto;
 using Entities.DataTransferObjects.Victims___Dto;
 using System;
@@ -28,6 +29,7 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
         public TypesEmergenciesDisastersDto TypesEmergenciesDisasters { get; set; }
         public string EmergencyDisasterInstruction { get; set; }
 
+        public List<ResourcesRequestDto> Resources_Requests { get; set; }
 
         public LocationsEmergenciesDisastersDto LocationsEmergenciesDisasters { get; set; }
 

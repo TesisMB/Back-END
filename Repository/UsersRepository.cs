@@ -277,7 +277,8 @@ namespace Repository
 
             collection = collection.Where(
                 a => a.Estates.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName
-                && a.FK_RoleID != 1);
+                && a.FK_RoleID != 1
+                && a.UserID != userId);
 
             return await collection
                                .Include(u => u.Persons)

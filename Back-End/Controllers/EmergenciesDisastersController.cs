@@ -3,8 +3,10 @@ using Back_End.EmergencyDisasterPDF;
 using Back_End.Entities;
 using Back_End.Models;
 using Contracts.Interfaces;
-
+using Entities.DataTransferObjects;
 using Entities.DataTransferObjects.EmergenciesDisasters___Dto;
+using Entities.DataTransferObjects.Resources_Request___Dto;
+using Entities.DataTransferObjects.Resources_RequestResources_Materials_Medicines_Vehicles___Dto;
 using Entities.Helpers;
 using Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
@@ -65,6 +67,8 @@ namespace Back_End.Controllers
         }
 
 
+
+
         //********************************* FUNCIONANDO *********************************
         [HttpGet("WithoutFilter")]
 
@@ -108,6 +112,110 @@ namespace Back_End.Controllers
         }
 
 
+        //********************************* FUNCIONANDO *********************************
+        [HttpGet("Reports")]
+
+        public async Task<ActionResult<EmergenciesDisasters>> GetAllEmergenciesDisastersReports([FromQuery] int userId, [FromQuery] string limit)
+        {
+            try
+            {
+                var emergenciesDisasters = await _repository.EmergenciesDisasters.GetAllEmergenciesDisastersWithourFilter(userId, limit);
+
+                _logger.LogInfo($"Returned all emergenciesDisasters from database.");
+
+                var emergenciesDisastersResult = _mapper.Map<IEnumerable<EmergenciesDisastersAppDto>>(emergenciesDisasters);
+
+                CruzRojaContext cruzRojaContext = new CruzRojaContext();
+                List<ReportsDto> reports = new List<ReportsDto>();
+
+                foreach (var item in emergenciesDisastersResult)
+                {
+                    if(reports.Count.Equals(0))
+                    {
+                        returnList2(reports, item);
+                    }
+                    else
+                    {
+                        returnList2(reports, item);
+                    }
+
+                }
+
+                return Ok(reports);
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside GetAllEmegenciesDisasters action: {ex.Message}");
+                return StatusCode(500, "Internal Server error");
+            }
+        }
+
+
+        [NonAction]
+        public List<ReportsDto> returnList2(List<ReportsDto> reportsDto, EmergenciesDisastersAppDto emergenciesDisastersAppDto)
+        {
+            var locations = emergenciesDisastersAppDto.LocationsEmergenciesDisasters.LocationCityName.Split(',');
+
+
+            reportsDto.Add(new ReportsDto
+            {
+                EmergencyDisasterID = emergenciesDisastersAppDto.EmergencyDisasterID,
+                City = locations[locations.Length - 3],
+                EmergencyDisasterStartDate = emergenciesDisastersAppDto.EmergencyDisasterStartDate,
+                EmergencyDisasterEndDate = emergenciesDisastersAppDto.EmergencyDisasterEndDate,
+                Type = emergenciesDisastersAppDto.TypesEmergenciesDisasters.TypeEmergencyDisasterName,
+                alertName = emergenciesDisastersAppDto.Alerts.AlertDegree,
+                Victims = emergenciesDisastersAppDto.Victims,
+                State = (emergenciesDisastersAppDto.EmergencyDisasterEndDate == null) ? "Activa" : "Inactiva",
+                //Resources_Requests = emergenciesDisastersAppDto.Resources_Requests,
+                Recursos = Recursos(emergenciesDisastersAppDto.Resources_Requests)
+            });
+
+            return reportsDto;
+        }
+
+        [NonAction]
+        public List<Recursos> Recursos(List<ResourcesRequestDto> Resources_Requests)
+        {
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+            List<Recursos> recursos = new List<Recursos>();
+          
+            List<ResourcesRequestMaterialsMedicinesVehicles> recurso = new List<ResourcesRequestMaterialsMedicinesVehicles>();
+            foreach (var item in Resources_Requests.Where(a => a.Condition == "Aceptada"))
+            {
+                 recurso = cruzRojaContext.Resources_RequestResources_Materials_Medicines_Vehicles
+                                .Where(a => a.FK_Resource_RequestID.Equals(item.ID))
+                                .ToList();
+
+                foreach (var item2 in recurso)
+                {
+                    if (item2.FK_MaterialID != null)
+                    {
+                    recursos.Add(new Recursos
+                        {
+                            Materiales = item2.Quantity,
+                        });
+                    }
+                    else if(item2.FK_MedicineID != null)
+                    {
+                        recursos.Add(new Recursos
+                        {
+                            Medicamentos = item2.Quantity,
+                        });
+                    }
+                    else
+                    {
+                        recursos.Add(new Recursos
+                        {
+                            Vehiculos = item2.Quantity,
+                        });
+                    }
+                }
+            }
+
+            return recursos;
+        }
 
         //********************************* FUNCIONANDO *********************************
 

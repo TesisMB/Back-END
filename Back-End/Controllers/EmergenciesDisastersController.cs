@@ -101,6 +101,19 @@ namespace Back_End.Controllers
                     }
                 }
 
+
+
+                foreach (var item in emergenciesDisastersResult)
+                {
+                    var locations = item.LocationsEmergenciesDisasters.LocationCityName.Split(',');
+
+                    item.Type = item.TypesEmergenciesDisasters.TypeEmergencyDisasterName;
+                    item.State = (item.EmergencyDisasterEndDate == null) ? "Activa" : "Inactiva";
+                    item.alertName = item.Alerts.AlertDegree;
+                    item.City = locations[locations.Length - 3];
+                    item.Recursos = Recursos(item.Resources_Requests);
+                }
+
                 return Ok(emergenciesDisastersResult);
 
             }
@@ -400,7 +413,7 @@ namespace Back_End.Controllers
 
                 _repository.EmergenciesDisasters.SaveAsync();
 
-                //var response = await SendController.SendNotification(userId, emergenciesDisasters.LocationsEmergenciesDisasters.LocationCityName, emergencyDisaster.EmergencyDisasterID);
+                var response = await SendController.SendNotification(userId, emergenciesDisasters.LocationsEmergenciesDisasters.LocationCityName, emergencyDisaster.EmergencyDisasterID);
 
 
                 return Ok();

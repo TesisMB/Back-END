@@ -41,6 +41,17 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
 
         public ICollection<UsersChatRoomsDto> UsersChatRooms { get; set; }
 
+        public string Type { get; set; }
+        public string City { get; set; }
+
+        public string State { get; set; }
+        public string alertName { get; set; }
+
+        //public ICollection<ResourcesRequestMaterialsMedicinesVehiclesDto> Resources_Requests { get; set; }
+
+        public Dictionary<string, int> Recursos { get; set; }
+        //public List<ReportsDto> Reports { get; set; }
+
 
     }
 }

@@ -110,7 +110,18 @@ namespace Back_End.Controllers
                     item.Type = item.TypesEmergenciesDisasters.TypeEmergencyDisasterName;
                     item.State = (item.EmergencyDisasterEndDate == null) ? "Activa" : "Inactiva";
                     item.alertName = item.Alerts.AlertDegree;
-                    item.City = locations[locations.Length - 3];
+
+                    if(locations.Length == 1) {
+                    item.City = locations[locations.Length - 1];
+                    
+                    }else if (locations.Length == 2)
+                    {
+                        item.City = locations[locations.Length - 2];
+                    }
+                    else{
+                        item.City = locations[locations.Length - 3];
+                    }
+
                     item.Recursos = Recursos(item.Resources_Requests);
                 }
 
@@ -173,6 +184,8 @@ namespace Back_End.Controllers
 
             reportsDto.Add(new ReportsDto
             {
+                
+
                 EmergencyDisasterID = emergenciesDisastersAppDto.EmergencyDisasterID,
                 City = locations[locations.Length - 3],
                 EmergencyDisasterStartDate = emergenciesDisastersAppDto.EmergencyDisasterStartDate,

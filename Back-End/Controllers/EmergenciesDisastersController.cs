@@ -176,11 +176,16 @@ namespace Back_End.Controllers
         }
 
         [NonAction]
-        public List<Recursos> Recursos(List<ResourcesRequestDto> Resources_Requests)
+        public Dictionary<string,int> Recursos(List<ResourcesRequestDto> Resources_Requests)
         {
             CruzRojaContext cruzRojaContext = new CruzRojaContext();
             List<Recursos> recursos = new List<Recursos>();
-          
+            var resources = new Dictionary<string, int>();
+            resources["medicamentos"] = 0;
+            resources["materiales"] = 0;
+            resources["vehiculos"] = 0;
+
+
             List<ResourcesRequestMaterialsMedicinesVehicles> recurso = new List<ResourcesRequestMaterialsMedicinesVehicles>();
             foreach (var item in Resources_Requests.Where(a => a.Condition == "Aceptada"))
             {
@@ -192,29 +197,27 @@ namespace Back_End.Controllers
                 {
                     if (item2.FK_MaterialID != null)
                     {
-                    recursos.Add(new Recursos
-                        {
-                            Materiales = item2.Quantity,
-                        });
+
+
+                        resources["materiales"] += item2.Quantity;
+                        
                     }
                     else if(item2.FK_MedicineID != null)
                     {
-                        recursos.Add(new Recursos
-                        {
-                            Medicamentos = item2.Quantity,
-                        });
+
+                        resources["medicamentos"] +=  item2.Quantity;
+                        
                     }
                     else
                     {
-                        recursos.Add(new Recursos
-                        {
-                            Vehiculos = item2.Quantity,
-                        });
+
+                        resources["vehiculos"] +=  item2.Quantity;
+                        
                     }
                 }
             }
 
-            return recursos;
+            return resources;
         }
 
         //********************************* FUNCIONANDO *********************************

@@ -23,7 +23,9 @@ namespace Entities.DataTransferObjects
 
         //public ICollection<ResourcesRequestMaterialsMedicinesVehiclesDto> Resources_Requests { get; set; }
 
-        public List<Recursos> Recursos { get; set; }
+        public Dictionary<string, int> Recursos { get; set; }
+
+        
 
     }
 

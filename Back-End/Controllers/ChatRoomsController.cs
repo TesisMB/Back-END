@@ -282,7 +282,7 @@ namespace Back_End.Controllers
                 }
 
 
-                //var response = await SendController.SendNotificationByChat(userId, messages.Message, Convert.ToInt32(message.chatRoomID));
+              var response = await SendController.SendNotificationByChat(userId, messages.Message, Convert.ToInt32(message.chatRoomID));
 
                 return StatusCode(200);
 

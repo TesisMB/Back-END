@@ -178,7 +178,7 @@ namespace Repository
                     {
                         Data = new Dictionary<string, string>()
                             {
-                                { "alertId", Convert.ToString(chatRoomID) },
+                                { "chatId", Convert.ToString(chatRoomID) },
                             },
 
                         Token = item.DeviceToken,
@@ -202,7 +202,7 @@ namespace Repository
                 {
                     Data = new Dictionary<string, string>()
                             {
-                                { "chatRoomId", Convert.ToString(chatRoomID) },
+                                { "chatId", Convert.ToString(chatRoomID) },
                             },
 
                     Token = registrationToken,

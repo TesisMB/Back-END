@@ -8,6 +8,7 @@ namespace Back_End.Models.Employees___Dto
         public int EstateID { get; set; }
 
         public string EstatePhone { get; set; }
+        public int locationID { get; set; }
         public string EstateTypes { get; set; }
         public string LocationCityName { get; set; }
 

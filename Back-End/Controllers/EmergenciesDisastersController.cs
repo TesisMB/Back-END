@@ -180,6 +180,21 @@ namespace Back_End.Controllers
         public List<ReportsDto> returnList2(List<ReportsDto> reportsDto, EmergenciesDisastersAppDto emergenciesDisastersAppDto)
         {
             var locations = emergenciesDisastersAppDto.LocationsEmergenciesDisasters.LocationCityName.Split(',');
+            var newCity = "";
+
+            if (locations.Length == 1)
+            {
+                newCity = locations[locations.Length - 1];
+
+            }
+            else if (locations.Length == 2)
+            {
+                newCity = locations[locations.Length - 2];
+            }
+            else
+            {
+                newCity = locations[locations.Length - 3];
+            }
 
 
             reportsDto.Add(new ReportsDto
@@ -187,7 +202,7 @@ namespace Back_End.Controllers
                 
 
                 EmergencyDisasterID = emergenciesDisastersAppDto.EmergencyDisasterID,
-                City = locations[locations.Length - 3],
+                City = newCity,
                 EmergencyDisasterStartDate = emergenciesDisastersAppDto.EmergencyDisasterStartDate,
                 EmergencyDisasterEndDate = emergenciesDisastersAppDto.EmergencyDisasterEndDate,
                 Type = emergenciesDisastersAppDto.TypesEmergenciesDisasters.TypeEmergencyDisasterName,

@@ -16,6 +16,7 @@ namespace Back_End.Profiles
 
 
             CreateMap<Estates, EstateDto>()
+
                                       .ForPath(resp => resp.LocationCityName, opt => opt.MapFrom(src => src.Locations.LocationCityName))
                                       .ForPath(resp => resp.LocationAddress, opt => opt.MapFrom(src => src.LocationAddress));
 
@@ -27,6 +28,7 @@ namespace Back_End.Profiles
             CreateMap<Estates, EstatesDto>()
                               .ForPath(resp => resp.LocationCityName, opt => opt.MapFrom(src => src.Locations.LocationCityName))
 
+                              .ForPath(resp => resp.locationID, opt => opt.MapFrom(src => src.Locations.LocationID))
 
                               .ForPath(resp => resp.PostalCode, opt => opt.MapFrom(src => src.LocationAddress.PostalCode))
 

@@ -140,12 +140,29 @@ namespace Back_End.Controllers
                                                           TypesEmergenciesDisasters typesEmergenciesDisasters, LocationsEmergenciesDisasters location)
         {
             var locations = location.LocationCityName.Split(',');
+            var newCity = "" ;
+
+            if (locations.Length == 1)
+            {
+                newCity = locations[locations.Length - 1];
+
+            }
+            else if (locations.Length == 2)
+            {
+                newCity = locations[locations.Length - 2];
+            }
+            else
+            {
+                newCity = locations[locations.Length - 3];
+            }
+
+
             emergenciesDisasterByUsers.Add(new EmergenciesDisasterByUser
             {
                 ID = emergenciesDisasters.EmergencyDisasterID,
                 Type = typesEmergenciesDisasters.TypeEmergencyDisasterName,
                 Degree = alerts.AlertDegree,
-                City = locations[locations.Length - 3],
+                City = newCity,
                 State = (emergenciesDisasters.EmergencyDisasterEndDate == null) ? "Activa" : "Inactiva",
                 StartDate = emergenciesDisasters.EmergencyDisasterStartDate,
                 EndDate = emergenciesDisasters.EmergencyDisasterEndDate,
@@ -163,11 +180,27 @@ namespace Back_End.Controllers
                                                       ResourcesRequest resourcesRequest)
         {
             var locations = resourcesRequest.EmergenciesDisasters.LocationsEmergenciesDisasters.LocationCityName.Split(',');
+            var newCity = "";
+
+            if (locations.Length == 1)
+            {
+                newCity = locations[locations.Length - 1];
+
+            }
+            else if (locations.Length == 2)
+            {
+                newCity = locations[locations.Length - 2];
+            }
+            else
+            {
+                newCity = locations[locations.Length - 3];
+            }
+
             resourcesRequestReports.Add(new ResourcesRequestReports
             {
                 ID = resourcesRequest.ID,
                 Condition = resourcesRequest.Condition,
-                City = locations[locations.Length - 3],
+                City = newCity,
                 RequestDate = resourcesRequest.RequestDate,
                 EmergencyDisasterID = resourcesRequest.EmergenciesDisasters.EmergencyDisasterID,
                 Type = resourcesRequest.EmergenciesDisasters.TypesEmergenciesDisasters.TypeEmergencyDisasterName

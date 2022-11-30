@@ -26,6 +26,8 @@ namespace Entities.DataTransferObjects.ResourcesDto
 
         public int CreatedBy { get; set; }
 
+        public string Reason { get; set; }
+        public bool Enabled { get; set; } = false;
 
         public MaterialsDto Materials { get; set; }
 

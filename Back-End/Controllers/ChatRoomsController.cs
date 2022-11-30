@@ -176,7 +176,12 @@ namespace Back_End.Controllers
                     item.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{user.Avatar}";
                     item.RoleName = roles.RoleName;
 
-                    if (item.Status == true)
+                    if(status != item.Status)
+                    {
+                        chatRoomsToResult.UsersChatRooms.Remove(item);
+                    }
+
+                    if (item.RoleName == "Admin")
                     {
                         chatRoomsToResult.UsersChatRooms.Remove(item);
                     }
@@ -333,8 +338,11 @@ namespace Back_End.Controllers
                 userChatRoom.ID = userChatRooms.ID + 1;
                 }
 
+
                 _repository.UsersChatRooms.Create(userChatRoom);
                 _repository.UsersChatRooms.SaveAsync();
+
+                var response =  SendController.SendNotificationJoinGroup(userId, usersChat);
 
                 return Ok();
 
@@ -363,6 +371,7 @@ namespace Back_End.Controllers
                     return NotFound();
                 }
 
+
                 if(status == false)
                 {
                     _repository.UsersChatRooms.LeaveGroup(usersChatRooms);
@@ -375,6 +384,8 @@ namespace Back_End.Controllers
 
 
                 _repository.UsersChatRooms.SaveAsync();
+
+                var response = await SendController.SendNotificationAcceptRejectRequestChat(UserID, chatRoomID, status);
 
                 return NoContent();
             }

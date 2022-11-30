@@ -20,6 +20,8 @@ namespace Entities.DataTransferObjects.Medicines___Dto
         public DateTime? DateModified { get; set; } = DateTime.Now;
 
         public int ModifiedBy { get; set; }
+
+        public bool Enabled { get; set; }
         public MedicinesDto Medicines { get; set; }
 
     }

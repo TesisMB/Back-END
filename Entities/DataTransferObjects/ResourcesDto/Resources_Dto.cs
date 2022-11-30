@@ -26,6 +26,10 @@ namespace Entities.DataTransferObjects.ResourcesDto
 
         public string LocationCityName { get; set; }
 
+        public string Reason { get; set; }
+
+        public bool Enabled { get; set; }
+
         public MedicinesDto Medicines { get; set; }
 
         public MaterialsDto Materials { get; set; }

@@ -130,8 +130,102 @@ namespace Repository
             return message;
                     
         }
-    
-    
+
+        public static Message SendNotificationJoinGroup(int userId, UsersChatRoomsJoin_LeaveGroupDto userChatRoom)
+        {
+            string response = string.Empty;
+
+            var user = EmployeesRepository.GetAllEmployeesById(userId);
+
+
+
+            if (FirebaseApp.DefaultInstance == null)
+            {
+                FirebaseApp.Create(new AppOptions()
+                {
+                    Credential = GoogleCredential.FromFile("private_key.json")
+                });
+            }
+
+
+            var registrationToken = "dVPHPzBoRgGvMOgInBXbqL:APA91bGV8Au2acf1Kk_KbLM-mqQVaQ5nPD7cmNB79Fl5cqsEpPkjPPjKMcSxqN4crpNy70-4KYpLJuozR8EmIOI5brifTiVSX-FT_cHTjhoDNcQzbdXsWMWACApjZ80MEWzmxcAZt0tk";
+
+            users = _cruzRojaContext.Users
+                            .Where(a => a.FK_EstateID.Equals(user.FK_EstateID)
+                                    && a.FK_RoleID.Equals(2)
+                                    && a.DeviceToken != null)
+                           .Include(a => a.Persons)
+                           .Include(a => a.Roles)
+                           .Include(a => a.Estates)
+                           .ThenInclude(a => a.Locations)
+                           .Include(a => a.Volunteers)
+                           .AsNoTracking()
+                           .ToList();
+
+
+            if (users != null)
+            {
+                foreach (var item in users)
+                {
+
+                    message = new Message()
+                    {
+                        Data = new Dictionary<string, string>()
+                            {
+                                { "JoinGroup", Convert.ToString(userChatRoom.FK_ChatRoomID) },
+                            },
+
+                        Token = item.DeviceToken,
+                        //Topic = "all",
+
+                        Notification = new Notification()
+                        {
+                            Title = "Nueva solicitud",
+                            Body = $"El voluntario {item.Persons.LastName}, {item.Persons.FirstName} quiere participar de la alerta #{userChatRoom.FK_ChatRoomID}"
+
+                        }
+                    };
+
+                    response = FirebaseMessaging.DefaultInstance.SendAsync(message).Result;
+                }
+                FirebaseApp.DefaultInstance.Delete();
+            }
+            else
+            {
+                message = new Message()
+                {
+                    Data = new Dictionary<string, string>()
+                            {
+                                { "JoinGroup", Convert.ToString(userChatRoom.FK_ChatRoomID) },
+                            },
+
+                    Token = registrationToken,
+                    //Topic = "all",
+
+                    Notification = new Notification()
+                    {
+                        Title = "Nueva solicitud",
+                        Body = $"NADA"
+
+                    }
+                };
+
+                response = FirebaseMessaging.DefaultInstance.SendAsync(message).Result;
+                FirebaseApp.DefaultInstance.Delete();
+
+            }
+
+
+            foreach (var kvp in message.Data)
+            {
+                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+            }
+
+
+            return message;
+
+        }
+
         public static async Task<Message> SendNotificationChat(int userId, string messages, int chatRoomID)
         {
             string response = string.Empty;
@@ -230,6 +324,102 @@ namespace Repository
 
             return message;
                     
+        }
+
+
+        public static async Task<Message> SendNotificationAcceptRejectRequestChat(int userId, int chatRoomId, bool status)
+        {
+            string response = string.Empty;
+
+            var user = EmployeesRepository.GetAllEmployeesById(userId);
+
+
+
+            if (FirebaseApp.DefaultInstance == null)
+            {
+                FirebaseApp.Create(new AppOptions()
+                {
+                    Credential = GoogleCredential.FromFile("private_key.json")
+                });
+            }
+
+
+            var registrationToken = "dVPHPzBoRgGvMOgInBXbqL:APA91bGV8Au2acf1Kk_KbLM-mqQVaQ5nPD7cmNB79Fl5cqsEpPkjPPjKMcSxqN4crpNy70-4KYpLJuozR8EmIOI5brifTiVSX-FT_cHTjhoDNcQzbdXsWMWACApjZ80MEWzmxcAZt0tk";
+
+            users = _cruzRojaContext.Users
+                            .Where(a => a.UserID.Equals(userId)
+                                    && a.DeviceToken != null)
+                           .Include(a => a.Persons)
+                           .Include(a => a.Roles)
+                           .Include(a => a.Estates)
+                           .ThenInclude(a => a.Locations)
+                           .Include(a => a.Volunteers)
+                           .AsNoTracking()
+                           .ToList();
+
+            var estado = status == true ? "aprobada" : "rechazada";
+
+
+            if (users != null)
+            {
+                foreach (var item in users)
+                {
+
+                    message = new Message()
+                    {
+                        Data = new Dictionary<string, string>()
+                        {
+                            { "chatRoomId", Convert.ToString(chatRoomId) },
+                        },
+
+                        Token = item.DeviceToken,
+                        //Topic = "all",
+
+                        Notification = new Notification()
+                        {
+                            Title = "Su solicitud fue resuelta",
+                            Body =  $"La solicitud para la alerta #{chatRoomId} fue {estado}"
+                }
+            };
+
+                    response = FirebaseMessaging.DefaultInstance.SendAsync(message).Result;
+                }
+                FirebaseApp.DefaultInstance.Delete();
+            }
+            else
+            {
+                message = new Message()
+                {
+                    Data = new Dictionary<string, string>()
+                            {
+                                { "chatRoomId", Convert.ToString(chatRoomId) },
+                            },
+
+                    Token = registrationToken,
+                    //Topic = "all",
+
+                    Notification = new Notification()
+                    {
+                        Title = "Su solicitud fue resuelta",
+                        Body = $"La solicitud para la alerta {chatRoomId} fue {estado}"
+
+                    }
+                };
+
+                response = FirebaseMessaging.DefaultInstance.SendAsync(message).Result;
+                FirebaseApp.DefaultInstance.Delete();
+
+            }
+
+
+            foreach (var kvp in message.Data)
+            {
+                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+            }
+
+
+            return message;
+
         }
 
     }

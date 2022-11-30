@@ -50,6 +50,7 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
         //public ICollection<ResourcesRequestMaterialsMedicinesVehiclesDto> Resources_Requests { get; set; }
 
         public Dictionary<string, int> Recursos { get; set; }
+
         //public List<ReportsDto> Reports { get; set; }
 
 

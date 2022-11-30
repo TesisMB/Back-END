@@ -75,7 +75,9 @@ namespace Back_End.Models
         [ForeignKey("ModifiedBy")]
         public Employees? EmployeeModified { get; set; }
 
+        public string Reason { get; set; }
 
+        public bool Enabled { get; set; }
 
         [ForeignKey("FK_VehicleID")]
         public ICollection<ResourcesRequestMaterialsMedicinesVehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }

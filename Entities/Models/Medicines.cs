@@ -70,6 +70,9 @@ namespace Entities.Models
         [ForeignKey("ModifiedBy")]
         public Employees? EmployeeModified { get; set; }
 
+        public string Reason { get; set; }
+
+        public bool Enabled { get; set; }
 
 
         [ForeignKey("FK_MedicineID")]

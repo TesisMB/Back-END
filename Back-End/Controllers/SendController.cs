@@ -30,10 +30,23 @@ namespace Back_End.Controllers
             return result;
         }
 
+        public static async Task<Message> SendNotificationAcceptRejectRequestChat(int userId, int chatRoomId, bool status) 
+        {
+            var result = await NotificationService.SendNotificationAcceptRejectRequestChat(userId, chatRoomId, status);
 
+            return result;
+        }
         public static async Task<Message> SendNotificationByChat(int userId, string messages, int chatRoomID)
         {
             var result = await NotificationService.SendNotificationChat(userId, messages, chatRoomID);
+
+            return result;
+        }
+
+
+        public static Message SendNotificationJoinGroup(int userId, UsersChatRoomsJoin_LeaveGroupDto userChatRoom)
+        {
+            var result =  NotificationService.SendNotificationJoinGroup(userId, userChatRoom);
 
             return result;
         }

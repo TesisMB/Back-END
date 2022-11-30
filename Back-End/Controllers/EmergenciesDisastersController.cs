@@ -99,6 +99,7 @@ namespace Back_End.Controllers
                             item3.Name = person.FirstName + " " + person.LastName;
                          }
                     }
+
                 }
 
 
@@ -261,8 +262,9 @@ namespace Back_End.Controllers
             return resources;
         }
 
+         
         //********************************* FUNCIONANDO *********************************
-
+        
         //TODO Hacer modelo dto aparte tanto para victims como resourceRequest(WebApp)
         [HttpGet("WithoutFilter/{emegencyDisasterID}")]
         public async Task<ActionResult<EmergenciesDisasters>> GetEmegencyDisasterIDWithDetails(int emegencyDisasterID)
@@ -270,7 +272,7 @@ namespace Back_End.Controllers
             try
             {
                 var emegencyDisaster = await _repository.EmergenciesDisasters.GetEmergencyDisasterWithDetails(emegencyDisasterID);
-
+                    
                 if (emegencyDisaster == null)
                 {
                     _logger.LogError($"EmergenciesDisasters with id: {emegencyDisasterID}, hasn't been found in db.");
@@ -301,6 +303,24 @@ namespace Back_End.Controllers
                             item3.Name = person.FirstName + " " + person.LastName;
                         }
                     }
+
+
+                foreach (var item in emergencyDisasterResult.UsersChatRooms.ToList())
+                {
+
+                    if (item.RoleName.Equals("Admin"))
+                    {
+                        emergencyDisasterResult.UsersChatRooms.Remove(item);
+                    }
+
+                    if (item.Status == false)
+                    {
+                        emergencyDisasterResult.UsersChatRooms.Remove(item);
+                    }
+                }
+
+                emergencyDisasterResult.Quantity = emergencyDisasterResult.UsersChatRooms.Count();
+
 
                 return Ok(emergencyDisasterResult);
 

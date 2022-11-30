@@ -49,6 +49,7 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
         //TO-DO CORREGIR MODELO
         public ICollection<UsersChatRoomsDto> UsersChatRooms { get; set; }
 
+        public int Quantity { get; set; }
 
     }
 }

@@ -63,8 +63,9 @@ namespace Entities.Models
         [ForeignKey("ModifiedBy")]
         public Employees? EmployeeModified { get; set; }
 
+        public string Reason { get; set; }
 
-
+        public bool Enabled { get; set; }
 
         [ForeignKey("FK_MaterialID")]
         public ICollection<ResourcesRequestMaterialsMedicinesVehicles> Resources_RequestResources_Materials_Medicines_Vehicles { get; set; }

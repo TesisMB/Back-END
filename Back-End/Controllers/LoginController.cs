@@ -30,6 +30,7 @@ namespace Back_End.Controllers
         [HttpPost("app/login")]
         public async Task<ActionResult<Users>> LoginApp([FromBody] UserLoginDto user)
         {
+
             try
             {
                 var auth = await _repository.Users.ValidateUser(user);

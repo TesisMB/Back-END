@@ -407,6 +407,8 @@ namespace Back_End.Controllers
 
                 List<UsersChatRooms> employeeEmg = new List<UsersChatRooms>();
                 List<EmergenciesDisasters> employeeEmg2 = new List<EmergenciesDisasters>();
+                Users user = new Users();
+                List<Users> users = new List<Users>();
 
                 using (var db = new CruzRojaContext())
                 {
@@ -414,7 +416,17 @@ namespace Back_End.Controllers
                                                           .AsNoTracking()
                                                           .ToList();
 
-                    if(employeeEmg != null)
+                    user = db.Users.Where(a => a.UserID.Equals(employeeId))
+                             .AsNoTracking()
+                            .FirstOrDefault();
+
+                    users = db.Users.Where(a => a.FK_EstateID.Equals(user.FK_EstateID)
+                                            && a.FK_RoleID.Equals(4))
+                            .AsNoTracking()
+                            .ToList();
+                            
+
+                    if(!employeeEmg.Count().Equals(0))
                     {
                         foreach (var item in employeeEmg)
                         {
@@ -424,12 +436,18 @@ namespace Back_End.Controllers
                                                               .ToList();
                         }
                     }
-
                 }
 
-                if(employeeToPatch.UserAvailability == false && employeeEmg2 != null)
+
+                if (users.Count().Equals(1))
                 {
-                    return BadRequest(ErrorHelper.Response(400, "Este usuario se encuentra en una Emergencia activa"));
+                    return BadRequest(ErrorHelper.Response(400, "No se puede deshabilitar ya que es el unico Encargado de Logistica"));
+                }
+
+
+                if (employeeToPatch.UserAvailability == false && !employeeEmg.Count().Equals(0))
+                {
+                    return BadRequest(ErrorHelper.Response(400, "Este usuario se encuentra en una alerta activa"));
                 }
 
 
@@ -464,11 +482,16 @@ namespace Back_End.Controllers
 
                 }
 
+             
 
                 var employeeResult = _mapper.Map(employeeToPatch, employeeEntity);
 
                 _repository.Users.Update(employeeResult);
 
+                 if(employeeToPatch.FK_EstateID != employeeEntity.FK_EstateID)
+                {
+                    employeeEntity.FK_EstateID = employeeToPatch.FK_EstateID;
+                }
                 _repository.Employees.SaveAsync();
 
                 return Ok(employeeResult);

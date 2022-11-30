@@ -30,7 +30,7 @@ namespace Repository
             else
             {
                 collection = collection.Where(x => x.ID.Equals(chatID)
-                                              && x.UsersChatRooms.Any(a => a.Status.Equals(false)));
+                                       /*       && x.UsersChatRooms.Any(a => a.Status.Equals(false))*/);
             }
 
 

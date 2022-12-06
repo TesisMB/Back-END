@@ -10,7 +10,7 @@ namespace Entities.DataTransferObjects.Messages___Dto
 
         public Boolean? MessageState { get; set; } = false;
 
-        public DateTime CreationDate { get; set; } = DateTime.Now;
+        public DateTime CreationDate { get; set; }
 
         public string chatRoomID { get; set; } 
 

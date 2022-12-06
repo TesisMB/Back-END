@@ -120,10 +120,13 @@ namespace Repository
 
             }
 
-
-            foreach (var kvp in message.Data)
+            if (message.Data != null)
             {
-                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+
+                foreach (var kvp in message.Data)
+                {
+                    Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+                }
             }
 
 
@@ -216,11 +219,15 @@ namespace Repository
             }
 
 
-            //foreach (var kvp in message.Data)
-            //{
-            //    Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
-            //}
 
+            if (message.Data != null)
+            {
+
+                foreach (var kvp in message.Data)
+                {
+                    Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+                }
+            }
 
             return message;
 
@@ -247,7 +254,8 @@ namespace Repository
 
             users = _cruzRojaContext.Users
                             .Where(a => a.DeviceToken != null &&
-                                   a.UsersChatRooms.Any(a => a.FK_ChatRoomID == chatRoomID))
+                                   a.UsersChatRooms.Any(a => a.FK_ChatRoomID == chatRoomID)
+                                   && a.UserID != userId)
                            .Include(a => a.Persons)
                            .Include(a => a.Roles)
                            .Include(a => a.Estates)
@@ -316,14 +324,18 @@ namespace Repository
             }
 
 
-            foreach (var kvp in message.Data)
+            if (message.Data != null)
             {
-                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+
+                foreach (var kvp in message.Data)
+                {
+                    Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+                }
+
             }
 
-
             return message;
-                    
+
         }
 
 

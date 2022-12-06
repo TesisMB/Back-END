@@ -52,9 +52,25 @@ namespace Back_End.Controllers
 
                 var emergenciesDisastersResult = _mapper.Map<IEnumerable<EmergenciesDisastersSelectDto>>(emergenciesDisasters);
 
-                var query = from st in emergenciesDisastersResult
-                            select st;
 
+                //foreach (var item in emergenciesDisastersResult)
+                //{
+                //    var locations = item.LocationsEmergenciesDisasters.LocationCityName.Split(',');
+
+                //    if (locations.Length == 1)
+                //    {
+                //        item.LocationsEmergenciesDisasters.LocationCityName = locations[locations.Length - 1];
+
+                //    }
+                //    else if (locations.Length == 2)
+                //    {
+                //        item.LocationsEmergenciesDisasters.LocationCityName = locations[locations.Length - 2];
+                //    }
+                //    else
+                //    {
+                //        item.LocationsEmergenciesDisasters.LocationCityName = locations[locations.Length - 3];
+                //    }
+                //}
 
                 return Ok(emergenciesDisastersResult);
 
@@ -266,8 +282,8 @@ namespace Back_End.Controllers
         //********************************* FUNCIONANDO *********************************
         
         //TODO Hacer modelo dto aparte tanto para victims como resourceRequest(WebApp)
-        [HttpGet("WithoutFilter/{emegencyDisasterID}")]
-        public async Task<ActionResult<EmergenciesDisasters>> GetEmegencyDisasterIDWithDetails(int emegencyDisasterID)
+        [HttpGet("WithoutFilter/{emegencyDisasterID}/{status}")]
+        public async Task<ActionResult<EmergenciesDisasters>> GetEmegencyDisasterIDWithDetails(int emegencyDisasterID, bool status)
         {
             try
             {
@@ -304,22 +320,25 @@ namespace Back_End.Controllers
                         }
                     }
 
+                    int count = emergencyDisasterResult.UsersChatRooms.Count();
 
                 foreach (var item in emergencyDisasterResult.UsersChatRooms.ToList())
                 {
 
-                    if (item.RoleName.Equals("Admin"))
+                    if (status != item.Status && item.RoleName != "Admin")
                     {
                         emergencyDisasterResult.UsersChatRooms.Remove(item);
+                        count -= 1;
                     }
 
-                    if (item.Status == false)
+                    if (item.RoleName == "Admin")
                     {
                         emergencyDisasterResult.UsersChatRooms.Remove(item);
+                        count -= 1;
                     }
                 }
 
-                emergencyDisasterResult.Quantity = emergencyDisasterResult.UsersChatRooms.Count();
+                emergencyDisasterResult.Quantity = count;
 
 
                 return Ok(emergencyDisasterResult);

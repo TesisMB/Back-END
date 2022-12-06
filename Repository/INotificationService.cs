@@ -216,10 +216,10 @@ namespace Repository
             }
 
 
-            foreach (var kvp in message.Data)
-            {
-                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
-            }
+            //foreach (var kvp in message.Data)
+            //{
+            //    Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+            //}
 
 
             return message;
@@ -412,11 +412,16 @@ namespace Repository
             }
 
 
-            foreach (var kvp in message.Data)
-            {
-                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
-            }
 
+            if (message.Data != null)
+            {
+
+                foreach (var kvp in message.Data)
+                {
+                    Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+                }
+
+            }
 
             return message;
 

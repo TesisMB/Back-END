@@ -372,7 +372,7 @@ namespace Back_End.Controllers
                 }
 
 
-                if(status == false)
+                if (status == false)
                 {
                     _repository.UsersChatRooms.LeaveGroup(usersChatRooms);
                 }
@@ -387,7 +387,24 @@ namespace Back_End.Controllers
 
                 var response = await SendController.SendNotificationAcceptRejectRequestChat(UserID, chatRoomID, status);
 
-                return NoContent();
+                CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+
+                var userChatRooms = cruzRojaContext.UsersChatRooms.Where(a => a.FK_ChatRoomID.Equals(chatRoomID)).ToList();
+
+                int count = userChatRooms.Count();
+
+                foreach (var item in userChatRooms.ToList())
+                {
+                if (item.Status == true)
+                {
+                   userChatRooms.Remove(item);
+                    count -= 1;
+                }
+                }
+
+
+                return Ok(count);
             }
 
             catch (Exception ex)

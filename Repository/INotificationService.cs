@@ -184,7 +184,7 @@ namespace Repository
                         Notification = new Notification()
                         {
                             Title = "Nueva solicitud",
-                            Body = $"El voluntario {item.Persons.LastName}, {item.Persons.FirstName} quiere participar de la alerta #{userChatRoom.FK_ChatRoomID}"
+                            Body = $"El voluntario {user.Persons.LastName}, {user.Persons.FirstName} quiere participar de la alerta #{userChatRoom.FK_ChatRoomID}"
 
                         }
                     };

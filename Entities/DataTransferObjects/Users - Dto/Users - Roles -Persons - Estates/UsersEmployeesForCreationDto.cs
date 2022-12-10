@@ -7,7 +7,7 @@ namespace Back_End.Models
     public class UsersEmployeesForCreationDto
     {
         public string UserDni { get; set; }
-        public string UserPassword { get; set; } = "admin1234";
+        public string UserPassword { get; set; }
 
         public Boolean UserAvailability { get; set; } = true;
 

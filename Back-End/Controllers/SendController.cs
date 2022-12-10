@@ -50,5 +50,12 @@ namespace Back_End.Controllers
 
             return result;
         }
+
+        public static Message SendNotificationEndAlert(int userId, EmergenciesDisasters emergenciesDisasters)
+        {
+            var result =  NotificationService.SendNotificationEndAlert(userId, emergenciesDisasters);
+
+            return result;
+        }
     }
 }

@@ -53,25 +53,6 @@ namespace Back_End.Controllers
                 var emergenciesDisastersResult = _mapper.Map<IEnumerable<EmergenciesDisastersSelectDto>>(emergenciesDisasters);
 
 
-                //foreach (var item in emergenciesDisastersResult)
-                //{
-                //    var locations = item.LocationsEmergenciesDisasters.LocationCityName.Split(',');
-
-                //    if (locations.Length == 1)
-                //    {
-                //        item.LocationsEmergenciesDisasters.LocationCityName = locations[locations.Length - 1];
-
-                //    }
-                //    else if (locations.Length == 2)
-                //    {
-                //        item.LocationsEmergenciesDisasters.LocationCityName = locations[locations.Length - 2];
-                //    }
-                //    else
-                //    {
-                //        item.LocationsEmergenciesDisasters.LocationCityName = locations[locations.Length - 3];
-                //    }
-                //}
-
                 return Ok(emergenciesDisastersResult);
 
             }
@@ -140,6 +121,47 @@ namespace Back_End.Controllers
                     }
 
                     item.Recursos = Recursos(item.Resources_Requests);
+                }
+
+                return Ok(emergenciesDisastersResult);
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside GetAllEmegenciesDisasters action: {ex.Message}");
+                return StatusCode(500, "Internal Server error");
+            }
+        }
+
+        [HttpGet("WithoutFilter/app")]
+
+        public async Task<ActionResult<EmergenciesDisasters>> GetAllEmergenciesDisastersWithoutFilterApp([FromQuery] int userId)
+        {
+            try
+            {
+                var emergenciesDisasters = await _repository.EmergenciesDisasters.GetAllEmergenciesDisastersWithourFilterApp(userId);
+
+                _logger.LogInfo($"Returned all emergenciesDisasters from database.");
+
+                var emergenciesDisastersResult = _mapper.Map<IEnumerable<EmergenciesDisastersAppDto>>(emergenciesDisasters);
+
+                CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+                foreach (var item in emergenciesDisastersResult)
+                {
+                    foreach (var item2 in item.ChatRooms.DateMessage)
+                    {
+                        foreach (var item3 in item2.Messages)
+                        {
+                            var person = cruzRojaContext.Persons
+                                          .Where(a => a.ID == item3.userID)
+                                          .AsNoTracking()
+                                          .FirstOrDefault();
+
+                            item3.Name = person.FirstName + " " + person.LastName;
+                        }
+                    }
+
                 }
 
                 return Ok(emergenciesDisastersResult);
@@ -388,7 +410,6 @@ namespace Back_End.Controllers
                   emergencyDisaster.EmergencyDisasterID = emergency.EmergencyDisasterID + 1;
                 }
 
-
                 emergencyDisaster.ChatRooms = new ChatRooms();
                 emergencyDisaster.ChatRooms.CreationDate = DateTime.Now;
                 emergencyDisaster.ChatRooms.FK_TypeChatRoomID = emergenciesDisasters.FK_TypeChatRoomID;
@@ -399,7 +420,7 @@ namespace Back_End.Controllers
                               .AsNoTracking()
                              .FirstOrDefault();
 
-                var userCG  = cruzRojaContext.Users
+                var userCG = cruzRojaContext.Users
                                .Where(a => a.FK_EstateID == user.FK_EstateID
                                       && a.Roles.RoleName == "Coord. General")
                                .AsNoTracking()
@@ -413,9 +434,9 @@ namespace Back_End.Controllers
 
                 emergencyDisaster.ChatRooms.UsersChatRooms = new List<UsersChatRooms>();
 
-                    var userChatRooms = cruzRojaContext.UsersChatRooms
-                                 .OrderByDescending(a => a.ID)
-                                 .FirstOrDefault();
+                var userChatRooms = cruzRojaContext.UsersChatRooms
+                             .OrderByDescending(a => a.ID)
+                             .FirstOrDefault();
 
 
                 int ID;
@@ -438,23 +459,23 @@ namespace Back_End.Controllers
                 }); ;
 
 
-                if(userCG != null)
+                if (userCG != null)
                 {
-                //Completo con los C.General
+                    //Completo con los C.General
                     foreach (var item in userCG)
                     {
-                        ID += 1; 
+                        ID += 1;
                         emergencyDisaster.ChatRooms.UsersChatRooms.Add(new UsersChatRooms()
                         {
-                           FK_UserID = item.UserID,
-                           FK_ChatRoomID = emergencyDisaster.EmergencyDisasterID,
-                           Status = true,
+                            FK_UserID = item.UserID,
+                            FK_ChatRoomID = emergencyDisaster.EmergencyDisasterID,
+                            Status = true,
                             ID = ID
                         });
                     }
                 }
 
-                //***************** CONSULTAR *****************
+                //*****************CONSULTAR * ****************
                 //if (userAdm != null)
                 //{
                 //    ID += 1;
@@ -535,14 +556,24 @@ namespace Back_End.Controllers
 
                 _repository.EmergenciesDisasters.UpdateEmergencyDisaster(emergencyDisasterResult, _emergencyDisaster, emergencyDisasterToPatch);
 
+                if (emergencyDisasterToPatch.EmergencyDisasterEndDate != null)
+                {
+                    var response = SendController.SendNotificationEndAlert(userId, emergencyDisaster);
+                }
 
-                var userChatRooms = cruzRojaContext.UsersChatRooms
+
+
+                var name = _emergencyDisaster.Operations.ToList();
+
+                  if (name.Equals("fk_EmplooyeeID"))
+                  {
+                            var userChatRooms = cruzRojaContext.UsersChatRooms
                              .OrderByDescending(a => a.ID)
                              .FirstOrDefault();
 
 
                 //Completo con el C.Emergencia Elejido para la emergencia
-               var usersChatRoomsCE = new UsersChatRooms()
+                var usersChatRoomsCE = new UsersChatRooms()
                 {
                     FK_UserID = (int)emergencyDisaster.Fk_EmplooyeeID,
                     FK_ChatRoomID = emergencyDisaster.EmergencyDisasterID,
@@ -550,12 +581,18 @@ namespace Back_End.Controllers
                     ID = userChatRooms.ID + 1
                 };
 
+
                 _repository.UsersChatRooms.Create(usersChatRoomsCE);
                 _repository.UsersChatRooms.LeaveGroup(CG);
                 _repository.UsersChatRooms.SaveAsync();
+                }
+                else
+                {
                 _repository.EmergenciesDisasters.SaveAsync();
+                }
 
 
+                
 
                 return NoContent();
             }

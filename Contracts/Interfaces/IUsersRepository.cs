@@ -10,6 +10,7 @@ namespace Contracts.Interfaces
         Task<Users> GetUserEmployeeById(int userId);
         Task<Users> SendDeviceById(int userId);
         Task<Users> GetEmployeeVolunteerById(int userId);
+        Task<IEnumerable<Users>> Get(int userId);
 
         Task<Users> GetUsers(int userId);
         Task<IEnumerable<Users>> GetEmployeesVolunteers(int userId);

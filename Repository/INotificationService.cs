@@ -439,5 +439,110 @@ namespace Repository
 
         }
 
+
+        public static Message SendNotificationEndAlert(int userId, EmergenciesDisasters emergenciesDisasters)
+        {
+            string response = string.Empty;
+
+            var user = EmployeesRepository.GetAllEmployeesById(userId);
+
+
+
+            if (FirebaseApp.DefaultInstance == null)
+            {
+                FirebaseApp.Create(new AppOptions()
+                {
+                    Credential = GoogleCredential.FromFile("private_key.json")
+                });
+            }
+
+
+            var registrationToken = "dVPHPzBoRgGvMOgInBXbqL:APA91bGV8Au2acf1Kk_KbLM-mqQVaQ5nPD7cmNB79Fl5cqsEpPkjPPjKMcSxqN4crpNy70-4KYpLJuozR8EmIOI5brifTiVSX-FT_cHTjhoDNcQzbdXsWMWACApjZ80MEWzmxcAZt0tk";
+
+            users = _cruzRojaContext.Users
+                            .Where(a => a.FK_EstateID.Equals(user.FK_EstateID)
+                                    && a.DeviceToken != null)
+                           .Include(a => a.Persons)
+                           .Include(a => a.Roles)
+                           .Include(a => a.Estates)
+                           .ThenInclude(a => a.Locations)
+                           .Include(a => a.Volunteers)
+                           .AsNoTracking()
+                           .ToList();
+
+            var emergencies = _cruzRojaContext.EmergenciesDisasters
+                           .Where(a => a.EmergencyDisasterID.Equals(emergenciesDisasters.EmergencyDisasterID))
+                          .Include(a => a.LocationsEmergenciesDisasters)
+                          .AsNoTracking()
+                          .FirstOrDefault();
+
+
+            if (users != null)
+            {
+                foreach (var item in users)
+                {
+
+                    message = new Message()
+                    {
+                        Data = new Dictionary<string, string>()
+                            {
+                                { "EndAlert", "EndAlert" },
+                            },
+
+                        Token = item.DeviceToken,
+                        //Topic = "all",
+
+                        Notification = new Notification()
+                        {
+                            Title = "Alerta finalizada",
+                            Body = $"La alerta: #{emergenciesDisasters.EmergencyDisasterID} {emergencies.LocationsEmergenciesDisasters.LocationCityName} ha terminado, gracias por participar"
+
+                        }
+                    };
+
+                    response = FirebaseMessaging.DefaultInstance.SendAsync(message).Result;
+                }
+                FirebaseApp.DefaultInstance.Delete();
+            }
+            else
+            {
+                message = new Message()
+                {
+                    Data = new Dictionary<string, string>()
+                            {
+                                { "JoinGroup", "EndAlert"},
+                            },
+
+                    Token = registrationToken,
+                    //Topic = "all",
+
+                    Notification = new Notification()
+                    {
+                        Title = "Alerta finalizada",
+                        Body = $"La alerta: #{emergenciesDisasters.EmergencyDisasterID} {emergenciesDisasters.LocationsEmergenciesDisasters.LocationCityName} ha terminado, gracias por participar"
+
+                    }
+                };
+
+                response = FirebaseMessaging.DefaultInstance.SendAsync(message).Result;
+                FirebaseApp.DefaultInstance.Delete();
+
+            }
+
+
+
+            if (message.Data != null)
+            {
+
+                foreach (var kvp in message.Data)
+                {
+                    Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+                }
+            }
+
+            return message;
+
+        }
+
     }
 }

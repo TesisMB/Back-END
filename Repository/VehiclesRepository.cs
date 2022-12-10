@@ -25,8 +25,12 @@ namespace Repository
         }
         public async Task<IEnumerable<Vehicles>> GetAllVehiclesFilters(int userId, int locationId)
         {
-            var user =  EmployeesRepository.GetAllEmployeesById(userId);
-
+            var user = await _cruzRojaContext.Users
+                            .Where(a => a.UserID.Equals(userId))
+                            .Include(a => a.Roles)
+                            .Include(a => a.Estates)
+                            .ThenInclude(a => a.Locations)
+                            .FirstOrDefaultAsync();
             var collection = _cruzRojaContext.Vehicles as IQueryable<Vehicles>;
 
             if (!locationId.Equals(0))

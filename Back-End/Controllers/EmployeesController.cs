@@ -303,6 +303,60 @@ namespace Back_End.Controllers
             }
         }
 
+        [HttpGet("Employees/Select")]
+        public async Task<ActionResult<Users>> GetAll([FromQuery] int userId)
+        {
+            try
+            {
+                var employees = await _repository.Users.Get(userId);
+
+                _logger.LogInfo($"Returned all employees from database.");
+
+                var employeesResult = _mapper.Map<IEnumerable<EmployeeUserDto>>(employees);
+
+
+                return Ok(employeesResult);
+            }
+
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside GetAllEmployees action: {ex.Message}");
+                return StatusCode(500, "Internal Server error");
+            }
+        }
+
+        [HttpGet("Employees/Select/{employeeId}")]
+        public async Task<ActionResult<Users>> Get(int employeeId)
+        {
+            try
+            {
+                var employee = await _repository.Users.GetEmployeeVolunteerById(employeeId);
+
+                //var employee = _repository.Employees.GetEmployeeWithDetails(employeeId);
+
+                if (employee == null)
+                {
+                    _logger.LogError($"Employee with id: {employeeId}, hasn't been found in db.");
+                    return NotFound();
+                }
+                else
+                {
+                    _logger.LogInfo($"Returned employe with details for id: {employeeId}");
+
+                    var employeeResult = _mapper.Map<EmployeeUserDto>(employee);
+
+                    employeeResult.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{employeeResult.Avatar}";
+
+                    return Ok(employeeResult);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside GetEmployeeWithDetails action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
 
         //********************************* FUNCIONANDO *********************************
 
@@ -337,7 +391,7 @@ namespace Back_End.Controllers
 
                 var employeeEntity = _mapper.Map<Users>(employee);
                employeeEntity.CreatedDate = DateTime.Now;
-               employeeEntity.Avatar = "avatar-user.png";
+               //employeeEntity.Avatar = "avatar-user.png";
 
                 if (roles.RoleName != "Voluntario")
                 {
@@ -404,6 +458,7 @@ namespace Back_End.Controllers
                 {
                     return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
                 }
+
 
                 List<UsersChatRooms> employeeEmg = new List<UsersChatRooms>();
                 List<EmergenciesDisasters> employeeEmg2 = new List<EmergenciesDisasters>();

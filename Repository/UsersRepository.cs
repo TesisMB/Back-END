@@ -276,7 +276,7 @@ namespace Repository
 
 
             collection = collection.Where(
-                a => a.Estates.Locations.LocationDepartmentName == user.Estates.Locations.LocationDepartmentName
+                a => a.Estates.EstateID == user.FK_EstateID
                 && a.FK_RoleID != 1
                 && a.UserID != userId);
 
@@ -294,8 +294,35 @@ namespace Repository
                                .OrderBy(a => a.Roles.RoleID)
                                .ToListAsync();
         }
-   
-            public async Task<Users> GetEmployeeVolunteerById(int userId)
+
+
+        public async Task<IEnumerable<Users>> Get(int userId)
+        {
+
+            var user = EmployeesRepository.GetAllEmployeesById(userId);
+
+
+            var collection = _cruzRojaContext.Users as IQueryable<Users>;
+
+
+            collection = collection.Where(
+                a => a.Estates.EstateID == user.FK_EstateID);
+
+            return await collection
+                               .Include(u => u.Persons)
+                               .Include(u => u.Roles)
+                               .Include(u => u.Estates)
+                               .ThenInclude(u => u.LocationAddress)
+                               .Include(u => u.Estates.EstatesTimes)
+                               .ThenInclude(u => u.Times)
+                               .ThenInclude(u => u.Schedules)
+                               .Include(u => u.Estates.Locations)
+                               .Include(u => u.Volunteers)
+                               .Include(u => u.Employees)
+                               .OrderBy(a => a.Roles.RoleID)
+                               .ToListAsync();
+        }
+        public async Task<Users> GetEmployeeVolunteerById(int userId)
         {
             return await FindByCondition(emp => emp.UserID.Equals(userId))
                            .Include(u => u.Persons)
@@ -309,6 +336,7 @@ namespace Repository
                            .ThenInclude(u => u.LocationAddress)
                            .FirstOrDefaultAsync();
         }
+
         public void sendLoginNotification(Users account)
         {
             string message;

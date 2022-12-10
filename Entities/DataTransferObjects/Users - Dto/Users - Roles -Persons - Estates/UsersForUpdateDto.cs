@@ -14,6 +14,7 @@ namespace Back_End.Models
         public string Reason { get; set; }
         public int FK_LocationID { get; set; }
         public string avatar { get; set; }
+        public string DeviceToken { get; set; }
         public PersonsForUpdatoDto Persons { get; set; }
     }
 }

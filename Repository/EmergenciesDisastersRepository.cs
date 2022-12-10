@@ -56,6 +56,8 @@ namespace Repository
 
             var user =  EmployeesRepository.GetAllEmployeesById(userId);
 
+
+
             var collection = _cruzRojaContext.EmergenciesDisasters as IQueryable<EmergenciesDisasters>;
             if (string.IsNullOrEmpty(limit))
             {
@@ -153,6 +155,99 @@ namespace Repository
 
         }
 
+        public async Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisastersWithourFilterApp(int userId)
+        {
+            //var user = UsersRepository.authUser;
+
+            var user = EmployeesRepository.GetAllEmployeesById(userId);
+
+            var collection = _cruzRojaContext.EmergenciesDisasters as IQueryable<EmergenciesDisasters>;
+           
+                collection = collection
+                    .Where(x => x.EmergencyDisasterEndDate == null)
+                    .AsNoTracking();
+
+
+            //Falta filtrar unicamente los recursos solamente aceptados
+
+            return await collection
+                .Include(i => i.TypesEmergenciesDisasters)
+                .Include(i => i.Alerts)
+                .Include(i => i.LocationsEmergenciesDisasters)
+                .Include(i => i.EmployeeIncharge)
+                .ThenInclude(i => i.Users)
+                .ThenInclude(i => i.Persons)
+                .Include(i => i.EmployeeIncharge.Users.Roles)
+
+                .Include(i => i.Resources_Requests)
+                .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                .ThenInclude(i => i.Materials)
+
+                 .Include(i => i.Resources_Requests)
+                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                 .ThenInclude(i => i.Vehicles)
+
+                 .ThenInclude(a => a.Model)
+
+                  .Include(i => i.Resources_Requests)
+                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                 .ThenInclude(i => i.Vehicles)
+
+
+                 .ThenInclude(a => a.Brands)
+
+                     .Include(i => i.Resources_Requests)
+                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                 .ThenInclude(i => i.Vehicles.TypeVehicles)
+
+
+                 .Include(i => i.Resources_Requests)
+                 .ThenInclude(i => i.Resources_RequestResources_Materials_Medicines_Vehicles)
+                 .ThenInclude(i => i.Medicines)
+
+                 .Include(a => a.ChatRooms)
+                 .ThenInclude(a => a.DateMessage)
+
+                 .ThenInclude(a => a.Messages)
+                 .ThenInclude(a => a.Users)
+                 .ThenInclude(a => a.Persons)
+
+                 .Include(a => a.ChatRooms)
+                 .ThenInclude(a => a.DateMessage)
+                 .ThenInclude(a => a.Messages)
+                 .ThenInclude(a => a.Users)
+                 .ThenInclude(a => a.Volunteers)
+
+                 .Include(a => a.Victims)
+
+                 .Include(a => a.VolunteersLocationVolunteersEmergenciesDisasters)
+
+                  .Include(i => i.EmployeeModified)
+                 .ThenInclude(i => i.Users)
+                 .ThenInclude(i => i.Persons)
+                 .Include(i => i.EmployeeModified.Users.Roles)
+
+                 .Include(i => i.EmployeeCreated)
+                 .ThenInclude(i => i.Users)
+                 .ThenInclude(i => i.Persons)
+                 .Include(i => i.EmployeeCreated.Users.Roles)
+
+                 .Include(i => i.Resources_Requests)
+                 .ThenInclude(i => i.EmployeeCreated)
+                 .ThenInclude(i => i.Users)
+                 .ThenInclude(i => i.Persons)
+                 .Include(i => i.EmployeeCreated.Users.Roles)
+
+                 .Include(i => i.Resources_Requests)
+                 .ThenInclude(i => i.EmployeeModified)
+                 .ThenInclude(i => i.Users)
+                 .ThenInclude(i => i.Persons)
+                 .Include(i => i.EmployeeModified.Users.Roles)
+                 .Include(a => a.ChatRooms.UsersChatRooms)
+                 .OrderByDescending(a => a.EmergencyDisasterID)
+                .ToListAsync();
+
+        }
 
         public async Task<IEnumerable<EmergenciesDisasters>> GetAllEmergenciesDisastersWithourFilterApp()
         {
@@ -561,7 +656,7 @@ namespace Repository
                                                 .AsNoTracking()
                                                .FirstOrDefault();
 
-                    if (name.Equals("Fk_EmplooyeeID"))
+                    if (name.Equals("fk_EmplooyeeID"))
                     {
                         var empleado = EmployeesRepository.GetAllEmployeesById(Convert.ToInt32(item.value));
                         var empleadoAnterior = EmployeesRepository.GetAllEmployeesById(emergenciesDisasters1.Fk_EmplooyeeID);

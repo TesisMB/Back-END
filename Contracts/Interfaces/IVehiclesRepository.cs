@@ -1,6 +1,8 @@
 ﻿using Back_End.Models;
 using Back_End.Models.Vehicles___Dto;
 using Entities.DataTransferObjects.Vehicles___Dto;
+using Entities.DataTransferObjects.Vehicles___Dto.Update;
+using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,7 +22,7 @@ namespace Contracts.Interfaces
 
         void CreateVehicle(Vehicles vehicles);
 
-        void UpdateVehicle(Vehicles vehicles);
+        void UpdateVehicle(Vehicles vehicles, JsonPatchDocument<VehiclesForUpdateDto> patchDocument);
 
         void DeleteVehicle(Vehicles vehicles);
         IEnumerable<Vehicles> GetAllVehicles(DateTime dateConvert, DateTime dateConvertEnd, int estateId);

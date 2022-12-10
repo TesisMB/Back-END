@@ -1,4 +1,6 @@
-﻿using Entities.Models;
+﻿using Entities.DataTransferObjects.EmergenciesDisasters___Dto;
+using Entities.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,7 +19,8 @@ namespace Contracts.Interfaces
         Task<EmergenciesDisasters> GetEmergencyDisasterWithDetails(int emergencydisasterId);
 
         void CreateEmergencyDisaster(EmergenciesDisasters emergencyDisaster);
-        void UpdateEmergencyDisaster(EmergenciesDisasters emergencyDisaster);
+        void UpdateEmergencyDisaster(EmergenciesDisasters emergencyDisaster, JsonPatchDocument<EmergenciesDisastersForUpdateDto> _emergencyDisaster,
+                                     EmergenciesDisastersForUpdateDto emergenciesDisastersAnterior);
 
         void DeleteEmergencyDisaster(EmergenciesDisasters emergencyDisaster);
 

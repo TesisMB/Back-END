@@ -21,6 +21,7 @@ namespace Entities.DataTransferObjects.Employees___Dto
         public int FK_RoleID { get; set; }
 
         public string RoleName { get; set; }
+        public string Reason { get; set; }
         public EmployeePersonDto Persons { get; set; }
 
         public EstatesDto Estates { get; set; }

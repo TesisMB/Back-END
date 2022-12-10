@@ -162,7 +162,7 @@ namespace Back_End.Controllers
 
                 _repository.Medicines.CreateMedicine(medicineEntity);
 
-                _repository.Medicines.SaveAsync();
+                //_repository.Medicines.SaveAsync();
 
 
                 return Ok();
@@ -205,12 +205,14 @@ namespace Back_End.Controllers
                     return ValidationProblem(ModelState);
                 }
 
+                medicineToPatch.Enabled = medicineEntity.Enabled;
+
 
                 var medicineResult = _mapper.Map(medicineToPatch, medicineEntity);
 
-                _repository.Medicines.Update(medicineResult);
+                _repository.Medicines.UpdateMedicine(medicineResult, patchDocument, medicineToPatch);
 
-                _repository.Medicines.SaveAsync();
+               // _repository.Medicines.SaveAsync();
 
                 return NoContent();
             }

@@ -148,7 +148,7 @@ namespace Back_End.Controllers
 
                 _repository.Vehicles.CreateVehicle(vehicleEntity);
 
-                _repository.Vehicles.SaveAsync();
+                 _repository.Vehicles.SaveAsync();
 
                 return Ok();
 
@@ -190,12 +190,14 @@ namespace Back_End.Controllers
                     return ValidationProblem(ModelState);
                 }
 
+                vehicleToPatch.Enabled = vehicleEntity.Enabled;
+
 
                 var vehicleResult = _mapper.Map(vehicleToPatch, vehicleEntity);
 
-                _repository.Vehicles.Update(vehicleResult);
+                _repository.Vehicles.UpdateVehicle(vehicleResult, patchDocument);
 
-                _repository.Vehicles.SaveAsync();
+               // _repository.Vehicles.SaveAsync();
 
                 return NoContent();
 

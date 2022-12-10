@@ -60,6 +60,7 @@ namespace Back_End.Controllers
                     item.Volunteers.Birthdate = user.Persons.Birthdate;
                     item.Availability = user.Persons.Status;
                     item.Picture = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{item.Picture}";
+                    item.Reason = user.Reason;
                 }
 
 
@@ -107,6 +108,7 @@ namespace Back_End.Controllers
                     volunteerResult.Volunteers.Phone = user.Persons.Phone;
                     volunteerResult.Volunteers.Birthdate = user.Persons.Birthdate;
                     volunteerResult.Availability = user.Persons.Status;
+                    volunteerResult.Reason = user.Reason;
 
 
 

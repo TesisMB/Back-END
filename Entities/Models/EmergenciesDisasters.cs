@@ -49,7 +49,7 @@ namespace Entities.Models
         public DateTime? EmergencyDisasterDateModified { get; set; }
 
         [Required]
-        public int? Fk_EmplooyeeID { get; set; }
+        public int Fk_EmplooyeeID { get; set; }
 
         public int? ModifiedBy { get; set; }
         public int CreatedBy { get; set; }

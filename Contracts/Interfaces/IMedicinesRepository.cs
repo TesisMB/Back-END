@@ -1,6 +1,7 @@
 ﻿using Entities.DataTransferObjects.Medicines___Dto;
 using Entities.DataTransferObjects.ResourcesDto;
 using Entities.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,7 +20,7 @@ namespace Contracts.Interfaces
         Task<Medicines> GetMedicinelWithDetails(string medicineId);
 
         void CreateMedicine(Medicines medicine);
-        void UpdateMedicine(Medicines medicine);
+        void UpdateMedicine(Medicines medicine, JsonPatchDocument<MedicineForUpdateDto> _medicines, MedicineForUpdateDto medicineToPatch);
 
         void DeleteMedicine(Medicines medicine);
 

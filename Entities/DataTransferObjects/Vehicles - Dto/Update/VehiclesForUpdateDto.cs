@@ -14,6 +14,7 @@ namespace Entities.DataTransferObjects.Vehicles___Dto.Update
         public string Description { get; set; }
 
         public int FK_EstateID { get; set; }
+        public bool Enabled { get; set; }
 
         public Boolean Donation { get; set; }
 

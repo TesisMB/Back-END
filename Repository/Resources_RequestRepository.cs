@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Repository
@@ -51,7 +52,7 @@ namespace Repository
                        .AsNoTracking();
             }
 
-            if (!String.IsNullOrEmpty(Condition) && state == "solicitud")
+            if (!String.IsNullOrEmpty(Condition) && state == "solicitud" && user.FK_RoleID != 4)
             {
                 collection = collection.Where(
                             a => a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID
@@ -67,7 +68,7 @@ namespace Repository
                 return  GetAllResourcesRequests(user.FK_EstateID, Condition);
             }
 
-            else if (user.Roles.RoleName == "Coordinador General" && Condition == null)
+            else if (user.Roles.RoleName == "Coord. General" && Condition == null)
             {
                 return  GetAllResourcesRequests(user.FK_EstateID, Condition);
             }
@@ -75,14 +76,16 @@ namespace Repository
 
             //Encargado de logistica tiene acceso a las solicitudes pendientes nomas    
 
-            else if (user.Roles.RoleName == "Encargado de Logistica")
+            else if (user.Roles.RoleName == "Enc. De logística")
             {
 
                 collection = collection.Where(
                                               a => a.Condition == Condition 
                                              && a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID)
-                                             .AsNoTracking();
-            }
+                                            .OrderByDescending(a => a.ID)
+                                            .Take(5)
+                                            .AsNoTracking();
+                }
 
             //C.Emergencias tiene acceso a solamente el historial de solicitudes
 
@@ -94,6 +97,8 @@ namespace Repository
                                             a => a.Condition == Condition
                                             && a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID
                                             && a.CreatedBy == user.UserID)
+                                            .OrderByDescending(a => a.ID)
+                                            .Take(5)
                                             .AsNoTracking();
             }
             
@@ -284,7 +289,7 @@ namespace Repository
                     return GetAllResourcesRequests(user.FK_EstateID, Condition);
                 }
 
-                else if (user.Roles.RoleName == "Coordinador General")
+                else if (user.Roles.RoleName == "Coord. General")
                 {
                     return GetAllResourcesRequests(user.FK_EstateID, Condition);
                 }
@@ -292,7 +297,7 @@ namespace Repository
 
                 //Encargado de logistica tiene acceso a las solicitudes pendientes nomas    
 
-                else if (user.Roles.RoleName == "Encargado de Logistica")
+                else if (user.Roles.RoleName == "Enc. De logística")
                 {
 
                     collection = collection.Where(
@@ -430,8 +435,8 @@ namespace Repository
 
             logsitica = db.Users
                 .Where(
-                        a => a.Roles.RoleName == "Encargado de Logistica"
-                        && a.FK_EstateID == user.FK_EstateID)
+                        a => a.FK_RoleID == 4
+                        && a.FK_EstateID == 20)
                         .Include(a => a.Persons)
                         .Include(a => a.Employees)
                 .ToList();
@@ -447,7 +452,7 @@ namespace Repository
                         .Include(a => a.Resources_RequestResources_Materials_Medicines_Vehicles)
                        .FirstOrDefault();
 
-         
+
                 if(rec != null)
                 {
                     foreach (var item in resources_Request.Resources_RequestResources_Materials_Medicines_Vehicles)
@@ -468,9 +473,14 @@ namespace Repository
                 }
             }
 
-            // Usuario existe entonces puedo actualizar y crear añadir nuevos recursos a la solicitud
+            var estado = "";
+            var estadoNuevo = "";
+
+            // Usuario existe entonces puedo actualizar y  añadir nuevos recursos a la solicitud
             foreach (var item in resources_Request.Resources_RequestResources_Materials_Medicines_Vehicles)
             {
+                item.Estado = "Nuevo";
+                estado = "Nuevo";
                 var re = Recurso(resources_Request, item);
 
                 if (re == null && rec != null)
@@ -495,15 +505,18 @@ namespace Repository
 
                     DeleteResource(resources_Request);
 
-                    Update(resources_Request);
+                    //Update(resources_Request);
 
-                    SaveAsync();
+                    //SaveAsync();
                 }
 
                 //Actualizando recursos - existe la solicitud a esa Emegrnecia de un Usuario especifico
                 else if (re != null && rec != null)
                 {
-                    if(resources_Request.Description != null)
+                    item.Estado = "Actualizar";
+                    estadoNuevo = "Actualizar";
+
+                    if (resources_Request.Description != null)
                     {
                          rec.Description = resources_Request.Description;
                     }
@@ -521,126 +534,43 @@ namespace Repository
 
                     DeleteResource(rec);
 
-                    UpdateResources(item, resources_Request);
+                    //UpdateResources(item, resources_Request);
 
-                    DeleteResource(rec);
+                    //DeleteResource(rec);
 
-                    Update(rec);
+                    //sendEmailUpdateResourcesRequest(resources_Request);
 
-                    SaveAsync();
+                    //Update(rec);
+
+                    //SaveAsync();
 
                 }
             }
 
+            //Envio de mail
+            if (estadoNuevo.Equals("Actualizar") && estado.Equals("Nuevo"))
+            {
+                sendEmailUpdateResourcesRequest(resources_Request);
+            }
 
-         
-                //cuando no exite ningun registro de solicitud se procede a crearla completa
-                if (rec == null)
+            //cuando no exite ningun registro de solicitud se procede a crearla completa
+            if (rec == null)
                 {
-
-                     SpaceCamelCase(resources_Request);
-
-                    Create(resources_Request);
-
-                    UpdateResource_Resquest2(resources_Request);
-
-                    DeleteResource(resources_Request);
+                SpaceCamelCase(resources_Request);
+                //Create(resources_Request);
+                //UpdateResource_Resquest2(resources_Request);
+                //DeleteResource(resources_Request);
 
                 foreach (var item in logsitica)
                 {
                     sendResourcesRequest(resources_Request, item);
                 }
 
-                SaveAsync();
+                //SaveAsync();
                  }
         }
 
 
-        public static void sendResourcesRequest(ResourcesRequest resourcesRequest, Users user2)
-        {
-            string message;
-
-            CruzRojaContext cruzRojaContext = new CruzRojaContext();
-
-            var emergency = cruzRojaContext.EmergenciesDisasters.Where(a => a.EmergencyDisasterID.Equals(resourcesRequest.FK_EmergencyDisasterID))
-                                            .Include(a => a.TypesEmergenciesDisasters) 
-                                            .Include(a => a.LocationsEmergenciesDisasters) 
-                                            .FirstOrDefault();
-
-
-            // TODO Falta legajo - Dni
-            message = $@"
-
-             <div style='margin-top: 1.7rem; text-align: center;
-                            margin-right: 15rem'>
-                                <img src='https://www.cruzroja.org.ar/newDesign/wp-content/uploads/2019/01/favicon1.png' style='height: 37%;
-                        margin-left: 27%;
-                        width: 30px;
-                        border-radius: 50%;
-                        padding: 8px;
-                        border: 1px solid #000;'>
-
-                                <h1 style='font-size: 24px;
-                        font-weight: normal;
-                        font-size: 24px;
-                        font-weight: normal; margin: 0; margin-left: 16rem;
-                        margin-top: 5px;'>SICREYD</h1>
-
-                                <h2 style='font-size: 24px;
-                        font-weight: normal;
-                        font-size: 24px;
-                        font-weight: normal;
-                        position: relative;
-                        margin-left: 27%;
-                        right: 65px;'>Nueva solicitud de recursos</h2>
-                            </div>
-                            <div style=' width: 512px;
-                        padding: 25px;
-                        border-radius: 8px;
-                        border: 1px solid #ccc;
-                        margin-left: 20rem;
-                        margin: 0 auto;'>
-                                <p style='margin-left: 20px;'>Se realizo una nueva solicitud para la emergencia
-                                    {emergency.LocationsEmergenciesDisasters.LocationCityName} -
-                                    {emergency.TypesEmergenciesDisasters.TypeEmergencyDisasterName}.
-                                </p>
-                                <p style='margin-left: 20px;'>Fecha: {DateTime.Now.ToString("dd/mm/yyyy hh:mm:ss")}</p>
-
-                                <p style='margin-left: 20px; margin-top: 2rem;'>
-                                   Para ver el detalle de la solicitud ingrese a SICREYD tocando en el siguiente botón.
-                                </p>
-
-                            <a style='color: white;
-                                text-align: center;
-                            display: block;
-                                background: rgb(189, 45, 45);
-                            text-decoration: none;
-                                border-radius: 0.4rem;
-                                 width: 33%;
-                                 margin-top: 2rem;
-                                margin-bottom: 2rem;
-                                padding: 15px; cursor: pointer; margin-left: 10rem;' href='https://calm-dune-0fef6d210.2.azurestaticapps.net/'>Ir a SICREYD</a>
-
-                                <p style='margin-top: 2rem; margin-left: 20px;'>
-                                 Gracias.
-                                </p>
-                                <p style='margin-left: 20px;'>
-                                    El equipo de SICREYD
-                                </p>
-                            </div>
-";
-
-
-            var msg = new Mail(new string[] { user2.Persons.Email }, "Solicitud de recursos", $@"{message}");
-
-            EmailSender.SendEmail(msg);
-
-            //Email.Send(
-            //    to: user2.Persons.Email,
-            //    subject: "Solicitud de recursos",
-            //    html: $@"{message}"
-            //    );
-        }
 
 
         private void SpaceCamelCase(ResourcesRequest resources_Request)
@@ -766,22 +696,6 @@ namespace Repository
 
 
         }
-
-
-        public static ICollection<ResourcesRequestMaterialsMedicinesVehicles> ValorId()
-        {
-
-            ICollection<ResourcesRequestMaterialsMedicinesVehicles> recs =
-
-              db.Resources_RequestResources_Materials_Medicines_Vehicles
-                    .ToList();
-
-
-            return recs;
-
-        }
-
-
 
 
         //Reviso la exitencia de los recursos de la slicitud existente 
@@ -930,6 +844,7 @@ namespace Repository
                                         if (materials.MaterialQuantity == 0)
                                         {
                                             materials.MaterialAvailability = false;
+                                              sendEmailMaterial(materials);
                                         }
 
                                         MaterialsRepository.status(materials);
@@ -952,9 +867,10 @@ namespace Repository
                             if (medicines.MedicineQuantity == 0)
                             {
                                 medicines.MedicineAvailability = false;
-                            }
+                                sendEmailMedicine(medicines);
+                    }
 
-                            MedicinesRepository.status(medicines);
+                    MedicinesRepository.status(medicines);
 
                     }
 
@@ -970,13 +886,15 @@ namespace Repository
 
                                         resources.Quantity = 1;
 
-                                        VehiclesRepository.status(vehicles);
+                                        //VehiclesRepository.status(vehicles);
+
+                                        sendEmailVehicle(vehicles);
                                 }
             }
         }
 
 
-
+        //Actualizacion de recursos (suma)
         public ResourcesRequestMaterialsMedicinesVehicles Stock(ResourcesRequest resources, ResourcesRequestMaterialsMedicinesVehicles resources_Request)
         {
             Materials materials = null;
@@ -1171,49 +1089,228 @@ namespace Repository
             }
         }
 
+
+
         public static void sendAcceptRejectRequest(Users user, string condition, ResourcesRequest resourcesRequest)
         {
             string message;
+            var sb = new StringBuilder();
 
+            sb.Append($@"  <div style='margin-top: 1.7rem; text-align: center;'>
+                                    <img src='https://www.cruzroja.org.ar/newDesign/wp-content/uploads/2019/01/favicon1.png' style='
+                                    width: 30px;
+                                    border-radius: 50%;
+                                    padding: 8px;
+                                    border: 1px solid #000;'>
 
-            message = $@"
-                                        <div style='margin-top: 1.7rem; text-align: center;
-                                                         margin-right: 15rem'>
-                                            <img src='https://www.cruzroja.org.ar/newDesign/wp-content/uploads/2019/01/favicon1.png' style='height: 37%;
-                                            margin-left: 27%;
-                                            width: 30px;
-                                            border-radius: 50%;
-                                            padding: 8px;
-                                            border: 1px solid #000;'>
-
-                                            <h1 style='font-size: 24px;
-                                            font-weight: normal;
-                                            font-size: 24px;
-                                            font-weight: normal; margin: 0; margin-left: 16rem;
-                                            margin-top: 5px;'>SICREYD</h1>
-
-                                            <h2 style='font-size: 24px;
-                                            font-weight: normal;
-                                            font-size: 24px;
-                                            font-weight: normal;
-                                            position: relative;
-                                            margin-left: 27%;
-                                            right: 65px;'>Estado de la solicitud de recursos</h2>
-                                        </div>
-                                        <div style=' width: 512px;
-                                        padding: 25px;
-                                        border-radius: 8px;
-                                        border: 1px solid #ccc;
-                                        margin-left: 20rem;
-                                        margin: 0 auto;'>
+                                    <h1 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 24px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px;'>SICREYD</h1>
+                                </div>
+                                     <div style=' width: 512px;
+                                    padding: 25px;
+                                    border-radius: 8px;
+                                    border: 1px solid #ccc;
+                                    margin: 0 auto;'>
+                                    <p style='margin-left: 20px;'>
+                                    A continuación se describen los datos del material: 
+                                    </p>
                                             <p style='margin-left: 20px;'>La solicitud {resourcesRequest.ID} realizada para la emergencia en {resourcesRequest.EmergenciesDisasters.LocationsEmergenciesDisasters.LocationCityName} - {resourcesRequest.EmergenciesDisasters.TypesEmergenciesDisasters.TypeEmergencyDisasterName}, fue
                                                 {condition}.
                                             </p>
-                                            <p style='margin-left: 20px;'>Fecha: {DateTime.Now.ToString("dd/mm/yyyy hh:mm:ss")}</p>
-                                            
-                                               <p style='margin-left: 20px; margin-top: 2rem;'>
-                                                   Para ver el detalle de su solicitud ingrese a SICREYD tocando en el siguiente botón.
-                                                </p>
+                                    <p style='margin-left: 20px;'>
+                                    A continuación se describen los datos de los recursos: 
+                                    </p>
+                ");
+
+            string materiales = "";
+            string medicamentos = "";
+            string vehiculos = "";
+            string reason = "";
+
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            var emergency = cruzRojaContext.EmergenciesDisasters.Where(a => a.EmergencyDisasterID.Equals(resourcesRequest.FK_EmergencyDisasterID))
+                                            .Include(a => a.TypesEmergenciesDisasters)
+                                            .Include(a => a.LocationsEmergenciesDisasters)
+                                            .FirstOrDefault();
+
+            var mat = resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles.Where(x => x.FK_MaterialID != null);
+            var med = resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles.Where(x => x.FK_MedicineID != null);
+            var veh = resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles.Where(x => x.FK_VehicleID != null);
+
+            if (resourcesRequest.Description != null)
+            {
+                reason = $@"
+                                    <p style='margin-top: 2rem; margin-left: 20px;'>
+                                       Razón: {resourcesRequest.Reason}     
+                                     </p>";
+            }
+
+
+            if (mat.Count() > 0)
+            {
+
+                sb.Append($@" <h6 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 18px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px; margin-bottom: 5px; margin-top: 40px; margin-left: 20px;'>Materiales</h6>
+                               <table style='border-collapse: collapse; margin-left: 20px;'>
+                                   <tr style='padding: 8px;'>
+                                       <th style='border: 1px solid #000; padding: 8px;'>Nombre</th>
+                                       <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Marca</th>
+                                       <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Cantidad solicitada</th>
+                                   </tr>
+            ");
+            }
+
+            foreach (var item in resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles.Where(x => x.FK_MaterialID != null))
+            {
+                var mater = cruzRojaContext.Materials.Where(a => a.ID.Equals(item.FK_MaterialID))
+                     .FirstOrDefault();
+
+                sb.Append($@"<tr style='border: 1px solid #000; padding: 8px;'>
+                                               <td style='border: 1px solid #000; padding: 8px;'>{mater.MaterialName}</td>
+                                               <td style='border: 1px solid #000; padding: 8px;'>{mater.MaterialBrand}</td>
+                                               <td style='border: 1px solid #000; padding: 8px;'>{item.Quantity}</td>
+                                             </tr>"
+                                       );
+            }
+
+            if (med.Count() > 0)
+            {
+                sb.Append($@" </table>
+                    ");
+            }
+
+
+            if (med.Count() > 0)
+            {
+
+                sb.Append($@" <h6 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 18px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px; margin-bottom: 5px; margin-top: 40px; margin-left: 20px;'>Medicamentos</h6>
+                                    <table style='border-collapse: collapse; margin-left: 20px;'>
+                                        <tr style='padding: 8px;'>
+                                            <th style='border: 1px solid #000; padding: 8px;'>Nombre</th>
+                                            <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Farmaco</th>
+                                            <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Laboratorio</th>
+                                            <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Peso/Volumen</th>
+                                            <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Cantidad solicitada</th>
+                                        </tr>");
+            }
+
+            foreach (var item in resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles.Where(x => x.FK_MedicineID != null))
+            {
+                var medic = cruzRojaContext.Medicines.Where(a => a.ID.Equals(item.FK_MedicineID))
+                              .FirstOrDefault();
+
+                sb.Append($@"
+                                           <tr style='border: 1px solid #000; padding: 8px;'>
+                                                    <td style='border: 1px solid #000; padding: 8px;'>{medic.MedicineName}</td>
+                                                    <td style='border: 1px solid #000; padding: 8px;'>{medic.MedicineDrug}</td>
+                                                    <td style='border: 1px solid #000; padding: 8px;'>{medic.MedicineLab}</td>
+                                                    <td style='border: 1px solid #000; padding: 8px;'>{medic.MedicineWeight} {medic.MedicineUnits}</td>
+                                                    <td style='border: 1px solid #000; padding: 8px;'>{item.Quantity}</td>
+                                                  </tr>
+                ");
+            }
+            if (med.Count() > 0)
+            {
+                sb.Append($@" </table>
+                    ");
+            }
+
+
+            if (veh.Count() > 0)
+            {
+                sb.Append($@"
+                                 <h6 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 18px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px; margin-bottom: 5px; margin-top: 40px; margin-left: 20px;'>Vehiculos</h6>
+                                <table style='border-collapse: collapse; margin-left: 20px;'>
+                                    <tr style='padding: 8px;'>
+                                        <th style='border: 1px solid #000; padding: 8px;'>Patente</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Nombre</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Tipo</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Año</th>
+                                    </tr>
+            ");
+            }
+
+            foreach (var item in resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles.Where(x => x.FK_VehicleID != null))
+            {
+
+
+                var vehicles = cruzRojaContext.Vehicles.Where(a => a.ID.Equals(item.FK_VehicleID))
+                               .Include(a => a.Brands)
+                               .Include(a => a.Model)
+                               .Include(a => a.TypeVehicles)
+                               .FirstOrDefault();
+                sb.Append($@"
+                                   <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.VehiclePatent}</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.Brands.BrandName} {vehicles.Model.ModelName}</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.TypeVehicles.Type}</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.VehicleYear}</td>
+                                              </tr>
+                                     ");
+            }
+
+
+
+            if (veh.Count() > 0)
+            {
+                sb.Append($@" </table>
+                    ");
+            }
+
+
+
+            foreach (var item in resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles.Where(x => x.FK_VehicleID != null))
+            {
+
+
+                var vehicles = cruzRojaContext.Vehicles.Where(a => a.ID.Equals(item.FK_VehicleID))
+                               .Include(a => a.Brands)
+                               .Include(a => a.Model)
+                               .Include(a => a.TypeVehicles)
+                               .FirstOrDefault();
+
+                vehiculos = $@"
+                               <h6 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 18px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px; margin-bottom: 5px; margin-top: 40px; margin-left: 20px;'>Vehiculos</h6>
+                                <table style='border-collapse: collapse; margin-left: 20px;'>
+                                    <tr style='padding: 8px;'>
+                                        <th style='border: 1px solid #000; padding: 8px;'>Patente</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Nombre</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Tipo</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Año</th>
+                                    </tr>
+
+                                   <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.VehiclePatent}</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.Brands.BrandName} {vehicles.Model.ModelName}</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.TypeVehicles.Type}</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.VehicleYear}</td>
+                                              </tr>
+                                        </table>
+                    ";
+
+            }
+
+            sb.Append(@$"
+                                {reason}
 
                                             <a style='color: white;
                                                 text-align: center;
@@ -1227,32 +1324,1069 @@ namespace Repository
                                                 padding: 15px; cursor: pointer; margin-left: 10rem;' href='https://calm-dune-0fef6d210.2.azurestaticapps.net/'>Ir a SICREYD</a>
 
 
-                                            <p style='margin-top: 2rem; margin-left: 20px;'>
-                                                Gracias.
-                                            </p>
-                                            <p style='margin-left: 20px;'>
-                                                El equipo de SICREYD
-                                            </p>
+                                             <p style='margin-top: 2rem; margin-left: 20px;'>
+                                                    Este mensaje fue enviado automáticamente por el Sistema. Por favor no responda a este mensaje.
+                                                </p>
+                                                <p style='margin-top: 2rem; margin-left: 20px;'>
+                                                    Gracias.
+                                                </p>
+                                                <p style='margin-left: 20px;'>
+                                                    El equipo de SICREYD.
+                                                </p>
                                         </div>
-                                        ";
+            ");
+                                            
+
+                                              
 
 
-            //message = $@"<p>Estado de solicitud de recursos</p>
-            //             <p>Su solicitud fue {condition}</p>
-            //            ";
+
+        var msg = new Mail(new string[] { user.Persons.Email }, "Estado de la solicitud de recursos", $@"{sb.ToString()}");
+
+            EmailSender.SendEmail(msg);
+
+        }
 
 
-        var msg = new Mail(new string[] { user.Persons.Email }, "Estado de la solicitud de recursos", $@"{message}");
+        //Envio mail (Nueva solicitud)
+        public static void sendResourcesRequest(ResourcesRequest resourcesRequest, Users user2)
+        {
+            string message;
+            string materiales = "";
+            string medicamentos = "";
+            string vehiculos = "";
+            string reason = "";
+
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            var emergency = cruzRojaContext.EmergenciesDisasters.Where(a => a.EmergencyDisasterID.Equals(resourcesRequest.FK_EmergencyDisasterID))
+                                            .Include(a => a.TypesEmergenciesDisasters)
+                                            .Include(a => a.LocationsEmergenciesDisasters)
+                                            .FirstOrDefault();
+
+            var mat = resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles.Where(x => x.FK_MaterialID != null);
+            var med = resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles.Where(x => x.FK_MedicineID != null);
+            var veh = resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles.Where(x => x.FK_VehicleID != null);
+
+            if (resourcesRequest.Description != null)
+            {
+                reason = $@"
+                                    <p style='margin-top: 2rem; margin-left: 20px;'>
+                                       Razón de la solicitud: {resourcesRequest.Description}     
+                                     </p>";
+            }
+
+
+            var sb = new StringBuilder();
+            sb.Append($@" 
+                               <div style='margin-top: 1.7rem; text-align: center;'>
+                                    <img src='https://www.cruzroja.org.ar/newDesign/wp-content/uploads/2019/01/favicon1.png' style='
+                                    width: 30px;
+                                    border-radius: 50%;
+                                    padding: 8px;
+                                    border: 1px solid #000;'>
+
+                                    <h1 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 24px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px;'>SICREYD</h1>
+                                </div>
+                                     <div style=' width: 512px;
+                                    padding: 25px;
+                                    border-radius: 8px;
+                                    border: 1px solid #ccc;
+                                    margin: 0 auto;'>
+                                    <p style = 'margin-left: 20px;'> Se realizo una nueva solicitud para la alerta
+                                                #{emergency.EmergencyDisasterID}
+                                                { emergency.LocationsEmergenciesDisasters.LocationCityName}
+                                    </p>
+                                    <p style='margin-left: 20px;'>
+                                    A continuación se describen los datos del material: 
+                                    </p>
+                ");
+
+            if (mat.Count() > 0)
+            {
+
+                sb.Append($@" <h6 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 18px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px; margin-bottom: 5px; margin-top: 40px; margin-left: 20px;'>Materiales</h6>
+                               <table style='border-collapse: collapse; margin-left: 20px;'>
+                                   <tr style='padding: 8px;'>
+                                       <th style='border: 1px solid #000; padding: 8px;'>Nombre</th>
+                                       <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Marca</th>
+                                       <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Cantidad solicitada</th>
+                                   </tr>
+            ");
+            }
+
+            foreach (var item in resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles.Where(x => x.FK_MaterialID != null))
+            {
+                var mater = cruzRojaContext.Materials.Where(a => a.ID.Equals(item.FK_MaterialID))
+                     .FirstOrDefault();
+
+                sb.Append($@"<tr style='border: 1px solid #000; padding: 8px;'>
+                                               <td style='border: 1px solid #000; padding: 8px;'>{mater.MaterialName}</td>
+                                               <td style='border: 1px solid #000; padding: 8px;'>{mater.MaterialBrand}</td>
+                                               <td style='border: 1px solid #000; padding: 8px;'>{item.Quantity}</td>
+                                             </tr>"
+                                       );
+            }
+
+            if (med.Count() > 0)
+            {
+                sb.Append($@" </table>
+                    ");
+            }
+
+
+            if (med.Count() > 0)
+            {
+
+                sb.Append($@" <h6 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 18px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px; margin-bottom: 5px; margin-top: 40px; margin-left: 20px;'>Medicamentos</h6>
+                                    <table style='border-collapse: collapse; margin-left: 20px;'>
+                                        <tr style='padding: 8px;'>
+                                            <th style='border: 1px solid #000; padding: 8px;'>Nombre</th>
+                                            <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Farmaco</th>
+                                            <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Laboratorio</th>
+                                            <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Peso/Volumen</th>
+                                            <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Cantidad solicitada</th>
+                                        </tr>");
+            }
+
+            foreach (var item in resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles.Where(x => x.FK_MedicineID != null))
+            {
+                var medic = cruzRojaContext.Medicines.Where(a => a.ID.Equals(item.FK_MedicineID))
+                              .FirstOrDefault();
+
+                sb.Append($@"
+                                           <tr style='border: 1px solid #000; padding: 8px;'>
+                                                    <td style='border: 1px solid #000; padding: 8px;'>{medic.MedicineName}</td>
+                                                    <td style='border: 1px solid #000; padding: 8px;'>{medic.MedicineDrug}</td>
+                                                    <td style='border: 1px solid #000; padding: 8px;'>{medic.MedicineLab}</td>
+                                                    <td style='border: 1px solid #000; padding: 8px;'>{medic.MedicineWeight} {medic.MedicineUnits}</td>
+                                                    <td style='border: 1px solid #000; padding: 8px;'>{item.Quantity}</td>
+                                                  </tr>
+                ");
+            }
+            if (med.Count() > 0)
+            {
+                sb.Append($@" </table>
+                    ");
+            }
+
+
+            if (veh.Count() > 0)
+            {
+                sb.Append($@"
+                                 <h6 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 18px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px; margin-bottom: 5px; margin-top: 40px; margin-left: 20px;'>Vehiculos</h6>
+                                <table style='border-collapse: collapse; margin-left: 20px;'>
+                                    <tr style='padding: 8px;'>
+                                        <th style='border: 1px solid #000; padding: 8px;'>Patente</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Nombre</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Tipo</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Año</th>
+                                    </tr>
+            ");
+            }
+
+            foreach (var item in resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles.Where(x => x.FK_VehicleID != null))
+            {
+
+
+                var vehicles = cruzRojaContext.Vehicles.Where(a => a.ID.Equals(item.FK_VehicleID))
+                               .Include(a => a.Brands)
+                               .Include(a => a.Model)
+                               .Include(a => a.TypeVehicles)
+                               .FirstOrDefault();
+                sb.Append($@"
+                                   <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.VehiclePatent}</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.Brands.BrandName} {vehicles.Model.ModelName}</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.TypeVehicles.Type}</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.VehicleYear}</td>
+                                              </tr>
+                                     ");
+            }
+
+
+
+            if (veh.Count() > 0)
+            {
+                sb.Append($@" </table>
+                    ");
+            }
+
+
+
+            foreach (var item in resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles.Where(x => x.FK_VehicleID != null))
+            {
+
+
+                var vehicles = cruzRojaContext.Vehicles.Where(a => a.ID.Equals(item.FK_VehicleID))
+                               .Include(a => a.Brands)
+                               .Include(a => a.Model)
+                               .Include(a => a.TypeVehicles)
+                               .FirstOrDefault();
+
+                vehiculos = $@"
+                               <h6 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 18px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px; margin-bottom: 5px; margin-top: 40px; margin-left: 20px;'>Vehiculos</h6>
+                                <table style='border-collapse: collapse; margin-left: 20px;'>
+                                    <tr style='padding: 8px;'>
+                                        <th style='border: 1px solid #000; padding: 8px;'>Patente</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Nombre</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Tipo</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Año</th>
+                                    </tr>
+
+                                   <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.VehiclePatent}</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.Brands.BrandName} {vehicles.Model.ModelName}</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.TypeVehicles.Type}</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.VehicleYear}</td>
+                                              </tr>
+                                        </table>
+                    ";
+
+            }
+
+            sb.Append($@"
+                                {reason}
+
+                                 <a style='color: white;
+                                    text-align: center;
+                                display: block;
+                                    background: rgb(189, 45, 45);
+                                text-decoration: none;
+                                    border-radius: 0.4rem;
+                                     width: 33%;
+                                     margin-top: 2rem;
+                                    margin-bottom: 2rem;
+                                    padding: 15px; cursor: pointer; margin-left: 10rem;' href='https://calm-dune-0fef6d210.2.azurestaticapps.net/'>Ir a SICREYD</a>
+                                    
+        
+                                    <p style='margin-top: 2rem; margin-left: 20px;'>
+                                        Este mensaje fue enviado automáticamente por el Sistema. Por favor no responda a este mensaje.
+                                    </p>
+                                    <p style='margin-top: 2rem; margin-left: 20px;'>
+                                        Gracias.
+                                    </p>
+                                    <p style='margin-left: 20px;'>
+                                        El equipo de SICREYD.
+                                    </p>
+                            </div>
+");
+
+
+
+
+
+
+
+            var msg = new Mail(new string[] { user2.Persons.Email }, "Solicitud de recursos", $@"{sb.ToString()}");
 
             EmailSender.SendEmail(msg);
 
             //Email.Send(
-            //    to: user.Persons.Email,
-            //    subject: "Estado de solicitud de recursos",
+            //    to: user2.Persons.Email,
+            //    subject: "Solicitud de recursos",
             //    html: $@"{message}"
             //    );
         }
 
+
+        //Envio mail (Actualizacion de solicitud)
+        public static void sendEmailUpdateResourcesRequest(ResourcesRequest resourcesRequest)
+        {
+            string message;
+            string materiales = "";
+            string medicamentos = "";
+            string vehiculos = "";
+            string reason = "";
+
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            var emergency = cruzRojaContext.EmergenciesDisasters.Where(a => a.EmergencyDisasterID.Equals(resourcesRequest.FK_EmergencyDisasterID))
+                                            .Include(a => a.TypesEmergenciesDisasters)
+                                            .Include(a => a.LocationsEmergenciesDisasters)
+                                            .FirstOrDefault();
+
+            var mat = resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles
+                                            .Where(x => x.FK_MaterialID != null && x.Estado == "Nuevo");
+
+            var matMod = resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles
+                                            .Where(x => x.FK_MaterialID != null && x.Estado == "Actualizar");
+
+            var medMod = resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles
+                                  .Where(x => x.FK_MedicineID != null && x.Estado == "Actualizar");
+
+            var med= resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles
+                                 .Where(x => x.FK_MedicineID != null && x.Estado == "Nuevo");
+
+            var veh = resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles.Where(x => x.FK_VehicleID != null);
+
+       
+
+
+            if (resourcesRequest.Description != null)
+            {
+                reason = $@"
+                                    <p style='margin-top: 2rem; margin-left: 20px;'>
+                                       Razón de la solicitud: {resourcesRequest.Description}     
+                                     </p>";
+            }
+
+
+            var sb = new StringBuilder();
+            sb.Append($@" 
+                               <div style='margin-top: 1.7rem; text-align: center;'>
+                                    <img src='https://www.cruzroja.org.ar/newDesign/wp-content/uploads/2019/01/favicon1.png' style='
+                                    width: 30px;
+                                    border-radius: 50%;
+                                    padding: 8px;
+                                    border: 1px solid #000;'>
+
+                                    <h1 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 24px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px;'>SICREYD</h1>
+                                </div>
+                                     <div style=' width: 512px;
+                                    padding: 25px;
+                                    border-radius: 8px;
+                                    border: 1px solid #ccc;
+                                    margin: 0 auto;'>
+                                    <p style = 'margin-left: 20px;'> Se realizo una nueva actualización a la solicitud para la alerta
+                                                #{emergency.EmergencyDisasterID}
+                                                { emergency.LocationsEmergenciesDisasters.LocationCityName}
+                                    </p>
+                                    <p style='margin-left: 20px;'>
+                                    A continuación se describen los datos de los recursos solicitados: 
+                                    </p>
+                ");
+            
+            //Actualizaciones materiales
+            if (matMod.Count() > 0)
+            {
+
+                sb.Append($@" <h6 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 18px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px; margin-bottom: 5px; margin-top: 40px; margin-left: 20px;'>Materiales actualizados</h6>
+                               <table style='border-collapse: collapse; margin-left: 20px;'>
+                                   <tr style='padding: 8px;'>
+                                       <th style='border: 1px solid #000; padding: 8px;'>Nombre</th>
+                                       <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Marca</th>
+                                       <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Cantidad anterior solicitada</th>
+                                       <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Cantidad nueva solicitada</th>
+                                   </tr>
+            ");
+            }
+
+            foreach (var item in resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles
+                     .Where(x => x.FK_MaterialID != null && x.Estado == "Actualizar"))
+            {
+                var mater = cruzRojaContext.Materials.Where(a => a.ID.Equals(item.FK_MaterialID))
+                     .AsNoTracking()
+                     .FirstOrDefault();
+
+
+                var me = db.Resources_RequestResources_Materials_Medicines_Vehicles
+                        .Where(a => a.FK_Resource_RequestID == item.FK_Resource_RequestID
+                        && a.FK_MaterialID == item.FK_MaterialID)
+                        .Include(a => a.Materials)
+                     .AsNoTracking()
+                        .FirstOrDefault();
+
+                var materials = cruzRojaContext.Materials.Where(a => a.ID.Equals(me.FK_MaterialID))
+                            .FirstOrDefault();
+
+
+                sb.Append($@"<tr style='border: 1px solid #000; padding: 8px;'>
+                                               <td style='border: 1px solid #000; padding: 8px;'>{mater.MaterialName}</td>
+                                               <td style='border: 1px solid #000; padding: 8px;'>{mater.MaterialBrand}</td>
+                                               <td style='border: 1px solid #000; padding: 8px;'>{item.Quantity}</td>
+                                               <td style='border: 1px solid #000; padding: 8px;'>{materials.MaterialQuantity}</td>
+                                             </tr>"
+                                       );
+            }
+
+            if (matMod.Count() > 0)
+            {
+                sb.Append($@" </table>
+                    ");
+            }
+
+            if (mat.Count() > 0)
+            {
+
+                sb.Append($@" <h6 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 18px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px; margin-bottom: 5px; margin-top: 40px; margin-left: 20px;'>Materiales nuevos</h6>
+                               <table style='border-collapse: collapse; margin-left: 20px;'>
+                                   <tr style='padding: 8px;'>
+                                       <th style='border: 1px solid #000; padding: 8px;'>Nombre</th>
+                                       <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Marca</th>
+                                       <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Cantidad solicitada</th>
+                                   </tr>
+            ");
+            }
+
+            //nuevos materiales
+            foreach (var item in resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles
+                    .Where(x => x.FK_MaterialID != null && x.Estado == "Nuevo"))
+            {
+                var mater = cruzRojaContext.Materials.Where(a => a.ID.Equals(item.FK_MaterialID))
+                     .AsNoTracking()
+                     .FirstOrDefault();
+
+
+                sb.Append($@"<tr style='border: 1px solid #000; padding: 8px;'>
+                                               <td style='border: 1px solid #000; padding: 8px;'>{mater.MaterialName}</td>
+                                               <td style='border: 1px solid #000; padding: 8px;'>{mater.MaterialBrand}</td>
+                                               <td style='border: 1px solid #000; padding: 8px;'>{item.Quantity}</td>
+                                             </tr>"
+                                       );
+            }
+
+            if (mat.Count() > 0)
+            {
+                sb.Append($@" </table>
+                    ");
+            }
+
+
+
+            //actualizaciones de medicamentos
+            if (medMod.Count() > 0)
+            {
+
+                sb.Append($@" <h6 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 18px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px; margin-bottom: 5px; margin-top: 40px; margin-left: 20px;'>Medicamentos actualizados</h6>
+                                    <table style='border-collapse: collapse; margin-left: 20px;'>
+                                        <tr style='padding: 8px;'>
+                                            <th style='border: 1px solid #000; padding: 8px;'>Nombre</th>
+                                            <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Farmaco</th>
+                                            <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Laboratorio</th>
+                                            <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Peso/Volumen</th>
+                                            <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Cantidad anterior solicitada</th>
+                                            <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Cantidad nueva solicitada</th>
+                                        </tr>");
+            }
+
+
+
+            foreach (var item in resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles
+                                         .Where(x => x.FK_MedicineID != null && x.Estado.Equals("Actualizar")))
+            {
+                var medic = cruzRojaContext.Medicines.Where(a => a.ID.Equals(item.FK_MedicineID))
+                              .FirstOrDefault();
+
+                var me = db.Resources_RequestResources_Materials_Medicines_Vehicles
+                        .Where(a => a.FK_Resource_RequestID == item.FK_Resource_RequestID
+                        && a.FK_MaterialID == item.FK_MedicineID)
+                        .Include(a => a.Medicines)
+                        .AsNoTracking()
+                        .FirstOrDefault();
+
+                var medicam = cruzRojaContext.Medicines.Where(a => a.ID.Equals(me.FK_MedicineID))
+                            .FirstOrDefault();
+
+                sb.Append($@"
+                                           <tr style='border: 1px solid #000; padding: 8px;'>
+                                                    <td style='border: 1px solid #000; padding: 8px;'>{medic.MedicineName}</td>
+                                                    <td style='border: 1px solid #000; padding: 8px;'>{medic.MedicineDrug}</td>
+                                                    <td style='border: 1px solid #000; padding: 8px;'>{medic.MedicineLab}</td>
+                                                    <td style='border: 1px solid #000; padding: 8px;'>{medic.MedicineWeight} {medic.MedicineUnits}</td>
+                                                    <td style='border: 1px solid #000; padding: 8px;'>{me.Medicines.MedicineQuantity}</td>
+                                                    <td style='border: 1px solid #000; padding: 8px;'>{item.Quantity}</td>
+                                                  </tr>
+                ");
+            }
+
+            if (medMod.Count() > 0)
+            {
+                sb.Append($@" </table>
+                    ");
+            }
+
+
+
+
+            if (med.Count() > 0)
+            {
+
+                sb.Append($@" <h6 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 18px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px; margin-bottom: 5px; margin-top: 40px; margin-left: 20px;'>Medicamentos nuevos</h6>
+                                    <table style='border-collapse: collapse; margin-left: 20px;'>
+                                        <tr style='padding: 8px;'>
+                                            <th style='border: 1px solid #000; padding: 8px;'>Nombre</th>
+                                            <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Farmaco</th>
+                                            <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Laboratorio</th>
+                                            <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Peso/Volumen</th>
+                                            <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Cantidad solicitada</th>
+                                        </tr>");
+            }
+
+            foreach (var item in resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles
+                                                        .Where(x => x.FK_MedicineID != null && x.Estado.Equals("Nuevo")))
+            {
+                var medic = cruzRojaContext.Medicines.Where(a => a.ID.Equals(item.FK_MedicineID))
+                              .FirstOrDefault();
+
+                sb.Append($@"
+                                           <tr style='border: 1px solid #000; padding: 8px;'>
+                                                    <td style='border: 1px solid #000; padding: 8px;'>{medic.MedicineName}</td>
+                                                    <td style='border: 1px solid #000; padding: 8px;'>{medic.MedicineDrug}</td>
+                                                    <td style='border: 1px solid #000; padding: 8px;'>{medic.MedicineLab}</td>
+                                                    <td style='border: 1px solid #000; padding: 8px;'>{medic.MedicineWeight} {medic.MedicineUnits}</td>
+                                                    <td style='border: 1px solid #000; padding: 8px;'>{item.Quantity}</td>
+                                                  </tr>
+                ");
+            }
+           
+            if (med.Count() > 0)
+            {
+                sb.Append($@" </table>
+                    ");
+            }
+
+
+            if (veh.Count() > 0)
+            {
+                sb.Append($@"
+                                 <h6 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 18px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px; margin-bottom: 5px; margin-top: 40px; margin-left: 20px;'>Vehiculos nuevos</h6>
+                                <table style='border-collapse: collapse; margin-left: 20px;'>
+                                    <tr style='padding: 8px;'>
+                                        <th style='border: 1px solid #000; padding: 8px;'>Patente</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Nombre</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Tipo</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Año</th>
+                                    </tr>
+            ");
+            }
+
+            foreach (var item in resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles
+                                                             .Where(x => x.FK_VehicleID != null && x.Estado == "Nuevo"))
+            {
+
+
+                var vehicles = cruzRojaContext.Vehicles.Where(a => a.ID.Equals(item.FK_VehicleID))
+                               .Include(a => a.Brands)
+                               .Include(a => a.Model)
+                               .Include(a => a.TypeVehicles)
+                               .FirstOrDefault();
+                sb.Append($@"
+                                   <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.VehiclePatent}</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.Brands.BrandName} {vehicles.Model.ModelName}</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.TypeVehicles.Type}</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.VehicleYear}</td>
+                                              </tr>
+                                     ");
+            }
+
+            if (veh.Count() > 0)
+            {
+                sb.Append($@" </table>
+                    ");
+            }
+
+
+
+            foreach (var item in resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles.Where(x => x.FK_VehicleID != null))
+            {
+
+
+                var vehicles = cruzRojaContext.Vehicles.Where(a => a.ID.Equals(item.FK_VehicleID))
+                               .Include(a => a.Brands)
+                               .Include(a => a.Model)
+                               .Include(a => a.TypeVehicles)
+                               .FirstOrDefault();
+
+                vehiculos = $@"
+                               <h6 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 18px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px; margin-bottom: 5px; margin-top: 40px; margin-left: 20px;'>Vehiculos nuevos</h6>
+                                <table style='border-collapse: collapse; margin-left: 20px;'>
+                                    <tr style='padding: 8px;'>
+                                        <th style='border: 1px solid #000; padding: 8px;'>Patente</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Nombre</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Tipo</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Año</th>
+                                    </tr>
+
+                                   <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.VehiclePatent}</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.Brands.BrandName} {vehicles.Model.ModelName}</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.TypeVehicles.Type}</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.VehicleYear}</td>
+                                              </tr>
+                                        </table>
+                    ";
+
+            }
+
+            sb.Append($@"
+                                {reason}
+
+                                 <a style='color: white;
+                                    text-align: center;
+                                display: block;
+                                    background: rgb(189, 45, 45);
+                                text-decoration: none;
+                                    border-radius: 0.4rem;
+                                     width: 33%;
+                                     margin-top: 2rem;
+                                    margin-bottom: 2rem;
+                                    padding: 15px; cursor: pointer; margin-left: 10rem;' href='https://calm-dune-0fef6d210.2.azurestaticapps.net/'>Ir a SICREYD</a>
+                                    
+        
+                                    <p style='margin-top: 2rem; margin-left: 20px;'>
+                                        Este mensaje fue enviado automáticamente por el Sistema. Por favor no responda a este mensaje.
+                                    </p>
+                                    <p style='margin-top: 2rem; margin-left: 20px;'>
+                                        Gracias.
+                                    </p>
+                                    <p style='margin-left: 20px;'>
+                                        El equipo de SICREYD.
+                                    </p>
+                            </div>
+");
+
+
+
+
+            var msg = new Mail(new string[] { "yoelsoadasd@gmail.com" }, "Actulización de solicitud de recursos", $@"{sb.ToString()}");
+
+            EmailSender.SendEmail(msg);
+
+            //Email.Send(
+            //    to: user2.Persons.Email,
+            //    subject: "Solicitud de recursos",
+            //    html: $@"{message}"
+            //    );
+        }
+
+        //Envio de mail sin stock
+        public static void sendEmailMaterial(Materials materials)
+        {
+
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            string message = "";
+            string messageFinal = "";
+
+
+            var mat = cruzRojaContext.Materials.Where(x => x.ID.Equals(materials.ID))
+                                                  .AsNoTracking()
+                                                  .FirstOrDefault();
+
+            var coordinadoraGeneral = cruzRojaContext.Users.Where(x => x.FK_EstateID.Equals(2)
+                                                                   && x.FK_RoleID == 2)
+                                                                  .Include(a => a.Persons)
+                                                                  .AsNoTracking()
+                                                                  .ToList();
+
+            var estates = cruzRojaContext.Estates.Where(x => x.EstateID.Equals(materials.FK_EstateID))
+                                                                .Include(a => a.LocationAddress)
+                                                                .Include(a => a.Locations)
+                                                                .AsNoTracking()
+                                                                .FirstOrDefault();
+
+            var status = materials.MaterialDonation ? "Si" : "No";
+
+            messageFinal = $@"
+
+                                    <a style='color: white;
+                                    text-align: center;
+                                display: block;
+                                    background: rgb(189, 45, 45);
+                                text-decoration: none;
+                                    border-radius: 0.4rem;
+                                     width: 33%;
+                                     margin-top: 2rem;
+                                    margin-bottom: 2rem;
+                                    padding: 15px; cursor: pointer; margin-left: 10rem;' href='https://calm-dune-0fef6d210.2.azurestaticapps.net/'>Ir a SICREYD</a>
+                                    
+        
+                                    <p style='margin-top: 2rem; margin-left: 20px;'>
+                                        Este mensaje fue enviado automáticamente por el Sistema. Por favor no responda a este mensaje.
+                                    </p>
+                                    <p style='margin-top: 2rem; margin-left: 20px;'>
+                                        Gracias.
+                                    </p>
+                                    <p style='margin-left: 20px;'>
+                                        El equipo de SICREYD.
+                                    </p>
+                            </div>
+
+                              ";
+
+
+
+            message = $@"
+                                <div style='margin-top: 1.7rem; text-align: center;'>
+                                    <img src='https://www.cruzroja.org.ar/newDesign/wp-content/uploads/2019/01/favicon1.png' style='
+                                    width: 30px;
+                                    border-radius: 50%;
+                                    padding: 8px;
+                                    border: 1px solid #000;'>
+
+                                    <h1 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 24px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px;'>SICREYD</h1>
+                                </div>
+                                     <div style=' width: 512px;
+                                    padding: 25px;
+                                    border-radius: 8px;
+                                    border: 1px solid #ccc;
+                                    margin: 0 auto;'>
+                                    <p style='margin-left: 20px;'>
+                                    A continuación se describen los datos del material: 
+                                    </p>
+
+                               <table style='border-collapse: collapse; margin:auto;'>
+                                    <tr style='padding: 8px;'>
+                                        <th style='border: 1px solid #000; padding: 8px;'>Nombre del atributo</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Valor</th>
+                                    </tr>
+                                              <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Nombre</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{materials.MaterialName}</td>
+                                              </tr>
+                                              <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Marca</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{materials.MaterialBrand}</td>
+                                              </tr>
+
+                                              <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>¿es donación?</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{status}</td>
+                                              </tr>
+
+                                            <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Sucursal</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{estates.LocationAddress.Address} {estates.LocationAddress.NumberAddress} {estates.EstateTypes.ToUpper()}</td>
+                                              </tr>
+
+                                    </table>
+                                    
+                                    {messageFinal}
+                                ";
+
+            foreach (var item in coordinadoraGeneral)
+            {
+                var msg = new Mail(new string[] { item.Persons.Email }, $"Material sin stock #{materials.ID}", $@"{message}");
+
+                EmailSender.SendEmail(msg);
+            }
+        }
+        public static void sendEmailMedicine(Medicines medicines)
+        {
+
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            string message = "";
+            string messageFinal = "";
+
+
+            var mat = cruzRojaContext.Medicines.Where(x => x.ID.Equals(medicines.ID))
+                                                  .AsNoTracking()
+                                                  .FirstOrDefault();
+
+            var coordinadoraGeneral = cruzRojaContext.Users.Where(x => x.FK_EstateID.Equals(2)
+                                                                   && x.FK_RoleID == 2)
+                                                                  .Include(a => a.Persons)
+                                                                  .AsNoTracking()
+                                                                  .ToList();
+
+            var estates = cruzRojaContext.Estates.Where(x => x.EstateID.Equals(medicines.FK_EstateID))
+                                                                .Include(a => a.LocationAddress)
+                                                                .Include(a => a.Locations)
+                                                                .AsNoTracking()
+                                                                .FirstOrDefault();
+
+            var status = medicines.MedicineDonation ? "Si" : "No";
+
+            messageFinal = $@"
+
+                                    <a style='color: white;
+                                    text-align: center;
+                                display: block;
+                                    background: rgb(189, 45, 45);
+                                text-decoration: none;
+                                    border-radius: 0.4rem;
+                                     width: 33%;
+                                     margin-top: 2rem;
+                                    margin-bottom: 2rem;
+                                    padding: 15px; cursor: pointer; margin-left: 10rem;' href='https://calm-dune-0fef6d210.2.azurestaticapps.net/'>Ir a SICREYD</a>
+                                    
+        
+                                    <p style='margin-top: 2rem; margin-left: 20px;'>
+                                        Este mensaje fue enviado automáticamente por el Sistema. Por favor no responda a este mensaje.
+                                    </p>
+                                    <p style='margin-top: 2rem; margin-left: 20px;'>
+                                        Gracias.
+                                    </p>
+                                    <p style='margin-left: 20px;'>
+                                        El equipo de SICREYD.
+                                    </p>
+                            </div>
+
+                              ";
+
+
+
+            message = $@"
+                                <div style='margin-top: 1.7rem; text-align: center;'>
+                                    <img src='https://www.cruzroja.org.ar/newDesign/wp-content/uploads/2019/01/favicon1.png' style='
+                                    width: 30px;
+                                    border-radius: 50%;
+                                    padding: 8px;
+                                    border: 1px solid #000;'>
+
+                                    <h1 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 24px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px;'>SICREYD</h1>
+                                </div>
+                                     <div style=' width: 512px;
+                                    padding: 25px;
+                                    border-radius: 8px;
+                                    border: 1px solid #ccc;
+                                    margin: 0 auto;'>
+                                    <p style='margin-left: 20px;'>
+                                    A continuación se describen los datos del material: 
+                                    </p>
+
+                               <table style='border-collapse: collapse; margin:auto;'>
+                                    <tr style='padding: 8px;'>
+                                        <th style='border: 1px solid #000; padding: 8px;'>Nombre del atributo</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Valor</th>
+                                    </tr>
+                                              <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Nombre</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{medicines.MedicineName}</td>
+                                              </tr>
+
+                                               <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Farmaco</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{medicines.MedicineDrug}</td>
+                                              </tr>
+
+                                             <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Laboratorio</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{medicines.MedicineLab}</td>
+                                              </tr>
+
+                                             <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Peso - Volumen</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{medicines.MedicineWeight}</td>
+                                              </tr>
+
+                                            <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Unidad de medida</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{medicines.MedicineUnits}</td>
+                                              </tr>
+
+                                              <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>¿es donación?</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{status}</td>
+                                              </tr>
+
+                                              <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Descripción</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{medicines.MedicineUtility}</td>
+                                              </tr>
+
+                                            <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Sucursal</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{estates.LocationAddress.Address} {estates.LocationAddress.NumberAddress} {estates.EstateTypes.ToUpper()}</td>
+                                              </tr>
+                                    </table>
+
+                                    {messageFinal}
+                                ";
+
+            foreach (var item in coordinadoraGeneral)
+            {
+                var msg = new Mail(new string[] { item.Persons.Email }, $"Medicamento sin stock #{medicines.ID}", $@"{message}");
+
+                EmailSender.SendEmail(msg);
+            }
+        }
+        public static void sendEmailVehicle(Vehicles vehicles)
+        {
+
+            CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+            var estates = cruzRojaContext.Estates.Where(x => x.EstateID.Equals(vehicles.FK_EstateID))
+                                                                .Include(a => a.LocationAddress)
+                                                                .Include(a => a.Locations)
+                                                                .AsNoTracking()
+                                                                .FirstOrDefault();
+
+            var veh = cruzRojaContext.TypeVehicles.Where(x => x.ID.Equals(vehicles.Fk_TypeVehicleID))
+                                                               .AsNoTracking()
+                                                               .FirstOrDefault();
+
+
+            var coordinadoraGeneral = cruzRojaContext.Users.Where(x => x.FK_EstateID.Equals(vehicles.FK_EstateID)
+                                                                   && x.FK_RoleID == 2)
+                                                                  .Include(a => a.Persons)
+                                                                  .AsNoTracking()
+                                                                  .ToList();
+
+            var brandModel = cruzRojaContext.Vehicles.Where(x => x.ID.Equals(vehicles.ID))
+                                                               .Include(a => a.Brands)
+                                                               .Include(a => a.Model)
+                                                               .AsNoTracking()
+                                                               .FirstOrDefault();
+
+            var messageFinal = $@"
+                                    <a style='color: white;
+                                    text-align: center;
+                                display: block;
+                                    background: rgb(189, 45, 45);
+                                text-decoration: none;
+                                    border-radius: 0.4rem;
+                                     width: 33%;
+                                     margin-top: 2rem;
+                                    margin-bottom: 2rem;
+                                    padding: 15px; cursor: pointer; margin-left: 10rem;' href='https://calm-dune-0fef6d210.2.azurestaticapps.net/'>Ir a SICREYD</a>
+                                    
+        
+                                    <p style='margin-top: 2rem; margin-left: 20px;'>
+                                        Este mensaje fue enviado automáticamente por el Sistema. Por favor no responda a este mensaje.
+                                    </p>
+                                    <p style='margin-top: 2rem; margin-left: 20px;'>
+                                        Gracias.
+                                    </p>
+                                    <p style='margin-left: 20px;'>
+                                        El equipo de SICREYD.
+                                    </p>
+                            </div>
+
+                              ";
+
+
+            var status = vehicles.VehicleDonation ? "Si" : "No";
+
+           var  message = $@"
+                                <div style='margin-top: 1.7rem; text-align: center;'>
+                                    <img src='https://www.cruzroja.org.ar/newDesign/wp-content/uploads/2019/01/favicon1.png' style='
+                                    width: 30px;
+                                    border-radius: 50%;
+                                    padding: 8px;
+                                    border: 1px solid #000;'>
+
+                                    <h1 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 24px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px;'>SICREYD</h1>
+                                </div>
+                                     <div style=' width: 512px;
+                                    padding: 25px;
+                                    border-radius: 8px;
+                                    border: 1px solid #ccc;
+                                    margin: 0 auto;'>
+                                    <p style='margin-left: 20px;'>
+                                    A continuación se describen los datos del material: 
+                                    </p>
+
+                               <table style='border-collapse: collapse; margin:auto;'>
+                                    <tr style='padding: 8px;'>
+                                        <th style='border: 1px solid #000; padding: 8px;'>Nombre del atributo</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Valor</th>
+                                    </tr>
+                                              <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Marca</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{brandModel.Brands.BrandName}</td>
+                                              </tr>
+
+                                             <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Modelo</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{brandModel.Model.ModelName}</td>
+                                              </tr>
+
+                                              <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Patente</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.VehiclePatent}</td>
+                                              </tr>
+
+                                               <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Año</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.VehicleYear}</td>
+                                              </tr>
+
+                                             <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Utilidad</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.VehicleUtility}</td>
+                                              </tr>
+
+                                             <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Tipo de rodado</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{veh.Type}</td>
+                                              </tr>
+
+                                            <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Descripción</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{vehicles.VehicleDescription}</td>
+                                              </tr>
+
+                                            <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Sucursal</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{estates.LocationAddress.Address} {estates.LocationAddress.NumberAddress} {estates.EstateTypes.ToUpper()}</td>
+                                              </tr>
+
+                                    </table>
+
+                                    {messageFinal}
+                                ";
+
+            foreach (var item in coordinadoraGeneral)
+            {
+                var msg = new Mail(new string[] { item.Persons.Email }, $"Vehiculo sin stock #{vehicles.ID}", $@"{message}");
+
+                EmailSender.SendEmail(msg);
+            }
+        }
 
 
     }

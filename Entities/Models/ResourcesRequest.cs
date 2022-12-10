@@ -45,6 +45,9 @@ namespace Entities.Models
         [ForeignKey("FK_EmergencyDisasterID")]
         public EmergenciesDisasters EmergenciesDisasters { get; set; }
 
+
+
+
         [Required]
         public int FK_EmergencyDisasterID { get; set; }
 

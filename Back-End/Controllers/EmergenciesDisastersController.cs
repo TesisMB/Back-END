@@ -255,20 +255,16 @@ namespace Back_End.Controllers
                 {
                     if (item2.FK_MaterialID != null)
                     {
-
-
                         resources["materiales"] += item2.Quantity;
                         
                     }
                     else if(item2.FK_MedicineID != null)
                     {
-
                         resources["medicamentos"] +=  item2.Quantity;
                         
                     }
                     else
                     {
-
                         resources["vehiculos"] +=  item2.Quantity;
                         
                     }
@@ -405,7 +401,7 @@ namespace Back_End.Controllers
 
                 var userCG  = cruzRojaContext.Users
                                .Where(a => a.FK_EstateID == user.FK_EstateID
-                                      && a.Roles.RoleName == "Coordinador General")
+                                      && a.Roles.RoleName == "Coord. General")
                                .AsNoTracking()
                                .ToList();
 
@@ -537,7 +533,7 @@ namespace Back_End.Controllers
 
                 var emergencyDisasterResult = _mapper.Map(emergencyDisasterToPatch, emergencyDisaster);
 
-                _repository.EmergenciesDisasters.UpdateEmergencyDisaster(emergencyDisasterResult);
+                _repository.EmergenciesDisasters.UpdateEmergencyDisaster(emergencyDisasterResult, _emergencyDisaster, emergencyDisasterToPatch);
 
 
                 var userChatRooms = cruzRojaContext.UsersChatRooms

@@ -23,6 +23,8 @@ namespace Entities.Models
         public Vehicles Vehicles { get; set; }
         public string? FK_VehicleID { get; set; }
 
+        [NotMapped]
+        public string Estado { get; set; }
         public int Quantity { get; set; }
     }
 }

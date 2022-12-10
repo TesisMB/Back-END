@@ -21,6 +21,7 @@ namespace Entities.DataTransferObjects.Materials___Dto
 
         public int ModifiedBy { get; set; }
         public bool Enabled { get; set; }
+        public string reason { get; set; }
 
         public MaterialsDto Materials { get; set; }
 

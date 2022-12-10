@@ -53,6 +53,7 @@ namespace Back_End.Models
         public int FK_EstateID { get; set; }
 
         public string DeviceToken { get; set; }
+        public string Reason { get; set; }
 
         [ForeignKey("FK_UserID")]
         public ICollection<UsersNotifications> UsersNotifications { get; set; }

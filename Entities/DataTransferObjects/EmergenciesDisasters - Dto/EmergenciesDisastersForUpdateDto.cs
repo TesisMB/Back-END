@@ -9,7 +9,7 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
 
         public string EmergencyDisasterInstruction { get; set; }
 
-        public int? Fk_EmplooyeeID { get; set; }
+        public int Fk_EmplooyeeID { get; set; }
 
 
         public int ModifiedBy { get; set; }

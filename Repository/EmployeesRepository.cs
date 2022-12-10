@@ -55,7 +55,7 @@ namespace Repository
         }
 
 
-        public static Users GetAllEmployeesById(int id)
+        public static Users GetAllEmployeesById(int? id)
         {
             user =  _cruzRojaContext.Users
                 .Where(a => a.UserID.Equals(id))

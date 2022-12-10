@@ -1,11 +1,13 @@
 ﻿using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Back_End.Entities;
+using Back_End.Models;
 using Contracts.Interfaces;
 using Entities.DataTransferObjects.Medicines___Dto;
 using Entities.DataTransferObjects.ResourcesDto;
 using Entities.Helpers;
 using Entities.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -133,7 +135,9 @@ namespace Repository
         {
             //spaceCamelCase(medicine);
 
-            Create(medicine);
+            //Create(medicine);
+
+            sendEmail(medicine, "Nuevo", null, null, null);
         }
 
         private void spaceCamelCase(Medicines medicine)
@@ -150,9 +154,10 @@ namespace Repository
             //medicine.MedicineUtility = WithoutSpace_CamelCase.GetCamelCase(medicine.MedicineUtility);
         }
 
-        public void UpdateMedicine(Medicines medicine)
+        public void UpdateMedicine(Medicines medicine, JsonPatchDocument<MedicineForUpdateDto> _medicines, MedicineForUpdateDto medicineToPatch)
         {
-            Update(medicine);
+            //Update(medicine);
+            sendEmail(medicine, "Modificación de", _medicines, null, medicineToPatch);
         }
 
         public void DeleteMedicine(Medicines medicine)
@@ -234,5 +239,400 @@ namespace Repository
                 .Include(i => i.EmployeeModified.Users.Roles)
                 .ToList();
         }
+
+
+        public static void sendEmail(Medicines medicine, string estado,
+                                        JsonPatchDocument<MedicineForUpdateDto> _medicines = null,
+                                        Resources_ForCreationDto resources = null,
+                                        MedicineForUpdateDto medicineToPatch = null)
+        {
+
+            string message = "";
+            string messageFinal;
+            CruzRojaContext cruzRojaContext1 = new CruzRojaContext();
+
+
+            //var med = cruzRojaContext1.Medicines.Where(x => x.ID.Equals(medicine.ID))
+            //                                      .AsNoTracking()
+            //                                      .FirstOrDefault();
+
+            var coordinadoraGeneral = cruzRojaContext1.Users.Where(x => x.FK_EstateID.Equals(2)
+                                                                   && x.FK_RoleID == 2)
+                                                                  .Include(a => a.Persons)
+                                                                  .AsNoTracking()
+                                                                  .ToList();
+
+
+            messageFinal = $@"
+                                    <a style='color: white;
+                                    text-align: center;
+                                display: block;
+                                    background: rgb(189, 45, 45);
+                                text-decoration: none;
+                                    border-radius: 0.4rem;
+                                     width: 33%;
+                                     margin-top: 2rem;
+                                    margin-bottom: 2rem;
+                                    padding: 15px; cursor: pointer; margin-left: 10rem;' href='https://calm-dune-0fef6d210.2.azurestaticapps.net/'>Ir a SICREYD</a>
+                                    
+        
+                                    <p style='margin-top: 2rem; margin-left: 20px;'>
+                                        Este mensaje fue enviado automáticamente por el Sistema. Por favor no responda a este mensaje.
+                                    </p>
+                                    <p style='margin-top: 2rem; margin-left: 20px;'>
+                                        Gracias.
+                                    </p>
+                                    <p style='margin-left: 20px;'>
+                                        El equipo de SICREYD.
+                                    </p>
+                            </div>
+
+                              ";
+
+            if (estado.Equals("Nuevo"))
+            {
+                var userCreate = EmployeesRepository.GetAllEmployeesById(medicine.CreatedBy);
+
+                CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+                var estates = cruzRojaContext.Estates.Where(x => x.EstateID.Equals(medicine.FK_EstateID))
+                                                                    .Include(a => a.LocationAddress)
+                                                                    .Include(a => a.Locations)
+                                                                    .AsNoTracking()
+                                                                    .FirstOrDefault();
+
+                var status = medicine.MedicineDonation ? "Si" : "No";
+
+                message = $@"
+                                <div style='margin-top: 1.7rem; text-align: center;'>
+                                    <img src='https://www.cruzroja.org.ar/newDesign/wp-content/uploads/2019/01/favicon1.png' style='
+                                    width: 30px;
+                                    border-radius: 50%;
+                                    padding: 8px;
+                                    border: 1px solid #000;'>
+
+                                    <h1 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 24px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px;'>SICREYD</h1>
+                                </div>
+                                     <div style=' width: 512px;
+                                    padding: 25px;
+                                    border-radius: 8px;
+                                    border: 1px solid #ccc;
+                                    margin: 0 auto;'>
+                                    <p style='margin-left: 20px;'>
+                                    A continuación se describen los datos del material: 
+                                    </p>
+
+                               <table style='border-collapse: collapse; margin:auto;'>
+                                    <tr style='padding: 8px;'>
+                                        <th style='border: 1px solid #000; padding: 8px;'>Nombre del atributo</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Valor</th>
+                                    </tr>
+                                              <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Nombre</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{medicine.MedicineName}</td>
+                                              </tr>
+
+                                              <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Cantidad</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{medicine.MedicineQuantity}</td>
+                                              </tr>
+
+                                               <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Farmaco</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{medicine.MedicineDrug}</td>
+                                              </tr>
+
+                                             <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Laboratorio</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{medicine.MedicineLab}</td>
+                                              </tr>
+
+                                             <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Peso - Volumen</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{medicine.MedicineWeight}</td>
+                                              </tr>
+
+                                            <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Unidad de medida</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{medicine.MedicineUnits}</td>
+                                              </tr>
+
+                                              <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>¿es donación?</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{status}</td>
+                                              </tr>
+
+                                              <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Descripción</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{medicine.MedicineUtility}</td>
+                                              </tr>
+
+                                            <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Sucursal</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{estates.LocationAddress.Address} {estates.LocationAddress.NumberAddress} {estates.EstateTypes.ToUpper()}</td>
+                                              </tr>
+
+                                    </table>
+
+                                    <p style='margin-left: 20px; margin-top: 1.5rem; font-weight: normal;'>
+                                        - Creado por: {userCreate.Persons.LastName}, {userCreate.Persons.FirstName}
+                                    </p>
+                                    
+                                    <p style='margin-left: 20px; margin-top: 1.5rem; font-weight: normal;'>
+                                        - Fecha de creación: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}
+                                    </p>
+
+                                    {messageFinal}
+                                ";
+            }
+            else if (estado == "Modificación de" && !medicine.Enabled)
+            {
+                string responsable = "";
+                string instruction = "";
+                string alert = "";
+                string units = "";
+                string descripcion = "";
+
+                foreach (var item in _medicines.Operations.ToList())
+                {
+                    var name = item.path.Substring(1);
+                    var value = item.value;
+                    CruzRojaContext cruzRojaContext2 = new CruzRojaContext();
+
+                    var med = cruzRojaContext2.Medicines.Where(x => x.ID.Equals(medicine.ID))
+                                                          .AsNoTracking()
+                                                          .FirstOrDefault();
+
+                    var estates2 = cruzRojaContext2.Estates.Where(x => x.EstateID.Equals(med.FK_EstateID))
+                                                            .Include(a => a.LocationAddress)
+                                                            .Include(a => a.Locations)
+                                                            .AsNoTracking()
+                                                            .FirstOrDefault();
+
+                    var estates3 = new Estates();
+                    if (name.Equals("fk_EstateID"))
+                    {
+                        estates3 = cruzRojaContext2.Estates.Where(x => x.EstateID.Equals(Convert.ToInt32(item.value)))
+                                                                           .Include(a => a.LocationAddress)
+                                                                           .Include(a => a.Locations)
+                                                                           .AsNoTracking()
+                                                                           .FirstOrDefault();
+                    }
+
+                    if (name.Equals("name"))
+                    {
+                        responsable = $@"
+                                            <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Nombre</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{med.MedicineName}</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{item.value}</td>
+                                              </tr>";
+                    }
+
+                    if (name.Equals("quantity"))
+                    {
+                        instruction = $@"  <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Cantidad</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{med.MedicineQuantity}</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{item.value}</td>
+                                              </tr>";
+
+
+                    }
+
+                    if (name.Equals("fk_EstateID"))
+                    {
+                        alert = $@"        <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Sucursal</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{estates2.LocationAddress.Address} {estates2.LocationAddress.NumberAddress} {estates2.EstateTypes.ToUpper()}</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{estates3.LocationAddress.Address} {estates3.LocationAddress.NumberAddress} {estates3.EstateTypes.ToUpper()}</td>
+                                              </tr>";
+                    }
+
+                    if (name.Equals("medicines/medicineUnits"))
+                    {
+                        units = $@"        <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Sucursal</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{med.MedicineUnits}</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{item.value}</td>
+                                              </tr>";
+                    }
+
+                    if (name.Equals("description"))
+                    {
+                        units = $@"        <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Sucursal</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{med.MedicineUtility}</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{item.value}</td>
+                                              </tr>";
+                    }
+                }
+
+
+                var modificado = EmployeesRepository.GetAllEmployeesById(medicine.ModifiedBy);
+
+                message = $@"
+                                <div style='margin-top: 1.7rem; text-align: center;'>
+                                    <img src='https://www.cruzroja.org.ar/newDesign/wp-content/uploads/2019/01/favicon1.png' style='
+                                    width: 30px;
+                                    border-radius: 50%;
+                                    padding: 8px;
+                                    border: 1px solid #000;'>
+
+                                    <h1 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 24px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px;'>SICREYD</h1>
+                                </div>
+                                     <div style=' width: 512px;
+                                    padding: 25px;
+                                    border-radius: 8px;
+                                    border: 1px solid #ccc;
+                                    margin: 0 auto;'>
+                                    <p style='margin-left: 20px;'>
+                                    A continuación se listan los campos modificados:
+                                    </p>
+                                 <table style='border-collapse: collapse; margin:auto;'>
+                                    <tr style='padding: 8px;'>
+                                        <th style='border: 1px solid #000; padding: 8px;'>Nombre del atributo</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Valor anterior</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Valor actual</th>
+                                    </tr>
+                                    {responsable}
+                                    {instruction}
+                                    {alert}
+                                    {units}
+                                    {descripcion}
+                                    </table>
+                                  <p style='margin-left: 20px; margin-top: 1.5rem; font-weight: normal;'>
+                                        - Modificado por: {modificado.Persons.LastName}, {modificado.Persons.FirstName}
+                                         </p>
+
+                                    <p style='margin-left: 20px; margin-top: 1.5rem; font-weight: normal;'>
+                                        - Fecha de modificación: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}
+                                    </p>
+                                    {messageFinal}
+                                ";
+
+            }
+
+
+            else
+            {
+
+                estado = "Deshabilitación del";
+                var modificado = EmployeesRepository.GetAllEmployeesById(medicine.ModifiedBy);
+                var status = medicine.MedicineDonation ? "Si" : "No";
+
+                CruzRojaContext cruzRojaContext = new CruzRojaContext();
+
+                var estates = cruzRojaContext.Estates.Where(x => x.EstateID.Equals(2))
+                                                                    .Include(a => a.LocationAddress)
+                                                                    .Include(a => a.Locations)
+                                                                    .AsNoTracking()
+                                                                    .FirstOrDefault();
+
+                message = $@"
+                                <div style='margin-top: 1.7rem; text-align: center;'>
+                                    <img src='https://www.cruzroja.org.ar/newDesign/wp-content/uploads/2019/01/favicon1.png' style='
+                                    width: 30px;
+                                    border-radius: 50%;
+                                    padding: 8px;
+                                    border: 1px solid #000;'>
+
+                                    <h1 style='font-size: 24px;
+                                    font-weight: normal;
+                                    font-size: 24px;
+                                    font-weight: normal; margin: 0;
+                                    margin-top: 5px;'>SICREYD</h1>
+                                </div>
+                                     <div style=' width: 512px;
+                                    padding: 25px;
+                                    border-radius: 8px;
+                                    border: 1px solid #ccc;
+                                    margin: 0 auto;'>
+                                    <p style='margin-left: 20px;'>
+                                    A continuación se describen los datos del medicamento: 
+                                    </p>
+
+                               <table style='border-collapse: collapse; margin:auto;'>
+                                   <tr style='padding: 8px;'>
+                                        <th style='border: 1px solid #000; padding: 8px;'>Nombre del atributo</th>
+                                        <th style='text-align: start; border: 1px solid #000; padding: 8px;'>Valor</th>
+                                    </tr>
+                                              <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Nombre</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{medicine.MedicineName}</td>
+                                              </tr>
+
+                                              <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Cantidad</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{medicine.MedicineQuantity}</td>
+                                              </tr>
+
+                                               <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Farmaco</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{medicine.MedicineDrug}</td>
+                                              </tr>
+
+                                             <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Laboratorio</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{medicine.MedicineLab}</td>
+                                              </tr>
+
+                                             <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Peso - Volumen</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{medicine.MedicineWeight}</td>
+                                              </tr>
+
+                                            <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Unidad de medida</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{medicine.MedicineUnits}</td>
+                                              </tr>
+
+                                              <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>¿es donación?</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{status}</td>
+                                              </tr>
+
+                                              <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Descripción</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{medicine.MedicineUtility}</td>
+                                              </tr>
+
+                                            <tr style='border: 1px solid #000; padding: 8px;'>
+                                                <td style='border: 1px solid #000; padding: 8px;'>Sucursal</td>
+                                                <td style='border: 1px solid #000; padding: 8px;'>{estates.LocationAddress.Address} {estates.LocationAddress.NumberAddress} {estates.EstateTypes.ToUpper()}</td>
+                                              </tr>
+
+                                    </table>
+
+                                    <p style='margin-left: 20px; margin-top: 1.5rem; font-weight: normal;'>
+                                        - Modificado por: {modificado.Persons.LastName}, {modificado.Persons.FirstName}
+                                    </p>
+
+                                    <p style='margin-left: 20px; margin-top: 1.5rem; font-weight: normal;'>
+                                        - Fecha de deshabilitación: {DateTime.Now.ToString("dd/MM/yyyy hh:mm")}
+                                    </p>
+
+                                    {messageFinal}
+                                ";
+            }
+
+
+            foreach (var item in coordinadoraGeneral)
+            {
+                var msg = new Mail(new string[] { item.Persons.Email }, $"{estado} medicamento #{medicine.ID}", $@"{message}");
+
+                EmailSender.SendEmail(msg);
+            }
+        }
     }
+
 }
+

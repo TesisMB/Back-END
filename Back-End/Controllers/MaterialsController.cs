@@ -156,7 +156,7 @@ namespace Back_End.Controllers
                 }
 
 
-                _repository.Materials.CreateMaterial(materialEntity);
+                _repository.Materials.CreateMaterial(materialEntity, material);
                 _repository.Materials.SaveAsync();
 
                 return Ok();
@@ -202,11 +202,17 @@ namespace Back_End.Controllers
                 {
                     return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
                 }
-            
+
+                if (materialToPatch.Enabled)
+                    materialToPatch.Enabled = true;
+                else
+                    materialToPatch.Enabled = false;
+
 
                 var employeeResult = _mapper.Map(materialToPatch, materialEntity);
 
-                _repository.Materials.UpdateMaterial(employeeResult);
+                _repository.Materials.UpdateMaterial(employeeResult, _materials, materialToPatch);
+
 
                 _repository.Materials.SaveAsync();
 

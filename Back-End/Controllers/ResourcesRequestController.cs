@@ -1,18 +1,14 @@
 ﻿using AutoMapper;
 using Back_End.Entities;
-using Back_End.Models;
 using Contracts.Interfaces;
-
 using Entities.DataTransferObjects.Resources_Request___Dto;
 using Entities.DataTransferObjects.ResourcesRequest___Dto;
 using Entities.Helpers;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PDF_Generator.Utility;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -143,7 +139,7 @@ namespace Back_End.Controllers
 
                 _repository.Resources_Requests.CreateResource_Resquest(resourceRequest);
 
-                _repository.Resources_Requests.SaveAsync();
+                //_repository.Resources_Requests.SaveAsync();
 
                 return Ok();
             }

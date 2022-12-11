@@ -356,6 +356,17 @@ namespace Back_End.Controllers
                     }
                 }
 
+
+
+
+                //var CG = cruzRojaContext.UsersChatRooms.Where(a => a.FK_ChatRoomID.Equals(emegencyDisaster.EmergencyDisasterID))
+                //                                         .Take(2)
+                //                                         .ToList();
+
+
+                //_repository.UsersChatRooms.LeaveGroup(CG.First());
+                //_repository.UsersChatRooms.SaveAsync();
+
                 emergencyDisasterResult.Quantity = count;
 
 
@@ -426,11 +437,11 @@ namespace Back_End.Controllers
                                .AsNoTracking()
                                .ToList();
 
-                var userAdm = cruzRojaContext.Users
-                          .Where(a => a.FK_EstateID == user.FK_EstateID
-                                 && a.Roles.RoleName == "Admin")
-                          .AsNoTracking()
-                          .ToList();
+                //var userAdm = cruzRojaContext.Users
+                //          .Where(a => a.FK_EstateID == user.FK_EstateID
+                //                 && a.Roles.RoleName == "Admin")
+                //          .AsNoTracking()
+                //          .ToList();
 
                 emergencyDisaster.ChatRooms.UsersChatRooms = new List<UsersChatRooms>();
 
@@ -496,11 +507,11 @@ namespace Back_End.Controllers
                 _repository.EmergenciesDisasters.CreateEmergencyDisaster(emergencyDisaster);
 
                 _repository.EmergenciesDisasters.SaveAsync();
-
                 var response = await SendController.SendNotification(userId, emergenciesDisasters.LocationsEmergenciesDisasters.LocationCityName, emergencyDisaster.EmergencyDisasterID);
 
-
                 return Ok();
+
+
             }
             catch (Exception ex)
             {
@@ -527,9 +538,6 @@ namespace Back_End.Controllers
                 {
                     return NotFound();
                 }
-
-                var CG = cruzRojaContext.UsersChatRooms.Where(a => a.FK_UserID.Equals(emergencyDisaster.Fk_EmplooyeeID))
-                                                                .FirstOrDefault();
 
 
                 var emergencyDisasterToPatch = _mapper.Map<EmergenciesDisastersForUpdateDto>(emergencyDisaster);
@@ -562,10 +570,9 @@ namespace Back_End.Controllers
                 }
 
 
+                var name = _emergencyDisaster.Operations.ToList().Where(x => x.path.ToString().Equals("fk_EmplooyeeID"));
 
-                var name = _emergencyDisaster.Operations.ToList();
-
-                  if (name.Equals("fk_EmplooyeeID"))
+                  if (name !=null)
                   {
                             var userChatRooms = cruzRojaContext.UsersChatRooms
                              .OrderByDescending(a => a.ID)
@@ -583,16 +590,12 @@ namespace Back_End.Controllers
 
 
                 _repository.UsersChatRooms.Create(usersChatRoomsCE);
-                _repository.UsersChatRooms.LeaveGroup(CG);
                 _repository.UsersChatRooms.SaveAsync();
                 }
-                else
-                {
+
+
                 _repository.EmergenciesDisasters.SaveAsync();
-                }
 
-
-                
 
                 return NoContent();
             }

@@ -139,7 +139,7 @@ namespace Back_End.Controllers
 
                 _repository.Resources_Requests.CreateResource_Resquest(resourceRequest);
 
-                //_repository.Resources_Requests.SaveAsync();
+                _repository.Resources_Requests.SaveAsync();
 
                 return Ok();
             }

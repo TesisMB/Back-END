@@ -19,8 +19,8 @@ namespace Contracts.Interfaces
 
         Task<Medicines> GetMedicinelWithDetails(string medicineId);
 
-        void CreateMedicine(Medicines medicine);
-        void UpdateMedicine(Medicines medicine, JsonPatchDocument<MedicineForUpdateDto> _medicines, MedicineForUpdateDto medicineToPatch);
+        void CreateMedicine(Medicines medicine, int userId);
+        void UpdateMedicine(Medicines medicine, JsonPatchDocument<MedicineForUpdateDto> _medicines, MedicineForUpdateDto medicineToPatch, int userId);
 
         void DeleteMedicine(Medicines medicine);
 

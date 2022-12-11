@@ -125,15 +125,16 @@ namespace Back_End.Controllers
             try
             {
 
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
-                }
 
                 if (vehicle == null)
                 {
                     _logger.LogError("Vehicle object sent from client is null.");
                     return BadRequest("Vehicle object is null");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
                 }
                 
                 var vehicleEntity = _mapper.Map<Vehicles>(vehicle);
@@ -146,7 +147,7 @@ namespace Back_End.Controllers
                      vehicleEntity.VehiclePicture = vehicle.Picture;
                 
 
-                _repository.Vehicles.CreateVehicle(vehicleEntity);
+                _repository.Vehicles.CreateVehicle(vehicleEntity, userId);
 
                  _repository.Vehicles.SaveAsync();
 
@@ -195,9 +196,9 @@ namespace Back_End.Controllers
 
                 var vehicleResult = _mapper.Map(vehicleToPatch, vehicleEntity);
 
-                _repository.Vehicles.UpdateVehicle(vehicleResult, patchDocument);
+                _repository.Vehicles.UpdateVehicle(vehicleResult, patchDocument, userId);
 
-               // _repository.Vehicles.SaveAsync();
+               _repository.Vehicles.SaveAsync();
 
                 return NoContent();
 

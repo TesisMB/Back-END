@@ -106,12 +106,12 @@ namespace Back_End.Controllers
                         employeeResult.Picture = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{employeeResult.Picture}";
                     }
 
-                    DateTime date = Convert.ToDateTime(employeeResult.Medicines.MedicineExpirationDate);
+                    //DateTime date = Convert.ToDateTime(employeeResult.Medicines.MedicineExpirationDate);
 
-                    if (date < DateTime.Now)
-                    {
-                        employeeResult.Availability = false;
-                    }
+                    //if (date < DateTime.Now)
+                    //{
+                    //    employeeResult.Availability = false;
+                    //}
 
                     return Ok(employeeResult);
                 }
@@ -128,7 +128,6 @@ namespace Back_End.Controllers
         [HttpPost]
         public async Task<ActionResult<Medicines>> CreateMedicine([FromBody] Resources_ForCreationDto medicine, [FromQuery] int userId)
         {
-            medicine.CreatedBy = userId;
 
             var cruzRojaContext = new CruzRojaContext();
 
@@ -141,16 +140,18 @@ namespace Back_End.Controllers
 
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
-                }
 
                 if (medicine == null)
                 {
                     _logger.LogError("Medicine object sent from client is null.");
                     return BadRequest("Medicine object is null");
                 }
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
+                }
+            medicine.CreatedBy = userId;
 
                 var medicineEntity = _mapper.Map<Medicines>(medicine);
 
@@ -160,9 +161,9 @@ namespace Back_End.Controllers
                     medicineEntity.MedicinePicture = medicine.Picture;
 
 
-                _repository.Medicines.CreateMedicine(medicineEntity);
+                _repository.Medicines.CreateMedicine(medicineEntity, userId);
 
-                //_repository.Medicines.SaveAsync();
+                _repository.Medicines.SaveAsync();
 
 
                 return Ok();
@@ -210,9 +211,9 @@ namespace Back_End.Controllers
 
                 var medicineResult = _mapper.Map(medicineToPatch, medicineEntity);
 
-                _repository.Medicines.UpdateMedicine(medicineResult, patchDocument, medicineToPatch);
+                _repository.Medicines.UpdateMedicine(medicineResult, patchDocument, medicineToPatch, userId);
 
-               // _repository.Medicines.SaveAsync();
+                _repository.Medicines.SaveAsync();
 
                 return NoContent();
             }

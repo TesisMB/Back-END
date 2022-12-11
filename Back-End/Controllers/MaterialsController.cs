@@ -131,16 +131,16 @@ namespace Back_End.Controllers
 
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
-                }
-
                 if (material == null)
 
                 {
                     _logger.LogError("Material object sent from client is null.");
                     return BadRequest("Material object is null");
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
+                }
 
                 }
 
@@ -156,7 +156,7 @@ namespace Back_End.Controllers
                 }
 
 
-                _repository.Materials.CreateMaterial(materialEntity, material);
+                _repository.Materials.CreateMaterial(materialEntity, material, userId);
                 _repository.Materials.SaveAsync();
 
                 return Ok();
@@ -211,7 +211,7 @@ namespace Back_End.Controllers
 
                 var employeeResult = _mapper.Map(materialToPatch, materialEntity);
 
-                _repository.Materials.UpdateMaterial(employeeResult, _materials, materialToPatch);
+                _repository.Materials.UpdateMaterial(employeeResult, _materials, materialToPatch, userId);
 
 
                 _repository.Materials.SaveAsync();

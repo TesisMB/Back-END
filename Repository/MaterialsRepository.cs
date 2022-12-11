@@ -122,11 +122,11 @@ namespace Repository
                        .FirstOrDefaultAsync();
         }
 
-        public void CreateMaterial(Materials material, Resources_ForCreationDto resources)
+        public void CreateMaterial(Materials material, Resources_ForCreationDto resources, int userId)
         {
             //spaceCamelCase(material);
             Create(material);
-            sendEmail(material, "Nuevo", null, resources);
+            sendEmail(material, "Nuevo", userId, null, resources);
         }
 
         private void spaceCamelCase(Materials material)
@@ -137,10 +137,11 @@ namespace Repository
         }
 
         public void UpdateMaterial(Materials material, JsonPatchDocument<MaterialsForUpdateDto> _materials,
-                                  MaterialsForUpdateDto materialToPatch)
+                                  MaterialsForUpdateDto materialToPatch, int userId)
         {
             Update(material);
-            //sendEmail(material, "Modificación de", _materials, null, materialToPatch);
+            //editar id
+            sendEmail(material, "Modificación de", userId,_materials, null, materialToPatch);
 
         }
 
@@ -193,7 +194,7 @@ namespace Repository
 
 
 
-        public static void sendEmail(Materials materials, string estado,
+        public static void sendEmail(Materials materials, string estado, int userId,
                                      JsonPatchDocument<MaterialsForUpdateDto> _materials = null,
                                      Resources_ForCreationDto resources = null,
                                      MaterialsForUpdateDto materialToPatch = null)
@@ -203,13 +204,12 @@ namespace Repository
             string messageFinal;
             CruzRojaContext cruzRojaContext1 = new CruzRojaContext();
 
+            var user =  EmployeesRepository.GetAllEmployeesById(userId);
 
-            var mat = cruzRojaContext1.Materials.Where(x => x.ID.Equals(materials.ID))
-                                                  .AsNoTracking()
-                                                  .FirstOrDefault();
 
-            var coordinadoraGeneral = cruzRojaContext1.Users.Where(x => x.FK_EstateID.Equals(mat.FK_EstateID)
-                                                                   && x.FK_RoleID == 2)
+
+            var coordinadoraGeneral = cruzRojaContext1.Users.Where(x => x.FK_EstateID.Equals(user.FK_EstateID)
+                                                                   && x.FK_RoleID == user.FK_RoleID)
                                                                   .Include(a => a.Persons)
                                                                   .AsNoTracking()
                                                                   .ToList();
@@ -320,7 +320,7 @@ namespace Repository
                                     {messageFinal}
                                 ";
             }
-            else if (estado == "Modificación de" && !materialToPatch.Enabled)
+            else if (estado == "Modificación de" && materialToPatch.Enabled)
             {
                 string responsable = "";
                 string instruction = "";
@@ -364,7 +364,7 @@ namespace Repository
                                               </tr>";
                     }
 
-                    if (name.Equals("Quantity"))
+                    if (name.Equals("quantity"))
                     {
                         //var DescAnterior = EmployeesRepository.GetAllEmployeesById(emergenciesDisasters1.Fk_EmplooyeeID);
 

@@ -268,17 +268,33 @@ namespace Repository
 
         public async Task<IEnumerable<Users>> GetEmployeesVolunteers(int userId)
         {
-
-            var user = EmployeesRepository.GetAllEmployeesById(userId);
-
+            var user2 = new Users(); 
+            var user = new Users();
+            if (userId == 0)
+            {
+                 user2 = UsersRepository.authUser;
+            }
+            else
+            {
+                 user = EmployeesRepository.GetAllEmployeesById(userId);
+            }
 
             var collection = _cruzRojaContext.Users as IQueryable<Users>;
 
-
-            collection = collection.Where(
-                a => a.Estates.EstateID == user.FK_EstateID
-                && a.FK_RoleID != 1
-                && a.UserID != userId);
+            if (userId.Equals(0))
+            {
+                collection = collection.Where(
+                    a => a.Estates.EstateID == user2.FK_EstateID
+                    && a.FK_RoleID != 1
+                    && a.UserID != userId);
+            }
+            else
+            {
+                collection = collection.Where(
+                    a => a.Estates.EstateID == user.FK_EstateID
+                    && a.FK_RoleID != 1
+                    && a.UserID != userId);
+            }
 
             return await collection
                                .Include(u => u.Persons)

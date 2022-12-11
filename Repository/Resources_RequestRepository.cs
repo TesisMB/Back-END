@@ -52,7 +52,7 @@ namespace Repository
                        .AsNoTracking();
             }
 
-            if (!String.IsNullOrEmpty(Condition) && state == "solicitud" && user.FK_RoleID != 4)
+            if (!String.IsNullOrEmpty(Condition) && state == "solicitud" && user.FK_RoleID != 4 && user.FK_RoleID != 2)
             {
                 collection = collection.Where(
                             a => a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID
@@ -68,15 +68,15 @@ namespace Repository
                 return  GetAllResourcesRequests(user.FK_EstateID, Condition);
             }
 
-            else if (user.Roles.RoleName == "Coord. General" && Condition == null)
-            {
-                return  GetAllResourcesRequests(user.FK_EstateID, Condition);
-            }
+            //else if (user.Roles.RoleName == "Coord. General" && Condition == null)
+            //{
+            //    return  GetAllResourcesRequests(user.FK_EstateID, Condition);
+            //}
 
 
             //Encargado de logistica tiene acceso a las solicitudes pendientes nomas    
 
-            else if (user.Roles.RoleName == "Enc. De logística")
+            else if (user.Roles.RoleName == "Enc. De logística" || user.Roles.RoleName == "Coord. General")
             {
 
                 collection = collection.Where(
@@ -505,9 +505,9 @@ namespace Repository
 
                     DeleteResource(resources_Request);
 
-                    //Update(resources_Request);
+                    Update(resources_Request);
 
-                    //SaveAsync();
+                    SaveAsync();
                 }
 
                 //Actualizando recursos - existe la solicitud a esa Emegrnecia de un Usuario especifico
@@ -534,15 +534,15 @@ namespace Repository
 
                     DeleteResource(rec);
 
-                    //UpdateResources(item, resources_Request);
+                    UpdateResources(item, resources_Request);
 
-                    //DeleteResource(rec);
+                    DeleteResource(rec);
 
-                    //sendEmailUpdateResourcesRequest(resources_Request);
+                    sendEmailUpdateResourcesRequest(resources_Request);
 
-                    //Update(rec);
+                    Update(rec);
 
-                    //SaveAsync();
+                    SaveAsync();
 
                 }
             }
@@ -557,17 +557,17 @@ namespace Repository
             if (rec == null)
                 {
                 SpaceCamelCase(resources_Request);
-                //Create(resources_Request);
-                //UpdateResource_Resquest2(resources_Request);
-                //DeleteResource(resources_Request);
+                Create(resources_Request);
+                UpdateResource_Resquest2(resources_Request);
+                DeleteResource(resources_Request);
 
                 foreach (var item in logsitica)
                 {
                     sendResourcesRequest(resources_Request, item);
                 }
 
-                //SaveAsync();
-                 }
+                SaveAsync();
+            }
         }
 
 
@@ -886,7 +886,7 @@ namespace Repository
 
                                         resources.Quantity = 1;
 
-                                        //VehiclesRepository.status(vehicles);
+                                        VehiclesRepository.status(vehicles);
 
                                         sendEmailVehicle(vehicles);
                                 }
@@ -1806,7 +1806,7 @@ namespace Repository
 
                 var me = db.Resources_RequestResources_Materials_Medicines_Vehicles
                         .Where(a => a.FK_Resource_RequestID == item.FK_Resource_RequestID
-                        && a.FK_MaterialID == item.FK_MedicineID)
+                        && a.FK_MedicineID == item.FK_MedicineID)
                         .Include(a => a.Medicines)
                         .AsNoTracking()
                         .FirstOrDefault();

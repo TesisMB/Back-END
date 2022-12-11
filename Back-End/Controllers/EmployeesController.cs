@@ -106,6 +106,8 @@ namespace Back_End.Controllers
                 {
                     var resourcesRequest = cruzRojaContext.Resources_Requests
                               .Where(a => a.CreatedBy.Equals(item.UserID))
+                              .Include(a => a.EmergenciesDisasters)
+                              .Include(a => a.EmergenciesDisasters.LocationsEmergenciesDisasters)
                               .ToList();
 
                     if (resourcesRequest != null)
@@ -391,7 +393,8 @@ namespace Back_End.Controllers
 
                 var employeeEntity = _mapper.Map<Users>(employee);
                employeeEntity.CreatedDate = DateTime.Now;
-               //employeeEntity.Avatar = "avatar-user.png";
+                //employeeEntity.Avatar = "avatar-user.png";
+                employeeEntity.Avatar = "avatar-user.png";
 
                 if (roles.RoleName != "Voluntario")
                 {
@@ -402,24 +405,25 @@ namespace Back_End.Controllers
 
 
                 }
-                else
-                {
+                //else
+                //{
 
-                    employee.Volunteers = new VolunteersForCreationDto();
-                    employeeEntity.Volunteers = new Volunteers();
+                //    employee.Volunteers = new VolunteersForCreationDto();
+                //    employeeEntity.Volunteers = new Volunteers();
 
-                    if (employee.Avatar == null)
-                    {
-                        employeeEntity.Avatar = "avatar-user.png";
-                    }
+                //    if (employee.Avatar == null)
+                //    {
+                //        employeeEntity.Avatar = "avatar-user.png";
+                //    }
                     //else
                     //{
                     //    employeeEntity.Volunteers.VolunteerAvatar =  UploadController.SaveImage(employee.Volunteers.ImageFile);
                     //}
 
-                }
+                //}
 
                 _repository.Employees.CreateEmployee(employeeEntity);
+                _repository.Employees.SaveAsync();
 
                 return Ok();
             }
@@ -493,10 +497,12 @@ namespace Back_End.Controllers
                     }
                 }
 
-
-                if (users.Count().Equals(1))
+                if (employeeToPatch.UserAvailability == false && employeeToPatch.FK_RoleID == 4)
                 {
-                    return BadRequest(ErrorHelper.Response(400, "No se puede deshabilitar ya que es el unico Encargado de Logistica"));
+                    if (users.Count().Equals(1))
+                    {
+                        return BadRequest(ErrorHelper.Response(400, "No se puede deshabilitar ya que es el unico Encargado de Logistica"));
+                    }
                 }
 
 

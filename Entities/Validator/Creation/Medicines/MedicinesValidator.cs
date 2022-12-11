@@ -41,7 +41,7 @@ namespace Entities.Validator.Creation.Medicines
 
             int dateInt = Convert.ToInt32(variable);
 
-            if (dateInt <= 2030 && dateInt > 0 && dateInt >= dateTime)
+            if (dateInt <= 2030 && dateInt > 0 && dateInt > dateTime)
             {
                 return true;
             }
@@ -51,7 +51,6 @@ namespace Entities.Validator.Creation.Medicines
 
         private bool BeAValidDay(string date)
         {
-
             string variable = date.Substring(0, 2);
 
             int dateInt = Convert.ToInt32(variable);

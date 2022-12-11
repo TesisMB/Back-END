@@ -20,9 +20,9 @@ namespace Contracts.Interfaces
         Task<Vehicles> GetVehicleById(string vehicleId);
         Task<Vehicles> GetVehicleWithDetails(string vehicleId);
 
-        void CreateVehicle(Vehicles vehicles);
+        void CreateVehicle(Vehicles vehicles, int userId);
 
-        void UpdateVehicle(Vehicles vehicles, JsonPatchDocument<VehiclesForUpdateDto> patchDocument);
+        void UpdateVehicle(Vehicles vehicles, JsonPatchDocument<VehiclesForUpdateDto> patchDocument, int userId);
 
         void DeleteVehicle(Vehicles vehicles);
         IEnumerable<Vehicles> GetAllVehicles(DateTime dateConvert, DateTime dateConvertEnd, int estateId);

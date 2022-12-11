@@ -54,7 +54,7 @@ namespace Repository
         {
             //var user = UsersRepository.authUser;
 
-            var user =  EmployeesRepository.GetAllEmployeesById(userId);
+            var user = EmployeesRepository.GetAllEmployeesById(userId);
 
 
 
@@ -64,13 +64,21 @@ namespace Repository
                 collection = collection.Where(a => a.FK_EstateID == user.FK_EstateID);
 
             }
-            else {
+            else if (user.Roles.RoleName == "Coord. General") {
 
                 collection = collection
                     .OrderByDescending(a => a.EmergencyDisasterID)
                     .Take(2)
                     .AsNoTracking();
 
+            }
+            else
+            {
+                collection = collection
+                    .Where(a => a.CreatedBy == user.UserID)
+                 .OrderByDescending(a => a.EmergencyDisasterID)
+                 .Take(2)
+                 .AsNoTracking();
             }
 
 
@@ -388,7 +396,7 @@ namespace Repository
             //var user = UsersRepository.authUser;
             var collection = _cruzRojaContext.EmergenciesDisasters as IQueryable<EmergenciesDisasters>;
 
-            collection = collection.Where(a => a.FK_EstateID == user.FK_EstateID && a.EmergencyDisasterEndDate == null);
+            collection = collection.Where(a => a.Fk_EmplooyeeID == user.UserID && a.EmergencyDisasterEndDate == null);
 
 
             return await collection

@@ -18,8 +18,8 @@ namespace Contracts.Interfaces
 
         Task<Materials> GetMaterialWithDetails(string materialId);
 
-        void CreateMaterial(Materials material, Resources_ForCreationDto resources);
-        void UpdateMaterial(Materials material, JsonPatchDocument<MaterialsForUpdateDto> _materials, MaterialsForUpdateDto materialToPatch);
+        void CreateMaterial(Materials material, Resources_ForCreationDto resources, int userId);
+        void UpdateMaterial(Materials material, JsonPatchDocument<MaterialsForUpdateDto> _materials, MaterialsForUpdateDto materialToPatch, int userId);
 
         void DeleteMaterial(Materials material);
         IEnumerable<Materials> GetAllMaterials(DateTime dateConvert, DateTime dateConvertEnd, int estateId);

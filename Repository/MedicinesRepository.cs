@@ -41,7 +41,7 @@ namespace Repository
 
             if (!locationId.Equals(0))
                 collection = collection.Where
-                                            (a => a.Estates.Locations.LocationID.Equals(locationId));
+                                            (a => a.Estates.Locations.LocationID.Equals(user.Estates.FK_LocationID));
             else
                 return await GetAllMedicines();
 
@@ -131,13 +131,13 @@ namespace Repository
                      .FirstOrDefaultAsync();
         }
 
-        public void CreateMedicine(Medicines medicine)
+        public void CreateMedicine(Medicines medicine, int userId)
         {
             //spaceCamelCase(medicine);
 
-            //Create(medicine);
+            Create(medicine);
 
-            sendEmail(medicine, "Nuevo", null, null, null);
+            sendEmail(medicine, "Nuevo", userId, null, null, null);
         }
 
         private void spaceCamelCase(Medicines medicine)
@@ -154,10 +154,11 @@ namespace Repository
             //medicine.MedicineUtility = WithoutSpace_CamelCase.GetCamelCase(medicine.MedicineUtility);
         }
 
-        public void UpdateMedicine(Medicines medicine, JsonPatchDocument<MedicineForUpdateDto> _medicines, MedicineForUpdateDto medicineToPatch)
+        public void UpdateMedicine(Medicines medicine, JsonPatchDocument<MedicineForUpdateDto> _medicines, MedicineForUpdateDto medicineToPatch, int userId)
         {
-            //Update(medicine);
-            sendEmail(medicine, "Modificación de", _medicines, null, medicineToPatch);
+            Update(medicine);
+            //sacar despues id
+            sendEmail(medicine, "Modificación de", userId,_medicines, null, medicineToPatch);
         }
 
         public void DeleteMedicine(Medicines medicine)
@@ -241,7 +242,7 @@ namespace Repository
         }
 
 
-        public static void sendEmail(Medicines medicine, string estado,
+        public static void sendEmail(Medicines medicine, string estado, int userId,
                                         JsonPatchDocument<MedicineForUpdateDto> _medicines = null,
                                         Resources_ForCreationDto resources = null,
                                         MedicineForUpdateDto medicineToPatch = null)
@@ -256,8 +257,11 @@ namespace Repository
             //                                      .AsNoTracking()
             //                                      .FirstOrDefault();
 
-            var coordinadoraGeneral = cruzRojaContext1.Users.Where(x => x.FK_EstateID.Equals(2)
-                                                                   && x.FK_RoleID == 2)
+            var user = EmployeesRepository.GetAllEmployeesById(userId);
+
+
+            var coordinadoraGeneral = cruzRojaContext1.Users.Where(x => x.FK_EstateID.Equals(user.FK_EstateID)
+                                                                   && x.FK_RoleID == user.FK_RoleID)
                                                                   .Include(a => a.Persons)
                                                                   .AsNoTracking()
                                                                   .ToList();
@@ -389,7 +393,7 @@ namespace Repository
                                     {messageFinal}
                                 ";
             }
-            else if (estado == "Modificación de" && !medicine.Enabled)
+            else if (estado == "Modificación de" && medicine.Enabled)
             {
                 string responsable = "";
                 string instruction = "";

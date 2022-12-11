@@ -112,11 +112,11 @@ namespace Repository
         }
 
 
-        public void CreateVehicle(Vehicles vehicles)
+        public void CreateVehicle(Vehicles vehicles, int userId)
         {
             //spaceCamelCase(vehicles);
             Create(vehicles);
-            sendEmail(vehicles, "Nuevo", null, null, null);
+            sendEmail(vehicles, "Nuevo", userId, null, null, null);
         }
 
         private void spaceCamelCase(Vehicles vehicles)
@@ -137,10 +137,11 @@ namespace Repository
             }*/
         }
 
-        public void UpdateVehicle(Vehicles vehicles, JsonPatchDocument<VehiclesForUpdateDto> patchDocument)
+        public void UpdateVehicle(Vehicles vehicles, JsonPatchDocument<VehiclesForUpdateDto> patchDocument, int userId)
         {
             Update(vehicles);
-            sendEmail(vehicles, "Modificación de", patchDocument, null, null);
+            //sacar despues id
+            sendEmail(vehicles, "Modificación de", userId, patchDocument, null, null);
 
         }
 
@@ -266,7 +267,7 @@ namespace Repository
 
 
 
-        public static void sendEmail(Vehicles vehicles, string estado,
+        public static void sendEmail(Vehicles vehicles, string estado, int userId,
                                       JsonPatchDocument<VehiclesForUpdateDto> _vehicle = null,
                                       Resources_ForCreationDto resources = null,
                                       VehiclesForUpdateDto vehicleToPatch = null)
@@ -281,8 +282,11 @@ namespace Repository
             //                                      .AsNoTracking()
             //                                      .FirstOrDefault();
 
-            var coordinadoraGeneral = cruzRojaContext1.Users.Where(x => x.FK_EstateID.Equals(2)
-                                                                   && x.FK_RoleID == 2)
+            var user = EmployeesRepository.GetAllEmployeesById(userId);
+
+
+            var coordinadoraGeneral = cruzRojaContext1.Users.Where(x => x.FK_EstateID.Equals(user.FK_EstateID)
+                                                                   && x.FK_RoleID == user.FK_RoleID)
                                                                   .Include(a => a.Persons)
                                                                   .AsNoTracking()
                                                                   .ToList();
@@ -414,7 +418,7 @@ namespace Repository
                                     {messageFinal}
                                 ";
             }
-            else if (estado == "Modificación de" && !vehicles.Enabled)
+            else if (estado == "Modificación de" && vehicles.Enabled)
             {
                 string responsable = "";
                 string instruction = "";

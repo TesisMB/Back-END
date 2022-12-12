@@ -210,8 +210,6 @@ namespace Back_End.Controllers
                         item3.Avatar = $"https://almacenamientotesis.blob.core.windows.net/publicuploads/{user.Avatar}";
                         item3.RoleName = roles.RoleName;
                     }
-
-
                 }
 
                 return Ok(chatRoomsToResult);

@@ -164,6 +164,30 @@ namespace Back_End.Controllers
 
                 }
 
+                //int count = 0;
+
+                //foreach (var item in emergenciesDisastersResult.ToList())
+                //{
+                //    foreach (var item1 in item.UsersChatRooms)
+                //    {
+                //        if (status != item1.Status && item1.RoleName != "Admin")
+                //        {
+                //            item.UsersChatRooms.Remove(item1);
+                //            count -= 1;
+                //        }
+
+                //        if (item1.RoleName == "Admin")
+                //        {
+                //            item.UsersChatRooms.Remove(item1);
+                //            count -= 1;
+                //        }
+                //    }
+
+                //}
+
+
+
+
                 return Ok(emergenciesDisastersResult);
 
             }
@@ -356,16 +380,6 @@ namespace Back_End.Controllers
                     }
                 }
 
-
-
-
-                //var CG = cruzRojaContext.UsersChatRooms.Where(a => a.FK_ChatRoomID.Equals(emegencyDisaster.EmergencyDisasterID))
-                //                                         .Take(2)
-                //                                         .ToList();
-
-
-                //_repository.UsersChatRooms.LeaveGroup(CG.First());
-                //_repository.UsersChatRooms.SaveAsync();
 
                 emergencyDisasterResult.Quantity = count;
 

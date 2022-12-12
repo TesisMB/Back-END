@@ -47,6 +47,8 @@ namespace Entities.DataTransferObjects.EmergenciesDisasters___Dto
         public string State { get; set; }
         public string alertName { get; set; }
 
+        public int Quantity { get; set; }
+
         //public ICollection<ResourcesRequestMaterialsMedicinesVehiclesDto> Resources_Requests { get; set; }
 
         public Dictionary<string, int> Recursos { get; set; }

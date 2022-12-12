@@ -226,7 +226,7 @@ namespace Repository
                                      width: 33%;
                                      margin-top: 2rem;
                                     margin-bottom: 2rem;
-                                    padding: 15px; cursor: pointer; margin-left: 10rem;' href='https://calm-dune-0fef6d210.2.azurestaticapps.net/'>Ir a SICREYD</a>
+                                    padding: 15px; cursor: pointer; margin-left: 10rem;' href='http://localhost:4200/'>Ir a SICREYD</a>
                                     
         
                                     <p style='margin-top: 2rem; margin-left: 20px;'>

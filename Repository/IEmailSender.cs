@@ -30,8 +30,8 @@ namespace Repository
         private static MimeMessage CreateEmailMessage(Mail message)
         {
             var emailMessage = new MimeMessage();
-            //emailMessage.From.Add(new MailboxAddress("tesis.unc.mb@gmail.com"));
-            emailMessage.From.Add(new MailboxAddress("yoelsolca5@gmail.com"));
+            emailMessage.From.Add(new MailboxAddress("tesis.unc.mb@gmail.com"));
+            //emailMessage.From.Add(new MailboxAddress("yoelsolca5@gmail.com"));
             emailMessage.To.AddRange(message.To);
             emailMessage.Subject = message.Subject;
             //emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Text) { Text = message.Content };
@@ -48,8 +48,8 @@ namespace Repository
                 {
                     client.Connect("smtp.gmail.com", 465, true);
                     client.AuthenticationMechanisms.Remove("XOAUTH2");
-                    //client.Authenticate("tesis.unc.mb@gmail.com", "acfm vbmz zbuo qnpt");
-                    client.Authenticate("yoelsolca5@gmail.com", "zjim mxtp uudt wmcm");
+                    client.Authenticate("tesis.unc.mb@gmail.com", "acfm vbmz zbuo qnpt");
+                    //client.Authenticate("yoelsolca5@gmail.com", "zjim mxtp uudt wmcm");
                     client.Send(mailMessage);
                 }
                 catch

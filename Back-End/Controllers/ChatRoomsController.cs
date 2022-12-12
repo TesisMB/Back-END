@@ -265,17 +265,17 @@ namespace Back_End.Controllers
 
                 var messages = _mapper.Map<Messages>(message);
 
-               //messages.CreatedDate = DateTime.Now;
-                    var fehca = DateTime.Now.ToString(@"hh");
-                    var min = DateTime.Now.ToString(@"mm");
-                    var seg = DateTime.Now.ToString(@"ss");
-                    var day = DateTime.Now.ToString(@"dd/MM/yyyy");
+                messages.CreatedDate = DateTime.Now;
+                var fehca = DateTime.Now.ToString(@"hh");
+                var min = DateTime.Now.ToString(@"mm");
+                var seg = DateTime.Now.ToString(@"ss");
+                var day = DateTime.Now.ToString(@"dd/MM/yyyy");
                 var total = Convert.ToInt32(fehca) - 3;
                 string totalf;
 
                 if (total <= 9)
                 {
-                    totalf = day + " " + "0" + Convert.ToString(total) + ":" + $"{min}:" + $"{seg}" ;
+                    totalf = day + " " + "0" + Convert.ToString(total) + ":" + $"{min}:" + $"{seg}";
                 }
                 else
                 {

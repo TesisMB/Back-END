@@ -437,15 +437,15 @@ namespace Repository
             //Traigo todos los encargados de Logistica para enviarles un email
             //con la solicitudes nuevas o alguna actualizacion 
 
-            List<Users> logsitica = new List<Users>();
+            //List<Users> logsitica = new List<Users>();
 
-            logsitica = db.Users
-                .Where(
-                        a => a.FK_RoleID == 4
-                        && a.FK_EstateID == 20)
-                        .Include(a => a.Persons)
-                        .Include(a => a.Employees)
-                .ToList();
+            //logsitica = db.Users
+            //    .Where(
+            //            a => a.FK_RoleID == 4
+            //            && a.FK_EstateID == 20)
+            //            .Include(a => a.Persons)
+            //            .Include(a => a.Employees)
+            //    .ToList();
 
 
             //var userRequest = ResourcesRequestForCreationDto.UserRequest;
@@ -567,10 +567,10 @@ namespace Repository
                 UpdateResource_Resquest2(resources_Request);
                 DeleteResource(resources_Request);
 
-                foreach (var item in logsitica)
-                {
-                    sendResourcesRequest(resources_Request, item);
-                }
+                //foreach (var item in logsitica)
+                //{
+                    sendResourcesRequest(resources_Request);
+                //}
 
                 SaveAsync();
             }
@@ -1355,7 +1355,7 @@ namespace Repository
 
 
         //Envio mail (Nueva solicitud)
-        public static void sendResourcesRequest(ResourcesRequest resourcesRequest, Users user2)
+        public static void sendResourcesRequest(ResourcesRequest resourcesRequest)
         {
             string message;
             string materiales = "";
@@ -1373,6 +1373,14 @@ namespace Repository
             var mat = resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles.Where(x => x.FK_MaterialID != null);
             var med = resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles.Where(x => x.FK_MedicineID != null);
             var veh = resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles.Where(x => x.FK_VehicleID != null);
+
+
+
+            var coordinadoraGeneral = cruzRojaContext.Users.Where(x => x.FK_EstateID.Equals(emergency.FK_EstateID)
+                                                                            && x.FK_RoleID != 3 && x.FK_RoleID != 5 && x.FK_RoleID != 1)
+                                                                           .Include(a => a.Persons)
+                                                                           .AsNoTracking()
+                                                                           .ToList();
 
             if (resourcesRequest.Description != null)
             {
@@ -1601,12 +1609,14 @@ namespace Repository
 
 
 
+            foreach (var item in coordinadoraGeneral)
+            {
+                var msg = new Mail(new string[] { item.Persons.Email }, "Solicitud de recursos", $@"{sb.ToString()}");
 
+                EmailSender.SendEmail(msg);
 
+            }
 
-            var msg = new Mail(new string[] { user2.Persons.Email }, "Solicitud de recursos", $@"{sb.ToString()}");
-
-            EmailSender.SendEmail(msg);
 
             //Email.Send(
             //    to: user2.Persons.Email,
@@ -1646,8 +1656,12 @@ namespace Repository
 
             var veh = resourcesRequest.Resources_RequestResources_Materials_Medicines_Vehicles.Where(x => x.FK_VehicleID != null);
 
-       
 
+            var coordinadoraGeneral = cruzRojaContext.Users.Where(x => x.FK_EstateID.Equals(emergency.FK_EstateID)
+                                                                            && x.FK_RoleID != 3 && x.FK_RoleID != 5 && x.FK_RoleID != 1)
+                                                                           .Include(a => a.Persons)
+                                                                           .AsNoTracking()
+                                                                           .ToList();
 
             if (resourcesRequest.Description != null)
             {
@@ -1992,11 +2006,12 @@ namespace Repository
 ");
 
 
-
-
-            var msg = new Mail(new string[] { "yoelsoadasd@gmail.com" }, "Actulización de solicitud de recursos", $@"{sb.ToString()}");
+            foreach (var item in coordinadoraGeneral)
+            {
+            var msg = new Mail(new string[] { item.Persons.Email }, "Actulización de solicitud de recursos", $@"{sb.ToString()}");
 
             EmailSender.SendEmail(msg);
+            }
 
             //Email.Send(
             //    to: user2.Persons.Email,
@@ -2019,11 +2034,13 @@ namespace Repository
                                                   .AsNoTracking()
                                                   .FirstOrDefault();
 
-            var coordinadoraGeneral = cruzRojaContext.Users.Where(x => x.FK_EstateID.Equals(2)
-                                                                   && x.FK_RoleID == 2)
-                                                                  .Include(a => a.Persons)
-                                                                  .AsNoTracking()
-                                                                  .ToList();
+            //var user = EmployeesRepository.GetAllEmployeesById(mat.FK_EstateID);
+
+            var coordinadoraGeneral = cruzRojaContext.Users.Where(x => x.FK_EstateID.Equals(mat.FK_EstateID)
+                                                                && x.FK_RoleID != 3 && x.FK_RoleID != 5 && x.FK_RoleID != 1)
+                                                               .Include(a => a.Persons)
+                                                               .AsNoTracking()
+                                                               .ToList();
 
             var estates = cruzRojaContext.Estates.Where(x => x.EstateID.Equals(materials.FK_EstateID))
                                                                 .Include(a => a.LocationAddress)
@@ -2134,11 +2151,13 @@ namespace Repository
                                                   .AsNoTracking()
                                                   .FirstOrDefault();
 
-            var coordinadoraGeneral = cruzRojaContext.Users.Where(x => x.FK_EstateID.Equals(2)
-                                                                   && x.FK_RoleID == 2)
-                                                                  .Include(a => a.Persons)
-                                                                  .AsNoTracking()
-                                                                  .ToList();
+
+            var coordinadoraGeneral = cruzRojaContext.Users.Where(x => x.FK_EstateID.Equals(mat.FK_EstateID)
+                                                                      && x.FK_RoleID != 3 && x.FK_RoleID != 5 && x.FK_RoleID != 1)
+                                                                     .Include(a => a.Persons)
+                                                                     .AsNoTracking()
+                                                                     .ToList();
+
 
             var estates = cruzRojaContext.Estates.Where(x => x.EstateID.Equals(medicines.FK_EstateID))
                                                                 .Include(a => a.LocationAddress)
@@ -2273,10 +2292,10 @@ namespace Repository
 
 
             var coordinadoraGeneral = cruzRojaContext.Users.Where(x => x.FK_EstateID.Equals(vehicles.FK_EstateID)
-                                                                   && x.FK_RoleID == 2)
-                                                                  .Include(a => a.Persons)
-                                                                  .AsNoTracking()
-                                                                  .ToList();
+                                                           && x.FK_RoleID != 3 && x.FK_RoleID != 5 && x.FK_RoleID != 1)
+                                                          .Include(a => a.Persons)
+                                                          .AsNoTracking()
+                                                          .ToList();
 
             var brandModel = cruzRojaContext.Vehicles.Where(x => x.ID.Equals(vehicles.ID))
                                                                .Include(a => a.Brands)

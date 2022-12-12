@@ -261,7 +261,7 @@ namespace Repository
 
 
             var coordinadoraGeneral = cruzRojaContext1.Users.Where(x => x.FK_EstateID.Equals(user.FK_EstateID)
-                                                                   && x.FK_RoleID == user.FK_RoleID)
+                                                                   && x.FK_RoleID != 4 && x.FK_RoleID != 5 && x.FK_RoleID != 1)
                                                                   .Include(a => a.Persons)
                                                                   .AsNoTracking()
                                                                   .ToList();

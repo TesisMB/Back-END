@@ -471,7 +471,7 @@ namespace Repository
         public void UpdateEmergencyDisaster(EmergenciesDisasters emergencyDisaster, JsonPatchDocument<EmergenciesDisastersForUpdateDto> _emergencyDisaster,
                                             EmergenciesDisastersForUpdateDto emergenciesDisastersAnterior)
         {
-            SpaceCamelCase(emergencyDisaster);
+            //SpaceCamelCase(emergencyDisaster);
 
             Update(emergencyDisaster);
             sendEmail(emergencyDisaster, "Modificación de", _emergencyDisaster, emergenciesDisastersAnterior);
@@ -492,12 +492,11 @@ namespace Repository
 
             CruzRojaContext cruzRojaContext = new CruzRojaContext();
 
-
             var coordinadoraGeneral = cruzRojaContext.Users.Where(x => x.FK_EstateID.Equals(user.FK_EstateID)
-                                                                   && x.FK_RoleID == 2)
-                                                                  .Include(a => a.Persons)
-                                                                  .AsNoTracking()
-                                                                  .ToList();
+                                                                && x.FK_RoleID != 4 && x.FK_RoleID != 5 && x.FK_RoleID != 1)
+                                                               .Include(a => a.Persons)
+                                                               .AsNoTracking()
+                                                               .ToList();
 
             var alerta = cruzRojaContext.Alerts.Where(x => x.AlertID.Equals(emergenciesDisasters.FK_AlertID))
                                                             .AsNoTracking()

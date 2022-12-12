@@ -379,7 +379,12 @@ namespace Back_End.Controllers
 
                 if (!ModelState.IsValid)
                 {
-                    return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
+                    var error = ErrorHelper.GetModelStateErrors(ModelState);
+
+
+                    error.RemoveAt(0);
+
+                    return BadRequest(error);
                 }
 
 

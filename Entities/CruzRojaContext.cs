@@ -166,7 +166,7 @@ namespace Back_End.Entities
         //             "Server=tcp:cruzrojadb.database.windows.net,1433;Initial Catalog=CruzRojaDB;Persist Security Info=False;User ID=usuarioazure;Password=Larioja1450;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
         private const string Connection =
-                    "Server=tcp:tesissicreyd.database.windows.net,1433;Initial Catalog=Tesis;Persist Security Info=False;User ID=CloudSA60ba9660;Password=LaRioja1450;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                    "Server=Tesis23.mssql.somee.com;packet size=4096;user id=YoelSolca23_SQLLogin_1;pwd=hq1i9uc1k1;";
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

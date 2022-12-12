@@ -140,6 +140,13 @@ namespace Back_End.Controllers
 
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    var error = ErrorHelper.GetModelStateErrors(ModelState);
+                    error.RemoveAt(0);
+
+                    return BadRequest(error);
+                }
 
                 if (medicine == null)
                 {
@@ -147,11 +154,7 @@ namespace Back_End.Controllers
                     return BadRequest("Medicine object is null");
                 }
 
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
-                }
-            medicine.CreatedBy = userId;
+                medicine.CreatedBy = userId;
 
                 var medicineEntity = _mapper.Map<Medicines>(medicine);
 

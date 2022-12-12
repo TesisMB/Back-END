@@ -122,10 +122,11 @@ namespace Back_End.Controllers
 
                 if (!ModelState.IsValid)
                 {
-                    return BadRequest(ErrorHelper.GetModelStateErrorsResourcesStock(ModelState));
+                    var error = ErrorHelper.GetModelStateErrors(ModelState);
+                    error.RemoveAt(0);
 
+                    return BadRequest(error);
                 }
-
 
                 if (resources_Request == null)
                 {

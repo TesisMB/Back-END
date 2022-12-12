@@ -124,6 +124,13 @@ namespace Back_End.Controllers
 
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    var error = ErrorHelper.GetModelStateErrors(ModelState);
+                    error.RemoveAt(0);
+
+                    return BadRequest(error);
+                }
 
 
                 if (vehicle == null)
@@ -132,11 +139,7 @@ namespace Back_End.Controllers
                     return BadRequest("Vehicle object is null");
                 }
 
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
-                }
-                
+
                 var vehicleEntity = _mapper.Map<Vehicles>(vehicle);
 
                 vehicleEntity.VehicleDescription = vehicle.Description;

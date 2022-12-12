@@ -44,15 +44,20 @@ namespace Repository
 
             //Admin y C.General -> tiene acceso a todo en funcion del departamento
 
-            if (Condition == "TODOS")
+            if (Condition == "Todas")
             {
                 collection = collection.Where(
-                       a => a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID
-                       && a.CreatedBy == user.UserID)
+                       a => a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID)
                        .AsNoTracking();
+
             }
 
-            if (!String.IsNullOrEmpty(Condition) && state == "solicitud" && user.FK_RoleID != 4 && user.FK_RoleID != 2)
+            else if (user.Roles.RoleName == "Coord. General" && Condition != null)
+            {
+                return GetAllResourcesRequests(user.FK_EstateID, Condition);
+            }
+
+            else if (!String.IsNullOrEmpty(Condition) && state == "solicitud" && user.FK_RoleID != 4)
             {
                 collection = collection.Where(
                             a => a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID
@@ -61,14 +66,19 @@ namespace Repository
                             .Take(2)
                             .AsNoTracking();
             }
-            else
+            else if (user.Roles.RoleName == "Enc. De logística")
             {
-                if (user.Roles.RoleName == "Admin" && Condition == null)
-            {
-                return  GetAllResourcesRequests(user.FK_EstateID, Condition);
+                //if (user.Roles.RoleName == "Admin" && Condition == null)
+                
+                    collection = collection.Where(
+                                                                  a => a.Condition == Condition
+                                                                 && a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID)
+                                                                .OrderByDescending(a => a.ID)
+                                                                .Take(5)
+                                                                .AsNoTracking();
             }
 
-            //else if (user.Roles.RoleName == "Coord. General" && Condition == null)
+            // if (user.Roles.RoleName == "Coord. General" && Condition == null)
             //{
             //    return  GetAllResourcesRequests(user.FK_EstateID, Condition);
             //}
@@ -76,34 +86,29 @@ namespace Repository
 
             //Encargado de logistica tiene acceso a las solicitudes pendientes nomas    
 
-            else if (user.Roles.RoleName == "Enc. De logística" || user.Roles.RoleName == "Coord. General")
-            {
+            //else if (user.Roles.RoleName == "Enc. De logística")
+            //{
 
-                collection = collection.Where(
-                                              a => a.Condition == Condition 
-                                             && a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID)
-                                            .OrderByDescending(a => a.ID)
-                                            .Take(5)
-                                            .AsNoTracking();
-                }
+            //    collection = collection.Where(
+            //                                  a => a.Condition == Condition 
+            //                                 && a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID)
+            //                                .OrderByDescending(a => a.ID)
+            //                                .Take(5)
+            //                                .AsNoTracking();
+            //    }
 
             //C.Emergencias tiene acceso a solamente el historial de solicitudes
 
-           
 
-            else if(Condition == "Aceptada" || Condition == "Pendiente" | Condition == "Rechazada")
+
+            else if (Condition == "Aceptada" || Condition == "Pendiente" | Condition == "Rechazada")
             {
                 collection = collection.Where(
                                             a => a.Condition == Condition
-                                            && a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID
-                                            && a.CreatedBy == user.UserID)
-                                            .OrderByDescending(a => a.ID)
-                                            .Take(5)
+                                            && a.EmergenciesDisasters.FK_EstateID == user.FK_EstateID)
                                             .AsNoTracking();
             }
             
-            }
-
 
             return  collection
                 .Include(i => i.EmergenciesDisasters)
@@ -146,6 +151,7 @@ namespace Repository
                 .Include(i => i.EmployeeResponse.Users.Estates.Locations)
                 .ToList();
         }
+
 
         public async Task<IEnumerable<ResourcesRequest>> GetAllResourcesRequestPDF(int id, string Condition, int emergency,
                                                                                    DateTime dateConvert,
